@@ -1,0 +1,154 @@
+[
+  {
+    "opcodes": [
+      249,
+      73
+    ],
+    "class": "com.asteria.network.packet.impl.AttackPlayerPacket"
+  },
+  {
+    "opcodes": [
+      101
+    ],
+    "class": "com.asteria.network.packet.impl.CharacterSelectionPacket"
+  },
+  {
+    "opcodes": [
+      4
+    ],
+    "class": "com.asteria.network.packet.impl.ChatPacket"
+  },
+  {
+    "opcodes": [
+      185
+    ],
+    "class": "com.asteria.network.packet.impl.ClickButtonPacket"
+  },
+  {
+    "opcodes": [
+      122
+    ],
+    "class": "com.asteria.network.packet.impl.ItemActionPacket"
+  },
+  {
+    "opcodes": [
+      103
+    ],
+    "class": "com.asteria.network.packet.impl.CommandPacket"
+  },
+  {
+    "opcodes": [
+      0,
+      95,
+      241,
+      86
+    ],
+    "class": "com.asteria.network.packet.impl.DefaultPacket"
+  },
+  {
+    "opcodes": [
+      40
+    ],
+    "class": "com.asteria.network.packet.impl.AdvanceDialoguePacket"
+  },
+  {
+    "opcodes": [
+      87
+    ],
+    "class": "com.asteria.network.packet.impl.DropItemPacket"
+  },
+  {
+    "opcodes": [
+      39
+    ],
+    "class": "com.asteria.network.packet.impl.FollowPlayerPacket"
+  },
+  {
+    "opcodes": [
+      130
+    ],
+    "class": "com.asteria.network.packet.impl.InterfaceClickPacket"
+  },
+  {
+    "opcodes": [
+      145,
+      41,
+      117,
+      43,
+      129,
+      214
+    ],
+    "class": "com.asteria.network.packet.impl.ItemInterfacePacket"
+  },
+  {
+    "opcodes": [
+      53
+    ],
+    "class": "com.asteria.network.packet.impl.ItemOnItemPacket"
+  },
+  {
+    "opcodes": [
+      192
+    ],
+    "class": "com.asteria.network.packet.impl.ItemOnObjectPacket"
+  },
+  {
+    "opcodes": [
+      14
+    ],
+    "class": "com.asteria.network.packet.impl.ItemOnPlayerPacket"
+  },
+  {
+    "opcodes": [
+      248,
+      164,
+      98
+    ],
+    "class": "com.asteria.network.packet.impl.MovementQueuePacket"
+  },
+  {
+    "opcodes": [
+      72,
+      131,
+      155,
+      17
+    ],
+    "class": "com.asteria.network.packet.impl.NpcActionPacket"
+  },
+  {
+    "opcodes": [
+      132,
+      252,
+      70
+    ],
+    "class": "com.asteria.network.packet.impl.ObjectActionPacket"
+  },
+  {
+    "opcodes": [
+      236
+    ],
+    "class": "com.asteria.network.packet.impl.PickupItemPacket"
+  },
+  {
+    "opcodes": [
+      188,
+      215,
+      133,
+      74,
+      126
+    ],
+    "class": "com.asteria.network.packet.impl.PrivateMessagingPacket"
+  },
+  {
+    "opcodes": [
+      139
+    ],
+    "class": "com.asteria.network.packet.impl.RequestPacket"
+  },
+  {
+    "opcodes": [
+      121
+    ],
+    "class": "com.asteria.network.packet.impl.UpdateRegionPacket"
+  }
+]

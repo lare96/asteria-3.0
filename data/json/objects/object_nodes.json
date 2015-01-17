@@ -1,0 +1,22 @@
+[
+    {
+        "id": 6552,
+        "position": {
+        	"x": 3089,
+        	"y": 3247,
+        	"z": 0
+        },
+        "direction": "EAST",
+        "type": "DEFAULT"
+    },
+    {
+        "id": 409,
+        "position": {
+        	"x": 3094,
+        	"y": 3247,
+        	"z": 0
+        },
+        "direction": "EAST",
+        "type": "DEFAULT"
+    }
+]

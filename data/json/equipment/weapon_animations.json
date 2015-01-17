@@ -1,0 +1,450 @@
+[
+  {
+    "id": 3200,
+    "animation": {
+      "standingAnimation": 809,
+      "walkingAnimation": 1146,
+      "runningAnimation": 1210
+    }
+  },
+  {
+    "id": 4864,
+    "animation": {
+      "standingAnimation": 809,
+      "walkingAnimation": 1146,
+      "runningAnimation": 1210
+    }
+  },
+  {
+    "id": 4865,
+    "animation": {
+      "standingAnimation": 809,
+      "walkingAnimation": 1146,
+      "runningAnimation": 1210
+    }
+  },
+  {
+    "id": 3202,
+    "animation": {
+      "standingAnimation": 809,
+      "walkingAnimation": 1146,
+      "runningAnimation": 1210
+    }
+  },
+  {
+    "id": 3204,
+    "animation": {
+      "standingAnimation": 809,
+      "walkingAnimation": 1146,
+      "runningAnimation": 1210
+    }
+  },
+  {
+    "id": 4755,
+    "animation": {
+      "standingAnimation": 1832,
+      "walkingAnimation": 1830,
+      "runningAnimation": 1831
+    }
+  },
+  {
+    "id": 4886,
+    "animation": {
+      "standingAnimation": 2065,
+      "walkingAnimation": 1663,
+      "runningAnimation": 1664
+    }
+  },
+  {
+    "id": 4887,
+    "animation": {
+      "standingAnimation": 2065,
+      "walkingAnimation": 1663,
+      "runningAnimation": 1664
+    }
+  },
+  {
+    "id": 4888,
+    "animation": {
+      "standingAnimation": 2065,
+      "walkingAnimation": 1663,
+      "runningAnimation": 1664
+    }
+  },
+  {
+    "id": 1305,
+    "animation": {
+      "standingAnimation": 809,
+      "walkingAnimation": -1,
+      "runningAnimation": -1
+    }
+  },
+  {
+    "id": 4889,
+    "animation": {
+      "standingAnimation": 2065,
+      "walkingAnimation": 1663,
+      "runningAnimation": 1664
+    }
+  },
+  {
+    "id": 1307,
+    "animation": {
+      "standingAnimation": 2561,
+      "walkingAnimation": 2064,
+      "runningAnimation": 2563
+    }
+  },
+  {
+    "id": 1309,
+    "animation": {
+      "standingAnimation": 2561,
+      "walkingAnimation": 2064,
+      "runningAnimation": 2563
+    }
+  },
+  {
+    "id": 1311,
+    "animation": {
+      "standingAnimation": 2561,
+      "walkingAnimation": 2064,
+      "runningAnimation": 2563
+    }
+  },
+  {
+    "id": 1313,
+    "animation": {
+      "standingAnimation": 2561,
+      "walkingAnimation": 2064,
+      "runningAnimation": 2563
+    }
+  },
+  {
+    "id": 1315,
+    "animation": {
+      "standingAnimation": 2561,
+      "walkingAnimation": 2064,
+      "runningAnimation": 2563
+    }
+  },
+  {
+    "id": 1317,
+    "animation": {
+      "standingAnimation": 2561,
+      "walkingAnimation": 2064,
+      "runningAnimation": 2563
+    }
+  },
+  {
+    "id": 1319,
+    "animation": {
+      "standingAnimation": 2561,
+      "walkingAnimation": 2064,
+      "runningAnimation": 2563
+    }
+  },
+  {
+    "id": 4151,
+    "animation": {
+      "standingAnimation": 1832,
+      "walkingAnimation": 1660,
+      "runningAnimation": 1661
+    }
+  },
+  {
+    "id": 4153,
+    "animation": {
+      "standingAnimation": 1662,
+      "walkingAnimation": 1663,
+      "runningAnimation": 1664
+    }
+  },
+  {
+    "id": 6082,
+    "animation": {
+      "standingAnimation": 2316,
+      "walkingAnimation": 2317,
+      "runningAnimation": 2322
+    }
+  },
+  {
+    "id": 837,
+    "animation": {
+      "standingAnimation": 2074,
+      "walkingAnimation": 2076,
+      "runningAnimation": 2077
+    }
+  },
+  {
+    "id": 4934,
+    "animation": {
+      "standingAnimation": 2074,
+      "walkingAnimation": 2076,
+      "runningAnimation": 2077
+    }
+  },
+  {
+    "id": 4935,
+    "animation": {
+      "standingAnimation": 2074,
+      "walkingAnimation": 2076,
+      "runningAnimation": 2077
+    }
+  },
+  {
+    "id": 6599,
+    "animation": {
+      "standingAnimation": 809,
+      "walkingAnimation": 1146,
+      "runningAnimation": 1210
+    }
+  },
+  {
+    "id": 4936,
+    "animation": {
+      "standingAnimation": 2074,
+      "walkingAnimation": 2076,
+      "runningAnimation": 2077
+    }
+  },
+  {
+    "id": 4937,
+    "animation": {
+      "standingAnimation": 2074,
+      "walkingAnimation": 2076,
+      "runningAnimation": 2077
+    }
+  },
+  {
+    "id": 843,
+    "animation": {
+      "standingAnimation": 808,
+      "walkingAnimation": 819,
+      "runningAnimation": 824
+    }
+  },
+  {
+    "id": 845,
+    "animation": {
+      "standingAnimation": 808,
+      "walkingAnimation": 819,
+      "runningAnimation": 824
+    }
+  },
+  {
+    "id": 847,
+    "animation": {
+      "standingAnimation": 808,
+      "walkingAnimation": 819,
+      "runningAnimation": 824
+    }
+  },
+  {
+    "id": 849,
+    "animation": {
+      "standingAnimation": 808,
+      "walkingAnimation": 819,
+      "runningAnimation": 824
+    }
+  },
+  {
+    "id": 6609,
+    "animation": {
+      "standingAnimation": 2561,
+      "walkingAnimation": 2064,
+      "runningAnimation": 2563
+    }
+  },
+  {
+    "id": 4178,
+    "animation": {
+      "standingAnimation": 1832,
+      "walkingAnimation": 1660,
+      "runningAnimation": 1661
+    }
+  },
+  {
+    "id": 851,
+    "animation": {
+      "standingAnimation": 808,
+      "walkingAnimation": 819,
+      "runningAnimation": 824
+    }
+  },
+  {
+    "id": 853,
+    "animation": {
+      "standingAnimation": 808,
+      "walkingAnimation": 819,
+      "runningAnimation": 824
+    }
+  },
+  {
+    "id": 855,
+    "animation": {
+      "standingAnimation": 808,
+      "walkingAnimation": 819,
+      "runningAnimation": 824
+    }
+  },
+  {
+    "id": 857,
+    "animation": {
+      "standingAnimation": 808,
+      "walkingAnimation": 819,
+      "runningAnimation": 824
+    }
+  },
+  {
+    "id": 859,
+    "animation": {
+      "standingAnimation": 808,
+      "walkingAnimation": 819,
+      "runningAnimation": 824
+    }
+  },
+  {
+    "id": 861,
+    "animation": {
+      "standingAnimation": 808,
+      "walkingAnimation": 819,
+      "runningAnimation": 824
+    }
+  },
+  {
+    "id": 4710,
+    "animation": {
+      "standingAnimation": 809,
+      "walkingAnimation": 1146,
+      "runningAnimation": 1210
+    }
+  },
+  {
+    "id": 4718,
+    "animation": {
+      "standingAnimation": 2065,
+      "walkingAnimation": 1663,
+      "runningAnimation": 1664
+    }
+  },
+  {
+    "id": 3190,
+    "animation": {
+      "standingAnimation": 809,
+      "walkingAnimation": 1146,
+      "runningAnimation": 1210
+    }
+  },
+  {
+    "id": 4982,
+    "animation": {
+      "standingAnimation": 1832,
+      "walkingAnimation": 1830,
+      "runningAnimation": 1831
+    }
+  },
+  {
+    "id": 7158,
+    "animation": {
+      "standingAnimation": 2561,
+      "walkingAnimation": 2064,
+      "runningAnimation": 2563
+    }
+  },
+  {
+    "id": 4983,
+    "animation": {
+      "standingAnimation": 1832,
+      "walkingAnimation": 1830,
+      "runningAnimation": 1831
+    }
+  },
+  {
+    "id": 7671,
+    "animation": {
+      "standingAnimation": 3677,
+      "walkingAnimation": 3680,
+      "runningAnimation": -1
+    }
+  },
+  {
+    "id": 3192,
+    "animation": {
+      "standingAnimation": 809,
+      "walkingAnimation": 1146,
+      "runningAnimation": 1210
+    }
+  },
+  {
+    "id": 4984,
+    "animation": {
+      "standingAnimation": 1832,
+      "walkingAnimation": 1830,
+      "runningAnimation": 1831
+    }
+  },
+  {
+    "id": 4985,
+    "animation": {
+      "standingAnimation": 1832,
+      "walkingAnimation": 1830,
+      "runningAnimation": 1831
+    }
+  },
+  {
+    "id": 7673,
+    "animation": {
+      "standingAnimation": 3677,
+      "walkingAnimation": 3680,
+      "runningAnimation": -1
+    }
+  },
+  {
+    "id": 3194,
+    "animation": {
+      "standingAnimation": 809,
+      "walkingAnimation": 1146,
+      "runningAnimation": 1210
+    }
+  },
+  {
+    "id": 3196,
+    "animation": {
+      "standingAnimation": 809,
+      "walkingAnimation": 1146,
+      "runningAnimation": 1210
+    }
+  },
+  {
+    "id": 3198,
+    "animation": {
+      "standingAnimation": 809,
+      "walkingAnimation": 1146,
+      "runningAnimation": 1210
+    }
+  },
+  {
+    "id": 4734,
+    "animation": {
+      "standingAnimation": 2074,
+      "walkingAnimation": 2076,
+      "runningAnimation": 2077
+    }
+  },
+  {
+    "id": 4862,
+    "animation": {
+      "standingAnimation": 809,
+      "walkingAnimation": 1146,
+      "runningAnimation": 1210
+    }
+  },
+  {
+    "id": 4863,
+    "animation": {
+      "standingAnimation": 809,
+      "walkingAnimation": 1146,
+      "runningAnimation": 1210
+    }
+  }
+]

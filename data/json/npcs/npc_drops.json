@@ -1,0 +1,57 @@
+[
+    {
+        "id": [
+         	1,
+         	2,
+         	3
+         ],
+        "dynamic": [
+        	{
+        		"id": 526,
+        		"minimum": 1,
+        		"maximum": 1,
+        		"chance": ALWAYS
+        	},
+        	{
+        	    "id": 995,
+        		"minimum": 50,
+        		"maximum": 500,
+        		"chance": COMMON
+        	},
+        	{
+        		"id": 1205,
+        		"minimum": 1,
+        		"maximum": 1,
+        		"chance": UNCOMMON
+        	}
+        ],
+        "rare": []
+    },
+    {
+        "id": [
+         	1615
+         ],
+        "dynamic": [
+        	{
+        		"id": 592,
+        		"minimum": 1,
+        		"maximum": 1,
+        		"chance": ALWAYS
+        	},
+        	{
+        	    "id": 995,
+        		"minimum": 1000,
+        		"maximum": 100000,
+        		"chance": RARE
+        	}
+        ],
+        "rare": [
+       		{
+        		"id": 4151,
+        		"minimum": 1,
+        		"maximum": 1,
+        		"chance": VERY_RARE
+        	}
+		]	
+    }
+]

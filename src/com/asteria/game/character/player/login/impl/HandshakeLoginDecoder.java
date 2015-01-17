@@ -1,0 +1,68 @@
+package com.asteria.game.character.player.login.impl;
+
+import java.nio.ByteBuffer;
+import java.security.SecureRandom;
+import java.util.logging.Logger;
+
+import com.asteria.game.character.player.IOState;
+import com.asteria.game.character.player.PlayerIO;
+import com.asteria.game.character.player.login.LoginProtocolDecoder;
+import com.asteria.network.DataBuffer;
+import com.asteria.utility.Utility;
+
+/**
+ * The login protocol decoder that handles the handshake between the client and
+ * the server.
+ * 
+ * @author lare96 <http://www.rune-server.org/members/lare96/>
+ */
+public final class HandshakeLoginDecoder extends LoginProtocolDecoder {
+
+    /**
+     * The logger that will print important information.
+     */
+    private static Logger logger = Utility.getLogger(PlayerIO.class);
+
+    /**
+     * The secure random generator that will generate a server session key.
+     */
+    private final SecureRandom random = new SecureRandom();
+
+    /**
+     * Creates a new {@link HandshakeLoginDecoder}.
+     * 
+     * @param session
+     *            the session that is decoding this protocol.
+     */
+    public HandshakeLoginDecoder(PlayerIO session) {
+        super(session);
+    }
+
+    @Override
+    public void execute() {
+        PlayerIO session = getSession();
+        ByteBuffer in = session.getInData();
+        if (in.remaining() < 2) {
+            in.compact();
+            return;
+        }
+        int request = in.get() & 0xff;
+        in.get();
+        if (request != 14) {
+            logger.warning("Invalid login request: " + request);
+            session.disconnect();
+            return;
+        }
+        DataBuffer out = DataBuffer.create(17);
+        out.putLong(0);
+        out.put(0);
+        out.putLong(random.nextLong());
+        session.send(out);
+        session.setState(IOState.LOGGING_IN);
+    }
+
+    @Override
+    public IOState state() {
+        return IOState.CONNECTED;
+    }
+}

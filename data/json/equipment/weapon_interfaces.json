@@ -1,0 +1,1891 @@
+[
+  {
+    "id": 3093,
+    "interface": "DART"
+  },
+  {
+    "id": 3094,
+    "interface": "DART"
+  },
+  {
+    "id": 3095,
+    "interface": "CLAWS"
+  },
+  {
+    "id": 3096,
+    "interface": "CLAWS"
+  },
+  {
+    "id": 3097,
+    "interface": "CLAWS"
+  },
+  {
+    "id": 3098,
+    "interface": "CLAWS"
+  },
+  {
+    "id": 3099,
+    "interface": "CLAWS"
+  },
+  {
+    "id": 3100,
+    "interface": "CLAWS"
+  },
+  {
+    "id": 3101,
+    "interface": "CLAWS"
+  },
+  {
+    "id": 35,
+    "interface": "UNARMED"
+  },
+  {
+    "id": 4151,
+    "interface": "WHIP"
+  },
+  {
+    "id": 4153,
+    "interface": "WARHAMMER"
+  },
+  {
+    "id": 4158,
+    "interface": "SPEAR"
+  },
+  {
+    "id": 4170,
+    "interface": "STAFF"
+  },
+  {
+    "id": 4178,
+    "interface": "WHIP"
+  },
+  {
+    "id": 3170,
+    "interface": "UNARMED"
+  },
+  {
+    "id": 3171,
+    "interface": "UNARMED"
+  },
+  {
+    "id": 3172,
+    "interface": "UNARMED"
+  },
+  {
+    "id": 3173,
+    "interface": "UNARMED"
+  },
+  {
+    "id": 3174,
+    "interface": "UNARMED"
+  },
+  {
+    "id": 3175,
+    "interface": "UNARMED"
+  },
+  {
+    "id": 3176,
+    "interface": "UNARMED"
+  },
+  {
+    "id": 4212,
+    "interface": "SHORTBOW"
+  },
+  {
+    "id": 3190,
+    "interface": "HALBERD"
+  },
+  {
+    "id": 4214,
+    "interface": "SHORTBOW"
+  },
+  {
+    "id": 4215,
+    "interface": "SHORTBOW"
+  },
+  {
+    "id": 3192,
+    "interface": "HALBERD"
+  },
+  {
+    "id": 4216,
+    "interface": "SHORTBOW"
+  },
+  {
+    "id": 4217,
+    "interface": "SHORTBOW"
+  },
+  {
+    "id": 3194,
+    "interface": "HALBERD"
+  },
+  {
+    "id": 4218,
+    "interface": "SHORTBOW"
+  },
+  {
+    "id": 4219,
+    "interface": "SHORTBOW"
+  },
+  {
+    "id": 3196,
+    "interface": "HALBERD"
+  },
+  {
+    "id": 4220,
+    "interface": "SHORTBOW"
+  },
+  {
+    "id": 4221,
+    "interface": "SHORTBOW"
+  },
+  {
+    "id": 3198,
+    "interface": "HALBERD"
+  },
+  {
+    "id": 4222,
+    "interface": "SHORTBOW"
+  },
+  {
+    "id": 4223,
+    "interface": "SHORTBOW"
+  },
+  {
+    "id": 3200,
+    "interface": "HALBERD"
+  },
+  {
+    "id": 3202,
+    "interface": "HALBERD"
+  },
+  {
+    "id": 3204,
+    "interface": "HALBERD"
+  },
+  {
+    "id": 4236,
+    "interface": "UNARMED"
+  },
+  {
+    "id": 1203,
+    "interface": "DAGGER"
+  },
+  {
+    "id": 1205,
+    "interface": "DAGGER"
+  },
+  {
+    "id": 1207,
+    "interface": "DAGGER"
+  },
+  {
+    "hash": 1209,
+    "id": 1209,
+    "interface": "DAGGER"
+  },
+  {
+    "hash": 1211,
+    "id": 1211,
+    "interface": "DAGGER"
+  },
+  {
+    "hash": 1213,
+    "id": 1213,
+    "interface": "DAGGER"
+  },
+  {
+    "hash": 1215,
+    "id": 1215,
+    "interface": "DAGGER"
+  },
+  {
+    "hash": 1217,
+    "id": 1217,
+    "interface": "DAGGER"
+  },
+  {
+    "hash": 1219,
+    "id": 1219,
+    "interface": "DAGGER"
+  },
+  {
+    "hash": 1221,
+    "id": 1221,
+    "interface": "DAGGER"
+  },
+  {
+    "hash": 1223,
+    "id": 1223,
+    "interface": "DAGGER"
+  },
+  {
+    "hash": 1225,
+    "id": 1225,
+    "interface": "DAGGER"
+  },
+  {
+    "hash": 1227,
+    "id": 1227,
+    "interface": "DAGGER"
+  },
+  {
+    "hash": 1229,
+    "id": 1229,
+    "interface": "DAGGER"
+  },
+  {
+    "hash": 1231,
+    "id": 1231,
+    "interface": "DAGGER"
+  },
+  {
+    "hash": 1233,
+    "id": 1233,
+    "interface": "DAGGER"
+  },
+  {
+    "hash": 1235,
+    "id": 1235,
+    "interface": "DAGGER"
+  },
+  {
+    "hash": 1237,
+    "id": 1237,
+    "interface": "SPEAR"
+  },
+  {
+    "hash": 1239,
+    "id": 1239,
+    "interface": "SPEAR"
+  },
+  {
+    "hash": 1241,
+    "id": 1241,
+    "interface": "SPEAR"
+  },
+  {
+    "hash": 1243,
+    "id": 1243,
+    "interface": "SPEAR"
+  },
+  {
+    "hash": 1245,
+    "id": 1245,
+    "interface": "SPEAR"
+  },
+  {
+    "hash": 1247,
+    "id": 1247,
+    "interface": "SPEAR"
+  },
+  {
+    "hash": 1249,
+    "id": 1249,
+    "interface": "SPEAR"
+  },
+  {
+    "hash": 1251,
+    "id": 1251,
+    "interface": "UNARMED"
+  },
+  {
+    "hash": 1253,
+    "id": 1253,
+    "interface": "UNARMED"
+  },
+  {
+    "hash": 1255,
+    "id": 1255,
+    "interface": "UNARMED"
+  },
+  {
+    "hash": 1257,
+    "id": 1257,
+    "interface": "UNARMED"
+  },
+  {
+    "hash": 1259,
+    "id": 1259,
+    "interface": "UNARMED"
+  },
+  {
+    "hash": 1261,
+    "id": 1261,
+    "interface": "UNARMED"
+  },
+  {
+    "hash": 1263,
+    "id": 1263,
+    "interface": "UNARMED"
+  },
+  {
+    "hash": 1265,
+    "id": 1265,
+    "interface": "PICKAXE"
+  },
+  {
+    "hash": 1267,
+    "id": 1267,
+    "interface": "PICKAXE"
+  },
+  {
+    "hash": 1269,
+    "id": 1269,
+    "interface": "PICKAXE"
+  },
+  {
+    "hash": 1271,
+    "id": 1271,
+    "interface": "PICKAXE"
+  },
+  {
+    "hash": 1273,
+    "id": 1273,
+    "interface": "PICKAXE"
+  },
+  {
+    "hash": 1275,
+    "id": 1275,
+    "interface": "PICKAXE"
+  },
+  {
+    "hash": 1277,
+    "id": 1277,
+    "interface": "SWORD"
+  },
+  {
+    "hash": 1279,
+    "id": 1279,
+    "interface": "SWORD"
+  },
+  {
+    "hash": 1281,
+    "id": 1281,
+    "interface": "SWORD"
+  },
+  {
+    "hash": 1283,
+    "id": 1283,
+    "interface": "SWORD"
+  },
+  {
+    "hash": 1285,
+    "id": 1285,
+    "interface": "SWORD"
+  },
+  {
+    "hash": 1287,
+    "id": 1287,
+    "interface": "SWORD"
+  },
+  {
+    "hash": 1289,
+    "id": 1289,
+    "interface": "SWORD"
+  },
+  {
+    "hash": 1291,
+    "id": 1291,
+    "interface": "LONGSWORD"
+  },
+  {
+    "hash": 1293,
+    "id": 1293,
+    "interface": "LONGSWORD"
+  },
+  {
+    "hash": 1295,
+    "id": 1295,
+    "interface": "LONGSWORD"
+  },
+  {
+    "hash": 1297,
+    "id": 1297,
+    "interface": "LONGSWORD"
+  },
+  {
+    "hash": 1299,
+    "id": 1299,
+    "interface": "LONGSWORD"
+  },
+  {
+    "hash": 1301,
+    "id": 1301,
+    "interface": "LONGSWORD"
+  },
+  {
+    "hash": 1303,
+    "id": 1303,
+    "interface": "LONGSWORD"
+  },
+  {
+    "hash": 7447,
+    "id": 7447,
+    "interface": "KNIFE"
+  },
+  {
+    "hash": 1305,
+    "id": 1305,
+    "interface": "LONGSWORD"
+  },
+  {
+    "hash": 1307,
+    "id": 1307,
+    "interface": "TWO_HANDED_SWORD"
+  },
+  {
+    "hash": 1309,
+    "id": 1309,
+    "interface": "TWO_HANDED_SWORD"
+  },
+  {
+    "hash": 1311,
+    "id": 1311,
+    "interface": "TWO_HANDED_SWORD"
+  },
+  {
+    "hash": 1313,
+    "id": 1313,
+    "interface": "TWO_HANDED_SWORD"
+  },
+  {
+    "hash": 1315,
+    "id": 1315,
+    "interface": "TWO_HANDED_SWORD"
+  },
+  {
+    "hash": 1317,
+    "id": 1317,
+    "interface": "TWO_HANDED_SWORD"
+  },
+  {
+    "hash": 1319,
+    "id": 1319,
+    "interface": "TWO_HANDED_SWORD"
+  },
+  {
+    "hash": 1321,
+    "id": 1321,
+    "interface": "SCIMITAR"
+  },
+  {
+    "hash": 1323,
+    "id": 1323,
+    "interface": "SCIMITAR"
+  },
+  {
+    "hash": 1325,
+    "id": 1325,
+    "interface": "SCIMITAR"
+  },
+  {
+    "hash": 1327,
+    "id": 1327,
+    "interface": "SCIMITAR"
+  },
+  {
+    "hash": 1329,
+    "id": 1329,
+    "interface": "SCIMITAR"
+  },
+  {
+    "hash": 1331,
+    "id": 1331,
+    "interface": "SCIMITAR"
+  },
+  {
+    "hash": 1333,
+    "id": 1333,
+    "interface": "SCIMITAR"
+  },
+  {
+    "hash": 1335,
+    "id": 1335,
+    "interface": "WARHAMMER"
+  },
+  {
+    "hash": 1337,
+    "id": 1337,
+    "interface": "WARHAMMER"
+  },
+  {
+    "hash": 1339,
+    "id": 1339,
+    "interface": "WARHAMMER"
+  },
+  {
+    "hash": 1341,
+    "id": 1341,
+    "interface": "WARHAMMER"
+  },
+  {
+    "hash": 1343,
+    "id": 1343,
+    "interface": "WARHAMMER"
+  },
+  {
+    "hash": 1345,
+    "id": 1345,
+    "interface": "WARHAMMER"
+  },
+  {
+    "hash": 1347,
+    "id": 1347,
+    "interface": "WARHAMMER"
+  },
+  {
+    "hash": 1349,
+    "id": 1349,
+    "interface": "BATTLEAXE"
+  },
+  {
+    "hash": 1351,
+    "id": 1351,
+    "interface": "BATTLEAXE"
+  },
+  {
+    "hash": 1353,
+    "id": 1353,
+    "interface": "BATTLEAXE"
+  },
+  {
+    "hash": 1355,
+    "id": 1355,
+    "interface": "BATTLEAXE"
+  },
+  {
+    "hash": 1357,
+    "id": 1357,
+    "interface": "BATTLEAXE"
+  },
+  {
+    "hash": 1359,
+    "id": 1359,
+    "interface": "BATTLEAXE"
+  },
+  {
+    "hash": 1361,
+    "id": 1361,
+    "interface": "BATTLEAXE"
+  },
+  {
+    "hash": 1363,
+    "id": 1363,
+    "interface": "BATTLEAXE"
+  },
+  {
+    "hash": 1365,
+    "id": 1365,
+    "interface": "BATTLEAXE"
+  },
+  {
+    "hash": 1367,
+    "id": 1367,
+    "interface": "BATTLEAXE"
+  },
+  {
+    "hash": 1369,
+    "id": 1369,
+    "interface": "BATTLEAXE"
+  },
+  {
+    "hash": 1371,
+    "id": 1371,
+    "interface": "BATTLEAXE"
+  },
+  {
+    "hash": 1373,
+    "id": 1373,
+    "interface": "BATTLEAXE"
+  },
+  {
+    "hash": 1375,
+    "id": 1375,
+    "interface": "BATTLEAXE"
+  },
+  {
+    "hash": 1377,
+    "id": 1377,
+    "interface": "BATTLEAXE"
+  },
+  {
+    "hash": 2402,
+    "id": 2402,
+    "interface": "UNARMED"
+  },
+  {
+    "hash": 1379,
+    "id": 1379,
+    "interface": "STAFF"
+  },
+  {
+    "hash": 1381,
+    "id": 1381,
+    "interface": "STAFF"
+  },
+  {
+    "hash": 1383,
+    "id": 1383,
+    "interface": "STAFF"
+  },
+  {
+    "hash": 1385,
+    "id": 1385,
+    "interface": "STAFF"
+  },
+  {
+    "hash": 1387,
+    "id": 1387,
+    "interface": "STAFF"
+  },
+  {
+    "hash": 1389,
+    "id": 1389,
+    "interface": "STAFF"
+  },
+  {
+    "hash": 1391,
+    "id": 1391,
+    "interface": "STAFF"
+  },
+  {
+    "hash": 2415,
+    "id": 2415,
+    "interface": "STAFF"
+  },
+  {
+    "hash": 2416,
+    "id": 2416,
+    "interface": "STAFF"
+  },
+  {
+    "hash": 1393,
+    "id": 1393,
+    "interface": "STAFF"
+  },
+  {
+    "hash": 2417,
+    "id": 2417,
+    "interface": "STAFF"
+  },
+  {
+    "hash": 1395,
+    "id": 1395,
+    "interface": "STAFF"
+  },
+  {
+    "hash": 1397,
+    "id": 1397,
+    "interface": "STAFF"
+  },
+  {
+    "hash": 1399,
+    "id": 1399,
+    "interface": "STAFF"
+  },
+  {
+    "hash": 1401,
+    "id": 1401,
+    "interface": "STAFF"
+  },
+  {
+    "hash": 2425,
+    "id": 2425,
+    "interface": "KNIFE"
+  },
+  {
+    "hash": 6522,
+    "id": 6522,
+    "interface": "KNIFE"
+  },
+  {
+    "hash": 1403,
+    "id": 1403,
+    "interface": "STAFF"
+  },
+  {
+    "hash": 6523,
+    "id": 6523,
+    "interface": "UNARMED"
+  },
+  {
+    "hash": 1405,
+    "id": 1405,
+    "interface": "STAFF"
+  },
+  {
+    "hash": 6525,
+    "id": 6525,
+    "interface": "UNARMED"
+  },
+  {
+    "hash": 6526,
+    "id": 6526,
+    "interface": "UNARMED"
+  },
+  {
+    "hash": 1407,
+    "id": 1407,
+    "interface": "STAFF"
+  },
+  {
+    "hash": 6527,
+    "id": 6527,
+    "interface": "UNARMED"
+  },
+  {
+    "hash": 6528,
+    "id": 6528,
+    "interface": "WARHAMMER"
+  },
+  {
+    "hash": 1409,
+    "id": 1409,
+    "interface": "STAFF"
+  },
+  {
+    "hash": 1419,
+    "id": 1419,
+    "interface": "SCYTHE"
+  },
+  {
+    "hash": 1420,
+    "id": 1420,
+    "interface": "MACE"
+  },
+  {
+    "hash": 1422,
+    "id": 1422,
+    "interface": "MACE"
+  },
+  {
+    "hash": 1424,
+    "id": 1424,
+    "interface": "MACE"
+  },
+  {
+    "hash": 1426,
+    "id": 1426,
+    "interface": "MACE"
+  },
+  {
+    "hash": 1428,
+    "id": 1428,
+    "interface": "MACE"
+  },
+  {
+    "hash": 1430,
+    "id": 1430,
+    "interface": "MACE"
+  },
+  {
+    "hash": 4503,
+    "id": 4503,
+    "interface": "SWORD"
+  },
+  {
+    "hash": 1432,
+    "id": 1432,
+    "interface": "MACE"
+  },
+  {
+    "hash": 1434,
+    "id": 1434,
+    "interface": "MACE"
+  },
+  {
+    "hash": 2460,
+    "id": 2460,
+    "interface": "UNARMED"
+  },
+  {
+    "hash": 4508,
+    "id": 4508,
+    "interface": "SWORD"
+  },
+  {
+    "hash": 2462,
+    "id": 2462,
+    "interface": "UNARMED"
+  },
+  {
+    "hash": 2464,
+    "id": 2464,
+    "interface": "UNARMED"
+  },
+  {
+    "hash": 2466,
+    "id": 2466,
+    "interface": "UNARMED"
+  },
+  {
+    "hash": 6562,
+    "id": 6562,
+    "interface": "STAFF"
+  },
+  {
+    "hash": 6563,
+    "id": 6563,
+    "interface": "STAFF"
+  },
+  {
+    "hash": 2468,
+    "id": 2468,
+    "interface": "UNARMED"
+  },
+  {
+    "hash": 2470,
+    "id": 2470,
+    "interface": "UNARMED"
+  },
+  {
+    "hash": 2472,
+    "id": 2472,
+    "interface": "UNARMED"
+  },
+  {
+    "hash": 2474,
+    "id": 2474,
+    "interface": "UNARMED"
+  },
+  {
+    "hash": 2476,
+    "id": 2476,
+    "interface": "UNARMED"
+  },
+  {
+    "hash": 6587,
+    "id": 6587,
+    "interface": "CLAWS"
+  },
+  {
+    "hash": 6589,
+    "id": 6589,
+    "interface": "BATTLEAXE"
+  },
+  {
+    "hash": 6591,
+    "id": 6591,
+    "interface": "DAGGER"
+  },
+  {
+    "hash": 6593,
+    "id": 6593,
+    "interface": "DAGGER"
+  },
+  {
+    "hash": 6595,
+    "id": 6595,
+    "interface": "DAGGER"
+  },
+  {
+    "hash": 6597,
+    "id": 6597,
+    "interface": "DAGGER"
+  },
+  {
+    "hash": 6599,
+    "id": 6599,
+    "interface": "HALBERD"
+  },
+  {
+    "hash": 6601,
+    "id": 6601,
+    "interface": "MACE"
+  },
+  {
+    "hash": 6603,
+    "id": 6603,
+    "interface": "STAFF"
+  },
+  {
+    "hash": 6605,
+    "id": 6605,
+    "interface": "SWORD"
+  },
+  {
+    "hash": 6607,
+    "id": 6607,
+    "interface": "LONGSWORD"
+  },
+  {
+    "hash": 6609,
+    "id": 6609,
+    "interface": "TWO_HANDED_SWORD"
+  },
+  {
+    "hash": 466,
+    "id": 466,
+    "interface": "UNARMED"
+  },
+  {
+    "hash": 6611,
+    "id": 6611,
+    "interface": "SCIMITAR"
+  },
+  {
+    "hash": 6613,
+    "id": 6613,
+    "interface": "WARHAMMER"
+  },
+  {
+    "hash": 4580,
+    "id": 4580,
+    "interface": "SPEAR"
+  },
+  {
+    "hash": 4582,
+    "id": 4582,
+    "interface": "UNARMED"
+  },
+  {
+    "hash": 4584,
+    "id": 4584,
+    "interface": "UNARMED"
+  },
+  {
+    "hash": 4587,
+    "id": 4587,
+    "interface": "SCIMITAR"
+  },
+  {
+    "hash": 7668,
+    "id": 7668,
+    "interface": "UNARMED"
+  },
+  {
+    "hash": 7671,
+    "id": 7671,
+    "interface": "UNARMED"
+  },
+  {
+    "hash": 7673,
+    "id": 7673,
+    "interface": "UNARMED"
+  },
+  {
+    "hash": 7675,
+    "id": 7675,
+    "interface": "SWORD"
+  },
+  {
+    "hash": 5628,
+    "id": 5628,
+    "interface": "DART"
+  },
+  {
+    "hash": 5629,
+    "id": 5629,
+    "interface": "DART"
+  },
+  {
+    "hash": 5630,
+    "id": 5630,
+    "interface": "DART"
+  },
+  {
+    "hash": 5631,
+    "id": 5631,
+    "interface": "DART"
+  },
+  {
+    "hash": 5632,
+    "id": 5632,
+    "interface": "DART"
+  },
+  {
+    "hash": 5633,
+    "id": 5633,
+    "interface": "DART"
+  },
+  {
+    "hash": 5634,
+    "id": 5634,
+    "interface": "DART"
+  },
+  {
+    "hash": 5635,
+    "id": 5635,
+    "interface": "DART"
+  },
+  {
+    "hash": 5636,
+    "id": 5636,
+    "interface": "DART"
+  },
+  {
+    "hash": 5637,
+    "id": 5637,
+    "interface": "DART"
+  },
+  {
+    "hash": 5638,
+    "id": 5638,
+    "interface": "DART"
+  },
+  {
+    "hash": 5639,
+    "id": 5639,
+    "interface": "DART"
+  },
+  {
+    "hash": 5640,
+    "id": 5640,
+    "interface": "DART"
+  },
+  {
+    "hash": 5641,
+    "id": 5641,
+    "interface": "DART"
+  },
+  {
+    "hash": 5642,
+    "id": 5642,
+    "interface": "JAVELIN"
+  },
+  {
+    "hash": 5643,
+    "id": 5643,
+    "interface": "JAVELIN"
+  },
+  {
+    "hash": 5644,
+    "id": 5644,
+    "interface": "JAVELIN"
+  },
+  {
+    "hash": 5645,
+    "id": 5645,
+    "interface": "JAVELIN"
+  },
+  {
+    "hash": 5646,
+    "id": 5646,
+    "interface": "JAVELIN"
+  },
+  {
+    "hash": 5647,
+    "id": 5647,
+    "interface": "JAVELIN"
+  },
+  {
+    "hash": 5648,
+    "id": 5648,
+    "interface": "UNARMED"
+  },
+  {
+    "hash": 5649,
+    "id": 5649,
+    "interface": "JAVELIN"
+  },
+  {
+    "hash": 5650,
+    "id": 5650,
+    "interface": "JAVELIN"
+  },
+  {
+    "hash": 5651,
+    "id": 5651,
+    "interface": "JAVELIN"
+  },
+  {
+    "hash": 5652,
+    "id": 5652,
+    "interface": "JAVELIN"
+  },
+  {
+    "hash": 5653,
+    "id": 5653,
+    "interface": "JAVELIN"
+  },
+  {
+    "hash": 5654,
+    "id": 5654,
+    "interface": "KNIFE"
+  },
+  {
+    "hash": 5655,
+    "id": 5655,
+    "interface": "KNIFE"
+  },
+  {
+    "hash": 5656,
+    "id": 5656,
+    "interface": "KNIFE"
+  },
+  {
+    "hash": 5657,
+    "id": 5657,
+    "interface": "KNIFE"
+  },
+  {
+    "hash": 5658,
+    "id": 5658,
+    "interface": "KNIFE"
+  },
+  {
+    "hash": 5659,
+    "id": 5659,
+    "interface": "KNIFE"
+  },
+  {
+    "hash": 5660,
+    "id": 5660,
+    "interface": "KNIFE"
+  },
+  {
+    "hash": 5661,
+    "id": 5661,
+    "interface": "KNIFE"
+  },
+  {
+    "hash": 5662,
+    "id": 5662,
+    "interface": "KNIFE"
+  },
+  {
+    "hash": 5663,
+    "id": 5663,
+    "interface": "KNIFE"
+  },
+  {
+    "hash": 5664,
+    "id": 5664,
+    "interface": "KNIFE"
+  },
+  {
+    "hash": 5665,
+    "id": 5665,
+    "interface": "KNIFE"
+  },
+  {
+    "hash": 5666,
+    "id": 5666,
+    "interface": "KNIFE"
+  },
+  {
+    "hash": 5667,
+    "id": 5667,
+    "interface": "KNIFE"
+  },
+  {
+    "hash": 5668,
+    "id": 5668,
+    "interface": "DAGGER"
+  },
+  {
+    "hash": 5670,
+    "id": 5670,
+    "interface": "DAGGER"
+  },
+  {
+    "hash": 5672,
+    "id": 5672,
+    "interface": "DAGGER"
+  },
+  {
+    "hash": 5674,
+    "id": 5674,
+    "interface": "DAGGER"
+  },
+  {
+    "hash": 5676,
+    "id": 5676,
+    "interface": "DAGGER"
+  },
+  {
+    "hash": 5678,
+    "id": 5678,
+    "interface": "DAGGER"
+  },
+  {
+    "hash": 5680,
+    "id": 5680,
+    "interface": "DAGGER"
+  },
+  {
+    "hash": 5682,
+    "id": 5682,
+    "interface": "DAGGER"
+  },
+  {
+    "hash": 5684,
+    "id": 5684,
+    "interface": "DAGGER"
+  },
+  {
+    "hash": 5686,
+    "id": 5686,
+    "interface": "DAGGER"
+  },
+  {
+    "hash": 5688,
+    "id": 5688,
+    "interface": "DAGGER"
+  },
+  {
+    "hash": 5690,
+    "id": 5690,
+    "interface": "DAGGER"
+  },
+  {
+    "hash": 5692,
+    "id": 5692,
+    "interface": "DAGGER"
+  },
+  {
+    "hash": 5694,
+    "id": 5694,
+    "interface": "DAGGER"
+  },
+  {
+    "hash": 5696,
+    "id": 5696,
+    "interface": "DAGGER"
+  },
+  {
+    "hash": 5698,
+    "id": 5698,
+    "interface": "DAGGER"
+  },
+  {
+    "hash": 4675,
+    "id": 4675,
+    "interface": "STAFF"
+  },
+  {
+    "hash": 5700,
+    "id": 5700,
+    "interface": "DAGGER"
+  },
+  {
+    "hash": 6724,
+    "id": 6724,
+    "interface": "UNARMED"
+  },
+  {
+    "hash": 5702,
+    "id": 5702,
+    "interface": "DAGGER"
+  },
+  {
+    "hash": 5704,
+    "id": 5704,
+    "interface": "UNARMED"
+  },
+  {
+    "hash": 5706,
+    "id": 5706,
+    "interface": "UNARMED"
+  },
+  {
+    "hash": 5708,
+    "id": 5708,
+    "interface": "UNARMED"
+  },
+  {
+    "hash": 5710,
+    "id": 5710,
+    "interface": "UNARMED"
+  },
+  {
+    "hash": 5712,
+    "id": 5712,
+    "interface": "UNARMED"
+  },
+  {
+    "hash": 5714,
+    "id": 5714,
+    "interface": "UNARMED"
+  },
+  {
+    "hash": 6739,
+    "id": 6739,
+    "interface": "BATTLEAXE"
+  },
+  {
+    "hash": 5716,
+    "id": 5716,
+    "interface": "UNARMED"
+  },
+  {
+    "hash": 5718,
+    "id": 5718,
+    "interface": "UNARMED"
+  },
+  {
+    "hash": 5720,
+    "id": 5720,
+    "interface": "UNARMED"
+  },
+  {
+    "hash": 6745,
+    "id": 6745,
+    "interface": "UNARMED"
+  },
+  {
+    "hash": 5722,
+    "id": 5722,
+    "interface": "UNARMED"
+  },
+  {
+    "hash": 6746,
+    "id": 6746,
+    "interface": "UNARMED"
+  },
+  {
+    "hash": 5724,
+    "id": 5724,
+    "interface": "UNARMED"
+  },
+  {
+    "hash": 5726,
+    "id": 5726,
+    "interface": "UNARMED"
+  },
+  {
+    "hash": 5728,
+    "id": 5728,
+    "interface": "UNARMED"
+  },
+  {
+    "hash": 5730,
+    "id": 5730,
+    "interface": "UNARMED"
+  },
+  {
+    "hash": 4710,
+    "id": 4710,
+    "interface": "STAFF"
+  },
+  {
+    "hash": 5734,
+    "id": 5734,
+    "interface": "UNARMED"
+  },
+  {
+    "hash": 5736,
+    "id": 5736,
+    "interface": "UNARMED"
+  },
+  {
+    "hash": 6760,
+    "id": 6760,
+    "interface": "UNARMED"
+  },
+  {
+    "hash": 6762,
+    "id": 6762,
+    "interface": "UNARMED"
+  },
+  {
+    "hash": 6764,
+    "id": 6764,
+    "interface": "UNARMED"
+  },
+  {
+    "hash": 4718,
+    "id": 4718,
+    "interface": "BATTLEAXE"
+  },
+  {
+    "hash": 4726,
+    "id": 4726,
+    "interface": "SPEAR"
+  },
+  {
+    "hash": 7804,
+    "id": 7804,
+    "interface": "UNARMED"
+  },
+  {
+    "hash": 4734,
+    "id": 4734,
+    "interface": "CROSSBOW"
+  },
+  {
+    "hash": 7806,
+    "id": 7806,
+    "interface": "SWORD"
+  },
+  {
+    "hash": 7807,
+    "id": 7807,
+    "interface": "BATTLEAXE"
+  },
+  {
+    "hash": 7808,
+    "id": 7808,
+    "interface": "MACE"
+  },
+  {
+    "hash": 7809,
+    "id": 7809,
+    "interface": "SPEAR"
+  },
+  {
+    "hash": 4747,
+    "id": 4747,
+    "interface": "WARHAMMER"
+  },
+  {
+    "hash": 4755,
+    "id": 4755,
+    "interface": "WHIP"
+  },
+  {
+    "hash": 667,
+    "id": 667,
+    "interface": "SWORD"
+  },
+  {
+    "hash": 6818,
+    "id": 6818,
+    "interface": "UNARMED"
+  },
+  {
+    "hash": 4827,
+    "id": 4827,
+    "interface": "UNARMED"
+  },
+  {
+    "hash": 746,
+    "id": 746,
+    "interface": "DAGGER"
+  },
+  {
+    "hash": 747,
+    "id": 747,
+    "interface": "DAGGER"
+  },
+  {
+    "hash": 6897,
+    "id": 6897,
+    "interface": "LONGSWORD"
+  },
+  {
+    "id": 6908,
+    "interface": "UNARMED"
+  },
+  {
+    "id": 4862,
+    "interface": "UNARMED"
+  },
+  {
+    "id": 6910,
+    "interface": "UNARMED"
+  },
+  {
+    "id": 767,
+    "interface": "CROSSBOW"
+  },
+  {
+    "id": 4863,
+    "interface": "UNARMED"
+  },
+  {
+    "id": 4864,
+    "interface": "UNARMED"
+  },
+  {
+    "id": 6912,
+    "interface": "UNARMED"
+  },
+  {
+    "id": 4865,
+    "interface": "UNARMED"
+  },
+  {
+    "id": 6914,
+    "interface": "UNARMED"
+  },
+  {
+    "id": 772,
+    "interface": "STAFF"
+  },
+  {
+    "id": 4886,
+    "interface": "UNARMED"
+  },
+  {
+    "id": 4887,
+    "interface": "UNARMED"
+  },
+  {
+    "id": 4888,
+    "interface": "UNARMED"
+  },
+  {
+    "id": 4889,
+    "interface": "UNARMED"
+  },
+  {
+    "id": 800,
+    "interface": "THROWNAXE"
+  },
+  {
+    "id": 801,
+    "interface": "THROWNAXE"
+  },
+  {
+    "id": 802,
+    "interface": "THROWNAXE"
+  },
+  {
+    "id": 803,
+    "interface": "THROWNAXE"
+  },
+  {
+    "id": 804,
+    "interface": "THROWNAXE"
+  },
+  {
+    "id": 805,
+    "interface": "THROWNAXE"
+  },
+  {
+    "id": 806,
+    "interface": "DART"
+  },
+  {
+    "id": 807,
+    "interface": "DART"
+  },
+  {
+    "id": 808,
+    "interface": "DART"
+  },
+  {
+    "id": 809,
+    "interface": "DART"
+  },
+  {
+    "id": 810,
+    "interface": "DART"
+  },
+  {
+    "id": 811,
+    "interface": "DART"
+  },
+  {
+    "id": 812,
+    "interface": "DART"
+  },
+  {
+    "id": 813,
+    "interface": "DART"
+  },
+  {
+    "id": 814,
+    "interface": "DART"
+  },
+  {
+    "id": 4910,
+    "interface": "UNARMED"
+  },
+  {
+    "id": 815,
+    "interface": "DART"
+  },
+  {
+    "id": 4911,
+    "interface": "UNARMED"
+  },
+  {
+    "id": 816,
+    "interface": "DART"
+  },
+  {
+    "id": 4912,
+    "interface": "UNARMED"
+  },
+  {
+    "id": 817,
+    "interface": "DART"
+  },
+  {
+    "id": 4913,
+    "interface": "UNARMED"
+  },
+  {
+    "id": 818,
+    "interface": "DART"
+  },
+  {
+    "id": 825,
+    "interface": "JAVELIN"
+  },
+  {
+    "id": 826,
+    "interface": "JAVELIN"
+  },
+  {
+    "id": 827,
+    "interface": "JAVELIN"
+  },
+  {
+    "id": 3899,
+    "interface": "UNARMED"
+  },
+  {
+    "id": 828,
+    "interface": "JAVELIN"
+  },
+  {
+    "id": 829,
+    "interface": "JAVELIN"
+  },
+  {
+    "id": 830,
+    "interface": "JAVELIN"
+  },
+  {
+    "id": 831,
+    "interface": "JAVELIN"
+  },
+  {
+    "id": 832,
+    "interface": "JAVELIN"
+  },
+  {
+    "id": 833,
+    "interface": "JAVELIN"
+  },
+  {
+    "id": 834,
+    "interface": "JAVELIN"
+  },
+  {
+    "id": 835,
+    "interface": "JAVELIN"
+  },
+  {
+    "id": 2883,
+    "interface": "UNARMED"
+  },
+  {
+    "id": 836,
+    "interface": "JAVELIN"
+  },
+  {
+    "id": 837,
+    "interface": "CROSSBOW"
+  },
+  {
+    "id": 4934,
+    "interface": "UNARMED"
+  },
+  {
+    "id": 839,
+    "interface": "UNARMED"
+  },
+  {
+    "id": 4935,
+    "interface": "UNARMED"
+  },
+  {
+    "id": 4936,
+    "interface": "UNARMED"
+  },
+  {
+    "id": 841,
+    "interface": "SHORTBOW"
+  },
+  {
+    "id": 4937,
+    "interface": "UNARMED"
+  },
+  {
+    "id": 843,
+    "interface": "SHORTBOW"
+  },
+  {
+    "id": 845,
+    "interface": "LONGBOW"
+  },
+  {
+    "id": 847,
+    "interface": "LONGBOW"
+  },
+  {
+    "id": 849,
+    "interface": "SHORTBOW"
+  },
+  {
+    "id": 851,
+    "interface": "LONGBOW"
+  },
+  {
+    "id": 853,
+    "interface": "SHORTBOW"
+  },
+  {
+    "id": 855,
+    "interface": "LONGBOW"
+  },
+  {
+    "id": 857,
+    "interface": "SHORTBOW"
+  },
+  {
+    "id": 859,
+    "interface": "LONGBOW"
+  },
+  {
+    "id": 861,
+    "interface": "SHORTBOW"
+  },
+  {
+    "id": 4958,
+    "interface": "UNARMED"
+  },
+  {
+    "id": 863,
+    "interface": "KNIFE"
+  },
+  {
+    "id": 4959,
+    "interface": "UNARMED"
+  },
+  {
+    "id": 864,
+    "interface": "KNIFE"
+  },
+  {
+    "id": 4960,
+    "interface": "UNARMED"
+  },
+  {
+    "id": 865,
+    "interface": "KNIFE"
+  },
+  {
+    "id": 4961,
+    "interface": "UNARMED"
+  },
+  {
+    "id": 866,
+    "interface": "KNIFE"
+  },
+  {
+    "id": 867,
+    "interface": "KNIFE"
+  },
+  {
+    "id": 868,
+    "interface": "KNIFE"
+  },
+  {
+    "id": 869,
+    "interface": "KNIFE"
+  },
+  {
+    "id": 870,
+    "interface": "KNIFE"
+  },
+  {
+    "id": 871,
+    "interface": "KNIFE"
+  },
+  {
+    "id": 872,
+    "interface": "KNIFE"
+  },
+  {
+    "id": 873,
+    "interface": "KNIFE"
+  },
+  {
+    "id": 874,
+    "interface": "KNIFE"
+  },
+  {
+    "id": 875,
+    "interface": "KNIFE"
+  },
+  {
+    "id": 876,
+    "interface": "KNIFE"
+  },
+  {
+    "id": 4982,
+    "interface": "UNARMED"
+  },
+  {
+    "id": 4983,
+    "interface": "UNARMED"
+  },
+  {
+    "id": 4984,
+    "interface": "UNARMED"
+  },
+  {
+    "id": 4985,
+    "interface": "UNARMED"
+  },
+  {
+    "id": 2952,
+    "interface": "UNARMED"
+  },
+  {
+    "id": 2961,
+    "interface": "UNARMED"
+  },
+  {
+    "id": 2963,
+    "interface": "UNARMED"
+  },
+  {
+    "id": 5016,
+    "interface": "SPEAR"
+  },
+  {
+    "id": 2997,
+    "interface": "UNARMED"
+  },
+  {
+    "id": 5056,
+    "interface": "BATTLEAXE"
+  },
+  {
+    "id": 5057,
+    "interface": "BATTLEAXE"
+  },
+  {
+    "id": 5058,
+    "interface": "BATTLEAXE"
+  },
+  {
+    "id": 6082,
+    "interface": "UNARMED"
+  },
+  {
+    "id": 5059,
+    "interface": "BATTLEAXE"
+  },
+  {
+    "id": 4037,
+    "interface": "UNARMED"
+  },
+  {
+    "id": 4039,
+    "interface": "UNARMED"
+  },
+  {
+    "id": 4068,
+    "interface": "SWORD"
+  },
+  {
+    "id": 3053,
+    "interface": "STAFF"
+  },
+  {
+    "id": 3054,
+    "interface": "STAFF"
+  },
+  {
+    "id": 7158,
+    "interface": "TWO_HANDED_SWORD"
+  }
+]
