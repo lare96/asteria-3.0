@@ -38,7 +38,7 @@ public final class TaskManager {
         Iterator<Task> it = PENDING_LIST.iterator();
         while (it.hasNext()) {
             Task t = it.next();
-
+            t.onSequence();
             if (t.needsExecute()) {
                 RUNNING_QUEUE.add(t);
             } else if (!t.isRunning()) {

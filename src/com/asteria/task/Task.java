@@ -70,6 +70,13 @@ public abstract class Task {
     }
 
     /**
+     * The method executed every {@code 600}ms when this task is sequenced.
+     */
+    public void onSequence() {
+
+    }
+
+    /**
      * The method executed when this task is cancelled using
      * {@link Task#cancel()}. This may be overridden so more code can be
      * executed dynamically when a task is cancelled.
