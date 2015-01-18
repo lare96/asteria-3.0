@@ -1,6 +1,6 @@
 package com.asteria.game.character.player.minigame;
 
-import com.asteria.utility.Counter;
+import com.asteria.utility.MutableNumber;
 
 /**
  * The class that provides all of the functionality needed for minigames cannot
@@ -14,7 +14,7 @@ public abstract class SequencedMinigame extends Minigame {
     /**
      * The counter that conceals the tick amount.
      */
-    private final Counter counter = new Counter();
+    private final MutableNumber counter = new MutableNumber();
 
     /**
      * Creates a new {@link SequencedMinigame}.
@@ -43,7 +43,7 @@ public abstract class SequencedMinigame extends Minigame {
      * 
      * @return the tick amount.
      */
-    public Counter getCounter() {
+    public MutableNumber getCounter() {
         return counter;
     }
 }

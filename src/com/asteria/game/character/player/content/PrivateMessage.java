@@ -2,7 +2,7 @@ package com.asteria.game.character.player.content;
 
 import com.asteria.game.World;
 import com.asteria.game.character.player.Player;
-import com.asteria.utility.Counter;
+import com.asteria.utility.MutableNumber;
 
 /**
  * The class that contains functions for managing private messaging lists.
@@ -21,7 +21,7 @@ public final class PrivateMessage {
     /**
      * The last message identifier concealed within a counter.
      */
-    private final Counter lastMessage = new Counter(1);
+    private final MutableNumber lastMessage = new MutableNumber(1);
 
     /**
      * Creates a new {@link PrivateMessage}.
@@ -143,7 +143,7 @@ public final class PrivateMessage {
      * 
      * @return the last message identifier.
      */
-    public Counter getLastMessage() {
+    public MutableNumber getLastMessage() {
         return lastMessage;
     }
 }

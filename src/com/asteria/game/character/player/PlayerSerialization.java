@@ -20,7 +20,7 @@ import com.asteria.game.item.container.Bank;
 import com.asteria.game.item.container.Equipment;
 import com.asteria.game.item.container.Inventory;
 import com.asteria.game.location.Position;
-import com.asteria.utility.Counter;
+import com.asteria.utility.MutableNumber;
 import com.asteria.utility.Utility;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -120,7 +120,7 @@ public final class PlayerSerialization {
         tokens.add(new TokenSerializer("friends", f.toArray(), n -> Collections.addAll(f, b.fromJson(n, Long[].class))));
         Set<Long> i = p.getIgnores();
         tokens.add(new TokenSerializer("ignores", i.toArray(), n -> Collections.addAll(i, b.fromJson(n, Long[].class))));
-        Counter energy = p.getRunEnergy();
+        MutableNumber energy = p.getRunEnergy();
         tokens.add(new TokenSerializer("run-energy", energy.get(), n -> energy.set(n.getAsInt())));
         Spellbook book = p.getSpellbook();
         tokens.add(new TokenSerializer("spellbook", book.name(), n -> p.setSpellbook(Spellbook.valueOf(n.getAsString()))));
@@ -128,13 +128,13 @@ public final class PlayerSerialization {
         tokens.add(new TokenSerializer("auto-retaliate", p.isAutoRetaliate(), n -> p.setAutoRetaliate(n.getAsBoolean())));
         FightType type = p.getFightType();
         tokens.add(new TokenSerializer("fight-type", type.name(), n -> p.setFightType(FightType.valueOf(n.getAsString()))));
-        Counter skulled = p.getSkullTimer();
+        MutableNumber skulled = p.getSkullTimer();
         tokens.add(new TokenSerializer("skull-timer", skulled.get(), n -> skulled.set(n.getAsInt())));
         tokens.add(new TokenSerializer("accept-aid", p.isAcceptAid(), n -> p.setAcceptAid(n.getAsBoolean())));
         tokens.add(new TokenSerializer("poison-damage", p.getPoisonDamage(), n -> p.setPoisonDamage(n.getAsInt())));
-        Counter teleblocked = p.getTeleblockTimer();
+        MutableNumber teleblocked = p.getTeleblockTimer();
         tokens.add(new TokenSerializer("teleblock-timer", teleblocked.get(), n -> teleblocked.set(n.getAsInt())));
-        Counter percentage = p.getSpecialPercentage();
+        MutableNumber percentage = p.getSpecialPercentage();
         tokens.add(new TokenSerializer("special-amount", percentage.get(), n -> percentage.set(n.getAsInt())));
         tokens.add(new TokenSerializer("skills", p.getSkills(), n -> Utility.dump(b.fromJson(n, Skill[].class), p.getSkills())));
     }

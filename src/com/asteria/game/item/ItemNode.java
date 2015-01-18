@@ -5,7 +5,7 @@ import com.asteria.game.NodeType;
 import com.asteria.game.World;
 import com.asteria.game.character.player.Player;
 import com.asteria.game.location.Position;
-import com.asteria.utility.Counter;
+import com.asteria.utility.MutableNumber;
 
 /**
  * The node implementation that represents an item on the ground.
@@ -22,7 +22,7 @@ public class ItemNode extends Node {
     /**
      * The counter that contains the amount of ticks this node has.
      */
-    private final Counter counter = new Counter();
+    private final MutableNumber counter = new MutableNumber();
 
     /**
      * The item state of this node.
@@ -201,7 +201,7 @@ public class ItemNode extends Node {
      * 
      * @return the counter that contains the ticks.
      */
-    public final Counter getCounter() {
+    public final MutableNumber getCounter() {
         return counter;
     }
 }

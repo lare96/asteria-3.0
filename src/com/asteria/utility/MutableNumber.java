@@ -5,7 +5,7 @@ package com.asteria.utility;
  * 
  * @author lare96 <http://www.rune-server.org/members/lare96/>
  */
-public final class Counter {
+public final class MutableNumber {
 
     /**
      * The value present within this counter.
@@ -13,19 +13,19 @@ public final class Counter {
     private int value;
 
     /**
-     * Creates a new {@link Counter} with {@code value}.
+     * Creates a new {@link MutableNumber} with {@code value}.
      * 
      * @param value
      *            the value present within this counter.
      */
-    public Counter(int value) {
+    public MutableNumber(int value) {
         this.value = value;
     }
 
     /**
-     * Creates a new {@link Counter} with a value of {@code 0}.
+     * Creates a new {@link MutableNumber} with a value of {@code 0}.
      */
-    public Counter() {
+    public MutableNumber() {
         this(0);
     }
 
@@ -45,9 +45,9 @@ public final class Counter {
             return true;
         if (obj == null)
             return false;
-        if (!(obj instanceof Counter))
+        if (!(obj instanceof MutableNumber))
             return false;
-        Counter other = (Counter) obj;
+        MutableNumber other = (MutableNumber) obj;
         if (value != other.value)
             return false;
         return true;

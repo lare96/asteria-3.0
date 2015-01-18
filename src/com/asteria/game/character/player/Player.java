@@ -51,7 +51,7 @@ import com.asteria.game.shop.Shop;
 import com.asteria.network.ConnectionHandler;
 import com.asteria.network.packet.PacketEncoder;
 import com.asteria.task.Task;
-import com.asteria.utility.Counter;
+import com.asteria.utility.MutableNumber;
 import com.asteria.utility.Settings;
 import com.asteria.utility.Stopwatch;
 import com.asteria.utility.Utility;
@@ -209,8 +209,8 @@ public class Player extends CharacterNode {
     /**
      * The collection of counters used for various counting operations.
      */
-    private final Counter poisonImmunity = new Counter(), teleblockTimer = new Counter(), fireImmunity = new Counter(),
-        donatorPoints = new Counter(), skullTimer = new Counter(), runEnergy = new Counter(100), specialPercentage = new Counter(
+    private final MutableNumber poisonImmunity = new MutableNumber(), teleblockTimer = new MutableNumber(), fireImmunity = new MutableNumber(),
+        donatorPoints = new MutableNumber(), skullTimer = new MutableNumber(), runEnergy = new MutableNumber(100), specialPercentage = new MutableNumber(
             100);
 
     /**
@@ -1023,7 +1023,7 @@ public class Player extends CharacterNode {
      * 
      * @return the poison immunity counter.
      */
-    public final Counter getPoisonImmunity() {
+    public final MutableNumber getPoisonImmunity() {
         return poisonImmunity;
     }
 
@@ -1032,7 +1032,7 @@ public class Player extends CharacterNode {
      * 
      * @return the teleblock counter.
      */
-    public final Counter getTeleblockTimer() {
+    public final MutableNumber getTeleblockTimer() {
         return teleblockTimer;
     }
 
@@ -1041,7 +1041,7 @@ public class Player extends CharacterNode {
      * 
      * @return the immunity counter.
      */
-    public final Counter getFireImmunity() {
+    public final MutableNumber getFireImmunity() {
         return fireImmunity;
     }
 
@@ -1050,7 +1050,7 @@ public class Player extends CharacterNode {
      * 
      * @return the donator points counter.
      */
-    public final Counter getDonatorPoints() {
+    public final MutableNumber getDonatorPoints() {
         return donatorPoints;
     }
 
@@ -1059,7 +1059,7 @@ public class Player extends CharacterNode {
      * 
      * @return the skull timer counter.
      */
-    public final Counter getSkullTimer() {
+    public final MutableNumber getSkullTimer() {
         return skullTimer;
     }
 
@@ -1068,7 +1068,7 @@ public class Player extends CharacterNode {
      * 
      * @return the run energy percentage counter.
      */
-    public final Counter getRunEnergy() {
+    public final MutableNumber getRunEnergy() {
         return runEnergy;
     }
 
@@ -1077,7 +1077,7 @@ public class Player extends CharacterNode {
      * 
      * @return the special percentage counter.
      */
-    public final Counter getSpecialPercentage() {
+    public final MutableNumber getSpecialPercentage() {
         return specialPercentage;
     }
 
