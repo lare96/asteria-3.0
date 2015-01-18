@@ -74,11 +74,8 @@ public final class DecodePacketServerEvent extends ServerSelectionEvent {
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 } finally {
-                    int read = session.getInData().position() - positionBefore;
-
-                    for (int i = read; i < session.getPacketSize(); i++) {
-                        session.getInData().get();
-                    }
+                    session.getInData().get(
+                        new byte[(session.getPacketSize() - (session.getInData().position() - positionBefore))]);
                 }
                 session.setPacketOpcode(-1);
                 session.setPacketSize(-1);
