@@ -32,10 +32,7 @@ public final class AcceptRequestServerEvent extends ServerSelectionEvent {
     @Override
     public void executeEvent(ServerSelectionKey key) throws Exception {
         SocketChannel socket;
-        while ((socket = ServerHandler.getServer().accept()) != null || counter.getAndIncrement() <= 5) {
-            if (socket == null) {
-                continue;
-            }
+        while ((socket = ServerHandler.getServer().accept()) != null && counter.getAndIncrement() <= 5) {
             String host = socket.socket().getInetAddress().getHostAddress();
             socket.configureBlocking(false);
             SelectionKey newKey = socket.register(ServerHandler.getSelector(), SelectionKey.OP_READ);
