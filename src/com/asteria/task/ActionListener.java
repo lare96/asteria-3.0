@@ -38,20 +38,20 @@ public abstract class ActionListener extends Task {
      * The listener will execute {@link ActionListener#run()} when invocation of
      * this method returns {@code false}.
      * 
-     * @return {@code true} if this listener should keep listening,
-     *         {@code false} if the code should be executed.
+     * @return {@code true} if the code can be executed, {@code false} if the
+     *         listener should keep listening.
      */
-    public abstract boolean listenWhile();
+    public abstract boolean canExecute();
 
     /**
-     * The code that will be executed when {@link ActionListener#listenWhile()}
+     * The code that will be executed when {@link ActionListener#canExecute()}
      * returns {@code false}.
      */
     public abstract void run();
 
     @Override
     public void execute() {
-        if (!listenWhile()) {
+        if (canExecute()) {
             try {
                 run();
             } finally {

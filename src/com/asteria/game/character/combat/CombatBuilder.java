@@ -310,7 +310,7 @@ public final class CombatBuilder {
         }
 
         @Override
-        public boolean listenWhile() {
+        public boolean canExecute() {
             builder.determineStrategy();
             builder.attackTimer = 0;
             builder.cooldown = 0;
@@ -331,7 +331,7 @@ public final class CombatBuilder {
                     return true;
                 }
             }
-            return !builder.character.getPosition().withinDistance(victim.getPosition(),
+            return builder.character.getPosition().withinDistance(victim.getPosition(),
                 builder.strategy.attackDistance(builder.getCharacter()));
         }
 

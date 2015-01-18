@@ -87,8 +87,8 @@ public final class MovementQueueListener {
         }
 
         @Override
-        public boolean listenWhile() {
-            return !(character.getMovementQueue().isMovementDone() || !character.isRegistered());
+        public boolean canExecute() {
+            return character.getMovementQueue().isMovementDone();
         }
 
         @Override
