@@ -140,7 +140,12 @@ public class Equipment extends ItemContainer {
             }
             if (used(designatedSlot)) {
                 Item equipItem = get(designatedSlot);
-                player.getInventory().set(inventorySlot, equipItem);
+                if (!equipItem.getDefinition().isStackable()) {
+                    player.getInventory().set(inventorySlot, equipItem);
+                } else {
+                    player.getInventory().add(equipItem);
+                    player.getInventory().set(inventorySlot, null);
+                }
                 player.getInventory().refresh();
             } else {
                 player.getInventory().remove(item, inventorySlot);
