@@ -4,9 +4,12 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Consumer;
 
 import com.asteria.game.character.player.Player;
 import com.asteria.game.location.Position;
+import com.asteria.task.Task;
+import com.asteria.task.TaskManager;
 
 /**
  * The node manager that manages all registered object nodes.
@@ -38,6 +41,48 @@ public final class ObjectNodeManager {
             return true;
         }
         return false;
+    }
+
+    /**
+     * The method that attempts to register {@code object} and then execute
+     * {@code action} after specified amount of ticks.
+     * 
+     * @param object
+     *            the object to attempt to register.
+     * @param ticks
+     *            the amount of ticks to unregister this object after.
+     * @return {@code true} if the object was registered, {@code false}
+     *         otherwise.
+     */
+    public static boolean register(ObjectNode object, int ticks, Consumer<ObjectNode> action) {
+        if (register(object)) {
+            TaskManager.submit(new Task(ticks, false) {
+                @Override
+                public void execute() {
+                    action.accept(object);
+                }
+            });
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * The method that attempts to register {@code object} for the specified
+     * amount of ticks.
+     * 
+     * @param object
+     *            the object to attempt to register.
+     * @param ticks
+     *            the amount of ticks to unregister this object after.
+     * @return {@code true} if the object was registered, {@code false}
+     *         otherwise.
+     */
+    public static boolean register(ObjectNode object, int ticks) {
+        return register(object, ticks, n -> {
+            if (!unregister(n))
+                throw new IllegalStateException(n + " could not be removed after " + ticks + " ticks!");
+        });
     }
 
     /**
