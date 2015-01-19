@@ -53,12 +53,11 @@ public class DefaultRangedCombatStrategy implements CombatStrategy {
         player.setRangedAmmo(null);
         player.setFireAmmo(0);
         startAnimation(player);
+        CombatRangedAmmo ammo = CombatRangedAmmo.getPlayerAmmo(player).get();
+        player.setRangedAmmo(ammo);
         if (!Combat.isCrystalBow(player)) {
             decrementAmmo(player);
         }
-        CombatRangedAmmo ammo = CombatRangedAmmo.getPlayerAmmo(player).get();
-        player.setRangedAmmo(ammo);
-
         if (!player.isSpecialActivated()) {
             player.highGraphic(new Graphic(ammo.getGraphic()));
             new Projectile(player, victim, ammo.getProjectile(), ammo.getDelay(), ammo.getSpeed(), ammo.getStartHeight(), ammo
