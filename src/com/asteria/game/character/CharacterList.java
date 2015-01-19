@@ -49,8 +49,7 @@ public final class CharacterList<E extends CharacterNode> implements Iterable<E>
      */
     @SuppressWarnings("unchecked")
     public CharacterList(int capacity) {
-        capacity++;
-        this.capacity = capacity;
+        this.capacity = ++capacity;
         this.characters = (E[]) new CharacterNode[capacity];
         this.size = 0;
     }
