@@ -143,6 +143,8 @@ public enum CombatRangedAmmo {
             .getWeapon() == WeaponInterface.CROSSBOW ? Equipment.ARROWS_SLOT : Equipment.WEAPON_SLOT;
         if (Combat.isCrystalBow(player))
             return Optional.of(CombatRangedAmmo.CRYSTAL_ARROW);
+        if (player.getEquipment().get(slot) == null)
+            return Optional.empty();
         return ELEMENTS.stream().filter(
             c -> player.getEquipment().get(slot).getDefinition().getName().toLowerCase().contains(c.toString())).findFirst();
     }
