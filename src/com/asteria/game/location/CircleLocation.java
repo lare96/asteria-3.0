@@ -1,6 +1,5 @@
 package com.asteria.game.location;
 
-
 /**
  * The location type that models any area in a circle or oval shape.
  * 

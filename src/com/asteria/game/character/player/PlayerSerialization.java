@@ -181,7 +181,8 @@ public final class PlayerSerialization {
             }
             try (FileReader in = new FileReader(cf)) {
                 JsonObject reader = (JsonObject) new JsonParser().parse(in);
-                tokens.stream().filter(t -> reader.has(t.getName())).forEach(t -> t.getFromJson().accept(reader.get(t.getName())));
+                tokens.stream().filter(t -> reader.has(t.getName()))
+                    .forEach(t -> t.getFromJson().accept(reader.get(t.getName())));
             }
             if (!password.equals(player.getPassword()))
                 return LoginResponse.INVALID_CREDENTIALS;

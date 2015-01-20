@@ -44,8 +44,8 @@ public final class ServerBuilder {
     /**
      * The scheduled executor service that will run the {@link GameSequencer}.
      */
-    private final ScheduledExecutorService sequenceExecutor = Executors.newSingleThreadScheduledExecutor(new ThreadFactoryBuilder()
-        .setNameFormat("GameThread").build());
+    private final ScheduledExecutorService sequenceExecutor = Executors
+        .newSingleThreadScheduledExecutor(new ThreadFactoryBuilder().setNameFormat("GameThread").build());
 
     /**
      * The flag that determines if the engine should update {@link Player}s in

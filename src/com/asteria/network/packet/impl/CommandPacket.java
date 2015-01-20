@@ -42,8 +42,8 @@ public final class CommandPacket extends PacketDecoder {
                 int monsters = Integer.parseInt(cmd[1]);
                 int npcId = Integer.parseInt(cmd[2]);
                 int npcId2 = Integer.parseInt(cmd[3]);
-                Location l = new SquareLocation(player.getPosition().getX(), player.getPosition().getY(), player.getPosition().getZ(),
-                    (int) radiusMod * monsters);
+                Location l = new SquareLocation(player.getPosition().getX(), player.getPosition().getY(), player.getPosition()
+                    .getZ(), (int) radiusMod * monsters);
 
                 for (int i = 0; i < monsters; i++) {
                     World.getNpcs().add(new Npc(npcId, l.random()));

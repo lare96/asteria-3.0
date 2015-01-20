@@ -56,7 +56,7 @@ public final class Utility {
      *             if the arrays are not equal in length.
      */
     public static <T> void dump(T[] from, T[] to) {
-        if(from.length != to.length)
+        if (from.length != to.length)
             throw new IllegalArgumentException("Arrays must be equal in size!");
         for (int i = 0; i < from.length; i++)
             to[i] = from[i];

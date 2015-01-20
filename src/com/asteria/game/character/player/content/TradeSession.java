@@ -234,8 +234,7 @@ public final class TradeSession {
      */
     private String name(Player player) {
         return player.getFormatUsername().concat(
-            player.getRights().equal(Rights.MODERATOR) ? "@cr1@" : player.getRights().greater(Rights.MODERATOR)
-                ? "@cr2@" : "");
+            player.getRights().equal(Rights.MODERATOR) ? "@cr1@" : player.getRights().greater(Rights.MODERATOR) ? "@cr2@" : "");
     }
 
     /**

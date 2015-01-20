@@ -157,8 +157,9 @@ public final class CombatSession extends Task {
         if (builder.getCharacter().getType() == NodeType.NPC) {
             Npc npc = (Npc) builder.getCharacter();
 
-            if (builder.getVictim().getCombatBuilder().isCooldown() && !npc.getPosition().isViewableFrom(npc.getOriginalPosition()) || !builder
-                .getVictim().getCombatBuilder().isBeingAttacked() && !npc.getPosition().isViewableFrom(npc.getOriginalPosition())) {
+            if (builder.getVictim().getCombatBuilder().isCooldown() && !npc.getPosition().isViewableFrom(
+                npc.getOriginalPosition()) || !builder.getVictim().getCombatBuilder().isBeingAttacked() && !npc.getPosition()
+                .isViewableFrom(npc.getOriginalPosition())) {
                 builder.reset();
                 return false;
             }

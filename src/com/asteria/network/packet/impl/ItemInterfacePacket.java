@@ -188,8 +188,7 @@ public final class ItemInterfacePacket extends PacketDecoder {
                 amount = player.getBank().amount(itemId);
             } else {
                 Item itemWithdrew = new Item(itemId, 1);
-                amount = ItemDefinition.DEFINITIONS[itemWithdrew.getId()].isStackable() ? player.getBank().amount(itemId)
-                    : 28;
+                amount = ItemDefinition.DEFINITIONS[itemWithdrew.getId()].isStackable() ? player.getBank().amount(itemId) : 28;
             }
 
             player.getBank().withdraw(slot, amount, true);

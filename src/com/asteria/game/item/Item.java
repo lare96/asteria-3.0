@@ -1,6 +1,5 @@
 package com.asteria.game.item;
 
-
 /**
  * The container class that represents an item that can be interacted with.
  * 

@@ -107,72 +107,78 @@ public final class NpcActionPacket extends PacketDecoder {
             return;
         int id = npc.getId();
         Position position = new Position(npc.getPosition().getX(), npc.getPosition().getY(), npc.getPosition().getZ());
-        player.getMovementListener().append(() -> {
-            if (player.getPosition().withinDistance(position, 1)) {
-                player.facePosition(npc.getPosition());
-                npc.facePosition(player.getPosition());
-                MinigameHandler.execute(player, m -> m.onFirstClickNpc(player, npc));
-                switch (id) {
-                case 460:
-                    // Please note that the "append" function can be chained...
-                    // I just did it line by line so you can see exactly how
-                    // dialogues are done. I also tried to incorporate as much
-                    // of the dialogue system's features as possible.
-                    DialogueChainBuilder builder = player.getDialogueChain();
-                    builder.append(new NpcDialogue(id, "Hello, this is the new dialogue system. It", "should be easier to use."));
-                    builder.append(new PlayerDialogue("Cool, I'm loving it already!"));
-                    builder.append(new NpcDialogue(id, "Would you like some money?"));
-                    builder.append(new OptionDialogue("Yes please!", "No thanks.") {
-                        @Override
-                        public Optional<Consumer<OptionType>> getOptionListener() {
-                           return Optional.of(n -> {
-                                if (n == OptionType.FIRST_OPTION) {
-                                    builder.append(new GiveItemDialogue(new Item(995, 1000), "You receive 1000 gold coins."));
-                                    builder.advance();
-                                } else if (n == OptionType.SECOND_OPTION) {
-                                    player.getEncoder().sendCloseWindows();
-                                }
-                           });
-                        }
-                    });
-                    builder.advance();
-                    break;
-                case 520:
-                    Shop.SHOPS.get("General Store").openShop(player);
-                    break;
-                case 233:
-                case 234:
-                case 235:
-                case 236:
-                    Fishing fishing = new Fishing(player, Tool.FISHING_ROD, position);
-                    fishing.start();
-                    break;
-                case 309:
-                case 310:
-                case 311:
-                case 314:
-                case 315:
-                case 317:
-                case 318:
-                    fishing = new Fishing(player, Tool.FLY_FISHING_ROD, position);
-                    fishing.start();
-                    break;
-                case 312:
-                    fishing = new Fishing(player, Tool.LOBSTER_POT, position);
-                    fishing.start();
-                    break;
-                case 313:
-                    fishing = new Fishing(player, Tool.BIG_NET, position);
-                    fishing.start();
-                    break;
-                case 316:
-                case 319:
-                    fishing = new Fishing(player, Tool.NET, position);
-                    fishing.start();
-                    break;
+        player.getMovementListener()
+            .append(() -> {
+                if (player.getPosition().withinDistance(position, 1)) {
+                    player.facePosition(npc.getPosition());
+                    npc.facePosition(player.getPosition());
+                    MinigameHandler.execute(player, m -> m.onFirstClickNpc(player, npc));
+                    switch (id) {
+                    case 460:
+                        // Please note that the "append" function can be
+                        // chained...
+                        // I just did it line by line so you can see exactly how
+                        // dialogues are done. I also tried to incorporate as
+                        // much
+                        // of the dialogue system's features as possible.
+                DialogueChainBuilder builder = player.getDialogueChain();
+                        builder.append(new NpcDialogue(id, "Hello, this is the new dialogue system. It",
+                            "should be easier to use."));
+                        builder.append(new PlayerDialogue("Cool, I'm loving it already!"));
+                        builder.append(new NpcDialogue(id, "Would you like some money?"));
+                        builder.append(new OptionDialogue("Yes please!", "No thanks.") {
+                            @Override
+                            public Optional<Consumer<OptionType>> getOptionListener() {
+                                return Optional
+                                    .of(n -> {
+                                        if (n == OptionType.FIRST_OPTION) {
+                                            builder.append(new GiveItemDialogue(new Item(995, 1000),
+                                                "You receive 1000 gold coins."));
+                                            builder.advance();
+                                        } else if (n == OptionType.SECOND_OPTION) {
+                                            player.getEncoder().sendCloseWindows();
+                                        }
+                                    });
+                            }
+                        });
+                        builder.advance();
+                        break;
+                    case 520:
+                        Shop.SHOPS.get("General Store").openShop(player);
+                        break;
+                    case 233:
+                    case 234:
+                    case 235:
+                    case 236:
+                        Fishing fishing = new Fishing(player, Tool.FISHING_ROD, position);
+                        fishing.start();
+                        break;
+                    case 309:
+                    case 310:
+                    case 311:
+                    case 314:
+                    case 315:
+                    case 317:
+                    case 318:
+                        fishing = new Fishing(player, Tool.FLY_FISHING_ROD, position);
+                        fishing.start();
+                        break;
+                    case 312:
+                        fishing = new Fishing(player, Tool.LOBSTER_POT, position);
+                        fishing.start();
+                        break;
+                    case 313:
+                        fishing = new Fishing(player, Tool.BIG_NET, position);
+                        fishing.start();
+                        break;
+                    case 316:
+                    case 319:
+                        fishing = new Fishing(player, Tool.NET, position);
+                        fishing.start();
+                        break;
+                    }
                 }
-            }
-        });
+            });
     }
 
     /**
@@ -238,8 +244,8 @@ public final class NpcActionPacket extends PacketDecoder {
             return false;
         if (!MinigameHandler.execute(player, true, m -> m.canHit(player, npc)))
             return false;
-        if (!Location.inMultiCombat(player) && player.getCombatBuilder().isBeingAttacked() && !npc.equals(player.getCombatBuilder()
-            .getLastAttacker())) {
+        if (!Location.inMultiCombat(player) && player.getCombatBuilder().isBeingAttacked() && !npc.equals(player
+            .getCombatBuilder().getLastAttacker())) {
             player.getEncoder().sendMessage("You are already under attack!");
             return false;
         }

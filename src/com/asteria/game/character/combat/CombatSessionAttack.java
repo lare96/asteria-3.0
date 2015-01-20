@@ -170,7 +170,8 @@ public final class CombatSessionAttack extends Task {
                         if (builder.getCharacter().getPosition().withinDistance(victim.getPosition(), Combat.RETRIBUTION_RADIUS)) {
                             builder.getCharacter().damage(new Hit(random.inclusive(Combat.MAXIMUM_RETRIBUTION_DAMAGE)));
                         }
-                    } else if (Location.inWilderness(victim) || MinigameHandler.contains(victim) && Location.inMultiCombat(victim)) {
+                    } else if (Location.inWilderness(victim) || MinigameHandler.contains(victim) && Location
+                        .inMultiCombat(victim)) {
                         for (Player player : victim.getLocalPlayers()) {
                             if (player == null) {
                                 continue;

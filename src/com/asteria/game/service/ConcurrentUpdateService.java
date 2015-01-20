@@ -34,26 +34,26 @@ public final class ConcurrentUpdateService implements Runnable {
     public void run() {
 
         // Sequence movement and perform sequential processing for players.
-		World.getPlayers().forEach(player -> {
-			try {
-				player.sequence();
+        World.getPlayers().forEach(player -> {
+            try {
+                player.sequence();
                 player.getMovementQueue().sequence();
-			} catch (Exception e) {
-				e.printStackTrace();
-				World.getPlayers().remove(player);
-			}
-		});
+            } catch (Exception e) {
+                e.printStackTrace();
+                World.getPlayers().remove(player);
+            }
+        });
 
         // Sequence movement and perform sequential processing for npcs.
         World.getNpcs().forEach(npc -> {
-			try {
-				npc.sequence();
+            try {
+                npc.sequence();
                 npc.getMovementQueue().sequence();
-			} catch (Exception e) {
-				e.printStackTrace();
-				World.getNpcs().remove(npc);
-			}
-		});
+            } catch (Exception e) {
+                e.printStackTrace();
+                World.getNpcs().remove(npc);
+            }
+        });
 
         // Update players for players, and npcs for players.
         synchronizer.bulkRegister(World.getPlayers().size());

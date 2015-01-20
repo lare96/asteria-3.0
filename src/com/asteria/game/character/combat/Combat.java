@@ -641,8 +641,7 @@ public final class Combat {
         maxHit = (int) (baseDamage * specialMultiplier);
 
         if (Combat.isFullDharoks(player)) {
-            maxHit += (player.getSkills()[Skills.HITPOINTS].getRealLevel() - player.getSkills()[Skills.HITPOINTS]
-                .getLevel()) * 0.35;
+            maxHit += (player.getSkills()[Skills.HITPOINTS].getRealLevel() - player.getSkills()[Skills.HITPOINTS].getLevel()) * 0.35;
         }
         if (Settings.DEBUG)
             player.getEncoder().sendMessage("[DEBUG]: Maximum hit this turn is [" + maxHit + "].");

@@ -173,8 +173,7 @@ public final class PacketEncoder {
      * @return an instance of this encoder.
      */
     public PacketEncoder sendLocalGraphic(int id, Position position, int level) {
-        player.getLocalPlayers().stream().filter(Objects::nonNull).forEach(
-            p -> p.getEncoder().sendGraphic(id, position, level));
+        player.getLocalPlayers().stream().filter(Objects::nonNull).forEach(p -> p.getEncoder().sendGraphic(id, position, level));
         return this;
     }
 
@@ -749,8 +748,7 @@ public final class PacketEncoder {
      */
     public void sendAllProjectile(Position position, Position offset, int angle, int speed, int gfxMoving, int startHeight, int endHeight, int lockon, int time) {
         player.getLocalPlayers().stream().filter(Objects::nonNull).forEach(
-            p -> p.getEncoder().sendProjectile(position, offset, angle, speed, gfxMoving, startHeight, endHeight, lockon,
-                time));
+            p -> p.getEncoder().sendProjectile(position, offset, angle, speed, gfxMoving, startHeight, endHeight, lockon, time));
     }
 
     /**

@@ -42,7 +42,7 @@ public final class Requirement {
         this.level = level;
         this.skill = skill;
     }
-    
+
     /**
      * A substitute for {@link Object#clone()} that creates another 'copy' of
      * this instance. The created copy is <i>safe</i> meaning it does not hold
@@ -99,8 +99,7 @@ public final class Requirement {
         for (Requirement r : req) {
             if (player.getSkills()[r.getSkill()].getRealLevel() < r.getLevel()) {
                 String append = Utility.appendIndefiniteArticle(SkillData.values()[r.getSkill()].toString());
-                player.getEncoder()
-                    .sendMessage("You need " + append + " level of " + r.getLevel() + " to equip this item.");
+                player.getEncoder().sendMessage("You need " + append + " level of " + r.getLevel() + " to equip this item.");
                 return false;
             }
         }

@@ -103,7 +103,7 @@ public final class SquareLocation extends Location {
 
     @Override
     public String toString() {
-        return "SQUARE_LOCATION[swX= "+swX+", swY= "+swY+", neX= "+neX+", neY= "+neY+"]";
+        return "SQUARE_LOCATION[swX= " + swX + ", swY= " + swY + ", neX= " + neX + ", neY= " + neY + "]";
     }
 
     @Override

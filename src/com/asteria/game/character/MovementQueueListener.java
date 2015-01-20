@@ -36,18 +36,18 @@ public final class MovementQueueListener {
     }
 
     /**
-	 * Resets this {@link ActionListener} so it may listen for the walking queue
-	 * to finish. Once the walking queue is finished the listener will run the
-	 * logic within {@code task}. <br>
-	 * <br>
-	 * Please note that appended tasks are not guaranteed to be ran! If a new
-	 * task is being appended while the listener is already waiting to run
-	 * another task, the existing listener is stopped, the old task discarded,
-	 * and a new listener is started to run the new task.
-	 * 
-	 * @param task
-	 *            the task that will be ran once the walking queue is finished.
-	 */
+     * Resets this {@link ActionListener} so it may listen for the walking queue
+     * to finish. Once the walking queue is finished the listener will run the
+     * logic within {@code task}. <br>
+     * <br>
+     * Please note that appended tasks are not guaranteed to be ran! If a new
+     * task is being appended while the listener is already waiting to run
+     * another task, the existing listener is stopped, the old task discarded,
+     * and a new listener is started to run the new task.
+     * 
+     * @param task
+     *            the task that will be ran once the walking queue is finished.
+     */
     public void append(Runnable task) {
         listener.ifPresent(t -> t.cancel());
         listener = Optional.of(new MovementQueueListenerTask(character, task));

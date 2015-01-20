@@ -31,7 +31,7 @@ public class OptionDialogue implements DialogueChain {
         Dialogues.optionDialogue(dialogue.getPlayer(), options);
         dialogue.append(getOptionListener());
     }
-    
+
     /**
      * Retrieves the option listener for this option dialogue entry. This can be
      * overridden to provide functionality for the displayed options.

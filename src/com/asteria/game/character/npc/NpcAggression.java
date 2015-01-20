@@ -62,8 +62,8 @@ public final class NpcAggression {
      */
     private static boolean validate(Npc npc, Player player) {
         Position position = npc.getOriginalPosition();
-        if(!Location.inMultiCombat(player) && player.getCombatBuilder().isAttacking() ||player.getCombatBuilder()
-                .isBeingAttacked())
+        if (!Location.inMultiCombat(player) && player.getCombatBuilder().isAttacking() || player.getCombatBuilder()
+            .isBeingAttacked())
             return false;
         if (player.determineCombatLevel() > (npc.getDefinition().getCombatLevel() * 2) && !Location.inWilderness(player))
             return false;

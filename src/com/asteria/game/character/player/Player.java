@@ -209,9 +209,9 @@ public class Player extends CharacterNode {
     /**
      * The collection of counters used for various counting operations.
      */
-    private final MutableNumber poisonImmunity = new MutableNumber(), teleblockTimer = new MutableNumber(), fireImmunity = new MutableNumber(),
-        donatorPoints = new MutableNumber(), skullTimer = new MutableNumber(), runEnergy = new MutableNumber(100), specialPercentage = new MutableNumber(
-            100);
+    private final MutableNumber poisonImmunity = new MutableNumber(), teleblockTimer = new MutableNumber(),
+        fireImmunity = new MutableNumber(), donatorPoints = new MutableNumber(), skullTimer = new MutableNumber(),
+        runEnergy = new MutableNumber(100), specialPercentage = new MutableNumber(100);
 
     /**
      * The amount of authority this player has over others.
