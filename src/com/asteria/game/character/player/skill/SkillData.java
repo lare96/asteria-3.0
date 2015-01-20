@@ -1,6 +1,6 @@
 package com.asteria.game.character.player.skill;
 
-import com.asteria.utility.Utility;
+import com.asteria.utility.TextUtils;
 
 /**
  * The enumerated type whose elements represent data for the skills.
@@ -79,7 +79,7 @@ public enum SkillData {
 
     @Override
     public String toString() {
-        return Utility.capitalize(name().toLowerCase().replaceAll("_", " "));
+        return TextUtils.capitalize(name().toLowerCase().replaceAll("_", " "));
     }
 
     /**

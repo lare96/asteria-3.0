@@ -14,7 +14,7 @@ public final class Stopwatch {
     /**
      * The internal cached time that acts as a time stamp.
      */
-    private long cachedTime = Utility.currentTime();
+    private long cachedTime = Stopwatch.currentTime();
 
     /**
      * The current state of this stopwatch.
@@ -28,6 +28,17 @@ public final class Stopwatch {
     }
 
     /**
+     * Gets the current time in {@link TimeUnit#MILLISECONDS}. This method is
+     * more accurate than {@link System#currentTimeMillis()} and does not rely
+     * on the underlying OS.
+     * 
+     * @return the current time in milliseconds.
+     */
+    public static long currentTime() {
+        return TimeUnit.MILLISECONDS.convert(System.nanoTime(), TimeUnit.NANOSECONDS);
+    }
+
+    /**
      * Sets the internal cached time to {@link Utility#currentTime()},
      * effectively making {@link Stopwatch#elapsedTime()} and
      * {@link Stopwatch#elapsed(long, TimeUnit)} return {@code 0}. If this
@@ -37,7 +48,7 @@ public final class Stopwatch {
      * @return an instance of this stopwatch.
      */
     public Stopwatch reset() {
-        cachedTime = Utility.currentTime();
+        cachedTime = Stopwatch.currentTime();
         state = State.RUNNING;
         return this;
     }
@@ -66,7 +77,7 @@ public final class Stopwatch {
     public long elapsedTime(TimeUnit unit) {
         if (state == State.STOPPED)
             throw new IllegalStateException("The timer has been stopped!");
-        return unit.convert((Utility.currentTime() - cachedTime), TimeUnit.MILLISECONDS);
+        return unit.convert((Stopwatch.currentTime() - cachedTime), TimeUnit.MILLISECONDS);
     }
 
     /**

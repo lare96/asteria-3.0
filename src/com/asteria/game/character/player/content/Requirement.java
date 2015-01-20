@@ -6,7 +6,7 @@ import java.util.Map;
 import com.asteria.game.character.player.Player;
 import com.asteria.game.character.player.skill.SkillData;
 import com.asteria.game.item.Item;
-import com.asteria.utility.Utility;
+import com.asteria.utility.TextUtils;
 
 /**
  * The container class that represents one equipment requirement.
@@ -98,7 +98,7 @@ public final class Requirement {
             return true;
         for (Requirement r : req) {
             if (player.getSkills()[r.getSkill()].getRealLevel() < r.getLevel()) {
-                String append = Utility.appendIndefiniteArticle(SkillData.values()[r.getSkill()].toString());
+                String append = TextUtils.appendIndefiniteArticle(SkillData.values()[r.getSkill()].toString());
                 player.getEncoder().sendMessage("You need " + append + " level of " + r.getLevel() + " to equip this item.");
                 return false;
             }

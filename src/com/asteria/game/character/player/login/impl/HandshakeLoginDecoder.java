@@ -8,7 +8,7 @@ import com.asteria.game.character.player.IOState;
 import com.asteria.game.character.player.PlayerIO;
 import com.asteria.game.character.player.login.LoginProtocolDecoder;
 import com.asteria.network.DataBuffer;
-import com.asteria.utility.Utility;
+import com.asteria.utility.LoggerUtils;
 
 /**
  * The login protocol decoder that handles the handshake between the client and
@@ -21,7 +21,7 @@ public final class HandshakeLoginDecoder extends LoginProtocolDecoder {
     /**
      * The logger that will print important information.
      */
-    private static Logger logger = Utility.getLogger(PlayerIO.class);
+    private static Logger logger = LoggerUtils.getLogger(PlayerIO.class);
 
     /**
      * The secure random generator that will generate a server session key.

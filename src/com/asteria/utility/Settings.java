@@ -107,7 +107,7 @@ public final class Settings {
     /**
      * The default constructor.
      * 
-     * @throws InstantiationException
+     * @throws InstantiationError
      *             if this class is instantiated.
      */
     private Settings() {

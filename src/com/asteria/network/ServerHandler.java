@@ -10,7 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.asteria.Server;
-import com.asteria.utility.Utility;
+import com.asteria.utility.LoggerUtils;
 import com.google.common.base.Preconditions;
 
 /**
@@ -23,7 +23,7 @@ public final class ServerHandler {
     /**
      * The logger that will print important information.
      */
-    private static Logger logger = Utility.getLogger(Server.class);
+    private static Logger logger = LoggerUtils.getLogger(Server.class);
 
     /**
      * The selector that will determine which network events to handle.

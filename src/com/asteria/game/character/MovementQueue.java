@@ -11,7 +11,6 @@ import com.asteria.game.location.Position;
 import com.asteria.task.Task;
 import com.asteria.task.TaskManager;
 import com.asteria.utility.RandomGen;
-import com.asteria.utility.Utility;
 
 /**
  * The movement queue sequencer that handles the entire movement process for
@@ -247,9 +246,46 @@ public final class MovementQueue {
         Point last = waypoints.peekLast();
         int deltaX = x - last.getX();
         int deltaY = y - last.getY();
-        int direction = Utility.direction(deltaX, deltaY);
+        int direction = direction(deltaX, deltaY);
         if (direction > -1) {
             waypoints.add(new Point(x, y, direction));
+        }
+    }
+
+    /**
+     * Calculates the direction between the two coordinates.
+     * 
+     * @param dx
+     *            the first coordinate.
+     * @param dy
+     *            the second coordinate.
+     * @return the direction.
+     */
+    private int direction(int dx, int dy) {
+        if (dx < 0) {
+            if (dy < 0) {
+                return 5;
+            } else if (dy > 0) {
+                return 0;
+            } else {
+                return 3;
+            }
+        } else if (dx > 0) {
+            if (dy < 0) {
+                return 7;
+            } else if (dy > 0) {
+                return 2;
+            } else {
+                return 4;
+            }
+        } else {
+            if (dy < 0) {
+                return 6;
+            } else if (dy > 0) {
+                return 1;
+            } else {
+                return -1;
+            }
         }
     }
 

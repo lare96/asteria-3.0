@@ -7,8 +7,8 @@ import com.asteria.game.character.player.content.RestoreStatTask;
 import com.asteria.game.character.player.minigame.MinigameHandler;
 import com.asteria.game.item.ItemNodeManager;
 import com.asteria.task.TaskManager;
+import com.asteria.utility.LoggerUtils;
 import com.asteria.utility.Settings;
-import com.asteria.utility.Utility;
 
 /**
  * The main class of <i>Asteria 3.0</i> that will prepare the server builder.
@@ -20,7 +20,7 @@ public final class Server {
     /**
      * The logger that will print important information.
      */
-    private static Logger logger = Utility.getLogger(Server.class);
+    private static Logger logger = LoggerUtils.getLogger(Server.class);
 
     /**
      * The server builder that will prepare the server.
@@ -30,7 +30,7 @@ public final class Server {
     /**
      * The default constructor.
      * 
-     * @throws InstantiationException
+     * @throws InstantiationError
      *             if this class is instantiated.
      */
     private Server() {

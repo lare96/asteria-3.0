@@ -20,8 +20,8 @@ import com.asteria.network.DataBuffer;
 import com.asteria.network.packet.PacketDecoder;
 import com.asteria.task.Task;
 import com.asteria.task.TaskManager;
+import com.asteria.utility.BufferUtils;
 import com.asteria.utility.Settings;
-import com.asteria.utility.Utility;
 
 /**
  * The packet sent from the client when the player clicks some sort of button or
@@ -45,7 +45,7 @@ public final class ClickButtonPacket extends PacketDecoder {
 
     @Override
     public void decode(Player player, int opcode, int size, DataBuffer buf) {
-        int button = PROPER_READ ? buf.getShort() : Utility.hexToInt(buf.getBytes(2));
+        int button = PROPER_READ ? buf.getShort() : BufferUtils.hexToInt(buf.getBytes(2));
 
         switch (button) {
         case 53152:

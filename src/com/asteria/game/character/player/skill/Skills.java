@@ -3,7 +3,7 @@ package com.asteria.game.character.player.skill;
 import com.asteria.game.character.Flag;
 import com.asteria.game.character.Graphic;
 import com.asteria.game.character.player.Player;
-import com.asteria.utility.Utility;
+import com.asteria.utility.TextUtils;
 
 /**
  * The class that contains methods to handle the functionality of skills.
@@ -159,7 +159,7 @@ public final class Skills {
                     player.getSkills()[skill].setLevel(old + 1, true);
                 }
                 SkillData data = SkillData.values()[skill];
-                String append = Utility.appendIndefiniteArticle(data.toString());
+                String append = TextUtils.appendIndefiniteArticle(data.toString());
                 player.getEncoder().sendString("@dre@Congratulations, you've just advanced " + append + " level!",
                     data.getFirstLine());
                 player.getEncoder().sendString("Your " + data + " level is now " + newLevel + ".", data.getSecondLine());

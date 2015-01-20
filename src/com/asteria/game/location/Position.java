@@ -1,7 +1,6 @@
 package com.asteria.game.location;
 
 import com.asteria.utility.RandomGen;
-import com.asteria.utility.Utility;
 
 /**
  * The container class that represents a coordinate anywhere in the world.
@@ -89,6 +88,21 @@ public class Position {
     }
 
     /**
+     * Returns the delta coordinates. Note that the returned position is not an
+     * actual position, instead it's values represent the delta values between
+     * the two arguments.
+     * 
+     * @param a
+     *            the first position.
+     * @param b
+     *            the second position.
+     * @return the delta coordinates contained within a position.
+     */
+    public static Position delta(Position a, Position b) {
+        return new Position(b.x - a.x, b.y - a.y);
+    }
+
+    /**
      * A substitute for {@link Object#clone()} that creates another 'copy' of
      * this instance. The created copy <i>safe</i> meaning it does not hold
      * <b>any</b> references to the original instance.
@@ -110,7 +124,7 @@ public class Position {
     public final boolean isViewableFrom(Position other) {
         if (this.getZ() != other.getZ())
             return false;
-        Position p = Utility.delta(this, other);
+        Position p = Position.delta(this, other);
         return p.x <= 14 && p.x >= -15 && p.y <= 14 && p.y >= -15;
     }
 

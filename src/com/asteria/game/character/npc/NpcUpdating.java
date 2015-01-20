@@ -10,7 +10,6 @@ import com.asteria.network.ByteOrder;
 import com.asteria.network.DataBuffer;
 import com.asteria.network.ValueType;
 import com.asteria.task.TaskManager;
-import com.asteria.utility.Utility;
 
 /**
  * The class that provides static utility methods for updating NPCs.
@@ -94,7 +93,7 @@ public final class NpcUpdating {
      */
     private static void addNpc(DataBuffer out, Player player, Npc npc) {
         out.putBits(14, npc.getSlot());
-        Position delta = Utility.delta(player.getPosition(), npc.getPosition());
+        Position delta = Position.delta(player.getPosition(), npc.getPosition());
         out.putBits(5, delta.getY());
         out.putBits(5, delta.getX());
         out.putBit(npc.getFlags().needsUpdate());

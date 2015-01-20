@@ -197,6 +197,28 @@ public final class RandomGen extends Random {
     }
 
     /**
+     * Pseudo-randomly retrieves an {@code short} from this {@code array}.
+     * 
+     * @param array
+     *            the array to retrieve an {@code short} from.
+     * @return the {@code short} retrieved from the array.
+     */
+    public short random(short[] array) {
+        return array[(int) (nextDouble() * array.length)];
+    }
+
+    /**
+     * Pseudo-randomly retrieves an {@code byte} from this {@code array}.
+     * 
+     * @param array
+     *            the array to retrieve an {@code byte} from.
+     * @return the {@code byte} retrieved from the array.
+     */
+    public byte random(byte[] array) {
+        return array[(int) (nextDouble() * array.length)];
+    }
+
+    /**
      * Pseudo-randomly retrieves an {@code float} from this {@code array}.
      * 
      * @param array
@@ -204,6 +226,28 @@ public final class RandomGen extends Random {
      * @return the {@code float} retrieved from the array.
      */
     public float random(float[] array) {
+        return array[(int) (nextDouble() * array.length)];
+    }
+
+    /**
+     * Pseudo-randomly retrieves an {@code boolean} from this {@code array}.
+     * 
+     * @param array
+     *            the array to retrieve an {@code boolean} from.
+     * @return the {@code boolean} retrieved from the array.
+     */
+    public boolean random(boolean[] array) {
+        return array[(int) (nextDouble() * array.length)];
+    }
+
+    /**
+     * Pseudo-randomly retrieves an {@code char} from this {@code array}.
+     * 
+     * @param array
+     *            the array to retrieve an {@code char} from.
+     * @return the {@code char} retrieved from the array.
+     */
+    public char random(char[] array) {
         return array[(int) (nextDouble() * array.length)];
     }
 

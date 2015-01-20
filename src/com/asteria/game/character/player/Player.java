@@ -51,10 +51,11 @@ import com.asteria.game.shop.Shop;
 import com.asteria.network.ConnectionHandler;
 import com.asteria.network.packet.PacketEncoder;
 import com.asteria.task.Task;
+import com.asteria.utility.LoggerUtils;
 import com.asteria.utility.MutableNumber;
 import com.asteria.utility.Settings;
 import com.asteria.utility.Stopwatch;
-import com.asteria.utility.Utility;
+import com.asteria.utility.TextUtils;
 
 /**
  * The character implementation that represents a node that is operated by an
@@ -113,7 +114,7 @@ public class Player extends CharacterNode {
     /**
      * The logger that will print important information.
      */
-    private static Logger logger = Utility.getLogger(Player.class);
+    private static Logger logger = LoggerUtils.getLogger(Player.class);
 
     /**
      * The hash collection of the local players.
@@ -817,7 +818,7 @@ public class Player extends CharacterNode {
      * @return the formatted username.
      */
     public final String getFormatUsername() {
-        return Utility.capitalize(username);
+        return TextUtils.capitalize(username);
     }
 
     /**

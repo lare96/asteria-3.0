@@ -14,7 +14,7 @@ import com.asteria.game.item.container.ItemContainer;
 import com.asteria.game.item.container.ItemContainerPolicy;
 import com.asteria.task.TaskManager;
 import com.asteria.utility.Settings;
-import com.asteria.utility.Utility;
+import com.asteria.utility.TextUtils;
 
 /**
  * The container that represents a shop players can buy and sell items from.
@@ -167,7 +167,7 @@ public class Shop {
             player.getEncoder().sendMessage("You can't sell " + itemName + " to this store.");
             return;
         }
-        String formatPrice = Utility.formatPrice((int) Math.floor(determinePrice(item) / 2));
+        String formatPrice = TextUtils.formatPrice((int) Math.floor(determinePrice(item) / 2));
         String currencyName = currency.name().toLowerCase().replaceAll("_", " ");
         player.getEncoder().sendMessage(itemName + ": shop will buy for " + formatPrice + " " + currencyName + ".");
     }
@@ -185,9 +185,11 @@ public class Shop {
             player.getEncoder().sendMessage("There is none of this item left in stock!");
             return;
         }
-        player.getEncoder().sendMessage(
-            item.getDefinition().getName() + ": shop will sell for " + Utility.formatPrice(determinePrice(item)) + " " + currency
-                .name().toLowerCase().replaceAll("_", " ") + ".");
+        player
+            .getEncoder()
+            .sendMessage(
+                item.getDefinition().getName() + ": shop will sell for " + TextUtils.formatPrice(determinePrice(item)) + " " + currency
+                    .name().toLowerCase().replaceAll("_", " ") + ".");
     }
 
     /**

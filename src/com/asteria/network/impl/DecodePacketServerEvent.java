@@ -7,8 +7,8 @@ import com.asteria.network.DataBuffer;
 import com.asteria.network.ServerSelectionEvent;
 import com.asteria.network.ServerSelectionKey;
 import com.asteria.network.packet.PacketDecoder;
+import com.asteria.utility.LoggerUtils;
 import com.asteria.utility.Settings;
-import com.asteria.utility.Utility;
 
 /**
  * The server selection event that decodes and handles all incoming packets.
@@ -27,7 +27,7 @@ public final class DecodePacketServerEvent extends ServerSelectionEvent {
     /**
      * The logger that will print important information.
      */
-    private static Logger logger = Utility.getLogger(DecodePacketServerEvent.class);
+    private static Logger logger = LoggerUtils.getLogger(DecodePacketServerEvent.class);
 
     @Override
     public void executeEvent(ServerSelectionKey key) throws Exception {

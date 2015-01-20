@@ -11,7 +11,6 @@ import com.asteria.network.ByteOrder;
 import com.asteria.network.DataBuffer;
 import com.asteria.network.ValueType;
 import com.asteria.task.TaskManager;
-import com.asteria.utility.Utility;
 
 /**
  * The class that provides static utility methods for updating players.
@@ -223,7 +222,7 @@ public final class PlayerUpdating {
         out.putBits(11, other.getSlot());
         out.putBit(true);
         out.putBit(true);
-        Position delta = Utility.delta(player.getPosition(), other.getPosition());
+        Position delta = Position.delta(player.getPosition(), other.getPosition());
         out.putBits(5, delta.getY());
         out.putBits(5, delta.getX());
     }

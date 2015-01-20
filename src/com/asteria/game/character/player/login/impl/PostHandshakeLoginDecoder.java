@@ -13,8 +13,9 @@ import com.asteria.game.character.player.login.LoginProtocolDecoder;
 import com.asteria.game.character.player.login.LoginResponse;
 import com.asteria.network.DataBuffer;
 import com.asteria.network.ISAACCipher;
+import com.asteria.utility.LoggerUtils;
 import com.asteria.utility.Settings;
-import com.asteria.utility.Utility;
+import com.asteria.utility.TextUtils;
 
 /**
  * The login protocol decoder that handles the rest of the login session.
@@ -26,7 +27,7 @@ public final class PostHandshakeLoginDecoder extends LoginProtocolDecoder {
     /**
      * The logger that will print important information.
      */
-    private static Logger logger = Utility.getLogger(PlayerIO.class);
+    private static Logger logger = LoggerUtils.getLogger(PlayerIO.class);
 
     /**
      * Creates a new {@link PostHandshakeLoginDecoder}.
@@ -122,7 +123,7 @@ public final class PostHandshakeLoginDecoder extends LoginProtocolDecoder {
         Player player = session.getPlayer();
         if (session.getResponse() == LoginResponse.NORMAL) {
             player.setUsername(username);
-            player.setUsernameHash(Utility.nameToHash(username));
+            player.setUsernameHash(TextUtils.nameToHash(username));
             player.setPassword(password);
             if (World.getPlayer(player.getUsernameHash()).isPresent()) {
                 session.setResponse(LoginResponse.ACCOUNT_ONLINE);

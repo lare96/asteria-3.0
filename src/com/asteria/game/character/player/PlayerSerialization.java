@@ -20,8 +20,8 @@ import com.asteria.game.item.container.Bank;
 import com.asteria.game.item.container.Equipment;
 import com.asteria.game.item.container.Inventory;
 import com.asteria.game.location.Position;
+import com.asteria.utility.ArrayUtils;
 import com.asteria.utility.MutableNumber;
-import com.asteria.utility.Utility;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
@@ -105,8 +105,8 @@ public final class PlayerSerialization {
         tokens.add(new TokenSerializer("rights", p.getRights(), n -> p.setRights(Rights.valueOf(n.getAsString()))));
         tokens.add(new TokenSerializer("gender", p.getGender(), n -> p.setGender(n.getAsInt())));
         int[] appearance = p.getAppearance();
-        tokens.add(new TokenSerializer("appearance", appearance, n -> Utility.dump(b.fromJson(n, int[].class), appearance)));
-        tokens.add(new TokenSerializer("colors", p.getColors(), n -> Utility.dump(b.fromJson(n, int[].class), p.getColors())));
+        tokens.add(new TokenSerializer("appearance", appearance, n -> ArrayUtils.dump(b.fromJson(n, int[].class), appearance)));
+        tokens.add(new TokenSerializer("colors", p.getColors(), n -> ArrayUtils.dump(b.fromJson(n, int[].class), p.getColors())));
         MovementQueue movement = p.getMovementQueue();
         tokens.add(new TokenSerializer("running", movement.isRunning(), n -> movement.setRunning(n.getAsBoolean())));
         tokens.add(new TokenSerializer("new-player", p.isNewPlayer(), n -> p.setNewPlayer(n.getAsBoolean())));
@@ -136,7 +136,8 @@ public final class PlayerSerialization {
         tokens.add(new TokenSerializer("teleblock-timer", teleblocked.get(), n -> teleblocked.set(n.getAsInt())));
         MutableNumber percentage = p.getSpecialPercentage();
         tokens.add(new TokenSerializer("special-amount", percentage.get(), n -> percentage.set(n.getAsInt())));
-        tokens.add(new TokenSerializer("skills", p.getSkills(), n -> Utility.dump(b.fromJson(n, Skill[].class), p.getSkills())));
+        Skill[] skills = p.getSkills();
+        tokens.add(new TokenSerializer("skills", skills, n -> ArrayUtils.dump(b.fromJson(n, Skill[].class), skills)));
     }
 
     /**

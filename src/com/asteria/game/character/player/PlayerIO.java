@@ -19,8 +19,8 @@ import com.asteria.network.DataBuffer;
 import com.asteria.network.ISAACCipher;
 import com.asteria.network.packet.PacketEncoder;
 import com.asteria.task.TaskManager;
+import com.asteria.utility.LoggerUtils;
 import com.asteria.utility.Stopwatch;
-import com.asteria.utility.Utility;
 
 /**
  * The session handler dedicated to a player that will handle input and output
@@ -34,7 +34,7 @@ public final class PlayerIO {
     /**
      * The logger that will print important information.
      */
-    private static Logger logger = Utility.getLogger(PlayerIO.class);
+    private static Logger logger = LoggerUtils.getLogger(PlayerIO.class);
 
     /**
      * The byte buffer for reading data from the client.

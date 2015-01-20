@@ -7,7 +7,7 @@ import com.asteria.game.character.combat.CombatType;
 import com.asteria.game.character.player.Player;
 import com.asteria.game.character.player.skill.Skills;
 import com.asteria.task.TaskManager;
-import com.asteria.utility.Utility;
+import com.asteria.utility.TextUtils;
 
 /**
  * The enumerated type whose elements represent the prayers that can be
@@ -333,7 +333,7 @@ public enum CombatPrayer {
             return false;
         } else if (player.getSkills()[Skills.PRAYER].getRealLevel() < level) {
             player.getEncoder().sendChatboxString(
-                "You need a @blu@Prayer level of " + level + " @bla@to use @blu@" + Utility.capitalize(name().toLowerCase()
+                "You need a @blu@Prayer level of " + level + " @bla@to use @blu@" + TextUtils.capitalize(name().toLowerCase()
                     .replaceAll("_", " ")) + "@bla@.");
             player.getEncoder().sendConfig(config, 0);
             return false;

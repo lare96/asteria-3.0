@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 
 import com.asteria.network.ServerHandler;
 import com.asteria.task.TaskManager;
-import com.asteria.utility.Utility;
+import com.asteria.utility.LoggerUtils;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 
 /**
@@ -24,7 +24,7 @@ public final class GameSequencer implements Runnable {
     /**
      * The logger that will print important information.
      */
-    private static Logger logger = Utility.getLogger(GameSequencer.class);
+    private static Logger logger = LoggerUtils.getLogger(GameSequencer.class);
 
     /**
      * The executor that will execute various {@code Thread.MIN_PRIORITY}
