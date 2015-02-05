@@ -10,7 +10,7 @@ import com.asteria.game.location.Position;
  * 
  * @author lare96 <http://www.rune-server.org/members/lare96/>
  */
-public final class Projectile {
+public class Projectile {
 
     /**
      * The starting position of the projectile.
@@ -137,7 +137,7 @@ public final class Projectile {
      * 
      * @return the starting position of the projectile.
      */
-    public Position getStart() {
+    public final Position getStart() {
         return start;
     }
 
@@ -146,7 +146,7 @@ public final class Projectile {
      * 
      * @return the offset position of the projectile.
      */
-    public Position getOffset() {
+    public final Position getOffset() {
         return offset;
     }
 
@@ -155,7 +155,7 @@ public final class Projectile {
      * 
      * @return the speed of the projectile.
      */
-    public int getSpeed() {
+    public final int getSpeed() {
         return speed;
     }
 
@@ -164,7 +164,7 @@ public final class Projectile {
      * 
      * @return the id of the projectile.
      */
-    public int getProjectileId() {
+    public final int getProjectileId() {
         return projectileId;
     }
 
@@ -173,7 +173,7 @@ public final class Projectile {
      * 
      * @return the starting height of the projectile.
      */
-    public int getStartHeight() {
+    public final int getStartHeight() {
         return startHeight;
     }
 
@@ -182,7 +182,7 @@ public final class Projectile {
      * 
      * @return the ending height of the projectile
      */
-    public int getEndHeight() {
+    public final int getEndHeight() {
         return endHeight;
     }
 
@@ -191,7 +191,7 @@ public final class Projectile {
      * 
      * @return the lock on value of the projectile.
      */
-    public int getLockon() {
+    public final int getLockon() {
         return lockon;
     }
 
@@ -200,7 +200,7 @@ public final class Projectile {
      * 
      * @return the delay of the projectile.
      */
-    public int getDelay() {
+    public final int getDelay() {
         return delay;
     }
 
@@ -209,7 +209,7 @@ public final class Projectile {
      * 
      * @return the curve angle of the projectile.
      */
-    public int getCurve() {
+    public final int getCurve() {
         return curve;
     }
 }

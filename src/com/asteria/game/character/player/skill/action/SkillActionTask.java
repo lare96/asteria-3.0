@@ -11,7 +11,7 @@ import com.asteria.task.Task;
  * 
  * @author lare96 <http://www.rune-server.org/members/lare96/>
  */
-public class SkillActionTask extends Task {
+public final class SkillActionTask extends Task {
 
     /**
      * The skill action dedicated to this task.

@@ -1,7 +1,7 @@
 package com.asteria.game.character;
 
 /**
- * The enumerated type representing the hit type of a {@link Hit}.
+ * The enumerated type whose elements represent the hit type of a {@link Hit}.
  * 
  * @author lare96 <http://www.rune-server.org/members/lare96/>
  */

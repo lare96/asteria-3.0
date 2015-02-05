@@ -24,7 +24,7 @@ import com.asteria.task.Task;
 import com.asteria.task.TaskManager;
 
 /**
- * An enumerated type that holds all of the combat special attacks.
+ * The enumerated type whose elements represent the combat special attacks.
  * 
  * @author lare96 <http://www.rune-server.org/members/lare96/>
  */

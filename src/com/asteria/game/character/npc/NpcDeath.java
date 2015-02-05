@@ -45,6 +45,8 @@ public final class NpcDeath extends CharacterDeath<Npc> {
         drops.ifPresent(t -> {
             Item[] dropItems = t.toItems(killer.orElse(null));
             for (Item drop : dropItems) {
+                if (drop == null)
+                    continue;
                 ItemNodeManager.register(!killer.isPresent() ? new ItemNodeStatic(drop, character.getPosition()) : new ItemNode(
                     drop, character.getPosition(), killer.get()));
             }

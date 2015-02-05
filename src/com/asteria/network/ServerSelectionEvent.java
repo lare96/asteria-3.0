@@ -1,6 +1,6 @@
 package com.asteria.network;
 
-import com.asteria.game.GameSequencer;
+import com.asteria.game.GameService;
 
 /**
  * The event that has been selected by the selector and is awaiting execution.
@@ -44,7 +44,7 @@ public abstract class ServerSelectionEvent {
     protected final void execute(ServerSelectionKey key) {
         Runnable r = constructEvent(key);
         if (asynchronous) {
-            GameSequencer.getLogicService().execute(r);
+            GameService.getLogicService().execute(r);
             return;
         }
         r.run();

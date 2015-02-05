@@ -50,7 +50,7 @@ public abstract class HarvestingSkillAction extends SkillAction {
     }
 
     @Override
-    public void execute(Task t) {
+    public final void execute(Task t) {
         Player player = getPlayer();
         int factor = (player.getSkills()[skill().getId()].getLevel() / 5);
         double boost = (factor * SUCCESS_FACTOR_BOOST);

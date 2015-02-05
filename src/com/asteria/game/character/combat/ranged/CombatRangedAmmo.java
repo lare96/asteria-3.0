@@ -124,7 +124,7 @@ public enum CombatRangedAmmo {
     }
 
     @Override
-    public String toString() {
+    public final String toString() {
         String s = name().toLowerCase().replaceAll("_", " ");
         return this == CombatRangedAmmo.TOKTZ_XIL_UL ? "toktz-xil-ul" : s;
     }

@@ -35,7 +35,7 @@ public final class DecodePacketServerEvent extends ServerSelectionEvent {
         if (session == null)
             return;
         if (session.getChannel().read(session.getInData()) == -1) {
-            session.disconnect();
+            session.disconnect(false);
             return;
         }
         session.getInData().flip();
@@ -91,6 +91,6 @@ public final class DecodePacketServerEvent extends ServerSelectionEvent {
     @Override
     public void onThrowable(Throwable t, ServerSelectionKey key) {
         PlayerIO session = (PlayerIO) key.getKey().attachment();
-        session.disconnect();
+        session.disconnect(true);
     }
 }

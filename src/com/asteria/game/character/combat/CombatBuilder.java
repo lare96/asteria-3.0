@@ -283,7 +283,7 @@ public final class CombatBuilder {
      * 
      * @author lare96
      */
-    private static class CombatDistanceListener extends ActionListener {
+    private static final class CombatDistanceListener extends ActionListener {
 
         /**
          * The combat builder owned by the controller.

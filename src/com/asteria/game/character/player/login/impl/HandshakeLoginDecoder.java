@@ -35,7 +35,7 @@ public final class HandshakeLoginDecoder extends LoginProtocolDecoder {
      *            the session that is decoding this protocol.
      */
     public HandshakeLoginDecoder(PlayerIO session) {
-        super(session);
+        super(session, IOState.CONNECTED);
     }
 
     @Override
@@ -50,7 +50,7 @@ public final class HandshakeLoginDecoder extends LoginProtocolDecoder {
         in.get();
         if (request != 14) {
             logger.warning("Invalid login request: " + request);
-            session.disconnect();
+            session.disconnect(false);
             return;
         }
         DataBuffer out = DataBuffer.create(17);
@@ -59,10 +59,5 @@ public final class HandshakeLoginDecoder extends LoginProtocolDecoder {
         out.putLong(random.nextLong());
         session.send(out);
         session.setState(IOState.LOGGING_IN);
-    }
-
-    @Override
-    public IOState state() {
-        return IOState.CONNECTED;
     }
 }

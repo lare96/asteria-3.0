@@ -1,7 +1,7 @@
 package com.asteria.game.character;
 
 /**
- * The enumerated type that holds all of the different levels of poison.
+ * The enumerated type whose elements represent the different levels of poison.
  * 
  * @author lare96 <http://www.rune-server.org/members/lare96/>
  */

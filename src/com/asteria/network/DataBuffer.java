@@ -102,7 +102,7 @@ public final class DataBuffer {
      *            the amount of requested bytes.
      */
     private void requestSpace(int requested) {
-        if ((buf.position() + (requested + 1)) >= buf.capacity()) {
+        if ((buf.position() + requested + 1) >= buf.capacity()) {
             int oldPosition = buf.position();
             byte[] oldBuffer = buf.array();
             int newLength = (buf.capacity() * 2);

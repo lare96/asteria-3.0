@@ -9,7 +9,7 @@ import java.util.Set;
 import java.util.logging.Logger;
 
 import com.asteria.content.skills.cooking.CookingData;
-import com.asteria.game.GameSequencer;
+import com.asteria.game.GameService;
 import com.asteria.game.NodeType;
 import com.asteria.game.World;
 import com.asteria.game.character.CharacterNode;
@@ -31,13 +31,13 @@ import com.asteria.game.character.combat.weapon.CombatSpecial;
 import com.asteria.game.character.combat.weapon.FightType;
 import com.asteria.game.character.npc.Npc;
 import com.asteria.game.character.npc.NpcAggression;
-import com.asteria.game.character.npc.dialogue.DialogueChainBuilder;
 import com.asteria.game.character.player.content.PrivateMessage;
 import com.asteria.game.character.player.content.Spellbook;
 import com.asteria.game.character.player.content.TeleportSpell;
 import com.asteria.game.character.player.content.TradeSession;
 import com.asteria.game.character.player.content.WeaponAnimation;
 import com.asteria.game.character.player.content.WeaponInterface;
+import com.asteria.game.character.player.dialogue.DialogueChainBuilder;
 import com.asteria.game.character.player.minigame.MinigameHandler;
 import com.asteria.game.character.player.skill.Skill;
 import com.asteria.game.character.player.skill.Skills;
@@ -719,7 +719,7 @@ public class Player extends CharacterNode {
     public void save() {
         if (session.getState() != IOState.LOGGED_IN)
             return;
-        GameSequencer.getLogicService().execute(() -> new PlayerSerialization(this).serialize());
+        GameService.getLogicService().execute(() -> new PlayerSerialization(this).serialize());
     }
 
     /**

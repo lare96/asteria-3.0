@@ -1,4 +1,4 @@
-package com.asteria.game.character.npc.dialogue;
+package com.asteria.game.character.player.dialogue;
 
 /**
  * The dialogue chain entry that sends the player a dialogue from an NPC.

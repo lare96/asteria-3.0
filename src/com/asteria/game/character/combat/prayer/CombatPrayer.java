@@ -17,7 +17,6 @@ import com.asteria.utility.TextUtils;
  * @author lare96 <http://www.rune-server.org/members/lare96/>
  */
 public enum CombatPrayer {
-
     THICK_SKIN(0, 20, -1, 1, 83) {
         @Override
         protected void onActivation(Player player) {
@@ -431,6 +430,15 @@ public enum CombatPrayer {
         default:
             throw new IllegalArgumentException("Invalid combat type: " + type);
         }
+    }
+
+    /**
+     * Retrieves the size of this enumerated type.
+     * 
+     * @return the size of the enum.
+     */
+    public static int size() {
+        return CombatPrayer.values().length;
     }
 
     /**

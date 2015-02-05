@@ -99,14 +99,14 @@ public class Item {
     /**
      * Increments the amount by {@code 1}.
      */
-    public void incrementAmount() {
+    public final void incrementAmount() {
         incrementAmountBy(1);
     }
 
     /**
      * Decrements the amount by {@code 1}.
      */
-    public void decrementAmount() {
+    public final void decrementAmount() {
         decrementAmountBy(1);
     }
 
@@ -116,7 +116,7 @@ public class Item {
      * @param amount
      *            the amount to increment by.
      */
-    public void incrementAmountBy(int amount) {
+    public final void incrementAmountBy(int amount) {
         if ((this.amount + amount) > Integer.MAX_VALUE) {
             this.amount = Integer.MAX_VALUE;
         } else {
@@ -130,7 +130,7 @@ public class Item {
      * @param amount
      *            the amount to decrement by.
      */
-    public void decrementAmountBy(int amount) {
+    public final void decrementAmountBy(int amount) {
         if ((this.amount - amount) < 1) {
             this.amount = 0;
         } else {
@@ -143,7 +143,7 @@ public class Item {
      * 
      * @return the item definition.
      */
-    public ItemDefinition getDefinition() {
+    public final ItemDefinition getDefinition() {
         return ItemDefinition.DEFINITIONS[id];
     }
 
@@ -152,9 +152,8 @@ public class Item {
      * 
      * @return the identification.
      */
-    public int getId() {
+    public final int getId() {
         return id;
-
     }
 
     /**
@@ -163,7 +162,7 @@ public class Item {
      * @param id
      *            the new identification of this item.
      */
-    public void setId(int id) {
+    public final void setId(int id) {
         this.id = id;
     }
 
@@ -172,7 +171,7 @@ public class Item {
      * 
      * @return the quantity.
      */
-    public int getAmount() {
+    public final int getAmount() {
         return amount;
     }
 
@@ -182,7 +181,7 @@ public class Item {
      * @param amount
      *            the new quantity of this item.
      */
-    public void setAmount(int amount) {
+    public final void setAmount(int amount) {
         if (amount < 0)
             amount = 0;
         this.amount = amount;

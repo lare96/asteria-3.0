@@ -148,20 +148,28 @@ public final class PlayerIO {
     /**
      * Disconnects this session from the server by canceling the registered key
      * and closing the socket channel.
+     * 
+     * @param forced
+     *            if the session must be disconnected because of an IO issue.
      */
-    public void disconnect() {
+    public void disconnect(boolean forced) {
         try {
+            if (forced)
+                packetDisconnect = true;
             if (state == IOState.LOGGED_IN) {
-                MinigameHandler.execute(player, m -> m.onLogout(player));
                 player.save();
-                TaskManager.cancel(player.getCombatBuilder());
-                TaskManager.cancel(player);
-                player.getTradeSession().reset(false);
-                player.getPrivateMessage().updateOtherList(false);
-                Arrays.fill(player.getSkillEvent(), false);
                 if (player.getOpenShop() != null)
                     Shop.SHOPS.get(player.getOpenShop()).getPlayers().remove(player);
+                TaskManager.cancel(player.getCombatBuilder());
+                TaskManager.cancel(player);
+                Arrays.fill(player.getSkillEvent(), false);
                 World.getPlayers().remove(player);
+
+                if (!forced) {
+                    MinigameHandler.execute(player, m -> m.onLogout(player));
+                    player.getTradeSession().reset(false);
+                    player.getPrivateMessage().updateOtherList(false);
+                }
             }
 
             key.attach(null);
@@ -189,8 +197,7 @@ public final class PlayerIO {
             channel.write(buffer);
         } catch (Exception ex) {
             ex.printStackTrace();
-            packetDisconnect = true;
-            disconnect();
+            disconnect(true);
         }
     }
 
@@ -416,15 +423,5 @@ public final class PlayerIO {
      */
     public boolean isPacketDisconnect() {
         return packetDisconnect;
-    }
-
-    /**
-     * Sets the value for {@link PlayerIO#packetDisconnect}.
-     * 
-     * @param packetDisconnect
-     *            the new value to set.
-     */
-    public void setPacketDisconnect(boolean packetDisconnect) {
-        this.packetDisconnect = packetDisconnect;
     }
 }

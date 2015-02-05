@@ -57,7 +57,7 @@ public class Hit {
      * appropriate when displayed (things like not hitting a 15 with a blue
      * hitmark or 0 with a red hitmark).
      */
-    private void modify() {
+    private final void modify() {
         if (this.damage == 0 && this.type == HitType.NORMAL) {
             this.type = HitType.BLOCKED;
         } else if (this.damage > 0 && this.type == HitType.BLOCKED) {
@@ -72,7 +72,7 @@ public class Hit {
      * 
      * @return the amount of damage within this hit.
      */
-    public int getDamage() {
+    public final int getDamage() {
         return damage;
     }
 
@@ -82,7 +82,7 @@ public class Hit {
      * @param type
      *            the new value to set.
      */
-    public void setDamage(int damage) {
+    public final void setDamage(int damage) {
         this.damage = damage;
         this.modify();
     }
@@ -92,7 +92,7 @@ public class Hit {
      * 
      * @return the hit type represented by this hit.
      */
-    public HitType getType() {
+    public final HitType getType() {
         return type;
     }
 
@@ -102,7 +102,7 @@ public class Hit {
      * @param type
      *            the new value to set.
      */
-    public void setType(HitType type) {
+    public final void setType(HitType type) {
         this.type = type;
         this.modify();
     }

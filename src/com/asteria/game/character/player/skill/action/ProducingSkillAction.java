@@ -36,7 +36,7 @@ public abstract class ProducingSkillAction extends SkillAction {
     }
 
     @Override
-    public void execute(Task t) {
+    public final void execute(Task t) {
         Player player = getPlayer();
         Item removeItem = removeItem();
         if (player.getInventory().remove(removeItem)) {

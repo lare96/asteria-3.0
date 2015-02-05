@@ -50,26 +50,6 @@ public abstract class Node {
     public abstract void dispose();
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (!(obj instanceof Node))
-            return false;
-        Node other = (Node) obj;
-        return position.equals(other.position) && registered == other.registered && type == other.type;
-    }
-
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + position.hashCode();
-        result = prime * result + (registered ? 1231 : 1237);
-        result = prime * result + type.hashCode();
-        return result;
-    }
-
-    @Override
     public String toString() {
         return "NODE[type= " + type + ", registered= " + registered + "]";
     }

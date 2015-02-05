@@ -48,7 +48,7 @@ public abstract class DestructionSkillAction extends SkillAction {
     }
 
     @Override
-    public void execute(Task t) {
+    public final void execute(Task t) {
         Player player = getPlayer();
         if (player.getInventory().remove(destructItem())) {
             onDestruct(t, true);

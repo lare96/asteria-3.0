@@ -1,4 +1,4 @@
-package com.asteria.game.character.npc.dialogue;
+package com.asteria.game.character.player.dialogue;
 
 /**
  * The enumerated type whose elements represent the option types for option

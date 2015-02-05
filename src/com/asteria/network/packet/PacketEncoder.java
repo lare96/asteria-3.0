@@ -19,7 +19,7 @@ import com.asteria.network.ValueType;
 import com.google.common.base.Preconditions;
 
 /**
- * The class that provides functionality for encoding outgoing packets.
+ * The class that contains methods that encode and send data to the client.
  * 
  * @author lare96 <http://www.rune-server.org/members/lare96/>
  */

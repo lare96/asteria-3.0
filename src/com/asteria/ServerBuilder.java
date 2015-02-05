@@ -5,7 +5,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import com.asteria.game.GameSequencer;
+import com.asteria.game.GameService;
 import com.asteria.game.character.player.Player;
 import com.asteria.network.ConnectionHandler;
 import com.asteria.network.ServerHandler;
@@ -24,6 +24,7 @@ import com.asteria.utility.json.WeaponAnimationLoader;
 import com.asteria.utility.json.WeaponInterfaceLoader;
 import com.asteria.utility.json.WeaponPoisonLoader;
 import com.asteria.utility.json.WeaponRequirementLoader;
+import com.google.common.base.Preconditions;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 
 /**
@@ -42,7 +43,7 @@ public final class ServerBuilder {
         "ServiceLoaderThread").build());
 
     /**
-     * The scheduled executor service that will run the {@link GameSequencer}.
+     * The scheduled executor service that will run the {@link GameService}.
      */
     private final ScheduledExecutorService sequencer = Executors.newSingleThreadScheduledExecutor(new ThreadFactoryBuilder()
         .setNameFormat("GameThread").build());
@@ -82,10 +83,11 @@ public final class ServerBuilder {
      *             background service load takes too long.
      */
     public void build() throws Exception {
+        Preconditions.checkState(!serviceLoader.isShutdown(), "The server has been started already!");
         executeServiceLoad();
 
         ServerHandler.start(serverPort);
-        sequencer.scheduleAtFixedRate(new GameSequencer(), 0, 600, TimeUnit.MILLISECONDS);
+        sequencer.scheduleAtFixedRate(new GameService(), 0, 600, TimeUnit.MILLISECONDS);
 
         serviceLoader.shutdown();
         if (!serviceLoader.awaitTermination(15, TimeUnit.MINUTES)) {

@@ -292,7 +292,7 @@ public abstract class Minigame {
      * 
      * @return the name of this minigame.
      */
-    public String getName() {
+    public final String getName() {
         return name;
     }
 
@@ -301,7 +301,7 @@ public abstract class Minigame {
      * 
      * @return the type of this minigame.
      */
-    public MinigameType getType() {
+    public final MinigameType getType() {
         return type;
     }
 }
