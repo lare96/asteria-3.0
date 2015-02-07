@@ -11,7 +11,8 @@ import com.asteria.utility.LoggerUtils;
 import com.asteria.utility.Settings;
 
 /**
- * The main class of <i>Asteria 3.0</i> that will prepare the server builder.
+ * The main class that will prepare the server builder and put the server
+ * online.
  * 
  * @author lare96 <http://www.rune-server.org/members/lare96/>
  */
@@ -38,10 +39,10 @@ public final class Server {
     }
 
     /**
-     * The main method of <i>Asteria 3.0</i>.
+     * The main method that will put the server online.
      * 
      * @param args
-     *            all of the runtime arguments.
+     *            the runtime arguments.
      */
     public static void main(String[] args) {
         try {
