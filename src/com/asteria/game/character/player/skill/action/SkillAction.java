@@ -7,6 +7,7 @@ import com.asteria.game.character.Animation;
 import com.asteria.game.character.player.Player;
 import com.asteria.game.character.player.skill.SkillData;
 import com.asteria.game.location.Position;
+import com.asteria.game.plugin.Plugin;
 import com.asteria.task.Task;
 import com.asteria.task.TaskManager;
 
@@ -22,7 +23,7 @@ import com.asteria.task.TaskManager;
  * @see DestructionSkillAction
  * @see ProducingSkillAction
  */
-public abstract class SkillAction {
+public abstract class SkillAction implements Plugin {
 
     /**
      * The player this skill action is for.

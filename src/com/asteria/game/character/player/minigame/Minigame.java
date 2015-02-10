@@ -6,6 +6,7 @@ import com.asteria.game.character.npc.Npc;
 import com.asteria.game.character.player.Player;
 import com.asteria.game.item.Item;
 import com.asteria.game.location.Position;
+import com.asteria.game.plugin.Plugin;
 
 /**
  * The class that provides all of the functionality needed for very generic
@@ -14,7 +15,7 @@ import com.asteria.game.location.Position;
  * 
  * @author lare96 <http://www.rune-server.org/members/lare96/>
  */
-public abstract class Minigame {
+public abstract class Minigame implements Plugin {
 
     /**
      * The current name of this minigame.

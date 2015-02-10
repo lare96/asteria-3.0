@@ -8,7 +8,8 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.logging.Logger;
 
-import com.asteria.content.skills.cooking.CookingData;
+import plugin.skills.cooking.CookingData;
+
 import com.asteria.game.GameService;
 import com.asteria.game.NodeType;
 import com.asteria.game.World;

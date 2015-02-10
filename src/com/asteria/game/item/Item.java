@@ -117,11 +117,7 @@ public class Item {
      *            the amount to increment by.
      */
     public final void incrementAmountBy(int amount) {
-        if ((this.amount + amount) > Integer.MAX_VALUE) {
-            this.amount = Integer.MAX_VALUE;
-        } else {
-            this.amount += amount;
-        }
+        this.amount += amount;
     }
 
     /**

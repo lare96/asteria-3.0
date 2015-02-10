@@ -1,6 +1,7 @@
 package com.asteria.game.character.combat;
 
 import com.asteria.game.character.CharacterNode;
+import com.asteria.game.plugin.Plugin;
 
 /**
  * The blueprint of a combat session that determines how a character will act in
@@ -8,8 +9,7 @@ import com.asteria.game.character.CharacterNode;
  * 
  * @author lare96 <http://www.rune-server.org/members/lare96/>
  */
-public interface CombatStrategy {
-
+public interface CombatStrategy extends Plugin {
     /**
      * Determines if {@code character} is able to make an attack on
      * {@code victim}.
@@ -20,7 +20,7 @@ public interface CombatStrategy {
      *            the character being attacked.
      * @return {@code true} if an attack can be made, {@code false} otherwise.
      */
-    public boolean canAttack(CharacterNode character, CharacterNode victim);
+    public  boolean canAttack(CharacterNode character, CharacterNode victim);
 
     /**
      * Executed when {@code character} has passed the initial
@@ -52,4 +52,6 @@ public interface CombatStrategy {
      * @return the radius that the character must be in to attack.
      */
     public int attackDistance(CharacterNode character);
+
+    public int[] getNpcs();
 }

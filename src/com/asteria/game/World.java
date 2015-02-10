@@ -1,9 +1,12 @@
 package com.asteria.game;
 
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
 import com.asteria.Server;
 import com.asteria.game.character.CharacterList;
+import com.asteria.game.character.CharacterNode;
 import com.asteria.game.character.npc.Npc;
 import com.asteria.game.character.player.Player;
 import com.asteria.game.service.ConcurrentUpdateService;
@@ -65,6 +68,13 @@ public final class World {
      */
     public static Optional<Player> getPlayer(String username) {
         return players.search(player -> player.getUsername().equals(username));
+    }
+
+    public static Set<CharacterNode> getCharacters() {
+        Set<CharacterNode> characters = new HashSet<>();
+        players.forEach(characters::add);
+        npcs.forEach(characters::add);
+        return characters;
     }
 
     /**

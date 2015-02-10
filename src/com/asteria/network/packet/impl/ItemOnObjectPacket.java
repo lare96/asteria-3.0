@@ -1,13 +1,13 @@
 package com.asteria.network.packet.impl;
 
-import java.util.Optional;
+import plugin.skills.prayer.Bone;
+import plugin.skills.prayer.PrayerBoneAltar;
 
-import com.asteria.content.skills.cooking.CookingData;
-import com.asteria.content.skills.prayer.Bone;
-import com.asteria.content.skills.prayer.PrayerBoneAltar;
 import com.asteria.game.character.player.Player;
 import com.asteria.game.item.Item;
 import com.asteria.game.location.Position;
+import com.asteria.game.plugin.PluginHandler;
+import com.asteria.game.plugin.context.ItemOnObjectPlugin;
 import com.asteria.network.ByteOrder;
 import com.asteria.network.DataBuffer;
 import com.asteria.network.ValueType;
@@ -33,43 +33,23 @@ public final class ItemOnObjectPacket extends PacketDecoder {
         int itemId = buf.getShort(false);
         int objectSize = 1;
         Item item = player.getInventory().get(slot);
-
+        Position position = new Position(objectX, objectY, player.getPosition().getZ());
         if (item == null || container != 3214 || objectId < 0 || objectY < 0 || slot < 0 || objectX < 0 || itemId < 0)
             return;
 
-        player.facePosition(new Position(objectX, objectY));
-        player.getMovementListener().append(() -> {
-            if (player.getPosition().withinDistance(new Position(objectX, objectY, player.getPosition().getZ()), objectSize)) {
-                Optional<Bone> bone = Bone.getBone(itemId);
-                if (bone.isPresent()) {
-                    PrayerBoneAltar altarAction = new PrayerBoneAltar(player, bone.get(), new Position(objectX, objectY));
-                    altarAction.start();
-                    return;
+        player.facePosition(position);
+        player.getMovementListener().append(
+            () -> {
+                if (player.getPosition().withinDistance(position, objectSize)) {
+                    Bone bone = Bone.getBone(itemId);
+                    if (bone != null) {
+                        PrayerBoneAltar altarAction = new PrayerBoneAltar(player, bone, new Position(objectX, objectY));
+                        altarAction.start();
+                        return;
+                    }
+                    PluginHandler.execute(player, ItemOnObjectPlugin.class, new ItemOnObjectPlugin(objectId, position,
+                        objectSize, item, slot));
                 }
-
-                switch (objectId) {
-                case 114:
-                    CookingData.getData(itemId).ifPresent(c -> {
-                        player.setUsingStove(true);
-                        player.setCookData(c);
-                        player.setCookPosition(new Position(objectX, objectY, player.getPosition().getZ()));
-                        c.openInterface(player);
-                    });
-                    break;
-                case 2732:
-                    CookingData.getData(itemId).ifPresent(c -> {
-                        player.setUsingStove(false);
-                        player.setCookData(c);
-                        player.setCookPosition(new Position(objectX, objectY, player.getPosition().getZ()));
-                        c.openInterface(player);
-                    });
-                    break;
-                }
-
-                switch (itemId) {
-
-                }
-            }
-        });
+            });
     }
 }

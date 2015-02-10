@@ -1,8 +1,12 @@
 package com.asteria.game.character.combat;
 
-import com.asteria.content.combat.strategy.DefaultMagicCombatStrategy;
-import com.asteria.content.combat.strategy.DefaultMeleeCombatStrategy;
-import com.asteria.content.combat.strategy.DefaultRangedCombatStrategy;
+import java.util.HashMap;
+import java.util.Map;
+
+import plugin.combat.DefaultMagicCombatStrategy;
+import plugin.combat.DefaultMeleeCombatStrategy;
+import plugin.combat.DefaultRangedCombatStrategy;
+
 import com.asteria.game.NodeType;
 import com.asteria.game.character.CharacterNode;
 import com.asteria.game.character.Hit;
@@ -129,6 +133,11 @@ public final class Combat {
             "Range", "Strength", "Prayer" };
 
     /**
+     * The hash collection of all the NPCs mapped to their combat strategies.
+     */
+    public static final Map<Integer, CombatStrategy> STRATEGIES = new HashMap<>();
+
+    /**
      * The random generator instance that will generate random numbers.
      */
     private static RandomGen random = new RandomGen();
@@ -151,16 +160,10 @@ public final class Combat {
      * @return
      */
     public static CombatStrategy determineStrategy(int npc) {
-        switch (npc) {
-        case 13:
-        case 172:
-        case 174:
-            return Combat.newDefaultMagicStrategy();
-        case 688:
-            return Combat.newDefaultRangedStrategy();
-        default:
+        CombatStrategy combat = STRATEGIES.get(npc);
+        if (combat == null)
             return Combat.newDefaultMeleeStrategy();
-        }
+        return combat;
     }
 
     /**

@@ -1,11 +1,11 @@
 package com.asteria.network.packet.impl;
 
-import com.asteria.game.character.Animation;
 import com.asteria.game.character.player.Player;
-import com.asteria.game.character.player.content.Spellbook;
 import com.asteria.game.character.player.minigame.MinigameHandler;
-import com.asteria.game.character.player.skill.Skills;
 import com.asteria.game.location.Position;
+import com.asteria.game.plugin.PluginHandler;
+import com.asteria.game.plugin.context.ObjectFirstClickPlugin;
+import com.asteria.game.plugin.context.ObjectSecondClickPlugin;
 import com.asteria.network.ByteOrder;
 import com.asteria.network.DataBuffer;
 import com.asteria.network.ValueType;
@@ -53,37 +53,14 @@ public final class ObjectActionPacket extends PacketDecoder {
         if (objectId < 0 || objectX < 0 || objectY < 0)
             return;
         player.facePosition(position);
-        player.getMovementListener().append(() -> {
-            if (player.getPosition().withinDistance(position, size)) {
-                MinigameHandler.execute(player, m -> m.onFirstClickObject(player, objectId, position.copy()));
-
-                switch (objectId) {
-                case 3193:
-                case 2213:
-                    player.getBank().open();
-                    break;
-                case 409:
-                    int level = player.getSkills()[Skills.PRAYER].getRealLevel();
-
-                    if (player.getSkills()[Skills.PRAYER].getLevel() < level) {
-                        player.animation(new Animation(645));
-                        player.getSkills()[Skills.PRAYER].setLevel(level, true);
-                        player.getEncoder().sendMessage("You recharge your prayer points.");
-                        Skills.refresh(player, Skills.PRAYER);
-                    } else {
-                        player.getEncoder().sendMessage("You already have full prayer points.");
-                    }
-                    break;
-                case 6552:
-                    if (player.getSpellbook() == Spellbook.ANCIENT) {
-                        Spellbook.convert(player, Spellbook.NORMAL);
-                    } else if (player.getSpellbook() == Spellbook.NORMAL) {
-                        Spellbook.convert(player, Spellbook.ANCIENT);
-                    }
-                    break;
+        player.getMovementListener().append(
+            () -> {
+                if (player.getPosition().withinDistance(position, size)) {
+                    MinigameHandler.execute(player, m -> m.onFirstClickObject(player, objectId, position.copy()));
+                    PluginHandler.execute(player, ObjectFirstClickPlugin.class, new ObjectFirstClickPlugin(objectId, position,
+                        size));
                 }
-            }
-        });
+            });
     }
 
     /**
@@ -103,14 +80,14 @@ public final class ObjectActionPacket extends PacketDecoder {
         if (objectId < 0 || objectX < 0 || objectY < 0)
             return;
         player.facePosition(position);
-        player.getMovementListener().append(() -> {
-            if (player.getPosition().withinDistance(position, size)) {
-                MinigameHandler.execute(player, m -> m.onSecondClickObject(player, objectId, position.copy()));
-                switch (objectId) {
-
+        player.getMovementListener().append(
+            () -> {
+                if (player.getPosition().withinDistance(position, size)) {
+                    MinigameHandler.execute(player, m -> m.onSecondClickObject(player, objectId, position.copy()));
+                    PluginHandler.execute(player, ObjectSecondClickPlugin.class, new ObjectSecondClickPlugin(objectId, position,
+                        size));
                 }
-            }
-        });
+            });
     }
 
     /**

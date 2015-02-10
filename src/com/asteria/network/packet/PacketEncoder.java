@@ -3,6 +3,7 @@ package com.asteria.network.packet;
 import java.util.Objects;
 
 import com.asteria.game.NodeType;
+import com.asteria.game.World;
 import com.asteria.game.character.CharacterNode;
 import com.asteria.game.character.player.Player;
 import com.asteria.game.item.Item;
@@ -175,6 +176,21 @@ public final class PacketEncoder {
     public PacketEncoder sendLocalGraphic(int id, Position position, int level) {
         player.getLocalPlayers().stream().filter(Objects::nonNull).forEach(p -> p.getEncoder().sendGraphic(id, position, level));
         return this;
+    }
+
+    /**
+     * The packet that creates a graphic that all players can see.
+     * 
+     * @param id
+     *            the id of the graphic that will be created.
+     * @param position
+     *            the position of the graphic that will be created.
+     * @param level
+     *            the height of the graphic that will be created.
+     * @return an instance of this encoder.
+     */
+    public static void sendAllGraphic(int id, Position position, int level) {
+        World.getPlayers().forEach(p -> p.getEncoder().sendGraphic(id, position, level));
     }
 
     /**

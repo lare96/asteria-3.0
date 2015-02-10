@@ -7,12 +7,12 @@ import java.util.concurrent.TimeUnit;
 
 import com.asteria.game.GameService;
 import com.asteria.game.character.player.Player;
+import com.asteria.game.plugin.PluginHandler;
 import com.asteria.network.ConnectionHandler;
 import com.asteria.network.ServerHandler;
 import com.asteria.utility.Settings;
 import com.asteria.utility.json.ItemDefinitionLoader;
 import com.asteria.utility.json.ItemNodeLoader;
-import com.asteria.utility.json.MinigameLoader;
 import com.asteria.utility.json.NpcDefinitionLoader;
 import com.asteria.utility.json.NpcDropTableLoader;
 import com.asteria.utility.json.NpcNodeLoader;
@@ -106,7 +106,6 @@ public final class ServerBuilder {
         serviceLoader.execute(() -> new WeaponPoisonLoader().load());
         serviceLoader.execute(() -> new PacketOpcodeLoader().load());
         serviceLoader.execute(() -> new PacketSizeLoader().load());
-        serviceLoader.execute(() -> new MinigameLoader().load());
         serviceLoader.execute(() -> ConnectionHandler.parseIPBans());
         serviceLoader.execute(() -> new NpcNodeLoader().load());
         serviceLoader.execute(() -> new ShopLoader().load());
@@ -116,6 +115,7 @@ public final class ServerBuilder {
         serviceLoader.execute(() -> new WeaponAnimationLoader().load());
         serviceLoader.execute(() -> new WeaponInterfaceLoader().load());
         serviceLoader.execute(() -> new WeaponRequirementLoader().load());
+        serviceLoader.execute(() -> PluginHandler.init());
     }
 
     /**
@@ -136,6 +136,7 @@ public final class ServerBuilder {
      * @return an instance of this builder, for chaining.
      */
     protected ServerBuilder setParallelEngine(boolean parallelEngine) {
+        Preconditions.checkState(!serviceLoader.isShutdown(), "The server has been started already!");
         this.parallelEngine = parallelEngine;
         return this;
     }
@@ -157,6 +158,7 @@ public final class ServerBuilder {
      * @return an instance of this builder, for chaining.
      */
     protected ServerBuilder setServerPort(int serverPort) {
+        Preconditions.checkState(!serviceLoader.isShutdown(), "The server has been started already!");
         this.serverPort = serverPort;
         return this;
     }
