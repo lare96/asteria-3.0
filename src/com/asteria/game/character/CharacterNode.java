@@ -15,7 +15,7 @@ import com.asteria.game.character.npc.Npc;
 import com.asteria.game.character.player.Player;
 import com.asteria.game.location.Position;
 import com.asteria.task.Task;
-import com.asteria.task.TaskManager;
+import com.asteria.task.TaskHandler;
 import com.asteria.utility.Stopwatch;
 import com.google.common.base.Preconditions;
 
@@ -183,7 +183,8 @@ public abstract class CharacterNode extends Node {
     @Override
     public final int hashCode() {
         final int prime = 31;
-        int result = super.hashCode();
+        int result = 1;
+        result = prime * result + super.getType().hashCode();
         result = prime * result + slot;
         return result;
     }
@@ -197,6 +198,8 @@ public abstract class CharacterNode extends Node {
         if (!(obj instanceof CharacterNode))
             return false;
         CharacterNode other = (CharacterNode) obj;
+        if (super.getType() != other.getType())
+            return false;
         if (slot != other.slot)
             return false;
         return true;
@@ -476,7 +479,7 @@ public abstract class CharacterNode extends Node {
     private void sendDamage(Hit hit, Hit hit2, Hit hit3) {
         sendDamage(hit, hit2);
 
-        TaskManager.submit(new Task(1, false) {
+        TaskHandler.submit(new Task(1, false) {
             @Override
             public void execute() {
                 this.cancel();
@@ -504,7 +507,7 @@ public abstract class CharacterNode extends Node {
     private void sendDamage(Hit hit, Hit hit2, Hit hit3, Hit hit4) {
         sendDamage(hit, hit2);
 
-        TaskManager.submit(new Task(1, false) {
+        TaskHandler.submit(new Task(1, false) {
             @Override
             public void execute() {
                 this.cancel();
@@ -556,7 +559,7 @@ public abstract class CharacterNode extends Node {
      * @return {@code true} if this character is poisoned, {@code false}
      *         otherwise.
      */
-    public boolean isPoisoned() {
+    public final boolean isPoisoned() {
         return poisonDamage != 0;
     }
 
@@ -566,7 +569,7 @@ public abstract class CharacterNode extends Node {
      * @return {@code true} if this character is frozen, {@code false}
      *         otherwise.
      */
-    public boolean isFrozen() {
+    public final boolean isFrozen() {
         return !freezeTimer.elapsed(freezeDelay, TimeUnit.SECONDS);
     }
 
@@ -575,7 +578,7 @@ public abstract class CharacterNode extends Node {
      * 
      * @return the slot of this character.
      */
-    public int getSlot() {
+    public final int getSlot() {
         return slot;
     }
 
@@ -585,7 +588,7 @@ public abstract class CharacterNode extends Node {
      * @param slot
      *            the new value to set.
      */
-    public void setSlot(int slot) {
+    public final void setSlot(int slot) {
         this.slot = slot;
     }
 
@@ -594,7 +597,7 @@ public abstract class CharacterNode extends Node {
      * 
      * @return the amount of poison damage.
      */
-    public int getPoisonDamage() {
+    public final int getPoisonDamage() {
         return poisonDamage;
     }
 
@@ -603,7 +606,7 @@ public abstract class CharacterNode extends Node {
      * 
      * @return the amount of poison damage.
      */
-    public int getAndDecrementPoisonDamage() {
+    public final int getAndDecrementPoisonDamage() {
         return poisonDamage--;
     }
 
@@ -613,7 +616,7 @@ public abstract class CharacterNode extends Node {
      * @param poisonDamage
      *            the new value to set.
      */
-    public void setPoisonDamage(int poisonDamage) {
+    public final void setPoisonDamage(int poisonDamage) {
         this.poisonDamage = poisonDamage;
     }
 
@@ -622,7 +625,7 @@ public abstract class CharacterNode extends Node {
      * 
      * @return the primary direction.
      */
-    public int getPrimaryDirection() {
+    public final int getPrimaryDirection() {
         return primaryDirection;
     }
 
@@ -632,7 +635,7 @@ public abstract class CharacterNode extends Node {
      * @param primaryDirection
      *            the new value to set.
      */
-    public void setPrimaryDirection(int primaryDirection) {
+    public final void setPrimaryDirection(int primaryDirection) {
         this.primaryDirection = primaryDirection;
     }
 
@@ -641,7 +644,7 @@ public abstract class CharacterNode extends Node {
      * 
      * @return the secondary direction.
      */
-    public int getSecondaryDirection() {
+    public final int getSecondaryDirection() {
         return secondaryDirection;
     }
 
@@ -651,7 +654,7 @@ public abstract class CharacterNode extends Node {
      * @param secondaryDirection
      *            the new value to set.
      */
-    public void setSecondaryDirection(int secondaryDirection) {
+    public final void setSecondaryDirection(int secondaryDirection) {
         this.secondaryDirection = secondaryDirection;
     }
 
@@ -660,7 +663,7 @@ public abstract class CharacterNode extends Node {
      * 
      * @return the last direction.
      */
-    public int getLastDirection() {
+    public final int getLastDirection() {
         return lastDirection;
     }
 
@@ -670,7 +673,7 @@ public abstract class CharacterNode extends Node {
      * @param lastDirection
      *            the new value to set.
      */
-    public void setLastDirection(int lastDirection) {
+    public final void setLastDirection(int lastDirection) {
         this.lastDirection = lastDirection;
     }
 
@@ -680,7 +683,7 @@ public abstract class CharacterNode extends Node {
      * @return {@code true} if this character needs placement, {@code false}
      *         otherwise.
      */
-    public boolean isNeedsPlacement() {
+    public final boolean isNeedsPlacement() {
         return needsPlacement;
     }
 
@@ -690,7 +693,7 @@ public abstract class CharacterNode extends Node {
      * @param needsPlacement
      *            the new value to set.
      */
-    public void setNeedsPlacement(boolean needsPlacement) {
+    public final void setNeedsPlacement(boolean needsPlacement) {
         this.needsPlacement = needsPlacement;
     }
 
@@ -700,7 +703,7 @@ public abstract class CharacterNode extends Node {
      * @return {@code true} if this character needs to reset their movement
      *         queue, {@code false} otherwise.
      */
-    public boolean isResetMovementQueue() {
+    public final boolean isResetMovementQueue() {
         return resetMovementQueue;
     }
 
@@ -710,7 +713,7 @@ public abstract class CharacterNode extends Node {
      * @param resetMovementQueue
      *            the new value to set.
      */
-    public void setResetMovementQueue(boolean resetMovementQueue) {
+    public final void setResetMovementQueue(boolean resetMovementQueue) {
         this.resetMovementQueue = resetMovementQueue;
     }
 
@@ -719,7 +722,7 @@ public abstract class CharacterNode extends Node {
      * 
      * @return the spell currently being casted.
      */
-    public CombatSpell getCurrentlyCasting() {
+    public final CombatSpell getCurrentlyCasting() {
         return currentlyCasting;
     }
 
@@ -729,7 +732,7 @@ public abstract class CharacterNode extends Node {
      * @param currentlyCasting
      *            the new value to set.
      */
-    public void setCurrentlyCasting(CombatSpell currentlyCasting) {
+    public final void setCurrentlyCasting(CombatSpell currentlyCasting) {
         this.currentlyCasting = currentlyCasting;
     }
 
@@ -738,7 +741,7 @@ public abstract class CharacterNode extends Node {
      * 
      * @return the current region.
      */
-    public Position getCurrentRegion() {
+    public final Position getCurrentRegion() {
         return currentRegion;
     }
 
@@ -748,7 +751,7 @@ public abstract class CharacterNode extends Node {
      * @param currentRegion
      *            the new value to set.
      */
-    public void setCurrentRegion(Position currentRegion) {
+    public final void setCurrentRegion(Position currentRegion) {
         this.currentRegion = currentRegion;
     }
 
@@ -758,7 +761,7 @@ public abstract class CharacterNode extends Node {
      * @return {@code true} if this character is auto-retaliating, {@code false}
      *         otherwise.
      */
-    public boolean isAutoRetaliate() {
+    public final boolean isAutoRetaliate() {
         return autoRetaliate;
     }
 
@@ -768,7 +771,7 @@ public abstract class CharacterNode extends Node {
      * @param autoRetaliate
      *            the new value to set.
      */
-    public void setAutoRetaliate(boolean autoRetaliate) {
+    public final void setAutoRetaliate(boolean autoRetaliate) {
         this.autoRetaliate = autoRetaliate;
     }
 
@@ -778,7 +781,7 @@ public abstract class CharacterNode extends Node {
      * @return {@code true} if this character is following someone,
      *         {@code false} otherwise.
      */
-    public boolean isFollowing() {
+    public final boolean isFollowing() {
         return following;
     }
 
@@ -788,7 +791,7 @@ public abstract class CharacterNode extends Node {
      * @param following
      *            the new value to set.
      */
-    public void setFollowing(boolean following) {
+    public final void setFollowing(boolean following) {
         this.following = following;
     }
 
@@ -797,7 +800,7 @@ public abstract class CharacterNode extends Node {
      * 
      * @return the character being followed.
      */
-    public CharacterNode getFollowCharacter() {
+    public final CharacterNode getFollowCharacter() {
         return followCharacter;
     }
 
@@ -807,7 +810,7 @@ public abstract class CharacterNode extends Node {
      * @param followCharacter
      *            the new value to set.
      */
-    public void setFollowCharacter(CharacterNode followCharacter) {
+    public final void setFollowCharacter(CharacterNode followCharacter) {
         this.followCharacter = followCharacter;
     }
 
@@ -816,7 +819,7 @@ public abstract class CharacterNode extends Node {
      * 
      * @return {@code true} if this character is dead, {@code false} otherwise.
      */
-    public boolean isDead() {
+    public final boolean isDead() {
         return dead;
     }
 
@@ -826,7 +829,7 @@ public abstract class CharacterNode extends Node {
      * @param dead
      *            the new value to set.
      */
-    public void setDead(boolean dead) {
+    public final void setDead(boolean dead) {
         this.dead = dead;
     }
 
@@ -835,7 +838,7 @@ public abstract class CharacterNode extends Node {
      * 
      * @return the last position.
      */
-    public Position getLastPosition() {
+    public final Position getLastPosition() {
         return lastPosition;
     }
 
@@ -845,7 +848,7 @@ public abstract class CharacterNode extends Node {
      * @param lastPosition
      *            the new value to set.
      */
-    public void setLastPosition(Position lastPosition) {
+    public final void setLastPosition(Position lastPosition) {
         this.lastPosition = lastPosition;
     }
 
@@ -855,7 +858,7 @@ public abstract class CharacterNode extends Node {
      * 
      * @return the combat builder.
      */
-    public CombatBuilder getCombatBuilder() {
+    public final CombatBuilder getCombatBuilder() {
         return combatBuilder;
     }
 
@@ -865,7 +868,7 @@ public abstract class CharacterNode extends Node {
      * 
      * @return the movement queue.
      */
-    public MovementQueue getMovementQueue() {
+    public final MovementQueue getMovementQueue() {
         return movementQueue;
     }
 
@@ -875,7 +878,7 @@ public abstract class CharacterNode extends Node {
      * 
      * @return the movement queue listener.
      */
-    public MovementQueueListener getMovementListener() {
+    public final MovementQueueListener getMovementListener() {
         return movementListener;
     }
 
@@ -885,7 +888,7 @@ public abstract class CharacterNode extends Node {
      * 
      * @return the update flags.
      */
-    public UpdateFlags getFlags() {
+    public final UpdateFlags getFlags() {
         return flags;
     }
 
@@ -895,7 +898,7 @@ public abstract class CharacterNode extends Node {
      * 
      * @return the timer that determines when the player was last in combat.
      */
-    public Stopwatch getLastCombat() {
+    public final Stopwatch getLastCombat() {
         return lastCombat;
     }
 
@@ -904,7 +907,7 @@ public abstract class CharacterNode extends Node {
      * 
      * @return the animation update block value.
      */
-    public Animation getAnimation() {
+    public final Animation getAnimation() {
         return animation;
     }
 
@@ -913,7 +916,7 @@ public abstract class CharacterNode extends Node {
      * 
      * @return the graphic update block value.
      */
-    public Graphic getGraphic() {
+    public final Graphic getGraphic() {
         return graphic;
     }
 
@@ -922,7 +925,7 @@ public abstract class CharacterNode extends Node {
      * 
      * @return the forced text update block value.
      */
-    public String getForcedText() {
+    public final String getForcedText() {
         return forcedText;
     }
 
@@ -931,7 +934,7 @@ public abstract class CharacterNode extends Node {
      * 
      * @return the face index update block value.
      */
-    public int getFaceIndex() {
+    public final int getFaceIndex() {
         return faceIndex;
     }
 
@@ -940,7 +943,7 @@ public abstract class CharacterNode extends Node {
      * 
      * @return the face position update block value.
      */
-    public Position getFacePosition() {
+    public final Position getFacePosition() {
         return facePosition;
     }
 
@@ -949,7 +952,7 @@ public abstract class CharacterNode extends Node {
      * 
      * @return the primary hit update block value.
      */
-    public Hit getPrimaryHit() {
+    public final Hit getPrimaryHit() {
         return primaryHit;
     }
 
@@ -958,7 +961,7 @@ public abstract class CharacterNode extends Node {
      * 
      * @return the secondary hit update block value.
      */
-    public Hit getSecondaryHit() {
+    public final Hit getSecondaryHit() {
         return secondaryHit;
     }
 }

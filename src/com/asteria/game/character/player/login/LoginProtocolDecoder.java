@@ -16,26 +16,34 @@ public abstract class LoginProtocolDecoder implements Runnable {
     private final PlayerIO session;
 
     /**
+     * The IO state the session must have to proceed.
+     */
+    private final IOState state;
+
+    /**
      * Creates a new {@link LoginProtocolDecoder}.
      * 
      * @param session
      *            the session that is decoding this protocol.
+     * @param state
+     *            the IO state the session must have to proceed.
      */
-    public LoginProtocolDecoder(PlayerIO session) {
+    public LoginProtocolDecoder(PlayerIO session, IOState state) {
         this.session = session;
+        this.state = state;
     }
 
     @Override
     public final void run() {
         try {
-            if (session.getState() != state()) {
-                session.disconnect();
+            if (session.getState() != state) {
+                session.disconnect(false);
                 return;
             }
             execute();
         } catch (Exception e) {
             e.printStackTrace();
-            session.disconnect();
+            session.disconnect(false);
         }
     }
 
@@ -43,13 +51,6 @@ public abstract class LoginProtocolDecoder implements Runnable {
      * The method that will decode the login protocol.
      */
     public abstract void execute();
-
-    /**
-     * The I/O state the session must have to proceed.
-     * 
-     * @return the required I/O state.
-     */
-    public abstract IOState state();
 
     /**
      * Gets the session that is decoding this protocol.

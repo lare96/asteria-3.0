@@ -1,15 +1,20 @@
 package com.asteria.utility;
 
+/**
+ * The static-utility class that contains buffer utility functions.
+ * 
+ * @author lare96 <http://www.rune-server.org/members/lare96/>
+ */
 public final class BufferUtils {
 
     /**
      * The default constructor.
      * 
-     * @throws InstantiationError
+     * @throws UnsupportedOperationException
      *             if this class is instantiated.
      */
     private BufferUtils() {
-        throw new InstantiationError("This class cannot be instantiated!");
+        throw new UnsupportedOperationException("This class cannot be instantiated!");
     }
 
     /**

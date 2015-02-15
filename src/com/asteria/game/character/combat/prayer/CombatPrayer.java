@@ -1,12 +1,12 @@
 package com.asteria.game.character.combat.prayer;
 
-import java.util.EnumSet;
+import java.util.Arrays;
 
 import com.asteria.game.character.Flag;
 import com.asteria.game.character.combat.CombatType;
 import com.asteria.game.character.player.Player;
 import com.asteria.game.character.player.skill.Skills;
-import com.asteria.task.TaskManager;
+import com.asteria.task.TaskHandler;
 import com.asteria.utility.TextUtils;
 
 /**
@@ -17,14 +17,13 @@ import com.asteria.utility.TextUtils;
  * @author lare96 <http://www.rune-server.org/members/lare96/>
  */
 public enum CombatPrayer {
-
     THICK_SKIN(0, 20, -1, 1, 83) {
         @Override
         protected void onActivation(Player player) {
             CombatPrayer.ROCK_SKIN.deactivate(player);
             CombatPrayer.STEEL_SKIN.deactivate(player);
             player.getPrayerActive()[CombatPrayer.THICK_SKIN.getId()] = true;
-            player.getEncoder().sendConfig(CombatPrayer.THICK_SKIN.getConfig(), 1);
+            player.getEncoder().sendByteState(CombatPrayer.THICK_SKIN.getConfig(), 1);
         }
     },
     BURST_OF_STRENGTH(1, 20, -1, 4, 84) {
@@ -33,7 +32,7 @@ public enum CombatPrayer {
             CombatPrayer.SUPERHUMAN_STRENGTH.deactivate(player);
             CombatPrayer.ULTIMATE_STRENGTH.deactivate(player);
             player.getPrayerActive()[CombatPrayer.BURST_OF_STRENGTH.getId()] = true;
-            player.getEncoder().sendConfig(CombatPrayer.BURST_OF_STRENGTH.getConfig(), 1);
+            player.getEncoder().sendByteState(CombatPrayer.BURST_OF_STRENGTH.getConfig(), 1);
         }
     },
     CLARITY_OF_THOUGHT(2, 20, -1, 7, 85) {
@@ -42,7 +41,7 @@ public enum CombatPrayer {
             CombatPrayer.IMPROVED_REFLEXES.deactivate(player);
             CombatPrayer.INCREDIBLE_REFLEXES.deactivate(player);
             player.getPrayerActive()[CombatPrayer.CLARITY_OF_THOUGHT.getId()] = true;
-            player.getEncoder().sendConfig(CombatPrayer.CLARITY_OF_THOUGHT.getConfig(), 1);
+            player.getEncoder().sendByteState(CombatPrayer.CLARITY_OF_THOUGHT.getConfig(), 1);
         }
     },
     ROCK_SKIN(3, 10, -1, 10, 86) {
@@ -51,7 +50,7 @@ public enum CombatPrayer {
             CombatPrayer.STEEL_SKIN.deactivate(player);
             CombatPrayer.THICK_SKIN.deactivate(player);
             player.getPrayerActive()[CombatPrayer.ROCK_SKIN.getId()] = true;
-            player.getEncoder().sendConfig(CombatPrayer.ROCK_SKIN.getConfig(), 1);
+            player.getEncoder().sendByteState(CombatPrayer.ROCK_SKIN.getConfig(), 1);
         }
     },
     SUPERHUMAN_STRENGTH(4, 10, -1, 13, 87) {
@@ -60,7 +59,7 @@ public enum CombatPrayer {
             CombatPrayer.BURST_OF_STRENGTH.deactivate(player);
             CombatPrayer.ULTIMATE_STRENGTH.deactivate(player);
             player.getPrayerActive()[CombatPrayer.SUPERHUMAN_STRENGTH.getId()] = true;
-            player.getEncoder().sendConfig(CombatPrayer.SUPERHUMAN_STRENGTH.getConfig(), 1);
+            player.getEncoder().sendByteState(CombatPrayer.SUPERHUMAN_STRENGTH.getConfig(), 1);
         }
     },
     IMPROVED_REFLEXES(5, 10, -1, 16, 88) {
@@ -69,28 +68,28 @@ public enum CombatPrayer {
             CombatPrayer.CLARITY_OF_THOUGHT.deactivate(player);
             CombatPrayer.INCREDIBLE_REFLEXES.deactivate(player);
             player.getPrayerActive()[CombatPrayer.IMPROVED_REFLEXES.getId()] = true;
-            player.getEncoder().sendConfig(CombatPrayer.IMPROVED_REFLEXES.getConfig(), 1);
+            player.getEncoder().sendByteState(CombatPrayer.IMPROVED_REFLEXES.getConfig(), 1);
         }
     },
     RAPID_RESTORE(6, 29, -1, 19, 89) {
         @Override
         protected void onActivation(Player player) {
             player.getPrayerActive()[CombatPrayer.RAPID_RESTORE.getId()] = true;
-            player.getEncoder().sendConfig(CombatPrayer.RAPID_RESTORE.getConfig(), 1);
+            player.getEncoder().sendByteState(CombatPrayer.RAPID_RESTORE.getConfig(), 1);
         }
     },
     RAPID_HEAL(7, 29, -1, 22, 90) {
         @Override
         protected void onActivation(Player player) {
             player.getPrayerActive()[CombatPrayer.RAPID_HEAL.getId()] = true;
-            player.getEncoder().sendConfig(CombatPrayer.RAPID_HEAL.getConfig(), 1);
+            player.getEncoder().sendByteState(CombatPrayer.RAPID_HEAL.getConfig(), 1);
         }
     },
     PROTECT_ITEM(8, 29, -1, 25, 91) {
         @Override
         protected void onActivation(Player player) {
             player.getPrayerActive()[CombatPrayer.PROTECT_ITEM.getId()] = true;
-            player.getEncoder().sendConfig(CombatPrayer.PROTECT_ITEM.getConfig(), 1);
+            player.getEncoder().sendByteState(CombatPrayer.PROTECT_ITEM.getConfig(), 1);
         }
     },
     STEEL_SKIN(9, 5, -1, 28, 92) {
@@ -99,7 +98,7 @@ public enum CombatPrayer {
             CombatPrayer.THICK_SKIN.deactivate(player);
             CombatPrayer.ROCK_SKIN.deactivate(player);
             player.getPrayerActive()[CombatPrayer.STEEL_SKIN.getId()] = true;
-            player.getEncoder().sendConfig(CombatPrayer.STEEL_SKIN.getConfig(), 1);
+            player.getEncoder().sendByteState(CombatPrayer.STEEL_SKIN.getConfig(), 1);
         }
     },
     ULTIMATE_STRENGTH(10, 5, -1, 31, 93) {
@@ -108,7 +107,7 @@ public enum CombatPrayer {
             CombatPrayer.BURST_OF_STRENGTH.deactivate(player);
             CombatPrayer.SUPERHUMAN_STRENGTH.deactivate(player);
             player.getPrayerActive()[CombatPrayer.ULTIMATE_STRENGTH.getId()] = true;
-            player.getEncoder().sendConfig(CombatPrayer.ULTIMATE_STRENGTH.getConfig(), 1);
+            player.getEncoder().sendByteState(CombatPrayer.ULTIMATE_STRENGTH.getConfig(), 1);
         }
     },
     INCREDIBLE_REFLEXES(11, 5, -1, 34, 94) {
@@ -117,7 +116,7 @@ public enum CombatPrayer {
             CombatPrayer.IMPROVED_REFLEXES.deactivate(player);
             CombatPrayer.CLARITY_OF_THOUGHT.deactivate(player);
             player.getPrayerActive()[CombatPrayer.INCREDIBLE_REFLEXES.getId()] = true;
-            player.getEncoder().sendConfig(CombatPrayer.INCREDIBLE_REFLEXES.getConfig(), 1);
+            player.getEncoder().sendByteState(CombatPrayer.INCREDIBLE_REFLEXES.getConfig(), 1);
         }
     },
     PROTECT_FROM_MAGIC(12, 5, 2, 37, 95) {
@@ -130,7 +129,7 @@ public enum CombatPrayer {
             CombatPrayer.SMITE.deactivate(player);
             player.getPrayerActive()[CombatPrayer.PROTECT_FROM_MAGIC.getId()] = true;
             player.setHeadIcon(CombatPrayer.PROTECT_FROM_MAGIC.getHeadIcon());
-            player.getEncoder().sendConfig(CombatPrayer.PROTECT_FROM_MAGIC.getConfig(), 1);
+            player.getEncoder().sendByteState(CombatPrayer.PROTECT_FROM_MAGIC.getConfig(), 1);
             player.getFlags().set(Flag.APPEARANCE);
         }
 
@@ -151,7 +150,7 @@ public enum CombatPrayer {
             CombatPrayer.SMITE.deactivate(player);
             player.getPrayerActive()[CombatPrayer.PROTECT_FROM_MISSILES.getId()] = true;
             player.setHeadIcon(CombatPrayer.PROTECT_FROM_MISSILES.getHeadIcon());
-            player.getEncoder().sendConfig(CombatPrayer.PROTECT_FROM_MISSILES.getConfig(), 1);
+            player.getEncoder().sendByteState(CombatPrayer.PROTECT_FROM_MISSILES.getConfig(), 1);
             player.getFlags().set(Flag.APPEARANCE);
         }
 
@@ -172,7 +171,7 @@ public enum CombatPrayer {
             CombatPrayer.SMITE.deactivate(player);
             player.getPrayerActive()[CombatPrayer.PROTECT_FROM_MELEE.getId()] = true;
             player.setHeadIcon(CombatPrayer.PROTECT_FROM_MELEE.getHeadIcon());
-            player.getEncoder().sendConfig(CombatPrayer.PROTECT_FROM_MELEE.getConfig(), 1);
+            player.getEncoder().sendByteState(CombatPrayer.PROTECT_FROM_MELEE.getConfig(), 1);
             player.getFlags().set(Flag.APPEARANCE);
         }
 
@@ -193,7 +192,7 @@ public enum CombatPrayer {
             CombatPrayer.SMITE.deactivate(player);
             player.getPrayerActive()[CombatPrayer.RETRIBUTION.getId()] = true;
             player.setHeadIcon(CombatPrayer.RETRIBUTION.getHeadIcon());
-            player.getEncoder().sendConfig(CombatPrayer.RETRIBUTION.getConfig(), 1);
+            player.getEncoder().sendByteState(CombatPrayer.RETRIBUTION.getConfig(), 1);
             player.getFlags().set(Flag.APPEARANCE);
         }
 
@@ -214,7 +213,7 @@ public enum CombatPrayer {
             CombatPrayer.SMITE.deactivate(player);
             player.getPrayerActive()[CombatPrayer.REDEMPTION.getId()] = true;
             player.setHeadIcon(CombatPrayer.REDEMPTION.getHeadIcon());
-            player.getEncoder().sendConfig(CombatPrayer.REDEMPTION.getConfig(), 1);
+            player.getEncoder().sendByteState(CombatPrayer.REDEMPTION.getConfig(), 1);
             player.getFlags().set(Flag.APPEARANCE);
         }
 
@@ -235,7 +234,7 @@ public enum CombatPrayer {
             CombatPrayer.REDEMPTION.deactivate(player);
             player.getPrayerActive()[CombatPrayer.SMITE.getId()] = true;
             player.setHeadIcon(CombatPrayer.SMITE.getHeadIcon());
-            player.getEncoder().sendConfig(CombatPrayer.SMITE.getConfig(), 1);
+            player.getEncoder().sendByteState(CombatPrayer.SMITE.getConfig(), 1);
             player.getFlags().set(Flag.APPEARANCE);
         }
 
@@ -246,11 +245,6 @@ public enum CombatPrayer {
             player.getFlags().set(Flag.APPEARANCE);
         }
     };
-
-    /**
-     * The enum set containing all of the elements in this enumeration.
-     */
-    private static final EnumSet<CombatPrayer> ELEMENTS = EnumSet.allOf(CombatPrayer.class);
 
     /**
      * The identification for this prayer.
@@ -317,7 +311,7 @@ public enum CombatPrayer {
      */
     protected void onDeactivation(Player player) {
         player.getPrayerActive()[id] = false;
-        player.getEncoder().sendConfig(config, 0);
+        player.getEncoder().sendByteState(config, 0);
     }
 
     /**
@@ -335,16 +329,16 @@ public enum CombatPrayer {
             player.getEncoder().sendChatboxString(
                 "You need a @blu@Prayer level of " + level + " @bla@to use @blu@" + TextUtils.capitalize(name().toLowerCase()
                     .replaceAll("_", " ")) + "@bla@.");
-            player.getEncoder().sendConfig(config, 0);
+            player.getEncoder().sendByteState(config, 0);
             return false;
         } else if (player.getSkills()[Skills.PRAYER].getLevel() < 1) {
             player.getEncoder().sendMessage("You've run out of prayer points!");
-            player.getEncoder().sendConfig(config, 0);
+            player.getEncoder().sendByteState(config, 0);
             return false;
         }
-        if (!player.getPrayerDrain().isRunning()) {
+        if (player.getPrayerDrain() == null || !player.getPrayerDrain().isRunning()) {
             player.setPrayerDrain(new CombatPrayerTask(player));
-            TaskManager.submit(player.getPrayerDrain());
+            TaskHandler.submit(player.getPrayerDrain());
         }
         onActivation(player);
         return true;
@@ -384,7 +378,7 @@ public enum CombatPrayer {
      *            the player to deactivate all prayers for.
      */
     public static void deactivateAll(Player player) {
-        ELEMENTS.stream().filter(c -> CombatPrayer.isActivated(player, c)).forEach(c -> c.deactivate(player));
+        Arrays.stream(CombatPrayer.values()).filter(c -> CombatPrayer.isActivated(player, c)).forEach(c -> c.deactivate(player));
     }
 
     /**
@@ -394,7 +388,7 @@ public enum CombatPrayer {
      *            the player to reset the configurations for.
      */
     public static void resetPrayerGlows(Player player) {
-        ELEMENTS.stream().forEach(c -> player.getEncoder().sendConfig(c.getConfig(), 0));
+        Arrays.stream(CombatPrayer.values()).forEach(c -> player.getEncoder().sendByteState(c.getConfig(), 0));
     }
 
     /**
@@ -431,6 +425,15 @@ public enum CombatPrayer {
         default:
             throw new IllegalArgumentException("Invalid combat type: " + type);
         }
+    }
+
+    /**
+     * Retrieves the size of this enumerated type.
+     * 
+     * @return the size of the enum.
+     */
+    public static int size() {
+        return CombatPrayer.values().length;
     }
 
     /**

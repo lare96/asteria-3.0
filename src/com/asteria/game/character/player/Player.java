@@ -8,8 +8,10 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.logging.Logger;
 
-import com.asteria.content.skills.cooking.CookingData;
-import com.asteria.game.GameSequencer;
+import plugin.minigames.FightCavesHandler;
+import plugin.skills.cooking.CookingData;
+
+import com.asteria.game.GameService;
 import com.asteria.game.NodeType;
 import com.asteria.game.World;
 import com.asteria.game.character.CharacterNode;
@@ -25,19 +27,19 @@ import com.asteria.game.character.combat.effect.CombatTeleblockEffect;
 import com.asteria.game.character.combat.magic.CombatSpell;
 import com.asteria.game.character.combat.magic.CombatWeaken;
 import com.asteria.game.character.combat.prayer.CombatPrayer;
-import com.asteria.game.character.combat.prayer.CombatPrayerTask;
 import com.asteria.game.character.combat.ranged.CombatRangedAmmo;
 import com.asteria.game.character.combat.weapon.CombatSpecial;
 import com.asteria.game.character.combat.weapon.FightType;
 import com.asteria.game.character.npc.Npc;
 import com.asteria.game.character.npc.NpcAggression;
-import com.asteria.game.character.npc.dialogue.DialogueChainBuilder;
 import com.asteria.game.character.player.content.PrivateMessage;
 import com.asteria.game.character.player.content.Spellbook;
 import com.asteria.game.character.player.content.TeleportSpell;
 import com.asteria.game.character.player.content.TradeSession;
 import com.asteria.game.character.player.content.WeaponAnimation;
 import com.asteria.game.character.player.content.WeaponInterface;
+import com.asteria.game.character.player.dialogue.DialogueChainBuilder;
+import com.asteria.game.character.player.dialogue.OptionType;
 import com.asteria.game.character.player.minigame.MinigameHandler;
 import com.asteria.game.character.player.skill.Skill;
 import com.asteria.game.character.player.skill.Skills;
@@ -119,12 +121,12 @@ public class Player extends CharacterNode {
     /**
      * The hash collection of the local players.
      */
-    private final Set<Player> localPlayers = new LinkedHashSet<>();
+    private final Set<Player> localPlayers = new LinkedHashSet<>(255);
 
     /**
      * The hash collection of the local npcs.
      */
-    private final Set<Npc> localNpcs = new LinkedHashSet<>();
+    private final Set<Npc> localNpcs = new LinkedHashSet<>(255);
 
     /**
      * The hash collection of friends.
@@ -211,8 +213,13 @@ public class Player extends CharacterNode {
      * The collection of counters used for various counting operations.
      */
     private final MutableNumber poisonImmunity = new MutableNumber(), teleblockTimer = new MutableNumber(),
-        fireImmunity = new MutableNumber(), donatorPoints = new MutableNumber(), skullTimer = new MutableNumber(),
-        runEnergy = new MutableNumber(100), specialPercentage = new MutableNumber(100);
+        fireImmunity = new MutableNumber(), skullTimer = new MutableNumber(), runEnergy = new MutableNumber(100),
+        specialPercentage = new MutableNumber(100);
+
+    /**
+     * The encoder that will encode and send packets.
+     */
+    private final PacketEncoder encoder;
 
     /**
      * The amount of authority this player has over others.
@@ -277,7 +284,7 @@ public class Player extends CharacterNode {
     /**
      * The task that handles combat prayer draining.
      */
-    private Task prayerDrain = new CombatPrayerTask(this);
+    private Task prayerDrain = null;
 
     /**
      * The wilderness level this player is in.
@@ -327,7 +334,7 @@ public class Player extends CharacterNode {
     /**
      * The option value used for npc dialogues.
      */
-    private int option;
+    private OptionType option;
 
     /**
      * The identifier for the head icon of this player.
@@ -418,6 +425,7 @@ public class Player extends CharacterNode {
     public Player(PlayerIO session) {
         super(Settings.STARTING_POSITION, NodeType.PLAYER);
         this.session = session;
+        this.encoder = new PacketEncoder(this);
         this.rights = ConnectionHandler.isLocal(session.getHost()) ? Rights.DEVELOPER : Rights.PLAYER;
         this.appearance[Player.APPEARANCE_SLOT_CHEST] = 18;
         this.appearance[Player.APPEARANCE_SLOT_ARMS] = 26;
@@ -485,12 +493,12 @@ public class Player extends CharacterNode {
         MinigameHandler.execute(this, m -> m.onLogin(this));
         WeaponInterface.execute(this, equipment.get(Equipment.WEAPON_SLOT));
         WeaponAnimation.execute(this, equipment.get(Equipment.WEAPON_SLOT));
-        encoder.sendConfig(173, super.getMovementQueue().isRunning() ? 1 : 0);
-        encoder.sendConfig(172, super.isAutoRetaliate() ? 0 : 1);
-        encoder.sendConfig(fightType.getParent(), fightType.getChild());
-        encoder.sendConfig(427, acceptAid ? 1 : 0);
-        encoder.sendConfig(108, 0);
-        encoder.sendConfig(301, 0);
+        encoder.sendByteState(173, super.getMovementQueue().isRunning() ? 1 : 0);
+        encoder.sendByteState(172, super.isAutoRetaliate() ? 0 : 1);
+        encoder.sendByteState(fightType.getParent(), fightType.getChild());
+        encoder.sendByteState(427, acceptAid ? 1 : 0);
+        encoder.sendByteState(108, 0);
+        encoder.sendByteState(301, 0);
         encoder.sendString(runEnergy + "%", 149);
         CombatPrayer.resetPrayerGlows(this);
         logger.info(this + " has logged in.");
@@ -650,6 +658,7 @@ public class Player extends CharacterNode {
             return;
         if (!spell.canCast(this))
             return;
+        FightCavesHandler.remove(this);
         teleportStage = 1;
         super.getCombatBuilder().reset();
         faceCharacter(null);
@@ -719,7 +728,7 @@ public class Player extends CharacterNode {
     public void save() {
         if (session.getState() != IOState.LOGGED_IN)
             return;
-        GameSequencer.getLogicService().execute(() -> new PlayerSerialization(this).serialize());
+        GameService.getLogicService().execute(() -> new PlayerSerialization(this).serialize());
     }
 
     /**
@@ -763,7 +772,7 @@ public class Player extends CharacterNode {
                 wildernessInterface = true;
             }
             encoder.sendString("@yel@Level: " + wildernessLevel, 199);
-        } else {
+        } else if (wildernessInterface) {
             encoder.sendContextMenu(3, "null");
             encoder.sendWalkable(-1);
             wildernessInterface = false;
@@ -917,7 +926,7 @@ public class Player extends CharacterNode {
      * @return the packet encoder.
      */
     public final PacketEncoder getEncoder() {
-        return session.getEncoder();
+        return encoder;
     }
 
     /**
@@ -1044,15 +1053,6 @@ public class Player extends CharacterNode {
      */
     public final MutableNumber getFireImmunity() {
         return fireImmunity;
-    }
-
-    /**
-     * Gets the donator points counter value.
-     * 
-     * @return the donator points counter.
-     */
-    public final MutableNumber getDonatorPoints() {
-        return donatorPoints;
     }
 
     /**
@@ -1508,7 +1508,7 @@ public class Player extends CharacterNode {
      * 
      * @return the option value.
      */
-    public final int getOption() {
+    public final OptionType getOption() {
         return option;
     }
 
@@ -1518,7 +1518,7 @@ public class Player extends CharacterNode {
      * @param option
      *            the new value to set.
      */
-    public final void setOption(int option) {
+    public final void setOption(OptionType option) {
         this.option = option;
     }
 

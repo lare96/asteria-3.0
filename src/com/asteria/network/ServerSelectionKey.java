@@ -7,7 +7,9 @@ import com.asteria.network.impl.AcceptRequestServerEvent;
 import com.asteria.network.impl.DecodePacketServerEvent;
 
 /**
- * The container class that serves as a wrapper for selection keys.
+ * The container class that serves as a wrapper for selection keys. Its main
+ * purpose is to determine which type of networking event should be executed for
+ * this key.
  * 
  * @author lare96 <http://www.rune-server.org/members/lare96/>
  */

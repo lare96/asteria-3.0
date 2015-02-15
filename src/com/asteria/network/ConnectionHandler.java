@@ -9,8 +9,9 @@ import java.util.Optional;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
-import com.asteria.game.GameSequencer;
+import com.asteria.game.GameService;
 import com.asteria.game.character.player.login.LoginResponse;
 import com.asteria.utility.Stopwatch;
 
@@ -36,7 +37,7 @@ public final class ConnectionHandler {
     /**
      * The concurrent map of registered connections.
      */
-    private static final Map<String, Connection> CONNECTIONS = new ConcurrentHashMap<>();
+    private static final Map<String, Connection> CONNECTIONS = new ConcurrentHashMap<>(16, 0.9f, 2);
 
     /**
      * The synchronized set of banned hosts.
@@ -46,11 +47,11 @@ public final class ConnectionHandler {
     /**
      * The default constructor.
      * 
-     * @throws InstantiationError
+     * @throws UnsupportedOperationException
      *             if this class is instantiated.
      */
     private ConnectionHandler() {
-        throw new InstantiationError();
+        throw new UnsupportedOperationException();
     }
 
     /**
@@ -110,7 +111,7 @@ public final class ConnectionHandler {
     public static void addIPBan(String host) {
         if (ConnectionHandler.isLocal(host))
             return;
-        GameSequencer.getLogicService().execute(() -> {
+        GameService.getLogicService().execute(() -> {
             if (BANNED.contains(host))
                 return;
             try (FileWriter out = new FileWriter(Paths.get("./data/", "banned_ips.txt").toFile(), true)) {
@@ -156,7 +157,7 @@ public final class ConnectionHandler {
         /**
          * The amount of sessions bound to this connection.
          */
-        private int amount;
+        private final AtomicInteger amount = new AtomicInteger();
 
         /**
          * The stopwatch used to time connection intervals.
@@ -171,7 +172,7 @@ public final class ConnectionHandler {
          *         otherwise.
          */
         public boolean sessionLimit() {
-            return amount >= CONNECTION_AMOUNT;
+            return amount.get() >= CONNECTION_AMOUNT;
         }
 
         /**
@@ -191,8 +192,7 @@ public final class ConnectionHandler {
          * @return the amount after the increment completes.
          */
         public int increment() {
-            amount++;
-            return amount;
+            return amount.incrementAndGet();
         }
 
         /**
@@ -201,8 +201,7 @@ public final class ConnectionHandler {
          * @return the amount after the decrement completes.
          */
         public int decrement() {
-            amount--;
-            return amount;
+            return amount.decrementAndGet();
         }
 
         /**
@@ -212,7 +211,7 @@ public final class ConnectionHandler {
          */
         @SuppressWarnings("unused")
         public int getAmount() {
-            return amount;
+            return amount.get();
         }
 
         /**

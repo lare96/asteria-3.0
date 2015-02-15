@@ -19,7 +19,6 @@ public final class WeaponInterfaceLoader extends JsonLoader {
      */
     public WeaponInterfaceLoader() {
         super("./data/json/equipment/weapon_interfaces.json");
-
     }
 
     @Override

@@ -8,7 +8,7 @@ import com.asteria.utility.RandomGen;
  * 
  * @author lare96 <http://www.rune-server.org/members/lare96/>
  */
-public class NpcDrop {
+public final class NpcDrop {
 
     /**
      * The identification of this NPC drop.
@@ -65,7 +65,7 @@ public class NpcDrop {
      * 
      * @return the identification.
      */
-    public final int getId() {
+    public int getId() {
         return id;
     }
 
@@ -74,7 +74,7 @@ public class NpcDrop {
      * 
      * @return the minimum amount.
      */
-    public final int getMinimum() {
+    public int getMinimum() {
         return minimum;
     }
 
@@ -83,7 +83,7 @@ public class NpcDrop {
      * 
      * @return the maximum amount.
      */
-    public final int getMaximum() {
+    public int getMaximum() {
         return maximum;
     }
 
@@ -92,7 +92,7 @@ public class NpcDrop {
      * 
      * @return the drop chance.
      */
-    public final NpcDropChance getChance() {
+    public NpcDropChance getChance() {
         return chance;
     }
 }

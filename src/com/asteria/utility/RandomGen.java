@@ -39,8 +39,8 @@ public final class RandomGen extends Random {
      * Returns a pseudo-random {@code int} value between inclusive {@code min}
      * and exclusive {@code max}.
      * 
-     * <br>
-     * <br>
+     * <p>
+     * <p>
      * This method is thread-safe. </br>
      * 
      * @param min
@@ -62,8 +62,8 @@ public final class RandomGen extends Random {
      * Returns a pseudo-random {@code int} value between inclusive {@code 0} and
      * exclusive {@code range}.
      * 
-     * <br>
-     * <br>
+     * <p>
+     * <p>
      * This method is thread-safe. </br>
      * 
      * @param range

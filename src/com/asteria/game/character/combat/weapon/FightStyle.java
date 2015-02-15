@@ -4,7 +4,7 @@ import com.asteria.game.character.combat.CombatType;
 import com.asteria.game.character.player.skill.Skills;
 
 /**
- * An enumerated type that holds all of the different fighting styles.
+ * The enumerated type whose elements represent the fighting styles.
  * 
  * @author lare96 <http://www.rune-server.org/members/lare96/>
  */

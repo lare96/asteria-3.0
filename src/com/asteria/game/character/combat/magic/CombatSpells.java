@@ -1,6 +1,6 @@
 package com.asteria.game.character.combat.magic;
 
-import java.util.EnumSet;
+import java.util.Arrays;
 import java.util.Optional;
 
 import com.asteria.game.NodeType;
@@ -2586,11 +2586,6 @@ public enum CombatSpells {
     });
 
     /**
-     * The enum set containing all of the elements in this enumeration.
-     */
-    public static final EnumSet<CombatSpells> ELEMENTS = EnumSet.allOf(CombatSpells.class);
-
-    /**
      * The spell attached to this element.
      */
     private final CombatSpell spell;
@@ -2622,6 +2617,6 @@ public enum CombatSpells {
      * @return the combat spell with that identification.
      */
     public static Optional<CombatSpells> getSpell(int id) {
-        return ELEMENTS.stream().filter(s -> s != null && s.getSpell().spellId() == id).findFirst();
+        return Arrays.stream(CombatSpells.values()).filter(s -> s != null && s.getSpell().spellId() == id).findFirst();
     }
 }

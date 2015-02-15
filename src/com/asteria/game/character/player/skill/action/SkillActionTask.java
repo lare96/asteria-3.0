@@ -11,7 +11,7 @@ import com.asteria.task.Task;
  * 
  * @author lare96 <http://www.rune-server.org/members/lare96/>
  */
-public class SkillActionTask extends Task {
+public final class SkillActionTask extends Task {
 
     /**
      * The skill action dedicated to this task.
@@ -35,7 +35,7 @@ public class SkillActionTask extends Task {
      *            the skill action dedicated to this task.
      */
     public SkillActionTask(SkillAction action) {
-        super(1, action.instant());
+        super(1, false);
         this.action = action;
         this.player = action.getPlayer();
     }
@@ -45,6 +45,16 @@ public class SkillActionTask extends Task {
         if (!action.init()) {
             this.cancel();
             return;
+        }
+        if (action.instant()) {
+            if (!action.canExecute()) {
+                this.cancel();
+                return;
+            }
+            action.execute(this);
+            action.getPosition().ifPresent(player::facePosition);
+            action.animation().ifPresent(player::animation);
+            counter = 0;
         }
         player.getMovementQueue().reset();
     }
@@ -63,15 +73,14 @@ public class SkillActionTask extends Task {
             }
             action.execute(this);
             action.getPosition().ifPresent(player::facePosition);
+            action.animation().ifPresent(player::animation);
             counter = 0;
         }
-        action.animation().ifPresent(player::animation);
     }
 
     @Override
     public void onCancel() {
         player.getSkillEvent()[action.skill().getIndex()] = false;
-        player.animation(null);
         action.onStop();
     }
 }

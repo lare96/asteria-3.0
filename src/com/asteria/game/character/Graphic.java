@@ -56,7 +56,7 @@ public class Graphic {
      * 
      * @return the identification for this graphic.
      */
-    public int getId() {
+    public final int getId() {
         return id;
     }
 
@@ -66,7 +66,7 @@ public class Graphic {
      * @param id
      *            the new value to set.
      */
-    public void setId(int id) {
+    public final void setId(int id) {
         this.id = id;
     }
 
@@ -75,7 +75,7 @@ public class Graphic {
      * 
      * @return the height of this graphic.
      */
-    public int getHeight() {
+    public final int getHeight() {
         return height;
     }
 
@@ -85,7 +85,7 @@ public class Graphic {
      * @param id
      *            the new value to set.
      */
-    public void setHeight(int height) {
+    public final void setHeight(int height) {
         this.height = height;
     }
 }

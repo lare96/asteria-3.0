@@ -12,13 +12,13 @@ public final class ArrayUtils {
     /**
      * The default constructor.
      * 
-     * @throws InstantiationError
+     * @throws UnsupportedOperationException
      *             if this class is instantiated.
      */
     private ArrayUtils() {
-        throw new InstantiationError("This class cannot be instantiated!");
+        throw new UnsupportedOperationException("This class cannot be instantiated!");
     }
-    
+
     /**
      * Pseudo-randomly retrieves a element from {@code array}.
      * 

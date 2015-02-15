@@ -64,7 +64,7 @@ public final class CombatSessionAttack extends Task {
         CharacterNode attacker = builder.getCharacter();
         CharacterNode victim = builder.getVictim();
 
-        if (attacker.isDead() || !attacker.isRegistered()) {
+        if (attacker.isDead() || !attacker.isRegistered() || victim.isDead() || !victim.isRegistered()) {
             this.cancel();
             return;
         }

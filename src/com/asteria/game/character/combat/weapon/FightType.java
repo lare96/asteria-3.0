@@ -3,7 +3,7 @@ package com.asteria.game.character.combat.weapon;
 import com.asteria.game.character.combat.Combat;
 
 /**
- * An enumerated type that holds all of the different fighting types.
+ * The enumerated type whose elements represent the fighting types.
  * 
  * @author lare96 <http://www.rune-server.org/members/lare96/>
  */
@@ -141,7 +141,7 @@ public enum FightType {
      * 
      * @return the corresponding.
      */
-    public int getCorrespondingBonus() {
+    public final int getCorrespondingBonus() {
         switch (bonus) {
         case Combat.ATTACK_CRUSH:
             return Combat.DEFENCE_CRUSH;

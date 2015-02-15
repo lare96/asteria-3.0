@@ -3,6 +3,8 @@ package com.asteria.game.item.container;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Spliterator;
@@ -35,7 +37,7 @@ public class ItemContainer implements Iterable<Item> {
     /**
      * The listener functionality for this container.
      */
-    private Optional<ItemContainerListener> listener;
+    private final List<ItemContainerListener> listeners = new LinkedList<>();
 
     /**
      * The items contained by this container.
@@ -53,7 +55,6 @@ public class ItemContainer implements Iterable<Item> {
     public ItemContainer(int capacity, ItemContainerPolicy policy) {
         this.capacity = capacity;
         this.policy = policy;
-        this.listener = Optional.empty();
         this.items = new Item[capacity];
     }
 
@@ -88,7 +89,7 @@ public class ItemContainer implements Iterable<Item> {
      */
     public boolean add(Item item, int slot) {
         if (!Item.valid(item) || item.getAmount() > Integer.MAX_VALUE) {
-            listener.ifPresent(l -> l.onAdd(ItemContainer.this, item, false));
+            listeners.forEach(l -> l.onAdd(ItemContainer.this, item, false));
             return false;
         }
         int newSlot = (slot > -1) ? slot : freeSlot();
@@ -99,7 +100,7 @@ public class ItemContainer implements Iterable<Item> {
             }
         }
         if (newSlot == -1) {
-            listener.ifPresent(l -> l.onAdd(ItemContainer.this, item, false));
+            listeners.forEach(l -> l.onAdd(ItemContainer.this, item, false));
             return false;
         }
         if (get(newSlot) != null) {
@@ -109,16 +110,16 @@ public class ItemContainer implements Iterable<Item> {
             for (int i = 0; i < items.length; i++) {
                 if (items[i] != null && items[i].getId() == item.getId()) {
                     set(i, new Item(items[i].getId(), items[i].getAmount() + item.getAmount()));
-                    listener.ifPresent(l -> l.onAdd(ItemContainer.this, item, true));
+                    listeners.forEach(l -> l.onAdd(ItemContainer.this, item, true));
                     return true;
                 }
             }
             if (newSlot == -1) {
-                listener.ifPresent(l -> l.onAdd(ItemContainer.this, item, false));
+                listeners.forEach(l -> l.onAdd(ItemContainer.this, item, false));
                 return false;
             }
             set(slot > -1 ? newSlot : freeSlot(), item);
-            listener.ifPresent(l -> l.onAdd(ItemContainer.this, item, true));
+            listeners.forEach(l -> l.onAdd(ItemContainer.this, item, true));
             return true;
         }
         int remainingSlots = remaining();
@@ -128,7 +129,7 @@ public class ItemContainer implements Iterable<Item> {
         for (int i = 0; i < item.getAmount(); i++) {
             set(slot > -1 ? newSlot : freeSlot(), new Item(item.getId(), 1));
         }
-        listener.ifPresent(l -> l.onAdd(ItemContainer.this, item, true));
+        listeners.forEach(l -> l.onAdd(ItemContainer.this, item, true));
         return true;
     }
 
@@ -199,7 +200,7 @@ public class ItemContainer implements Iterable<Item> {
      */
     public boolean remove(Item item, int slot) {
         if (!Item.valid(item) || item.getAmount() > Integer.MAX_VALUE) {
-            listener.ifPresent(l -> l.onAdd(ItemContainer.this, item, false));
+            listeners.forEach(l -> l.onRemove(ItemContainer.this, item, false));
             return false;
         }
         if ((item.getDefinition().isStackable() || policy.equals(ItemContainerPolicy.STACK_ALWAYS)) && !policy
@@ -207,7 +208,7 @@ public class ItemContainer implements Iterable<Item> {
             int slotHolder = searchSlot(item.getId());
             Item stack = get(slotHolder);
             if (stack == null) {
-                listener.ifPresent(l -> l.onAdd(ItemContainer.this, item, false));
+                listeners.forEach(l -> l.onRemove(ItemContainer.this, item, false));
                 return false;
             }
             if (stack.getAmount() > item.getAmount()) {
@@ -221,7 +222,7 @@ public class ItemContainer implements Iterable<Item> {
                 if (i == 0 && slot != -1) {
                     Item inSlot = get(slot);
                     if (inSlot == null) {
-                        listener.ifPresent(l -> l.onAdd(ItemContainer.this, item, false));
+                        listeners.forEach(l -> l.onRemove(ItemContainer.this, item, false));
                         return false;
                     }
                     if (inSlot.getId() == item.getId()) {
@@ -231,11 +232,12 @@ public class ItemContainer implements Iterable<Item> {
                 if (slotHolder != -1) {
                     set(slotHolder, null);
                 } else {
-                    break;
+                    listeners.forEach(l -> l.onRemove(ItemContainer.this, item, false));
+                    return false;
                 }
             }
         }
-        listener.ifPresent(l -> l.onAdd(ItemContainer.this, item, true));
+        listeners.forEach(l -> l.onRemove(ItemContainer.this, item, true));
         return true;
     }
 
@@ -647,22 +649,38 @@ public class ItemContainer implements Iterable<Item> {
     }
 
     /**
-     * Gets the listener functionality for this container.
+     * Adds a new listener to this item container.
      * 
-     * @return the listener functionality.
+     * @param listener
+     *            the listener to add to this container.
+     * @return {@code true} if the listener was successfully added,
+     *         {@code false} otherwise.
      */
-    public final Optional<ItemContainerListener> getListener() {
-        return listener;
+    public final boolean addListener(ItemContainerListener listener) {
+        return listeners.add(listener);
     }
 
     /**
-     * Sets the listener functionality for this container.
+     * Removes an existing listener from this item container.
      * 
      * @param listener
-     *            the new listener functionality for this container.
+     *            the listener to remove from this container.
+     * @return {@code true} if the listener was successfully removed,
+     *         {@code false} otherwise.
      */
-    public final void setListener(ItemContainerListener listener) {
-        this.listener = Optional.ofNullable(listener);
+    public final boolean removeListener(ItemContainerListener listener) {
+        return listeners.remove(listener);
+    }
+
+
+    /**
+     * Gets the list of listeners in this container. Changes made to the
+     * returned list will have an effect on this container.
+     * 
+     * @return the list of listeners.
+     */
+    public final List<ItemContainerListener> getListeners() {
+        return listeners;
     }
 
     /**

@@ -125,11 +125,11 @@ public final class Skills {
     /**
      * The default constructor.
      * 
-     * @throws InstantiationError
+     * @throws UnsupportedOperationException
      *             if this class is instantiated.
      */
     private Skills() {
-        throw new InstantiationError();
+        throw new UnsupportedOperationException();
     }
 
     /**

@@ -68,15 +68,18 @@ public final class PlayerSerialization {
     /**
      * The function where all of the tokens are added to the linked hash
      * collection. Add as many tokens here as needed but keep in mind tokens
-     * cannot have the same name.<br>
-     * The token serialization format is as follows:<br>
+     * cannot have the same name.
+     * <p>
+     * The token serialization format is as follows:
+     * <p>
      * 
      * <pre>
      * tokens.add(new TokenSerializer(NAME_OF_TOKEN, SERIALIZATION, DESERIALIZATION));
      * </pre>
      * 
      * For those who are still confused, here is an example. Lets say we want
-     * "deathCount" to be saved to and loaded from the character file:<br>
+     * "deathCount" to be saved to and loaded from the character file:
+     * <p>
      * 
      * <pre>
      * private int deathCount;
@@ -90,7 +93,8 @@ public final class PlayerSerialization {
      * }
      * </pre>
      * 
-     * We would be able to do it like this:<br>
+     * We would be able to do it like this:
+     * <p>
      * 
      * <pre>
      * tokens.add(new TokenSerializer(&quot;death-count&quot;, player.getDeathCount(), n -&gt; player.setDeathCount(n.getAsInt())));

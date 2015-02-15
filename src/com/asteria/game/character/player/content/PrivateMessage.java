@@ -11,8 +11,6 @@ import com.asteria.utility.MutableNumber;
  */
 public final class PrivateMessage {
 
-    // TODO: Test adding ignore with friend already in the list.
-
     /**
      * The player this private messaging list belongs to.
      */
@@ -72,12 +70,11 @@ public final class PrivateMessage {
             player.getEncoder().sendMessage("Your friends list is full!");
             return;
         }
-        if (player.getFriends().contains(name)) {
+        if (player.getFriends().add(name)) {
+            player.getEncoder().sendPrivateMessageFriend(name, World.getPlayer(name).isPresent());
+        } else {
             player.getEncoder().sendMessage("They are already on your friends list!");
-            return;
         }
-        player.getFriends().add(name);
-        player.getEncoder().sendPrivateMessageFriend(name, World.getPlayer(name).isPresent());
     }
 
     /**
@@ -91,11 +88,8 @@ public final class PrivateMessage {
             player.getEncoder().sendMessage("Your ignores list is full!");
             return;
         }
-        if (player.getIgnores().contains(name)) {
+        if (!player.getIgnores().add(name))
             player.getEncoder().sendMessage("They are already on your ignores list!");
-            return;
-        }
-        player.getIgnores().add(name);
     }
 
     /**

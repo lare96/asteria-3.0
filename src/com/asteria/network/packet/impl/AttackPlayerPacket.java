@@ -53,7 +53,7 @@ public final class AttackPlayerPacket extends PacketDecoder {
             return;
         player.setAutocastSpell(null);
         player.setAutocast(false);
-        player.getEncoder().sendConfig(108, 0);
+        player.getEncoder().sendByteState(108, 0);
         player.setCastSpell(spell);
         player.getCombatBuilder().attack(victim);
     }
@@ -106,13 +106,13 @@ public final class AttackPlayerPacket extends PacketDecoder {
                 attacker.getEncoder().sendMessage("Your combat level difference is too great to attack that player here.");
                 return false;
             }
+            if (!attacker.getCombatBuilder().isBeingAttacked() || attacker.getCombatBuilder().isBeingAttacked() && attacker
+                .getCombatBuilder().getLastAttacker() != victim && Location.inMultiCombat(attacker)) {
+                Combat.effect(new CombatSkullEffect(attacker));
+            }
         } else {
             if (!optional.get().canHit(attacker, victim))
                 return false;
-        }
-        if (!attacker.getCombatBuilder().isBeingAttacked() || attacker.getCombatBuilder().isBeingAttacked() && attacker
-            .getCombatBuilder().getLastAttacker() != victim && Location.inMultiCombat(attacker)) {
-            Combat.effect(new CombatSkullEffect(attacker));
         }
         return true;
     }

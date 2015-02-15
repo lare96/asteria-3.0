@@ -1,11 +1,24 @@
 package com.asteria.utility;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 /**
- * The container class that contains functions to modify a number.
+ * The container class that contains functions to simplify the modification of a
+ * number.
+ * <p>
+ * <p>
+ * This class is similar in functionality to {@link AtomicInteger} but does not
+ * support atomic operations, and therefore should not be used across multiple
+ * threads.
  * 
  * @author lare96 <http://www.rune-server.org/members/lare96/>
  */
-public final class MutableNumber {
+public final class MutableNumber extends Number implements Comparable<MutableNumber> {
+
+    /**
+     * The constant serial version UID for serialization.
+     */
+    private static final long serialVersionUID = -7475363158492415879L;
 
     /**
      * The value present within this counter.
@@ -51,6 +64,36 @@ public final class MutableNumber {
         if (value != other.value)
             return false;
         return true;
+    }
+
+    @Override
+    public int compareTo(MutableNumber o) {
+        return Integer.compare(value, o.value);
+    }
+
+    /**
+     * {@inheritDoc}
+     * 
+     * This function equates to the {@link MutableNumber#get()} function.
+     */
+    @Override
+    public int intValue() {
+        return value;
+    }
+
+    @Override
+    public long longValue() {
+        return (long) value;
+    }
+
+    @Override
+    public float floatValue() {
+        return (float) value;
+    }
+
+    @Override
+    public double doubleValue() {
+        return (double) value;
     }
 
     /**
@@ -212,7 +255,8 @@ public final class MutableNumber {
     }
 
     /**
-     * Gets the value present within this counter.
+     * Gets the value present within this counter. This function equates to the
+     * inherited {@link MutableNumber#intValue()} function.
      * 
      * @return the value present.
      */

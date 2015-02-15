@@ -1,8 +1,6 @@
 package com.asteria.game.character.player.content;
 
-import java.util.EnumSet;
 import java.util.Optional;
-import java.util.Set;
 
 import com.asteria.game.character.Animation;
 import com.asteria.game.character.player.Player;
@@ -155,11 +153,6 @@ public enum FoodConsumable {
     };
 
     /**
-     * The enum set containing all of the elements in this enumeration.
-     */
-    private static final Set<FoodConsumable> ELEMENTS = EnumSet.allOf(FoodConsumable.class);
-
-    /**
      * The amount of hit points this food heals.
      */
     private final int healAmount;
@@ -201,7 +194,7 @@ public enum FoodConsumable {
     public static boolean consume(Player player, Item item, int slot) {
         Optional<FoodConsumable> food = forId(item.getId());
         // TODO: Check duel rule for no food.
-        if (!food.isPresent() || player.isDead() || player.getEatingTimer().elapsed(food.get().getDelay()))
+        if (!food.isPresent() || player.isDead() || !player.getEatingTimer().elapsed(food.get().getDelay()))
             return false;
         player.animation(new Animation(829));
         player.getEatingTimer().reset();
@@ -289,7 +282,7 @@ public enum FoodConsumable {
      *         if no food consumable was found.
      */
     private static Optional<FoodConsumable> forId(int id) {
-        for (FoodConsumable food : ELEMENTS) {
+        for (FoodConsumable food : FoodConsumable.values()) {
             for (int foodId : food.getIds()) {
                 if (id == foodId) {
                     return Optional.of(food);

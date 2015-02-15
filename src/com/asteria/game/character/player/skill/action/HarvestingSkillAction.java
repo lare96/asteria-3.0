@@ -8,13 +8,15 @@ import com.asteria.game.item.Item;
 import com.asteria.game.location.Position;
 import com.asteria.task.Task;
 import com.asteria.utility.RandomGen;
+import com.google.common.base.Preconditions;
 
 /**
  * The skill action that represents an action where items are periodically added
  * to and removed from an inventory based on a success factor. This type of
  * skill action is more complicated and requires that a player have the items to
- * be removed and the space for the items to harvest.<br>
- * <br>
+ * be removed and the space for the items to harvest.
+ * <p>
+ * <p>
  * The skills that may use this type skill action include, but are not limited
  * to {@code FISHING} and {@code WOODCUTTING}.
  * 
@@ -26,11 +28,12 @@ import com.asteria.utility.RandomGen;
 public abstract class HarvestingSkillAction extends SkillAction {
 
     /**
-     * The factor boost that determines the bonus success rate for harvesting
-     * based on skill level. The higher the number means the more frequently
-     * harvest will be obtained.
+     * The factor boost that determines the success rate for harvesting based on
+     * skill level. The higher the number the less frequently harvest will be
+     * obtained. A value higher than {@code 99} will throw an
+     * {@link IllegalStateException}.
      */
-    private static final double SUCCESS_FACTOR_BOOST = 0.01;
+    private static final int SUCCESS_FACTOR = 10;
 
     /**
      * The random generator instance that will generate random numbers.
@@ -38,7 +41,7 @@ public abstract class HarvestingSkillAction extends SkillAction {
     private final RandomGen random = new RandomGen();
 
     /**
-     * Creates a new {@link DestructionSkillAction}.
+     * Creates a new {@link HarvestingSkillAction}.
      * 
      * @param player
      *            the player this skill action is for.
@@ -50,10 +53,11 @@ public abstract class HarvestingSkillAction extends SkillAction {
     }
 
     @Override
-    public void execute(Task t) {
+    public final void execute(Task t) {
+        Preconditions.checkState(SUCCESS_FACTOR <= 99, "Success factor for skill harvesting too high!");
         Player player = getPlayer();
-        int factor = (player.getSkills()[skill().getId()].getLevel() / 5);
-        double boost = (factor * SUCCESS_FACTOR_BOOST);
+        int factor = (player.getSkills()[skill().getId()].getLevel() / SUCCESS_FACTOR);
+        double boost = (factor * 0.01);
         if (random.roll((successFactor() + boost))) {
             Optional<Item[]> removeItems = removeItems();
             Item[] harvestItems = harvestItems();

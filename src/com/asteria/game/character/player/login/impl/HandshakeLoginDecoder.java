@@ -12,7 +12,8 @@ import com.asteria.utility.LoggerUtils;
 
 /**
  * The login protocol decoder that handles the handshake between the client and
- * the server.
+ * the server. This marks the beginning of the entire login protocol in one of
+ * two stages.
  * 
  * @author lare96 <http://www.rune-server.org/members/lare96/>
  */
@@ -35,7 +36,7 @@ public final class HandshakeLoginDecoder extends LoginProtocolDecoder {
      *            the session that is decoding this protocol.
      */
     public HandshakeLoginDecoder(PlayerIO session) {
-        super(session);
+        super(session, IOState.CONNECTED);
     }
 
     @Override
@@ -50,7 +51,7 @@ public final class HandshakeLoginDecoder extends LoginProtocolDecoder {
         in.get();
         if (request != 14) {
             logger.warning("Invalid login request: " + request);
-            session.disconnect();
+            session.disconnect(false);
             return;
         }
         DataBuffer out = DataBuffer.create(17);
@@ -59,10 +60,5 @@ public final class HandshakeLoginDecoder extends LoginProtocolDecoder {
         out.putLong(random.nextLong());
         session.send(out);
         session.setState(IOState.LOGGING_IN);
-    }
-
-    @Override
-    public IOState state() {
-        return IOState.CONNECTED;
     }
 }

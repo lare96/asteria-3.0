@@ -11,8 +11,9 @@ import com.asteria.task.Task;
 /**
  * The skill action that represents an action where one item in an inventory is
  * replaced with a new one. This type of skill action is somewhat basic and
- * requires that a player have the item to be removed.<br>
- * <br>
+ * requires that a player have the item to be removed.
+ * <p>
+ * <p>
  * The skills that may use this type skill action include, but are not limited
  * to {@code COOKING}.
  * 
@@ -24,7 +25,7 @@ import com.asteria.task.Task;
 public abstract class ProducingSkillAction extends SkillAction {
 
     /**
-     * Creates a new {@link DestructionSkillAction}.
+     * Creates a new {@link ProducingSkillAction}.
      * 
      * @param player
      *            the player this skill action is for.
@@ -36,7 +37,7 @@ public abstract class ProducingSkillAction extends SkillAction {
     }
 
     @Override
-    public void execute(Task t) {
+    public final void execute(Task t) {
         Player player = getPlayer();
         Item removeItem = removeItem();
         if (player.getInventory().remove(removeItem)) {

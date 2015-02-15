@@ -5,7 +5,17 @@ import java.util.Objects;
 import com.google.common.base.Preconditions;
 
 /**
- * The various services that are executed on the main game thread.
+ * An assignment that has been scheduled to be completed sometime in the future.
+ * These tasks run in intervals of {@code 600}ms and are executed on the main
+ * game thread. They support dynamic delay changes, which means that the delay
+ * for the task can be changed during the execution of the task. To conclude,
+ * tasks have the ability to have any Object attached to them which can later be
+ * utilized for things like stopping the task.
+ * <p>
+ * <p>
+ * The data structures that hold tasks are not thread safe, which means tasks
+ * should not be used across multiple threads. Tasks should only ever be used to
+ * execute game logic.
  * 
  * @author lare96 <http://www.rune-server.org/members/lare96/>
  */
@@ -78,17 +88,14 @@ public abstract class Task {
 
     /**
      * The method executed when this task is cancelled using
-     * {@link Task#cancel()}. This may be overridden so more code can be
-     * executed dynamically when a task is cancelled.
+     * {@link Task#cancel()}.
      */
     public void onCancel() {
 
     }
 
     /**
-     * The method executed when {@link Task#execute()} throws an error. This may
-     * be overridden so more code can be executed dynamically when a task is
-     * cancelled.
+     * The method executed when {@link Task#execute()} throws an error.
      * 
      * @param t
      *            the error thrown by execution of the task.
@@ -128,8 +135,10 @@ public abstract class Task {
      * related tasks can be bound with the same key, and then be retrieved or
      * cancelled later on. All player related tasks should be bound with the
      * player's instance so all tasks are automatically stopped on logout.
-     * Please note that keys with a value of {@code null} are not permitted, the
-     * default value for all keys is {@link Task#DEFAULT_KEY}.
+     * <p>
+     * <p>
+     * Keys with a value of {@code null} are <b>not</b> permitted, the default
+     * value for all keys is {@link Task#DEFAULT_KEY}.
      * 
      * @param key
      *            the key to bind to this task, cannot be {@code null}.

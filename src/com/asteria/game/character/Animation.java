@@ -56,7 +56,7 @@ public class Animation {
      * 
      * @return the identification for this animation.
      */
-    public int getId() {
+    public final int getId() {
         return id;
     }
 
@@ -66,7 +66,7 @@ public class Animation {
      * @param id
      *            the new value to set.
      */
-    public void setId(int id) {
+    public final void setId(int id) {
         this.id = id;
     }
 
@@ -75,7 +75,7 @@ public class Animation {
      * 
      * @return the delay for this animation.
      */
-    public int getDelay() {
+    public final int getDelay() {
         return delay;
     }
 
@@ -85,7 +85,7 @@ public class Animation {
      * @param id
      *            the new value to set.
      */
-    public void setDelay(int delay) {
+    public final void setDelay(int delay) {
         this.delay = delay;
     }
 }

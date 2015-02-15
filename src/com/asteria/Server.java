@@ -6,12 +6,13 @@ import java.util.logging.Logger;
 import com.asteria.game.character.player.content.RestoreStatTask;
 import com.asteria.game.character.player.minigame.MinigameHandler;
 import com.asteria.game.item.ItemNodeManager;
-import com.asteria.task.TaskManager;
+import com.asteria.task.TaskHandler;
 import com.asteria.utility.LoggerUtils;
 import com.asteria.utility.Settings;
 
 /**
- * The main class of <i>Asteria 3.0</i> that will prepare the server builder.
+ * The main class that will prepare the server builder and put the server
+ * online.
  * 
  * @author lare96 <http://www.rune-server.org/members/lare96/>
  */
@@ -30,18 +31,18 @@ public final class Server {
     /**
      * The default constructor.
      * 
-     * @throws InstantiationError
+     * @throws UnsupportedOperationException
      *             if this class is instantiated.
      */
     private Server() {
-        throw new InstantiationError("This class cannot be instantiated!");
+        throw new UnsupportedOperationException("This class cannot be instantiated!");
     }
 
     /**
-     * The main method of <i>Asteria 3.0</i>.
+     * The main method that will put the server online.
      * 
      * @param args
-     *            all of the runtime arguments.
+     *            the runtime arguments.
      */
     public static void main(String[] args) {
         try {
@@ -50,9 +51,9 @@ public final class Server {
             builder.build();
 
             logger.info(Settings.NAME + " is now online!");
-            TaskManager.submit(new ItemNodeManager());
-            TaskManager.submit(new RestoreStatTask());
-            TaskManager.submit(new MinigameHandler());
+            TaskHandler.submit(new ItemNodeManager());
+            TaskHandler.submit(new RestoreStatTask());
+            TaskHandler.submit(new MinigameHandler());
         } catch (Exception e) {
             logger.log(Level.SEVERE, "An error occured while starting " + Settings.NAME + "!", e);
             System.exit(1);

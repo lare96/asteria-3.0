@@ -12,7 +12,10 @@ import com.asteria.game.character.player.PlayerUpdating;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 
 /**
- * The concurrent update service that will execute the update sequence.
+ * The concurrent update service that will execute the update sequence in
+ * parallel using {@link Runtime#availableProcessors()} threads. If the hosting
+ * computer has more than one core, is it guaranteed that this update service
+ * will perform better than {@link SequentialUpdateService}.
  * 
  * @author lare96 <http://www.rune-server.org/members/lare96/>
  */
@@ -79,7 +82,7 @@ public final class ConcurrentUpdateService implements Runnable {
                 try {
                     player.reset();
                     player.setCachedUpdateBlock(null);
-                    player.getSession().getPacketCount().getAndSet(0);
+                    player.getSession().getPacketCount().set(0);
                 } catch (Exception e) {
                     e.printStackTrace();
                     World.getPlayers().remove(player);

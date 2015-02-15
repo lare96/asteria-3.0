@@ -11,7 +11,7 @@ import com.asteria.game.character.HitType;
 import com.asteria.game.character.PoisonType;
 import com.asteria.game.character.player.Player;
 import com.asteria.game.item.Item;
-import com.asteria.task.TaskManager;
+import com.asteria.task.TaskHandler;
 import com.asteria.utility.RandomGen;
 
 /**
@@ -83,7 +83,7 @@ public final class CombatPoisonEffect extends CombatEffect {
     @Override
     public void onLogin() {
         if (character.isPoisoned()) {
-            TaskManager.submit(this);
+            TaskHandler.submit(this);
         }
     }
 

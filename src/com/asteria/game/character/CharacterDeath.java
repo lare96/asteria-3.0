@@ -1,8 +1,5 @@
 package com.asteria.game.character;
 
-import java.util.Arrays;
-import java.util.Optional;
-
 import com.asteria.game.NodeType;
 import com.asteria.game.World;
 import com.asteria.game.character.npc.Npc;
@@ -68,31 +65,21 @@ public abstract class CharacterDeath<T extends CharacterNode> extends Task {
 
     @Override
     public void execute() {
-        Optional<DeathStage> stage = DeathStage.getStage(counter++);
-        stage.ifPresent(s -> {
-            switch (s) {
-            case JUST_DIED:
-                character.setDead(true);
-                character.setPoisonDamage(0);
-                character.getMovementQueue().reset();
-                character.unfreeze();
-                break;
-            case PRE_DEATH:
-                preDeath(character);
-                break;
-            case DEATH:
-                death(character);
-                break;
-            case POST_DEATH:
-                postDeath(character);
-                character.setDead(false);
-                break;
-            }
-        });
-
-        if (counter >= DeathStage.POST_DEATH.getTicks()) {
+        if (counter == 0) {
+            character.setDead(true);
+            character.setPoisonDamage(0);
+            character.getMovementQueue().reset();
+            character.unfreeze();
+        } else if (counter == 1) {
+            preDeath(character);
+        } else if (counter == 5) {
+            death(character);
+        } else if (counter == 6) {
+            postDeath(character);
+            character.setDead(false);
             this.cancel();
         }
+        counter++;
     }
 
     @Override
@@ -101,55 +88,6 @@ public abstract class CharacterDeath<T extends CharacterNode> extends Task {
             World.getPlayers().remove((Player) character);
         } else if (character.getType() == NodeType.NPC) {
             World.getNpcs().remove((Npc) character);
-        }
-    }
-
-    /**
-     * The enumerated type whose elements represent each death stage in the
-     * entire death process.
-     * 
-     * @author lare96 <http://www.rune-server.org/members/lare96/>
-     */
-    private enum DeathStage {
-        JUST_DIED(0),
-        PRE_DEATH(1),
-        DEATH(5),
-        POST_DEATH(6);
-
-        /**
-         * The amount of ticks needed to activate this death stage.
-         */
-        private final int ticks;
-
-        /**
-         * Creates a new {@link DeathStage}.
-         * 
-         * @param ticks
-         *            the amount of ticks needed to activate this death stage.
-         */
-        private DeathStage(int ticks) {
-            this.ticks = ticks;
-        }
-
-        /**
-         * Gets the amount of ticks needed to activate this death stage.
-         * 
-         * @return the amount of ticks for this stage.
-         */
-        public final int getTicks() {
-            return ticks;
-        }
-
-        /**
-         * Gets the death stage element based on {@code ticks}.
-         * 
-         * @param ticks
-         *            the amount of ticks to get the death stage with.
-         * @return the death stage wrapped within an optional if present, or an
-         *         empty optional if not present.
-         */
-        public static Optional<DeathStage> getStage(int ticks) {
-            return Arrays.stream(DeathStage.values()).filter(s -> s.ticks == ticks).findFirst();
         }
     }
 }

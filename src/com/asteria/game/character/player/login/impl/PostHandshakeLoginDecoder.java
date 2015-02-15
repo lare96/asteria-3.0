@@ -18,7 +18,8 @@ import com.asteria.utility.Settings;
 import com.asteria.utility.TextUtils;
 
 /**
- * The login protocol decoder that handles the rest of the login session.
+ * The login protocol decoder that handles the rest of the login session. This
+ * marks the ending of the entire login protocol in one of two stages.
  * 
  * @author lare96 <http://www.rune-server.org/members/lare96/>
  */
@@ -36,7 +37,7 @@ public final class PostHandshakeLoginDecoder extends LoginProtocolDecoder {
      *            the session that is decoding this protocol.
      */
     public PostHandshakeLoginDecoder(PlayerIO session) {
-        super(session);
+        super(session, IOState.LOGGING_IN);
     }
 
     @Override
@@ -50,14 +51,14 @@ public final class PostHandshakeLoginDecoder extends LoginProtocolDecoder {
         int loginType = inData.get();
         if (loginType != 16 && loginType != 18) {
             logger.warning(session + " invalid login type!");
-            session.disconnect();
+            session.disconnect(false);
             return;
         }
         int blockLength = inData.get() & 0xff;
         int loginEncryptPacketSize = blockLength - (36 + 1 + 1 + 2);
         if (loginEncryptPacketSize <= 0) {
             logger.warning(session + " invalid RSA packet size!");
-            session.disconnect();
+            session.disconnect(false);
             return;
         }
         if (inData.remaining() < blockLength) {
@@ -70,7 +71,7 @@ public final class PostHandshakeLoginDecoder extends LoginProtocolDecoder {
         int clientVersion = in.getShort();
         if (clientVersion != 317) {
             logger.warning(session + " invalid client version");
-            session.disconnect();
+            session.disconnect(false);
             return;
         }
         in.get();
@@ -88,7 +89,7 @@ public final class PostHandshakeLoginDecoder extends LoginProtocolDecoder {
             int rsaOpcode = rsaBuffer.get();
             if (rsaOpcode != 10) {
                 logger.warning(session + " unable to decode RSA block properly!");
-                session.disconnect();
+                session.disconnect(false);
                 return;
             }
             long clientHalf = rsaBuffer.getLong();
@@ -138,14 +139,9 @@ public final class PostHandshakeLoginDecoder extends LoginProtocolDecoder {
         resp.put(0);
         session.send(resp);
         if (session.getResponse() != LoginResponse.NORMAL) {
-            session.disconnect();
+            session.disconnect(false);
             return;
         }
         World.getPlayers().add(player);
-    }
-
-    @Override
-    public IOState state() {
-        return IOState.LOGGING_IN;
     }
 }

@@ -1,7 +1,7 @@
 package com.asteria.game.character.player;
 
 /**
- * The enumerated type whose elements represent the session handler states.
+ * The enumerated type whose elements represent the IO session states.
  * 
  * @author lare96 <http://www.rune-server.org/members/lare96/>
  */

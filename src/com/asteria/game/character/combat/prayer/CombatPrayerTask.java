@@ -20,7 +20,7 @@ public final class CombatPrayerTask extends Task {
     /**
      * An array of counters to perform a countdown.
      */
-    private int[] countdown = new int[18];
+    private final int[] countdown = new int[CombatPrayer.size()];
 
     /**
      * The flag that determines if this task should be cancelled.
@@ -43,10 +43,8 @@ public final class CombatPrayerTask extends Task {
     public void execute() {
         for (int i = 0; i < player.getPrayerActive().length; i++) {
             if (player.getPrayerActive()[i]) {
-                countdown[i]++;
                 cancel = false;
-
-                if (countdown[i] >= ((player.getBonus()[Combat.BONUS_PRAYER] / 2) + CombatPrayer.values()[i].getDrainRate())) {
+                if (++countdown[i] >= ((player.getBonus()[Combat.BONUS_PRAYER] / 2) + CombatPrayer.values()[i].getDrainRate())) {
                     player.getSkills()[Skills.PRAYER].decreaseLevel(1);
                     Skills.refresh(player, Skills.PRAYER);
                     countdown[i] = 0;

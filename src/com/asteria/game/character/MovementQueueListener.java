@@ -3,8 +3,8 @@ package com.asteria.game.character;
 import java.util.Objects;
 import java.util.Optional;
 
-import com.asteria.task.ActionListener;
-import com.asteria.task.TaskManager;
+import com.asteria.task.EventListener;
+import com.asteria.task.TaskHandler;
 
 /**
  * The container class that holds the movement queue listener. The listener
@@ -36,10 +36,11 @@ public final class MovementQueueListener {
     }
 
     /**
-     * Resets this {@link ActionListener} so it may listen for the walking queue
+     * Resets this {@link EventListener} so it may listen for the walking queue
      * to finish. Once the walking queue is finished the listener will run the
-     * logic within {@code task}. <br>
-     * <br>
+     * logic within {@code task}.
+     * <p>
+     * <p>
      * Please note that appended tasks are not guaranteed to be ran! If a new
      * task is being appended while the listener is already waiting to run
      * another task, the existing listener is stopped, the old task discarded,
@@ -52,7 +53,7 @@ public final class MovementQueueListener {
         listener.ifPresent(t -> t.cancel());
         listener = Optional.of(new MovementQueueListenerTask(character, task));
         character.setFollowing(false);
-        TaskManager.submit(listener.get());
+        TaskHandler.submit(listener.get());
     }
 
     /**
@@ -61,7 +62,7 @@ public final class MovementQueueListener {
      * 
      * @author lare96 <http://www.rune-server.org/members/lare96/>
      */
-    private static final class MovementQueueListenerTask extends ActionListener {
+    private static final class MovementQueueListenerTask extends EventListener {
 
         /**
          * The character that the queued task will be ran for.

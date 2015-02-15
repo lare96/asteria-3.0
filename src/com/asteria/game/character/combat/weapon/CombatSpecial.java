@@ -1,7 +1,6 @@
 package com.asteria.game.character.combat.weapon;
 
 import java.util.Arrays;
-import java.util.EnumSet;
 import java.util.Optional;
 import java.util.Set;
 
@@ -21,10 +20,10 @@ import com.asteria.game.character.player.skill.Skills;
 import com.asteria.game.item.container.Equipment;
 import com.asteria.game.location.Location;
 import com.asteria.task.Task;
-import com.asteria.task.TaskManager;
+import com.asteria.task.TaskHandler;
 
 /**
- * An enumerated type that holds all of the combat special attacks.
+ * The enumerated type whose elements represent the combat special attacks.
  * 
  * @author lare96 <http://www.rune-server.org/members/lare96/>
  */
@@ -68,7 +67,7 @@ public enum CombatSpecial {
             player.highGraphic(new Graphic(250));
             new Projectile(player, target, 249, 44, 3, 43, 31, 0).sendProjectile();
 
-            TaskManager.submit(new Task(1, false) {
+            TaskHandler.submit(new Task(1, false) {
                 @Override
                 public void execute() {
                     player.animation(new Animation(426));
@@ -196,11 +195,6 @@ public enum CombatSpecial {
     };
 
     /**
-     * The enum set containing all of the elements in this enumeration.
-     */
-    private static final EnumSet<CombatSpecial> ELEMENTS = EnumSet.allOf(CombatSpecial.class);
-
-    /**
      * The identifiers for the weapons that perform this special.
      */
     private final int[] ids;
@@ -290,7 +284,7 @@ public enum CombatSpecial {
     public static void drain(Player player, int amount) {
         player.getSpecialPercentage().decrementAndGet(amount, 0);
         CombatSpecial.updateSpecialAmount(player);
-        player.getEncoder().sendConfig(301, 0);
+        player.getEncoder().sendByteState(301, 0);
         player.setSpecialActivated(false);
     }
 
@@ -341,7 +335,7 @@ public enum CombatSpecial {
             return;
         }
 
-        Optional<CombatSpecial> special = ELEMENTS.stream().filter(
+        Optional<CombatSpecial> special = Arrays.stream(CombatSpecial.values()).filter(
             c -> Arrays.stream(c.getIds()).anyMatch(id -> player.getEquipment().getId(Equipment.WEAPON_SLOT) == id)).findFirst();
         if (special.isPresent()) {
             player.getEncoder().sendInterfaceLayer(player.getWeapon().getSpecialBar(), false);

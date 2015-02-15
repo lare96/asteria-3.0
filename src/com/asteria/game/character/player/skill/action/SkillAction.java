@@ -7,14 +7,16 @@ import com.asteria.game.character.Animation;
 import com.asteria.game.character.player.Player;
 import com.asteria.game.character.player.skill.SkillData;
 import com.asteria.game.location.Position;
+import com.asteria.game.plugin.PluginContext;
 import com.asteria.task.Task;
-import com.asteria.task.TaskManager;
+import com.asteria.task.TaskHandler;
 
 /**
  * The skill action that is the parent class of all other skill actions. This
  * type of skill action is extremely broad and should almost <b>always</b> be
- * extended only to add additional and more specific functionality.<br>
- * <br>
+ * extended only to add additional and more specific functionality.
+ * <p>
+ * <p>
  * To reiterate, no actual skills should be extending this skill action.
  * 
  * @author lare96 <http://www.rune-server.org/members/lare96/>
@@ -22,7 +24,7 @@ import com.asteria.task.TaskManager;
  * @see DestructionSkillAction
  * @see ProducingSkillAction
  */
-public abstract class SkillAction {
+public abstract class SkillAction implements PluginContext {
 
     /**
      * The player this skill action is for.
@@ -54,7 +56,7 @@ public abstract class SkillAction {
         if (!player.getSkillEvent()[skill().getIndex()]) {
             Arrays.fill(player.getSkillEvent(), false);
             player.getSkillEvent()[skill().getIndex()] = true;
-            TaskManager.submit(new SkillActionTask(this));
+            TaskHandler.submit(new SkillActionTask(this));
         }
     }
 

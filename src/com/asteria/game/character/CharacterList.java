@@ -70,9 +70,9 @@ public final class CharacterList<E extends CharacterNode> implements Iterable<E>
             if (slot < 0)
                 return false;
             e.setRegistered(true);
-            e.create();
             e.setSlot(slot);
             characters[slot] = e;
+            e.create();
             size++;
             return true;
         }
@@ -91,8 +91,8 @@ public final class CharacterList<E extends CharacterNode> implements Iterable<E>
         Objects.requireNonNull(e);
 
         if (e.isRegistered()) {
-            e.setRegistered(false);
             e.dispose();
+            e.setRegistered(false);
             characters[e.getSlot()] = null;
             lastSlot = e.getSlot();
             size--;

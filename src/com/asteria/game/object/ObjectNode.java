@@ -12,7 +12,7 @@ import com.asteria.game.location.Position;
  * 
  * @author lare96 <http://www.rune-server.org/members/lare96/>
  */
-public class ObjectNode extends Node {
+public final class ObjectNode extends Node {
 
     /**
      * The identification of this object.
@@ -77,7 +77,7 @@ public class ObjectNode extends Node {
     }
 
     @Override
-    public final int hashCode() {
+    public int hashCode() {
         final int prime = 31;
         int result = super.hashCode();
         result = prime * result + ((direction == null) ? 0 : direction.hashCode());
@@ -87,7 +87,7 @@ public class ObjectNode extends Node {
     }
 
     @Override
-    public final boolean equals(Object obj) {
+    public boolean equals(Object obj) {
         if (this == obj)
             return true;
         if (!super.equals(obj))

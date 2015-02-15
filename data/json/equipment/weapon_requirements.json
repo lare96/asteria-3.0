@@ -4,11 +4,11 @@
     "requirements": [
       {
         "level": 20,
-        "skill": 1
+        "skill": "DEFENCE"
       },
       {
         "level": 40,
-        "skill": 6
+        "skill": "MAGIC"
       }
     ]
   },
@@ -17,11 +17,11 @@
     "requirements": [
       {
         "level": 20,
-        "skill": 1
+        "skill": "DEFENCE"
       },
       {
         "level": 40,
-        "skill": 6
+        "skill": "MAGIC"
       }
     ]
   },
@@ -30,4193 +30,3808 @@
     "requirements": [
       {
         "level": 20,
-        "skill": 1
+        "skill": "DEFENCE"
       },
       {
         "level": 40,
-        "skill": 6
+        "skill": "MAGIC"
       }
     ]
   },
   {
-    "hash": 4103,
     "id": 4103,
     "requirements": [
       {
         "level": 20,
-        "skill": 1
+        "skill": "DEFENCE"
       },
       {
         "level": 40,
-        "skill": 6
+        "skill": "MAGIC"
       }
     ]
   },
   {
-    "hash": 4105,
     "id": 4105,
     "requirements": [
       {
         "level": 20,
-        "skill": 1
+        "skill": "DEFENCE"
       },
       {
         "level": 40,
-        "skill": 6
+        "skill": "MAGIC"
       }
     ]
   },
   {
-    "hash": 4107,
     "id": 4107,
     "requirements": [
       {
         "level": 20,
-        "skill": 1
+        "skill": "DEFENCE"
       },
       {
         "level": 40,
-        "skill": 6
+        "skill": "MAGIC"
       }
     ]
   },
   {
-    "hash": 4109,
     "id": 4109,
     "requirements": [
       {
         "level": 20,
-        "skill": 1
+        "skill": "DEFENCE"
       },
       {
         "level": 40,
-        "skill": 6
+        "skill": "MAGIC"
       }
     ]
   },
   {
-    "hash": 4111,
     "id": 4111,
     "requirements": [
       {
         "level": 20,
-        "skill": 1
+        "skill": "DEFENCE"
       },
       {
         "level": 40,
-        "skill": 6
+        "skill": "MAGIC"
       }
     ]
   },
   {
-    "hash": 4113,
     "id": 4113,
     "requirements": [
       {
         "level": 20,
-        "skill": 1
+        "skill": "DEFENCE"
       },
       {
         "level": 40,
-        "skill": 6
+        "skill": "MAGIC"
       }
     ]
   },
   {
-    "hash": 4115,
     "id": 4115,
     "requirements": [
       {
         "level": 20,
-        "skill": 1
+        "skill": "DEFENCE"
       },
       {
         "level": 40,
-        "skill": 6
+        "skill": "MAGIC"
       }
     ]
   },
   {
-    "hash": 3093,
     "id": 3093,
     "requirements": [
       {
         "level": 10,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 4117,
     "id": 4117,
     "requirements": [
       {
         "level": 20,
-        "skill": 1
+        "skill": "DEFENCE"
       },
       {
         "level": 40,
-        "skill": 6
+        "skill": "MAGIC"
       }
     ]
   },
   {
-    "hash": 3094,
     "id": 3094,
     "requirements": [
       {
         "level": 10,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 3097,
     "id": 3097,
     "requirements": [
       {
         "level": 5,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 3098,
     "id": 3098,
     "requirements": [
       {
         "level": 10,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 3099,
     "id": 3099,
     "requirements": [
       {
         "level": 20,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 3100,
     "id": 3100,
     "requirements": [
       {
         "level": 30,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 3101,
     "id": 3101,
     "requirements": [
       {
         "level": 40,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 1065,
     "id": 1065,
     "requirements": [
       {
         "level": 40,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 1069,
     "id": 1069,
     "requirements": [
       {
         "level": 5,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 1071,
     "id": 1071,
     "requirements": [
       {
         "level": 20,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 1073,
     "id": 1073,
     "requirements": [
       {
         "level": 30,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 1077,
     "id": 1077,
     "requirements": [
       {
         "level": 10,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 1079,
     "id": 1079,
     "requirements": [
       {
         "level": 40,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 4151,
     "id": 4151,
     "requirements": [
       {
         "level": 70,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 4153,
     "id": 4153,
     "requirements": [
       {
         "level": 50,
-        "skill": 0
+        "skill": "ATTACK"
       },
       {
         "level": 50,
-        "skill": 2
+        "skill": "STRENGTH"
       }
     ]
   },
   {
-    "hash": 1083,
     "id": 1083,
     "requirements": [
       {
         "level": 5,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 1085,
     "id": 1085,
     "requirements": [
       {
         "level": 20,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 1089,
     "id": 1089,
     "requirements": [
       {
         "level": 10,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 1091,
     "id": 1091,
     "requirements": [
       {
         "level": 30,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 3140,
     "id": 3140,
     "requirements": [
       {
         "level": 60,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 1093,
     "id": 1093,
     "requirements": [
       {
         "level": 40,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 1097,
     "id": 1097,
     "requirements": [
       {
         "level": 20,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 1099,
     "id": 1099,
     "requirements": [
       {
         "level": 40,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 1105,
     "id": 1105,
     "requirements": [
       {
         "level": 5,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 4178,
     "id": 4178,
     "requirements": [
       {
         "level": 70,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 1107,
     "id": 1107,
     "requirements": [
       {
         "level": 10,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 4180,
     "id": 4180,
     "requirements": [
       {
         "level": 60,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 1109,
     "id": 1109,
     "requirements": [
       {
         "level": 20,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 1111,
     "id": 1111,
     "requirements": [
       {
         "level": 30,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 1113,
     "id": 1113,
     "requirements": [
       {
         "level": 40,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 1119,
     "id": 1119,
     "requirements": [
       {
         "level": 5,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 1121,
     "id": 1121,
     "requirements": [
       {
         "level": 20,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 1123,
     "id": 1123,
     "requirements": [
       {
         "level": 30,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 1125,
     "id": 1125,
     "requirements": [
       {
         "level": 10,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 1127,
     "id": 1127,
     "requirements": [
       {
         "level": 40,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 1131,
     "id": 1131,
     "requirements": [
       {
         "level": 10,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 1133,
     "id": 1133,
     "requirements": [
       {
         "level": 20,
-        "skill": 1
+        "skill": "DEFENCE"
       },
       {
         "level": 20,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 1135,
     "id": 1135,
     "requirements": [
       {
         "level": 40,
-        "skill": 1
+        "skill": "DEFENCE"
       },
       {
         "level": 40,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 1141,
     "id": 1141,
     "requirements": [
       {
         "level": 5,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 1143,
     "id": 1143,
     "requirements": [
       {
         "level": 20,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 1145,
     "id": 1145,
     "requirements": [
       {
         "level": 30,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 3194,
     "id": 3194,
     "requirements": [
       {
         "level": 5,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 1147,
     "id": 1147,
     "requirements": [
       {
         "level": 40,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 3196,
     "id": 3196,
     "requirements": [
       {
         "level": 10,
-        "skill": 0
+        "skill": "ATTACK"
       },
       {
         "level": 5,
-        "skill": 2
+        "skill": "STRENGTH"
       }
     ]
   },
   {
-    "hash": 1149,
     "id": 1149,
     "requirements": [
       {
         "level": 60,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 3198,
     "id": 3198,
     "requirements": [
       {
         "level": 20,
-        "skill": 0
+        "skill": "ATTACK"
       },
       {
         "level": 10,
-        "skill": 2
+        "skill": "STRENGTH"
       }
     ]
   },
   {
-    "hash": 1151,
     "id": 1151,
     "requirements": [
       {
         "level": 10,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 3200,
     "id": 3200,
     "requirements": [
       {
         "level": 30,
-        "skill": 0
+        "skill": "ATTACK"
       },
       {
         "level": 15,
-        "skill": 2
+        "skill": "STRENGTH"
       }
     ]
   },
   {
-    "hash": 3202,
     "id": 3202,
     "requirements": [
       {
         "level": 40,
-        "skill": 0
+        "skill": "ATTACK"
       },
       {
         "level": 20,
-        "skill": 2
+        "skill": "STRENGTH"
       }
     ]
   },
   {
-    "hash": 3204,
     "id": 3204,
     "requirements": [
       {
         "level": 60,
-        "skill": 0
+        "skill": "ATTACK"
       },
       {
         "level": 30,
-        "skill": 2
+        "skill": "STRENGTH"
       }
     ]
   },
   {
-    "hash": 1157,
     "id": 1157,
     "requirements": [
       {
         "level": 5,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 1159,
     "id": 1159,
     "requirements": [
       {
         "level": 20,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 1161,
     "id": 1161,
     "requirements": [
       {
         "level": 30,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 1163,
     "id": 1163,
     "requirements": [
       {
         "level": 40,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 1165,
     "id": 1165,
     "requirements": [
       {
         "level": 10,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 1177,
     "id": 1177,
     "requirements": [
       {
         "level": 5,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 1179,
     "id": 1179,
     "requirements": [
       {
         "level": 10,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 1181,
     "id": 1181,
     "requirements": [
       {
         "level": 20,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 1183,
     "id": 1183,
     "requirements": [
       {
         "level": 30,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 1185,
     "id": 1185,
     "requirements": [
       {
         "level": 40,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 1187,
     "id": 1187,
     "requirements": [
       {
         "level": 60,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 1193,
     "id": 1193,
     "requirements": [
       {
         "level": 5,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 1195,
     "id": 1195,
     "requirements": [
       {
         "level": 10,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 1197,
     "id": 1197,
     "requirements": [
       {
         "level": 20,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 1199,
     "id": 1199,
     "requirements": [
       {
         "level": 30,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 1201,
     "id": 1201,
     "requirements": [
       {
         "level": 40,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 1207,
     "id": 1207,
     "requirements": [
       {
         "level": 5,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 1209,
     "id": 1209,
     "requirements": [
       {
         "level": 20,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 1211,
     "id": 1211,
     "requirements": [
       {
         "level": 30,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 1213,
     "id": 1213,
     "requirements": [
       {
         "level": 40,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 1215,
     "id": 1215,
     "requirements": [
       {
         "level": 60,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 1217,
     "id": 1217,
     "requirements": [
       {
         "level": 10,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 7362,
     "id": 7362,
     "requirements": [
       {
         "level": 20,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 7364,
     "id": 7364,
     "requirements": [
       {
         "level": 20,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 7366,
     "id": 7366,
     "requirements": [
       {
         "level": 20,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 1223,
     "id": 1223,
     "requirements": [
       {
         "level": 5,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 7368,
     "id": 7368,
     "requirements": [
       {
         "level": 20,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 1225,
     "id": 1225,
     "requirements": [
       {
         "level": 20,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 1227,
     "id": 1227,
     "requirements": [
       {
         "level": 30,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 1229,
     "id": 1229,
     "requirements": [
       {
         "level": 40,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 1231,
     "id": 1231,
     "requirements": [
       {
         "level": 60,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 1233,
     "id": 1233,
     "requirements": [
       {
         "level": 10,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 1241,
     "id": 1241,
     "requirements": [
       {
         "level": 5,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 1243,
     "id": 1243,
     "requirements": [
       {
         "level": 20,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 1245,
     "id": 1245,
     "requirements": [
       {
         "level": 30,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 1247,
     "id": 1247,
     "requirements": [
       {
         "level": 40,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 1249,
     "id": 1249,
     "requirements": [
       {
         "level": 60,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 7398,
     "id": 7398,
     "requirements": [
       {
         "level": 20,
-        "skill": 1
+        "skill": "DEFENCE"
       },
       {
         "level": 40,
-        "skill": 6
+        "skill": "MAGIC"
       }
     ]
   },
   {
-    "hash": 7399,
     "id": 7399,
     "requirements": [
       {
         "level": 20,
-        "skill": 1
+        "skill": "DEFENCE"
       },
       {
         "level": 40,
-        "skill": 6
+        "skill": "MAGIC"
       }
     ]
   },
   {
-    "hash": 7400,
     "id": 7400,
     "requirements": [
       {
         "level": 20,
-        "skill": 1
+        "skill": "DEFENCE"
       },
       {
         "level": 40,
-        "skill": 6
+        "skill": "MAGIC"
       }
     ]
   },
   {
-    "hash": 1269,
     "id": 1269,
     "requirements": [
       {
         "level": 5,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 1271,
     "id": 1271,
     "requirements": [
       {
         "level": 30,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 1273,
     "id": 1273,
     "requirements": [
       {
         "level": 20,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 1275,
     "id": 1275,
     "requirements": [
       {
         "level": 40,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 1281,
     "id": 1281,
     "requirements": [
       {
         "level": 5,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 1283,
     "id": 1283,
     "requirements": [
       {
         "level": 10,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 1285,
     "id": 1285,
     "requirements": [
       {
         "level": 20,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 1287,
     "id": 1287,
     "requirements": [
       {
         "level": 30,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 1289,
     "id": 1289,
     "requirements": [
       {
         "level": 40,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 1295,
     "id": 1295,
     "requirements": [
       {
         "level": 5,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 1297,
     "id": 1297,
     "requirements": [
       {
         "level": 10,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 1299,
     "id": 1299,
     "requirements": [
       {
         "level": 20,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 1301,
     "id": 1301,
     "requirements": [
       {
         "level": 30,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 1303,
     "id": 1303,
     "requirements": [
       {
         "level": 40,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 1305,
     "id": 1305,
     "requirements": [
       {
         "level": 60,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 1311,
     "id": 1311,
     "requirements": [
       {
         "level": 5,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 1313,
     "id": 1313,
     "requirements": [
       {
         "level": 10,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 1315,
     "id": 1315,
     "requirements": [
       {
         "level": 20,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 1317,
     "id": 1317,
     "requirements": [
       {
         "level": 30,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 1319,
     "id": 1319,
     "requirements": [
       {
         "level": 40,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 1325,
     "id": 1325,
     "requirements": [
       {
         "level": 5,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 1327,
     "id": 1327,
     "requirements": [
       {
         "level": 10,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 1329,
     "id": 1329,
     "requirements": [
       {
         "level": 20,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 1331,
     "id": 1331,
     "requirements": [
       {
         "level": 30,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 1333,
     "id": 1333,
     "requirements": [
       {
         "level": 40,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 3385,
     "id": 3385,
     "requirements": [
       {
         "level": 40,
-        "skill": 1
+        "skill": "DEFENCE"
       },
       {
         "level": 40,
-        "skill": 6
+        "skill": "MAGIC"
       }
     ]
   },
   {
-    "hash": 1339,
     "id": 1339,
     "requirements": [
       {
         "level": 5,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 3387,
     "id": 3387,
     "requirements": [
       {
         "level": 40,
-        "skill": 1
+        "skill": "DEFENCE"
       },
       {
         "level": 40,
-        "skill": 6
+        "skill": "MAGIC"
       }
     ]
   },
   {
-    "hash": 1341,
     "id": 1341,
     "requirements": [
       {
         "level": 10,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 3389,
     "id": 3389,
     "requirements": [
       {
         "level": 40,
-        "skill": 1
+        "skill": "DEFENCE"
       },
       {
         "level": 40,
-        "skill": 6
+        "skill": "MAGIC"
       }
     ]
   },
   {
-    "hash": 1343,
     "id": 1343,
     "requirements": [
       {
         "level": 20,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 3391,
     "id": 3391,
     "requirements": [
       {
         "level": 40,
-        "skill": 1
+        "skill": "DEFENCE"
       },
       {
         "level": 40,
-        "skill": 6
+        "skill": "MAGIC"
       }
     ]
   },
   {
-    "hash": 3393,
     "id": 3393,
     "requirements": [
       {
         "level": 40,
-        "skill": 1
+        "skill": "DEFENCE"
       },
       {
         "level": 40,
-        "skill": 6
+        "skill": "MAGIC"
       }
     ]
   },
   {
-    "hash": 1347,
     "id": 1347,
     "requirements": [
       {
         "level": 40,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 1365,
     "id": 1365,
     "requirements": [
       {
         "level": 5,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 1367,
     "id": 1367,
     "requirements": [
       {
         "level": 10,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 1369,
     "id": 1369,
     "requirements": [
       {
         "level": 20,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 1371,
     "id": 1371,
     "requirements": [
       {
         "level": 30,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 1373,
     "id": 1373,
     "requirements": [
       {
         "level": 40,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 1377,
     "id": 1377,
     "requirements": [
       {
         "level": 60,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 2415,
     "id": 2415,
     "requirements": [
       {
         "level": 60,
-        "skill": 6
+        "skill": "MAGIC"
       }
     ]
   },
   {
-    "hash": 2416,
     "id": 2416,
     "requirements": [
       {
         "level": 60,
-        "skill": 6
+        "skill": "MAGIC"
       }
     ]
   },
   {
-    "hash": 2417,
     "id": 2417,
     "requirements": [
       {
         "level": 60,
-        "skill": 6
+        "skill": "MAGIC"
       }
     ]
   },
   {
-    "hash": 1401,
     "id": 1401,
     "requirements": [
       {
         "level": 20,
-        "skill": 1
+        "skill": "DEFENCE"
       },
       {
         "level": 40,
-        "skill": 6
+        "skill": "MAGIC"
       }
     ]
   },
   {
-    "hash": 1403,
     "id": 1403,
     "requirements": [
       {
         "level": 20,
-        "skill": 1
+        "skill": "DEFENCE"
       },
       {
         "level": 40,
-        "skill": 6
+        "skill": "MAGIC"
       }
     ]
   },
   {
-    "hash": 1405,
     "id": 1405,
     "requirements": [
       {
         "level": 20,
-        "skill": 1
+        "skill": "DEFENCE"
       },
       {
         "level": 40,
-        "skill": 6
+        "skill": "MAGIC"
       }
     ]
   },
   {
-    "hash": 1407,
     "id": 1407,
     "requirements": [
       {
         "level": 20,
-        "skill": 1
+        "skill": "DEFENCE"
       },
       {
         "level": 40,
-        "skill": 6
+        "skill": "MAGIC"
       }
     ]
   },
   {
-    "hash": 6528,
     "id": 6528,
     "requirements": [
       {
         "level": 60,
-        "skill": 2
+        "skill": "STRENGTH"
       }
     ]
   },
   {
-    "hash": 1409,
     "id": 1409,
     "requirements": [
       {
         "level": 50,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 1424,
     "id": 1424,
     "requirements": [
       {
         "level": 5,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 1426,
     "id": 1426,
     "requirements": [
       {
         "level": 10,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 1428,
     "id": 1428,
     "requirements": [
       {
         "level": 20,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 1430,
     "id": 1430,
     "requirements": [
       {
         "level": 30,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 3478,
     "id": 3478,
     "requirements": [
       {
         "level": 40,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 1432,
     "id": 1432,
     "requirements": [
       {
         "level": 40,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 3480,
     "id": 3480,
     "requirements": [
       {
         "level": 40,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 1434,
     "id": 1434,
     "requirements": [
       {
         "level": 60,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 6563,
     "id": 6563,
     "requirements": [
       {
         "level": 20,
-        "skill": 1
+        "skill": "DEFENCE"
       },
       {
         "level": 40,
-        "skill": 6
+        "skill": "MAGIC"
       }
     ]
   },
   {
-    "hash": 2487,
     "id": 2487,
     "requirements": [
       {
         "level": 50,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 2489,
     "id": 2489,
     "requirements": [
       {
         "level": 60,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 2493,
     "id": 2493,
     "requirements": [
       {
         "level": 50,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 2495,
     "id": 2495,
     "requirements": [
       {
         "level": 60,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 2499,
     "id": 2499,
     "requirements": [
       {
         "level": 40,
-        "skill": 1
+        "skill": "DEFENCE"
       },
       {
         "level": 50,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 2501,
     "id": 2501,
     "requirements": [
       {
         "level": 40,
-        "skill": 1
+        "skill": "DEFENCE"
       },
       {
         "level": 60,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 2513,
     "id": 2513,
     "requirements": [
       {
         "level": 60,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 4580,
     "id": 4580,
     "requirements": [
       {
         "level": 10,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 4585,
     "id": 4585,
     "requirements": [
       {
         "level": 60,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 4587,
     "id": 4587,
     "requirements": [
       {
         "level": 60,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 5630,
     "id": 5630,
     "requirements": [
       {
         "level": 5,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 5631,
     "id": 5631,
     "requirements": [
       {
         "level": 10,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 5632,
     "id": 5632,
     "requirements": [
       {
         "level": 20,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 5633,
     "id": 5633,
     "requirements": [
       {
         "level": 30,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 5634,
     "id": 5634,
     "requirements": [
       {
         "level": 40,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 5637,
     "id": 5637,
     "requirements": [
       {
         "level": 5,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 5638,
     "id": 5638,
     "requirements": [
       {
         "level": 10,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 5639,
     "id": 5639,
     "requirements": [
       {
         "level": 20,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 5640,
     "id": 5640,
     "requirements": [
       {
         "level": 30,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 5641,
     "id": 5641,
     "requirements": [
       {
         "level": 40,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 5644,
     "id": 5644,
     "requirements": [
       {
         "level": 5,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 5645,
     "id": 5645,
     "requirements": [
       {
         "level": 20,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 5647,
     "id": 5647,
     "requirements": [
       {
         "level": 40,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 5650,
     "id": 5650,
     "requirements": [
       {
         "level": 5,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 5651,
     "id": 5651,
     "requirements": [
       {
         "level": 20,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 5653,
     "id": 5653,
     "requirements": [
       {
         "level": 40,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 5656,
     "id": 5656,
     "requirements": [
       {
         "level": 5,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 5657,
     "id": 5657,
     "requirements": [
       {
         "level": 20,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 5658,
     "id": 5658,
     "requirements": [
       {
         "level": 10,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 5659,
     "id": 5659,
     "requirements": [
       {
         "level": 30,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 5660,
     "id": 5660,
     "requirements": [
       {
         "level": 40,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 5663,
     "id": 5663,
     "requirements": [
       {
         "level": 5,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 5664,
     "id": 5664,
     "requirements": [
       {
         "level": 20,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 5665,
     "id": 5665,
     "requirements": [
       {
         "level": 10,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 5667,
     "id": 5667,
     "requirements": [
       {
         "level": 40,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 5672,
     "id": 5672,
     "requirements": [
       {
         "level": 5,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 5674,
     "id": 5674,
     "requirements": [
       {
         "level": 20,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 5678,
     "id": 5678,
     "requirements": [
       {
         "level": 40,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 5680,
     "id": 5680,
     "requirements": [
       {
         "level": 60,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 5682,
     "id": 5682,
     "requirements": [
       {
         "level": 10,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 5690,
     "id": 5690,
     "requirements": [
       {
         "level": 5,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 5692,
     "id": 5692,
     "requirements": [
       {
         "level": 20,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 5696,
     "id": 5696,
     "requirements": [
       {
         "level": 40,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 5698,
     "id": 5698,
     "requirements": [
       {
         "level": 60,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 4675,
     "id": 4675,
     "requirements": [
       {
         "level": 50,
-        "skill": 6
+        "skill": "MAGIC"
       },
       {
         "level": 50,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 5700,
     "id": 5700,
     "requirements": [
       {
         "level": 10,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 2653,
     "id": 2653,
     "requirements": [
       {
         "level": 40,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 2655,
     "id": 2655,
     "requirements": [
       {
         "level": 40,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 2657,
     "id": 2657,
     "requirements": [
       {
         "level": 40,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 2659,
     "id": 2659,
     "requirements": [
       {
         "level": 40,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 4708,
     "id": 4708,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       },
       {
         "level": 70,
-        "skill": 6
+        "skill": "MAGIC"
       }
     ]
   },
   {
-    "hash": 4710,
     "id": 4710,
     "requirements": [
       {
         "level": 70,
-        "skill": 0
+        "skill": "ATTACK"
       },
       {
         "level": 70,
-        "skill": 6
+        "skill": "MAGIC"
       }
     ]
   },
   {
-    "hash": 4712,
     "id": 4712,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       },
       {
         "level": 70,
-        "skill": 6
+        "skill": "MAGIC"
       }
     ]
   },
   {
-    "hash": 4714,
     "id": 4714,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       },
       {
         "level": 70,
-        "skill": 6
+        "skill": "MAGIC"
       }
     ]
   },
   {
-    "hash": 4716,
     "id": 4716,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 2669,
     "id": 2669,
     "requirements": [
       {
         "level": 40,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 4718,
     "id": 4718,
     "requirements": [
       {
         "level": 70,
-        "skill": 0
+        "skill": "ATTACK"
       },
       {
         "level": 70,
-        "skill": 2
+        "skill": "STRENGTH"
       }
     ]
   },
   {
-    "hash": 2671,
     "id": 2671,
     "requirements": [
       {
         "level": 40,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 4720,
     "id": 4720,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 2673,
     "id": 2673,
     "requirements": [
       {
         "level": 40,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 4722,
     "id": 4722,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 2675,
     "id": 2675,
     "requirements": [
       {
         "level": 40,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 4724,
     "id": 4724,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 4726,
     "id": 4726,
     "requirements": [
       {
         "level": 70,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 4728,
     "id": 4728,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 4730,
     "id": 4730,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 4732,
     "id": 4732,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       },
       {
         "level": 70,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 4734,
     "id": 4734,
     "requirements": [
       {
         "level": 70,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 4736,
     "id": 4736,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       },
       {
         "level": 70,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 4738,
     "id": 4738,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       },
       {
         "level": 70,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 4745,
     "id": 4745,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 4747,
     "id": 4747,
     "requirements": [
       {
         "level": 70,
-        "skill": 0
+        "skill": "ATTACK"
       },
       {
         "level": 70,
-        "skill": 2
+        "skill": "STRENGTH"
       }
     ]
   },
   {
-    "hash": 4749,
     "id": 4749,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 4751,
     "id": 4751,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 4753,
     "id": 4753,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 4755,
     "id": 4755,
     "requirements": [
       {
         "level": 70,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 4757,
     "id": 4757,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 4759,
     "id": 4759,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 6889,
     "id": 6889,
     "requirements": [
       {
         "level": 60,
-        "skill": 6
+        "skill": "MAGIC"
       }
     ]
   },
   {
-    "hash": 6894,
     "id": 6894,
     "requirements": [
       {
         "level": 30,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 6895,
     "id": 6895,
     "requirements": [
       {
         "level": 30,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 6897,
     "id": 6897,
     "requirements": [
       {
         "level": 40,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 4856,
     "id": 4856,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       },
       {
         "level": 70,
-        "skill": 6
+        "skill": "MAGIC"
       }
     ]
   },
   {
-    "hash": 4857,
     "id": 4857,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       },
       {
         "level": 70,
-        "skill": 6
+        "skill": "MAGIC"
       }
     ]
   },
   {
-    "hash": 4858,
     "id": 4858,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       },
       {
         "level": 70,
-        "skill": 6
+        "skill": "MAGIC"
       }
     ]
   },
   {
-    "hash": 4859,
     "id": 4859,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       },
       {
         "level": 70,
-        "skill": 6
+        "skill": "MAGIC"
       }
     ]
   },
   {
-    "hash": 6908,
     "id": 6908,
     "requirements": [
       {
         "level": 45,
-        "skill": 6
+        "skill": "MAGIC"
       }
     ]
   },
   {
-    "hash": 4862,
     "id": 4862,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       },
       {
         "level": 70,
-        "skill": 6
+        "skill": "MAGIC"
       }
     ]
   },
   {
-    "hash": 6910,
     "id": 6910,
     "requirements": [
       {
         "level": 50,
-        "skill": 6
+        "skill": "MAGIC"
       }
     ]
   },
   {
-    "hash": 4863,
     "id": 4863,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       },
       {
         "level": 70,
-        "skill": 6
+        "skill": "MAGIC"
       }
     ]
   },
   {
-    "hash": 4864,
     "id": 4864,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       },
       {
         "level": 70,
-        "skill": 6
+        "skill": "MAGIC"
       }
     ]
   },
   {
-    "hash": 6912,
     "id": 6912,
     "requirements": [
       {
         "level": 55,
-        "skill": 6
+        "skill": "MAGIC"
       }
     ]
   },
   {
-    "hash": 4865,
     "id": 4865,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       },
       {
         "level": 70,
-        "skill": 6
+        "skill": "MAGIC"
       }
     ]
   },
   {
-    "hash": 6914,
     "id": 6914,
     "requirements": [
       {
         "level": 60,
-        "skill": 6
+        "skill": "MAGIC"
       }
     ]
   },
   {
-    "hash": 4868,
     "id": 4868,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       },
       {
         "level": 70,
-        "skill": 6
+        "skill": "MAGIC"
       }
     ]
   },
   {
-    "hash": 6916,
     "id": 6916,
     "requirements": [
       {
         "level": 25,
-        "skill": 1
+        "skill": "DEFENCE"
       },
       {
         "level": 50,
-        "skill": 6
+        "skill": "MAGIC"
       }
     ]
   },
   {
-    "hash": 4869,
     "id": 4869,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       },
       {
         "level": 70,
-        "skill": 6
+        "skill": "MAGIC"
       }
     ]
   },
   {
-    "hash": 4870,
     "id": 4870,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       },
       {
         "level": 70,
-        "skill": 6
+        "skill": "MAGIC"
       }
     ]
   },
   {
-    "hash": 6918,
     "id": 6918,
     "requirements": [
       {
         "level": 25,
-        "skill": 1
+        "skill": "DEFENCE"
       },
       {
         "level": 50,
-        "skill": 6
+        "skill": "MAGIC"
       }
     ]
   },
   {
-    "hash": 4871,
     "id": 4871,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       },
       {
         "level": 70,
-        "skill": 6
+        "skill": "MAGIC"
       }
     ]
   },
   {
-    "hash": 6920,
     "id": 6920,
     "requirements": [
       {
         "level": 25,
-        "skill": 1
+        "skill": "DEFENCE"
       },
       {
         "level": 50,
-        "skill": 6
+        "skill": "MAGIC"
       }
     ]
   },
   {
-    "hash": 4874,
     "id": 4874,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       },
       {
         "level": 70,
-        "skill": 6
+        "skill": "MAGIC"
       }
     ]
   },
   {
-    "hash": 6922,
     "id": 6922,
     "requirements": [
       {
         "level": 25,
-        "skill": 1
+        "skill": "DEFENCE"
       },
       {
         "level": 50,
-        "skill": 6
+        "skill": "MAGIC"
       }
     ]
   },
   {
-    "hash": 4875,
     "id": 4875,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       },
       {
         "level": 70,
-        "skill": 6
+        "skill": "MAGIC"
       }
     ]
   },
   {
-    "hash": 4876,
     "id": 4876,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       },
       {
         "level": 70,
-        "skill": 6
+        "skill": "MAGIC"
       }
     ]
   },
   {
-    "hash": 6924,
     "id": 6924,
     "requirements": [
       {
         "level": 25,
-        "skill": 1
+        "skill": "DEFENCE"
       },
       {
         "level": 50,
-        "skill": 6
+        "skill": "MAGIC"
       }
     ]
   },
   {
-    "hash": 4877,
     "id": 4877,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       },
       {
         "level": 70,
-        "skill": 6
+        "skill": "MAGIC"
       }
     ]
   },
   {
-    "hash": 4880,
     "id": 4880,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 4881,
     "id": 4881,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 4882,
     "id": 4882,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 4883,
     "id": 4883,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 4886,
     "id": 4886,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 4887,
     "id": 4887,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 4888,
     "id": 4888,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 4889,
     "id": 4889,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 4892,
     "id": 4892,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 4893,
     "id": 4893,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 4894,
     "id": 4894,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 4895,
     "id": 4895,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 802,
     "id": 802,
     "requirements": [
       {
         "level": 5,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 4898,
     "id": 4898,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 803,
     "id": 803,
     "requirements": [
       {
         "level": 20,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 4899,
     "id": 4899,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 4900,
     "id": 4900,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 805,
     "id": 805,
     "requirements": [
       {
         "level": 40,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 4901,
     "id": 4901,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 808,
     "id": 808,
     "requirements": [
       {
         "level": 5,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 4904,
     "id": 4904,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 809,
     "id": 809,
     "requirements": [
       {
         "level": 20,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 4905,
     "id": 4905,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 810,
     "id": 810,
     "requirements": [
       {
         "level": 30,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 4906,
     "id": 4906,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 811,
     "id": 811,
     "requirements": [
       {
         "level": 40,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 4907,
     "id": 4907,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 814,
     "id": 814,
     "requirements": [
       {
         "level": 5,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 4910,
     "id": 4910,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 815,
     "id": 815,
     "requirements": [
       {
         "level": 20,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 4911,
     "id": 4911,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 816,
     "id": 816,
     "requirements": [
       {
         "level": 30,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 4912,
     "id": 4912,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 817,
     "id": 817,
     "requirements": [
       {
         "level": 40,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 4913,
     "id": 4913,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 4916,
     "id": 4916,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 4917,
     "id": 4917,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 4918,
     "id": 4918,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 4919,
     "id": 4919,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 6967,
     "id": 6967,
     "requirements": [
       {
         "level": 60,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 4922,
     "id": 4922,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 827,
     "id": 827,
     "requirements": [
       {
         "level": 5,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 4923,
     "id": 4923,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 828,
     "id": 828,
     "requirements": [
       {
         "level": 20,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 4924,
     "id": 4924,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 829,
     "id": 829,
     "requirements": [
       {
         "level": 30,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 4925,
     "id": 4925,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 830,
     "id": 830,
     "requirements": [
       {
         "level": 40,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 4928,
     "id": 4928,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       },
       {
         "level": 70,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 833,
     "id": 833,
     "requirements": [
       {
         "level": 5,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 4929,
     "id": 4929,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       },
       {
         "level": 70,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 834,
     "id": 834,
     "requirements": [
       {
         "level": 20,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 4930,
     "id": 4930,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       },
       {
         "level": 70,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 835,
     "id": 835,
     "requirements": [
       {
         "level": 30,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 4931,
     "id": 4931,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       },
       {
         "level": 70,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 836,
     "id": 836,
     "requirements": [
       {
         "level": 40,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 4934,
     "id": 4934,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       },
       {
         "level": 70,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 4935,
     "id": 4935,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       },
       {
         "level": 70,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 4936,
     "id": 4936,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       },
       {
         "level": 70,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 4937,
     "id": 4937,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       },
       {
         "level": 70,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 843,
     "id": 843,
     "requirements": [
       {
         "level": 5,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 4940,
     "id": 4940,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       },
       {
         "level": 70,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 4941,
     "id": 4941,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       },
       {
         "level": 70,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 4942,
     "id": 4942,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       },
       {
         "level": 70,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 4943,
     "id": 4943,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       },
       {
         "level": 70,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 849,
     "id": 849,
     "requirements": [
       {
         "level": 20,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 4946,
     "id": 4946,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       },
       {
         "level": 70,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 4947,
     "id": 4947,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       },
       {
         "level": 70,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 4948,
     "id": 4948,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       },
       {
         "level": 70,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 853,
     "id": 853,
     "requirements": [
       {
         "level": 30,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 4949,
     "id": 4949,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       },
       {
         "level": 70,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 4952,
     "id": 4952,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 857,
     "id": 857,
     "requirements": [
       {
         "level": 40,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 4953,
     "id": 4953,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 4954,
     "id": 4954,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 4955,
     "id": 4955,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 861,
     "id": 861,
     "requirements": [
       {
         "level": 50,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 4958,
     "id": 4958,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 4959,
     "id": 4959,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 4960,
     "id": 4960,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 865,
     "id": 865,
     "requirements": [
       {
         "level": 5,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 4961,
     "id": 4961,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 866,
     "id": 866,
     "requirements": [
       {
         "level": 20,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 867,
     "id": 867,
     "requirements": [
       {
         "level": 30,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 868,
     "id": 868,
     "requirements": [
       {
         "level": 40,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 4964,
     "id": 4964,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 869,
     "id": 869,
     "requirements": [
       {
         "level": 10,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 4965,
     "id": 4965,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 4966,
     "id": 4966,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 4967,
     "id": 4967,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 872,
     "id": 872,
     "requirements": [
       {
         "level": 5,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 873,
     "id": 873,
     "requirements": [
       {
         "level": 20,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 874,
     "id": 874,
     "requirements": [
       {
         "level": 10,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 4970,
     "id": 4970,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 875,
     "id": 875,
     "requirements": [
       {
         "level": 30,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 4971,
     "id": 4971,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 876,
     "id": 876,
     "requirements": [
       {
         "level": 40,
-        "skill": 4
+        "skill": "RANGED"
       }
     ]
   },
   {
-    "hash": 4972,
     "id": 4972,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 4973,
     "id": 4973,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 4976,
     "id": 4976,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 4977,
     "id": 4977,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 4978,
     "id": 4978,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 4979,
     "id": 4979,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 4982,
     "id": 4982,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 4983,
     "id": 4983,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 4984,
     "id": 4984,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 4985,
     "id": 4985,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 4988,
     "id": 4988,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 4989,
     "id": 4989,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 4990,
     "id": 4990,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 4991,
     "id": 4991,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 4994,
     "id": 4994,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 4995,
     "id": 4995,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 4996,
     "id": 4996,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 4997,
     "id": 4997,
     "requirements": [
       {
         "level": 70,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 3054,
     "id": 3054,
     "requirements": [
       {
         "level": 20,
-        "skill": 1
+        "skill": "DEFENCE"
       },
       {
         "level": 40,
-        "skill": 6
+        "skill": "MAGIC"
       }
     ]
   },
   {
-    "hash": 7158,
     "id": 7158,
     "requirements": [
       {
         "level": 60,
-        "skill": 0
+        "skill": "ATTACK"
       }
     ]
   },
   {
-    "hash": 4087,
     "id": 4087,
     "requirements": [
       {
         "level": 60,
-        "skill": 1
+        "skill": "DEFENCE"
       }
     ]
   },
   {
-    "hash": 4089,
     "id": 4089,
     "requirements": [
       {
         "level": 20,
-        "skill": 1
+        "skill": "DEFENCE"
       },
       {
         "level": 40,
-        "skill": 6
+        "skill": "MAGIC"
       }
     ]
   },
   {
-    "hash": 4091,
     "id": 4091,
     "requirements": [
       {
         "level": 20,
-        "skill": 1
+        "skill": "DEFENCE"
       },
       {
         "level": 40,
-        "skill": 6
+        "skill": "MAGIC"
       }
     ]
   },
   {
-    "hash": 4093,
     "id": 4093,
     "requirements": [
       {
         "level": 20,
-        "skill": 1
+        "skill": "DEFENCE"
       },
       {
         "level": 40,
-        "skill": 6
+        "skill": "MAGIC"
       }
     ]
   },
   {
-    "hash": 4095,
     "id": 4095,
     "requirements": [
       {
         "level": 20,
-        "skill": 1
+        "skill": "DEFENCE"
       },
       {
         "level": 40,
-        "skill": 6
+        "skill": "MAGIC"
       }
     ]
   }

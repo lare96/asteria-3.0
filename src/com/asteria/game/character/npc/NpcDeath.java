@@ -13,7 +13,7 @@ import com.asteria.game.item.ItemNode;
 import com.asteria.game.item.ItemNodeManager;
 import com.asteria.game.item.ItemNodeStatic;
 import com.asteria.task.Task;
-import com.asteria.task.TaskManager;
+import com.asteria.task.TaskHandler;
 
 /**
  * The character death implementation that handles NPC death.
@@ -40,11 +40,12 @@ public final class NpcDeath extends CharacterDeath<Npc> {
     @Override
     public void death(Npc character) {
         Optional<Player> killer = character.getCombatBuilder().getDamageCache().calculateKiller();
-        character.getCombatBuilder().getDamageCache();
         Optional<NpcDropTable> drops = Optional.ofNullable(NpcDropTable.DROPS.get(character.getId()));
         drops.ifPresent(t -> {
             Item[] dropItems = t.toItems(killer.orElse(null));
             for (Item drop : dropItems) {
+                if (drop == null)
+                    continue;
                 ItemNodeManager.register(!killer.isPresent() ? new ItemNodeStatic(drop, character.getPosition()) : new ItemNode(
                     drop, character.getPosition(), killer.get()));
             }
@@ -56,11 +57,13 @@ public final class NpcDeath extends CharacterDeath<Npc> {
     @Override
     public void postDeath(Npc character) {
         if (character.isRespawn()) {
-            TaskManager.submit(new Task(character.getRespawnTime(), false) {
+            TaskHandler.submit(new Task(character.getRespawnTime(), false) {
                 @Override
                 public void execute() {
                     Npc npc = new Npc(character.getId(), character.getOriginalPosition());
                     npc.setRespawn(true);
+                    npc.getMovementCoordinator().setCoordinate(character.getMovementCoordinator().isCoordinate());
+                    npc.getMovementCoordinator().setRadius(character.getMovementCoordinator().getRadius());
                     World.getNpcs().add(npc);
                     this.cancel();
                 }

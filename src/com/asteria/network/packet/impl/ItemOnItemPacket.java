@@ -2,6 +2,8 @@ package com.asteria.network.packet.impl;
 
 import com.asteria.game.character.player.Player;
 import com.asteria.game.item.Item;
+import com.asteria.game.plugin.PluginHandler;
+import com.asteria.game.plugin.context.ItemOnItemPlugin;
 import com.asteria.network.DataBuffer;
 import com.asteria.network.packet.PacketDecoder;
 
@@ -23,13 +25,6 @@ public final class ItemOnItemPacket extends PacketDecoder {
 
         if (secondSlot < 0 || firstSlot < 0 || itemUsed == null || itemOn == null)
             return;
-
-        switch (itemOn.getId()) {
-
-        }
-
-        switch (itemUsed.getId()) {
-
-        }
+        PluginHandler.execute(player, ItemOnItemPlugin.class, new ItemOnItemPlugin(itemUsed, itemOn));
     }
 }

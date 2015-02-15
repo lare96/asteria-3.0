@@ -1,9 +1,11 @@
 package com.asteria.network;
 
-import com.asteria.game.GameSequencer;
+import com.asteria.game.GameService;
 
 /**
  * The event that has been selected by the selector and is awaiting execution.
+ * This serves as a wrapper for the event that allows the event to either be
+ * executed asynchronously or right on the underlying thread.
  * 
  * @author lare96 <http://www.rune-server.org/members/lare96/>
  */
@@ -35,22 +37,30 @@ public abstract class ServerSelectionEvent {
     public abstract void executeEvent(ServerSelectionKey key) throws Exception;
 
     /**
-     * Executes this event either on the reactor thread or queues data over to
-     * be handled on the game thread.
+     * Executes this event either asynchronously on the logic service thread, or
+     * right on the underlying game thread.
      * 
      * @param key
      *            the wrapped selection key for network operations.
      */
     protected final void execute(ServerSelectionKey key) {
-        Runnable r = constructEvent(key);
+        Runnable r = construct(key);
         if (asynchronous) {
-            GameSequencer.getLogicService().execute(r);
+            GameService.getLogicService().execute(r);
             return;
         }
         r.run();
     }
 
-    private Runnable constructEvent(ServerSelectionKey key) {
+    /**
+     * Constructs a runnable event containing the context that this network
+     * event will be executed in.
+     * 
+     * @param key
+     *            the key that that event is being executed for.
+     * @return the runnable event containing the event context.
+     */
+    private Runnable construct(ServerSelectionKey key) {
         return () -> {
             try {
                 executeEvent(key);
