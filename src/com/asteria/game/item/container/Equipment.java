@@ -125,7 +125,7 @@ public final class Equipment extends ItemContainer {
             player.getInventory().remove(item, inventorySlot);
         } else {
             int designatedSlot = item.getDefinition().getEquipmentSlot();
-            if (designatedSlot == Equipment.WEAPON_SLOT && item.getDefinition().isTwoHanded()) {
+            if (designatedSlot == Equipment.WEAPON_SLOT && item.getDefinition().isTwoHanded() && used(Equipment.SHIELD_SLOT)) {
                 if (!unequipItem(Equipment.SHIELD_SLOT, true))
                     return false;
             }
