@@ -16,8 +16,8 @@ import com.asteria.game.location.Position
 import com.asteria.game.object.ObjectDirection
 import com.asteria.game.object.ObjectNode
 import com.asteria.game.object.ObjectNodeManager
-import com.asteria.game.plugin.PluginSignature
 import com.asteria.game.plugin.PluginListener
+import com.asteria.game.plugin.PluginSignature
 import com.asteria.game.plugin.context.CommandPlugin
 import com.asteria.network.ConnectionHandler
 
@@ -33,9 +33,6 @@ final class Commands implements PluginListener<CommandPlugin> {
         // class.
         if (player.rights.greater(Rights.ADMINISTRATOR)) {
             switch (cmd[0]) {
-                case "walkable":
-                    player.encoder.sendWalkable Integer.parseInt(cmd[1])
-                    break
                 case "save":
                     World.players.each { GameService.getLogicService().execute({ -> new PlayerSerialization(it).serialize()}) }
                     player.encoder.sendMessage "Character files have been saved for everyone online!"
