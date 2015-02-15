@@ -73,7 +73,7 @@ public final class ObjectNode extends Node {
 
     @Override
     public void dispose() {
-        World.getPlayers().forEach(p -> p.getEncoder().sendRemoveObject(this));
+        World.getPlayers().forEach(p -> p.getEncoder().sendRemoveObject(super.getPosition()));
     }
 
     @Override

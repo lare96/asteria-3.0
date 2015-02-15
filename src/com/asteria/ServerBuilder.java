@@ -17,6 +17,7 @@ import com.asteria.utility.json.NpcDefinitionLoader;
 import com.asteria.utility.json.NpcDropTableLoader;
 import com.asteria.utility.json.NpcNodeLoader;
 import com.asteria.utility.json.ObjectNodeLoader;
+import com.asteria.utility.json.ObjectNodeRemoveLoader;
 import com.asteria.utility.json.PacketOpcodeLoader;
 import com.asteria.utility.json.PacketSizeLoader;
 import com.asteria.utility.json.ShopLoader;
@@ -115,6 +116,7 @@ public final class ServerBuilder {
         serviceLoader.execute(() -> new WeaponAnimationLoader().load());
         serviceLoader.execute(() -> new WeaponInterfaceLoader().load());
         serviceLoader.execute(() -> new WeaponRequirementLoader().load());
+        serviceLoader.execute(() -> new ObjectNodeRemoveLoader().load());
         serviceLoader.execute(() -> PluginHandler.init());
     }
 

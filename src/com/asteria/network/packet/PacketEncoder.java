@@ -862,11 +862,11 @@ public final class PacketEncoder {
      *            the object to remove for the player.
      * @return an instance of this encoder.
      */
-    public PacketEncoder sendRemoveObject(ObjectNode object) {
-        sendCoordinates(object.getPosition());
+    public PacketEncoder sendRemoveObject(Position position) {
+        sendCoordinates(position);
         DataBuffer out = DataBuffer.create();
         out.newPacket(101, player.getSession().getEncryptor());
-        out.put((object.getObjectType().getId() << 2) + (object.getDirection().getId() & 3), ValueType.C);
+        out.put((ObjectType.DEFAULT.getId() << 2) + (ObjectDirection.SOUTH.getId() & 3), ValueType.C);
         out.put(0);
         player.getSession().send(out);
         return this;
@@ -882,7 +882,7 @@ public final class PacketEncoder {
      * @return an instance of this encoder.
      */
     public PacketEncoder sendReplaceObject(Position position, int object) {
-        sendRemoveObject(new ObjectNode(0, position, ObjectDirection.SOUTH));
+        sendRemoveObject(position);
         sendObject(new ObjectNode(object, position, ObjectDirection.SOUTH));
         return this;
     }

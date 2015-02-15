@@ -24,6 +24,11 @@ public final class ObjectNodeManager {
     private static final Set<ObjectNode> OBJECTS = new HashSet<>();
 
     /**
+     * The hash collection of objects that will be removed.
+     */
+    public static final Set<Position> REMOVE_OBJECTS = new HashSet<>();
+
+    /**
      * The method that attempts to register {@code object}.
      * 
      * @param object
@@ -139,11 +144,14 @@ public final class ObjectNodeManager {
      *            the player to update objects for.
      */
     public static void updateRegion(Player player) {
-        OBJECTS.stream().forEach(obj -> {
-            player.getEncoder().sendRemoveObject(obj);
+        OBJECTS.forEach(obj -> {
+            player.getEncoder().sendRemoveObject(obj.getPosition());
             if (obj.getPosition().withinDistance(player.getPosition(), 60)) {
                 player.getEncoder().sendObject(obj);
             }
+        });
+        REMOVE_OBJECTS.forEach(obj -> {
+            player.getEncoder().sendRemoveObject(obj);
         });
     }
 }
