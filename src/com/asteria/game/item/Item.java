@@ -5,7 +5,7 @@ package com.asteria.game.item;
  * 
  * @author lare96 <http://www.rune-server.org/members/lare96/>
  */
-public class Item {
+public final class Item {
 
     /**
      * The identification of this item.

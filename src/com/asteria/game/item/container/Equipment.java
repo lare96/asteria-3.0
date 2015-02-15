@@ -13,7 +13,7 @@ import com.asteria.game.item.Item;
  * 
  * @author lare96 <http://www.rune-server.org/members/lare96/>
  */
-public class Equipment extends ItemContainer {
+public final class Equipment extends ItemContainer {
 
     /**
      * The head identification equipment slot.
@@ -126,16 +126,13 @@ public class Equipment extends ItemContainer {
         } else {
             int designatedSlot = item.getDefinition().getEquipmentSlot();
             if (designatedSlot == Equipment.WEAPON_SLOT && item.getDefinition().isTwoHanded()) {
-                if (used(Equipment.SHIELD_SLOT)) {
+                if (!unequipItem(Equipment.SHIELD_SLOT, true))
                     return false;
-                }
             }
             if (designatedSlot == Equipment.SHIELD_SLOT && used(Equipment.WEAPON_SLOT)) {
                 if (get(Equipment.WEAPON_SLOT).getDefinition().isTwoHanded()) {
-                    unequipItem(Equipment.WEAPON_SLOT, true);
-                    if (used(Equipment.WEAPON_SLOT)) {
+                    if (!unequipItem(Equipment.WEAPON_SLOT, true))
                         return false;
-                    }
                 }
             }
             if (used(designatedSlot)) {
@@ -158,8 +155,8 @@ public class Equipment extends ItemContainer {
             player.setCastSpell(null);
             player.setAutocastSpell(null);
             player.setAutocast(false);
-            player.getEncoder().sendConfig(108, 0);
-            player.getEncoder().sendConfig(301, 0);
+            player.getEncoder().sendByteState(108, 0);
+            player.getEncoder().sendByteState(301, 0);
             player.setSpecialActivated(false);
         }
         player.sendBonus();
@@ -195,9 +192,9 @@ public class Equipment extends ItemContainer {
             player.setCastSpell(null);
             player.setAutocastSpell(null);
             player.setAutocast(false);
-            player.getEncoder().sendConfig(108, 0);
+            player.getEncoder().sendByteState(108, 0);
             player.setWeaponAnimation(null);
-            player.getEncoder().sendConfig(301, 0);
+            player.getEncoder().sendByteState(301, 0);
             player.setSpecialActivated(false);
         }
         player.sendBonus();

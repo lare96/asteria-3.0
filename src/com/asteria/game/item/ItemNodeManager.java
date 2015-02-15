@@ -8,7 +8,7 @@ import java.util.Optional;
 import com.asteria.game.character.player.Player;
 import com.asteria.game.location.Position;
 import com.asteria.task.Task;
-import com.asteria.task.TaskManager;
+import com.asteria.task.TaskHandler;
 
 /**
  * The node manager that manages all registered item nodes.
@@ -52,7 +52,7 @@ public final class ItemNodeManager extends Task {
 
     @Override
     public void onCancel() {
-        TaskManager.submit(new ItemNodeManager());
+        TaskHandler.submit(new ItemNodeManager());
     }
 
     @Override

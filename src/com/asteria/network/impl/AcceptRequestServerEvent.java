@@ -11,7 +11,9 @@ import com.asteria.network.ServerSelectionEvent;
 import com.asteria.network.ServerSelectionKey;
 
 /**
- * The server selection event that handles all incoming connections.
+ * The server selection event that handles all incoming connections. This
+ * asynchronous event accepts the connection, and registers it with the server's
+ * selector.
  * 
  * @author lare96 <http://www.rune-server.org/members/lare96/>
  */
@@ -32,7 +34,9 @@ public final class AcceptRequestServerEvent extends ServerSelectionEvent {
     @Override
     public void executeEvent(ServerSelectionKey key) throws Exception {
         SocketChannel socket;
-        while ((socket = ServerHandler.getServer().accept()) != null && counter.getAndIncrement() <= 5) {
+        while ((socket = ServerHandler.getServer().accept()) != null) {
+            if (counter.getAndIncrement() > 5)
+                break;
             String host = socket.socket().getInetAddress().getHostAddress();
             socket.configureBlocking(false);
             SelectionKey newKey = socket.register(ServerHandler.getSelector(), SelectionKey.OP_READ);

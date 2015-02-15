@@ -9,30 +9,33 @@ import java.util.Queue;
 import com.google.common.base.Preconditions;
 
 /**
- * The sequencer that will manage and execute all tasks that run on the main
- * game thread.
+ * The task handler that oversees the processing of all submitted tasks. It
+ * makes sure tasks are stopped when requested and executed at the correct time.
+ * <p>
+ * <p>
+ * The data structures that hold tasks for processing are not thread safe, which
+ * means tasks should only be submitted on the main game thread.
  * 
  * @author lare96 <http://www.rune-server.org/members/lare96/>
  */
-public final class TaskManager {
+public final class TaskHandler {
 
     /**
-     * The pending list of tasks awaiting execution.
+     * The list that holds all of the pending tasks that are awaiting execution.
      */
     private static final List<Task> PENDING_LIST = new LinkedList<>();
 
     /**
-     * The queue of tasks that have waited their delays and are ready to be
-     * executed.
+     * The queue that holds all of the tasks that are ready to be executed.
      */
     private static final Queue<Task> RUNNING_QUEUE = new ArrayDeque<>(50);
 
     /**
-     * The sequence method that queues pending tasks that are ready to be
-     * executed and executes tasks that were previously queued.
+     * Queues pending tasks that are ready to be executed and executes tasks
+     * that were previously queued.
      * 
      * @throws Exception
-     *             if any errors occur during the task sequence.
+     *             if any errors occur while processing the tasks.
      */
     public static void sequence() throws Exception {
         Iterator<Task> it = PENDING_LIST.iterator();
@@ -58,17 +61,19 @@ public final class TaskManager {
     }
 
     /**
-     * Submits {@code task} to be ran by this task manager.
+     * Submits {@code task} to this task handler. The task must be running for
+     * it to be successfully submitted.
      * 
      * @param task
-     *            the task to be ran.
+     *            the task to submit to this task handler.
      */
     public static void submit(Task task) {
         Preconditions.checkArgument(task.isRunning());
+        task.onSubmit();
         if (task.isInstant())
             task.execute();
-        task.onSubmit();
-        PENDING_LIST.add(task);
+        if (task.isRunning())
+            PENDING_LIST.add(task);
     }
 
     /**

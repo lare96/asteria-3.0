@@ -1,7 +1,7 @@
 package com.asteria.game.character.player.skill;
 
 /**
- * The class that represents one skill that can be trained.
+ * The representation of a single skill that can be trained by a player.
  * 
  * @author lare96 <http://www.rune-server.org/members/lare96/>
  */

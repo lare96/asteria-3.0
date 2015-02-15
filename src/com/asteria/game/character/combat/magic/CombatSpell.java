@@ -10,7 +10,7 @@ import com.asteria.game.character.Projectile;
 import com.asteria.game.character.Spell;
 import com.asteria.game.character.npc.Npc;
 import com.asteria.task.Task;
-import com.asteria.task.TaskManager;
+import com.asteria.task.TaskHandler;
 
 /**
  * The {@link Spell} extension with support for combat related functions such as
@@ -30,7 +30,7 @@ public abstract class CombatSpell extends Spell {
         startGraphic().ifPresent(cast::graphic);
 
         projectile(cast, castOn).ifPresent(g -> {
-            TaskManager.submit(new Task(2, false) {
+            TaskHandler.submit(new Task(2, false) {
                 @Override
                 public void execute() {
                     g.sendProjectile();

@@ -7,7 +7,7 @@ import com.asteria.game.item.Item;
  * 
  * @author lare96 <http://www.rune-server.org/members/lare96/>
  */
-public class GiveItemDialogue implements DialogueChain {
+public final class GiveItemDialogue implements DialogueChain {
 
     /**
      * The item to give to the player during this chain.

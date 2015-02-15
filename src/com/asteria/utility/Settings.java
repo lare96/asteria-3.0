@@ -6,7 +6,7 @@ import com.asteria.game.item.Item;
 import com.asteria.game.location.Position;
 
 /**
- * The static utility class that holds various settings used throughout the
+ * The static utility class that holds various constants used throughout the
  * server.
  * 
  * @author lare96 <http://www.rune-server.org/members/lare96/>
@@ -107,10 +107,10 @@ public final class Settings {
     /**
      * The default constructor.
      * 
-     * @throws InstantiationError
+     * @throws UnsupportedOperationException
      *             if this class is instantiated.
      */
     private Settings() {
-        throw new InstantiationError("This class cannot be instantiated!");
+        throw new UnsupportedOperationException("This class cannot be instantiated!");
     }
 }

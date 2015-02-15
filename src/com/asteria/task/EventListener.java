@@ -1,12 +1,16 @@
 package com.asteria.task;
 
 /**
- * A listener that listens for some sort of event to occur before executing
- * code.
+ * An event listener is a {@link Task} implementation that executes an
+ * assignment when some sort of occurrence happens. They can be configured to
+ * stop listening after the occurrence happens, or to keep listening and
+ * executing the assignment accordingly. These event listeners can also be
+ * configured to check for the occurrence at certain rates (which of course, can
+ * be dynamically changed).
  * 
  * @author lare96 <http://www.rune-server.org/members/lare96/>
  */
-public abstract class ActionListener extends Task {
+public abstract class EventListener extends Task {
 
     /**
      * Determines if the listener should shutdown after execution.
@@ -14,28 +18,28 @@ public abstract class ActionListener extends Task {
     private final boolean shutdown;
 
     /**
-     * Create a new {@link ActionListener}.
+     * Create a new {@link EventListener}.
      * 
      * @param shutdown
      *            if the listener should shutdown after execution.
      * @param rate
      *            the rate in which the listener will listen.
      */
-    public ActionListener(boolean shutdown, int rate) {
+    public EventListener(boolean shutdown, int rate) {
         super(rate, true);
         this.shutdown = shutdown;
     }
 
     /**
-     * Create a new {@link ActionListener} that will listen at a rate of
+     * Create a new {@link EventListener} that will listen at a rate of
      * {@code 1} and will shutdown after execution.
      */
-    public ActionListener() {
+    public EventListener() {
         this(true, 1);
     }
 
     /**
-     * The listener will execute {@link ActionListener#run()} when invocation of
+     * The listener will execute {@link EventListener#run()} when invocation of
      * this method returns {@code false}.
      * 
      * @return {@code true} if the code can be executed, {@code false} if the
@@ -44,7 +48,7 @@ public abstract class ActionListener extends Task {
     public abstract boolean canExecute();
 
     /**
-     * The code that will be executed when {@link ActionListener#canExecute()}
+     * The code that will be executed when {@link EventListener#canExecute()}
      * returns {@code false}.
      */
     public abstract void run();
@@ -55,9 +59,8 @@ public abstract class ActionListener extends Task {
             try {
                 run();
             } finally {
-                if (shutdown) {
+                if (shutdown)
                     this.cancel();
-                }
             }
         }
     }

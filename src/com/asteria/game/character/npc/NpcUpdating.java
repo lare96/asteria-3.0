@@ -9,7 +9,7 @@ import com.asteria.game.location.Position;
 import com.asteria.network.ByteOrder;
 import com.asteria.network.DataBuffer;
 import com.asteria.network.ValueType;
-import com.asteria.task.TaskManager;
+import com.asteria.task.TaskHandler;
 
 /**
  * The class that provides static utility methods for updating NPCs.
@@ -22,11 +22,11 @@ public final class NpcUpdating {
     /**
      * The default constructor.
      * 
-     * @throws InstantiationError
+     * @throws UnsupportedOperationException
      *             if this class is instantiated.
      */
     private NpcUpdating() {
-        throw new InstantiationError();
+        throw new UnsupportedOperationException();
     }
 
     /**
@@ -58,16 +58,19 @@ public final class NpcUpdating {
         }
         int added = 0;
         for (Npc npc : World.getNpcs()) {
-            if (npc == null || added == 15 || player.getLocalNpcs().size() >= 255 || player.getLocalNpcs().contains(npc))
+            if (added == 15 || player.getLocalNpcs().size() >= 255)
+                break;
+            if (npc == null)
                 continue;
             if (npc.getPosition().isViewableFrom(player.getPosition())) {
-                npc.getFlags().set(Flag.APPEARANCE);
-                player.getLocalNpcs().add(npc);
-                addNpc(out, player, npc);
-                if (npc.getFlags().needsUpdate()) {
-                    NpcUpdating.updateState(block, npc);
+                if (player.getLocalNpcs().add(npc)) {
+                    npc.getFlags().set(Flag.APPEARANCE);
+                    addNpc(out, player, npc);
+                    if (npc.getFlags().needsUpdate()) {
+                        NpcUpdating.updateState(block, npc);
+                    }
+                    added++;
                 }
-                added++;
             }
         }
         if (block.buffer().position() > 0) {
@@ -216,7 +219,7 @@ public final class NpcUpdating {
         if (!npc.isDead()) {
             if (npc.getCurrentHealth() <= 0) {
                 npc.setCurrentHealth(0);
-                TaskManager.submit(new NpcDeath(npc));
+                TaskHandler.submit(new NpcDeath(npc));
             }
         }
         out.put(npc.getSecondaryHit().getDamage(), ValueType.A);
@@ -261,7 +264,7 @@ public final class NpcUpdating {
         if (!npc.isDead()) {
             if (npc.getCurrentHealth() <= 0) {
                 npc.setCurrentHealth(0);
-                TaskManager.submit(new NpcDeath(npc));
+                TaskHandler.submit(new NpcDeath(npc));
             }
         }
         out.put(npc.getPrimaryHit().getDamage(), ValueType.C);

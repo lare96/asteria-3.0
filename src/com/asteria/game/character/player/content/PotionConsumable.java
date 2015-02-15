@@ -8,9 +8,7 @@ import static com.asteria.game.character.player.skill.Skills.PRAYER;
 import static com.asteria.game.character.player.skill.Skills.RANGED;
 import static com.asteria.game.character.player.skill.Skills.STRENGTH;
 
-import java.util.EnumSet;
 import java.util.Optional;
-import java.util.Set;
 
 import com.asteria.game.character.Animation;
 import com.asteria.game.character.player.Player;
@@ -18,7 +16,7 @@ import com.asteria.game.character.player.skill.Skill;
 import com.asteria.game.character.player.skill.Skills;
 import com.asteria.game.item.Item;
 import com.asteria.task.Task;
-import com.asteria.task.TaskManager;
+import com.asteria.task.TaskHandler;
 
 /**
  * The enumerated type managing consumable potion types.
@@ -119,11 +117,6 @@ public enum PotionConsumable {
     };
 
     /**
-     * The enum set containing all of the elements in this enumeration.
-     */
-    private static final Set<PotionConsumable> ELEMENTS = EnumSet.allOf(PotionConsumable.class);
-
-    /**
      * The default item representing the final potion dose.
      */
     private static final Item VIAL = new Item(229);
@@ -157,7 +150,7 @@ public enum PotionConsumable {
     public static boolean consume(Player player, Item item, int slot) {
         Optional<PotionConsumable> potion = forId(item.getId());
         // TODO: Check duel rule for no potions.
-        if (!potion.isPresent() || player.isDead() || player.getPotionTimer().elapsed(1200))
+        if (!potion.isPresent() || player.isDead() || !player.getPotionTimer().elapsed(1200))
             return false;
         player.animation(new Animation(829));
         player.getPotionTimer().reset();
@@ -208,7 +201,7 @@ public enum PotionConsumable {
             if (player.getPoisonImmunity().get() <= 0) {
                 player.getEncoder().sendMessage("You have been granted immunity against poison.");
                 player.getPoisonImmunity().incrementAndGet(500);
-                TaskManager.submit(new Task(50, false) {
+                TaskHandler.submit(new Task(50, false) {
                     @Override
                     public void execute() {
                         player.getPoisonImmunity().decrementAndGet(50);
@@ -278,7 +271,7 @@ public enum PotionConsumable {
             count <= 0 ? "You have been granted immunity against dragon fire."
                 : "Your immunity against dragon fire has been restored.");
         if (count <= 0) {
-            TaskManager.submit(new Task(30, false) {
+            TaskHandler.submit(new Task(30, false) {
                 @Override
                 public void execute() {
                     player.getFireImmunity().decrementAndGet(30);
@@ -351,7 +344,7 @@ public enum PotionConsumable {
      *         optional if no potion consumable was found.
      */
     private static Optional<PotionConsumable> forId(int id) {
-        for (PotionConsumable potion : ELEMENTS) {
+        for (PotionConsumable potion : PotionConsumable.values()) {
             for (int potionId : potion.getIds()) {
                 if (id == potionId) {
                     return Optional.of(potion);

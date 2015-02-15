@@ -1,5 +1,10 @@
 package com.asteria.utility;
 
+/**
+ * The static-utility class that contains text utility functions.
+ * 
+ * @author lare96 <http://www.rune-server.org/members/lare96/>
+ */
 public final class TextUtils {
 
     /**
@@ -21,11 +26,11 @@ public final class TextUtils {
     /**
      * The default constructor.
      * 
-     * @throws InstantiationError
+     * @throws UnsupportedOperationException
      *             if this class is instantiated.
      */
     private TextUtils() {
-        throw new InstantiationError("This class cannot be instantiated!");
+        throw new UnsupportedOperationException("This class cannot be instantiated!");
     }
 
     /**
@@ -115,9 +120,9 @@ public final class TextUtils {
      */
     public static String formatPrice(int price) {
         if (price >= 1000 && price < 1000000) {
-            return " (" + (price / 1000) + "K)";
+            return "(" + (price / 1000) + "K)";
         } else if (price >= 1000000) {
-            return " (" + (price / 1000000) + " million)";
+            return "(" + (price / 1000000) + " million)";
         }
         return Integer.toString(price);
     }

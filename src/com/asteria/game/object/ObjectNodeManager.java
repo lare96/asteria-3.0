@@ -9,7 +9,7 @@ import java.util.function.Consumer;
 import com.asteria.game.character.player.Player;
 import com.asteria.game.location.Position;
 import com.asteria.task.Task;
-import com.asteria.task.TaskManager;
+import com.asteria.task.TaskHandler;
 
 /**
  * The node manager that manages all registered object nodes.
@@ -56,7 +56,7 @@ public final class ObjectNodeManager {
      */
     public static boolean register(ObjectNode object, int ticks, Consumer<ObjectNode> action) {
         if (register(object)) {
-            TaskManager.submit(new Task(ticks, false) {
+            TaskHandler.submit(new Task(ticks, false) {
                 @Override
                 public void execute() {
                     action.accept(object);

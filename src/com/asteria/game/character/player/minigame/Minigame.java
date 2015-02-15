@@ -6,7 +6,7 @@ import com.asteria.game.character.npc.Npc;
 import com.asteria.game.character.player.Player;
 import com.asteria.game.item.Item;
 import com.asteria.game.location.Position;
-import com.asteria.game.plugin.Plugin;
+import com.asteria.game.plugin.PluginContext;
 
 /**
  * The class that provides all of the functionality needed for very generic
@@ -15,7 +15,7 @@ import com.asteria.game.plugin.Plugin;
  * 
  * @author lare96 <http://www.rune-server.org/members/lare96/>
  */
-public abstract class Minigame implements Plugin {
+public abstract class Minigame implements PluginContext {
 
     /**
      * The current name of this minigame.
@@ -197,6 +197,7 @@ public abstract class Minigame implements Plugin {
      * @return {@code true} if the players can trade, {@code false} otherwise.
      */
     public boolean canTrade(Player player, Player other) {
+        player.getEncoder().sendMessage("You cannot trade in here!");
         return false;
     }
 
@@ -221,6 +222,7 @@ public abstract class Minigame implements Plugin {
      * @return {@code true} if the player can logout, {@code false} otherwise.
      */
     public boolean canLogout(Player player) {
+        player.getEncoder().sendMessage("You cannot logout in here!");
         return false;
     }
 
@@ -234,6 +236,7 @@ public abstract class Minigame implements Plugin {
      * @return {@code true} if the player can teleport, {@code false} otherwise.
      */
     public boolean canTeleport(Player player, Position position) {
+        player.getEncoder().sendMessage("You cannot teleport in here!");
         return false;
     }
 

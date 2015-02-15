@@ -68,7 +68,7 @@ public abstract class Spell {
         if (player.getCombatBuilder().isAttacking() || player.getCombatBuilder().isBeingAttacked() && player.isAutocast()) {
             player.setAutocastSpell(null);
             player.setAutocast(false);
-            player.getEncoder().sendConfig(108, 0);
+            player.getEncoder().sendByteState(108, 0);
             player.setCastSpell(null);
         }
     }

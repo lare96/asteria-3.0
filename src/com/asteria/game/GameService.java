@@ -12,7 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.asteria.network.ServerHandler;
-import com.asteria.task.TaskManager;
+import com.asteria.task.TaskHandler;
 import com.asteria.utility.LoggerUtils;
 import com.asteria.utility.RandomGen;
 import com.asteria.utility.Settings;
@@ -67,7 +67,7 @@ public final class GameService implements Runnable {
         try {
             if (Settings.DEBUG)
                 timer.reset();
-            TaskManager.sequence();
+            TaskHandler.sequence();
             ServerHandler.sequence();
             World.sequence();
             if (Settings.DEBUG)

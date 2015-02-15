@@ -3,9 +3,13 @@ package com.asteria.utility;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * The container class that contains functions to modify a number. Similar in
- * functionality to {@link AtomicInteger} but does not support atomic operations
- * and therefore should not be used across multiple threads.
+ * The container class that contains functions to simplify the modification of a
+ * number.
+ * <p>
+ * <p>
+ * This class is similar in functionality to {@link AtomicInteger} but does not
+ * support atomic operations, and therefore should not be used across multiple
+ * threads.
  * 
  * @author lare96 <http://www.rune-server.org/members/lare96/>
  */

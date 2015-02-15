@@ -10,7 +10,7 @@ import com.asteria.game.character.combat.CombatType;
 import com.asteria.game.character.combat.effect.CombatPoisonEffect;
 import com.asteria.game.character.combat.magic.CombatWeaken;
 import com.asteria.game.location.Position;
-import com.asteria.task.TaskManager;
+import com.asteria.task.TaskHandler;
 
 /**
  * The character implementation that represents a node that is operated by the
@@ -19,7 +19,7 @@ import com.asteria.task.TaskManager;
  * 
  * @author lare96 <http://www.rune-server.org/members/lare96/>
  */
-public class Npc extends CharacterNode {
+public final class Npc extends CharacterNode {
 
     /**
      * The identification for this NPC.
@@ -88,7 +88,7 @@ public class Npc extends CharacterNode {
         setPosition(new Position(1, 1));
         if (getDefinition().isAggressive())
             NpcAggression.AGGRESSIVE.remove(this);
-        TaskManager.cancel(this);
+        TaskHandler.cancel(this);
     }
 
     @Override
@@ -172,7 +172,7 @@ public class Npc extends CharacterNode {
      * 
      * @return the respawn time.
      */
-    public final int getRespawnTime() {
+    public int getRespawnTime() {
         return ((getDefinition().getRespawnTime() - 1) <= 0 ? 1 : (getDefinition().getRespawnTime() - 1));
     }
 
@@ -181,7 +181,7 @@ public class Npc extends CharacterNode {
      * 
      * @return the movement coordinator.
      */
-    public final NpcMovementCoordinator getMovementCoordinator() {
+    public NpcMovementCoordinator getMovementCoordinator() {
         return movementCoordinator;
     }
 
@@ -191,7 +191,7 @@ public class Npc extends CharacterNode {
      * @return {@code true} if this NPC was originally walking, {@code false}
      *         otherwise.
      */
-    public final boolean isOriginalRandomWalk() {
+    public boolean isOriginalRandomWalk() {
         return originalRandomWalk;
     }
 
@@ -201,7 +201,7 @@ public class Npc extends CharacterNode {
      * @param originalRandomWalk
      *            the new value to set.
      */
-    public final void setOriginalRandomWalk(boolean originalRandomWalk) {
+    public void setOriginalRandomWalk(boolean originalRandomWalk) {
         this.originalRandomWalk = originalRandomWalk;
     }
 
@@ -210,7 +210,7 @@ public class Npc extends CharacterNode {
      * 
      * @return {@code true} if this NPC respawns, {@code false} otherwise.
      */
-    public final boolean isRespawn() {
+    public boolean isRespawn() {
         return respawn;
     }
 
@@ -220,7 +220,7 @@ public class Npc extends CharacterNode {
      * @param respawn
      *            the new value to set.
      */
-    public final void setRespawn(boolean respawn) {
+    public void setRespawn(boolean respawn) {
         this.respawn = respawn;
     }
 
@@ -229,7 +229,7 @@ public class Npc extends CharacterNode {
      * 
      * @return the identification.
      */
-    public final int getId() {
+    public int getId() {
         return id;
     }
 
@@ -238,7 +238,7 @@ public class Npc extends CharacterNode {
      * 
      * @return the maximum health.
      */
-    public final int getMaxHealth() {
+    public int getMaxHealth() {
         return maxHealth;
     }
 
@@ -247,7 +247,7 @@ public class Npc extends CharacterNode {
      * 
      * @return the original position.
      */
-    public final Position getOriginalPosition() {
+    public Position getOriginalPosition() {
         return originalPosition;
     }
 
@@ -257,7 +257,7 @@ public class Npc extends CharacterNode {
      * @param currentHealth
      *            the new value to set.
      */
-    public final void setCurrentHealth(int currentHealth) {
+    public void setCurrentHealth(int currentHealth) {
         this.currentHealth = currentHealth;
     }
 
@@ -266,7 +266,7 @@ public class Npc extends CharacterNode {
      *
      * @return the weakening spell.
      */
-    public final CombatWeaken getWeakenedBy() {
+    public CombatWeaken getWeakenedBy() {
         return weakenedBy;
     }
 
@@ -276,7 +276,7 @@ public class Npc extends CharacterNode {
      * @param weakenedBy
      *            the new value to set.
      */
-    public final void setWeakenedBy(CombatWeaken weakenedBy) {
+    public void setWeakenedBy(CombatWeaken weakenedBy) {
         this.weakenedBy = weakenedBy;
     }
 
@@ -285,7 +285,7 @@ public class Npc extends CharacterNode {
      * 
      * @return the definition.
      */
-    public final NpcDefinition getDefinition() {
+    public NpcDefinition getDefinition() {
         return NpcDefinition.DEFINITIONS[id];
     }
 }

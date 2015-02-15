@@ -144,11 +144,6 @@ public final class ItemDefinition {
         prayerBonus();
     }
 
-    @Override
-    public String toString() {
-        return name;
-    }
-
     /**
      * The method that erases the prayer bonus from ranged weapons.
      */

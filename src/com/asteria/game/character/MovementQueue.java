@@ -9,7 +9,7 @@ import com.asteria.game.character.combat.Combat;
 import com.asteria.game.character.player.Player;
 import com.asteria.game.location.Position;
 import com.asteria.task.Task;
-import com.asteria.task.TaskManager;
+import com.asteria.task.TaskHandler;
 import com.asteria.utility.RandomGen;
 
 /**
@@ -129,7 +129,7 @@ public final class MovementQueue {
                     player.getEncoder().sendString(player.getRunEnergy() + "%", 149);
                 } else {
                     running = false;
-                    player.getEncoder().sendConfig(173, 0);
+                    player.getEncoder().sendByteState(173, 0);
                 }
             }
 
@@ -311,7 +311,7 @@ public final class MovementQueue {
             character.setFollowing(true);
             character.setFollowCharacter(leader);
             followTask = Optional.of(new CharacterFollowTask(character, leader));
-            TaskManager.submit(followTask.get());
+            TaskHandler.submit(followTask.get());
         }
     }
 

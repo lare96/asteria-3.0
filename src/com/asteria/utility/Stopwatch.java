@@ -4,8 +4,11 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
 /**
- * A utility class that provides functionality for measuring the elapsed time
+ * A utility class that provides functions for measuring the elapsed time
  * between two different time periods.
+ * <p>
+ * <p>
+ * This class is <b>not</b> intended for use across multiple threads.
  * 
  * @author lare96 <http://www.rune-server.org/members/lare96/>
  */
@@ -122,6 +125,16 @@ public final class Stopwatch {
      */
     public boolean elapsed(long time) {
         return elapsed(time, TimeUnit.MILLISECONDS);
+    }
+
+    /**
+     * Determines if this stopwatch is in a {@link State#STOPPED} state.
+     * 
+     * @return {@code true} if this stopwatch is in a stopped state,
+     *         {@code false} otherwise.
+     */
+    public boolean isStopped() {
+        return state == State.STOPPED;
     }
 
     /**

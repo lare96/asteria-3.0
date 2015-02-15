@@ -14,7 +14,7 @@ public abstract class Location {
     /**
      * An array of locations representing the wilderness areas.
      */
-    public static final Location[] WILDERNESS = { new SquareLocation(2941, 3518, 3392, 3966) };
+    public static final Location[] WILDERNESS = { new SquareLocation(2941, 3518, 3392, 3966, 0) };
 
     /**
      * An array of locations representing multi-combat areas.

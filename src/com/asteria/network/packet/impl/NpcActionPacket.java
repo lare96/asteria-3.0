@@ -76,7 +76,7 @@ public final class NpcActionPacket extends PacketDecoder {
             return;
         player.setAutocastSpell(null);
         player.setAutocast(false);
-        player.getEncoder().sendConfig(108, 0);
+        player.getEncoder().sendByteState(108, 0);
         player.setCastSpell(spell);
         player.getTolerance().reset();
         player.getCombatBuilder().attack(npc);
@@ -101,7 +101,7 @@ public final class NpcActionPacket extends PacketDecoder {
                 player.facePosition(npc.getPosition());
                 npc.facePosition(player.getPosition());
                 MinigameHandler.execute(player, m -> m.onFirstClickNpc(player, npc));
-                PluginHandler.execute(player, NpcSecondClickPlugin.class, new NpcSecondClickPlugin(npc));
+                PluginHandler.execute(player, NpcFirstClickPlugin.class, new NpcFirstClickPlugin(npc));
             }
         });
     }
@@ -125,7 +125,7 @@ public final class NpcActionPacket extends PacketDecoder {
                 player.facePosition(npc.getPosition());
                 npc.facePosition(player.getPosition());
                 MinigameHandler.execute(player, m -> m.onSecondClickNpc(player, npc));
-                PluginHandler.execute(player, NpcFirstClickPlugin.class, new NpcFirstClickPlugin(npc));
+                PluginHandler.execute(player, NpcSecondClickPlugin.class, new NpcSecondClickPlugin(npc));
             }
         });
     }

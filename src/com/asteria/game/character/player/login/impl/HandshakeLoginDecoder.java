@@ -12,7 +12,8 @@ import com.asteria.utility.LoggerUtils;
 
 /**
  * The login protocol decoder that handles the handshake between the client and
- * the server.
+ * the server. This marks the beginning of the entire login protocol in one of
+ * two stages.
  * 
  * @author lare96 <http://www.rune-server.org/members/lare96/>
  */

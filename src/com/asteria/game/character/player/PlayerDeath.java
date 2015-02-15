@@ -79,11 +79,12 @@ public final class PlayerDeath extends CharacterDeath<Player> {
 
     @Override
     public void postDeath(Player character) {
+        character.getEncoder().sendCloseWindows();
         character.getCombatBuilder().reset();
         character.getCombatBuilder().getDamageCache().clear();
         character.getTolerance().reset();
         character.getSpecialPercentage().set(100);
-        character.getEncoder().sendConfig(301, 0);
+        character.getEncoder().sendByteState(301, 0);
         character.setSpecialActivated(false);
         character.getSkullTimer().set(0);
         character.setSkullIcon(-1);
@@ -92,7 +93,7 @@ public final class PlayerDeath extends CharacterDeath<Player> {
         WeaponInterface.execute(character, character.getEquipment().get(Equipment.WEAPON_SLOT));
         character.getEncoder().sendMessage(
             character.getRights().less(Rights.ADMINISTRATOR) ? "Oh dear, you're dead!"
-                : "You're a high ranking staff member and unaffected by death.");
+                : "You are unaffected by death because of your rank.");
         character.getEncoder().sendWalkable(65535);
         CombatPrayer.deactivateAll(character);
         Skills.restoreAll(character);

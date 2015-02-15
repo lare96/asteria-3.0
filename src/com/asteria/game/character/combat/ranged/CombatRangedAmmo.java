@@ -1,6 +1,6 @@
 package com.asteria.game.character.combat.ranged;
 
-import java.util.EnumSet;
+import java.util.Arrays;
 import java.util.Optional;
 
 import com.asteria.game.character.combat.Combat;
@@ -54,11 +54,6 @@ public enum CombatRangedAmmo {
     ADAMANT_THROWNAXE(23, 39, 44, 3, 43, 31, 46),
     RUNE_THROWNAXE(26, 41, 44, 3, 43, 31, 48),
     TOKTZ_XIL_UL(50, 442, 44, 3, 43, 31, 0);
-
-    /**
-     * The enum set containing all of the elements in this enumeration.
-     */
-    private static final EnumSet<CombatRangedAmmo> ELEMENTS = EnumSet.allOf(CombatRangedAmmo.class);
 
     /**
      * The strength of this ranged ammo.
@@ -145,7 +140,7 @@ public enum CombatRangedAmmo {
             return Optional.of(CombatRangedAmmo.CRYSTAL_ARROW);
         if (player.getEquipment().get(slot) == null)
             return Optional.empty();
-        return ELEMENTS.stream().filter(
+        return Arrays.stream(CombatRangedAmmo.values()).filter(
             c -> player.getEquipment().get(slot).getDefinition().getName().toLowerCase().contains(c.toString())).findFirst();
     }
 

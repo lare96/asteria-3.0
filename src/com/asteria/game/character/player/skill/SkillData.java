@@ -78,7 +78,7 @@ public enum SkillData {
     }
 
     @Override
-    public String toString() {
+    public final String toString() {
         return TextUtils.capitalize(name().toLowerCase().replaceAll("_", " "));
     }
 

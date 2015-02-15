@@ -70,11 +70,26 @@ public final class World {
         return players.search(player -> player.getUsername().equals(username));
     }
 
+    /**
+     * Gets every single character in the player and npc character lists.
+     * 
+     * @return a set containing every single character.
+     */
     public static Set<CharacterNode> getCharacters() {
         Set<CharacterNode> characters = new HashSet<>();
         players.forEach(characters::add);
         npcs.forEach(characters::add);
         return characters;
+    }
+
+    /**
+     * Sends {@code message} to all online players.
+     * 
+     * @param message
+     *            the message to send to all online players.
+     */
+    public static void message(String message) {
+        players.forEach(p -> p.getEncoder().sendMessage("@red@[ANNOUNCEMENT]: " + message));
     }
 
     /**

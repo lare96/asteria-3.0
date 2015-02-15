@@ -18,7 +18,8 @@ import com.asteria.utility.Settings;
 import com.asteria.utility.TextUtils;
 
 /**
- * The login protocol decoder that handles the rest of the login session.
+ * The login protocol decoder that handles the rest of the login session. This
+ * marks the ending of the entire login protocol in one of two stages.
  * 
  * @author lare96 <http://www.rune-server.org/members/lare96/>
  */

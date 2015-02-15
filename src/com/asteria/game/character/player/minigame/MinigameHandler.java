@@ -8,7 +8,7 @@ import java.util.function.Function;
 
 import com.asteria.game.character.player.Player;
 import com.asteria.task.Task;
-import com.asteria.task.TaskManager;
+import com.asteria.task.TaskHandler;
 
 /**
  * The class that contains methods to handle the functionality of minigames.
@@ -44,7 +44,7 @@ public final class MinigameHandler extends Task {
 
     @Override
     public void onCancel() {
-        TaskManager.submit(new MinigameHandler());
+        TaskHandler.submit(new MinigameHandler());
     }
 
     /**

@@ -5,7 +5,7 @@ package com.asteria.game.character.player.dialogue;
  * 
  * @author lare96 <http://www.rune-server.org/members/lare96/>
  */
-public class PlayerDialogue implements DialogueChain {
+public final class PlayerDialogue implements DialogueChain {
 
     /**
      * The expression that this player will display.

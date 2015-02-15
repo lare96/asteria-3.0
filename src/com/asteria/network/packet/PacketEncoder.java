@@ -20,7 +20,7 @@ import com.asteria.network.ValueType;
 import com.google.common.base.Preconditions;
 
 /**
- * The class that contains methods that encode and send data to the client.
+ * The class that contains functions that encode and send data to the client.
  * 
  * @author lare96 <http://www.rune-server.org/members/lare96/>
  */
@@ -133,6 +133,7 @@ public final class PacketEncoder {
      * @return an instance of this encoder.
      */
     public PacketEncoder sendLocalObjectAnimation(Position position, int animation, ObjectType type, ObjectDirection direction) {
+        player.getEncoder().sendObjectAnimation(position, animation, type, direction);
         player.getLocalPlayers().stream().filter(Objects::nonNull).forEach(
             p -> p.getEncoder().sendObjectAnimation(position, animation, type, direction));
         return this;
@@ -174,6 +175,7 @@ public final class PacketEncoder {
      * @return an instance of this encoder.
      */
     public PacketEncoder sendLocalGraphic(int id, Position position, int level) {
+        player.getEncoder().sendGraphic(id, position, level);
         player.getLocalPlayers().stream().filter(Objects::nonNull).forEach(p -> p.getEncoder().sendGraphic(id, position, level));
         return this;
     }
@@ -226,6 +228,7 @@ public final class PacketEncoder {
      * @return an instance of this encoder.
      */
     public PacketEncoder sendLocalSound(int id, int type, int delay) {
+        player.getEncoder().sendSound(id, type, delay);
         player.getLocalPlayers().stream().filter(Objects::nonNull).forEach(p -> p.getEncoder().sendSound(id, type, delay));
         return this;
     }
@@ -441,23 +444,38 @@ public final class PacketEncoder {
      * 
      * @param code
      *            the identification of the sidebar to flash. The code for each
-     *            of the sidebar icons are as follows:<br>
-     * <br>
-     *            Attack type: 0<br>
-     *            Stats: -1<br>
-     *            Quests: -2<br>
-     *            Inventory: -3<br>
-     *            Wearing: -4<br>
-     *            Prayer: -5<br>
-     *            Magic: -6<br>
-     *            Empty: -7<br>
-     *            Friends list: -8<br>
-     *            Ignore list: -9<br>
-     *            Log out: -10<br>
-     *            Settings: -11<br>
-     *            Emotes: -12<br>
-     *            Music: -13<br>
-     * <br>
+     *            of the sidebar icons are as follows:
+     *            <p>
+     *            <p>
+     *            Attack type: 0
+     *            <p>
+     *            Stats: -1
+     *            <p>
+     *            Quests: -2
+     *            <p>
+     *            Inventory: -3
+     *            <p>
+     *            Wearing: -4
+     *            <p>
+     *            Prayer: -5
+     *            <p>
+     *            Magic: -6
+     *            <p>
+     *            Empty: -7
+     *            <p>
+     *            Friends list: -8
+     *            <p>
+     *            Ignore list: -9
+     *            <p>
+     *            Log out: -10
+     *            <p>
+     *            Settings: -11
+     *            <p>
+     *            Emotes: -12
+     *            <p>
+     *            Music: -13
+     *            <p>
+     *            <p>
      * @return an instance of this encoder.
      */
     public PacketEncoder sendFlashSidebar(int code) {
@@ -485,12 +503,16 @@ public final class PacketEncoder {
      * 
      * @param code
      *            the new state of the minimap. The code for each of the minimap
-     *            states are as follows:<br>
-     * <br>
-     *            Normal: 0<br>
-     *            Normal, but unclickable: 1<br>
-     *            Blacked out: 2<br>
-     * <br>
+     *            states are as follows:
+     *            <p>
+     *            <p>
+     *            Normal: 0
+     *            <p>
+     *            Normal, but unclickable: 1
+     *            <p>
+     *            Blacked out: 2
+     *            <p>
+     *            <p>
      * @return an instance of this encoder.
      */
     public PacketEncoder sendMinimapState(int code) {
@@ -574,18 +596,24 @@ public final class PacketEncoder {
      * 
      * @param parameter
      *            the position parameter to oscillate. The position parameters
-     *            are as follows:<br>
-     * <br>
+     *            are as follows:
+     *            <p>
+     *            <p>
      *            Camera location along world X axis (a horizontal axis, aligned
-     *            with map grid X): 0<br>
-     *            Camera location along world Z axis (vertical axis): 1 <br>
+     *            with map grid X): 0
+     *            <p>
+     *            Camera location along world Z axis (vertical axis): 1
+     *            <p>
      *            Camera location along world Y axis (a horizontal axis, aligned
-     *            with map grid Y): 2<br>
+     *            with map grid Y): 2
+     *            <p>
      *            Camera orientation in world X plane w.r.t. world Z axis, i.e.
-     *            yaw: 3<br>
+     *            yaw: 3
+     *            <p>
      *            Camera orientation in world Z plane w.r.t. world X axis, i.e.
-     *            pitch: 4<br>
-     * <br>
+     *            pitch: 4
+     *            <p>
+     *            <p>
      * 
      * @param jitter
      *            the amount of randomization in the screen shake.
@@ -676,12 +704,16 @@ public final class PacketEncoder {
      *            the interface identification to send the color on.
      * @param color
      *            the new color that will be added to the interface. The color
-     *            hex codes are as follows:<br>
-     * <br>
-     *            Red: 0x6000<br>
-     *            Yellow: 0x33FF66<br>
-     *            Green: 0x3366<br>
-     * <br>
+     *            hex codes are as follows:
+     *            <p>
+     *            <p>
+     *            Red: 0x6000
+     *            <p>
+     *            Yellow: 0x33FF66
+     *            <p>
+     *            Green: 0x3366
+     *            <p>
+     *            <p>
      * @return an instance of this encoder.
      */
     public PacketEncoder sendInterfaceColor(int id, int color) {
@@ -769,7 +801,7 @@ public final class PacketEncoder {
 
     /**
      * The packet that changes the configuration value for a certain client
-     * setting.
+     * setting in the form of a byte.
      * 
      * @param id
      *            the setting identification number.
@@ -777,11 +809,30 @@ public final class PacketEncoder {
      *            the new value for the setting.
      * @return an instance of this encoder.
      */
-    public PacketEncoder sendConfig(int id, int state) {
+    public PacketEncoder sendByteState(int id, int state) {
         DataBuffer out = DataBuffer.create();
         out.newPacket(36, player.getSession().getEncryptor());
         out.putShort(id, ByteOrder.LITTLE);
         out.put(state);
+        player.getSession().send(out);
+        return this;
+    }
+
+    /**
+     * The packet that changes the configuration value for a certain client
+     * setting in the form of an integer.
+     * 
+     * @param id
+     *            the setting identification number.
+     * @param state
+     *            the new value for the setting.
+     * @return an instance of this encoder.
+     */
+    public PacketEncoder sendIntState(int id, int state) {
+        DataBuffer out = DataBuffer.create();
+        out.newPacket(87, player.getSession().getEncryptor());
+        out.putShort(id);
+        out.putInt(state);
         player.getSession().send(out);
         return this;
     }
@@ -873,12 +924,16 @@ public final class PacketEncoder {
      * 
      * @param code
      *            the status of the friends list. The status for the friends
-     *            lists are as follows:<br>
-     * <br>
-     *            Loading: 0<br>
-     *            Connecting: 1<br>
-     *            Loaded: 2<br>
-     * <br>
+     *            lists are as follows:
+     *            <p>
+     *            <p>
+     *            Loading: 0
+     *            <p>
+     *            Connecting: 1
+     *            <p>
+     *            Loaded: 2
+     *            <p>
+     *            <p>
      * @return an instance of this encoder.
      */
     public PacketEncoder sendPrivateMessageListStatus(int code) {
@@ -917,14 +972,20 @@ public final class PacketEncoder {
      *            the position to send the arrow on.
      * @param direction
      *            the direction on the position to send the arrow on. The
-     *            possible directions to put the arrow on are as follows:<br>
-     * <br>
-     *            Middle: 2<br>
-     *            West: 3<br>
-     *            East: 4<br>
-     *            South: 5<br>
-     *            North: 6<br>
-     * <br>
+     *            possible directions to put the arrow on are as follows:
+     *            <p>
+     *            <p>
+     *            Middle: 2
+     *            <p>
+     *            West: 3
+     *            <p>
+     *            East: 4
+     *            <p>
+     *            South: 5
+     *            <p>
+     *            North: 6
+     *            <p>
+     *            <p>
      * @return an instance of this encoder.
      */
     public PacketEncoder sendPositionHintArrow(Position position, int direction) {

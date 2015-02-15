@@ -14,7 +14,10 @@ import com.asteria.utility.LoggerUtils;
 import com.google.common.base.Preconditions;
 
 /**
- * The reactor that will select and handle various network events.
+ * The reactor that will oversee the management of all network events. In
+ * contrast to other reactor implementations, this one runs on the main game
+ * thread selecting and handling network events either asynchronously or right
+ * on the underlying thread every {@code 600}ms.
  * 
  * @author lare96 <http://www.rune-server.org/members/lare96/>
  */
@@ -38,11 +41,11 @@ public final class ServerHandler {
     /**
      * The default constructor.
      * 
-     * @throws InstantiationError
+     * @throws UnsupportedOperationException
      *             if this class is instantiated.
      */
     private ServerHandler() {
-        throw new InstantiationError();
+        throw new UnsupportedOperationException();
     }
 
     /**

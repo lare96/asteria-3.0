@@ -24,7 +24,7 @@ import com.asteria.game.character.player.skill.Skills;
 import com.asteria.game.item.Item;
 import com.asteria.game.item.container.Equipment;
 import com.asteria.game.location.Position;
-import com.asteria.task.TaskManager;
+import com.asteria.task.TaskHandler;
 import com.asteria.utility.RandomGen;
 import com.asteria.utility.Settings;
 
@@ -145,11 +145,11 @@ public final class Combat {
     /**
      * The default constructor.
      * 
-     * @throws InstantiationError
+     * @throws UnsupportedOperationException
      *             if this class is instantiated.
      */
     private Combat() {
-        throw new InstantiationError();
+        throw new UnsupportedOperationException();
     }
 
     /**
@@ -389,7 +389,7 @@ public final class Combat {
      */
     public static boolean effect(CombatEffect effect) {
         if (effect.apply()) {
-            TaskManager.submit(effect);
+            TaskHandler.submit(effect);
             return true;
         }
         return false;

@@ -21,11 +21,11 @@ public final class Dialogues {
     /**
      * The default constructor.
      * 
-     * @throws InstantiationError
+     * @throws UnsupportedOperationException
      *             if this class is instantiated.
      */
     private Dialogues() {
-        throw new InstantiationError();
+        throw new UnsupportedOperationException();
     }
 
     /**

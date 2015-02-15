@@ -15,7 +15,7 @@ import com.asteria.game.character.npc.Npc;
 import com.asteria.game.character.player.Player;
 import com.asteria.game.location.Position;
 import com.asteria.task.Task;
-import com.asteria.task.TaskManager;
+import com.asteria.task.TaskHandler;
 import com.asteria.utility.Stopwatch;
 import com.google.common.base.Preconditions;
 
@@ -479,7 +479,7 @@ public abstract class CharacterNode extends Node {
     private void sendDamage(Hit hit, Hit hit2, Hit hit3) {
         sendDamage(hit, hit2);
 
-        TaskManager.submit(new Task(1, false) {
+        TaskHandler.submit(new Task(1, false) {
             @Override
             public void execute() {
                 this.cancel();
@@ -507,7 +507,7 @@ public abstract class CharacterNode extends Node {
     private void sendDamage(Hit hit, Hit hit2, Hit hit3, Hit hit4) {
         sendDamage(hit, hit2);
 
-        TaskManager.submit(new Task(1, false) {
+        TaskHandler.submit(new Task(1, false) {
             @Override
             public void execute() {
                 this.cancel();

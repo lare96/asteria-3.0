@@ -12,8 +12,9 @@ import com.asteria.task.Task;
 /**
  * The skill action that represents an action where one item is removed from an
  * inventory and lost forever. This type of skill action is very basic and only
- * requires that a player have the item to destruct in their inventory.<br>
- * <br>
+ * requires that a player have the item to destruct in their inventory.
+ * <p>
+ * <p>
  * The skills that may use this type skill action include, but are not limited
  * to {@code PRAYER}.
  * 

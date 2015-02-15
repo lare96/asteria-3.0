@@ -10,6 +10,7 @@ import com.asteria.network.ByteOrder;
 import com.asteria.network.DataBuffer;
 import com.asteria.network.ValueType;
 import com.asteria.network.packet.PacketDecoder;
+import com.asteria.utility.Settings;
 
 /**
  * The packet sent from the client when a player clicks an object.
@@ -52,6 +53,8 @@ public final class ObjectActionPacket extends PacketDecoder {
         int size = 1;
         if (objectId < 0 || objectX < 0 || objectY < 0)
             return;
+        if (Settings.DEBUG)
+            player.getEncoder().sendMessage("[DEBUG]: ID - " + objectId + ", X - " + objectX + ", Y - " + objectY);
         player.facePosition(position);
         player.getMovementListener().append(
             () -> {
@@ -79,6 +82,8 @@ public final class ObjectActionPacket extends PacketDecoder {
         Position position = new Position(objectX, objectY, player.getPosition().getZ());
         if (objectId < 0 || objectX < 0 || objectY < 0)
             return;
+        if (Settings.DEBUG)
+            player.getEncoder().sendMessage("[DEBUG]: ID - " + objectId + ", X - " + objectX + ", Y - " + objectY);
         player.facePosition(position);
         player.getMovementListener().append(
             () -> {

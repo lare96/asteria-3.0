@@ -5,7 +5,10 @@ import com.asteria.game.character.npc.NpcUpdating;
 import com.asteria.game.character.player.PlayerUpdating;
 
 /**
- * The sequential update service that will execute the update sequence.
+ * The sequential update service that will execute the update sequence
+ * sequentially. This service should only be used if the hosting computer has
+ * one core. If the hosting computer has more than one core, better performance
+ * is guaranteed with {@link ConcurrentUpdateService}.
  * 
  * @author lare96 <http://www.rune-server.org/members/lare96/>
  */
@@ -52,7 +55,7 @@ public final class SequentialUpdateService implements Runnable {
             try {
                 player.reset();
                 player.setCachedUpdateBlock(null);
-                player.getSession().getPacketCount().getAndSet(0);
+                player.getSession().getPacketCount().set(0);
             } catch (Exception e) {
                 e.printStackTrace();
                 World.getPlayers().remove(player);

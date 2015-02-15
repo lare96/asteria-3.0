@@ -4,8 +4,9 @@ import java.nio.ByteBuffer;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.SocketChannel;
 import java.util.Arrays;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Logger;
+
+import plugin.minigames.FightCavesHandler;
 
 import com.asteria.game.World;
 import com.asteria.game.character.player.login.LoginProtocolDecoderChain;
@@ -13,13 +14,14 @@ import com.asteria.game.character.player.login.LoginResponse;
 import com.asteria.game.character.player.login.impl.HandshakeLoginDecoder;
 import com.asteria.game.character.player.login.impl.PostHandshakeLoginDecoder;
 import com.asteria.game.character.player.minigame.MinigameHandler;
+import com.asteria.game.location.Position;
 import com.asteria.game.shop.Shop;
 import com.asteria.network.ConnectionHandler;
 import com.asteria.network.DataBuffer;
 import com.asteria.network.ISAACCipher;
-import com.asteria.network.packet.PacketEncoder;
-import com.asteria.task.TaskManager;
+import com.asteria.task.TaskHandler;
 import com.asteria.utility.LoggerUtils;
+import com.asteria.utility.MutableNumber;
 import com.asteria.utility.Stopwatch;
 
 /**
@@ -62,11 +64,6 @@ public final class PlayerIO {
     private final Player player;
 
     /**
-     * The encoder that will encode and send packets.
-     */
-    private final PacketEncoder encoder;
-
-    /**
      * The host address this session is bound to.
      */
     private final String host;
@@ -84,7 +81,7 @@ public final class PlayerIO {
     /**
      * The amount of packets that have been decoded this sequence.
      */
-    private final AtomicInteger packetCount = new AtomicInteger();
+    private final MutableNumber packetCount = new MutableNumber();
 
     /**
      * The current state of this I/O session.
@@ -135,7 +132,6 @@ public final class PlayerIO {
         this.channel = (SocketChannel) key.channel();
         this.host = channel.socket().getInetAddress().getHostAddress().toLowerCase();
         this.player = new Player(this);
-        this.encoder = new PacketEncoder(player);
         this.chain = new LoginProtocolDecoderChain(2).append(new HandshakeLoginDecoder(this)).append(
             new PostHandshakeLoginDecoder(this));
     }
@@ -160,8 +156,8 @@ public final class PlayerIO {
                 player.save();
                 if (player.getOpenShop() != null)
                     Shop.SHOPS.get(player.getOpenShop()).getPlayers().remove(player);
-                TaskManager.cancel(player.getCombatBuilder());
-                TaskManager.cancel(player);
+                TaskHandler.cancel(player.getCombatBuilder());
+                TaskHandler.cancel(player);
                 Arrays.fill(player.getSkillEvent(), false);
                 World.getPlayers().remove(player);
 
@@ -172,6 +168,9 @@ public final class PlayerIO {
                 }
             }
 
+            if(FightCavesHandler.remove(player) && !forced) {
+                player.move(new Position(2399, 5177));
+            }
             key.attach(null);
             key.cancel();
             channel.close();
@@ -257,15 +256,6 @@ public final class PlayerIO {
     }
 
     /**
-     * Gets the encoder that will encode and send packets.
-     * 
-     * @return the packet encoder.
-     */
-    public PacketEncoder getEncoder() {
-        return encoder;
-    }
-
-    /**
      * Gets the host address this session is bound to.
      * 
      * @return the host address.
@@ -297,7 +287,7 @@ public final class PlayerIO {
      * 
      * @return the amount of packets decoded.
      */
-    public AtomicInteger getPacketCount() {
+    public MutableNumber getPacketCount() {
         return packetCount;
     }
 

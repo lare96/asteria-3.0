@@ -12,6 +12,8 @@ import com.asteria.utility.Settings;
 
 /**
  * The server selection event that decodes and handles all incoming packets.
+ * This sequential event grabs the packet data from the client and uses it to
+ * execute the appropriate packets.
  * 
  * @author lare96 <http://www.rune-server.org/members/lare96/>
  */
@@ -63,6 +65,13 @@ public final class DecodePacketServerEvent extends ServerSelectionEvent {
             if (session.getInData().remaining() >= session.getPacketSize()) {
                 int positionBefore = session.getInData().position();
                 PacketDecoder packet = PacketDecoder.PACKETS[session.getPacketOpcode()];
+                if (session.getPacketCount().getAndIncrement() >= Settings.PACKET_LIMIT) {
+                    if (Settings.DEBUG)
+                        logger.warning(session.getPlayer() + " decoded too many packets in one sequence!");
+                    session.disconnect(false);
+                    break;
+                }
+
                 try {
                     if (packet != null) {
                         packet.decode(session.getPlayer(), session.getPacketOpcode(), session.getPacketSize(), DataBuffer

@@ -4,7 +4,8 @@ import com.asteria.game.character.player.Player;
 
 /**
  * The parent class of all currencies that provides basic functionality for any
- * general currency.
+ * general currency. This can be used to create tangible, and even intangible
+ * currencies.
  * 
  * @author lare96 <http://www.rune-server.org/members/lare96/>
  */

@@ -10,7 +10,7 @@ import com.asteria.game.location.Position;
 import com.asteria.network.ByteOrder;
 import com.asteria.network.DataBuffer;
 import com.asteria.network.ValueType;
-import com.asteria.task.TaskManager;
+import com.asteria.task.TaskHandler;
 
 /**
  * The class that provides static utility methods for updating players.
@@ -23,11 +23,11 @@ public final class PlayerUpdating {
     /**
      * The default constructor.
      * 
-     * @throws InstantiationError
+     * @throws UnsupportedOperationException
      *             if this class is instantiated.
      */
     private PlayerUpdating() {
-        throw new InstantiationError();
+        throw new UnsupportedOperationException();
     }
 
     /**
@@ -62,17 +62,17 @@ public final class PlayerUpdating {
             }
         }
         int added = 0;
-        for (int i = 0; i < World.getPlayers().capacity(); i++) {
+        for (Player other : World.getPlayers()) {
             if (added == 15 || player.getLocalPlayers().size() >= 255)
                 break;
-            Player other = World.getPlayers().get(i);
             if (other == null || other.equals(player) || other.getSession().getState() != IOState.LOGGED_IN)
                 continue;
-            if (!player.getLocalPlayers().contains(other) && other.getPosition().isViewableFrom(player.getPosition())) {
-                added++;
-                player.getLocalPlayers().add(other);
-                PlayerUpdating.addPlayer(out, player, other);
-                PlayerUpdating.updateState(other, player, block, true, false);
+            if (other.getPosition().isViewableFrom(player.getPosition())) {
+                if (player.getLocalPlayers().add(other)) {
+                    added++;
+                    PlayerUpdating.addPlayer(out, player, other);
+                    PlayerUpdating.updateState(other, player, block, true, false);
+                }
             }
         }
         if (block.buffer().position() > 0) {
@@ -165,8 +165,8 @@ public final class PlayerUpdating {
             } else {
                 block.putShort(0x100 + player.getAppearance()[Player.APPEARANCE_SLOT_HEAD]);
             }
-            if (player.getEquipment().getId(Equipment.HEAD_SLOT) > 1) {
-                block.putShort(0x200 + player.getEquipment().getId(Equipment.HEAD_SLOT));
+            if (player.getEquipment().getId(Equipment.HANDS_SLOT) > 1) {
+                block.putShort(0x200 + player.getEquipment().getId(Equipment.HANDS_SLOT));
             } else {
                 block.putShort(0x100 + player.getAppearance()[Player.APPEARANCE_SLOT_HANDS]);
             }
@@ -455,7 +455,7 @@ public final class PlayerUpdating {
             if (player.getSkills()[Skills.HITPOINTS].getLevel() <= 0) {
                 player.getSkills()[Skills.HITPOINTS].setLevel(0, true);
                 player.setDead(true);
-                TaskManager.submit(new PlayerDeath(player));
+                TaskHandler.submit(new PlayerDeath(player));
             }
         }
         out.put(player.getSkills()[Skills.HITPOINTS].getLevel(), ValueType.C);
@@ -478,7 +478,7 @@ public final class PlayerUpdating {
             if (player.getSkills()[Skills.HITPOINTS].getLevel() <= 0) {
                 player.getSkills()[Skills.HITPOINTS].setLevel(0, true);
                 player.setDead(true);
-                TaskManager.submit(new PlayerDeath(player));
+                TaskHandler.submit(new PlayerDeath(player));
             }
         }
 

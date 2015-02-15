@@ -4,11 +4,12 @@ import com.asteria.game.character.player.Player;
 import com.asteria.game.item.Item;
 
 /**
- * The currency that provides basic functionality for all physical currencies.
+ * The currency that provides basic functionality for all tangible currencies.
+ * It is recommended that this be used rather than {@link GeneralCurrency}.
  * 
  * @author lare96 <http://www.rune-server.org/members/lare96/>
  */
-public class ItemCurrency implements GeneralCurrency {
+public final class ItemCurrency implements GeneralCurrency {
 
     /**
      * The item identification for this currency.

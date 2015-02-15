@@ -12,9 +12,9 @@ import com.asteria.game.character.player.Player
 import com.asteria.game.character.player.content.WeaponInterface
 import com.asteria.game.item.Item
 import com.asteria.game.item.container.Equipment
-import com.asteria.game.plugin.PluginContext
+import com.asteria.game.plugin.PluginSignature
 
-@PluginContext(CombatStrategy.class)
+@PluginSignature(CombatStrategy.class)
 final class DefaultMeleeCombatStrategy implements CombatStrategy {
 
     @Override
@@ -35,9 +35,9 @@ final class DefaultMeleeCombatStrategy implements CombatStrategy {
 
     @Override
     int attackDistance(CharacterNode character) {
-        if (character.getType() == NodeType.NPC)
+        if (character.type == NodeType.NPC)
             return 1
-        if ((character as Player).getWeapon() == WeaponInterface.HALBERD)
+        if ((character as Player).weapon == WeaponInterface.HALBERD)
             return 2
         return 1
     }
@@ -48,31 +48,31 @@ final class DefaultMeleeCombatStrategy implements CombatStrategy {
     }
 
     private def startAnimation(CharacterNode character) {
-        if (character.getType() == NodeType.NPC) {
+        if (character.type == NodeType.NPC) {
             Npc npc = character as Npc
-            npc.animation new Animation(npc.getDefinition().getAttackAnimation())
-        } else if (character.getType() == NodeType.PLAYER) {
+            npc.animation new Animation(npc.getDefinition().attackAnimation)
+        } else if (character.type == NodeType.PLAYER) {
             Player player = character as Player
-            Item item = player.getEquipment().get Equipment.WEAPON_SLOT
+            Item item = player.equipment.get Equipment.WEAPON_SLOT
 
-            if (!player.isSpecialActivated() && item != null) {
-                if (item.getDefinition().getName().startsWith("Dragon dagger")) {
+            if (!player.specialActivated && item != null) {
+                if (item.getDefinition().name.startsWith("Dragon dagger")) {
                     player.animation new Animation(402)
-                } else if (item.getDefinition().getName().startsWith("Dharoks")) {
+                } else if (item.getDefinition().name.startsWith("Dharoks")) {
                     if (player.getFightType() == FightType.BATTLEAXE_SMASH) {
                         player.animation new Animation(2067)
                     } else {
                         player.animation new Animation(2066)
                     }
-                } else if (item.getDefinition().getName().equals("Granite maul")) {
+                } else if (item.getDefinition().name.equals("Granite maul")) {
                     player.animation new Animation(1665)
-                } else if (item.getDefinition().getName().equals("Tzhaar-ket-om")) {
+                } else if (item.getDefinition().name.equals("Tzhaar-ket-om")) {
                     player.animation new Animation(2661)
-                } else if (item.getDefinition().getName().endsWith("wand")) {
+                } else if (item.getDefinition().name.endsWith("wand")) {
                     player.animation new Animation(FightType.UNARMED_KICK.getAnimation())
-                } else if (item.getDefinition().getName().startsWith("Torags")) {
+                } else if (item.getDefinition().name.startsWith("Torags")) {
                     player.animation new Animation(2068)
-                } else if (item.getDefinition().getName().startsWith("Veracs")) {
+                } else if (item.getDefinition().name.startsWith("Veracs")) {
                     player.animation new Animation(2062)
                 } else {
                     player.animation new Animation(player.getFightType().getAnimation())

@@ -40,6 +40,6 @@ public final class ItemDefinitionLoader extends JsonLoader {
         boolean fullHelm = reader.get("fullHelm").getAsBoolean();
 
         ItemDefinition.DEFINITIONS[index] = new ItemDefinition(index, name, description, equipmentSlot, noteable, stackable,
-            specialPrice, generalPrice, highAlchValue, lowAlchValue, weight, bonus, twoHanded, platebody, fullHelm);
+            specialPrice, generalPrice, lowAlchValue, highAlchValue, weight, bonus, twoHanded, fullHelm, platebody);
     }
 }

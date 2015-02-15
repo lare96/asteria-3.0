@@ -8,7 +8,7 @@ import com.asteria.game.item.Item;
  * 
  * @author lare96 <http://www.rune-server.org/members/lare96/>
  */
-public class Inventory extends ItemContainer {
+public final class Inventory extends ItemContainer {
 
     /**
      * The player who's inventory is being managed.

@@ -16,7 +16,6 @@ import com.asteria.network.ByteOrder;
 import com.asteria.network.DataBuffer;
 import com.asteria.network.ValueType;
 import com.asteria.network.packet.PacketDecoder;
-import com.asteria.utility.RandomGen;
 
 /**
  * The packet sent from the client when the player clicks an item.
@@ -46,7 +45,6 @@ public final class ItemActionPacket extends PacketDecoder {
         int container = buf.getShort(true, ValueType.A, ByteOrder.LITTLE);
         int slot = buf.getShort(false, ValueType.A);
         int id = buf.getShort(false, ByteOrder.LITTLE);
-        RandomGen random = new RandomGen();
 
         if (slot < 0 || container < 0 || id < 0 || id > ItemDefinition.DEFINITIONS.length)
             return;

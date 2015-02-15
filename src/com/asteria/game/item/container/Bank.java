@@ -8,7 +8,7 @@ import com.asteria.game.item.Item;
  * 
  * @author lare96 <http://www.rune-server.org/members/lare96/>
  */
-public class Bank extends ItemContainer {
+public final class Bank extends ItemContainer {
 
     /**
      * The player who's bank is being managed.
@@ -31,7 +31,7 @@ public class Bank extends ItemContainer {
      */
     public void open() {
         player.setWithdrawAsNote(false);
-        player.getEncoder().sendConfig(115, 0);
+        player.getEncoder().sendByteState(115, 0);
         player.getEncoder().sendInventoryInterface(5292, 5063);
         refresh();
         player.getEncoder().sendItemsOnInterface(5064, player.getInventory().container());
@@ -143,7 +143,7 @@ public class Bank extends ItemContainer {
         if (player.isWithdrawAsNote() && !withdrawItemNoted) {
             player.getEncoder().sendMessage("This item can't be withdrawn as a note.");
             player.setWithdrawAsNote(false);
-            player.getEncoder().sendConfig(115, 0);
+            player.getEncoder().sendByteState(115, 0);
 
             if (!item.getDefinition().isStackable()) {
                 item.setAmount(player.getInventory().remaining());

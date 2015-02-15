@@ -28,7 +28,7 @@ public final class Requirement {
     /**
      * The skill identifier for this equipment requirement.
      */
-    private final int skill;
+    private final SkillData skill;
 
     /**
      * Creates a new {@link Requirement}.
@@ -38,7 +38,7 @@ public final class Requirement {
      * @param skill
      *            the skill identifier for this equipment requirement.
      */
-    public Requirement(int level, int skill) {
+    public Requirement(int level, SkillData skill) {
         this.level = level;
         this.skill = skill;
     }
@@ -52,31 +52,6 @@ public final class Requirement {
      */
     public Requirement copy() {
         return new Requirement(level, skill);
-    }
-
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + level;
-        result = prime * result + skill;
-        return result;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (!(obj instanceof Requirement))
-            return false;
-        Requirement other = (Requirement) obj;
-        if (level != other.level)
-            return false;
-        if (skill != other.skill)
-            return false;
-        return true;
     }
 
     /**
@@ -97,9 +72,9 @@ public final class Requirement {
         if (req == null)
             return true;
         for (Requirement r : req) {
-            if (player.getSkills()[r.getSkill()].getRealLevel() < r.getLevel()) {
-                String append = TextUtils.appendIndefiniteArticle(SkillData.values()[r.getSkill()].toString());
-                player.getEncoder().sendMessage("You need " + append + " level of " + r.getLevel() + " to equip this item.");
+            if (player.getSkills()[r.skill.getId()].getRealLevel() < r.level) {
+                String append = TextUtils.appendIndefiniteArticle(SkillData.values()[r.skill.getId()].toString());
+                player.getEncoder().sendMessage("You need " + append + " level of " + r.level + " to equip this item.");
                 return false;
             }
         }
@@ -120,7 +95,7 @@ public final class Requirement {
      * 
      * @return the skill identifier.
      */
-    public int getSkill() {
+    public SkillData getSkill() {
         return skill;
     }
 }

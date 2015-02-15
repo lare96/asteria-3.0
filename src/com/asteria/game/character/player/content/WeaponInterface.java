@@ -166,12 +166,12 @@ public enum WeaponInterface {
         for (FightType type : weapon.getFightTypes()) {
             if (type.getStyle() == player.getFightType().getStyle()) {
                 player.setFightType(type);
-                player.getEncoder().sendConfig(player.getFightType().getParent(), player.getFightType().getChild());
+                player.getEncoder().sendByteState(player.getFightType().getParent(), player.getFightType().getChild());
                 return;
             }
         }
         player.setFightType(player.getWeapon().getFightTypes()[0]);
-        player.getEncoder().sendConfig(player.getFightType().getParent(), player.getFightType().getChild());
+        player.getEncoder().sendByteState(player.getFightType().getParent(), player.getFightType().getChild());
     }
 
     /**

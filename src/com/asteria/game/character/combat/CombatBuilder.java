@@ -6,8 +6,8 @@ import com.asteria.game.NodeType;
 import com.asteria.game.character.CharacterNode;
 import com.asteria.game.character.npc.Npc;
 import com.asteria.game.character.player.Player;
-import com.asteria.task.ActionListener;
-import com.asteria.task.TaskManager;
+import com.asteria.task.EventListener;
+import com.asteria.task.TaskHandler;
 
 /**
  * Controls and gives access to the main parts of the combat process such as
@@ -94,8 +94,8 @@ public final class CombatBuilder {
             }
             return;
         }
-        TaskManager.cancel(this);
-        TaskManager.submit(new CombatDistanceListener(this, target));
+        TaskHandler.cancel(this);
+        TaskHandler.submit(new CombatDistanceListener(this, target));
     }
 
     /**
@@ -278,12 +278,12 @@ public final class CombatBuilder {
     }
 
     /**
-     * An {@link ActionListener} implementation that is used to listen for the
+     * An {@link EventListener} implementation that is used to listen for the
      * controller to become in proper range of the victim.
      * 
      * @author lare96
      */
-    private static final class CombatDistanceListener extends ActionListener {
+    private static final class CombatDistanceListener extends EventListener {
 
         /**
          * The combat builder owned by the controller.
@@ -342,7 +342,7 @@ public final class CombatBuilder {
 
             if (builder.combatTask == null || !builder.combatTask.isRunning()) {
                 builder.combatTask = new CombatSession(builder);
-                TaskManager.submit(builder.combatTask);
+                TaskHandler.submit(builder.combatTask);
             }
         }
     }

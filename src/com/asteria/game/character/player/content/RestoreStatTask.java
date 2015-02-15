@@ -7,7 +7,7 @@ import com.asteria.game.character.player.Player;
 import com.asteria.game.character.player.Rights;
 import com.asteria.game.character.player.skill.Skills;
 import com.asteria.task.Task;
-import com.asteria.task.TaskManager;
+import com.asteria.task.TaskHandler;
 
 /**
  * The class that handles the restoration of weakened skills.
@@ -70,6 +70,6 @@ public final class RestoreStatTask extends Task {
 
     @Override
     public void onCancel() {
-        TaskManager.submit(new RestoreStatTask());
+        TaskHandler.submit(new RestoreStatTask());
     }
 }

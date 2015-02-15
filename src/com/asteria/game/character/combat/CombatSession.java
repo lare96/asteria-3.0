@@ -13,7 +13,7 @@ import com.asteria.game.character.player.minigame.Minigame;
 import com.asteria.game.character.player.minigame.MinigameHandler;
 import com.asteria.game.location.Location;
 import com.asteria.task.Task;
-import com.asteria.task.TaskManager;
+import com.asteria.task.TaskHandler;
 import com.asteria.utility.RandomGen;
 import com.asteria.utility.Settings;
 
@@ -100,7 +100,7 @@ public final class CombatSession extends Task {
                         builder.determineStrategy();
                     }
                 }
-                TaskManager.submit(new CombatSessionAttack(builder, data));
+                TaskHandler.submit(new CombatSessionAttack(builder, data));
             }
             builder.resetAttackTimer();
             builder.getCharacter().faceCharacter(builder.getVictim());

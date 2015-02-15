@@ -10,14 +10,14 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 /**
- * A utility class that provides functionality for parsing {@code JSON} files.
+ * The utility class that provides functions for parsing {@code .json} files.
  * 
  * @author lare96 <http://www.rune-server.org/members/lare96/>
  */
 public abstract class JsonLoader {
 
     /**
-     * The path to the {@code JSON} file being parsed.
+     * The path to the {@code .json} file being parsed.
      */
     private final String path;
 
@@ -43,7 +43,7 @@ public abstract class JsonLoader {
 
     /**
      * Loads the parsed data. How the data is loaded is defined by
-     * {@link JsonLoader#load(JsonObject reader, Gson builder)}.
+     * {@link JsonLoader#load(JsonObject, Gson)}.
      * 
      * @return the loader instance, for chaining.
      */

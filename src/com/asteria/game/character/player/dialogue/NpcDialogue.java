@@ -5,7 +5,7 @@ package com.asteria.game.character.player.dialogue;
  * 
  * @author lare96 <http://www.rune-server.org/members/lare96/>
  */
-public class NpcDialogue implements DialogueChain {
+public final class NpcDialogue implements DialogueChain {
 
     /**
      * The identifier for the NPC sending this dialogue.

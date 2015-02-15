@@ -12,7 +12,7 @@ import com.asteria.game.character.player.Player;
 import com.asteria.game.item.Item;
 import com.asteria.game.item.container.ItemContainer;
 import com.asteria.game.item.container.ItemContainerPolicy;
-import com.asteria.task.TaskManager;
+import com.asteria.task.TaskHandler;
 import com.asteria.utility.Settings;
 import com.asteria.utility.TextUtils;
 
@@ -21,7 +21,7 @@ import com.asteria.utility.TextUtils;
  * 
  * @author lare96 <http://www.rune-server.org/members/lare96/>
  */
-public class Shop {
+public final class Shop {
 
     /**
      * The map that holds all of the shop names mapped to their shop instances.
@@ -88,7 +88,7 @@ public class Shop {
     }
 
     @Override
-    public final int hashCode() {
+    public int hashCode() {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((name == null) ? 0 : name.hashCode());
@@ -96,7 +96,7 @@ public class Shop {
     }
 
     @Override
-    public final boolean equals(Object obj) {
+    public boolean equals(Object obj) {
         if (this == obj)
             return true;
         if (obj == null)
@@ -143,9 +143,9 @@ public class Shop {
             p -> p.getEncoder().sendItemsOnInterface(3900, container.container(), size));
 
         if (checkStock && restock) {
-            if (TaskManager.running(this) || !needsRestock())
+            if (TaskHandler.running(this) || !needsRestock())
                 return;
-            TaskManager.submit(new ShopRestockTask(this));
+            TaskHandler.submit(new ShopRestockTask(this));
         }
     }
 
@@ -168,8 +168,7 @@ public class Shop {
             return;
         }
         String formatPrice = TextUtils.formatPrice((int) Math.floor(determinePrice(item) / 2));
-        String currencyName = currency.name().toLowerCase().replaceAll("_", " ");
-        player.getEncoder().sendMessage(itemName + ": shop will buy for " + formatPrice + " " + currencyName + ".");
+        player.getEncoder().sendMessage(itemName + ": shop will buy for " + formatPrice + " " + currency + ".");
     }
 
     /**
@@ -188,8 +187,7 @@ public class Shop {
         player
             .getEncoder()
             .sendMessage(
-                item.getDefinition().getName() + ": shop will sell for " + TextUtils.formatPrice(determinePrice(item)) + " " + currency
-                    .name().toLowerCase().replaceAll("_", " ") + ".");
+                item.getDefinition().getName() + ": shop will sell for" + TextUtils.formatPrice(determinePrice(item)) + " " + currency + ".");
     }
 
     /**
@@ -210,9 +208,8 @@ public class Shop {
         if (!container.contains(item.getId()))
             return false;
         int value = currency == Currency.COINS ? item.getDefinition().getGeneralPrice() : item.getDefinition().getSpecialPrice();
-        String name = currency.name().replaceAll("_", " ");
         if (!(currency.getCurrency().currencyAmount(player) >= (value * item.getAmount()))) {
-            player.getEncoder().sendMessage("You do not have enough " + name + " to buy this item.");
+            player.getEncoder().sendMessage("You do not have enough " + currency + " to buy this item.");
             return false;
         }
         if (item.getAmount() > container.amount(item.getId()))

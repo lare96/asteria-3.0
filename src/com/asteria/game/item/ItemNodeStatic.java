@@ -10,7 +10,7 @@ import com.asteria.game.location.Position;
  * 
  * @author lare96 <http://www.rune-server.org/members/lare96/>
  */
-public class ItemNodeStatic extends ItemNode {
+public final class ItemNodeStatic extends ItemNode {
 
     /**
      * The current item policy of this node.
