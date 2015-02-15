@@ -16,7 +16,8 @@ public enum Flag {
     FACE_COORDINATE(6),
     HIT(7),
     HIT_2(8),
-    TRANSFORM(9);
+    TRANSFORM(9),
+    FORCED_MOVEMENT(10);
 
     /**
      * The identification for this update flag.

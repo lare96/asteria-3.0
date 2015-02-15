@@ -322,6 +322,10 @@ public final class PlayerUpdating {
         }
         DataBuffer cachedBuffer = DataBuffer.create(300);
         int mask = 0x0;
+
+        if (player.getFlags().get(Flag.FORCED_MOVEMENT)) {
+            mask |= 0x400;
+        }
         if (player.getFlags().get(Flag.GRAPHICS)) {
             mask |= 0x100;
         }
@@ -355,6 +359,10 @@ public final class PlayerUpdating {
         } else {
             cachedBuffer.put(mask);
         }
+
+        if (player.getFlags().get(Flag.FORCED_MOVEMENT)) {
+            appendForcedMovement(player, cachedBuffer);
+        }
         if (player.getFlags().get(Flag.GRAPHICS)) {
             appendGraphic(player, cachedBuffer);
         }
@@ -386,6 +394,26 @@ public final class PlayerUpdating {
             player.setCachedUpdateBlock(cachedBuffer.buffer());
         }
         block.putBytes(cachedBuffer.buffer());
+    }
+
+    /**
+     * Appends the state of forced movement to {@code out} for {@code player}.
+     * 
+     * @param player
+     *            the player to append the state for.
+     * @param out
+     *            the buffer to append it to.
+     */
+    private static void appendForcedMovement(Player player, DataBuffer out) {
+        int localX = player.getPosition().getLocalX();
+        int localY = player.getPosition().getLocalY();
+        out.put(localX, ValueType.S);
+        out.put(localY, ValueType.S);
+        out.put(localX + player.getForcedMovement().getAmountX(), ValueType.S);
+        out.put(localY + player.getForcedMovement().getAmountY(), ValueType.S);
+        out.putShort(1, ValueType.A, ByteOrder.LITTLE);
+        out.putShort(0, ValueType.A);
+        out.put(player.getForcedMovement().getDirection(), ValueType.S);
     }
 
     /**

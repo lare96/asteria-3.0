@@ -32,6 +32,7 @@ import com.asteria.game.character.combat.weapon.CombatSpecial;
 import com.asteria.game.character.combat.weapon.FightType;
 import com.asteria.game.character.npc.Npc;
 import com.asteria.game.character.npc.NpcAggression;
+import com.asteria.game.character.player.content.ForcedMovement;
 import com.asteria.game.character.player.content.PrivateMessage;
 import com.asteria.game.character.player.content.Spellbook;
 import com.asteria.game.character.player.content.TeleportSpell;
@@ -53,6 +54,7 @@ import com.asteria.game.shop.Shop;
 import com.asteria.network.ConnectionHandler;
 import com.asteria.network.packet.PacketEncoder;
 import com.asteria.task.Task;
+import com.asteria.task.TaskHandler;
 import com.asteria.utility.LoggerUtils;
 import com.asteria.utility.MutableNumber;
 import com.asteria.utility.Settings;
@@ -280,6 +282,11 @@ public class Player extends CharacterNode {
      * The weapon animation for appearance updating.
      */
     private WeaponAnimation weaponAnimation;
+
+    /**
+     * The forced movement container for the update mask.
+     */
+    private ForcedMovement forcedMovement;
 
     /**
      * The task that handles combat prayer draining.
@@ -628,6 +635,28 @@ public class Player extends CharacterNode {
         skills[id].decreaseLevel((int) ((effect.getRate()) * (skills[id].getLevel())));
         encoder.sendMessage("You feel slightly weakened.");
         return true;
+    }
+
+    /**
+     * Applies the forced movement update mask to this player.
+     * 
+     * @param movement
+     *            the forced movement to apply.
+     * @param ticks
+     *            the amount of ticks it will take for this movement to
+     *            complete.
+     */
+    public void movement(ForcedMovement movement, int ticks) {
+        TaskHandler.submit(new Task(ticks, false) {
+            @Override
+            public void execute() {
+                setNeedsPlacement(true);
+                getPosition().move(movement.getAmountX(), movement.getAmountY());
+                this.cancel();
+            }
+        }.attach(this));
+        forcedMovement = movement.copy();
+        super.getFlags().set(Flag.FORCED_MOVEMENT);
     }
 
     /**
@@ -1838,5 +1867,24 @@ public class Player extends CharacterNode {
      */
     public final void setUpdateRegion(boolean updateRegion) {
         this.updateRegion = updateRegion;
+    }
+
+    /**
+     * Gets the forced movement container for the update mask.
+     * 
+     * @return the forced movement container.
+     */
+    public ForcedMovement getForcedMovement() {
+        return forcedMovement;
+    }
+
+    /**
+     * Sets the value for {@link Player#forcedMovement}.
+     * 
+     * @param forcedMovement
+     *            the new value to set.
+     */
+    public void setForcedMovement(ForcedMovement forcedMovement) {
+        this.forcedMovement = forcedMovement;
     }
 }
