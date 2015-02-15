@@ -5,17 +5,17 @@ package com.asteria.game.character;
  * 
  * @author lare96 <http://www.rune-server.org/members/lare96/>
  */
-public class Graphic {
+public final class Graphic {
 
     /**
      * The identification for this graphic.
      */
-    private int id;
+    private final int id;
 
     /**
      * The height of this graphic.
      */
-    private int height;
+    private final int height;
 
     /**
      * Creates a new {@link Graphic}.
@@ -56,18 +56,8 @@ public class Graphic {
      * 
      * @return the identification for this graphic.
      */
-    public final int getId() {
+    public int getId() {
         return id;
-    }
-
-    /**
-     * Sets the value for {@link Graphic#id}.
-     * 
-     * @param id
-     *            the new value to set.
-     */
-    public final void setId(int id) {
-        this.id = id;
     }
 
     /**
@@ -75,17 +65,7 @@ public class Graphic {
      * 
      * @return the height of this graphic.
      */
-    public final int getHeight() {
+    public int getHeight() {
         return height;
-    }
-
-    /**
-     * Sets the value for {@link Graphic#height}.
-     * 
-     * @param id
-     *            the new value to set.
-     */
-    public final void setHeight(int height) {
-        this.height = height;
     }
 }

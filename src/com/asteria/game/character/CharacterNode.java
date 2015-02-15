@@ -353,8 +353,7 @@ public abstract class CharacterNode extends Node {
      *            the graphic to execute.
      */
     public void highGraphic(Graphic graphic) {
-        this.graphic = graphic.copy();
-        this.graphic.setHeight(6553600);
+        this.graphic = new Graphic(graphic.getId(), 6553600);
         flags.set(Flag.GRAPHICS);
     }
 
