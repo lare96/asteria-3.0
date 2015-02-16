@@ -91,8 +91,8 @@ public final class CharacterList<E extends CharacterNode> implements Iterable<E>
         Objects.requireNonNull(e);
 
         if (e.isRegistered()) {
-            e.dispose();
             e.setRegistered(false);
+            e.dispose();
             characters[e.getSlot()] = null;
             lastSlot = e.getSlot();
             size--;
