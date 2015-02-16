@@ -14,11 +14,12 @@ final class FightCavesHandler {
 
     static final Position DEATH_POSITION = new Position(2399, 5177)
     static final int GAME_CYCLE_MINUTES = 5
+    static final int PLAYERS_NEEDED = 2
     static String currentChampion = "Xil"
     static Queue<Player> awaiting = new ArrayDeque<>()
     static Set<Player> players = new HashSet<>()
     static int gameCounter = 0
-    private static Stopwatch timeoutCounter = new Stopwatch()
+    static Stopwatch timeoutCounter = new Stopwatch()
 
     private FightCavesHandler() {
         throw new UnsupportedOperationException()
@@ -42,7 +43,7 @@ final class FightCavesHandler {
     }
 
     static def end(boolean timeout) {
-        if(players.size() > 1)
+        if(players.size() > 1 && !timeout)
             return
         if(timeout) {
             players.each {
@@ -64,7 +65,7 @@ final class FightCavesHandler {
                 if(!it.registered)
                     return
                 currentChampion = it.getFormatUsername()
-                it.inventory.add new Item(995, 50000)
+                it.inventory.add new Item(6529, 100)
                 it.encoder.sendMessage "Congratulations, you have won the fight pits minigame!"
                 World.message "${currentChampion} has won the fight pits minigame!"
                 it.encoder.sendContextMenu(3, "null")
@@ -76,6 +77,7 @@ final class FightCavesHandler {
                 CombatPrayer.deactivateAll it
                 Skills.restoreAll it
                 it.move FightCavesHandler.DEATH_POSITION
+                it.skullIcon = Player.RED_SKULL
             }
         }
         players.clear()
@@ -92,5 +94,9 @@ final class FightCavesHandler {
 
     static boolean remove(Player player) {
         awaiting.remove player
+    }
+
+    static boolean isChampion(Player player) {
+        player.username.equalsIgnoreCase(currentChampion)
     }
 }

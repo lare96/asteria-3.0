@@ -1,5 +1,7 @@
 package com.asteria.game.character.combat.effect;
 
+import plugin.minigames.FightCavesHandler;
+
 import com.asteria.game.character.Flag;
 import com.asteria.game.character.player.Player;
 import com.asteria.task.TaskHandler;
@@ -33,7 +35,7 @@ public final class CombatSkullEffect extends CombatEffect {
             return false;
         }
         player.getSkullTimer().set(3000);
-        player.setSkullIcon(0);
+        player.setSkullIcon(Player.WHITE_SKULL);
         player.getFlags().set(Flag.APPEARANCE);
         return true;
     }
@@ -56,8 +58,11 @@ public final class CombatSkullEffect extends CombatEffect {
     @Override
     public void onLogin() {
         if (player.getSkullTimer().get() > 0) {
-            player.setSkullIcon(0);
+            player.setSkullIcon(Player.WHITE_SKULL);
             TaskHandler.submit(this);
+            return;
         }
+        if (FightCavesHandler.isChampion(player))
+            player.setSkullIcon(Player.RED_SKULL);
     }
 }

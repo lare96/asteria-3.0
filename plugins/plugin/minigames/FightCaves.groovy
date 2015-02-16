@@ -13,8 +13,6 @@ import com.asteria.game.plugin.PluginSignature
 @PluginSignature(Minigame.class)
 final class FightCaves extends SequencedMinigame {
 
-    // TODO: Viewing orbs!
-
     FightCaves() {
         super("Fight Caves")
     }
@@ -23,7 +21,7 @@ final class FightCaves extends SequencedMinigame {
     void onSequence() {
         if(FightCavesHandler.timeoutCounter.elapsed(20, TimeUnit.MINUTES) && !FightCavesHandler.timeoutCounter.isStopped())
             FightCavesHandler.end true
-        if(++FightCavesHandler.gameCounter >= FightCavesHandler.GAME_CYCLE_MINUTES && FightCavesHandler.players.size() == 0 && FightCavesHandler.awaiting.size() >= 2)
+        if(++FightCavesHandler.gameCounter >= FightCavesHandler.GAME_CYCLE_MINUTES && FightCavesHandler.players.size() == 0 && FightCavesHandler.awaiting.size() >= FightCavesHandler.PLAYERS_NEEDED)
             FightCavesHandler.start()
         FightCavesHandler.update()
     }

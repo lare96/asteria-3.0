@@ -116,6 +116,16 @@ public class Player extends CharacterNode {
     public static final int GENDER_FEMALE = 1;
 
     /**
+     * The player appearance update white skull identifier.
+     */
+    public static final int WHITE_SKULL = 0;
+
+    /**
+     * The player appearance update red skull identifier.
+     */
+    public static final int RED_SKULL = 1;
+
+    /**
      * The logger that will print important information.
      */
     private static Logger logger = LoggerUtils.getLogger(Player.class);
@@ -686,6 +696,7 @@ public class Player extends CharacterNode {
         if (!spell.canCast(this))
             return;
         FightCavesHandler.remove(this);
+        encoder.sendWalkable(-1);
         teleportStage = 1;
         super.getCombatBuilder().reset();
         faceCharacter(null);

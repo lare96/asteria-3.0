@@ -7,6 +7,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
+import plugin.minigames.FightCavesHandler;
+
 import com.asteria.game.character.Animation;
 import com.asteria.game.character.CharacterDeath;
 import com.asteria.game.character.Flag;
@@ -87,7 +89,7 @@ public final class PlayerDeath extends CharacterDeath<Player> {
         character.getEncoder().sendByteState(301, 0);
         character.setSpecialActivated(false);
         character.getSkullTimer().set(0);
-        character.setSkullIcon(-1);
+        character.setSkullIcon(FightCavesHandler.isChampion(character) ? Player.RED_SKULL : -1);
         character.getTeleblockTimer().set(0);
         character.animation(new Animation(65535));
         WeaponInterface.execute(character, character.getEquipment().get(Equipment.WEAPON_SLOT));
