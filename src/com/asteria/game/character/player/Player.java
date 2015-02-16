@@ -515,9 +515,7 @@ public class Player extends CharacterNode {
 
     @Override
     public void dispose() {
-        PacketEncoder encoder = getEncoder();
-        if (!session.isPacketDisconnect())
-            encoder.sendLogout();
+        encoder.sendLogout();
     }
 
     @Override

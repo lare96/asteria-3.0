@@ -150,26 +150,20 @@ public final class PlayerIO {
      */
     public void disconnect(boolean forced) {
         try {
-            if (forced)
-                packetDisconnect = true;
+            packetDisconnect = forced;
             if (state == IOState.LOGGED_IN) {
-                player.save();
                 if (player.getOpenShop() != null)
                     Shop.SHOPS.get(player.getOpenShop()).getPlayers().remove(player);
                 TaskHandler.cancel(player.getCombatBuilder());
                 TaskHandler.cancel(player);
                 Arrays.fill(player.getSkillEvent(), false);
                 World.getPlayers().remove(player);
-
-                if (!forced) {
-                    MinigameHandler.execute(player, m -> m.onLogout(player));
-                    player.getTradeSession().reset(false);
-                    player.getPrivateMessage().updateOtherList(false);
-                }
-            }
-
-            if(FightCavesHandler.remove(player) && !forced) {
-                player.move(new Position(2399, 5177));
+                MinigameHandler.execute(player, m -> m.onLogout(player));
+                player.getTradeSession().reset(false);
+                player.getPrivateMessage().updateOtherList(false);
+                if (FightCavesHandler.remove(player))
+                    player.move(new Position(2399, 5177));
+                player.save();
             }
             key.attach(null);
             key.cancel();
@@ -189,7 +183,7 @@ public final class PlayerIO {
      *            the packet of data to send.
      */
     public void send(ByteBuffer buffer) {
-        if (!channel.isOpen())
+        if (!channel.isOpen() || packetDisconnect)
             return;
         buffer.flip();
         try {
@@ -403,15 +397,5 @@ public final class PlayerIO {
      */
     public void setDecryptor(ISAACCipher decryptor) {
         this.decryptor = decryptor;
-    }
-
-    /**
-     * Determines if the player disconnected while sending data.
-     * 
-     * @return {@code true} if the player packet disconnected, {@code false}
-     *         otherwise.
-     */
-    public boolean isPacketDisconnect() {
-        return packetDisconnect;
     }
 }
