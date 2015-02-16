@@ -187,7 +187,7 @@ public final class Shop {
         player
             .getEncoder()
             .sendMessage(
-                item.getDefinition().getName() + ": shop will sell for" + TextUtils.formatPrice(determinePrice(item)) + " " + currency + ".");
+                item.getDefinition().getName() + ": shop will sell for " + TextUtils.formatPrice(determinePrice(item)) + " " + currency + ".");
     }
 
     /**
