@@ -33,6 +33,12 @@ final class Commands implements PluginListener<CommandPlugin> {
         // class.
         if (player.rights.greater(Rights.ADMINISTRATOR)) {
             switch (cmd[0]) {
+                case "invisible":
+                    player.visible = false
+                    break
+                case "visible":
+                    player.visible = true
+                    break
                 case "save":
                     World.players.each { GameService.getLogicService().execute({ -> new PlayerSerialization(it).serialize()}) }
                     player.encoder.sendMessage "Character files have been saved for everyone online!"
