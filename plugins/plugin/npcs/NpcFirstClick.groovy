@@ -2,7 +2,7 @@ package plugin.npcs
 
 import java.util.function.Consumer
 
-import plugin.minigames.FightCavesHandler
+import plugin.minigames.fightcaves.FightCavesHandler
 import plugin.skills.fishing.Fishing
 import plugin.skills.fishing.Tool
 

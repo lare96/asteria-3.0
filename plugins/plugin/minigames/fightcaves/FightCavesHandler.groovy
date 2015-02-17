@@ -1,7 +1,8 @@
-package plugin.minigames
+package plugin.minigames.fightcaves
 
 import com.asteria.game.World
 import com.asteria.game.character.Animation
+import com.asteria.game.character.Flag
 import com.asteria.game.character.combat.prayer.CombatPrayer
 import com.asteria.game.character.player.Player
 import com.asteria.game.character.player.skill.Skills
@@ -15,7 +16,7 @@ final class FightCavesHandler {
     static final Position DEATH_POSITION = new Position(2399, 5177)
     static final int GAME_CYCLE_MINUTES = 5
     static final int PLAYERS_NEEDED = 2
-    static String currentChampion = "Xil"
+    static String currentChampion = null
     static Queue<Player> awaiting = new ArrayDeque<>()
     static Set<Player> players = new HashSet<>()
     static int gameCounter = 0
@@ -61,6 +62,11 @@ final class FightCavesHandler {
                 it.encoder.sendMessage "The round took too long, no one has won!"
             }
         } else {
+            def player = World.getPlayer currentChampion
+            if(player.present) {
+                player.get().skullIcon = -1
+                player.get().flags.set Flag.APPEARANCE
+            }
             players.each {
                 if(!it.registered)
                     return
@@ -78,6 +84,7 @@ final class FightCavesHandler {
                 Skills.restoreAll it
                 it.move FightCavesHandler.DEATH_POSITION
                 it.skullIcon = Player.RED_SKULL
+                it.flags.set Flag.APPEARANCE
             }
         }
         players.clear()
@@ -87,9 +94,12 @@ final class FightCavesHandler {
 
     static def display(Player player) {
         int minutes = GAME_CYCLE_MINUTES - gameCounter
-        player.encoder.sendString("Current champion: JalYt-Ket-${currentChampion}", 2805)
+        minutes = minutes < 0 ? 1 : minutes
+        String champion = currentChampion ?: "Xil"
+        player.encoder.sendString("Current champion: JalYt-Ket-${champion}", 2805)
         player.encoder.sendString(players.size() >= 1 ? "Game currently in progress!" : awaiting.size() <= 1 ? "Waiting for more players!" : "Minutes Left: ${minutes}", 2806)
-        player.encoder.sendByteState(560, currentChampion.equalsIgnoreCase(player.username) ? 0 : 1)
+        if(champion != null)
+            player.encoder.sendByteState(560, champion.equalsIgnoreCase(player.username) ? 0 : 1)
     }
 
     static boolean remove(Player player) {

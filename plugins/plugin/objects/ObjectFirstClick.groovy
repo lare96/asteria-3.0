@@ -1,6 +1,6 @@
 package plugin.objects
 
-import plugin.minigames.FightCavesHandler
+import plugin.minigames.fightcaves.FightCavesHandler
 
 import com.asteria.game.character.Animation
 import com.asteria.game.character.player.Player

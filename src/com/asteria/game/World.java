@@ -67,6 +67,8 @@ public final class World {
      *         not found.
      */
     public static Optional<Player> getPlayer(String username) {
+        if (username == null)
+            return Optional.empty();
         return players.search(player -> player.getUsername().equals(username));
     }
 

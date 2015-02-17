@@ -91,7 +91,7 @@ public final class GameService implements Runnable {
                 iterator.remove();
             }
             double percent = random.round(((double) (num / BENCHMARKS) / 600), 10000);
-            logger.info("BENCHMARK[average operational latency= " + (percent * 100.0) + "%]");
+            logger.info("BENCHMARK[engine load= " + (percent * 100.0) + "%]");
         } else {
             benchmarks.add(timer.elapsedTime());
         }

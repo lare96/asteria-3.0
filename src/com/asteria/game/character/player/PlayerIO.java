@@ -6,7 +6,7 @@ import java.nio.channels.SocketChannel;
 import java.util.Arrays;
 import java.util.logging.Logger;
 
-import plugin.minigames.FightCavesHandler;
+import plugin.minigames.fightcaves.FightCavesHandler;
 
 import com.asteria.game.World;
 import com.asteria.game.character.player.login.LoginProtocolDecoderChain;

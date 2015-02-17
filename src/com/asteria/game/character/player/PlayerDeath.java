@@ -7,7 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
-import plugin.minigames.FightCavesHandler;
+import plugin.minigames.fightcaves.FightCavesHandler;
 
 import com.asteria.game.character.Animation;
 import com.asteria.game.character.CharacterDeath;

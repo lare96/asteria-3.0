@@ -1,4 +1,4 @@
-package plugin.minigames
+package plugin.minigames.fightcaves
 
 import java.util.concurrent.TimeUnit
 

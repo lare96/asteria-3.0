@@ -1,6 +1,6 @@
 package com.asteria.game.character.combat.effect;
 
-import plugin.minigames.FightCavesHandler;
+import plugin.minigames.fightcaves.FightCavesHandler;
 
 import com.asteria.game.character.Flag;
 import com.asteria.game.character.player.Player;

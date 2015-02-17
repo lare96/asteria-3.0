@@ -8,7 +8,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.logging.Logger;
 
-import plugin.minigames.FightCavesHandler;
+import plugin.minigames.fightcaves.FightCavesHandler;
 import plugin.skills.cooking.CookingData;
 
 import com.asteria.game.GameService;
