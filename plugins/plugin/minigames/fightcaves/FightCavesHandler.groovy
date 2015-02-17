@@ -23,7 +23,7 @@ final class FightCavesHandler {
     static Stopwatch timeoutCounter = new Stopwatch()
 
     private FightCavesHandler() {
-        throw new UnsupportedOperationException()
+        throw new UnsupportedOperationException("This class cannot be instantiated!")
     }
 
     static def start() {

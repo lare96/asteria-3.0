@@ -26,7 +26,7 @@ public final class NpcUpdating {
      *             if this class is instantiated.
      */
     private NpcUpdating() {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException("This class cannot be instantiated!");
     }
 
     /**

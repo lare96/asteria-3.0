@@ -51,7 +51,7 @@ public final class ConnectionHandler {
      *             if this class is instantiated.
      */
     private ConnectionHandler() {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException("This class cannot be instantiated!");
     }
 
     /**

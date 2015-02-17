@@ -27,7 +27,7 @@ public final class PlayerUpdating {
      *             if this class is instantiated.
      */
     private PlayerUpdating() {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException("This class cannot be instantiated!");
     }
 
     /**

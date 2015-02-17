@@ -25,7 +25,7 @@ public final class Dialogues {
      *             if this class is instantiated.
      */
     private Dialogues() {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException("This class cannot be instantiated!");
     }
 
     /**

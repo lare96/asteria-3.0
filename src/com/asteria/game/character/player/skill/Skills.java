@@ -129,7 +129,7 @@ public final class Skills {
      *             if this class is instantiated.
      */
     private Skills() {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException("This class cannot be instantiated!");
     }
 
     /**

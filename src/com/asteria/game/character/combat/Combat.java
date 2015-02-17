@@ -149,7 +149,7 @@ public final class Combat {
      *             if this class is instantiated.
      */
     private Combat() {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException("This class cannot be instantiated!");
     }
 
     /**
