@@ -64,7 +64,7 @@ public abstract class CharacterDeath<T extends CharacterNode> extends Task {
     public abstract void postDeath(T character);
 
     @Override
-    public void execute() {
+    public final void execute() {
         if (counter == 0) {
             character.setDead(true);
             character.setPoisonDamage(0);
@@ -83,7 +83,7 @@ public abstract class CharacterDeath<T extends CharacterNode> extends Task {
     }
 
     @Override
-    public void onThrowable(Throwable t) {
+    public final void onThrowable(Throwable t) {
         if (character.getType() == NodeType.PLAYER) {
             World.getPlayers().remove((Player) character);
         } else if (character.getType() == NodeType.NPC) {
