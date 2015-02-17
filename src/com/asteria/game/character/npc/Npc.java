@@ -99,7 +99,7 @@ public final class Npc extends CharacterNode {
     @Override
     public Hit decrementHealth(Hit hit) {
         if (hit.getDamage() > currentHealth)
-            hit.setDamage(currentHealth);
+            hit = new Hit(currentHealth, hit.getType());
         currentHealth -= hit.getDamage();
         return hit;
     }

@@ -542,7 +542,7 @@ public class Player extends CharacterNode {
     public Hit decrementHealth(Hit hit) {
         PacketEncoder encoder = getEncoder();
         if (hit.getDamage() > skills[Skills.HITPOINTS].getLevel()) {
-            hit.setDamage(skills[Skills.HITPOINTS].getLevel());
+            hit = new Hit(skills[Skills.HITPOINTS].getLevel(), hit.getType());
         }
         skills[Skills.HITPOINTS].decreaseLevel(hit.getDamage());
         Skills.refresh(this, Skills.HITPOINTS);

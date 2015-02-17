@@ -5,17 +5,17 @@ package com.asteria.game.character;
  * 
  * @author lare96 <http://www.rune-server.org/members/lare96/>
  */
-public class Hit {
+public final class Hit {
 
     /**
      * The amount of damage within this hit.
      */
-    private int damage;
+    private final int damage;
 
     /**
      * The hit type represented by this hit.
      */
-    private HitType type;
+    private final HitType type;
 
     /**
      * Creates a new {@link Hit}.
@@ -26,9 +26,15 @@ public class Hit {
      *            the hit type represented by this hit.
      */
     public Hit(int damage, HitType type) {
+        if (damage == 0 && type == HitType.NORMAL) {
+            type = HitType.BLOCKED;
+        } else if (damage > 0 && type == HitType.BLOCKED) {
+            damage = 0;
+        } else if (damage < 0) {
+            damage = 0;
+        }
         this.damage = damage;
         this.type = type;
-        this.modify();
     }
 
     /**
@@ -53,38 +59,12 @@ public class Hit {
     }
 
     /**
-     * Modifies the {@code damage} and {@code type} fields so the hits will look
-     * appropriate when displayed (things like not hitting a 15 with a blue
-     * hitmark or 0 with a red hitmark).
-     */
-    private final void modify() {
-        if (this.damage == 0 && this.type == HitType.NORMAL) {
-            this.type = HitType.BLOCKED;
-        } else if (this.damage > 0 && this.type == HitType.BLOCKED) {
-            this.damage = 0;
-        } else if (this.damage < 0) {
-            this.damage = 0;
-        }
-    }
-
-    /**
      * Gets the amount of damage within this hit.
      * 
      * @return the amount of damage within this hit.
      */
-    public final int getDamage() {
+    public int getDamage() {
         return damage;
-    }
-
-    /**
-     * Sets the value for {@link Hit#damage}.
-     * 
-     * @param type
-     *            the new value to set.
-     */
-    public final void setDamage(int damage) {
-        this.damage = damage;
-        this.modify();
     }
 
     /**
@@ -92,18 +72,7 @@ public class Hit {
      * 
      * @return the hit type represented by this hit.
      */
-    public final HitType getType() {
+    public HitType getType() {
         return type;
-    }
-
-    /**
-     * Sets the value for {@link Hit#type}.
-     * 
-     * @param type
-     *            the new value to set.
-     */
-    public final void setType(HitType type) {
-        this.type = type;
-        this.modify();
     }
 }

@@ -5,6 +5,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 import com.asteria.game.NodeType;
+import com.asteria.game.character.Hit;
 import com.asteria.game.character.combat.prayer.CombatPrayer;
 import com.asteria.game.character.combat.weapon.CombatSpecial;
 import com.asteria.game.character.npc.Npc;
@@ -197,7 +198,7 @@ public final class CombatSession extends Task {
                 for (CombatHit h : data.getHits()) {
                     int hit = h.getHit().getDamage();
                     double mod = Math.abs(1 - Combat.PRAYER_DAMAGE_REDUCTION);
-                    h.getHit().setDamage((int) (hit * mod));
+                    h.setHit(new Hit((int) (hit * mod), h.getHit().getType()));
                     if (Settings.DEBUG)
                         player.getEncoder().sendMessage(
                             "[DEBUG]: Damage reduced by opponents prayer [" + (hit - h.getHit().getDamage()) + "]");
