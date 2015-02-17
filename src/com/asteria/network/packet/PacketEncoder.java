@@ -42,6 +42,38 @@ public final class PacketEncoder {
     }
 
     /**
+     * The packet that transforms a player into an {@link ObjectNode}.
+     * 
+     * @param object
+     *            the object to transform into.
+     * @param startDelay
+     *            the delay in which the player will transform into said object.
+     * @param duration
+     *            the duration of the transformation.
+     * @param modelPriorityX
+     *            the object's model viewing priority x-axis.
+     * @param modelPriorityY
+     *            the object's model viewing priority y-axis.
+     * @return an instance of this encoder.
+     */
+    public PacketEncoder sendObjectTransformation(ObjectNode object, int startDelay, int duration, int modelPriorityX, int modelPriorityY) {
+        sendCoordinates(object.getPosition());
+        DataBuffer out = DataBuffer.create();
+        out.put(0, ValueType.S);
+        out.putShort(player.getSlot());
+        out.put(modelPriorityX, ValueType.S);
+        out.putShort(startDelay, ByteOrder.LITTLE);
+        out.put(modelPriorityY, ValueType.C);
+        out.putShort(duration);
+        out.put((object.getObjectType().getId() << 2) + (object.getDirection().getId() & 3), ValueType.S);
+        out.put(1);
+        out.putShort(object.getId());
+        out.put(1, ValueType.C);
+        player.getSession().send(out);
+        return this;
+    }
+
+    /**
      * The packet that either shows or hides a layer on an interface.
      * 
      * @param id
