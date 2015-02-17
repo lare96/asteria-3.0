@@ -18,6 +18,9 @@ public final class MovementQueuePacket extends PacketDecoder {
 
     @Override
     public void decode(Player player, int opcode, int size, DataBuffer buf) {
+        if (player.getViewingOrb() != null)
+            return;
+
         player.faceCharacter(null);
 
         if (opcode == 248) {

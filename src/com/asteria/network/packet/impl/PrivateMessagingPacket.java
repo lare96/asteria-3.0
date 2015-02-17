@@ -14,6 +14,9 @@ public final class PrivateMessagingPacket extends PacketDecoder {
 
     @Override
     public void decode(Player player, int opcode, int size, DataBuffer buf) {
+        if (player.getViewingOrb() != null)
+            return;
+
         switch (opcode) {
         case 188:
             addFriend(player, buf);

@@ -5,6 +5,7 @@ import plugin.minigames.fightcaves.FightCavesHandler
 import com.asteria.game.character.Animation
 import com.asteria.game.character.player.Player
 import com.asteria.game.character.player.content.Spellbook
+import com.asteria.game.character.player.content.ViewingOrb
 import com.asteria.game.character.player.skill.Skills
 import com.asteria.game.location.Position
 import com.asteria.game.plugin.PluginListener
@@ -17,6 +18,12 @@ final class ObjectFirstClick implements PluginListener<ObjectFirstClickPlugin> {
     @Override
     void run(Player player, ObjectFirstClickPlugin context) {
         switch (context.id) {
+            case 9391:
+                player.viewingOrb = new ViewingOrb(player, new Position(2398, 5150),
+                new Position(2384, 5157), new Position(2409, 5158), new Position(2388, 5138),
+                new Position(2411, 5137))
+                player.viewingOrb.open()
+                break
             case 9368:
                 if (player.position.y <= 5167 && FightCavesHandler.players.remove(player)) {
                     player.move new Position(2399, 5169)

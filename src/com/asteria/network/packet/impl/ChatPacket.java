@@ -14,6 +14,9 @@ public final class ChatPacket extends PacketDecoder {
 
     @Override
     public void decode(Player player, int opcode, int size, DataBuffer buf) {
+        if (player.getViewingOrb() != null)
+            return;
+
         int effects = buf.get(false, com.asteria.network.ValueType.S);
         int color = buf.get(false, com.asteria.network.ValueType.S);
         int chatLength = (size - 2);

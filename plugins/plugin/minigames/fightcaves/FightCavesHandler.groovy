@@ -31,6 +31,10 @@ final class FightCavesHandler {
         RandomGen random = new RandomGen()
         Player player = null
         while((player = awaiting.poll()) != null) {
+            if(player.viewingOrb != null) {
+                player.viewingOrb.close()
+                player.viewingOrb = null
+            }
             player.encoder.sendContextMenu(3, "Attack")
             player.encoder.sendWalkable(-1)
             player.move new Position(2392 + random.exclusive(12), 5139 + random.exclusive(25))

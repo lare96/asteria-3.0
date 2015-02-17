@@ -37,6 +37,32 @@ final class ClickButtons implements PluginListener<ButtonClickPlugin> {
     void run(Player player, ButtonClickPlugin context) {
         int button = context.getId()
         switch (button) {
+            case 59135:
+                if(player.viewingOrb != null)
+                    player.viewingOrb.move("Centre", 15239, player.viewingOrb.getCentre())
+                break
+            case 59136:
+                if(player.viewingOrb != null)
+                    player.viewingOrb.move("North-West", 15240, player.viewingOrb.getNorthWest())
+                break
+            case 59137:
+                if(player.viewingOrb != null)
+                    player.viewingOrb.move("North-East", 15241, player.viewingOrb.getNorthEast())
+                break
+            case 59138:
+                if(player.viewingOrb != null)
+                    player.viewingOrb.move("South-East", 15242, player.viewingOrb.getSouthEast())
+                break
+            case 59139:
+                if(player.viewingOrb != null)
+                    player.viewingOrb.move("South-West", 15243, player.viewingOrb.getSouthWest())
+                break
+            case 17111:
+                if(player.viewingOrb != null) {
+                    player.viewingOrb.close()
+                    player.viewingOrb = null
+                }
+                break
             case 53152:
                 if (player.cookData != null) {
                     Cooking cooking = new Cooking(player, player.cookPosition, player.cookData, player.usingStove, 1)

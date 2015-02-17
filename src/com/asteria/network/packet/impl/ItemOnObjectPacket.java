@@ -25,6 +25,9 @@ public final class ItemOnObjectPacket extends PacketDecoder {
 
     @Override
     public void decode(Player player, int opcode, int size, DataBuffer buf) {
+        if (player.getViewingOrb() != null)
+            return;
+
         int container = buf.getShort(false);
         int objectId = buf.getShort(true, ByteOrder.LITTLE);
         int objectY = buf.getShort(true, ValueType.A, ByteOrder.LITTLE);

@@ -37,6 +37,7 @@ import com.asteria.game.character.player.content.PrivateMessage;
 import com.asteria.game.character.player.content.Spellbook;
 import com.asteria.game.character.player.content.TeleportSpell;
 import com.asteria.game.character.player.content.TradeSession;
+import com.asteria.game.character.player.content.ViewingOrb;
 import com.asteria.game.character.player.content.WeaponAnimation;
 import com.asteria.game.character.player.content.WeaponInterface;
 import com.asteria.game.character.player.dialogue.DialogueChainBuilder;
@@ -277,6 +278,11 @@ public class Player extends CharacterNode {
      * The ammo that was just fired with.
      */
     private int fireAmmo;
+
+    /**
+     * The current viewing orb that this player has open.
+     */
+    private ViewingOrb viewingOrb;
 
     /**
      * The flag that determines if the special bar has been activated.
@@ -674,6 +680,8 @@ public class Player extends CharacterNode {
      *            the spell the player is using to teleport.
      */
     public void teleport(TeleportSpell spell) {
+        if (viewingOrb != null)
+            return;
         PacketEncoder encoder = getEncoder();
         if (teleportStage > 0)
             return;
@@ -1895,5 +1903,24 @@ public class Player extends CharacterNode {
      */
     public void setForcedMovement(ForcedMovement forcedMovement) {
         this.forcedMovement = forcedMovement;
+    }
+
+    /**
+     * Gets the current viewing orb that this player has open.
+     * 
+     * @return the current viewing orb.
+     */
+    public ViewingOrb getViewingOrb() {
+        return viewingOrb;
+    }
+
+    /**
+     * Sets the value for {@link Player#viewingOrb}.
+     * 
+     * @param viewingOrb
+     *            the new value to set.
+     */
+    public void setViewingOrb(ViewingOrb viewingOrb) {
+        this.viewingOrb = viewingOrb;
     }
 }

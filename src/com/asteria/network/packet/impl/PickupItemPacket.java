@@ -21,6 +21,9 @@ public final class PickupItemPacket extends PacketDecoder {
 
     @Override
     public void decode(Player player, int opcode, int size, DataBuffer buf) {
+        if (player.getViewingOrb() != null)
+            return;
+
         int itemY = buf.getShort(ByteOrder.LITTLE);
         int itemId = buf.getShort(false);
         int itemX = buf.getShort(ByteOrder.LITTLE);

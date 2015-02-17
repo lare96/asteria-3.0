@@ -19,6 +19,9 @@ public final class CharacterSelectionPacket extends PacketDecoder {
 
     @Override
     public void decode(Player player, int opcode, int size, DataBuffer buf) {
+        if (player.getViewingOrb() != null)
+            return;
+
         IntStream stream = Arrays.stream(new int[13]).map(v -> buf.get());
 
         if (stream.anyMatch(v -> v < 1)) {

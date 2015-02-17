@@ -90,7 +90,7 @@ public final class CharacterList<E extends CharacterNode> implements Iterable<E>
     public boolean remove(E e) {
         Objects.requireNonNull(e);
 
-        if (e.isRegistered()) {
+        if (e.isRegistered() && characters[e.getSlot()] != null) {
             e.setRegistered(false);
             e.dispose();
             characters[e.getSlot()] = null;

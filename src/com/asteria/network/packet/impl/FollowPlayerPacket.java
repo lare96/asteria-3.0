@@ -17,6 +17,9 @@ public final class FollowPlayerPacket extends PacketDecoder {
 
     @Override
     public void decode(Player player, int opcode, int size, DataBuffer buf) {
+        if (player.getViewingOrb() != null)
+            return;
+
         int index = buf.getShort(false, ByteOrder.LITTLE);
         Player follow = World.getPlayers().get(index);
 

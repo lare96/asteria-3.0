@@ -3,6 +3,7 @@ package plugin.commands
 import com.asteria.game.GameService
 import com.asteria.game.World
 import com.asteria.game.character.Animation
+import com.asteria.game.character.Flag
 import com.asteria.game.character.Graphic
 import com.asteria.game.character.npc.Npc
 import com.asteria.game.character.player.Player
@@ -33,6 +34,11 @@ final class Commands implements PluginListener<CommandPlugin> {
         // class.
         if (player.rights.greater(Rights.ADMINISTRATOR)) {
             switch (cmd[0]) {
+                case "pnpc":
+                    int id = Integer.parseInt cmd[1]
+                    player.playerNpc = id
+                    player.flags.set Flag.APPEARANCE
+                    break
                 case "invisible":
                     player.visible = false
                     break

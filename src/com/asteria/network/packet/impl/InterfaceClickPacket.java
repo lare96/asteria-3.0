@@ -14,6 +14,9 @@ public final class InterfaceClickPacket extends PacketDecoder {
 
     @Override
     public void decode(Player player, int opcode, int size, DataBuffer buf) {
+        if (player.getViewingOrb() != null)
+            return;
+
         if (player.getTradeSession().inTradeSession())
             player.getTradeSession().reset(true);
         player.getEncoder().sendCloseWindows();
