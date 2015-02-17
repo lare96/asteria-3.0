@@ -5,17 +5,17 @@ package com.asteria.game.character;
  * 
  * @author lare96 <http://www.rune-server.org/members/lare96/>
  */
-public class Animation {
+public final class Animation {
 
     /**
      * The identification for this animation.
      */
-    private int id;
+    private final int id;
 
     /**
      * The delay for this animation.
      */
-    private int delay;
+    private final int delay;
 
     /**
      * Creates a new {@link Animation}.
@@ -56,18 +56,8 @@ public class Animation {
      * 
      * @return the identification for this animation.
      */
-    public final int getId() {
+    public int getId() {
         return id;
-    }
-
-    /**
-     * Sets the value for {@link Animation#id}.
-     * 
-     * @param id
-     *            the new value to set.
-     */
-    public final void setId(int id) {
-        this.id = id;
     }
 
     /**
@@ -75,17 +65,7 @@ public class Animation {
      * 
      * @return the delay for this animation.
      */
-    public final int getDelay() {
+    public int getDelay() {
         return delay;
-    }
-
-    /**
-     * Sets the value for {@link Animation#delay}.
-     * 
-     * @param id
-     *            the new value to set.
-     */
-    public final void setDelay(int delay) {
-        this.delay = delay;
     }
 }
