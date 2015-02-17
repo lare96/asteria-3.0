@@ -50,7 +50,7 @@ public final class PlayerUpdating {
         for (Iterator<Player> i = player.getLocalPlayers().iterator(); i.hasNext();) {
             Player other = i.next();
             if (other.getPosition().isViewableFrom(player.getPosition()) && other.getSession().getState() == IOState.LOGGED_IN && !other
-                .isNeedsPlacement()) {
+                .isNeedsPlacement() && other.isVisible()) {
                 PlayerUpdating.updateOtherPlayerMovement(other, out);
                 if (other.getFlags().needsUpdate()) {
                     PlayerUpdating.updateState(other, player, block, false, false);
@@ -67,7 +67,7 @@ public final class PlayerUpdating {
                 break;
             if (other == null || other.equals(player) || other.getSession().getState() != IOState.LOGGED_IN)
                 continue;
-            if (other.getPosition().isViewableFrom(player.getPosition())) {
+            if (other.getPosition().isViewableFrom(player.getPosition()) && other.isVisible()) {
                 if (player.getLocalPlayers().add(other)) {
                     added++;
                     PlayerUpdating.addPlayer(out, player, other);

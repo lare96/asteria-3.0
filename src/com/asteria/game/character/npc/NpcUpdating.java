@@ -45,7 +45,7 @@ public final class NpcUpdating {
         out.putBits(8, player.getLocalNpcs().size());
         for (Iterator<Npc> i = player.getLocalNpcs().iterator(); i.hasNext();) {
             Npc npc = i.next();
-            if (npc.getPosition().isViewableFrom(player.getPosition())) {
+            if (npc.getPosition().isViewableFrom(player.getPosition()) && npc.isVisible()) {
                 NpcUpdating.updateNpcMovement(out, npc);
                 if (npc.getFlags().needsUpdate()) {
                     NpcUpdating.updateState(block, npc);
@@ -62,7 +62,7 @@ public final class NpcUpdating {
                 break;
             if (npc == null)
                 continue;
-            if (npc.getPosition().isViewableFrom(player.getPosition())) {
+            if (npc.getPosition().isViewableFrom(player.getPosition()) && npc.isVisible()) {
                 if (player.getLocalNpcs().add(npc)) {
                     npc.getFlags().set(Flag.APPEARANCE);
                     addNpc(out, player, npc);

@@ -61,6 +61,11 @@ public abstract class CharacterNode extends Node {
     private int slot = -1;
 
     /**
+     * The flag that determines if this character is visible or not.
+     */
+    private boolean visible = true;
+
+    /**
      * The amount of poison damage this character has.
      */
     private int poisonDamage;
@@ -849,6 +854,26 @@ public abstract class CharacterNode extends Node {
      */
     public final void setLastPosition(Position lastPosition) {
         this.lastPosition = lastPosition;
+    }
+
+    /**
+     * Determines if this character is visible or not.
+     * 
+     * @return {@code true} if this character is visible, {@code false}
+     *         otherwise.
+     */
+    public boolean isVisible() {
+        return visible;
+    }
+
+    /**
+     * Sets the value for {@link CharacterNode#visible}.
+     * 
+     * @param visible
+     *            the new value to set.
+     */
+    public void setVisible(boolean visible) {
+        this.visible = visible;
     }
 
     /**
