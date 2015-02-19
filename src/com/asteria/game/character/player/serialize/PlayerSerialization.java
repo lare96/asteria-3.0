@@ -6,8 +6,8 @@ import java.io.FileWriter;
 import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.LinkedHashSet;
+import java.util.Optional;
 import java.util.Set;
-import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
 import com.asteria.game.character.MovementQueue;
@@ -25,8 +25,6 @@ import com.asteria.game.item.container.Inventory;
 import com.asteria.game.location.Position;
 import com.asteria.utility.ArrayUtils;
 import com.asteria.utility.MutableNumber;
-import com.google.common.cache.Cache;
-import com.google.common.cache.CacheBuilder;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
@@ -36,20 +34,20 @@ import com.google.gson.JsonParser;
 /**
  * The serializer that will serialize and deserialize character files for
  * players.
+ * <p>
+ * <p>
+ * Serialization of character files can and should be done on another thread
+ * whenever possible to avoid doing disk I/O on the main game thread.
  * 
  * @author lare96 <http://www.rune-server.org/members/lare96/>
  */
 public final class PlayerSerialization {
 
     /**
-     * The collection character files that have been cached. We cache character
-     * files on logout for {@code 5} minutes so that if the player logs out
-     * within that time period, we don't have to reload the character file. Many
-     * benefits can be seen with this on larger servers especially, where
-     * players are constantly logging in and out within short periods of time.
+     * The player serialization cache that will enabled the caching of character
+     * files for later use.
      */
-    public static final Cache<Long, JsonObject> PLAYER_CACHE = CacheBuilder.newBuilder().initialCapacity(100).expireAfterWrite(5,
-        TimeUnit.MINUTES).concurrencyLevel(2).build();
+    private static PlayerSerializationCache cache = new PlayerSerializationCache(false);
 
     /**
      * The linked hash collection of tokens that will be serialized and
@@ -177,7 +175,7 @@ public final class PlayerSerialization {
                 JsonObject obj = new JsonObject();
                 tokens.stream().forEach(t -> obj.add(t.getName(), gson.toJsonTree(t.getToJson())));
                 out.write(gson.toJson(obj));
-                PLAYER_CACHE.put(player.getUsernameHash(), obj);
+                cache.add(player.getUsernameHash(), obj);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -199,18 +197,17 @@ public final class PlayerSerialization {
                 Skills.create(player);
                 return LoginResponse.NORMAL;
             }
-
-            JsonObject cached = PLAYER_CACHE.getIfPresent(player.getUsernameHash());
-            if (cached == null) {
+            Optional<JsonObject> cached = cache.get(player.getUsernameHash());
+            if (cached.isPresent()) {
+                tokens.stream().filter(t -> cached.get().has(t.getName())).forEach(
+                    t -> t.getFromJson().accept(cached.get().get(t.getName())));
+            } else {
                 cf.setReadable(true);
                 try (FileReader in = new FileReader(cf)) {
                     JsonObject reader = (JsonObject) new JsonParser().parse(in);
                     tokens.stream().filter(t -> reader.has(t.getName())).forEach(
                         t -> t.getFromJson().accept(reader.get(t.getName())));
                 }
-            } else {
-                tokens.stream().filter(t -> cached.has(t.getName()))
-                    .forEach(t -> t.getFromJson().accept(cached.get(t.getName())));
             }
             if (!password.equals(player.getPassword()))
                 return LoginResponse.INVALID_CREDENTIALS;
@@ -221,6 +218,16 @@ public final class PlayerSerialization {
             return LoginResponse.COULD_NOT_COMPLETE_LOGIN;
         }
         return LoginResponse.NORMAL;
+    }
+
+    /**
+     * Gets the cache that will enabled the caching of character files for later
+     * use.
+     * 
+     * @return the cache for caching character files.
+     */
+    public static PlayerSerializationCache getCache() {
+        return cache;
     }
 
     /**
