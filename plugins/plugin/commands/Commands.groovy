@@ -7,8 +7,8 @@ import com.asteria.game.character.Flag
 import com.asteria.game.character.Graphic
 import com.asteria.game.character.npc.Npc
 import com.asteria.game.character.player.Player
-import com.asteria.game.character.player.PlayerSerialization
 import com.asteria.game.character.player.Rights
+import com.asteria.game.character.player.serialize.PlayerSerialization
 import com.asteria.game.character.player.skill.SkillData
 import com.asteria.game.character.player.skill.Skills
 import com.asteria.game.item.Item

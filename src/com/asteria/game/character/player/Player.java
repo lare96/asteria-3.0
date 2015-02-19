@@ -43,6 +43,7 @@ import com.asteria.game.character.player.content.WeaponInterface;
 import com.asteria.game.character.player.dialogue.DialogueChainBuilder;
 import com.asteria.game.character.player.dialogue.OptionType;
 import com.asteria.game.character.player.minigame.MinigameHandler;
+import com.asteria.game.character.player.serialize.PlayerSerialization;
 import com.asteria.game.character.player.skill.Skill;
 import com.asteria.game.character.player.skill.Skills;
 import com.asteria.game.item.Item;

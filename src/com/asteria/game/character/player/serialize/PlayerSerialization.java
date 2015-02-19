@@ -1,4 +1,4 @@
-package com.asteria.game.character.player;
+package com.asteria.game.character.player.serialize;
 
 import java.io.File;
 import java.io.FileReader;
@@ -7,10 +7,13 @@ import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
 import com.asteria.game.character.MovementQueue;
 import com.asteria.game.character.combat.weapon.FightType;
+import com.asteria.game.character.player.Player;
+import com.asteria.game.character.player.Rights;
 import com.asteria.game.character.player.content.Spellbook;
 import com.asteria.game.character.player.login.LoginResponse;
 import com.asteria.game.character.player.skill.Skill;
@@ -22,6 +25,8 @@ import com.asteria.game.item.container.Inventory;
 import com.asteria.game.location.Position;
 import com.asteria.utility.ArrayUtils;
 import com.asteria.utility.MutableNumber;
+import com.google.common.cache.Cache;
+import com.google.common.cache.CacheBuilder;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
@@ -35,6 +40,16 @@ import com.google.gson.JsonParser;
  * @author lare96 <http://www.rune-server.org/members/lare96/>
  */
 public final class PlayerSerialization {
+
+    /**
+     * The collection character files that have been cached. We cache character
+     * files on logout for {@code 5} minutes so that if the player logs out
+     * within that time period, we don't have to reload the character file. Many
+     * benefits can be seen with this on larger servers especially, where
+     * players are constantly logging in and out within short periods of time.
+     */
+    public static final Cache<Long, JsonObject> PLAYER_CACHE = CacheBuilder.newBuilder().initialCapacity(100).expireAfterWrite(5,
+        TimeUnit.MINUTES).concurrencyLevel(2).build();
 
     /**
      * The linked hash collection of tokens that will be serialized and
@@ -162,6 +177,7 @@ public final class PlayerSerialization {
                 JsonObject obj = new JsonObject();
                 tokens.stream().forEach(t -> obj.add(t.getName(), gson.toJsonTree(t.getToJson())));
                 out.write(gson.toJson(obj));
+                PLAYER_CACHE.put(player.getUsernameHash(), obj);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -179,15 +195,22 @@ public final class PlayerSerialization {
      */
     public LoginResponse deserialize(String password) {
         try {
-            cf.setReadable(true);
             if (!cf.exists()) {
                 Skills.create(player);
                 return LoginResponse.NORMAL;
             }
-            try (FileReader in = new FileReader(cf)) {
-                JsonObject reader = (JsonObject) new JsonParser().parse(in);
-                tokens.stream().filter(t -> reader.has(t.getName()))
-                    .forEach(t -> t.getFromJson().accept(reader.get(t.getName())));
+
+            JsonObject cached = PLAYER_CACHE.getIfPresent(player.getUsernameHash());
+            if (cached == null) {
+                cf.setReadable(true);
+                try (FileReader in = new FileReader(cf)) {
+                    JsonObject reader = (JsonObject) new JsonParser().parse(in);
+                    tokens.stream().filter(t -> reader.has(t.getName())).forEach(
+                        t -> t.getFromJson().accept(reader.get(t.getName())));
+                }
+            } else {
+                tokens.stream().filter(t -> cached.has(t.getName()))
+                    .forEach(t -> t.getFromJson().accept(cached.get(t.getName())));
             }
             if (!password.equals(player.getPassword()))
                 return LoginResponse.INVALID_CREDENTIALS;

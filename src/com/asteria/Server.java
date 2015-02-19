@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 
 import com.asteria.game.character.player.content.RestoreStatTask;
 import com.asteria.game.character.player.minigame.MinigameHandler;
+import com.asteria.game.character.player.serialize.PlayerCacheCleanUpTask;
 import com.asteria.game.item.ItemNodeManager;
 import com.asteria.task.TaskHandler;
 import com.asteria.utility.LoggerUtils;
@@ -54,6 +55,7 @@ public final class Server {
             TaskHandler.submit(new ItemNodeManager());
             TaskHandler.submit(new RestoreStatTask());
             TaskHandler.submit(new MinigameHandler());
+            PlayerCacheCleanUpTask.init();
         } catch (Exception e) {
             logger.log(Level.SEVERE, "An error occured while starting " + Settings.NAME + "!", e);
             System.exit(1);
