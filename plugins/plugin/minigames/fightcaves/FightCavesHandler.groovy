@@ -16,7 +16,7 @@ final class FightCavesHandler {
 
     static final Position DEATH_POSITION = new Position(2399, 5177)
     static final int GAME_CYCLE_MINUTES = 5
-    static final int PLAYERS_NEEDED = 2
+    static final int PLAYERS_NEEDED = 4
     static String currentChampion = null
     static Queue<Player> awaiting = new ArrayDeque<>()
     static Set<Player> players = new HashSet<>()
@@ -99,10 +99,11 @@ final class FightCavesHandler {
 
     static def display(Player player) {
         int minutes = GAME_CYCLE_MINUTES - gameCounter
+        int needed = PLAYERS_NEEDED - awaiting.size()
         minutes = minutes < 0 ? 1 : minutes
         String champion = currentChampion ?: "Xil"
         player.encoder.sendString("Current champion: JalYt-Ket-${champion}", 2805)
-        player.encoder.sendString(players.size() >= 1 ? "Game currently in progress!" : awaiting.size() <= 1 ? "Waiting for more players!" : "Minutes Left: ${minutes}", 2806)
+        player.encoder.sendString(players.size() >= 1 ? "Game currently in progress!" : awaiting.size() < PLAYERS_NEEDED ? "Waiting for ${needed} more players!" : "Minutes Left: ${minutes}", 2806)
         if(champion != null)
             player.encoder.sendByteState(560, champion.equalsIgnoreCase(player.username) ? 0 : 1)
     }
