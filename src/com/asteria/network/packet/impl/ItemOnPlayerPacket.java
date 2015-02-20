@@ -31,6 +31,8 @@ public final class ItemOnPlayerPacket extends PacketDecoder {
 
         if (container < 0 || item == null || usedOn == null || itemUsed < 0)
             return;
+        if (item.getId() != itemUsed)
+            return;
 
         player.getMovementListener().append(() -> {
             if (player.getPosition().withinDistance(usedOn.getPosition(), 1)) {

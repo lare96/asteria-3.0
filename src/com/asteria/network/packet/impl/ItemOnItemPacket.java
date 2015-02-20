@@ -5,6 +5,7 @@ import com.asteria.game.item.Item;
 import com.asteria.game.plugin.PluginHandler;
 import com.asteria.game.plugin.context.ItemOnItemPlugin;
 import com.asteria.network.DataBuffer;
+import com.asteria.network.ValueType;
 import com.asteria.network.packet.PacketDecoder;
 
 /**
@@ -18,9 +19,8 @@ public final class ItemOnItemPacket extends PacketDecoder {
     public void decode(Player player, int opcode, int size, DataBuffer buf) {
         if (player.getViewingOrb() != null)
             return;
-
         int secondSlot = buf.getShort();
-        int firstSlot = buf.getShort(com.asteria.network.ValueType.A);
+        int firstSlot = buf.getShort(ValueType.A);
         buf.getShort();
         buf.getShort();
         Item itemUsed = player.getInventory().get(firstSlot);
@@ -28,6 +28,7 @@ public final class ItemOnItemPacket extends PacketDecoder {
 
         if (secondSlot < 0 || firstSlot < 0 || itemUsed == null || itemOn == null)
             return;
+
         PluginHandler.execute(player, ItemOnItemPlugin.class, new ItemOnItemPlugin(itemUsed, itemOn));
     }
 }

@@ -39,7 +39,8 @@ public final class ItemOnObjectPacket extends PacketDecoder {
         Position position = new Position(objectX, objectY, player.getPosition().getZ());
         if (item == null || container != 3214 || objectId < 0 || objectY < 0 || slot < 0 || objectX < 0 || itemId < 0)
             return;
-
+        if (item.getId() != itemId)
+            return;
         player.facePosition(position);
         player.getMovementListener().append(
             () -> {

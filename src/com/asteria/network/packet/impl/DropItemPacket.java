@@ -28,16 +28,15 @@ public final class DropItemPacket extends PacketDecoder {
         buf.get(false);
         buf.get(false);
         int slot = buf.getShort(false, ValueType.A);
-
         if (slot < 0 || id < 0)
             return;
+        Item item = player.getInventory().get(slot);
+        if (item == null || item.getId() != id)
+            return;
         Arrays.fill(player.getSkillEvent(), false);
-        if (player.getInventory().contains(id)) {
-            int amount = ItemDefinition.DEFINITIONS[id].isStackable() ? amount = player.getInventory().amount(id) : 1;
-
-            player.getInventory().remove(new Item(id, amount), slot);
-            Position p = new Position(player.getPosition().getX(), player.getPosition().getY(), player.getPosition().getZ());
-            ItemNodeManager.register(new ItemNode(new Item(id, amount), p, player));
-        }
+        int amount = ItemDefinition.DEFINITIONS[id].isStackable() ? item.getAmount() : 1;
+        player.getInventory().remove(new Item(id, amount), slot);
+        Position p = new Position(player.getPosition().getX(), player.getPosition().getY(), player.getPosition().getZ());
+        ItemNodeManager.register(new ItemNode(new Item(id, amount), p, player));
     }
 }
