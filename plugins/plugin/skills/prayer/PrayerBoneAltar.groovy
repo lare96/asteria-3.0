@@ -50,7 +50,7 @@ final class PrayerBoneAltar extends DestructionSkillAction {
     }
 
     @Override
-    int experience() {
+    double experience() {
         (bone.experience * 2)
     }
 

@@ -27,9 +27,9 @@ enum CookingData {
     final int cookedId
     final int masterLevel
     final int burntId
-    final int experience
+    final double experience
 
-    CookingData(int rawId, int level, int cookedId, int masterLevel, int burntId, int experience) {
+    CookingData(int rawId, int level, int cookedId, int masterLevel, int burntId, double experience) {
         this.rawId = rawId
         this.level = level
         this.cookedId = cookedId

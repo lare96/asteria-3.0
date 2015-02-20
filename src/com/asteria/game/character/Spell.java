@@ -85,7 +85,7 @@ public abstract class Spell {
      * 
      * @return the base experience.
      */
-    public abstract int baseExperience();
+    public abstract double baseExperience();
 
     /**
      * The items required in the inventory to cast this spell.

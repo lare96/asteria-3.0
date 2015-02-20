@@ -142,11 +142,11 @@ public final class Skills {
      * @param skill
      *            the skill to add the experience for.
      */
-    public static void experience(Player player, int amount, int skill) {
-        if (amount < 1)
+    public static void experience(Player player, double amount, int skill) {
+        if (amount <= 0)
             return;
         int oldLevel = player.getSkills()[skill].getRealLevel();
-        int experience = player.getSkills()[skill].getExperience();
+        double experience = player.getSkills()[skill].getExperience();
         amount *= Skills.EXPERIENCE_MULTIPLIER;
         player.getSkills()[skill].setExperience(experience + amount);
         if (oldLevel < 99) {
@@ -191,7 +191,7 @@ public final class Skills {
             }
             player.getSkills()[skill] = s;
         }
-        player.getEncoder().sendSkill(skill, s.getLevel(), s.getExperience());
+        player.getEncoder().sendSkill(skill, s.getLevel(), (int) s.getExperience());
     }
 
     /**

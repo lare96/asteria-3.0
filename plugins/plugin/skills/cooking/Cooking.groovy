@@ -78,7 +78,7 @@ final class Cooking extends ProducingSkillAction {
     }
 
     @Override
-    int experience() {
+    double experience() {
         burned ? 0 : data.experience
     }
 

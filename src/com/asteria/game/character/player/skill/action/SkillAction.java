@@ -105,7 +105,7 @@ public abstract class SkillAction implements PluginContext {
      * 
      * @return the experience given.
      */
-    public abstract int experience();
+    public abstract double experience();
 
     /**
      * The skill that this skill action is for.

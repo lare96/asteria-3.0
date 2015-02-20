@@ -15,7 +15,7 @@ public class Skill {
     /**
      * The experience of this skill that can be trained.
      */
-    private int experience = 0;
+    private double experience = 0;
 
     /**
      * The real level of this skill that can be trained.
@@ -133,7 +133,7 @@ public class Skill {
      * 
      * @return the experience.
      */
-    public int getExperience() {
+    public double getExperience() {
         return experience;
     }
 
@@ -143,7 +143,7 @@ public class Skill {
      * @param experience
      *            the new value to set.
      */
-    public void setExperience(int experience) {
+    public void setExperience(double experience) {
         this.experience = experience;
 
         if (this.experience > 2000000000) {

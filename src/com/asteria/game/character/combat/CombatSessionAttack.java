@@ -203,19 +203,19 @@ public final class CombatSessionAttack extends Task {
         }
         if (builder.getCharacter().getType() == NodeType.PLAYER) {
             Player player = (Player) builder.getCharacter();
-            int exp = 0;
-            int hitpointsExp = 0;
+            double exp = 0;
+            double hitpointsExp = 0;
 
             if (data.getType() == CombatType.MAGIC) {
-                exp = (int) (counter * 4d) + builder.getCharacter().getCurrentlyCasting().baseExperience();
-                hitpointsExp = (int) (exp / 3d);
+                exp = (counter * 4d) + builder.getCharacter().getCurrentlyCasting().baseExperience();
+                hitpointsExp = (exp / 3d);
 
                 Skills.experience(player, exp, Skills.MAGIC);
                 Skills.experience(player, hitpointsExp, Skills.HITPOINTS);
                 return;
             }
-            exp = (int) ((counter * 4d) / data.getExperience().length);
-            hitpointsExp = (int) (exp / 3d);
+            exp = ((counter * 4d) / data.getExperience().length);
+            hitpointsExp = (exp / 3d);
 
             for (int amount : data.getExperience()) {
                 Skills.experience(player, exp, amount);

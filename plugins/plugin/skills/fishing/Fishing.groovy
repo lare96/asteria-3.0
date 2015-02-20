@@ -77,7 +77,7 @@ final class Fishing extends HarvestingSkillAction {
     }
 
     @Override
-    int experience() {
+    double experience() {
         0 // Experience handled elsewhere.
     }
 

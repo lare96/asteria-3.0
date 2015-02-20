@@ -736,7 +736,7 @@ public class Player extends CharacterNode {
             }
 
             @Override
-            public int baseExperience() {
+            public double baseExperience() {
                 return 0;
             }
 

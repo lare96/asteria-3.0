@@ -42,9 +42,9 @@ enum Catchable {
     final int id
     final int level
     final double chance
-    final int experience
+    final double experience
 
-    Catchable(int id, int level, double chance, int experience) {
+    Catchable(int id, int level, double chance, double experience) {
         this.id = id
         this.level = level
         this.chance = chance

@@ -56,7 +56,7 @@ final class PrayerBoneBury extends DestructionSkillAction {
     }
 
     @Override
-    int experience() {
+    double experience() {
         bone.experience
     }
 
