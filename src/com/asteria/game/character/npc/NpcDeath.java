@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import com.asteria.game.World;
 import com.asteria.game.character.Animation;
+import com.asteria.game.character.AnimationPriority;
 import com.asteria.game.character.CharacterDeath;
 import com.asteria.game.character.npc.drops.NpcDropTable;
 import com.asteria.game.character.player.Player;
@@ -34,7 +35,7 @@ public final class NpcDeath extends CharacterDeath<Npc> {
 
     @Override
     public void preDeath(Npc character) {
-        character.animation(new Animation(character.getDefinition().getDeathAnimation()));
+        character.animation(new Animation(character.getDefinition().getDeathAnimation(), AnimationPriority.HIGH));
     }
 
     @Override

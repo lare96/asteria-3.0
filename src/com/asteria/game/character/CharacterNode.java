@@ -336,8 +336,10 @@ public abstract class CharacterNode extends Node {
      *            animation.
      */
     public void animation(Animation animation) {
-        this.animation = animation == null ? new Animation(65535) : animation.copy();
-        flags.set(Flag.ANIMATION);
+        if (this.animation == null || this.animation.getPriority().getValue() <= animation.getPriority().getValue()) {
+            this.animation = animation == null ? new Animation(65535) : animation.copy();
+            flags.set(Flag.ANIMATION);
+        }
     }
 
     /**

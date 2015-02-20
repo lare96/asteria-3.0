@@ -18,26 +18,49 @@ public final class Animation {
     private final int delay;
 
     /**
+     * The priority of this animation.
+     */
+    private final AnimationPriority priority;
+
+    /**
      * Creates a new {@link Animation}.
      * 
      * @param id
      *            the identification for this animation.
      * @param delay
      *            the delay for this animation.
+     * @param priority
+     *            the priority of this animation.
      */
-    public Animation(int id, int delay) {
+    public Animation(int id, int delay, AnimationPriority priority) {
         this.id = id;
         this.delay = delay;
+        this.priority = priority;
     }
 
     /**
-     * Creates a new {@link Animation} with a {@code delay} of {@code 0}.
+     * Creates a new {@link Animation} with a delay of {@code 0}.
+     * 
+     * @param id
+     *            the identification for this animation.
+     * @param delay
+     *            the delay for this animation.
+     * @param priority
+     *            the priority of this animation.
+     */
+    public Animation(int id, AnimationPriority priority) {
+        this(id, 0, priority);
+    }
+
+    /**
+     * Creates a new {@link Animation} with a delay of {@code 0}, and a priority
+     * of {@code NORMAL}.
      * 
      * @param id
      *            the identification for this animation.
      */
     public Animation(int id) {
-        this(id, 0);
+        this(id, AnimationPriority.NORMAL);
     }
 
     /**
@@ -48,7 +71,7 @@ public final class Animation {
      * @return a reference-free copy of this instance.
      */
     public Animation copy() {
-        return new Animation(id, delay);
+        return new Animation(id, delay, priority);
     }
 
     /**
@@ -61,11 +84,20 @@ public final class Animation {
     }
 
     /**
-     * Gets delay for this animation.
+     * Gets the delay for this animation.
      * 
      * @return the delay for this animation.
      */
     public int getDelay() {
         return delay;
+    }
+
+    /**
+     * Gets the priority of this animation.
+     * 
+     * @return the priority of this animation.
+     */
+    public AnimationPriority getPriority() {
+        return priority;
     }
 }

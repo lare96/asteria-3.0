@@ -2,6 +2,7 @@ package com.asteria.game.character.combat;
 
 import com.asteria.game.NodeType;
 import com.asteria.game.character.Animation;
+import com.asteria.game.character.AnimationPriority;
 import com.asteria.game.character.CharacterNode;
 import com.asteria.game.character.Graphic;
 import com.asteria.game.character.Hit;
@@ -100,9 +101,9 @@ public final class CombatSessionAttack extends Task {
         }
 
         if (victim.getType() == NodeType.PLAYER) {
-            victim.animation(new Animation(404));
+            victim.animation(new Animation(404, AnimationPriority.LOW));
         } else if (victim.getType() == NodeType.NPC) {
-            victim.animation(new Animation(((Npc) victim).getDefinition().getDefenceAnimation()));
+            victim.animation(new Animation(((Npc) victim).getDefinition().getDefenceAnimation(), AnimationPriority.LOW));
         }
         data.postAttack(counter);
 

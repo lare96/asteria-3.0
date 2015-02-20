@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import com.asteria.game.NodeType;
 import com.asteria.game.character.Animation;
+import com.asteria.game.character.AnimationPriority;
 import com.asteria.game.character.CharacterNode;
 import com.asteria.game.character.Graphic;
 import com.asteria.game.character.Projectile;
@@ -23,9 +24,13 @@ public abstract class CombatSpell extends Spell {
     @Override
     public void startCast(CharacterNode cast, CharacterNode castOn) {
         if (cast.getType() == NodeType.PLAYER) {
-            castAnimation().ifPresent(cast::animation);
+            Optional<Animation> optional = castAnimation();
+            if (optional.isPresent()) {
+                Animation animation = new Animation(optional.get().getId(), optional.get().getDelay(), AnimationPriority.HIGH);
+                cast.animation(animation);
+            }
         } else if (castOn.getType() == NodeType.NPC) {
-            cast.animation(new Animation(((Npc) cast).getDefinition().getAttackAnimation()));
+            cast.animation(new Animation(((Npc) cast).getDefinition().getAttackAnimation(), AnimationPriority.HIGH));
         }
         startGraphic().ifPresent(cast::graphic);
 

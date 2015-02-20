@@ -2,6 +2,7 @@ package plugin.minigames.fightcaves
 
 import com.asteria.game.World
 import com.asteria.game.character.Animation
+import com.asteria.game.character.AnimationPriority
 import com.asteria.game.character.Flag
 import com.asteria.game.character.combat.prayer.CombatPrayer
 import com.asteria.game.character.player.Player
@@ -59,7 +60,7 @@ final class FightCavesHandler {
                 it.combatBuilder.reset()
                 it.specialPercentage.value = 100
                 it.specialActivated = false
-                it.animation new Animation(65535)
+                it.animation new Animation(65535, AnimationPriority.HIGH)
                 CombatPrayer.deactivateAll it
                 Skills.restoreAll it
                 it.move FightCavesHandler.DEATH_POSITION

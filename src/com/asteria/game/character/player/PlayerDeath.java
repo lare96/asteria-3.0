@@ -10,6 +10,7 @@ import java.util.Optional;
 import plugin.minigames.fightcaves.FightCavesHandler;
 
 import com.asteria.game.character.Animation;
+import com.asteria.game.character.AnimationPriority;
 import com.asteria.game.character.CharacterDeath;
 import com.asteria.game.character.Flag;
 import com.asteria.game.character.combat.prayer.CombatPrayer;
@@ -50,7 +51,7 @@ public final class PlayerDeath extends CharacterDeath<Player> {
 
     @Override
     public void preDeath(Player character) {
-        character.animation(new Animation(0x900));
+        character.animation(new Animation(0x900, AnimationPriority.HIGH));
         Arrays.fill(character.getSkillEvent(), false);
         character.getTradeSession().reset(false);
     }
@@ -91,7 +92,7 @@ public final class PlayerDeath extends CharacterDeath<Player> {
         character.getSkullTimer().set(0);
         character.setSkullIcon(FightCavesHandler.isChampion(character) ? Player.RED_SKULL : -1);
         character.getTeleblockTimer().set(0);
-        character.animation(new Animation(65535));
+        character.animation(new Animation(65535, AnimationPriority.HIGH));
         WeaponInterface.execute(character, character.getEquipment().get(Equipment.WEAPON_SLOT));
         character.getEncoder().sendMessage(
             character.getRights().less(Rights.ADMINISTRATOR) ? "Oh dear, you're dead!"
