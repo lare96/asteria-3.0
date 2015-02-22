@@ -3,7 +3,6 @@ package com.asteria.game.character.player;
 import java.nio.ByteBuffer;
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.LinkedHashSet;
 import java.util.Optional;
 import java.util.Set;
 import java.util.logging.Logger;
@@ -135,12 +134,12 @@ public class Player extends CharacterNode {
     /**
      * The hash collection of the local players.
      */
-    private final Set<Player> localPlayers = new LinkedHashSet<>(255);
+    private final Set<Player> localPlayers = new HashSet<>(255);
 
     /**
      * The hash collection of the local npcs.
      */
-    private final Set<Npc> localNpcs = new LinkedHashSet<>(255);
+    private final Set<Npc> localNpcs = new HashSet<>(255);
 
     /**
      * The hash collection of friends.
