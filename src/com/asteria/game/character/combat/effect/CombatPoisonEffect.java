@@ -59,14 +59,17 @@ public final class CombatPoisonEffect extends CombatEffect {
     public boolean apply() {
         if (character.isPoisoned() || type == null)
             return false;
-        if (character.getType() == NodeType.PLAYER) {
-            Player player = (Player) character;
-            if (player.getPoisonImmunity().get() > 0)
-                return false;
-            player.getEncoder().sendMessage("You have been poisoned!");
+        if (type.apply(random)) {
+            if (character.getType() == NodeType.PLAYER) {
+                Player player = (Player) character;
+                if (player.getPoisonImmunity().get() > 0)
+                    return false;
+                player.getEncoder().sendMessage("You have been poisoned!");
+            }
+            character.setPoisonDamage(type.getDamage());
+            return true;
         }
-        character.setPoisonDamage(type.getDamage());
-        return true;
+        return false;
     }
 
     @Override
