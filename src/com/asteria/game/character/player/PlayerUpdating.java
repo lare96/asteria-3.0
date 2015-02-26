@@ -192,13 +192,17 @@ public final class PlayerUpdating {
         block.put(player.getColors()[2]);
         block.put(player.getColors()[3]);
         block.put(player.getColors()[4]);
-        block.putShort(player.getWeaponAnimation() == null ? 0x328 : player.getWeaponAnimation().getStanding());
+
+        block.putShort(player.getWeaponAnimation() == null || player.getWeaponAnimation().getStanding() == -1 ? 0x328 : player
+            .getWeaponAnimation().getStanding());
         block.putShort(0x337);
-        block.putShort(player.getWeaponAnimation() == null ? 0x333 : player.getWeaponAnimation().getWalking());
+        block.putShort(player.getWeaponAnimation() == null || player.getWeaponAnimation().getWalking() == -1 ? 0x333 : player
+            .getWeaponAnimation().getWalking());
         block.putShort(0x334);
         block.putShort(0x335);
         block.putShort(0x336);
-        block.putShort(player.getWeaponAnimation() == null ? 0x338 : player.getWeaponAnimation().getRunning());
+        block.putShort(player.getWeaponAnimation() == null || player.getWeaponAnimation().getRunning() == -1 ? 0x338 : player
+            .getWeaponAnimation().getRunning());
 
         block.putLong(player.getUsernameHash());
         block.put(player.determineCombatLevel());
