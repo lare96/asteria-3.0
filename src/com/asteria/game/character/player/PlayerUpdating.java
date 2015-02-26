@@ -97,7 +97,7 @@ public final class PlayerUpdating {
     private static void appendChat(Player player, DataBuffer out) {
         out.putShort(((player.getChatColor() & 0xff) << 8) + (player.getChatEffects() & 0xff), ByteOrder.LITTLE);
         out.put(player.getRights().getProtocolValue());
-        out.put(player.getChatText().length, com.asteria.network.ValueType.C);
+        out.put(player.getChatText().length, ValueType.C);
         out.putBytesReverse(player.getChatText());
     }
 
@@ -182,6 +182,8 @@ public final class PlayerUpdating {
                 } else {
                     block.put(0);
                 }
+            } else {
+                block.put(0);
             }
         } else {
             block.putShort(-1);
