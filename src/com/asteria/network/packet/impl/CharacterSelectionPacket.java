@@ -1,6 +1,7 @@
 package com.asteria.network.packet.impl;
 
 import com.asteria.game.character.Flag;
+import com.asteria.game.character.player.Appearance;
 import com.asteria.game.character.player.Player;
 import com.asteria.network.DataBuffer;
 import com.asteria.network.packet.PacketDecoder;
@@ -52,39 +53,27 @@ public final class CharacterSelectionPacket extends PacketDecoder {
         if (player.getViewingOrb() != null)
             return;
         int cursor = 0;
-        int[] look = new int[13];
+        int[] values = new int[13];
         int gender = buf.get();
-        if (gender != Player.GENDER_FEMALE && gender != Player.GENDER_MALE)
+        if (gender != Appearance.GENDER_FEMALE && gender != Appearance.GENDER_MALE)
             return;
-        look[cursor++] = gender;
+        values[cursor++] = gender;
         for (int i = 0; i < 7; i++) {
             int value = buf.get();
             if ((value < (gender == 0 ? MALE_VALUES[i][0] : FEMALE_VALUES[i][0])) || (value > (gender == 0 ? MALE_VALUES[i][1]
                 : FEMALE_VALUES[i][1]))) {
                 return;
             }
-            look[cursor++] = value;
+            values[cursor++] = value;
         }
         for (int i = 0; i < VALID_COLORS.length; i++) {
             int value = buf.get();
             if ((value < VALID_COLORS[i][0]) || (value > VALID_COLORS[i][1])) {
                 return;
             }
-            look[cursor++] = value;
+            values[cursor++] = value;
         }
-        player.setGender(look[0]);
-        player.getAppearance()[Player.APPEARANCE_SLOT_HEAD] = look[1];
-        player.getAppearance()[Player.APPEARANCE_SLOT_BEARD] = look[2];
-        player.getAppearance()[Player.APPEARANCE_SLOT_CHEST] = look[3];
-        player.getAppearance()[Player.APPEARANCE_SLOT_ARMS] = look[4];
-        player.getAppearance()[Player.APPEARANCE_SLOT_HANDS] = look[5];
-        player.getAppearance()[Player.APPEARANCE_SLOT_LEGS] = look[6];
-        player.getAppearance()[Player.APPEARANCE_SLOT_FEET] = look[7];
-        player.getColors()[0] = look[8];
-        player.getColors()[1] = look[9];
-        player.getColors()[2] = look[10];
-        player.getColors()[3] = look[11];
-        player.getColors()[4] = look[12];
+        player.getAppearance().setValues(values);
         player.getFlags().set(Flag.APPEARANCE);
         player.getEncoder().sendCloseWindows();
     }

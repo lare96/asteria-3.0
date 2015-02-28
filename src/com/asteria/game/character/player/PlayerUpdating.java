@@ -110,8 +110,9 @@ public final class PlayerUpdating {
      *            the buffer to append it to.
      */
     private static void appendAppearance(Player player, DataBuffer out) {
+        Appearance appearance = player.getAppearance();
         DataBuffer block = DataBuffer.create(128);
-        block.put(player.getGender());
+        block.put(appearance.getGender());
         block.put(player.getHeadIcon());
         block.put(player.getSkullIcon());
         if (player.getPlayerNpc() == -1) {
@@ -138,7 +139,7 @@ public final class PlayerUpdating {
             if (player.getEquipment().getId(Equipment.CHEST_SLOT) > 1) {
                 block.putShort(0x200 + player.getEquipment().getId(Equipment.CHEST_SLOT));
             } else {
-                block.putShort(0x100 + player.getAppearance()[Player.APPEARANCE_SLOT_CHEST]);
+                block.putShort(0x100 + appearance.getChest());
             }
             if (player.getEquipment().getId(Equipment.SHIELD_SLOT) > 1) {
                 block.putShort(0x200 + player.getEquipment().getId(Equipment.SHIELD_SLOT));
@@ -147,38 +148,38 @@ public final class PlayerUpdating {
             }
             if (player.getEquipment().getId(Equipment.CHEST_SLOT) > 1) {
                 if (!player.getEquipment().get(Equipment.CHEST_SLOT).getDefinition().isPlatebody()) {
-                    block.putShort(0x100 + player.getAppearance()[Player.APPEARANCE_SLOT_ARMS]);
+                    block.putShort(0x100 + appearance.getArms());
                 } else {
                     block.put(0);
                 }
             } else {
-                block.putShort(0x100 + player.getAppearance()[Player.APPEARANCE_SLOT_ARMS]);
+                block.putShort(0x100 + appearance.getArms());
             }
             if (player.getEquipment().getId(Equipment.LEGS_SLOT) > 1) {
                 block.putShort(0x200 + player.getEquipment().getId(Equipment.LEGS_SLOT));
             } else {
-                block.putShort(0x100 + player.getAppearance()[Player.APPEARANCE_SLOT_LEGS]);
+                block.putShort(0x100 + appearance.getLegs());
             }
             if (player.getEquipment().getId(Equipment.HEAD_SLOT) > 1 && player.getEquipment().get(Equipment.HEAD_SLOT)
                 .getDefinition().isFullHelm()) {
                 block.put(0);
             } else {
-                block.putShort(0x100 + player.getAppearance()[Player.APPEARANCE_SLOT_HEAD]);
+                block.putShort(0x100 + appearance.getHead());
             }
             if (player.getEquipment().getId(Equipment.HANDS_SLOT) > 1) {
                 block.putShort(0x200 + player.getEquipment().getId(Equipment.HANDS_SLOT));
             } else {
-                block.putShort(0x100 + player.getAppearance()[Player.APPEARANCE_SLOT_HANDS]);
+                block.putShort(0x100 + appearance.getHands());
             }
             if (player.getEquipment().getId(Equipment.FEET_SLOT) > 1) {
                 block.putShort(0x200 + player.getEquipment().getId(Equipment.FEET_SLOT));
             } else {
-                block.putShort(0x100 + player.getAppearance()[Player.APPEARANCE_SLOT_FEET]);
+                block.putShort(0x100 + appearance.getFeet());
             }
-            if (player.getGender() == Player.GENDER_MALE) {
+            if (appearance.isMale()) {
                 if (player.getEquipment().getId(Equipment.HEAD_SLOT) > 1 && !player.getEquipment().get(Equipment.HEAD_SLOT)
                     .getDefinition().isFullHelm() || player.getEquipment().free(Equipment.HEAD_SLOT)) {
-                    block.putShort(0x100 + player.getAppearance()[Player.APPEARANCE_SLOT_BEARD]);
+                    block.putShort(0x100 + appearance.getBeard());
                 } else {
                     block.put(0);
                 }
@@ -189,11 +190,11 @@ public final class PlayerUpdating {
             block.putShort(-1);
             block.putShort(player.getPlayerNpc());
         }
-        block.put(player.getColors()[0]);
-        block.put(player.getColors()[1]);
-        block.put(player.getColors()[2]);
-        block.put(player.getColors()[3]);
-        block.put(player.getColors()[4]);
+        block.put(appearance.getHairColor());
+        block.put(appearance.getTorsoColor());
+        block.put(appearance.getLegColor());
+        block.put(appearance.getFeetColor());
+        block.put(appearance.getSkinColor());
 
         block.putShort(player.getWeaponAnimation() == null || player.getWeaponAnimation().getStanding() == -1 ? 0x328 : player
             .getWeaponAnimation().getStanding());

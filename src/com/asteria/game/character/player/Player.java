@@ -73,51 +73,6 @@ import com.asteria.utility.TextUtils;
 public class Player extends CharacterNode {
 
     /**
-     * The player appearance update chest slot.
-     */
-    public static final int APPEARANCE_SLOT_CHEST = 0;
-
-    /**
-     * The player appearance update arms slot.
-     */
-    public static final int APPEARANCE_SLOT_ARMS = 1;
-
-    /**
-     * The player appearance update legs slot.
-     */
-    public static final int APPEARANCE_SLOT_LEGS = 2;
-
-    /**
-     * The player appearance update head slot.
-     */
-    public static final int APPEARANCE_SLOT_HEAD = 3;
-
-    /**
-     * The player appearance update hands slot.
-     */
-    public static final int APPEARANCE_SLOT_HANDS = 4;
-
-    /**
-     * The player appearance update feet slot.
-     */
-    public static final int APPEARANCE_SLOT_FEET = 5;
-
-    /**
-     * The player appearance update beard slot.
-     */
-    public static final int APPEARANCE_SLOT_BEARD = 6;
-
-    /**
-     * The player appearance update male gender identifier.
-     */
-    public static final int GENDER_MALE = 0;
-
-    /**
-     * The player appearance update female gender identifier.
-     */
-    public static final int GENDER_FEMALE = 1;
-
-    /**
      * The player appearance update white skull identifier.
      */
     public static final int WHITE_SKULL = 0;
@@ -193,16 +148,6 @@ public class Player extends CharacterNode {
     private final Skill[] skills = new Skill[21];
 
     /**
-     * The array of appearance values for updating.
-     */
-    private final int[] appearance = new int[7];
-
-    /**
-     * The array of colors values for updating.
-     */
-    private final int[] colors = new int[5];
-
-    /**
      * The array of attack and defence bonus values.
      */
     private final int[] bonus = new int[12];
@@ -234,6 +179,11 @@ public class Player extends CharacterNode {
      * The encoder that will encode and send packets.
      */
     private final PacketEncoder encoder;
+
+    /**
+     * The container of appearance values for this player.
+     */
+    private final Appearance appearance = new Appearance();
 
     /**
      * The amount of authority this player has over others.
@@ -416,11 +366,6 @@ public class Player extends CharacterNode {
     private int chatEffects;
 
     /**
-     * The current gender identification of this player.
-     */
-    private int gender = Player.GENDER_MALE;
-
-    /**
      * The player-npc identifier for updating.
      */
     private int playerNpc = -1;
@@ -451,18 +396,6 @@ public class Player extends CharacterNode {
         this.session = session;
         this.encoder = new PacketEncoder(this);
         this.rights = ConnectionHandler.isLocal(session.getHost()) ? Rights.DEVELOPER : Rights.PLAYER;
-        this.appearance[Player.APPEARANCE_SLOT_CHEST] = 18;
-        this.appearance[Player.APPEARANCE_SLOT_ARMS] = 26;
-        this.appearance[Player.APPEARANCE_SLOT_LEGS] = 36;
-        this.appearance[Player.APPEARANCE_SLOT_HEAD] = 0;
-        this.appearance[Player.APPEARANCE_SLOT_HANDS] = 33;
-        this.appearance[Player.APPEARANCE_SLOT_FEET] = 42;
-        this.appearance[Player.APPEARANCE_SLOT_BEARD] = 10;
-        this.colors[0] = 7;
-        this.colors[1] = 8;
-        this.colors[2] = 9;
-        this.colors[3] = 5;
-        this.colors[4] = 0;
     }
 
     @Override
@@ -983,24 +916,6 @@ public class Player extends CharacterNode {
      */
     public final Skill[] getSkills() {
         return skills;
-    }
-
-    /**
-     * Gets the array of appearance values for updating.
-     * 
-     * @return the appearance values.
-     */
-    public final int[] getAppearance() {
-        return appearance;
-    }
-
-    /**
-     * Gets the array of colors values for updating.
-     * 
-     * @return the color values.
-     */
-    public final int[] getColors() {
-        return colors;
     }
 
     /**
@@ -1783,25 +1698,6 @@ public class Player extends CharacterNode {
     }
 
     /**
-     * Gets the current gender identification of this player.
-     * 
-     * @return the gender identification.
-     */
-    public final int getGender() {
-        return gender;
-    }
-
-    /**
-     * Sets the value for {@link Player#gender}.
-     * 
-     * @param gender
-     *            the new value to set.
-     */
-    public final void setGender(int gender) {
-        this.gender = gender;
-    }
-
-    /**
      * Gets the player-npc identifier for updating.
      * 
      * @return the player npc identifier.
@@ -1923,5 +1819,14 @@ public class Player extends CharacterNode {
      */
     public void setViewingOrb(ViewingOrb viewingOrb) {
         this.viewingOrb = viewingOrb;
+    }
+
+    /**
+     * Gets the container of appearance values for this player.
+     *
+     * @return the container of appearance values.
+     */
+    public Appearance getAppearance() {
+        return appearance;
     }
 }
