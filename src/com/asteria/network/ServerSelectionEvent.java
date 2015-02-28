@@ -88,7 +88,7 @@ public abstract class ServerSelectionEvent {
      * 
      * @return {@code true} if this is asynchronous, {@code false} otherwise.
      */
-    public boolean isAsynchronous() {
+    public final boolean isAsynchronous() {
         return asynchronous;
     }
 }
