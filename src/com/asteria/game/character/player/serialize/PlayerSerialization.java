@@ -12,6 +12,7 @@ import java.util.function.Consumer;
 
 import com.asteria.game.character.MovementQueue;
 import com.asteria.game.character.combat.weapon.FightType;
+import com.asteria.game.character.player.Appearance;
 import com.asteria.game.character.player.Player;
 import com.asteria.game.character.player.Rights;
 import com.asteria.game.character.player.content.Spellbook;
@@ -120,10 +121,9 @@ public final class PlayerSerialization {
         tokens.add(new TokenSerializer("password", p.getPassword(), n -> p.setPassword(n.getAsString())));
         tokens.add(new TokenSerializer("position", p.getPosition(), n -> p.setPosition(b.fromJson(n, Position.class))));
         tokens.add(new TokenSerializer("rights", p.getRights(), n -> p.setRights(Rights.valueOf(n.getAsString()))));
-        tokens.add(new TokenSerializer("gender", p.getGender(), n -> p.setGender(n.getAsInt())));
-        int[] appearance = p.getAppearance();
-        tokens.add(new TokenSerializer("appearance", appearance, n -> ArrayUtils.dump(b.fromJson(n, int[].class), appearance)));
-        tokens.add(new TokenSerializer("colors", p.getColors(), n -> ArrayUtils.dump(b.fromJson(n, int[].class), p.getColors())));
+        Appearance appearance = p.getAppearance();
+        tokens.add(new TokenSerializer("appearance", appearance.getValues(), n -> appearance
+            .setValues(b.fromJson(n, int[].class))));
         MovementQueue movement = p.getMovementQueue();
         tokens.add(new TokenSerializer("running", movement.isRunning(), n -> movement.setRunning(n.getAsBoolean())));
         tokens.add(new TokenSerializer("new-player", p.isNewPlayer(), n -> p.setNewPlayer(n.getAsBoolean())));
@@ -171,7 +171,8 @@ public final class PlayerSerialization {
                 }
             }
             try (FileWriter out = new FileWriter(cf)) {
-                Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                Gson gson = new GsonBuilder().setPrettyPrinting().addSerializationExclusionStrategy(
+                    new PlayerSerializationFilter()).create();
                 JsonObject obj = new JsonObject();
                 tokens.stream().forEach(t -> obj.add(t.getName(), gson.toJsonTree(t.getToJson())));
                 out.write(gson.toJson(obj));
