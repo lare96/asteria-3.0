@@ -79,8 +79,7 @@ public final class Npc extends CharacterNode {
 
     @Override
     public void create() {
-        if (getDefinition().isAggressive())
-            NpcAggression.AGGRESSIVE.add(this);
+
     }
 
     @Override

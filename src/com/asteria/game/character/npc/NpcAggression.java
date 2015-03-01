@@ -31,7 +31,7 @@ public final class NpcAggression {
     /**
      * The hash collection the holds the instances of aggressive NPCs.
      */
-    public static final Set<Npc> AGGRESSIVE = new HashSet<>();
+    public static final Set<Integer> AGGRESSIVE = new HashSet<>();
 
     /**
      * The sequencer that will prompt all aggressive NPCs to attack
@@ -41,7 +41,7 @@ public final class NpcAggression {
      *            the player that will be targeted by aggressive NPCs.
      */
     public static void sequence(Player player) {
-        for (Npc npc : AGGRESSIVE) {
+        for (Npc npc : player.getLocalNpcs()) {
             if (validate(npc, player)) {
                 npc.getCombatBuilder().attack(player);
             } else {
@@ -66,6 +66,8 @@ public final class NpcAggression {
             .isBeingAttacked())
             return false;
         if (player.determineCombatLevel() > (npc.getDefinition().getCombatLevel() * 2) && !Location.inWilderness(player))
+            return false;
+        if (!AGGRESSIVE.contains(npc.getId()))
             return false;
         return position.withinDistance(player.getPosition(), TARGET_DISTANCE) && !npc.getCombatBuilder().isAttacking() && !npc
             .getCombatBuilder().isBeingAttacked() && !player.getTolerance().elapsed(TOLERANCE_SECONDS, TimeUnit.SECONDS);

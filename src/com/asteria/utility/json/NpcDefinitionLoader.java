@@ -2,6 +2,7 @@ package com.asteria.utility.json;
 
 import java.util.Objects;
 
+import com.asteria.game.character.npc.NpcAggression;
 import com.asteria.game.character.npc.NpcDefinition;
 import com.asteria.utility.JsonLoader;
 import com.google.gson.Gson;
@@ -47,5 +48,8 @@ public final class NpcDefinitionLoader extends JsonLoader {
         NpcDefinition.DEFINITIONS[index] = new NpcDefinition(index, name, description, combatLevel, size, attackable, aggressive,
             retreats, poisonous, respawnTime, maxHit, hitpoints, attackSpeed, attackAnim, defenceAnim, deathAnim, attackBonus,
             meleeDefence, rangedDefence, magicDefence);
+
+        if (aggressive)
+            NpcAggression.AGGRESSIVE.add(index);
     }
 }
