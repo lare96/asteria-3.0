@@ -29,7 +29,7 @@ public final class NpcAggression {
     private static final int TOLERANCE_SECONDS = 600;
 
     /**
-     * The hash collection the holds the instances of aggressive NPCs.
+     * The hash collection the holds the npc identifiers of aggressive NPCs.
      */
     public static final Set<Integer> AGGRESSIVE = new HashSet<>();
 
