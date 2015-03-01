@@ -1,6 +1,5 @@
 package com.asteria.game.character.player.skill.action;
 
-import java.util.Arrays;
 import java.util.Optional;
 
 import com.asteria.game.character.Animation;
@@ -53,9 +52,8 @@ public abstract class SkillAction implements PluginContext {
      * Starts this skill action by submitting a new skill action task.
      */
     public final void start() {
-        if (!player.getSkillEvent()[skill().getIndex()]) {
-            Arrays.fill(player.getSkillEvent(), false);
-            player.getSkillEvent()[skill().getIndex()] = true;
+        if (!player.isSkillAction()) {
+            player.setSkillAction(true);
             TaskHandler.submit(new SkillActionTask(this));
         }
     }

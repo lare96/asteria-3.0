@@ -52,7 +52,7 @@ public final class PlayerDeath extends CharacterDeath<Player> {
     @Override
     public void preDeath(Player character) {
         character.animation(new Animation(0x900, AnimationPriority.HIGH));
-        Arrays.fill(character.getSkillEvent(), false);
+        character.setSkillAction(false);
         character.getTradeSession().reset(false);
     }
 

@@ -1,6 +1,5 @@
 package com.asteria.network.packet.impl;
 
-import java.util.Arrays;
 import java.util.Optional;
 
 import com.asteria.game.character.player.Player;
@@ -29,7 +28,7 @@ public final class PickupItemPacket extends PacketDecoder {
         int itemX = buf.getShort(ByteOrder.LITTLE);
         if (itemY < 0 || itemId < 0 || itemX < 0)
             return;
-        Arrays.fill(player.getSkillEvent(), false);
+        player.setSkillAction(false);
         player.getMovementListener().append(() -> {
             if (player.getPosition().equals(new Position(itemX, itemY, player.getPosition().getZ()))) {
                 Position position = new Position(itemX, itemY, player.getPosition().getZ());

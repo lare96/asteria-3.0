@@ -13,22 +13,22 @@ public enum SkillData {
     STRENGTH(Skills.STRENGTH, 6207, 6208, 6206),
     HITPOINTS(Skills.HITPOINTS, 6217, 6218, 6216),
     RANGED(Skills.RANGED, 5453, 6114, 4443),
-    PRAYER(Skills.PRAYER, 6243, 6244, 6242, 0),
+    PRAYER(Skills.PRAYER, 6243, 6244, 6242),
     MAGIC(Skills.MAGIC, 6212, 6213, 6211),
-    COOKING(Skills.COOKING, 6227, 6228, 6226, 1),
-    WOODCUTTING(Skills.WOODCUTTING, 4273, 4274, 4272, 2),
-    FLETCHING(Skills.FLETCHING, 6232, 6233, 6231, 3),
-    FISHING(Skills.FISHING, 6259, 6260, 6258, 4),
-    FIREMAKING(Skills.FIREMAKING, 4283, 4284, 4282, 5),
-    CRAFTING(Skills.CRAFTING, 6264, 6265, 6263, 6),
-    SMITHING(Skills.SMITHING, 6222, 6223, 6221, 7),
-    MINING(Skills.MINING, 4417, 4438, 4416, 8),
-    HERBLORE(Skills.HERBLORE, 6238, 6239, 6237, 9),
-    AGILITY(Skills.AGILITY, 4278, 4279, 4277, 10),
-    THIEVING(Skills.THIEVING, 4263, 4264, 4261, 11),
-    SLAYER(Skills.SLAYER, 12123, 12124, 12122, 12),
-    FARMING(Skills.FARMING, 4889, 4890, 4887, 13),
-    RUNECRAFTING(Skills.RUNECRAFTING, 4268, 4269, 4267, 14);
+    COOKING(Skills.COOKING, 6227, 6228, 6226),
+    WOODCUTTING(Skills.WOODCUTTING, 4273, 4274, 4272),
+    FLETCHING(Skills.FLETCHING, 6232, 6233, 6231),
+    FISHING(Skills.FISHING, 6259, 6260, 6258),
+    FIREMAKING(Skills.FIREMAKING, 4283, 4284, 4282),
+    CRAFTING(Skills.CRAFTING, 6264, 6265, 6263),
+    SMITHING(Skills.SMITHING, 6222, 6223, 6221),
+    MINING(Skills.MINING, 4417, 4438, 4416),
+    HERBLORE(Skills.HERBLORE, 6238, 6239, 6237),
+    AGILITY(Skills.AGILITY, 4278, 4279, 4277),
+    THIEVING(Skills.THIEVING, 4263, 4264, 4261),
+    SLAYER(Skills.SLAYER, 12123, 12124, 12122),
+    FARMING(Skills.FARMING, 4889, 4890, 4887),
+    RUNECRAFTING(Skills.RUNECRAFTING, 4268, 4269, 4267);
 
     /**
      * The identification for this skill in the skills array.
@@ -51,11 +51,6 @@ public enum SkillData {
     private final int chatbox;
 
     /**
-     * The index in the skill event array.
-     */
-    private final int index;
-
-    /**
      * Creates a new {@link SkillData}.
      * 
      * @param id
@@ -69,31 +64,16 @@ public enum SkillData {
      * @param index
      *            the index in the skill event array.
      */
-    private SkillData(int id, int firstLine, int secondLine, int chatbox, int index) {
+    private SkillData(int id, int firstLine, int secondLine, int chatbox) {
         this.id = id;
         this.firstLine = firstLine;
         this.secondLine = secondLine;
         this.chatbox = chatbox;
-        this.index = index;
     }
 
     @Override
     public final String toString() {
         return TextUtils.capitalize(name().toLowerCase().replaceAll("_", " "));
-    }
-
-    /**
-     * Creates a new {@link SkillData} with no skill event index.
-     * 
-     * @param firstLine
-     *            the first line that level up text will be printed on.
-     * @param secondLine
-     *            the second line that level up text will be printed on.
-     * @param chatbox
-     *            the chatbox interface displayed on level up.
-     */
-    private SkillData(int id, int firstLine, int secondLine, int chatbox) {
-        this(id, firstLine, secondLine, chatbox, -1);
     }
 
     /**
@@ -130,14 +110,5 @@ public enum SkillData {
      */
     public final int getChatbox() {
         return chatbox;
-    }
-
-    /**
-     * Gets the index in the skill event array.
-     * 
-     * @return the index.
-     */
-    public final int getIndex() {
-        return index;
     }
 }

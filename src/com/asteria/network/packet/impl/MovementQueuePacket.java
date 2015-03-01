@@ -1,7 +1,5 @@
 package com.asteria.network.packet.impl;
 
-import java.util.Arrays;
-
 import com.asteria.game.character.player.Player;
 import com.asteria.game.location.Position;
 import com.asteria.network.DataBuffer;
@@ -24,14 +22,14 @@ public final class MovementQueuePacket extends PacketDecoder {
         player.faceCharacter(null);
 
         if (opcode == 248) {
-            Arrays.fill(player.getSkillEvent(), false);
+            player.setSkillAction(false);
             player.setFollowing(false);
             player.getCombatBuilder().cooldown(false);
             size -= 14;
         }
 
         if (opcode == 164) {
-            Arrays.fill(player.getSkillEvent(), false);
+            player.setSkillAction(false);
             player.setFollowing(false);
             player.getCombatBuilder().cooldown(false);
         } else if (opcode == 98) {

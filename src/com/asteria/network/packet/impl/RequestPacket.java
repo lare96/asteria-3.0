@@ -1,7 +1,5 @@
 package com.asteria.network.packet.impl;
 
-import java.util.Arrays;
-
 import com.asteria.game.World;
 import com.asteria.game.character.player.Player;
 import com.asteria.game.character.player.minigame.MinigameHandler;
@@ -42,7 +40,7 @@ public final class RequestPacket extends PacketDecoder {
         Player other = World.getPlayers().get(index);
         if (other == null || !validate(player, other))
             return;
-        Arrays.fill(player.getSkillEvent(), false);
+        player.setSkillAction(false);
         if (!MinigameHandler.execute(player, true, m -> m.canTrade(player, other)))
             return;
         player.getTradeSession().request(other);

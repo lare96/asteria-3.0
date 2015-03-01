@@ -1,7 +1,5 @@
 package com.asteria.network.packet.impl;
 
-import java.util.Arrays;
-
 import com.asteria.game.World;
 import com.asteria.game.character.player.Player;
 import com.asteria.network.ByteOrder;
@@ -25,7 +23,7 @@ public final class FollowPlayerPacket extends PacketDecoder {
 
         if (follow == null || !follow.getPosition().isViewableFrom(player.getPosition()) || follow.equals(player))
             return;
-        Arrays.fill(player.getSkillEvent(), false);
+        player.setSkillAction(false);
         player.getMovementQueue().follow(follow);
     }
 }

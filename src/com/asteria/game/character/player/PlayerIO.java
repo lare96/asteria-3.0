@@ -3,7 +3,6 @@ package com.asteria.game.character.player;
 import java.nio.ByteBuffer;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.SocketChannel;
-import java.util.Arrays;
 import java.util.logging.Logger;
 
 import plugin.minigames.fightcaves.FightCavesHandler;
@@ -156,7 +155,7 @@ public final class PlayerIO {
                     Shop.SHOPS.get(player.getOpenShop()).getPlayers().remove(player);
                 TaskHandler.cancel(player.getCombatBuilder());
                 TaskHandler.cancel(player);
-                Arrays.fill(player.getSkillEvent(), false);
+                player.setSkillAction(false);
                 World.getPlayers().remove(player);
                 MinigameHandler.execute(player, m -> m.onLogout(player));
                 player.getTradeSession().reset(false);

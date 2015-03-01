@@ -1,7 +1,5 @@
 package com.asteria.network.packet.impl;
 
-import java.util.Arrays;
-
 import com.asteria.game.character.player.Player;
 import com.asteria.game.item.Item;
 import com.asteria.game.item.ItemDefinition;
@@ -56,14 +54,11 @@ public final class ItemInterfacePacket extends PacketDecoder {
         int interfaceId = buf.getShort(com.asteria.network.ValueType.A);
         int slot = buf.getShort(com.asteria.network.ValueType.A);
         int itemId = buf.getShort(com.asteria.network.ValueType.A);
-        Arrays.fill(player.getSkillEvent(), false);
-
         if (interfaceId < 0 || slot < 0 || itemId < 0)
             return;
-
+        player.setSkillAction(false);
         switch (interfaceId) {
         case 1688:
-            Arrays.fill(player.getSkillEvent(), false);
             player.getEquipment().unequipItem(slot, true);
             player.getCombatBuilder().cooldown(true);
             break;
@@ -230,7 +225,7 @@ public final class ItemInterfacePacket extends PacketDecoder {
 
         }
         player.getEquipment().equipItem(slot);
-        Arrays.fill(player.getSkillEvent(), false);
+        player.setSkillAction(false);
         player.getCombatBuilder().cooldown(true);
     }
 

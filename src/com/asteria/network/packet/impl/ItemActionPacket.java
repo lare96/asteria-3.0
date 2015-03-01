@@ -1,7 +1,5 @@
 package com.asteria.network.packet.impl;
 
-import java.util.Arrays;
-
 import plugin.skills.prayer.Bone;
 import plugin.skills.prayer.PrayerBoneBury;
 
@@ -52,7 +50,7 @@ public final class ItemActionPacket extends PacketDecoder {
         if (slot < 0 || container < 0 || id < 0 || id > ItemDefinition.DEFINITIONS.length)
             return;
 
-        Arrays.fill(player.getSkillEvent(), false);
+        player.setSkillAction(false);
         player.getCombatBuilder().cooldown(true);
 
         if (container == 3214) {

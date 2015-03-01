@@ -1,7 +1,5 @@
 package com.asteria.network.packet.impl;
 
-import java.util.Arrays;
-
 import com.asteria.game.character.player.Player;
 import com.asteria.game.item.Item;
 import com.asteria.game.item.ItemDefinition;
@@ -33,7 +31,7 @@ public final class DropItemPacket extends PacketDecoder {
         Item item = player.getInventory().get(slot);
         if (item == null || item.getId() != id)
             return;
-        Arrays.fill(player.getSkillEvent(), false);
+        player.setSkillAction(false);
         int amount = ItemDefinition.DEFINITIONS[id].isStackable() ? item.getAmount() : 1;
         player.getInventory().remove(new Item(id, amount), slot);
         Position p = new Position(player.getPosition().getX(), player.getPosition().getY(), player.getPosition().getZ());

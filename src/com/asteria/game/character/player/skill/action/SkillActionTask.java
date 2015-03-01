@@ -61,8 +61,7 @@ public final class SkillActionTask extends Task {
 
     @Override
     public void execute() {
-        boolean active = player.getSkillEvent()[action.skill().getIndex()];
-        if (player.getSession().getState() == IOState.LOGGED_OUT || !active) {
+        if (player.getSession().getState() == IOState.LOGGED_OUT || !player.isSkillAction()) {
             this.cancel();
             return;
         }
@@ -80,7 +79,7 @@ public final class SkillActionTask extends Task {
 
     @Override
     public void onCancel() {
-        player.getSkillEvent()[action.skill().getIndex()] = false;
+        player.setSkillAction(false);
         action.onStop();
     }
 }

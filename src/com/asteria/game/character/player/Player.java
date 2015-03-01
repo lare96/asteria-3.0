@@ -158,11 +158,6 @@ public class Player extends CharacterNode {
     private final boolean[] prayerActive = new boolean[18];
 
     /**
-     * The array of skill event flags.
-     */
-    private final boolean[] skillEvent = new boolean[15];
-
-    /**
      * The collection of stopwatches used for various timing operations.
      */
     private final Stopwatch eatingTimer = new Stopwatch().reset(), potionTimer = new Stopwatch().reset(),
@@ -239,6 +234,12 @@ public class Player extends CharacterNode {
      * The flag that determines if the special bar has been activated.
      */
     private boolean specialActivated;
+
+    /**
+     * The skill event flag that determines if a player is executing a skill
+     * action.
+     */
+    private boolean skillAction;
 
     /**
      * The current fight type the player is using.
@@ -937,12 +938,23 @@ public class Player extends CharacterNode {
     }
 
     /**
-     * Gets the array of skill event flags.
+     * Determines if this player is executing a skill action.
      * 
-     * @return the skill events.
+     * @return {@code true} if this player is currently executing a skill
+     *         action, {@code false} otherwise.
      */
-    public final boolean[] getSkillEvent() {
-        return skillEvent;
+    public boolean isSkillAction() {
+        return skillAction;
+    }
+
+    /**
+     * Sets the value for {@link Player#skillAction}.
+     * 
+     * @param skillAction
+     *            the new value to set.
+     */
+    public void setSkillAction(boolean skillAction) {
+        this.skillAction = skillAction;
     }
 
     /**
