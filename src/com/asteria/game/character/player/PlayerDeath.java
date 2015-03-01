@@ -92,7 +92,7 @@ public final class PlayerDeath extends CharacterDeath<Player> {
         character.getSkullTimer().set(0);
         character.setSkullIcon(FightCavesHandler.isChampion(character) ? Player.RED_SKULL : -1);
         character.getTeleblockTimer().set(0);
-        character.animation(new Animation(65535, AnimationPriority.HIGH));
+        character.animation(new Animation(65535));
         WeaponInterface.execute(character, character.getEquipment().get(Equipment.WEAPON_SLOT));
         character.getEncoder().sendMessage(
             character.getRights().less(Rights.ADMINISTRATOR) ? "Oh dear, you're dead!"

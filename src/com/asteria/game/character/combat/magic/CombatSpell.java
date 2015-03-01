@@ -26,11 +26,11 @@ public abstract class CombatSpell extends Spell {
         if (cast.getType() == NodeType.PLAYER) {
             Optional<Animation> optional = castAnimation();
             if (optional.isPresent()) {
-                Animation animation = new Animation(optional.get().getId(), optional.get().getDelay(), AnimationPriority.HIGH);
+                Animation animation = new Animation(optional.get().getId(), optional.get().getDelay(), AnimationPriority.NORMAL);
                 cast.animation(animation);
             }
         } else if (castOn.getType() == NodeType.NPC) {
-            cast.animation(new Animation(((Npc) cast).getDefinition().getAttackAnimation(), AnimationPriority.HIGH));
+            cast.animation(new Animation(((Npc) cast).getDefinition().getAttackAnimation()));
         }
         startGraphic().ifPresent(cast::graphic);
 

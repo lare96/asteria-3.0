@@ -2,7 +2,6 @@ package plugin.combat
 
 import com.asteria.game.NodeType
 import com.asteria.game.character.Animation
-import com.asteria.game.character.AnimationPriority
 import com.asteria.game.character.CharacterNode
 import com.asteria.game.character.Flag
 import com.asteria.game.character.Graphic
@@ -38,7 +37,7 @@ final class DefaultRangedCombatStrategy implements CombatStrategy {
         if (character.type == NodeType.NPC) {
             Npc npc = character as Npc
             CombatRangedAmmo ammo = Combat.prepareRangedAmmo npc
-            character.animation new Animation(npc.getDefinition().attackAnimation, AnimationPriority.HIGH)
+            character.animation new Animation(npc.getDefinition().attackAnimation)
             character.highGraphic new Graphic(ammo.graphic)
             new Projectile(character, victim, ammo.projectile, ammo.delay, ammo.speed, ammo.startHeight, ammo
                     .endHeight, 0).sendProjectile()
@@ -82,9 +81,9 @@ final class DefaultRangedCombatStrategy implements CombatStrategy {
 
     private def startAnimation(Player player) {
         if (player.equipment.get(Equipment.WEAPON_SLOT).getDefinition().name.startsWith("Karils")) {
-            player.animation new Animation(2075, AnimationPriority.HIGH)
+            player.animation new Animation(2075)
         } else {
-            player.animation new Animation(player.fightType.animation, AnimationPriority.HIGH)
+            player.animation new Animation(player.fightType.animation)
         }
     }
 

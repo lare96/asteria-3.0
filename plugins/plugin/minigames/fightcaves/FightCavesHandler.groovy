@@ -60,7 +60,7 @@ final class FightCavesHandler {
                 it.combatBuilder.reset()
                 it.specialPercentage.value = 100
                 it.specialActivated = false
-                it.animation new Animation(65535, AnimationPriority.HIGH)
+                it.animation new Animation(65535)
                 CombatPrayer.deactivateAll it
                 Skills.restoreAll it
                 it.move FightCavesHandler.DEATH_POSITION

@@ -326,6 +326,7 @@ public abstract class CharacterNode extends Node {
         flags.reset();
         resetMovementQueue = false;
         needsPlacement = false;
+        animation = null;
     }
 
     /**
@@ -337,7 +338,7 @@ public abstract class CharacterNode extends Node {
      */
     public void animation(Animation animation) {
         if (this.animation == null || this.animation.getPriority().getValue() <= animation.getPriority().getValue()) {
-            this.animation = animation == null ? new Animation(65535) : animation.copy();
+            this.animation = animation.copy();
             flags.set(Flag.ANIMATION);
         }
     }

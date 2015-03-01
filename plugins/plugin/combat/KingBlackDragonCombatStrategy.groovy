@@ -3,7 +3,6 @@ package plugin.combat
 import com.asteria.game.NodeType
 import com.asteria.game.World
 import com.asteria.game.character.Animation
-import com.asteria.game.character.AnimationPriority
 import com.asteria.game.character.CharacterNode
 import com.asteria.game.character.Hit
 import com.asteria.game.character.combat.Combat
@@ -58,13 +57,13 @@ final class KingBlackDragonCombatStrategy implements CombatStrategy {
 
     private CombatSessionData melee(CharacterNode character, victim)  {
         def animation = [80, 91, 80]
-        character.animation new Animation(random.random(animation), AnimationPriority.HIGH)
+        character.animation new Animation(random.random(animation))
         return new CombatSessionData(character, victim, 1
                 , CombatType.MELEE, true)
     }
 
     private CombatSessionData magic(CharacterNode character, CharacterNode victim)  {
-        character.animation new Animation(81, AnimationPriority.HIGH)
+        character.animation new Animation(81)
         TaskHandler.submit(new Task(1, false) {
                     @Override
                     void execute() {
@@ -95,7 +94,7 @@ final class KingBlackDragonCombatStrategy implements CombatStrategy {
     }
 
     private CombatSessionData ranged(CharacterNode character, CharacterNode victim)  {
-        character.animation new Animation(81, AnimationPriority.HIGH)
+        character.animation new Animation(81)
         def p = victim.position.copy()
         Location location = new SquareLocation(p.x, p.y, p.z, 5)
         TaskHandler.submit(new Task(2, false) {
