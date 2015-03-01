@@ -48,25 +48,6 @@ public class Skill {
     }
 
     /**
-     * Gets the amount of experience needed for the next level.
-     * 
-     * @return the amount of experience.
-     */
-    public int getExperienceForNextLevel() {
-        int points = 0;
-        int output = 0;
-
-        for (int lvl = 1; lvl <= (this.getLevel() + 1); lvl++) {
-            points += Math.floor(lvl + 300.0 * Math.pow(2.0, lvl / 7.0));
-            if (lvl >= (this.getRealLevel() + 1))
-                return output;
-            output = (int) Math.floor(points / 4);
-        }
-
-        return 0;
-    }
-
-    /**
      * Determines if your level is greater than or equal to {@code level}.
      * 
      * @param level
