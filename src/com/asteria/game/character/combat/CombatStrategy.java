@@ -10,6 +10,7 @@ import com.asteria.game.plugin.PluginContext;
  * @author lare96 <http://www.rune-server.org/members/lare96/>
  */
 public interface CombatStrategy extends PluginContext {
+
     /**
      * Determines if {@code character} is able to make an attack on
      * {@code victim}.
@@ -53,5 +54,10 @@ public interface CombatStrategy extends PluginContext {
      */
     public int attackDistance(CharacterNode character);
 
+    /**
+     * The NPCs that will be assigned this combat strategy.
+     * 
+     * @return the array of assigned NPCs.
+     */
     public int[] getNpcs();
 }
