@@ -21,7 +21,7 @@ public final class ObjectNodeManager {
     /**
      * The hash collection of registered objects.
      */
-    private static final Set<ObjectNode> OBJECTS = new HashSet<>();
+    public static final Set<ObjectNode> OBJECTS = new HashSet<>();
 
     /**
      * The hash collection of objects that will be removed.

@@ -25,7 +25,7 @@ public final class ItemNodeManager extends Task {
     /**
      * The linked collection of registered items.
      */
-    private static final List<ItemNode> ITEMS = new LinkedList<>();
+    public static final List<ItemNode> ITEMS = new LinkedList<>();
 
     /**
      * Creates a new {@link ItemNodeManager}.

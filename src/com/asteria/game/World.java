@@ -1,6 +1,8 @@
 package com.asteria.game;
 
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -9,6 +11,8 @@ import com.asteria.game.character.CharacterList;
 import com.asteria.game.character.CharacterNode;
 import com.asteria.game.character.npc.Npc;
 import com.asteria.game.character.player.Player;
+import com.asteria.game.item.ItemNodeManager;
+import com.asteria.game.object.ObjectNodeManager;
 import com.asteria.game.service.ConcurrentUpdateService;
 import com.asteria.game.service.SequentialUpdateService;
 
@@ -82,6 +86,20 @@ public final class World {
         players.forEach(characters::add);
         npcs.forEach(characters::add);
         return characters;
+    }
+
+    /**
+     * Gets every single node in the player, npc, object, and item lists.
+     * 
+     * @return a list containing every single node.
+     */
+    public static List<Node> getNodes() {
+        List<Node> nodes = new LinkedList<>();
+        players.forEach(nodes::add);
+        npcs.forEach(nodes::add);
+        ObjectNodeManager.OBJECTS.forEach(nodes::add);
+        ItemNodeManager.ITEMS.forEach(nodes::add);
+        return nodes;
     }
 
     /**
