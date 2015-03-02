@@ -100,7 +100,7 @@ public final class ViewingOrb {
         player.getMovementQueue().setLockMovement(true);
         player.setVisible(false);
         player.setDisabled(true);
-        player.getEncoder().sendMinimapState(1);
+        player.getEncoder().sendMinimapState(2);
         player.setPlayerNpc(2982);
         player.getFlags().set(Flag.APPEARANCE);
         move("Centre", 15239, centre);
