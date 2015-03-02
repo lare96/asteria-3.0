@@ -56,7 +56,7 @@ public abstract class CombatEffect extends Task {
     public abstract void onLogin();
 
     @Override
-    public void execute() {
+    public final void execute() {
         if (removeOn() || !character.isRegistered()) {
             this.cancel();
             return;
