@@ -48,7 +48,7 @@ final class FightCaves extends SequencedMinigame {
     void onDeath(Player player) {
         onLogout player
         player.encoder.sendContextMenu(3, "null")
-        player.encoder.sendMessage "You have lost the battle inside the Fight Pits.."
+        player.encoder.sendMessage "You have lost the battle inside the Fight Pits..."
         FightCavesHandler.end false
     }
 
