@@ -380,12 +380,12 @@ public final class MovementQueue {
      * 
      * @author blakeman8192
      */
-    private class Point extends Position {
+    private final class Point extends Position {
 
         /**
          * The direction to this point.
          */
-        private int direction;
+        private final int direction;
 
         /**
          * Creates a new {@link Point}.
@@ -399,16 +399,6 @@ public final class MovementQueue {
          */
         public Point(int x, int y, int direction) {
             super(x, y);
-            setDirection(direction);
-        }
-
-        /**
-         * Sets the value for {@link Point#direction}.
-         * 
-         * @param direction
-         *            the new value to set.
-         */
-        public void setDirection(int direction) {
             this.direction = direction;
         }
 
