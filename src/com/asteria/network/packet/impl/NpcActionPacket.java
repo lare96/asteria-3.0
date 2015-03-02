@@ -26,7 +26,7 @@ public final class NpcActionPacket extends PacketDecoder {
 
     @Override
     public void decode(Player player, int opcode, int size, DataBuffer buf) {
-        if (player.getViewingOrb() != null)
+        if (player.isDisabled())
             return;
         switch (opcode) {
         case 72:

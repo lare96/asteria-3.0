@@ -15,7 +15,7 @@ public final class FollowPlayerPacket extends PacketDecoder {
 
     @Override
     public void decode(Player player, int opcode, int size, DataBuffer buf) {
-        if (player.getViewingOrb() != null)
+        if (player.isDisabled())
             return;
 
         int index = buf.getShort(false, ByteOrder.LITTLE);

@@ -231,6 +231,11 @@ public class Player extends CharacterNode {
     private ViewingOrb viewingOrb;
 
     /**
+     * The flag that determines if this player is disabled.
+     */
+    private boolean disabled;
+
+    /**
      * The flag that determines if the special bar has been activated.
      */
     private boolean specialActivated;
@@ -1840,5 +1845,24 @@ public class Player extends CharacterNode {
      */
     public Appearance getAppearance() {
         return appearance;
+    }
+
+    /**
+     * Determines if this player is disabled.
+     * 
+     * @return {@code true} if this player is disabled, {@code false} otherwise.
+     */
+    public boolean isDisabled() {
+        return disabled;
+    }
+
+    /**
+     * Sets the value for {@link Player#disabled}.
+     * 
+     * @param disabled
+     *            the new value to set.
+     */
+    public void setDisabled(boolean disabled) {
+        this.disabled = disabled;
     }
 }

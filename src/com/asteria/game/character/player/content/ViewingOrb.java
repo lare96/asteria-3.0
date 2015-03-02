@@ -99,6 +99,7 @@ public final class ViewingOrb {
         player.getEncoder().sendString("@yel@South-West", 15243);
         player.getMovementQueue().setLockMovement(true);
         player.setVisible(false);
+        player.setDisabled(true);
         player.getEncoder().sendMinimapState(1);
         player.setPlayerNpc(2982);
         player.getFlags().set(Flag.APPEARANCE);
@@ -125,6 +126,7 @@ public final class ViewingOrb {
         player.getEncoder().sendSidebarInterface(0, 2423);
         player.getMovementQueue().setLockMovement(false);
         player.setVisible(true);
+        player.setDisabled(false);
         player.setPlayerNpc(-1);
         player.getFlags().set(Flag.APPEARANCE);
         player.getEncoder().sendMinimapState(0);

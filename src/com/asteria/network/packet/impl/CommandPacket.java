@@ -16,7 +16,7 @@ public final class CommandPacket extends PacketDecoder {
 
     @Override
     public void decode(Player player, int opcode, int size, DataBuffer buf) {
-        if (player.getViewingOrb() != null)
+        if (player.isDisabled())
             return;
 
         String[] text = buf.getString().toLowerCase().split(" ");

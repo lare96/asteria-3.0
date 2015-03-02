@@ -50,7 +50,7 @@ public final class CharacterSelectionPacket extends PacketDecoder {
 
     @Override
     public void decode(Player player, int opcode, int size, DataBuffer buf) {
-        if (player.getViewingOrb() != null)
+        if (player.isDisabled())
             return;
         int cursor = 0;
         int[] values = new int[13];

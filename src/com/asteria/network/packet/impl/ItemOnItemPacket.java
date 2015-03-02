@@ -17,7 +17,7 @@ public final class ItemOnItemPacket extends PacketDecoder {
 
     @Override
     public void decode(Player player, int opcode, int size, DataBuffer buf) {
-        if (player.getViewingOrb() != null)
+        if (player.isDisabled())
             return;
         int secondSlot = buf.getShort();
         int firstSlot = buf.getShort(ValueType.A);

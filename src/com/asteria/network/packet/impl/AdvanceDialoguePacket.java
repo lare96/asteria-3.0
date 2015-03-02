@@ -14,7 +14,7 @@ public final class AdvanceDialoguePacket extends PacketDecoder {
 
     @Override
     public void decode(Player player, int opcode, int size, DataBuffer buf) {
-        if (player.getViewingOrb() != null)
+        if (player.isDisabled())
             return;
         player.getDialogueChain().advance();
     }
