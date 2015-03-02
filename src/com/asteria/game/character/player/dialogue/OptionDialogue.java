@@ -26,7 +26,7 @@ public class OptionDialogue implements DialogueChain {
     }
 
     @Override
-    public void accept(DialogueChainBuilder dialogue) {
+    public final void accept(DialogueChainBuilder dialogue) {
         dialogue.interrupt();
         Dialogues.optionDialogue(dialogue.getPlayer(), options);
         dialogue.append(getOptionListener());

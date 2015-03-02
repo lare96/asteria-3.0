@@ -43,7 +43,7 @@ public abstract class SequencedMinigame extends Minigame {
      * 
      * @return the tick amount.
      */
-    public MutableNumber getCounter() {
+    public final MutableNumber getCounter() {
         return counter;
     }
 }

@@ -133,7 +133,7 @@ public abstract class SkillAction implements PluginContext {
      * 
      * @return the player.
      */
-    public Player getPlayer() {
+    public final Player getPlayer() {
         return player;
     }
 
@@ -142,7 +142,7 @@ public abstract class SkillAction implements PluginContext {
      * 
      * @return the position.
      */
-    public Optional<Position> getPosition() {
+    public final Optional<Position> getPosition() {
         return position;
     }
 }

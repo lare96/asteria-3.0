@@ -22,7 +22,7 @@ import com.asteria.task.TaskHandler;
 public abstract class CombatSpell extends Spell {
 
     @Override
-    public void startCast(CharacterNode cast, CharacterNode castOn) {
+    public final void startCast(CharacterNode cast, CharacterNode castOn) {
         if (cast.getType() == NodeType.PLAYER) {
             Optional<Animation> optional = castAnimation();
             if (optional.isPresent()) {

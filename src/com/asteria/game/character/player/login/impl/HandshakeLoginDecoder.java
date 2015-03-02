@@ -25,11 +25,6 @@ public final class HandshakeLoginDecoder extends LoginProtocolDecoder {
     private static Logger logger = LoggerUtils.getLogger(PlayerIO.class);
 
     /**
-     * The secure random generator that will generate a server session key.
-     */
-    private final SecureRandom random = new SecureRandom();
-
-    /**
      * Creates a new {@link HandshakeLoginDecoder}.
      * 
      * @param session
@@ -57,7 +52,7 @@ public final class HandshakeLoginDecoder extends LoginProtocolDecoder {
         DataBuffer out = DataBuffer.create(17);
         out.putLong(0);
         out.put(0);
-        out.putLong(random.nextLong());
+        out.putLong(new SecureRandom().nextLong());
         session.send(out);
         session.setState(IOState.LOGGING_IN);
     }

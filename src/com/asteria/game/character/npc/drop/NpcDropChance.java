@@ -1,4 +1,4 @@
-package com.asteria.game.character.npc.drops;
+package com.asteria.game.character.npc.drop;
 
 import com.asteria.utility.RandomGen;
 

@@ -60,7 +60,7 @@ public abstract class ServerSelectionEvent {
      *            the key that that event is being executed for.
      * @return the runnable event containing the event context.
      */
-    private Runnable construct(ServerSelectionKey key) {
+    private final Runnable construct(ServerSelectionKey key) {
         return () -> {
             try {
                 executeEvent(key);

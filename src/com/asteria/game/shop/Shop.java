@@ -118,7 +118,7 @@ public final class Shop {
      * @param player
      *            the player to open the shop for.
      */
-    public final void openShop(Player player) {
+    public void openShop(Player player) {
         player.getEncoder().sendItemsOnInterface(3823, player.getInventory().container());
         player.getEncoder().sendItemsOnInterface(3900, container.container(), container.size());
         player.setOpenShop(name);
@@ -136,7 +136,7 @@ public final class Shop {
      * @param checkStock
      *            if the stock should be checked.
      */
-    public final void updateShop(Player player, boolean checkStock) {
+    public void updateShop(Player player, boolean checkStock) {
         player.getEncoder().sendItemsOnInterface(3823, player.getInventory().container());
         int size = container.size();
         players.stream().filter(Objects::nonNull).forEach(
@@ -157,7 +157,7 @@ public final class Shop {
      * @param item
      *            the item to send the value of.
      */
-    public final void sendSellingPrice(Player player, Item item) {
+    public void sendSellingPrice(Player player, Item item) {
         String itemName = item.getDefinition().getName();
         if (Arrays.stream(Settings.BANNED_SHOP_ITEMS).anyMatch(i -> i == item.getId())) {
             player.getEncoder().sendMessage("You can't sell " + itemName + " here.");
@@ -179,7 +179,7 @@ public final class Shop {
      * @param item
      *            the item to send the value of.
      */
-    public final void sendPurchasePrice(Player player, Item item) {
+    public void sendPurchasePrice(Player player, Item item) {
         if (item.getAmount() <= 0) {
             player.getEncoder().sendMessage("There is none of this item left in stock!");
             return;
@@ -299,7 +299,7 @@ public final class Shop {
      * @return {@code true} if the items need to be restocked, {@code false}
      *         otherwise.
      */
-    protected final boolean needsRestock() {
+    protected boolean needsRestock() {
         return container.stream().filter(Objects::nonNull).anyMatch(i -> i.getAmount() <= 0 && itemCache.containsKey(i.getId()));
     }
 
@@ -309,7 +309,7 @@ public final class Shop {
      * @return {@code true} if the items don't to be restocked, {@code false}
      *         otherwise.
      */
-    protected final boolean restockCompleted() {
+    protected boolean restockCompleted() {
         return container.stream().filter(Objects::nonNull).allMatch(
             i -> itemCache.containsKey(i.getId()) && i.getAmount() >= itemCache.get(i.getId()));
     }
@@ -321,7 +321,7 @@ public final class Shop {
      *            the item to determine the price of.
      * @return the price of the item based on the currency.
      */
-    private final int determinePrice(Item item) {
+    private int determinePrice(Item item) {
         return currency == Currency.COINS ? item.getDefinition().getGeneralPrice() : item.getDefinition().getSpecialPrice();
     }
 
@@ -330,7 +330,7 @@ public final class Shop {
      * 
      * @return the name of this shop.
      */
-    public final String getName() {
+    public String getName() {
         return name;
     }
 
@@ -339,7 +339,7 @@ public final class Shop {
      * 
      * @return the container that contains the items.
      */
-    public final ItemContainer getContainer() {
+    public ItemContainer getContainer() {
         return container;
     }
 
@@ -348,7 +348,7 @@ public final class Shop {
      * 
      * @return {@code true} if this shop will restock, {@code false} otherwise.
      */
-    public final boolean isRestock() {
+    public boolean isRestock() {
         return restock;
     }
 
@@ -357,7 +357,7 @@ public final class Shop {
      * 
      * @return {@code true} if items can be sold, {@code false} otherwise.
      */
-    public final boolean isCanSell() {
+    public boolean isCanSell() {
         return canSell;
     }
 
@@ -366,7 +366,7 @@ public final class Shop {
      * 
      * @return the currency that items will be bought with.
      */
-    public final Currency getCurrency() {
+    public Currency getCurrency() {
         return currency;
     }
 
@@ -375,7 +375,7 @@ public final class Shop {
      * 
      * @return the set of players viewing the shop.
      */
-    public final Set<Player> getPlayers() {
+    public Set<Player> getPlayers() {
         return players;
     }
 
@@ -385,7 +385,7 @@ public final class Shop {
      * 
      * @return the map of cached shop items.
      */
-    public final Map<Integer, Integer> getItemCache() {
+    public Map<Integer, Integer> getItemCache() {
         return Collections.unmodifiableMap(itemCache);
     }
 }

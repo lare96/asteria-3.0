@@ -26,7 +26,7 @@ public abstract class CombatAncientSpell extends CombatSpell {
     private RandomGen random = new RandomGen();
 
     @Override
-    public void executeOnHit(CharacterNode cast, CharacterNode castOn, boolean accurate, int damage) {
+    public final void executeOnHit(CharacterNode cast, CharacterNode castOn, boolean accurate, int damage) {
         if (accurate) {
             effect(cast, castOn, damage);
 
@@ -61,7 +61,7 @@ public abstract class CombatAncientSpell extends CombatSpell {
     }
 
     @Override
-    public Optional<Item[]> equipmentRequired(Player player) {
+    public final Optional<Item[]> equipmentRequired(Player player) {
         return Optional.empty();
     }
 

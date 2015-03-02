@@ -30,8 +30,8 @@ public abstract class HarvestingSkillAction extends SkillAction {
     /**
      * The factor boost that determines the success rate for harvesting based on
      * skill level. The higher the number the less frequently harvest will be
-     * obtained. A value higher than {@code 99} will throw an
-     * {@link IllegalStateException}.
+     * obtained. A value higher than {@code 99} or lower than {@code 0} will
+     * throw an {@link IllegalStateException}.
      */
     private static final int SUCCESS_FACTOR = 10;
 
@@ -54,7 +54,7 @@ public abstract class HarvestingSkillAction extends SkillAction {
 
     @Override
     public final void execute(Task t) {
-        Preconditions.checkState(SUCCESS_FACTOR <= 99, "Success factor for skill harvesting too high!");
+        Preconditions.checkState(SUCCESS_FACTOR >= 0 && SUCCESS_FACTOR <= 99, "Invalid success factor for harvesting!");
         Player player = getPlayer();
         int factor = (player.getSkills()[skill().getId()].getLevel() / SUCCESS_FACTOR);
         double boost = (factor * 0.01);

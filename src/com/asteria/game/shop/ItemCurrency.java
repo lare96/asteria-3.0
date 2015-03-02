@@ -51,7 +51,7 @@ public final class ItemCurrency implements GeneralCurrency {
      * 
      * @return the item identification.
      */
-    public final int getId() {
+    public int getId() {
         return id;
     }
 }

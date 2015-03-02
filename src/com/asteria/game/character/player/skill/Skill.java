@@ -5,7 +5,7 @@ package com.asteria.game.character.player.skill;
  * 
  * @author lare96 <http://www.rune-server.org/members/lare96/>
  */
-public class Skill {
+public final class Skill {
 
     /**
      * The level of this skill that can be trained.

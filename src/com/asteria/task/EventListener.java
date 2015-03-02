@@ -54,7 +54,7 @@ public abstract class EventListener extends Task {
     public abstract void run();
 
     @Override
-    public void execute() {
+    public final void execute() {
         if (canExecute()) {
             try {
                 run();

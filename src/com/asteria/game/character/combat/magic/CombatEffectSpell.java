@@ -14,17 +14,17 @@ import com.asteria.game.item.Item;
 public abstract class CombatEffectSpell extends CombatSpell {
 
     @Override
-    public int maximumHit() {
+    public final int maximumHit() {
         return -1;
     }
 
     @Override
-    public Optional<Item[]> equipmentRequired(Player player) {
+    public final Optional<Item[]> equipmentRequired(Player player) {
         return Optional.empty();
     }
 
     @Override
-    public void executeOnHit(CharacterNode cast, CharacterNode castOn, boolean accurate, int damage) {
+    public final void executeOnHit(CharacterNode cast, CharacterNode castOn, boolean accurate, int damage) {
         if (accurate) {
             effect(cast, castOn);
         }

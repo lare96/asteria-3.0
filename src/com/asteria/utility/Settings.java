@@ -82,7 +82,7 @@ public final class Settings {
     /**
      * The message that will be sent on every login.
      */
-    public static final String WELCOME_MESSAGE = "Welcome to Asteria 3.0, developed by lare96!";
+    public static final String WELCOME_MESSAGE = "Welcome to Asteria 3.0!";
 
     /**
      * The items received when a player logs in for the first time.

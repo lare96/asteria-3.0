@@ -17,12 +17,12 @@ import com.asteria.game.location.Position;
 public abstract class TeleportSpell extends Spell {
 
     @Override
-    public Optional<Item[]> equipmentRequired(Player player) {
+    public final Optional<Item[]> equipmentRequired(Player player) {
         return Optional.empty();
     }
 
     @Override
-    public void startCast(CharacterNode cast, CharacterNode castOn) {
+    public final void startCast(CharacterNode cast, CharacterNode castOn) {
 
     }
 

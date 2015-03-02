@@ -83,7 +83,7 @@ public final class DialogueChainBuilder {
      * resetting the cursor value.
      */
     public void interrupt() {
-        if (chain.peek() != null)
+        if (!chain.isEmpty())
             chain.clear();
         optionListener = Optional.empty();
     }

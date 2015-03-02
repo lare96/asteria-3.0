@@ -13,7 +13,7 @@ import com.asteria.utility.Settings;
  * 
  * @author lare96 <http://www.rune-server.org/members/lare96/>
  */
-public class UpdateRegionPacket extends PacketDecoder {
+public final class UpdateRegionPacket extends PacketDecoder {
 
     @Override
     public void decode(Player player, int opcode, int size, DataBuffer buf) {

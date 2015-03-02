@@ -6,7 +6,7 @@ import com.asteria.game.World;
 import com.asteria.game.character.Animation;
 import com.asteria.game.character.AnimationPriority;
 import com.asteria.game.character.CharacterDeath;
-import com.asteria.game.character.npc.drops.NpcDropTable;
+import com.asteria.game.character.npc.drop.NpcDropTable;
 import com.asteria.game.character.player.Player;
 import com.asteria.game.character.player.minigame.MinigameHandler;
 import com.asteria.game.item.Item;

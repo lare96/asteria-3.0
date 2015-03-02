@@ -120,7 +120,7 @@ public final class ObjectNode extends Node {
      * 
      * @return the identification.
      */
-    public final int getId() {
+    public int getId() {
         return id;
     }
 
@@ -129,7 +129,7 @@ public final class ObjectNode extends Node {
      * 
      * @return the direction.
      */
-    public final ObjectDirection getDirection() {
+    public ObjectDirection getDirection() {
         return direction;
     }
 
@@ -138,7 +138,7 @@ public final class ObjectNode extends Node {
      * 
      * @return the type of object.
      */
-    public final ObjectType getObjectType() {
+    public ObjectType getObjectType() {
         return objectType;
     }
 }

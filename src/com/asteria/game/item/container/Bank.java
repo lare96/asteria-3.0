@@ -183,7 +183,7 @@ public final class Bank extends ItemContainer {
      *             throw an exception.
      */
     @Override
-    public final boolean add(Item item, int slot) {
+    public boolean add(Item item, int slot) {
         throw new UnsupportedOperationException("This method is not supported by this container implementation!");
     }
 
@@ -195,7 +195,7 @@ public final class Bank extends ItemContainer {
      *             throw an exception.
      */
     @Override
-    public final boolean remove(Item item, int slot) {
+    public boolean remove(Item item, int slot) {
         throw new UnsupportedOperationException("This method is not supported by this container implementation!");
     }
 }

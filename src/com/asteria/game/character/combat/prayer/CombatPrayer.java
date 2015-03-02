@@ -322,7 +322,7 @@ public enum CombatPrayer {
      * @return {@code true} if the activation was successful, {@code false}
      *         otherwise.
      */
-    public boolean activate(Player player) {
+    public final boolean activate(Player player) {
         if (CombatPrayer.isActivated(player, this)) {
             return false;
         } else if (player.getSkills()[Skills.PRAYER].getRealLevel() < level) {
@@ -351,7 +351,7 @@ public enum CombatPrayer {
      * @param player
      *            the player this will be done for.
      */
-    public void activateOrDeactivate(Player player) {
+    public final void activateOrDeactivate(Player player) {
         if (!activate(player))
             deactivate(player);
     }
@@ -364,7 +364,7 @@ public enum CombatPrayer {
      * @return {@code true} if the deactivation was successful, {@code false}
      *         otherwise.
      */
-    public boolean deactivate(Player player) {
+    public final boolean deactivate(Player player) {
         if (!CombatPrayer.isActivated(player, this))
             return false;
         onDeactivation(player);

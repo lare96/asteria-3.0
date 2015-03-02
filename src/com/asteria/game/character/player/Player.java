@@ -70,7 +70,7 @@ import com.asteria.utility.TextUtils;
  * 
  * @author lare96 <http://www.rune-server.org/members/lare96/>
  */
-public class Player extends CharacterNode {
+public final class Player extends CharacterNode {
 
     /**
      * The player appearance update white skull identifier.
@@ -812,7 +812,7 @@ public class Player extends CharacterNode {
      * 
      * @return the formatted username.
      */
-    public final String getFormatUsername() {
+    public  String getFormatUsername() {
         return TextUtils.capitalize(username);
     }
 
@@ -821,7 +821,7 @@ public class Player extends CharacterNode {
      * 
      * @return the local players.
      */
-    public final Set<Player> getLocalPlayers() {
+    public  Set<Player> getLocalPlayers() {
         return localPlayers;
     }
 
@@ -830,7 +830,7 @@ public class Player extends CharacterNode {
      * 
      * @return the local npcs.
      */
-    public final Set<Npc> getLocalNpcs() {
+    public  Set<Npc> getLocalNpcs() {
         return localNpcs;
     }
 
@@ -839,7 +839,7 @@ public class Player extends CharacterNode {
      * 
      * @return the friends list.
      */
-    public final Set<Long> getFriends() {
+    public  Set<Long> getFriends() {
         return friends;
     }
 
@@ -848,7 +848,7 @@ public class Player extends CharacterNode {
      * 
      * @return the ignores list.
      */
-    public final Set<Long> getIgnores() {
+    public  Set<Long> getIgnores() {
         return ignores;
     }
 
@@ -857,7 +857,7 @@ public class Player extends CharacterNode {
      * 
      * @return the container for the inventory.
      */
-    public final Inventory getInventory() {
+    public  Inventory getInventory() {
         return inventory;
     }
 
@@ -866,7 +866,7 @@ public class Player extends CharacterNode {
      * 
      * @return the container for the bank.
      */
-    public final Bank getBank() {
+    public  Bank getBank() {
         return bank;
     }
 
@@ -875,7 +875,7 @@ public class Player extends CharacterNode {
      * 
      * @return the container for the equipment.
      */
-    public final Equipment getEquipment() {
+    public  Equipment getEquipment() {
         return equipment;
     }
 
@@ -884,7 +884,7 @@ public class Player extends CharacterNode {
      * 
      * @return the trade session manager.
      */
-    public final TradeSession getTradeSession() {
+    public  TradeSession getTradeSession() {
         return tradeSession;
     }
 
@@ -893,7 +893,7 @@ public class Player extends CharacterNode {
      * 
      * @return the private message manager.
      */
-    public final PrivateMessage getPrivateMessage() {
+    public  PrivateMessage getPrivateMessage() {
         return privateMessage;
     }
 
@@ -902,7 +902,7 @@ public class Player extends CharacterNode {
      * 
      * @return the input/output manager.
      */
-    public final PlayerIO getSession() {
+    public  PlayerIO getSession() {
         return session;
     }
 
@@ -911,7 +911,7 @@ public class Player extends CharacterNode {
      * 
      * @return the packet encoder.
      */
-    public final PacketEncoder getEncoder() {
+    public  PacketEncoder getEncoder() {
         return encoder;
     }
 
@@ -920,7 +920,7 @@ public class Player extends CharacterNode {
      * 
      * @return the skills that can be trained.
      */
-    public final Skill[] getSkills() {
+    public  Skill[] getSkills() {
         return skills;
     }
 
@@ -929,7 +929,7 @@ public class Player extends CharacterNode {
      * 
      * @return the player bonuses.
      */
-    public final int[] getBonus() {
+    public  int[] getBonus() {
         return bonus;
     }
 
@@ -938,7 +938,7 @@ public class Player extends CharacterNode {
      * 
      * @return the active prayers.
      */
-    public final boolean[] getPrayerActive() {
+    public  boolean[] getPrayerActive() {
         return prayerActive;
     }
 
@@ -967,7 +967,7 @@ public class Player extends CharacterNode {
      * 
      * @return the eating timer.
      */
-    public final Stopwatch getEatingTimer() {
+    public  Stopwatch getEatingTimer() {
         return eatingTimer;
     }
 
@@ -976,7 +976,7 @@ public class Player extends CharacterNode {
      * 
      * @return the potion timer.
      */
-    public final Stopwatch getPotionTimer() {
+    public  Stopwatch getPotionTimer() {
         return potionTimer;
     }
 
@@ -985,7 +985,7 @@ public class Player extends CharacterNode {
      * 
      * @return the tolerance timer.
      */
-    public final Stopwatch getTolerance() {
+    public  Stopwatch getTolerance() {
         return tolerance;
     }
 
@@ -994,7 +994,7 @@ public class Player extends CharacterNode {
      * 
      * @return the last energy increment timer.
      */
-    public final Stopwatch getLastEnergy() {
+    public  Stopwatch getLastEnergy() {
         return lastEnergy;
     }
 
@@ -1003,7 +1003,7 @@ public class Player extends CharacterNode {
      * 
      * @return the bone bury timer.
      */
-    public final Stopwatch getBuryTimer() {
+    public  Stopwatch getBuryTimer() {
         return buryTimer;
     }
 
@@ -1012,7 +1012,7 @@ public class Player extends CharacterNode {
      * 
      * @return the poison immunity counter.
      */
-    public final MutableNumber getPoisonImmunity() {
+    public  MutableNumber getPoisonImmunity() {
         return poisonImmunity;
     }
 
@@ -1021,7 +1021,7 @@ public class Player extends CharacterNode {
      * 
      * @return the teleblock counter.
      */
-    public final MutableNumber getTeleblockTimer() {
+    public  MutableNumber getTeleblockTimer() {
         return teleblockTimer;
     }
 
@@ -1030,7 +1030,7 @@ public class Player extends CharacterNode {
      * 
      * @return the immunity counter.
      */
-    public final MutableNumber getFireImmunity() {
+    public  MutableNumber getFireImmunity() {
         return fireImmunity;
     }
 
@@ -1039,7 +1039,7 @@ public class Player extends CharacterNode {
      * 
      * @return the skull timer counter.
      */
-    public final MutableNumber getSkullTimer() {
+    public  MutableNumber getSkullTimer() {
         return skullTimer;
     }
 
@@ -1048,7 +1048,7 @@ public class Player extends CharacterNode {
      * 
      * @return the run energy percentage counter.
      */
-    public final MutableNumber getRunEnergy() {
+    public  MutableNumber getRunEnergy() {
         return runEnergy;
     }
 
@@ -1057,7 +1057,7 @@ public class Player extends CharacterNode {
      * 
      * @return the special percentage counter.
      */
-    public final MutableNumber getSpecialPercentage() {
+    public  MutableNumber getSpecialPercentage() {
         return specialPercentage;
     }
 
@@ -1066,7 +1066,7 @@ public class Player extends CharacterNode {
      * 
      * @return the authority this player has.
      */
-    public final Rights getRights() {
+    public  Rights getRights() {
         return rights;
     }
 
@@ -1076,7 +1076,7 @@ public class Player extends CharacterNode {
      * @param rights
      *            the new value to set.
      */
-    public final void setRights(Rights rights) {
+    public  void setRights(Rights rights) {
         this.rights = rights;
     }
 
@@ -1085,7 +1085,7 @@ public class Player extends CharacterNode {
      * 
      * @return the shop you have open.
      */
-    public final String getOpenShop() {
+    public  String getOpenShop() {
         return openShop;
     }
 
@@ -1106,7 +1106,7 @@ public class Player extends CharacterNode {
      * 
      * @return the username of this player.
      */
-    public final String getUsername() {
+    public  String getUsername() {
         return username;
     }
 
@@ -1116,7 +1116,7 @@ public class Player extends CharacterNode {
      * @param username
      *            the new value to set.
      */
-    public final void setUsername(String username) {
+    public  void setUsername(String username) {
         this.username = username;
     }
 
@@ -1125,7 +1125,7 @@ public class Player extends CharacterNode {
      * 
      * @return the password of this player.
      */
-    public final String getPassword() {
+    public  String getPassword() {
         return password;
     }
 
@@ -1135,7 +1135,7 @@ public class Player extends CharacterNode {
      * @param password
      *            the new value to set.
      */
-    public final void setPassword(String password) {
+    public  void setPassword(String password) {
         this.password = password;
     }
 
@@ -1144,7 +1144,7 @@ public class Player extends CharacterNode {
      * 
      * @return the selected combat spell.
      */
-    public final CombatSpell getCastSpell() {
+    public  CombatSpell getCastSpell() {
         return castSpell;
     }
 
@@ -1154,7 +1154,7 @@ public class Player extends CharacterNode {
      * @param castSpell
      *            the new value to set.
      */
-    public final void setCastSpell(CombatSpell castSpell) {
+    public  void setCastSpell(CombatSpell castSpell) {
         this.castSpell = castSpell;
     }
 
@@ -1163,7 +1163,7 @@ public class Player extends CharacterNode {
      * 
      * @return the type of ranged ammo.
      */
-    public final CombatRangedAmmo getRangedAmmo() {
+    public  CombatRangedAmmo getRangedAmmo() {
         return rangedAmmo;
     }
 
@@ -1173,7 +1173,7 @@ public class Player extends CharacterNode {
      * @param rangedAmmo
      *            the new value to set.
      */
-    public final void setRangedAmmo(CombatRangedAmmo rangedAmmo) {
+    public  void setRangedAmmo(CombatRangedAmmo rangedAmmo) {
         this.rangedAmmo = rangedAmmo;
     }
 
@@ -1182,7 +1182,7 @@ public class Player extends CharacterNode {
      * 
      * @return {@code true} if they are autocasting, {@code false} otherwise.
      */
-    public final boolean isAutocast() {
+    public  boolean isAutocast() {
         return autocast;
     }
 
@@ -1192,7 +1192,7 @@ public class Player extends CharacterNode {
      * @param autocast
      *            the new value to set.
      */
-    public final void setAutocast(boolean autocast) {
+    public  void setAutocast(boolean autocast) {
         this.autocast = autocast;
     }
 
@@ -1201,7 +1201,7 @@ public class Player extends CharacterNode {
      * 
      * @return the autocast spell.
      */
-    public final CombatSpell getAutocastSpell() {
+    public  CombatSpell getAutocastSpell() {
         return autocastSpell;
     }
 
@@ -1211,7 +1211,7 @@ public class Player extends CharacterNode {
      * @param autocastSpell
      *            the new value to set.
      */
-    public final void setAutocastSpell(CombatSpell autocastSpell) {
+    public  void setAutocastSpell(CombatSpell autocastSpell) {
         this.autocastSpell = autocastSpell;
     }
 
@@ -1220,7 +1220,7 @@ public class Player extends CharacterNode {
      * 
      * @return the activated combat special.
      */
-    public final CombatSpecial getCombatSpecial() {
+    public  CombatSpecial getCombatSpecial() {
         return combatSpecial;
     }
 
@@ -1230,7 +1230,7 @@ public class Player extends CharacterNode {
      * @param combatSpecial
      *            the new value to set.
      */
-    public final void setCombatSpecial(CombatSpecial combatSpecial) {
+    public  void setCombatSpecial(CombatSpecial combatSpecial) {
         this.combatSpecial = combatSpecial;
     }
 
@@ -1239,7 +1239,7 @@ public class Player extends CharacterNode {
      * 
      * @return the ranged ammo.
      */
-    public final int getFireAmmo() {
+    public  int getFireAmmo() {
         return fireAmmo;
     }
 
@@ -1249,7 +1249,7 @@ public class Player extends CharacterNode {
      * @param fireAmmo
      *            the new value to set.
      */
-    public final void setFireAmmo(int fireAmmo) {
+    public  void setFireAmmo(int fireAmmo) {
         this.fireAmmo = fireAmmo;
     }
 
@@ -1258,7 +1258,7 @@ public class Player extends CharacterNode {
      * 
      * @return {@code true} if it has been activated, {@code false} otherwise.
      */
-    public final boolean isSpecialActivated() {
+    public  boolean isSpecialActivated() {
         return specialActivated;
     }
 
@@ -1268,7 +1268,7 @@ public class Player extends CharacterNode {
      * @param specialActivated
      *            the new value to set.
      */
-    public final void setSpecialActivated(boolean specialActivated) {
+    public  void setSpecialActivated(boolean specialActivated) {
         this.specialActivated = specialActivated;
     }
 
@@ -1277,7 +1277,7 @@ public class Player extends CharacterNode {
      * 
      * @return the current fight type.
      */
-    public final FightType getFightType() {
+    public  FightType getFightType() {
         return fightType;
     }
 
@@ -1287,7 +1287,7 @@ public class Player extends CharacterNode {
      * @param fightType
      *            the new value to set.
      */
-    public final void setFightType(FightType fightType) {
+    public  void setFightType(FightType fightType) {
         this.fightType = fightType;
     }
 
@@ -1296,7 +1296,7 @@ public class Player extends CharacterNode {
      * 
      * @return the weapon animation.
      */
-    public final WeaponAnimation getWeaponAnimation() {
+    public  WeaponAnimation getWeaponAnimation() {
         return weaponAnimation;
     }
 
@@ -1306,7 +1306,7 @@ public class Player extends CharacterNode {
      * @param weaponAnimation
      *            the new value to set.
      */
-    public final void setWeaponAnimation(WeaponAnimation weaponAnimation) {
+    public  void setWeaponAnimation(WeaponAnimation weaponAnimation) {
         this.weaponAnimation = weaponAnimation;
     }
 
@@ -1315,7 +1315,7 @@ public class Player extends CharacterNode {
      * 
      * @return the prayer drain task.
      */
-    public final Task getPrayerDrain() {
+    public  Task getPrayerDrain() {
         return prayerDrain;
     }
 
@@ -1325,7 +1325,7 @@ public class Player extends CharacterNode {
      * @param prayerDrain
      *            the new value to set.
      */
-    public final void setPrayerDrain(Task prayerDrain) {
+    public  void setPrayerDrain(Task prayerDrain) {
         this.prayerDrain = prayerDrain;
     }
 
@@ -1334,7 +1334,7 @@ public class Player extends CharacterNode {
      * 
      * @return the wilderness level.
      */
-    public final int getWildernessLevel() {
+    public  int getWildernessLevel() {
         return wildernessLevel;
     }
 
@@ -1344,7 +1344,7 @@ public class Player extends CharacterNode {
      * @param wildernessLevel
      *            the new value to set.
      */
-    public final void setWildernessLevel(int wildernessLevel) {
+    public  void setWildernessLevel(int wildernessLevel) {
         this.wildernessLevel = wildernessLevel;
     }
 
@@ -1353,7 +1353,7 @@ public class Player extends CharacterNode {
      * 
      * @return the weapon interface.
      */
-    public final WeaponInterface getWeapon() {
+    public  WeaponInterface getWeapon() {
         return weapon;
     }
 
@@ -1363,7 +1363,7 @@ public class Player extends CharacterNode {
      * @param weapon
      *            the new value to set.
      */
-    public final void setWeapon(WeaponInterface weapon) {
+    public  void setWeapon(WeaponInterface weapon) {
         this.weapon = weapon;
     }
 
@@ -1372,7 +1372,7 @@ public class Player extends CharacterNode {
      * 
      * @return the teleport stage.
      */
-    public final int getTeleportStage() {
+    public  int getTeleportStage() {
         return teleportStage;
     }
 
@@ -1382,7 +1382,7 @@ public class Player extends CharacterNode {
      * @param teleportStage
      *            the new value to set.
      */
-    public final void setTeleportStage(int teleportStage) {
+    public  void setTeleportStage(int teleportStage) {
         this.teleportStage = teleportStage;
     }
 
@@ -1391,7 +1391,7 @@ public class Player extends CharacterNode {
      * 
      * @return {@code true} if you are using a stove, {@code false} otherwise.
      */
-    public final boolean isUsingStove() {
+    public  boolean isUsingStove() {
         return usingStove;
     }
 
@@ -1401,7 +1401,7 @@ public class Player extends CharacterNode {
      * @param usingStove
      *            the new value to set.
      */
-    public final void setUsingStove(boolean usingStove) {
+    public  void setUsingStove(boolean usingStove) {
         this.usingStove = usingStove;
     }
 
@@ -1410,7 +1410,7 @@ public class Player extends CharacterNode {
      * 
      * @return the cooking data.
      */
-    public final CookingData getCookData() {
+    public  CookingData getCookData() {
         return cookData;
     }
 
@@ -1420,7 +1420,7 @@ public class Player extends CharacterNode {
      * @param cookData
      *            the new value to set.
      */
-    public final void setCookData(CookingData cookData) {
+    public  void setCookData(CookingData cookData) {
         this.cookData = cookData;
     }
 
@@ -1429,7 +1429,7 @@ public class Player extends CharacterNode {
      * 
      * @return the cook position.
      */
-    public final Position getCookPosition() {
+    public  Position getCookPosition() {
         return cookPosition;
     }
 
@@ -1439,7 +1439,7 @@ public class Player extends CharacterNode {
      * @param cookPosition
      *            the new value to set.
      */
-    public final void setCookPosition(Position cookPosition) {
+    public  void setCookPosition(Position cookPosition) {
         this.cookPosition = cookPosition;
     }
 
@@ -1448,7 +1448,7 @@ public class Player extends CharacterNode {
      * 
      * @return {@code true} if the player is banned, {@code false} otherwise.
      */
-    public final boolean isBanned() {
+    public  boolean isBanned() {
         return banned;
     }
 
@@ -1458,7 +1458,7 @@ public class Player extends CharacterNode {
      * @param banned
      *            the new value to set.
      */
-    public final void setBanned(boolean banned) {
+    public  void setBanned(boolean banned) {
         this.banned = banned;
     }
 
@@ -1468,7 +1468,7 @@ public class Player extends CharacterNode {
      * @return {@code true} if the player has accept aid toggled, {@code false}
      *         otherwise.
      */
-    public final boolean isAcceptAid() {
+    public  boolean isAcceptAid() {
         return acceptAid;
     }
 
@@ -1478,7 +1478,7 @@ public class Player extends CharacterNode {
      * @param acceptAid
      *            the new value to set.
      */
-    public final void setAcceptAid(boolean acceptAid) {
+    public  void setAcceptAid(boolean acceptAid) {
         this.acceptAid = acceptAid;
     }
 
@@ -1487,7 +1487,7 @@ public class Player extends CharacterNode {
      * 
      * @return the option value.
      */
-    public final OptionType getOption() {
+    public  OptionType getOption() {
         return option;
     }
 
@@ -1497,7 +1497,7 @@ public class Player extends CharacterNode {
      * @param option
      *            the new value to set.
      */
-    public final void setOption(OptionType option) {
+    public  void setOption(OptionType option) {
         this.option = option;
     }
 
@@ -1506,7 +1506,7 @@ public class Player extends CharacterNode {
      * 
      * @return the head icon.
      */
-    public final int getHeadIcon() {
+    public  int getHeadIcon() {
         return headIcon;
     }
 
@@ -1516,7 +1516,7 @@ public class Player extends CharacterNode {
      * @param headIcon
      *            the new value to set.
      */
-    public final void setHeadIcon(int headIcon) {
+    public  void setHeadIcon(int headIcon) {
         this.headIcon = headIcon;
     }
 
@@ -1525,7 +1525,7 @@ public class Player extends CharacterNode {
      * 
      * @return the skull icon.
      */
-    public final int getSkullIcon() {
+    public  int getSkullIcon() {
         return skullIcon;
     }
 
@@ -1535,7 +1535,7 @@ public class Player extends CharacterNode {
      * @param skullIcon
      *            the new value to set.
      */
-    public final void setSkullIcon(int skullIcon) {
+    public  void setSkullIcon(int skullIcon) {
         this.skullIcon = skullIcon;
     }
 
@@ -1545,7 +1545,7 @@ public class Player extends CharacterNode {
      * @return {@code true} if a wilderness interface is present, {@code false}
      *         otherwise.
      */
-    public final boolean isWildernessInterface() {
+    public  boolean isWildernessInterface() {
         return wildernessInterface;
     }
 
@@ -1555,7 +1555,7 @@ public class Player extends CharacterNode {
      * @param wildernessInterface
      *            the new value to set.
      */
-    public final void setWildernessInterface(boolean wildernessInterface) {
+    public  void setWildernessInterface(boolean wildernessInterface) {
         this.wildernessInterface = wildernessInterface;
     }
 
@@ -1565,7 +1565,7 @@ public class Player extends CharacterNode {
      * @return {@code true} if a multicombat interface is present, {@code false}
      *         otherwise.
      */
-    public final boolean isMulticombatInterface() {
+    public  boolean isMulticombatInterface() {
         return multicombatInterface;
     }
 
@@ -1575,7 +1575,7 @@ public class Player extends CharacterNode {
      * @param multicombatInterface
      *            the new value to set.
      */
-    public final void setMulticombatInterface(boolean multicombatInterface) {
+    public  void setMulticombatInterface(boolean multicombatInterface) {
         this.multicombatInterface = multicombatInterface;
     }
 
@@ -1584,7 +1584,7 @@ public class Player extends CharacterNode {
      * 
      * @return {@code true} if this player is new, {@code false} otherwise.
      */
-    public final boolean isNewPlayer() {
+    public  boolean isNewPlayer() {
         return newPlayer;
     }
 
@@ -1594,7 +1594,7 @@ public class Player extends CharacterNode {
      * @param newPlayer
      *            the new value to set.
      */
-    public final void setNewPlayer(boolean newPlayer) {
+    public  void setNewPlayer(boolean newPlayer) {
         this.newPlayer = newPlayer;
     }
 
@@ -1604,7 +1604,7 @@ public class Player extends CharacterNode {
      * @return {@code true} if items should be inserted, {@code false}
      *         otherwise.
      */
-    public final boolean isInsertItem() {
+    public  boolean isInsertItem() {
         return insertItem;
     }
 
@@ -1614,7 +1614,7 @@ public class Player extends CharacterNode {
      * @param insertItem
      *            the new value to set.
      */
-    public final void setInsertItem(boolean insertItem) {
+    public  void setInsertItem(boolean insertItem) {
         this.insertItem = insertItem;
     }
 
@@ -1624,7 +1624,7 @@ public class Player extends CharacterNode {
      * @return {@code true} if items should be withdrawn as notes, {@code false}
      *         otherwise.
      */
-    public final boolean isWithdrawAsNote() {
+    public  boolean isWithdrawAsNote() {
         return withdrawAsNote;
     }
 
@@ -1634,7 +1634,7 @@ public class Player extends CharacterNode {
      * @param withdrawAsNote
      *            the new value to set.
      */
-    public final void setWithdrawAsNote(boolean withdrawAsNote) {
+    public  void setWithdrawAsNote(boolean withdrawAsNote) {
         this.withdrawAsNote = withdrawAsNote;
     }
 
@@ -1643,7 +1643,7 @@ public class Player extends CharacterNode {
      * 
      * @return the spellbook open.
      */
-    public final Spellbook getSpellbook() {
+    public  Spellbook getSpellbook() {
         return spellbook;
     }
 
@@ -1653,7 +1653,7 @@ public class Player extends CharacterNode {
      * @param spellbook
      *            the new value to set.
      */
-    public final void setSpellbook(Spellbook spellbook) {
+    public  void setSpellbook(Spellbook spellbook) {
         this.spellbook = spellbook;
     }
 
@@ -1662,7 +1662,7 @@ public class Player extends CharacterNode {
      * 
      * @return the array of chat text.
      */
-    public final byte[] getChatText() {
+    public  byte[] getChatText() {
         return chatText;
     }
 
@@ -1672,7 +1672,7 @@ public class Player extends CharacterNode {
      * @param chatText
      *            the new value to set.
      */
-    public final void setChatText(byte[] chatText) {
+    public  void setChatText(byte[] chatText) {
         this.chatText = chatText;
     }
 
@@ -1681,7 +1681,7 @@ public class Player extends CharacterNode {
      * 
      * @return the chat color.
      */
-    public final int getChatColor() {
+    public  int getChatColor() {
         return chatColor;
     }
 
@@ -1691,7 +1691,7 @@ public class Player extends CharacterNode {
      * @param chatColor
      *            the new value to set.
      */
-    public final void setChatColor(int chatColor) {
+    public  void setChatColor(int chatColor) {
         this.chatColor = chatColor;
     }
 
@@ -1700,7 +1700,7 @@ public class Player extends CharacterNode {
      * 
      * @return the chat effects.
      */
-    public final int getChatEffects() {
+    public  int getChatEffects() {
         return chatEffects;
     }
 
@@ -1710,7 +1710,7 @@ public class Player extends CharacterNode {
      * @param chatEffects
      *            the new value to set.
      */
-    public final void setChatEffects(int chatEffects) {
+    public  void setChatEffects(int chatEffects) {
         this.chatEffects = chatEffects;
     }
 
@@ -1719,7 +1719,7 @@ public class Player extends CharacterNode {
      * 
      * @return the player npc identifier.
      */
-    public final int getPlayerNpc() {
+    public  int getPlayerNpc() {
         return playerNpc;
     }
 
@@ -1729,7 +1729,7 @@ public class Player extends CharacterNode {
      * @param playerNpc
      *            the new value to set.
      */
-    public final void setPlayerNpc(int playerNpc) {
+    public  void setPlayerNpc(int playerNpc) {
         this.playerNpc = playerNpc;
     }
 
@@ -1738,7 +1738,7 @@ public class Player extends CharacterNode {
      * 
      * @return the cached update block.
      */
-    public final ByteBuffer getCachedUpdateBlock() {
+    public  ByteBuffer getCachedUpdateBlock() {
         return cachedUpdateBlock;
     }
 
@@ -1748,7 +1748,7 @@ public class Player extends CharacterNode {
      * @param cachedUpdateBlock
      *            the new value to set.
      */
-    public final void setCachedUpdateBlock(ByteBuffer cachedUpdateBlock) {
+    public  void setCachedUpdateBlock(ByteBuffer cachedUpdateBlock) {
         this.cachedUpdateBlock = cachedUpdateBlock;
     }
 
@@ -1757,7 +1757,7 @@ public class Player extends CharacterNode {
      * 
      * @return the username hash.
      */
-    public final long getUsernameHash() {
+    public  long getUsernameHash() {
         return usernameHash;
     }
 
@@ -1767,7 +1767,7 @@ public class Player extends CharacterNode {
      * @param usernameHash
      *            the new value to set.
      */
-    public final void setUsernameHash(long usernameHash) {
+    public  void setUsernameHash(long usernameHash) {
         this.usernameHash = usernameHash;
     }
 
@@ -1776,7 +1776,7 @@ public class Player extends CharacterNode {
      * 
      * @return the dialogue chain.
      */
-    public final DialogueChainBuilder getDialogueChain() {
+    public  DialogueChainBuilder getDialogueChain() {
         return dialogueChain;
     }
 
@@ -1786,7 +1786,7 @@ public class Player extends CharacterNode {
      * @return {@code true} if the region has been updated, {@code false}
      *         otherwise.
      */
-    public final boolean isUpdateRegion() {
+    public  boolean isUpdateRegion() {
         return updateRegion;
     }
 
@@ -1796,7 +1796,7 @@ public class Player extends CharacterNode {
      * @param updateRegion
      *            the new value to set.
      */
-    public final void setUpdateRegion(boolean updateRegion) {
+    public  void setUpdateRegion(boolean updateRegion) {
         this.updateRegion = updateRegion;
     }
 

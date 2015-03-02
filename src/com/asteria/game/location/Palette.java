@@ -59,7 +59,7 @@ public final class Palette {
     /**
      * The array of tiles.
      */
-    private PaletteTile[][][] tiles = new PaletteTile[13][13][4];
+    private final PaletteTile[][][] tiles = new PaletteTile[13][13][4];
 
     /**
      * Gets a tile.

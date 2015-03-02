@@ -3,8 +3,8 @@ package com.asteria.utility.json;
 import java.util.Arrays;
 import java.util.Objects;
 
-import com.asteria.game.character.npc.drops.NpcDrop;
-import com.asteria.game.character.npc.drops.NpcDropTable;
+import com.asteria.game.character.npc.drop.NpcDrop;
+import com.asteria.game.character.npc.drop.NpcDropTable;
 import com.asteria.utility.JsonLoader;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
