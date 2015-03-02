@@ -311,7 +311,7 @@ public abstract class CharacterNode extends Node {
      * 
      * @return the size of this character.
      */
-    public int size() {
+    public final int size() {
         if (super.getType() == NodeType.PLAYER)
             return 1;
         return ((Npc) this).getDefinition().getSize();
@@ -320,7 +320,7 @@ public abstract class CharacterNode extends Node {
     /**
      * Resets the prepares this character for the next update sequence.
      */
-    public void reset() {
+    public final void reset() {
         primaryDirection = -1;
         secondaryDirection = -1;
         flags.reset();
@@ -336,7 +336,7 @@ public abstract class CharacterNode extends Node {
      *            the animation to execute, or {@code null} to reset the current
      *            animation.
      */
-    public void animation(Animation animation) {
+    public final void animation(Animation animation) {
         if (this.animation == null || this.animation.getPriority().getValue() <= animation.getPriority().getValue()) {
             this.animation = animation.copy();
             flags.set(Flag.ANIMATION);
@@ -349,7 +349,7 @@ public abstract class CharacterNode extends Node {
      * @param graphic
      *            the graphic to execute.
      */
-    public void graphic(Graphic graphic) {
+    public final void graphic(Graphic graphic) {
         this.graphic = graphic.copy();
         flags.set(Flag.GRAPHICS);
     }
@@ -360,7 +360,7 @@ public abstract class CharacterNode extends Node {
      * @param graphic
      *            the graphic to execute.
      */
-    public void highGraphic(Graphic graphic) {
+    public final void highGraphic(Graphic graphic) {
         this.graphic = new Graphic(graphic.getId(), 6553600);
         flags.set(Flag.GRAPHICS);
     }
@@ -371,7 +371,7 @@ public abstract class CharacterNode extends Node {
      * @param forcedText
      *            the forced text to execute.
      */
-    public void forceChat(String forcedText) {
+    public final void forceChat(String forcedText) {
         this.forcedText = forcedText;
         flags.set(Flag.FORCED_CHAT);
     }
@@ -382,7 +382,7 @@ public abstract class CharacterNode extends Node {
      * @param character
      *            the character to face, or {@code null} to reset the face.
      */
-    public void faceCharacter(CharacterNode character) {
+    public final void faceCharacter(CharacterNode character) {
         this.faceIndex = character == null ? 65535 : character.getType() == NodeType.PLAYER ? character.slot + 32768
             : character.slot;
         flags.set(Flag.FACE_CHARACTER);
@@ -394,7 +394,7 @@ public abstract class CharacterNode extends Node {
      * @param position
      *            the position to face.
      */
-    public void facePosition(Position position) {
+    public final void facePosition(Position position) {
         facePosition = new Position(2 * position.getX() + 1, 2 * position.getY() + 1);
         flags.set(Flag.FACE_COORDINATE);
     }
@@ -405,7 +405,7 @@ public abstract class CharacterNode extends Node {
      * @param hit
      *            the hit to deal on this character.
      */
-    private void primaryDamage(Hit hit) {
+    private final void primaryDamage(Hit hit) {
         primaryHit = decrementHealth(Objects.requireNonNull(hit));
         flags.set(Flag.HIT);
     }
@@ -416,7 +416,7 @@ public abstract class CharacterNode extends Node {
      * @param hit
      *            the hit to deal on this character.
      */
-    private void secondaryDamage(Hit hit) {
+    private final void secondaryDamage(Hit hit) {
         secondaryHit = decrementHealth(Objects.requireNonNull(hit));
         flags.set(Flag.HIT_2);
     }
@@ -427,7 +427,7 @@ public abstract class CharacterNode extends Node {
      * @param hits
      *            the hits to deal to this character.
      */
-    public void damage(Hit... hits) {
+    public final void damage(Hit... hits) {
         Preconditions.checkArgument(hits.length >= 1 && hits.length <= 4);
 
         switch (hits.length) {
@@ -452,7 +452,7 @@ public abstract class CharacterNode extends Node {
      * @param hit
      *            the hit to deal to this character.
      */
-    private void sendDamage(Hit hit) {
+    private final void sendDamage(Hit hit) {
         if (flags.get(Flag.HIT)) {
             secondaryDamage(hit);
             return;
@@ -468,7 +468,7 @@ public abstract class CharacterNode extends Node {
      * @param hit2
      *            the second hit to deal to this character.
      */
-    private void sendDamage(Hit hit, Hit hit2) {
+    private final void sendDamage(Hit hit, Hit hit2) {
         sendDamage(hit);
         secondaryDamage(hit2);
     }
@@ -483,7 +483,7 @@ public abstract class CharacterNode extends Node {
      * @param hit3
      *            the third hit to deal to this character.
      */
-    private void sendDamage(Hit hit, Hit hit2, Hit hit3) {
+    private final void sendDamage(Hit hit, Hit hit2, Hit hit3) {
         sendDamage(hit, hit2);
 
         TaskHandler.submit(new Task(1, false) {
@@ -511,7 +511,7 @@ public abstract class CharacterNode extends Node {
      * @param hit4
      *            the fourth hit to deal to this character.
      */
-    private void sendDamage(Hit hit, Hit hit2, Hit hit3, Hit hit4) {
+    private final void sendDamage(Hit hit, Hit hit2, Hit hit3, Hit hit4) {
         sendDamage(hit, hit2);
 
         TaskHandler.submit(new Task(1, false) {
@@ -534,7 +534,7 @@ public abstract class CharacterNode extends Node {
      * @param victim
      *            the victim that the spell will be cast on.
      */
-    public void prepareSpell(CombatSpell spell, CharacterNode victim) {
+    public final void prepareSpell(CombatSpell spell, CharacterNode victim) {
         currentlyCasting = spell;
         currentlyCasting.startCast(this, victim);
     }
@@ -545,7 +545,7 @@ public abstract class CharacterNode extends Node {
      * @param time
      *            the time to freeze this character for.
      */
-    public void freeze(long time) {
+    public final void freeze(long time) {
         freezeDelay = time;
         freezeTimer.reset();
         movementQueue.reset();
@@ -555,7 +555,7 @@ public abstract class CharacterNode extends Node {
      * Unfreezes this character completely allowing them to reestablish
      * movement.
      */
-    public void unfreeze() {
+    public final void unfreeze() {
         freezeDelay = 0;
         freezeTimer.stop();
     }
