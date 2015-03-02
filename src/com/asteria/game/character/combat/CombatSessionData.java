@@ -181,7 +181,7 @@ public class CombatSessionData {
      * 
      * @return the attacker.
      */
-    public CharacterNode getAttacker() {
+    public final CharacterNode getAttacker() {
         return attacker;
     }
 
@@ -190,7 +190,7 @@ public class CombatSessionData {
      * 
      * @return the victim.
      */
-    public CharacterNode getVictim() {
+    public final CharacterNode getVictim() {
         return victim;
     }
 
@@ -199,7 +199,7 @@ public class CombatSessionData {
      * 
      * @return {@code true} if one hit is accurate, {@code false} otherwise.
      */
-    public boolean isAccurate() {
+    public final boolean isAccurate() {
         return accurate;
     }
 
@@ -209,7 +209,7 @@ public class CombatSessionData {
      * @param accurate
      *            the new value to set.
      */
-    public void setAccurate(boolean accurate) {
+    public final void setAccurate(boolean accurate) {
         this.accurate = accurate;
     }
 
@@ -218,7 +218,7 @@ public class CombatSessionData {
      * 
      * @return the hits that will be sent.
      */
-    public CombatHit[] getHits() {
+    public final CombatHit[] getHits() {
         return hits;
     }
 
@@ -227,7 +227,7 @@ public class CombatSessionData {
      * 
      * @return the skills for experience.
      */
-    public int[] getExperience() {
+    public final int[] getExperience() {
         return experience;
     }
 
@@ -236,7 +236,7 @@ public class CombatSessionData {
      * 
      * @return the combat type.
      */
-    public CombatType getType() {
+    public final CombatType getType() {
         return type;
     }
 
@@ -246,7 +246,7 @@ public class CombatSessionData {
      * @return {@code true} if accuracy should be calculated, {@code false}
      *         otherwise.
      */
-    public boolean isCheckAccuracy() {
+    public final boolean isCheckAccuracy() {
         return checkAccuracy;
     }
 }
