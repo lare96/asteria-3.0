@@ -1,5 +1,7 @@
 package com.asteria.game.character.player.content;
 
+import java.util.stream.IntStream;
+
 import com.asteria.game.character.Flag;
 import com.asteria.game.character.player.Player;
 import com.asteria.game.location.Position;
@@ -78,18 +80,7 @@ public final class ViewingOrb {
      * Opens the viewing orb navigation interface in the sidebar.
      */
     public void open() {
-        player.getEncoder().sendSidebarInterface(1, -1);
-        player.getEncoder().sendSidebarInterface(2, -1);
-        player.getEncoder().sendSidebarInterface(3, -1);
-        player.getEncoder().sendSidebarInterface(4, -1);
-        player.getEncoder().sendSidebarInterface(5, -1);
-        player.getEncoder().sendSidebarInterface(6, -1);
-        player.getEncoder().sendSidebarInterface(8, -1);
-        player.getEncoder().sendSidebarInterface(9, -1);
-        player.getEncoder().sendSidebarInterface(11, -1);
-        player.getEncoder().sendSidebarInterface(12, -1);
-        player.getEncoder().sendSidebarInterface(13, -1);
-        player.getEncoder().sendSidebarInterface(0, -1);
+        IntStream.rangeClosed(0, 13).filter(v -> v != 7 && v != 10).forEach(v -> player.getEncoder().sendSidebarInterface(v, -1));
         player.getEncoder().sendSidebarInterface(10, 3209);
         player.getEncoder().sendForceTab(10);
         player.getEncoder().sendString("@yel@Centre", 15239);
