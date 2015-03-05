@@ -33,6 +33,7 @@ public final class NpcNodeLoader extends JsonLoader {
         Preconditions.checkState(!(coordinate && radius == 0));
         Preconditions.checkState(!(!coordinate && radius > 0));
         Npc npc = new Npc(id, position);
+        npc.setOriginalRandomWalk(coordinate);
         npc.getMovementCoordinator().setCoordinate(coordinate);
         npc.getMovementCoordinator().setRadius(radius);
         npc.setRespawn(true);
