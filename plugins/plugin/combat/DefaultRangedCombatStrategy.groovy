@@ -49,7 +49,7 @@ final class DefaultRangedCombatStrategy implements CombatStrategy {
         player.fireAmmo = 0
         startAnimation player
         CombatRangedAmmo ammo = CombatRangedAmmo.getPlayerAmmo(player).get()
-        player.rangedAmmo ammo
+        player.rangedAmmo = ammo
         if (!Combat.isCrystalBow(player)) {
             decrementAmmo player
         }
