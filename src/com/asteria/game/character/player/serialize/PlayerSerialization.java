@@ -40,7 +40,7 @@ import com.google.gson.JsonParser;
  * Serialization of character files can and should be done on another thread
  * whenever possible to avoid doing disk I/O on the main game thread.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public final class PlayerSerialization {
 
@@ -235,7 +235,7 @@ public final class PlayerSerialization {
      * The container that represents a token that can be both serialized and
      * deserialized.
      * 
-     * @author lare96 <http://www.rune-server.org/members/lare96/>
+     * @author lare96 <http://github.com/lare96>
      */
     private static final class TokenSerializer {
 

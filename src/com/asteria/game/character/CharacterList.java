@@ -15,7 +15,7 @@ import java.util.stream.Stream;
  * This list does not support the storage of elements with a value of
  * {@code null}, and maintains an extremely strict ordering of the elements.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  * @param <E>
  *            the type of character being managed with this collection.
  */
@@ -243,7 +243,7 @@ public final class CharacterList<E extends CharacterNode> implements Iterable<E>
      * An {@link Iterator} implementation that will iterate over the elements in
      * a character list.
      * 
-     * @author lare96 <http://www.rune-server.org/members/lare96/>
+     * @author lare96 <http://github.com/lare96>
      * @param <E>
      *            the type of character being iterated over.
      */

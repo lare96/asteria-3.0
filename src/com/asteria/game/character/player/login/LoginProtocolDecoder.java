@@ -6,7 +6,7 @@ import com.asteria.game.character.player.PlayerIO;
 /**
  * The parent class that provides functions for decoding the login protocol.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public abstract class LoginProtocolDecoder implements Runnable {
 

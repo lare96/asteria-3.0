@@ -15,7 +15,7 @@ import com.asteria.utility.Settings;
  * The main class that will prepare the server builder and put the server
  * online.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public final class Server {
 

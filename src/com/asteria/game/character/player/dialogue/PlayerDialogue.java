@@ -3,7 +3,7 @@ package com.asteria.game.character.player.dialogue;
 /**
  * The dialogue chain entry that sends the player a dialogue from a player.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public final class PlayerDialogue implements DialogueChain {
 

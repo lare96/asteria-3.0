@@ -3,7 +3,7 @@ package com.asteria.game.character.player.skill;
 /**
  * The representation of a single skill that can be trained by a player.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public final class Skill {
 

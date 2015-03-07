@@ -24,7 +24,7 @@ import com.google.common.collect.Multimap;
  * The data structures that hold the plugin listeners are not thread safe, which
  * means that plugin listeners should only be executed on the main game thread.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public final class PluginHandler {

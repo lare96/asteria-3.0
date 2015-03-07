@@ -5,7 +5,7 @@ import com.asteria.utility.RandomGen;
 /**
  * The container class that represents a coordinate anywhere in the world.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  * @author blakeman8192
  */
 public class Position {

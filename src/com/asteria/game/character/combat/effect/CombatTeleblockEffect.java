@@ -6,7 +6,7 @@ import com.asteria.task.TaskHandler;
 /**
  * The combat effect applied when a player needs to be teleblocked.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public final class CombatTeleblockEffect extends CombatEffect {
 

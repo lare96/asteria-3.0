@@ -16,7 +16,7 @@ import com.asteria.utility.RandomGen;
  * The {@link CombatSpell} extension with support for effects and the ability to
  * multicast characters within a certain radius.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public abstract class CombatAncientSpell extends CombatSpell {
 

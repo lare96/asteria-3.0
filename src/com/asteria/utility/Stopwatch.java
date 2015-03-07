@@ -10,7 +10,7 @@ import java.util.function.Consumer;
  * <p>
  * This class is <b>not</b> intended for use across multiple threads.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public final class Stopwatch {
 
@@ -180,7 +180,7 @@ public final class Stopwatch {
     /**
      * The enumerated type representing all possible states of this stopwatch.
      * 
-     * @author lare96 <http://www.rune-server.org/members/lare96/>
+     * @author lare96 <http://github.com/lare96>
      */
     private enum State {
         RUNNING,

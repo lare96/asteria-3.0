@@ -5,7 +5,7 @@ package com.asteria.game.object;
  * 
  * @author Ryley Kimmel <ryley.kimmel@live.com>
  * @author Maxi <http://www.rune-server.org/members/maxi/>
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public enum ObjectType {
     STRAIGHT_WALL(0),

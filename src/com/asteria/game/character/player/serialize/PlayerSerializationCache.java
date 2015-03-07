@@ -23,7 +23,7 @@ import com.google.gson.JsonObject;
  * Caches are thread safe, so functions within this class can be executed within
  * multiple threads.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public final class PlayerSerializationCache implements Runnable {
 

@@ -5,7 +5,7 @@ import com.asteria.utility.RandomGen;
 /**
  * The location type that models any area in a square or rectangle shape.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public final class SquareLocation extends Location {
 

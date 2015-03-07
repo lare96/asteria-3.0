@@ -22,7 +22,7 @@ import com.asteria.utility.RandomGen;
  * An attack on the builder's victim that is sent completely separate from the
  * main combat session.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public final class CombatSessionAttack extends Task {
 

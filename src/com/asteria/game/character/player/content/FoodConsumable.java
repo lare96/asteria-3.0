@@ -14,7 +14,7 @@ import com.asteria.utility.RandomGen;
  * The enumerated type managing consumable food types.
  * 
  * @author Ryley Kimmel <ryley.kimmel@live.com>
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public enum FoodConsumable {
     SHRIMP(3, 315),

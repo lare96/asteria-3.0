@@ -15,7 +15,7 @@ import com.asteria.utility.Stopwatch;
  * A cache of players who have inflicted damage on a controller in a combat
  * session.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public final class CombatDamage {
 
@@ -86,7 +86,7 @@ public final class CombatDamage {
      * A counter that will track the amount of damage dealt and whether that
      * damaged has timed out or not.
      * 
-     * @author lare96 <http://www.rune-server.org/members/lare96/>
+     * @author lare96 <http://github.com/lare96>
      */
     private static final class DamageCounter {
 

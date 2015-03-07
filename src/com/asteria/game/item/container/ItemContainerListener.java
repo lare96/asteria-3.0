@@ -6,7 +6,7 @@ import com.asteria.game.item.Item;
  * The listener that provides functionality for the operations of item
  * containers.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public interface ItemContainerListener {
 

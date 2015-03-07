@@ -16,7 +16,7 @@ import com.asteria.utility.RandomGen;
  * The movement queue sequencer that handles the entire movement process for
  * characters.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public final class MovementQueue {
 
@@ -416,7 +416,7 @@ public final class MovementQueue {
      * The {@link Task} implementation that handles the entire following
      * process.
      * 
-     * @author lare96 <http://www.rune-server.org/members/lare96/>
+     * @author lare96 <http://github.com/lare96>
      */
     private static final class CharacterFollowTask extends Task {
 

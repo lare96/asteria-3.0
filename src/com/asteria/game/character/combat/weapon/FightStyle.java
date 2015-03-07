@@ -6,7 +6,7 @@ import com.asteria.game.character.player.skill.Skills;
 /**
  * The enumerated type whose elements represent the fighting styles.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public enum FightStyle {
     ACCURATE {

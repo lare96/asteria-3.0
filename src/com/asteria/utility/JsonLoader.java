@@ -12,7 +12,7 @@ import com.google.gson.JsonParser;
 /**
  * The utility class that provides functions for parsing {@code .json} files.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public abstract class JsonLoader {
 

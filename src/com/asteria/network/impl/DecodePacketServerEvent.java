@@ -15,7 +15,7 @@ import com.asteria.utility.Settings;
  * This sequential event grabs the packet data from the client and uses it to
  * execute the appropriate packets.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public final class DecodePacketServerEvent extends ServerSelectionEvent {
 

@@ -6,7 +6,7 @@ import com.asteria.utility.RandomGen;
  * The movement coordinator that makes all NPCs pseudo-randomly move within a
  * radius of their original positions.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public final class NpcMovementCoordinator {
 
@@ -108,7 +108,7 @@ public final class NpcMovementCoordinator {
      * The enumerated type whose elements represent the movement coordinate
      * states for NPCs.
      * 
-     * @author lare96 <http://www.rune-server.org/members/lare96/>
+     * @author lare96 <http://github.com/lare96>
      */
     private enum CoordinateState {
         HOME,

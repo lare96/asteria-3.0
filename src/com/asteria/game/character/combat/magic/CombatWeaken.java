@@ -4,7 +4,7 @@ package com.asteria.game.character.combat.magic;
  * The enumerated type whose elements represent the types of stats that can be
  * weakened by combat spells.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public enum CombatWeaken {
     ATTACK_LOW(0.05),

@@ -31,7 +31,7 @@ import com.asteria.utility.Settings;
 /**
  * A collection of utility methods and constants related to combat.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public final class Combat {
 

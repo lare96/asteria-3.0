@@ -17,7 +17,7 @@ import com.asteria.task.Task;
  * The skills that may use this type skill action include, but are not limited
  * to {@code COOKING}.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  * @see SkillAction
  * @see DestructionSkillAction
  * @see HarvestingSkillAction

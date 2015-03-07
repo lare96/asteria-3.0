@@ -8,7 +8,7 @@ import com.asteria.network.packet.PacketDecoder;
 /**
  * The packet sent from the client when the player speaks.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public final class ChatPacket extends PacketDecoder {
 

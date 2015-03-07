@@ -12,7 +12,7 @@ import com.asteria.game.location.Position;
  * The static utility class that handles the behavior of aggressive NPCs within
  * a certain radius of players.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public final class NpcAggression {
 

@@ -11,7 +11,7 @@ import com.asteria.game.character.player.Player;
  * The dialogue chain builder that contains functions for building and managing
  * dialogues.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public final class DialogueChainBuilder {
 

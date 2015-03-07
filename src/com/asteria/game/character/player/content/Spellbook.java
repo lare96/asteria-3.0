@@ -10,7 +10,7 @@ import com.asteria.task.TaskHandler;
 /**
  * The enumerated type whose elements represent a spellbook type.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public enum Spellbook {
     NORMAL(1151) {

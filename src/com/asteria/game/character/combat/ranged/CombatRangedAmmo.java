@@ -12,7 +12,7 @@ import com.asteria.game.item.container.Equipment;
  * The enumerated type whose elements represent the ranged ammo that can be used
  * in combat.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public enum CombatRangedAmmo {
     BRONZE_ARROW(7, 10, 44, 3, 43, 31, 19),

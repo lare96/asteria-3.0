@@ -11,7 +11,7 @@ import com.asteria.game.item.Item;
 /**
  * The enumerated type whose elements represent the weapon interfaces.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public enum WeaponInterface {
     STAFF(328, 331, 6, new FightType[] { FightType.STAFF_BASH, FightType.STAFF_POUND, FightType.STAFF_FOCUS }),

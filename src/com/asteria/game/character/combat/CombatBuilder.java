@@ -13,7 +13,7 @@ import com.asteria.task.TaskHandler;
  * Controls and gives access to the main parts of the combat process such as
  * starting and ending combat sessions.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public final class CombatBuilder {
 

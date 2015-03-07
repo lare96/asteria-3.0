@@ -68,7 +68,7 @@ import com.asteria.utility.TextUtils;
  * actual person. This type of node functions solely through communication with
  * the client, by reading data from and writing data to non-blocking sockets.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public final class Player extends CharacterNode {
 

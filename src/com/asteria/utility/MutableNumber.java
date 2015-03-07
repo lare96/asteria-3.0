@@ -11,7 +11,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * support atomic operations, and therefore should not be used across multiple
  * threads.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public final class MutableNumber extends Number implements Comparable<MutableNumber> {
 

@@ -8,7 +8,7 @@ import com.asteria.utility.TextUtils;
 /**
  * The class that contains methods to handle the functionality of skills.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public final class Skills {
 

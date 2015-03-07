@@ -17,7 +17,7 @@ import com.google.common.base.Preconditions;
  * should not be used across multiple threads. Tasks should only ever be used to
  * execute game logic.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public abstract class Task {
 

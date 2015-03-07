@@ -9,7 +9,7 @@ import com.asteria.task.Task;
  * functions of a skill action. The skill action tasks are the core of what make
  * skills function the way they do.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public final class SkillActionTask extends Task {
 

@@ -22,7 +22,7 @@ import com.asteria.task.TaskHandler;
  * The enumerated type managing consumable potion types.
  * 
  * @author Ryley Kimmel <ryley.kimmel@live.com>
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public enum PotionConsumable {
     RANGE_POTIONS(2444, 169, 171, 173) {
@@ -375,7 +375,7 @@ public enum PotionConsumable {
      * The enumerated type whose elements represent the boost types for potions.
      * 
      * @author Ryley Kimmel <ryley.kimmel@live.com>
-     * @author lare96 <http://www.rune-server.org/members/lare96/>
+     * @author lare96 <http://github.com/lare96>
      */
     private enum BoostType {
         NORMAL(.13F),

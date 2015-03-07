@@ -6,7 +6,7 @@ import java.nio.ByteBuffer;
  * A resizable buffer implementation backed by a byte buffer, that is used for
  * reading and writing data.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  * @author blakeman8192
  */
 public final class DataBuffer {

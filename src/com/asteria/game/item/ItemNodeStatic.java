@@ -8,7 +8,7 @@ import com.asteria.game.location.Position;
  * The node implementation that represents an item everyone can see by default
  * on the ground.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public final class ItemNodeStatic extends ItemNode {
 

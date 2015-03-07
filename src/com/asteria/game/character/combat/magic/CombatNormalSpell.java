@@ -6,7 +6,7 @@ import com.asteria.game.character.CharacterNode;
  * The {@link CombatSpell} extension with support for normal spells that have no
  * effects whatsoever.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public abstract class CombatNormalSpell extends CombatSpell {
 

@@ -5,7 +5,7 @@ import com.asteria.game.item.container.Equipment;
 /**
  * The container that represents an item definition.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public final class ItemDefinition {
 

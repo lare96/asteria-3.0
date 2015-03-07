@@ -5,7 +5,7 @@ import com.asteria.game.character.combat.Combat;
 /**
  * The enumerated type whose elements represent the fighting types.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public enum FightType {
     STAFF_BASH(406, 43, 0, Combat.ATTACK_CRUSH, FightStyle.ACCURATE),

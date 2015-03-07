@@ -8,7 +8,7 @@ import com.asteria.game.location.Position;
  * A container representing a graphic propelled through the air by some sort of
  * spell, weapon, or other miscellaneous force.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public final class Projectile {
 

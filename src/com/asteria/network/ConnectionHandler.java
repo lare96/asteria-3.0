@@ -20,7 +20,7 @@ import com.asteria.utility.Stopwatch;
  * received by the server to ensure that the server does not fall victim to
  * attacks by a socket flooder or a connection from a banned host.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public final class ConnectionHandler {
 
@@ -150,7 +150,7 @@ public final class ConnectionHandler {
     /**
      * The container that represents a host within the connection map.
      * 
-     * @author lare96 <http://www.rune-server.org/members/lare96/>
+     * @author lare96 <http://github.com/lare96>
      */
     private static final class Connection {
 

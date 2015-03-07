@@ -15,7 +15,7 @@ import com.asteria.utility.Settings;
 /**
  * The packet sent from the client when a player clicks an object.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public final class ObjectActionPacket extends PacketDecoder {
 

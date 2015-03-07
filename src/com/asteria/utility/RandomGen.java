@@ -8,7 +8,7 @@ import java.util.Random;
  * The {@link Random} implementation that provides additional functionality for
  * generating pseudo-random numbers.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  * @author Ryley Kimmel <ryley.kimmel@live.com>
  */
 public final class RandomGen extends Random {

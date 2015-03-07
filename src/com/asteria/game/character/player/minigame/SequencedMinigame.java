@@ -7,7 +7,7 @@ import com.asteria.utility.MutableNumber;
  * usually be ran on their own meaning they are dependent on some sort of
  * sequencer or task.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public abstract class SequencedMinigame extends Minigame {
 

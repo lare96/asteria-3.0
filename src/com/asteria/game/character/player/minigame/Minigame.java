@@ -13,7 +13,7 @@ import com.asteria.game.plugin.PluginContext;
  * minigames. These types of minigames can usually be ran on their own meaning
  * they aren't dependent on some sort of sequencer or task.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public abstract class Minigame implements PluginContext {
 

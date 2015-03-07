@@ -22,7 +22,7 @@ import com.asteria.utility.Settings;
  * The combat session controls the mechanics of when and how the controller of
  * the builder will attack.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public final class CombatSession extends Task {
 

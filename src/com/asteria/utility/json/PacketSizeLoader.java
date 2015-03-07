@@ -9,7 +9,7 @@ import com.google.gson.JsonObject;
  * The {@link JsonLoader} implementation that loads all of the sizes of incoming
  * packets.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public final class PacketSizeLoader extends JsonLoader {
 

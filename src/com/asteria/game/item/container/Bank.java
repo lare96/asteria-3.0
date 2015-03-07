@@ -6,7 +6,7 @@ import com.asteria.game.item.Item;
 /**
  * The container that manages the bank for a player.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public final class Bank extends ItemContainer {
 

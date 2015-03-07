@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * The decoder chain that holds a series of events to decode the login protocol.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public final class LoginProtocolDecoderChain {
 

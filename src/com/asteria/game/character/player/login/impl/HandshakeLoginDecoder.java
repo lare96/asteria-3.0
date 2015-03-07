@@ -15,7 +15,7 @@ import com.asteria.utility.LoggerUtils;
  * the server. This marks the beginning of the entire login protocol in one of
  * two stages.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public final class HandshakeLoginDecoder extends LoginProtocolDecoder {
 

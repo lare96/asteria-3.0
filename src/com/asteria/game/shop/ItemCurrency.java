@@ -7,7 +7,7 @@ import com.asteria.game.item.Item;
  * The currency that provides basic functionality for all tangible currencies.
  * It is recommended that this be used rather than {@link GeneralCurrency}.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public final class ItemCurrency implements GeneralCurrency {
 

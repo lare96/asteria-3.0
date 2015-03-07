@@ -3,7 +3,7 @@ package com.asteria.game.object;
 /**
  * The enumerated type whose elements represent the directions for objects.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public enum ObjectDirection {
     NORTH(1),

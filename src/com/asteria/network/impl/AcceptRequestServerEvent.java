@@ -15,7 +15,7 @@ import com.asteria.network.ServerSelectionKey;
  * asynchronous event accepts the connection, and registers it with the server's
  * selector.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public final class AcceptRequestServerEvent extends ServerSelectionEvent {
 

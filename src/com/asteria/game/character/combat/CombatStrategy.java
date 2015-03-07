@@ -7,7 +7,7 @@ import com.asteria.game.plugin.PluginContext;
  * The blueprint of a combat session that determines how a character will act in
  * combat.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public interface CombatStrategy extends PluginContext {
 

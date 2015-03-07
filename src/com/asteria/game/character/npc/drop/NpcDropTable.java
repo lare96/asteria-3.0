@@ -11,7 +11,7 @@ import com.asteria.utility.RandomGen;
  * The container class that contains the drop tables for a set of NPCs along
  * with functions to manage these tables.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public final class NpcDropTable {
 

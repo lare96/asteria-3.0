@@ -5,7 +5,7 @@ import java.util.BitSet;
 /**
  * The container class that contains functions for managing update flags.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public final class UpdateFlags {
 

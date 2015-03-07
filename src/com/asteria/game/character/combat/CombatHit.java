@@ -6,7 +6,7 @@ import com.asteria.game.character.Hit;
  * A container that conceals the hit dealt to a victim during a combat session
  * attack.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public final class CombatHit {
 

@@ -26,7 +26,7 @@ import com.asteria.task.TaskHandler;
 /**
  * The enumerated type whose elements represent the combat special attacks.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public enum CombatSpecial {
     DRAGON_DAGGER(new int[] { 1215, 1231, 5680, 5698 }, 25, 1.15, 1.25, CombatType.MELEE, WeaponInterface.DAGGER) {

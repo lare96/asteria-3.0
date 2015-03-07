@@ -14,7 +14,7 @@ import com.asteria.utility.TextUtils;
  * activated and deactivated. This currently only has support for prayers
  * present in the {@code 317} protocol.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public enum CombatPrayer {
     THICK_SKIN(0, 20, -1, 1, 83) {

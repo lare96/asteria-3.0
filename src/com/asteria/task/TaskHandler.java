@@ -16,7 +16,7 @@ import com.google.common.base.Preconditions;
  * The data structures that hold tasks for processing are not thread safe, which
  * means tasks should only be submitted on the main game thread.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public final class TaskHandler {
 

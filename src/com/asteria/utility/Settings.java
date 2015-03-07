@@ -9,7 +9,7 @@ import com.asteria.game.location.Position;
  * The static utility class that holds various constants used throughout the
  * server.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public final class Settings {
 

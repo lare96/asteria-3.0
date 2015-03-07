@@ -20,7 +20,7 @@ import com.asteria.game.service.SequentialUpdateService;
  * The static utility class that contains functions to manage and process game
  * characters.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public final class World {
 

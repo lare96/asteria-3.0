@@ -10,7 +10,7 @@ import com.asteria.game.character.player.PlayerUpdating;
  * one core. If the hosting computer has more than one core, better performance
  * is guaranteed with {@link ConcurrentUpdateService}.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public final class SequentialUpdateService implements Runnable {
 

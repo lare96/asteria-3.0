@@ -27,7 +27,7 @@ import com.asteria.utility.Stopwatch;
  * The session handler dedicated to a player that will handle input and output
  * operations.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  * @author blakeman8192
  */
 public final class PlayerIO {

@@ -18,7 +18,7 @@ import com.asteria.task.TaskHandler;
  * <p>
  * To reiterate, no actual skills should be extending this skill action.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  * @see HarvestingSkillAction
  * @see DestructionSkillAction
  * @see ProducingSkillAction

@@ -3,7 +3,7 @@ package com.asteria.game.item;
 /**
  * The container class that represents an item that can be interacted with.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public final class Item {
 

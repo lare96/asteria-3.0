@@ -20,7 +20,7 @@ import com.google.common.base.Preconditions;
 /**
  * The container that represents a collection of items.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public class ItemContainer implements Iterable<Item> {
 
@@ -713,7 +713,7 @@ public class ItemContainer implements Iterable<Item> {
     /**
      * The iterator that will iterate over elements in an item container.
      * 
-     * @author lare96 <http://www.rune-server.org/members/lare96/>
+     * @author lare96 <http://github.com/lare96>
      */
     private static final class ItemContainerIterator implements Iterator<Item> {
 

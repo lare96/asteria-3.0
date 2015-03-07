@@ -8,7 +8,7 @@ package com.asteria.task;
  * configured to check for the occurrence at certain rates (which of course, can
  * be dynamically changed).
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public abstract class EventListener extends Task {
 

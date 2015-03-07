@@ -5,7 +5,7 @@ import com.asteria.utility.TextUtils;
 /**
  * The enumerated type whose elements represent data for the skills.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public enum SkillData {
     ATTACK(Skills.ATTACK, 6248, 6249, 6247),

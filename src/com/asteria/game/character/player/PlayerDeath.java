@@ -30,7 +30,7 @@ import com.asteria.utility.Settings;
 /**
  * The character death implementation that handles player death.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public final class PlayerDeath extends CharacterDeath<Player> {
 

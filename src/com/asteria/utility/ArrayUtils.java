@@ -5,7 +5,7 @@ import java.util.Random;
 /**
  * The static-utility class that contains array utility functions.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public final class ArrayUtils {
 

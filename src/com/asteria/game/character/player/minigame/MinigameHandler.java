@@ -13,7 +13,7 @@ import com.asteria.task.TaskHandler;
 /**
  * The class that contains methods to handle the functionality of minigames.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public final class MinigameHandler extends Task {
 

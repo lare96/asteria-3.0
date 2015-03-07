@@ -6,7 +6,7 @@ import java.util.function.Consumer;
 /**
  * The dialogue chain entry that sends the player an option dialogue.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public class OptionDialogue implements DialogueChain {
 

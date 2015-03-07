@@ -4,7 +4,7 @@ package com.asteria.game.character.player;
  * The enumerated type whose elements represent the types of authority a player
  * can have.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public enum Rights {
     PLAYER(0, 0),

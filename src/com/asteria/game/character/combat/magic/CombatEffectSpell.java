@@ -9,7 +9,7 @@ import com.asteria.game.item.Item;
 /**
  * The {@link CombatSpell} extension with support for effects and no damage.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public abstract class CombatEffectSpell extends CombatSpell {
 

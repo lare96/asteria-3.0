@@ -4,7 +4,7 @@ package com.asteria.game.plugin;
  * The exception thrown when a {@link PluginSignature} is invalid in a
  * {@link PluginListener}.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public final class PluginSignatureException extends RuntimeException {
 

@@ -19,7 +19,7 @@ import com.google.common.base.Preconditions;
  * thread selecting and handling network events either asynchronously or right
  * on the underlying thread every {@code 600}ms.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public final class ServerHandler {
 

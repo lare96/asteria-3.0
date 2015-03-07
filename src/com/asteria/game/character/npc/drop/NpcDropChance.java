@@ -5,7 +5,7 @@ import com.asteria.utility.RandomGen;
 /**
  * The enumerated type whose elements represent the NPC drop rates.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public enum NpcDropChance {
     ALWAYS(1, 1) {

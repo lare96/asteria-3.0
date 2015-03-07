@@ -8,7 +8,7 @@ import com.asteria.task.Task;
 /**
  * The {@link Task} extension that handles the draining of prayer.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public final class CombatPrayerTask extends Task {
 

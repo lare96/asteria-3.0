@@ -12,7 +12,7 @@ import com.asteria.game.location.Position;
  * The spell implementation that provides additional functions exclusively for
  * teleportation spells.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public abstract class TeleportSpell extends Spell {
 

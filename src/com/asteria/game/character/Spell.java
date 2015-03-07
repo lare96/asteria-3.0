@@ -12,7 +12,7 @@ import com.asteria.game.item.Item;
  * The parent class of all magic spells that provides basic functionality for
  * generic spells.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public abstract class Spell {
 

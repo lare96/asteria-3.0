@@ -32,7 +32,7 @@ import com.google.common.util.concurrent.ThreadFactoryBuilder;
  * The builder class that will prepare the game, network, and load various
  * utilities.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public final class ServerBuilder {
 

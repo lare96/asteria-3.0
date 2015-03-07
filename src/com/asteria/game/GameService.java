@@ -17,7 +17,7 @@ import com.google.common.util.concurrent.ThreadFactoryBuilder;
  * The most important class of this server that sequentially executes, or
  * sequences all game related code.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public final class GameService implements Runnable {
 

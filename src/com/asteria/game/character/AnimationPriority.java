@@ -4,7 +4,7 @@ package com.asteria.game.character;
  * The enumerated type whose elements represent the levels an animation can be
  * prioritized with.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public enum AnimationPriority {
     LOW(0),

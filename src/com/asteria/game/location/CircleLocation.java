@@ -3,7 +3,7 @@ package com.asteria.game.location;
 /**
  * The location type that models any area in a circle or oval shape.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public final class CircleLocation extends Location {
 

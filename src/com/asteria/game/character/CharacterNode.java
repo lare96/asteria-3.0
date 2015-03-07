@@ -22,7 +22,7 @@ import com.google.common.base.Preconditions;
 /**
  * The node that can represent either a {@link Player} or {@link Npc}.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public abstract class CharacterNode extends Node {
 

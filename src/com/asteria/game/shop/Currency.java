@@ -4,7 +4,7 @@ package com.asteria.game.shop;
  * The enumerated type whose elements represent all of the different currencies
  * that can be used with shops.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public enum Currency {
     COINS(new ItemCurrency(995)),

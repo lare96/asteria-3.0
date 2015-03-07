@@ -9,7 +9,7 @@ import com.asteria.game.item.container.Equipment;
 /**
  * The enumerated type whose elements represent the different types of staves.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public enum MagicStaff {
     AIR(new int[] { 1381, 1397, 1405 }, new int[] { 556 }),

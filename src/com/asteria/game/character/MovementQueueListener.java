@@ -11,7 +11,7 @@ import com.asteria.task.TaskHandler;
  * allows for various actions to be appended to the end of the movement queue,
  * this is useful for things such as "walking to actions".
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public final class MovementQueueListener {
 
@@ -60,7 +60,7 @@ public final class MovementQueueListener {
      * The action listener implementation that allows for a task to be appended
      * to the end of the movement queue.
      * 
-     * @author lare96 <http://www.rune-server.org/members/lare96/>
+     * @author lare96 <http://github.com/lare96>
      */
     private static final class MovementQueueListenerTask extends EventListener {
 

@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
  * listener must have this annotation as its header or a
  * {@link PluginSignatureException} will be thrown.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)

@@ -10,7 +10,7 @@ import com.google.gson.JsonObject;
 /**
  * The {@link JsonLoader} implementation that loads all weapon animations.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public final class WeaponAnimationLoader extends JsonLoader {
 

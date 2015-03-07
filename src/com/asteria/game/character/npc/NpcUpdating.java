@@ -15,7 +15,7 @@ import com.asteria.task.TaskHandler;
  * The class that provides static utility methods for updating NPCs.
  * 
  * @author blakeman8192
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public final class NpcUpdating {
 

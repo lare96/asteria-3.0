@@ -7,7 +7,7 @@ import com.asteria.game.GameService;
  * This serves as a wrapper for the event that allows the event to either be
  * executed asynchronously or right on the underlying thread.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public abstract class ServerSelectionEvent {
 

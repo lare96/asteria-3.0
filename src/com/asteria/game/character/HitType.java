@@ -3,7 +3,7 @@ package com.asteria.game.character;
 /**
  * The enumerated type whose elements represent the hit type of a {@link Hit}.
  * 
- * @author lare96 <http://www.rune-server.org/members/lare96/>
+ * @author lare96 <http://github.com/lare96>
  */
 public enum HitType {
     BLOCKED(0),
