@@ -324,7 +324,7 @@ public final class PlayerUpdating {
         if (!player.getFlags().needsUpdate() && !forceAppearance)
             return;
         if (player.getCachedUpdateBlock() != null && !player.equals(thisPlayer) && !forceAppearance && !noChat) {
-            block.buffer().put(player.getCachedUpdateBlock().array());
+            block.putBytes(player.getCachedUpdateBlock());
             return;
         }
         DataBuffer cachedBuffer = DataBuffer.create(300);
