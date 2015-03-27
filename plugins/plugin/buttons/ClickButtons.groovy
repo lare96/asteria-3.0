@@ -167,88 +167,88 @@ final class ClickButtons implements PluginListener<ButtonClickPlugin> {
                 break
             case 56109:
                 if (player.dialogueChain.executeOptions(OptionType.FIRST_OPTION))
-                    return
+                    break
                 switch (player.option) {
                 }
                 break
             case 56110:
                 if (player.dialogueChain.executeOptions(OptionType.SECOND_OPTION))
-                    return
+                    break
                 switch (player.option) {
                 }
                 break
 
             case 9167:
                 if (player.dialogueChain.executeOptions(OptionType.FIRST_OPTION))
-                    return
+                    break
                 switch (player.option) {
                 }
                 break
             case 9168:
                 if (player.dialogueChain.executeOptions(OptionType.SECOND_OPTION))
-                    return
+                    break
                 switch (player.option) {
                 }
                 break
             case 9169:
                 if (player.dialogueChain.executeOptions(OptionType.THIRD_OPTION))
-                    return
+                    break
                 switch (player.option) {
                 }
                 break
 
             case 32017:
                 if (player.dialogueChain.executeOptions(OptionType.FIRST_OPTION))
-                    return
+                    break
                 switch (player.option) {
                 }
                 break
             case 32018:
                 if (player.dialogueChain.executeOptions(OptionType.SECOND_OPTION))
-                    return
+                    break
                 switch (player.option) {
                 }
                 break
             case 32019:
                 if (player.dialogueChain.executeOptions(OptionType.THIRD_OPTION))
-                    return
+                    break
                 switch (player.option) {
                 }
                 break
             case 32020:
                 if (player.dialogueChain.executeOptions(OptionType.FOURTH_OPTION))
-                    return
+                    break
                 switch (player.option) {
                 }
                 break
 
             case 32029:
                 if (player.dialogueChain.executeOptions(OptionType.FIRST_OPTION))
-                    return
+                    break
                 switch (player.option) {
                 }
                 break
             case 32030:
                 if (player.dialogueChain.executeOptions(OptionType.SECOND_OPTION))
-                    return
+                    break
                 switch (player.option) {
                 }
                 break
             case 32031:
                 if (player.dialogueChain.executeOptions(OptionType.THIRD_OPTION))
-                    return
+                    break
                 switch (player.option) {
                 }
                 break
             case 32032:
                 if (player.dialogueChain.executeOptions(OptionType.FOURTH_OPTION))
-                    return
+                    break
                 switch (player.option) {
                 }
                 break
             case 32033:
                 if (player.dialogueChain.executeOptions(OptionType.FIFTH_OPTION))
-                    return
+                    break
                 switch (player.option) {
                 }
                 break
@@ -259,16 +259,16 @@ final class ClickButtons implements PluginListener<ButtonClickPlugin> {
                         t.canLogout(player)
                     }
                 }))
-                    return
+                    break
                 if (!player.lastCombat.elapsed(10, TimeUnit.SECONDS)) {
                     player.encoder.sendMessage "You must wait 10 seconds after combat before logging out."
-                    return
+                    break
                 }
                 World.players.remove(player)
                 break
             case 153:
                 if (player.runEnergy.get() == 0)
-                    return
+                    break
                 player.movementQueue.running = true
                 player.encoder.sendByteState(173, 1)
                 break
@@ -293,11 +293,11 @@ final class ClickButtons implements PluginListener<ButtonClickPlugin> {
                     Player partner = player.tradeSession.other
 
                     if (!partner.tradeSession.inTradeSession())
-                        return
+                        break
                     if (partner.inventory.remaining() < player.tradeSession.container.size()) {
                         String username = partner.getFormatUsername()
                         player.encoder.sendMessage "${username} does not have enough free slots for this many items."
-                        return
+                        break
                     }
                     player.tradeSession.stage = TradeStage.FIRST_ACCEPT
                     player.encoder.sendString("Waiting for other player...", 3431)
@@ -312,7 +312,7 @@ final class ClickButtons implements PluginListener<ButtonClickPlugin> {
                 if (player.tradeSession.inTradeSession()) {
                     Player partner = player.tradeSession.other
                     if (!partner.tradeSession.inTradeSession())
-                        return
+                        break
                     player.tradeSession.stage = TradeStage.FINAL_ACCEPT
                     partner.encoder.sendString("Other player has accepted.", 3535)
                     player.encoder.sendString("Waiting for other player...", 3535)
@@ -588,14 +588,14 @@ final class ClickButtons implements PluginListener<ButtonClickPlugin> {
                     if (player.getEquipment().getId(Equipment.WEAPON_SLOT) == 4675) {
                         if (player.getSpellbook() != Spellbook.ANCIENT) {
                             player.encoder.sendMessage "You can only autocast ancient magics with this staff."
-                            return
+                            break
                         }
 
                         player.encoder.sendSidebarInterface(0, 1689)
                     } else {
                         if (player.getSpellbook() != Spellbook.NORMAL) {
                             player.encoder.sendMessage "You can only autocast standard magics with this staff."
-                            return
+                            break
                         }
 
                         player.encoder.sendSidebarInterface(0, 1829)
@@ -808,7 +808,7 @@ final class ClickButtons implements PluginListener<ButtonClickPlugin> {
             case 33033:
             case 30108:
                 if (player.combatSpecial== null) {
-                    return
+                    break
                 }
 
                 if (player.specialActivated) {
@@ -817,7 +817,7 @@ final class ClickButtons implements PluginListener<ButtonClickPlugin> {
                 } else {
                     if (player.specialPercentage.value < player.combatSpecial.amount) {
                         player.encoder.sendMessage "You do not have enough special energy left!"
-                        return
+                        break
                     }
 
                     player.encoder.sendByteState(301, 1)
