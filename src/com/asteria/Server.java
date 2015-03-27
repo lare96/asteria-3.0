@@ -57,7 +57,7 @@ public final class Server {
             TaskHandler.submit(new MinigameHandler());
             PlayerSerialization.getCache().init();
         } catch (Exception e) {
-            logger.log(Level.SEVERE, "An error occured while starting " + Settings.NAME + "!", e);
+            logger.log(Level.SEVERE, "An error occurred while starting " + Settings.NAME + "!", e);
             System.exit(1);
         }
     }
