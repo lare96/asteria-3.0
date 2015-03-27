@@ -11,6 +11,7 @@ import com.asteria.network.ByteOrder;
 import com.asteria.network.DataBuffer;
 import com.asteria.network.ValueType;
 import com.asteria.task.TaskHandler;
+import com.asteria.utility.BitMask;
 
 /**
  * The class that provides static utility methods for updating players.
@@ -328,43 +329,43 @@ public final class PlayerUpdating {
             return;
         }
         DataBuffer cachedBuffer = DataBuffer.create(300);
-        int mask = 0x0;
+        BitMask mask = new BitMask();
 
         if (player.getFlags().get(Flag.FORCED_MOVEMENT)) {
-            mask |= 0x400;
+            mask.set(0x400);
         }
         if (player.getFlags().get(Flag.GRAPHICS)) {
-            mask |= 0x100;
+            mask.set(0x100);
         }
         if (player.getFlags().get(Flag.ANIMATION)) {
-            mask |= 8;
+            mask.set(8);
         }
         if (player.getFlags().get(Flag.FORCED_CHAT)) {
-            mask |= 4;
+            mask.set(4);
         }
         if (player.getFlags().get(Flag.CHAT) && !noChat) {
-            mask |= 0x80;
+            mask.set(0x80);
         }
         if (player.getFlags().get(Flag.APPEARANCE) || forceAppearance) {
-            mask |= 0x10;
+            mask.set(0x10);
         }
         if (player.getFlags().get(Flag.FACE_CHARACTER)) {
-            mask |= 1;
+            mask.set(1);
         }
         if (player.getFlags().get(Flag.FACE_COORDINATE)) {
-            mask |= 2;
+            mask.set(2);
         }
         if (player.getFlags().get(Flag.HIT)) {
-            mask |= 0x20;
+            mask.set(0x20);
         }
         if (player.getFlags().get(Flag.HIT_2)) {
-            mask |= 0x200;
+            mask.set(0x200);
         }
-        if (mask >= 0x100) {
-            mask |= 0x40;
-            cachedBuffer.putShort(mask, com.asteria.network.ByteOrder.LITTLE);
+        if (mask.get() >= 0x100) {
+            mask.set(0x40);
+            cachedBuffer.putShort(mask.get(), com.asteria.network.ByteOrder.LITTLE);
         } else {
-            cachedBuffer.put(mask);
+            cachedBuffer.put(mask.get());
         }
 
         if (player.getFlags().get(Flag.FORCED_MOVEMENT)) {

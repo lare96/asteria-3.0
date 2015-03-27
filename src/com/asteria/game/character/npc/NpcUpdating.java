@@ -10,6 +10,7 @@ import com.asteria.network.ByteOrder;
 import com.asteria.network.DataBuffer;
 import com.asteria.network.ValueType;
 import com.asteria.task.TaskHandler;
+import com.asteria.utility.BitMask;
 
 /**
  * The class that provides static utility methods for updating NPCs.
@@ -143,33 +144,33 @@ public final class NpcUpdating {
      *             if any errors occur while updating the state.
      */
     private static void updateState(DataBuffer block, Npc npc) throws Exception {
-        int mask = 0x0;
+        BitMask mask = new BitMask();
         if (npc.getFlags().get(Flag.ANIMATION)) {
-            mask |= 0x10;
+            mask.set(0x10);
         }
         if (npc.getFlags().get(Flag.HIT_2)) {
-            mask |= 8;
+            mask.set(8);
         }
         if (npc.getFlags().get(Flag.GRAPHICS)) {
-            mask |= 0x80;
+            mask.set(0x80);
         }
         if (npc.getFlags().get(Flag.FACE_CHARACTER)) {
-            mask |= 0x20;
+            mask.set(0x20);
         }
         if (npc.getFlags().get(Flag.FORCED_CHAT)) {
-            mask |= 1;
+            mask.set(1);
         }
         if (npc.getFlags().get(Flag.HIT)) {
-            mask |= 0x40;
+            mask.set(0x40);
         }
         if (npc.getFlags().get(Flag.FACE_COORDINATE)) {
-            mask |= 4;
+            mask.set(4);
         }
-        if (mask >= 0x100) {
-            mask |= 0x40;
-            block.putShort(mask, com.asteria.network.ByteOrder.LITTLE);
+        if (mask.get() >= 0x100) {
+            mask.set(0x40);
+            block.putShort(mask.get(), com.asteria.network.ByteOrder.LITTLE);
         } else {
-            block.put(mask);
+            block.put(mask.get());
         }
         if (npc.getFlags().get(Flag.ANIMATION)) {
             appendAnimation(block, npc);
