@@ -33,7 +33,7 @@ public final class PlayerSerializationCache implements Runnable {
     private static Logger logger = LoggerUtils.getLogger(PlayerSerializationCache.class);
 
     /**
-     * The collection character files that have been cached by the
+     * The collection of character files that have been cached by the
      * {@link PlayerSerializer}. These character files will be removed from the
      * cache {@code 15} minutes after they've been added to free up memory.
      */
