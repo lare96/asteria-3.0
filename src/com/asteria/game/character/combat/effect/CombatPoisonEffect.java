@@ -16,7 +16,7 @@ import com.asteria.utility.RandomGen;
 
 /**
  * The combat effect applied when a character needs to be poisoned.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public final class CombatPoisonEffect extends CombatEffect {
@@ -43,11 +43,11 @@ public final class CombatPoisonEffect extends CombatEffect {
 
     /**
      * Creates a new {@link CombatPoisonEffect}.
-     * 
+     *
      * @param character
-     *            the character this effect is being applied to.
+     *         the character this effect is being applied to.
      * @param type
-     *            the poison type this effect will use.
+     *         the poison type this effect will use.
      */
     public CombatPoisonEffect(CharacterNode character, PoisonType type) {
         super(character, 30);
@@ -79,7 +79,8 @@ public final class CombatPoisonEffect extends CombatEffect {
 
     @Override
     public void sequence() {
-        int counter = random.nextBoolean() ? character.getPoisonDamage() : character.getAndDecrementPoisonDamage();
+        int counter = random.nextBoolean() ? character.getPoisonDamage() :
+                character.getAndDecrementPoisonDamage();
         character.damage(new Hit(counter, HitType.POISON));
     }
 
@@ -91,14 +92,15 @@ public final class CombatPoisonEffect extends CombatEffect {
     }
 
     /**
-     * Gets the {@link PoisonType} for {@code item} wrapped in an optional. If a
+     * Gets the {@link PoisonType} for {@code item} wrapped in an optional. If
+     * a
      * poison type doesn't exist for the item then an empty optional is
      * returned.
-     * 
+     *
      * @param item
-     *            the item to get the poison type for.
+     *         the item to get the poison type for.
      * @return the poison type for this item wrapped in an optional, or an empty
-     *         optional if no poison type exists.
+     * optional if no poison type exists.
      */
     public static Optional<PoisonType> getPoisonType(Item item) {
         if (item == null || item.getId() < 1 || item.getAmount() < 1)

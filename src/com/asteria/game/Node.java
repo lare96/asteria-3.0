@@ -1,12 +1,12 @@
 package com.asteria.game;
 
-import java.util.Objects;
-
 import com.asteria.game.location.Position;
+
+import java.util.Objects;
 
 /**
  * The parent class that represents anything that can be interacted with.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public abstract class Node {
@@ -28,11 +28,11 @@ public abstract class Node {
 
     /**
      * Creates a new {@link Node}.
-     * 
+     *
      * @param position
-     *            the position of this node in the world.
+     *         the position of this node in the world.
      * @param type
-     *            the type of node that this node is.
+     *         the type of node that this node is.
      */
     public Node(Position position, NodeType type) {
         this.position = Objects.requireNonNull(position.copy());
@@ -56,7 +56,7 @@ public abstract class Node {
 
     /**
      * Gets the position of this node in the world.
-     * 
+     *
      * @return the position of this node in the world.
      */
     public final Position getPosition() {
@@ -65,9 +65,9 @@ public abstract class Node {
 
     /**
      * Sets the value for {@link Node#position}.
-     * 
+     *
      * @param position
-     *            the new value to set.
+     *         the new value to set.
      */
     public final void setPosition(Position position) {
         this.position = position;
@@ -75,7 +75,7 @@ public abstract class Node {
 
     /**
      * Gets the type of node that this node is.
-     * 
+     *
      * @return the type of node that this node is.
      */
     public final NodeType getType() {
@@ -84,9 +84,9 @@ public abstract class Node {
 
     /**
      * Determines if this node has been registered or not.
-     * 
+     *
      * @return {@code true} if this node has been registered, {@code false}
-     *         otherwise.
+     * otherwise.
      */
     public final boolean isRegistered() {
         return registered;
@@ -94,9 +94,9 @@ public abstract class Node {
 
     /**
      * Sets the value for {@link Node#registered}.
-     * 
+     *
      * @param registered
-     *            the new value to set.
+     *         the new value to set.
      */
     public final void setRegistered(boolean registered) {
         this.registered = registered;

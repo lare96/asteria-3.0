@@ -11,7 +11,7 @@ import com.asteria.game.location.Position;
 /**
  * The static utility class that handles the behavior of aggressive NPCs within
  * a certain radius of players.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public final class NpcAggression {
@@ -36,40 +36,45 @@ public final class NpcAggression {
     /**
      * The sequencer that will prompt all aggressive NPCs to attack
      * {@code player}.
-     * 
+     *
      * @param player
-     *            the player that will be targeted by aggressive NPCs.
+     *         the player that will be targeted by aggressive NPCs.
      */
     public static void sequence(Player player) {
         for (Npc npc : player.getLocalNpcs()) {
             if (validate(npc, player)) {
                 npc.getCombatBuilder().attack(player);
-            } else {
-                npc.getMovementCoordinator().setCoordinate(npc.isOriginalRandomWalk());
+            }
+            else {
+                npc.getMovementCoordinator().setCoordinate(npc
+                        .isOriginalRandomWalk());
             }
         }
     }
 
     /**
      * Determines if {@code npc} is able to target {@code player}.
-     * 
+     *
      * @param npc
-     *            the npc trying to target the player.
+     *         the npc trying to target the player.
      * @param player
-     *            the player that is being targeted by the NPC.
+     *         the player that is being targeted by the NPC.
      * @return {@code true} if the player can be targeted, {@code false}
-     *         otherwise.
+     * otherwise.
      */
     private static boolean validate(Npc npc, Player player) {
         Position position = npc.getOriginalPosition();
         if (!AGGRESSIVE.contains(npc.getId()))
             return false;
-        if (!Location.inMultiCombat(player) && player.getCombatBuilder().isAttacking() || player.getCombatBuilder()
-            .isBeingAttacked())
+        if (!Location.inMultiCombat(player) && player.getCombatBuilder()
+                .isAttacking() || player.getCombatBuilder().isBeingAttacked())
             return false;
-        if (player.determineCombatLevel() > (npc.getDefinition().getCombatLevel() * 2) && !Location.inWilderness(player))
+        if (player.determineCombatLevel() > (npc.getDefinition()
+                .getCombatLevel() * 2) && !Location.inWilderness(player))
             return false;
-        return position.withinDistance(player.getPosition(), TARGET_DISTANCE) && !npc.getCombatBuilder().isAttacking() && !npc
-            .getCombatBuilder().isBeingAttacked() && !player.getTolerance().elapsed(TOLERANCE_SECONDS, TimeUnit.SECONDS);
+        return position.withinDistance(player.getPosition(), TARGET_DISTANCE)
+                && !npc.getCombatBuilder().isAttacking() && !npc
+                .getCombatBuilder().isBeingAttacked() && !player.getTolerance
+                ().elapsed(TOLERANCE_SECONDS, TimeUnit.SECONDS);
     }
 }

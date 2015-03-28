@@ -11,7 +11,7 @@ import com.google.gson.JsonObject;
 
 /**
  * The {@link JsonLoader} implementation that loads all npc drops.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public final class NpcDropTableLoader extends JsonLoader {
@@ -26,8 +26,11 @@ public final class NpcDropTableLoader extends JsonLoader {
     @Override
     public void load(JsonObject reader, Gson builder) {
         int[] array = builder.fromJson(reader.get("id"), int[].class);
-        NpcDrop[] dynamic = Objects.requireNonNull(builder.fromJson(reader.get("dynamic"), NpcDrop[].class));
-        NpcDrop[] rare = Objects.requireNonNull(builder.fromJson(reader.get("rare"), NpcDrop[].class));
-        Arrays.stream(array).forEach(id -> NpcDropTable.DROPS.put(id, new NpcDropTable(array, dynamic, rare)));
+        NpcDrop[] dynamic = Objects.requireNonNull(builder.fromJson(reader
+                .get("dynamic"), NpcDrop[].class));
+        NpcDrop[] rare = Objects.requireNonNull(builder.fromJson(reader.get
+                ("rare"), NpcDrop[].class));
+        Arrays.stream(array).forEach(id -> NpcDropTable.DROPS.put(id, new
+                NpcDropTable(array, dynamic, rare)));
     }
 }

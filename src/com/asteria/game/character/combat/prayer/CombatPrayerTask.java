@@ -7,7 +7,7 @@ import com.asteria.task.Task;
 
 /**
  * The {@link Task} extension that handles the draining of prayer.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public final class CombatPrayerTask extends Task {
@@ -29,9 +29,9 @@ public final class CombatPrayerTask extends Task {
 
     /**
      * Creates a new {@link CombatPrayerTask}.
-     * 
+     *
      * @param player
-     *            the player attached to this task.
+     *         the player attached to this task.
      */
     public CombatPrayerTask(Player player) {
         super(1, false);
@@ -44,7 +44,9 @@ public final class CombatPrayerTask extends Task {
         for (int i = 0; i < player.getPrayerActive().length; i++) {
             if (player.getPrayerActive()[i]) {
                 cancel = false;
-                if (++countdown[i] >= ((player.getBonus()[Combat.BONUS_PRAYER] / 2) + CombatPrayer.values()[i].getDrainRate())) {
+                if (++countdown[i] >= ((player.getBonus()[Combat
+                        .BONUS_PRAYER] / 2) + CombatPrayer.values()[i]
+                        .getDrainRate())) {
                     player.getSkills()[Skills.PRAYER].decreaseLevel(1);
                     Skills.refresh(player, Skills.PRAYER);
                     countdown[i] = 0;

@@ -254,7 +254,8 @@ public abstract class Minigame implements PluginContext {
     }
 
     /**
-     * Retrieves the position {@code player} will be moved to when they respawn.
+     * Retrieves the position {@code player} will be moved to when they
+     * respawn.
      *
      * @param player
      *         the player who is being respawned.

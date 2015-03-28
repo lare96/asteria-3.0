@@ -5,9 +5,10 @@ import com.asteria.network.DataBuffer;
 import com.asteria.network.packet.PacketDecoder;
 
 /**
- * The packet sent from the client when a player adds, removes, or sends someone
+ * The packet sent from the client when a player adds, removes, or sends
+ * someone
  * a message.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public final class PrivateMessagingPacket extends PacketDecoder {
@@ -18,31 +19,31 @@ public final class PrivateMessagingPacket extends PacketDecoder {
             return;
 
         switch (opcode) {
-        case 188:
-            addFriend(player, buf);
-            break;
-        case 215:
-            removeFriend(player, buf);
-            break;
-        case 133:
-            addIgnore(player, buf);
-            break;
-        case 74:
-            removeIgnore(player, buf);
-            break;
-        case 126:
-            sendMessage(player, size, buf);
-            break;
+            case 188:
+                addFriend(player, buf);
+                break;
+            case 215:
+                removeFriend(player, buf);
+                break;
+            case 133:
+                addIgnore(player, buf);
+                break;
+            case 74:
+                removeIgnore(player, buf);
+                break;
+            case 126:
+                sendMessage(player, size, buf);
+                break;
         }
     }
 
     /**
      * Handles the adding of a new friend.
-     * 
+     *
      * @param player
-     *            the player to handle this for.
+     *         the player to handle this for.
      * @param buf
-     *            the buffer used for reading sent data.
+     *         the buffer used for reading sent data.
      */
     private void addFriend(Player player, DataBuffer buf) {
         long name = buf.getLong();
@@ -53,11 +54,11 @@ public final class PrivateMessagingPacket extends PacketDecoder {
 
     /**
      * Handles the removing of an existing friend.
-     * 
+     *
      * @param player
-     *            the player to handle this for.
+     *         the player to handle this for.
      * @param buf
-     *            the buffer used for reading sent data.
+     *         the buffer used for reading sent data.
      */
     private void removeFriend(Player player, DataBuffer buf) {
         long name = buf.getLong();
@@ -68,11 +69,11 @@ public final class PrivateMessagingPacket extends PacketDecoder {
 
     /**
      * Handles the adding of a new ignore.
-     * 
+     *
      * @param player
-     *            the player to handle this for.
+     *         the player to handle this for.
      * @param buf
-     *            the buffer used for reading sent data.
+     *         the buffer used for reading sent data.
      */
     private void addIgnore(Player player, DataBuffer buf) {
         long name = buf.getLong();
@@ -83,11 +84,11 @@ public final class PrivateMessagingPacket extends PacketDecoder {
 
     /**
      * Handles the removing of an existing ignore.
-     * 
+     *
      * @param player
-     *            the player to handle this for.
+     *         the player to handle this for.
      * @param buf
-     *            the buffer used for reading sent data.
+     *         the buffer used for reading sent data.
      */
     private void removeIgnore(Player player, DataBuffer buf) {
         long name = buf.getLong();
@@ -98,11 +99,11 @@ public final class PrivateMessagingPacket extends PacketDecoder {
 
     /**
      * Handles the sending of a private message.
-     * 
+     *
      * @param player
-     *            the player to handle this for.
+     *         the player to handle this for.
      * @param buf
-     *            the buffer used for reading sent data.
+     *         the buffer used for reading sent data.
      */
     private void sendMessage(Player player, int size, DataBuffer buf) {
         long to = buf.getLong();
@@ -111,7 +112,8 @@ public final class PrivateMessagingPacket extends PacketDecoder {
         if (to < 0 || newSize < 0 || message == null)
             return;
         if (!player.getFriends().contains(to)) {
-            player.getEncoder().sendMessage("You cannot send a message to a player not on your friends list!");
+            player.getEncoder().sendMessage("You cannot send a message to a " +
+                    "player not on your friends list!");
             return;
         }
         player.getPrivateMessage().sendPrivateMessage(to, message, newSize);

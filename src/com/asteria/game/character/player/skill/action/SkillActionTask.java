@@ -6,9 +6,10 @@ import com.asteria.task.Task;
 
 /**
  * The skill action task whose job is to process and execute the various
- * functions of a skill action. The skill action tasks are the core of what make
+ * functions of a skill action. The skill action tasks are the core of what
+ * make
  * skills function the way they do.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public final class SkillActionTask extends Task {
@@ -30,9 +31,9 @@ public final class SkillActionTask extends Task {
 
     /**
      * Create a new {@link SkillAction}.
-     * 
+     *
      * @param action
-     *            the skill action dedicated to this task.
+     *         the skill action dedicated to this task.
      */
     public SkillActionTask(SkillAction action) {
         super(1, false);
@@ -61,7 +62,8 @@ public final class SkillActionTask extends Task {
 
     @Override
     public void execute() {
-        if (player.getSession().getState() == IOState.LOGGED_OUT || !player.isSkillAction()) {
+        if (player.getSession().getState() == IOState.LOGGED_OUT || !player
+                .isSkillAction()) {
             this.cancel();
             return;
         }

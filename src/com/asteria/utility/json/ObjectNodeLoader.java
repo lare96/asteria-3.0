@@ -14,7 +14,7 @@ import com.google.gson.JsonObject;
 
 /**
  * The {@link JsonLoader} implementation that loads all object nodes.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public final class ObjectNodeLoader extends JsonLoader {
@@ -29,10 +29,14 @@ public final class ObjectNodeLoader extends JsonLoader {
     @Override
     public void load(JsonObject reader, Gson builder) {
         int id = reader.get("id").getAsInt();
-        Position position = Objects.requireNonNull(builder.fromJson(reader.get("position"), Position.class));
-        ObjectDirection face = Objects.requireNonNull(ObjectDirection.valueOf(reader.get("direction").getAsString()));
-        ObjectType type = Objects.requireNonNull(ObjectType.valueOf(reader.get("type").getAsString()));
-        Preconditions.checkState(!ObjectNodeManager.REMOVE_OBJECTS.contains(position));
+        Position position = Objects.requireNonNull(builder.fromJson(reader
+                .get("position"), Position.class));
+        ObjectDirection face = Objects.requireNonNull(ObjectDirection.valueOf
+                (reader.get("direction").getAsString()));
+        ObjectType type = Objects.requireNonNull(ObjectType.valueOf(reader
+                .get("type").getAsString()));
+        Preconditions.checkState(!ObjectNodeManager.REMOVE_OBJECTS.contains
+                (position));
         ObjectNodeManager.register(new ObjectNode(id, position, face, type));
     }
 }

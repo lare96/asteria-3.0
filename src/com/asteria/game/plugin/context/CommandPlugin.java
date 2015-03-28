@@ -4,7 +4,7 @@ import com.asteria.game.plugin.PluginContext;
 
 /**
  * The plugin context for the player command packet.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public final class CommandPlugin implements PluginContext {
@@ -16,9 +16,9 @@ public final class CommandPlugin implements PluginContext {
 
     /**
      * Creates a new {@link CommandPlugin}.
-     * 
+     *
      * @param text
-     *            the command text broken up between spaces.
+     *         the command text broken up between spaces.
      */
     public CommandPlugin(String[] text) {
         this.text = text;
@@ -26,7 +26,7 @@ public final class CommandPlugin implements PluginContext {
 
     /**
      * Gets the command text broken up between spaces.
-     * 
+     *
      * @return the command text.
      */
     public String[] getText() {

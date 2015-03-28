@@ -2,7 +2,7 @@ package com.asteria.game.character;
 
 /**
  * The enumerated type whose elements represent the hit type of a {@link Hit}.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public enum HitType {
@@ -18,9 +18,9 @@ public enum HitType {
 
     /**
      * Create a new {@link HitType}.
-     * 
+     *
      * @param id
-     *            the identification for this hit type.
+     *         the identification for this hit type.
      */
     private HitType(int id) {
         this.id = id;
@@ -28,7 +28,7 @@ public enum HitType {
 
     /**
      * Gets the identification for this hit type.
-     * 
+     *
      * @return the identification for this hit type.
      */
     public final int getId() {

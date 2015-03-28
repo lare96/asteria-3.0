@@ -6,7 +6,7 @@ import com.asteria.game.plugin.PluginContext;
 
 /**
  * The plugin context for the item on player packet.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public final class ItemOnPlayerPlugin implements PluginContext {
@@ -23,11 +23,11 @@ public final class ItemOnPlayerPlugin implements PluginContext {
 
     /**
      * Creates a new {@link ItemOnPlayerPlugin}.
-     * 
+     *
      * @param player
-     *            the player that the item is being used on.
+     *         the player that the item is being used on.
      * @param item
-     *            the item that is being used on the player.
+     *         the item that is being used on the player.
      */
     public ItemOnPlayerPlugin(Player player, Item item) {
         this.player = player;
@@ -36,7 +36,7 @@ public final class ItemOnPlayerPlugin implements PluginContext {
 
     /**
      * Gets the player that the item is being used on.
-     * 
+     *
      * @return the player the item is used on.
      */
     public Player getPlayer() {
@@ -45,7 +45,7 @@ public final class ItemOnPlayerPlugin implements PluginContext {
 
     /**
      * Gets the item that is being used on the player.
-     * 
+     *
      * @return the item being used.
      */
     public Item getItem() {

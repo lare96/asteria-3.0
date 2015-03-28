@@ -10,7 +10,7 @@ import com.asteria.task.TaskHandler;
  * The container class that holds the movement queue listener. The listener
  * allows for various actions to be appended to the end of the movement queue,
  * this is useful for things such as "walking to actions".
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public final class MovementQueueListener {
@@ -27,9 +27,9 @@ public final class MovementQueueListener {
 
     /**
      * Creates a new {@link MovementQueueListener}.
-     * 
+     *
      * @param character
-     *            the character this listener is dedicated to.
+     *         the character this listener is dedicated to.
      */
     public MovementQueueListener(CharacterNode character) {
         this.character = character;
@@ -45,9 +45,9 @@ public final class MovementQueueListener {
      * task is being appended while the listener is already waiting to run
      * another task, the existing listener is stopped, the old task discarded,
      * and a new listener is started to run the new task.
-     * 
+     *
      * @param task
-     *            the task that will be ran once the walking queue is finished.
+     *         the task that will be ran once the walking queue is finished.
      */
     public void append(Runnable task) {
         listener.ifPresent(t -> t.cancel());
@@ -59,7 +59,7 @@ public final class MovementQueueListener {
     /**
      * The action listener implementation that allows for a task to be appended
      * to the end of the movement queue.
-     * 
+     *
      * @author lare96 <http://github.com/lare96>
      */
     private static final class MovementQueueListenerTask extends EventListener {
@@ -76,13 +76,14 @@ public final class MovementQueueListener {
 
         /**
          * Creates a new {@link MovementQueueListenerTask}.
-         * 
+         *
          * @param character
-         *            the character that the queued task will be ran for.
+         *         the character that the queued task will be ran for.
          * @param task
-         *            the queued task that will be executed by this listener.
+         *         the queued task that will be executed by this listener.
          */
-        public MovementQueueListenerTask(CharacterNode character, Runnable task) {
+        public MovementQueueListenerTask(CharacterNode character, Runnable
+                task) {
             this.character = character;
             this.task = Objects.requireNonNull(task);
         }

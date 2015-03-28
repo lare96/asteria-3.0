@@ -4,7 +4,7 @@ import com.asteria.utility.RandomGen;
 
 /**
  * The enumerated type whose elements represent the NPC drop rates.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public enum NpcDropChance {
@@ -31,11 +31,11 @@ public enum NpcDropChance {
 
     /**
      * Creates a new {@link NpcDropChance}.
-     * 
+     *
      * @param numerator
-     *            the numerator of this NPC drop rate.
+     *         the numerator of this NPC drop rate.
      * @param denominator
-     *            the denominator of this NPC drop rate.
+     *         the denominator of this NPC drop rate.
      */
     private NpcDropChance(int numerator, int denominator) {
         this.numerator = numerator;
@@ -44,9 +44,9 @@ public enum NpcDropChance {
 
     /**
      * Determines if an NPC drop will be successful or not.
-     * 
+     *
      * @param random
-     *            the random number generator used to determine this.
+     *         the random number generator used to determine this.
      * @return {@code true} if the drop was successful, {@code false} otherwise.
      */
     public boolean successful(RandomGen random) {
@@ -55,7 +55,7 @@ public enum NpcDropChance {
 
     /**
      * Gets the numerator of this NPC drop rate.
-     * 
+     *
      * @return the numerator.
      */
     public final int getNumerator() {
@@ -64,7 +64,7 @@ public enum NpcDropChance {
 
     /**
      * Gets the denominator of this NPC drop rate.
-     * 
+     *
      * @return the denominator.
      */
     public final int getDenominator() {

@@ -10,8 +10,9 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 /**
- * The {@link JsonLoader} implementation that loads the removal of object nodes.
- * 
+ * The {@link JsonLoader} implementation that loads the removal of object
+ * nodes.
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public final class ObjectNodeRemoveLoader extends JsonLoader {
@@ -25,8 +26,10 @@ public final class ObjectNodeRemoveLoader extends JsonLoader {
 
     @Override
     public void load(JsonObject reader, Gson builder) {
-        Position position = Objects.requireNonNull(builder.fromJson(reader.get("position"), Position.class));
-        Preconditions.checkState(!ObjectNodeManager.getObject(position).isPresent());
+        Position position = Objects.requireNonNull(builder.fromJson(reader
+                .get("position"), Position.class));
+        Preconditions.checkState(!ObjectNodeManager.getObject(position)
+                .isPresent());
         ObjectNodeManager.REMOVE_OBJECTS.add(position);
     }
 }

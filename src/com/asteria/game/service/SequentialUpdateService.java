@@ -9,7 +9,7 @@ import com.asteria.game.character.player.PlayerUpdating;
  * sequentially. This service should only be used if the hosting computer has
  * one core. If the hosting computer has more than one core, better performance
  * is guaranteed with {@link ConcurrentUpdateService}.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public final class SequentialUpdateService implements Runnable {

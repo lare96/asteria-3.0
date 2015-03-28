@@ -2,7 +2,7 @@ package com.asteria.game.character;
 
 /**
  * The container class that represents a hit.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public final class Hit {
@@ -19,18 +19,20 @@ public final class Hit {
 
     /**
      * Creates a new {@link Hit}.
-     * 
+     *
      * @param damage
-     *            the amount of damage within this hit.
+     *         the amount of damage within this hit.
      * @param type
-     *            the hit type represented by this hit.
+     *         the hit type represented by this hit.
      */
     public Hit(int damage, HitType type) {
         if (damage == 0 && type == HitType.NORMAL) {
             type = HitType.BLOCKED;
-        } else if (damage > 0 && type == HitType.BLOCKED) {
+        }
+        else if (damage > 0 && type == HitType.BLOCKED) {
             damage = 0;
-        } else if (damage < 0) {
+        }
+        else if (damage < 0) {
             damage = 0;
         }
         this.damage = damage;
@@ -39,9 +41,9 @@ public final class Hit {
 
     /**
      * Creates a new {@link Hit} with a {@code type} of {@code NORMAL}.
-     * 
+     *
      * @param damage
-     *            the amount of damage within this hit.
+     *         the amount of damage within this hit.
      */
     public Hit(int damage) {
         this(damage, HitType.NORMAL);
@@ -51,7 +53,7 @@ public final class Hit {
      * A substitute for {@link Object#clone()} that creates another 'copy' of
      * this instance. The created copy is <i>safe</i> meaning it does not hold
      * <b>any</b> references to the original instance.
-     * 
+     *
      * @return a reference-free copy of this instance.
      */
     public Hit copy() {
@@ -60,7 +62,7 @@ public final class Hit {
 
     /**
      * Gets the amount of damage within this hit.
-     * 
+     *
      * @return the amount of damage within this hit.
      */
     public int getDamage() {
@@ -69,7 +71,7 @@ public final class Hit {
 
     /**
      * Gets the hit type represented by this hit.
-     * 
+     *
      * @return the hit type represented by this hit.
      */
     public HitType getType() {

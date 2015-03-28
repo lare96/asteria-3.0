@@ -4,7 +4,7 @@ import com.asteria.game.item.container.Equipment;
 
 /**
  * The container that represents an item definition.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public final class ItemDefinition {
@@ -91,41 +91,43 @@ public final class ItemDefinition {
 
     /**
      * Creates a new {@link ItemDefinition}.
-     * 
+     *
      * @param id
-     *            the identifier for the item.
+     *         the identifier for the item.
      * @param name
-     *            the proper name of the item.
+     *         the proper name of the item.
      * @param description
-     *            the description of the item.
+     *         the description of the item.
      * @param equipmentSlot
-     *            the equipment slot of this item.
+     *         the equipment slot of this item.
      * @param noteable
-     *            the flag that determines if the item is noteable.
+     *         the flag that determines if the item is noteable.
      * @param stackable
-     *            the flag that determines if the item is stackable.
+     *         the flag that determines if the item is stackable.
      * @param specialPrice
-     *            the special store price of this item.
+     *         the special store price of this item.
      * @param generalPrice
-     *            the general store price of this item.
+     *         the general store price of this item.
      * @param lowAlchValue
-     *            the low alch value of this item.
+     *         the low alch value of this item.
      * @param highAlchValue
-     *            the high alch value of this item.
+     *         the high alch value of this item.
      * @param weight
-     *            the weight value of this item.
+     *         the weight value of this item.
      * @param bonus
-     *            the array of bonuses for this item.
+     *         the array of bonuses for this item.
      * @param twoHanded
-     *            the flag that determines if this item is two-handed.
+     *         the flag that determines if this item is two-handed.
      * @param fullHelm
-     *            the flag that determines if this item is a full helmet.
+     *         the flag that determines if this item is a full helmet.
      * @param platebody
-     *            the flag that determines if this item is a platebody.
+     *         the flag that determines if this item is a platebody.
      */
-    public ItemDefinition(int id, String name, String description, int equipmentSlot, boolean noteable, boolean stackable,
-        int specialPrice, int generalPrice, int lowAlchValue, int highAlchValue, double weight, int[] bonus, boolean twoHanded,
-        boolean fullHelm, boolean platebody) {
+    public ItemDefinition(int id, String name, String description, int
+            equipmentSlot, boolean noteable, boolean stackable, int
+            specialPrice, int generalPrice, int lowAlchValue, int
+            highAlchValue, double weight, int[] bonus, boolean twoHanded,
+                          boolean fullHelm, boolean platebody) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -148,15 +150,16 @@ public final class ItemDefinition {
      * The method that erases the prayer bonus from ranged weapons.
      */
     private void prayerBonus() {
-        if (equipmentSlot == Equipment.ARROWS_SLOT || name.contains("knife") || name.contains("dart") || name
-            .contains("thrownaxe") || name.contains("javelin")) {
+        if (equipmentSlot == Equipment.ARROWS_SLOT || name.contains("knife")
+                || name.contains("dart") || name.contains("thrownaxe") ||
+                name.contains("javelin")) {
             bonus[11] = 0;
         }
     }
 
     /**
      * Gets the identifier for the item.
-     * 
+     *
      * @return the identifier.
      */
     public int getId() {
@@ -165,7 +168,7 @@ public final class ItemDefinition {
 
     /**
      * Gets the proper name of the item.
-     * 
+     *
      * @return the proper name.
      */
     public String getName() {
@@ -174,7 +177,7 @@ public final class ItemDefinition {
 
     /**
      * Gets the description of the item.
-     * 
+     *
      * @return the description.
      */
     public String getDescription() {
@@ -183,7 +186,7 @@ public final class ItemDefinition {
 
     /**
      * Gets the equipment slot of this item.
-     * 
+     *
      * @return the equipment slot.
      */
     public int getEquipmentSlot() {
@@ -192,16 +195,17 @@ public final class ItemDefinition {
 
     /**
      * Determines if the item is noted or not.
-     * 
+     *
      * @return {@code true} if the item is noted, {@code false} otherwise.
      */
     public boolean isNoted() {
-        return description.equals("Swap this note at any bank for the equivalent item.");
+        return description.equals("Swap this note at any bank for the " +
+                "equivalent item.");
     }
 
     /**
      * Determines if the item is noteable or not.
-     * 
+     *
      * @return {@code true} if the item is noteable, {@code false} otherwise.
      */
     public boolean isNoteable() {
@@ -210,7 +214,7 @@ public final class ItemDefinition {
 
     /**
      * Determines if the item is stackable or not.
-     * 
+     *
      * @return {@code true} if the item is stackable, {@code false} otherwise.
      */
     public boolean isStackable() {
@@ -219,7 +223,7 @@ public final class ItemDefinition {
 
     /**
      * Gets the special store price of this item.
-     * 
+     *
      * @return the special price.
      */
     public int getSpecialPrice() {
@@ -228,7 +232,7 @@ public final class ItemDefinition {
 
     /**
      * Gets the general store price of this item.
-     * 
+     *
      * @return the general price.
      */
     public int getGeneralPrice() {
@@ -237,7 +241,7 @@ public final class ItemDefinition {
 
     /**
      * Gets the low alch value of this item.
-     * 
+     *
      * @return the low alch value.
      */
     public int getLowAlchValue() {
@@ -246,7 +250,7 @@ public final class ItemDefinition {
 
     /**
      * Gets the high alch value of this item.
-     * 
+     *
      * @return the high alch value.
      */
     public int getHighAlchValue() {
@@ -255,7 +259,7 @@ public final class ItemDefinition {
 
     /**
      * Gets the weight value of this item.
-     * 
+     *
      * @return the weight value.
      */
     public double getWeight() {
@@ -264,7 +268,7 @@ public final class ItemDefinition {
 
     /**
      * Gets the array of bonuses for this item.
-     * 
+     *
      * @return the array of bonuses.
      */
     public int[] getBonus() {
@@ -273,7 +277,7 @@ public final class ItemDefinition {
 
     /**
      * Determines if this item is two-handed or not.
-     * 
+     *
      * @return {@code true} if this item is two-handed, {@code false} otherwise.
      */
     public boolean isTwoHanded() {
@@ -282,9 +286,9 @@ public final class ItemDefinition {
 
     /**
      * Determines if this item is a full helmet or not.
-     * 
+     *
      * @return {@code true} if this item is a full helmet, {@code false}
-     *         otherwise.
+     * otherwise.
      */
     public boolean isFullHelm() {
         return fullHelm;
@@ -292,9 +296,9 @@ public final class ItemDefinition {
 
     /**
      * Determines if this item is a platebody or not.
-     * 
+     *
      * @return {@code true} if this item is a platebody, {@code false}
-     *         otherwise.
+     * otherwise.
      */
     public boolean isPlatebody() {
         return platebody;

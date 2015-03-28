@@ -14,7 +14,7 @@ import com.asteria.utility.Settings;
  * The server selection event that decodes and handles all incoming packets.
  * This sequential event grabs the packet data from the client and uses it to
  * execute the appropriate packets.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public final class DecodePacketServerEvent extends ServerSelectionEvent {
@@ -29,7 +29,8 @@ public final class DecodePacketServerEvent extends ServerSelectionEvent {
     /**
      * The logger that will print important information.
      */
-    private static Logger logger = LoggerUtils.getLogger(DecodePacketServerEvent.class);
+    private static Logger logger = LoggerUtils.getLogger
+            (DecodePacketServerEvent.class);
 
     @Override
     public void executeEvent(ServerSelectionKey key) throws Exception {
@@ -49,10 +50,12 @@ public final class DecodePacketServerEvent extends ServerSelectionEvent {
             }
             if (session.getPacketOpcode() == -1) {
                 session.setPacketOpcode(session.getInData().get() & 0xff);
-                session.setPacketOpcode(session.getPacketOpcode() - session.getDecryptor().getKey() & 0xff);
+                session.setPacketOpcode(session.getPacketOpcode() - session
+                        .getDecryptor().getKey() & 0xff);
             }
             if (session.getPacketSize() == -1) {
-                session.setPacketSize(PacketDecoder.PACKET_SIZES[session.getPacketOpcode()]);
+                session.setPacketSize(PacketDecoder.PACKET_SIZES[session
+                        .getPacketOpcode()]);
                 if (session.getPacketSize() == -1) {
                     if (!session.getInData().hasRemaining()) {
                         session.getInData().flip();
@@ -64,31 +67,39 @@ public final class DecodePacketServerEvent extends ServerSelectionEvent {
             }
             if (session.getInData().remaining() >= session.getPacketSize()) {
                 int positionBefore = session.getInData().position();
-                PacketDecoder packet = PacketDecoder.PACKETS[session.getPacketOpcode()];
-                if (session.getPacketCount().getAndIncrement() >= Settings.PACKET_LIMIT) {
+                PacketDecoder packet = PacketDecoder.PACKETS[session
+                        .getPacketOpcode()];
+                if (session.getPacketCount().getAndIncrement() >= Settings
+                        .PACKET_LIMIT) {
                     if (Settings.DEBUG)
-                        logger.warning(session.getPlayer() + " decoded too many packets in one sequence!");
+                        logger.warning(session.getPlayer() + " decoded too " +
+                                "many packets in one sequence!");
                     session.disconnect(false);
                     break;
                 }
 
                 try {
                     if (packet != null) {
-                        packet.decode(session.getPlayer(), session.getPacketOpcode(), session.getPacketSize(), DataBuffer
-                            .create(session.getInData()));
-                    } else {
+                        packet.decode(session.getPlayer(), session
+                                .getPacketOpcode(), session.getPacketSize(),
+                                DataBuffer.create(session.getInData()));
+                    }
+                    else {
                         if (Settings.DEBUG)
-                            logger.info(session.getPlayer() + " unhandled packet " + session.getPacketOpcode());
+                            logger.info(session.getPlayer() + " unhandled " +
+                                    "packet " + session.getPacketOpcode());
                     }
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 } finally {
-                    session.getInData().get(
-                        new byte[(session.getPacketSize() - (session.getInData().position() - positionBefore))]);
+                    session.getInData().get(new byte[(session.getPacketSize()
+                            - (session.getInData().position() -
+                            positionBefore))]);
                 }
                 session.setPacketOpcode(-1);
                 session.setPacketSize(-1);
-            } else {
+            }
+            else {
                 session.getInData().flip();
                 session.getInData().compact();
                 break;

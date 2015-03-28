@@ -7,7 +7,7 @@ import com.asteria.network.packet.PacketDecoder;
 /**
  * The packet sent from the client when a player clicks certain options on an
  * interface.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public final class InterfaceClickPacket extends PacketDecoder {

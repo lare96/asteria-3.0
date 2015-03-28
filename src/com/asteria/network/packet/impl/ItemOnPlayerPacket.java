@@ -11,8 +11,9 @@ import com.asteria.network.ValueType;
 import com.asteria.network.packet.PacketDecoder;
 
 /**
- * The packet sent from the client when a player uses an item on another player.
- * 
+ * The packet sent from the client when a player uses an item on another
+ * player.
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public final class ItemOnPlayerPacket extends PacketDecoder {
@@ -36,7 +37,8 @@ public final class ItemOnPlayerPacket extends PacketDecoder {
 
         player.getMovementListener().append(() -> {
             if (player.getPosition().withinDistance(usedOn.getPosition(), 1)) {
-                PluginHandler.execute(player, ItemOnPlayerPlugin.class, new ItemOnPlayerPlugin(player, item));
+                PluginHandler.execute(player, ItemOnPlayerPlugin.class, new
+                        ItemOnPlayerPlugin(player, item));
             }
         });
     }

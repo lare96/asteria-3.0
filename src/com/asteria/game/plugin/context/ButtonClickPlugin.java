@@ -4,7 +4,7 @@ import com.asteria.game.plugin.PluginContext;
 
 /**
  * The plugin context for the clicking buttons packet.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public final class ButtonClickPlugin implements PluginContext {
@@ -16,9 +16,9 @@ public final class ButtonClickPlugin implements PluginContext {
 
     /**
      * Creates a new {@link ButtonClickPlugin}.
-     * 
+     *
      * @param id
-     *            the identifier for the button that was clicked.
+     *         the identifier for the button that was clicked.
      */
     public ButtonClickPlugin(int id) {
         this.id = id;
@@ -26,7 +26,7 @@ public final class ButtonClickPlugin implements PluginContext {
 
     /**
      * Gets the identifier for the button that was clicked.
-     * 
+     *
      * @return the identifier for the button.
      */
     public int getId() {

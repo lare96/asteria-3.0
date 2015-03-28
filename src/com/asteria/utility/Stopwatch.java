@@ -9,7 +9,7 @@ import java.util.function.Consumer;
  * <p>
  * <p>
  * This class is <b>not</b> intended for use across multiple threads.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public final class Stopwatch {
@@ -34,11 +34,12 @@ public final class Stopwatch {
      * Gets the current time in {@link TimeUnit#MILLISECONDS}. This method is
      * more accurate than {@link System#currentTimeMillis()} and does not rely
      * on the underlying OS.
-     * 
+     *
      * @return the current time in milliseconds.
      */
     public static long currentTime() {
-        return TimeUnit.MILLISECONDS.convert(System.nanoTime(), TimeUnit.NANOSECONDS);
+        return TimeUnit.MILLISECONDS.convert(System.nanoTime(), TimeUnit
+                .NANOSECONDS);
     }
 
     /**
@@ -47,7 +48,7 @@ public final class Stopwatch {
      * {@link Stopwatch#elapsed(long, TimeUnit)} return {@code 0}. If this
      * stopwatch is in a {@link State#STOPPED} state, invocation of this method
      * will change it to a {@link State#RUNNING} state.
-     * 
+     *
      * @return an instance of this stopwatch.
      */
     public Stopwatch reset() {
@@ -59,7 +60,7 @@ public final class Stopwatch {
     /**
      * Sets the internal cached time to {@code 0} effectively putting this
      * stopwatch in a {@link State#STOPPED} state.
-     * 
+     *
      * @return an instance of this stopwatch.
      */
     public Stopwatch stop() {
@@ -70,26 +71,27 @@ public final class Stopwatch {
     /**
      * Retrieves the elapsed time in {@code unit}. If this stopwatch is stopped
      * invocation of this method will throw an exception.
-     * 
+     *
      * @param unit
-     *            the time unit to retrieve the elapsed time in.
+     *         the time unit to retrieve the elapsed time in.
      * @return the elapsed time.
      * @throws IllegalStateException
-     *             if this stopwatch has been stopped.
+     *         if this stopwatch has been stopped.
      */
     public long elapsedTime(TimeUnit unit) {
         if (state == State.STOPPED)
             throw new IllegalStateException("The timer has been stopped!");
-        return unit.convert((Stopwatch.currentTime() - cachedTime), TimeUnit.MILLISECONDS);
+        return unit.convert((Stopwatch.currentTime() - cachedTime), TimeUnit
+                .MILLISECONDS);
     }
 
     /**
      * Retrieves the elapsed time in {@link TimeUnit#MILLISECONDS}. If this
      * stopwatch is stopped invocation of this method will throw an exception.
-     * 
+     *
      * @return the elapsed time.
      * @throws IllegalStateException
-     *             if this stopwatch has been stopped.
+     *         if this stopwatch has been stopped.
      */
     public long elapsedTime() {
         return elapsedTime(TimeUnit.MILLISECONDS);
@@ -97,15 +99,16 @@ public final class Stopwatch {
 
     /**
      * Determines if the elapsed time is greater than {@code time} in
-     * {@code unit}. If this stopwatch is stopped invocation of this method will
+     * {@code unit}. If this stopwatch is stopped invocation of this method
+     * will
      * automatically return {@code true}.
-     * 
+     *
      * @param time
-     *            the time to check if greater than the elapsed time.
+     *         the time to check if greater than the elapsed time.
      * @param unit
-     *            the time unit to check in.
+     *         the time unit to has in.
      * @return {@code true} if the elapsed time has passed or this stopwatch has
-     *         been stopped, {@code false} otherwise.
+     * been stopped, {@code false} otherwise.
      */
     public boolean elapsed(long time, TimeUnit unit) {
         if (state == State.STOPPED)
@@ -115,13 +118,14 @@ public final class Stopwatch {
 
     /**
      * Determines if the elapsed time is greater than {@code time} in
-     * {@link TimeUnit#MILLISECONDS}. If this stopwatch is stopped invocation of
+     * {@link TimeUnit#MILLISECONDS}. If this stopwatch is stopped invocation
+     * of
      * this method will automatically return {@code true}.
-     * 
+     *
      * @param time
-     *            the time to check if greater than the elapsed time.
+     *         the time to check if greater than the elapsed time.
      * @return {@code true} if the elapsed time has passed or this stopwatch has
-     *         been stopped, {@code false} otherwise.
+     * been stopped, {@code false} otherwise.
      */
     public boolean elapsed(long time) {
         return elapsed(time, TimeUnit.MILLISECONDS);
@@ -129,9 +133,9 @@ public final class Stopwatch {
 
     /**
      * Determines if this stopwatch is in a {@link State#STOPPED} state.
-     * 
+     *
      * @return {@code true} if this stopwatch is in a stopped state,
-     *         {@code false} otherwise.
+     * {@code false} otherwise.
      */
     public boolean isStopped() {
         return state == State.STOPPED;
@@ -141,15 +145,16 @@ public final class Stopwatch {
      * Executes {@code action} if the elapsed time is greater than {@code time}
      * in {@code unit}. If this stopwatch is stopped invocation of this method
      * will automatically execute {@code action}.
-     * 
+     *
      * @param time
-     *            the time to check if greater than the elapsed time.
+     *         the time to check if greater than the elapsed time.
      * @param action
-     *            the action to execute if satisfied.
+     *         the action to execute if satisfied.
      * @param unit
-     *            the time unit to check in.
+     *         the time unit to check in.
      */
-    public void ifElapsed(long time, Consumer<? super Long> action, TimeUnit unit) {
+    public void ifElapsed(long time, Consumer<? super Long> action, TimeUnit
+            unit) {
         if (state == State.STOPPED) {
             action.accept((long) 0);
             return;
@@ -163,15 +168,14 @@ public final class Stopwatch {
 
     /**
      * Executes {@code action} if the elapsed time is greater than {@code time}
-     * in {@link TimeUnit#MILLISECONDS}. If this stopwatch is stopped invocation
+     * in {@link TimeUnit#MILLISECONDS}. If this stopwatch is stopped
+     * invocation
      * of this method will automatically execute {@code action}.
-     * 
-     * @param time
-     *            the time to check if greater than the elapsed time.
+     *
+     * @param timePassed
+     *         the time to check if greater than the elapsed time.
      * @param action
-     *            the action to execute if satisfied.
-     * @param unit
-     *            the time unit to check in.
+     *         the action to execute if satisfied.
      */
     public void ifElapsed(long timePassed, Consumer<? super Long> action) {
         ifElapsed(timePassed, action, TimeUnit.MILLISECONDS);
@@ -179,7 +183,7 @@ public final class Stopwatch {
 
     /**
      * The enumerated type representing all possible states of this stopwatch.
-     * 
+     *
      * @author lare96 <http://github.com/lare96>
      */
     private enum State {

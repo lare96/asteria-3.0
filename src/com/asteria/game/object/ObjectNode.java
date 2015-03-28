@@ -9,7 +9,7 @@ import com.asteria.game.location.Position;
 
 /**
  * The node that represents an object anywhere in the world.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public final class ObjectNode extends Node {
@@ -31,17 +31,18 @@ public final class ObjectNode extends Node {
 
     /**
      * Creates a new {@link ObjectNode}.
-     * 
+     *
      * @param id
-     *            the identification of the object.
+     *         the identification of the object.
      * @param position
-     *            the position of this object in the world.
+     *         the position of this object in the world.
      * @param direction
-     *            the direction this object is facing.
+     *         the direction this object is facing.
      * @param type
-     *            the type of object that this is.
+     *         the type of object that this is.
      */
-    public ObjectNode(int id, Position position, ObjectDirection direction, ObjectType type) {
+    public ObjectNode(int id, Position position, ObjectDirection direction,
+                      ObjectType type) {
         super(position, NodeType.OBJECT);
         this.id = id;
         this.direction = Objects.requireNonNull(direction);
@@ -50,13 +51,13 @@ public final class ObjectNode extends Node {
 
     /**
      * Creates a new {@link ObjectNode} with the default {@code objectType}.
-     * 
+     *
      * @param id
-     *            the identification of the object.
+     *         the identification of the object.
      * @param position
-     *            the position of this object in the world.
+     *         the position of this object in the world.
      * @param direction
-     *            the direction this object is facing.
+     *         the direction this object is facing.
      */
     public ObjectNode(int id, Position position, ObjectDirection direction) {
         this(id, position, direction, ObjectType.DEFAULT);
@@ -73,16 +74,19 @@ public final class ObjectNode extends Node {
 
     @Override
     public void dispose() {
-        World.getPlayers().forEach(p -> p.getEncoder().sendRemoveObject(super.getPosition()));
+        World.getPlayers().forEach(p -> p.getEncoder().sendRemoveObject(super
+                .getPosition()));
     }
 
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = super.hashCode();
-        result = prime * result + ((direction == null) ? 0 : direction.hashCode());
+        result = prime * result + ((direction == null) ? 0 : direction
+                .hashCode());
         result = prime * result + id;
-        result = prime * result + ((objectType == null) ? 0 : objectType.hashCode());
+        result = prime * result + ((objectType == null) ? 0 : objectType
+                .hashCode());
         return result;
     }
 
@@ -108,7 +112,7 @@ public final class ObjectNode extends Node {
      * A substitute for {@link Object#clone()} that creates another 'copy' of
      * this instance. The created copy <i>safe</i> meaning it does not hold
      * <b>any</b> references to the original instance.
-     * 
+     *
      * @return the copy of this instance that does not hold any references.
      */
     public ObjectNode copy() {
@@ -117,7 +121,7 @@ public final class ObjectNode extends Node {
 
     /**
      * Gets the identification of this object.
-     * 
+     *
      * @return the identification.
      */
     public int getId() {
@@ -126,7 +130,7 @@ public final class ObjectNode extends Node {
 
     /**
      * Gets the direction this object is facing.
-     * 
+     *
      * @return the direction.
      */
     public ObjectDirection getDirection() {
@@ -135,7 +139,7 @@ public final class ObjectNode extends Node {
 
     /**
      * Gets the type of object that this is.
-     * 
+     *
      * @return the type of object.
      */
     public ObjectType getObjectType() {

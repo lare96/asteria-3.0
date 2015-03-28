@@ -5,7 +5,7 @@ import com.asteria.game.plugin.PluginContext;
 
 /**
  * The plugin context for the npc second click packet.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public final class NpcSecondClickPlugin implements PluginContext {
@@ -17,9 +17,9 @@ public final class NpcSecondClickPlugin implements PluginContext {
 
     /**
      * Creates a new {@link NpcSecondClickPlugin}.
-     * 
+     *
      * @param npc
-     *            the npc that was clicked by the player.
+     *         the npc that was clicked by the player.
      */
     public NpcSecondClickPlugin(Npc npc) {
         this.npc = npc;
@@ -27,7 +27,7 @@ public final class NpcSecondClickPlugin implements PluginContext {
 
     /**
      * Gets the npc that was clicked by the player.
-     * 
+     *
      * @return the npc that was clicked.
      */
     public Npc getNpc() {

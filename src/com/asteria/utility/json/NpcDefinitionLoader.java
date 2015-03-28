@@ -10,7 +10,7 @@ import com.google.gson.JsonObject;
 
 /**
  * The {@link JsonLoader} implementation that loads all npc definitions.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public final class NpcDefinitionLoader extends JsonLoader {
@@ -26,7 +26,8 @@ public final class NpcDefinitionLoader extends JsonLoader {
     public void load(JsonObject reader, Gson builder) {
         int index = reader.get("id").getAsInt();
         String name = Objects.requireNonNull(reader.get("name").getAsString());
-        String description = Objects.requireNonNull(reader.get("examine").getAsString());
+        String description = Objects.requireNonNull(reader.get("examine")
+                .getAsString());
         int combatLevel = reader.get("combat").getAsInt();
         int size = reader.get("size").getAsInt();
         boolean attackable = reader.get("attackable").getAsBoolean();
@@ -45,9 +46,11 @@ public final class NpcDefinitionLoader extends JsonLoader {
         int rangedDefence = reader.get("defenceRange").getAsInt();
         int magicDefence = reader.get("defenceMage").getAsInt();
 
-        NpcDefinition.DEFINITIONS[index] = new NpcDefinition(index, name, description, combatLevel, size, attackable, aggressive,
-            retreats, poisonous, respawnTime, maxHit, hitpoints, attackSpeed, attackAnim, defenceAnim, deathAnim, attackBonus,
-            meleeDefence, rangedDefence, magicDefence);
+        NpcDefinition.DEFINITIONS[index] = new NpcDefinition(index, name,
+                description, combatLevel, size, attackable, aggressive,
+                retreats, poisonous, respawnTime, maxHit, hitpoints,
+                attackSpeed, attackAnim, defenceAnim, deathAnim, attackBonus,
+                meleeDefence, rangedDefence, magicDefence);
 
         if (aggressive)
             NpcAggression.AGGRESSIVE.add(index);

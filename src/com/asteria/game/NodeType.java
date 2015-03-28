@@ -8,7 +8,7 @@ import com.asteria.game.object.ObjectNode;
 /**
  * The enumerated type whose elements represent the different types of
  * {@link Node} implementations.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public enum NodeType {

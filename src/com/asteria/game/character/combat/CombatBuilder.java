@@ -1,7 +1,5 @@
 package com.asteria.game.character.combat;
 
-import java.util.concurrent.TimeUnit;
-
 import com.asteria.game.NodeType;
 import com.asteria.game.character.CharacterNode;
 import com.asteria.game.character.npc.Npc;
@@ -9,10 +7,12 @@ import com.asteria.game.character.player.Player;
 import com.asteria.task.EventListener;
 import com.asteria.task.TaskHandler;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * Controls and gives access to the main parts of the combat process such as
  * starting and ending combat sessions.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public final class CombatBuilder {
@@ -59,9 +59,9 @@ public final class CombatBuilder {
 
     /**
      * Creates a new {@link CombatBuilder}.
-     * 
+     *
      * @param character
-     *            the character in control of this combat builder.
+     *         the character in control of this combat builder.
      */
     public CombatBuilder(CharacterNode character) {
         this.character = character;
@@ -70,16 +70,17 @@ public final class CombatBuilder {
     /**
      * Prompts the controller to attack {@code target}. If the controller is
      * already attacking the target this method has no effect.
-     * 
+     *
      * @param target
-     *            the character that this controller will be prompted to attack.
+     *         the character that this controller will be prompted to attack.
      */
     public void attack(CharacterNode target) {
         if (character.equals(target))
             return;
         if (target.equals(currentVictim)) {
             determineStrategy();
-            if (character.getPosition().withinDistance(currentVictim.getPosition(), strategy.attackDistance(character))) {
+            if (character.getPosition().withinDistance(currentVictim
+                    .getPosition(), strategy.attackDistance(character))) {
                 character.getMovementQueue().reset();
             }
         }
@@ -88,7 +89,8 @@ public final class CombatBuilder {
             currentVictim = target;
             if (character.getType() == NodeType.PLAYER) {
                 Player player = (Player) character;
-                if (player.isAutocast() || player.getCastSpell() == null || attackTimer < 1) {
+                if (player.isAutocast() || player.getCastSpell() == null ||
+                        attackTimer < 1) {
                     cooldown = 0;
                 }
             }
@@ -127,9 +129,9 @@ public final class CombatBuilder {
 
     /**
      * Starts the cooldown sequence for this controller.
-     * 
+     *
      * @param resetAttack
-     *            if the attack timer should be reset.
+     *         if the attack timer should be reset.
      */
     public void cooldown(boolean resetAttack) {
         if (strategy == null)
@@ -150,9 +152,9 @@ public final class CombatBuilder {
 
     /**
      * Determines if this character is attacking another character.
-     * 
+     *
      * @return {@code true} if this character is attacking another character,
-     *         {@code false} otherwise.
+     * {@code false} otherwise.
      */
     public boolean isAttacking() {
         return currentVictim != null;
@@ -160,9 +162,9 @@ public final class CombatBuilder {
 
     /**
      * Determines if this character is being attacked by another character.
-     * 
+     *
      * @return {@code true} if this character is being attacked by another
-     *         character, {@code false} otherwise.
+     * character, {@code false} otherwise.
      */
     public boolean isBeingAttacked() {
         return !character.getLastCombat().elapsed(5, TimeUnit.SECONDS);
@@ -170,9 +172,9 @@ public final class CombatBuilder {
 
     /**
      * Determines if this combat builder is in cooldown mode.
-     * 
+     *
      * @return {@code true} if this combat builder is in cooldown mode,
-     *         {@code false} otherwise.
+     * {@code false} otherwise.
      */
     public boolean isCooldown() {
         return cooldown > 0;
@@ -181,7 +183,7 @@ public final class CombatBuilder {
     /**
      * Gets the cooldown timer used when the character breaks the combat
      * session.
-     * 
+     *
      * @return the cooldown timer.
      */
     public int getCooldown() {
@@ -197,8 +199,9 @@ public final class CombatBuilder {
     }
 
     /**
-     * Gets the timer that controls how long this character must wait to attack.
-     * 
+     * Gets the timer that controls how long this character must wait to
+     * attack.
+     *
      * @return the timer determines when the controller attacks.
      */
     public int getAttackTimer() {
@@ -215,7 +218,7 @@ public final class CombatBuilder {
 
     /**
      * Gets the character in control of this combat builder.
-     * 
+     *
      * @return the character in control.
      */
     public CharacterNode getCharacter() {
@@ -224,7 +227,7 @@ public final class CombatBuilder {
 
     /**
      * Gets the current character that the controller is attacking.
-     * 
+     *
      * @return the character the controller is attacking
      */
     public CharacterNode getVictim() {
@@ -233,7 +236,7 @@ public final class CombatBuilder {
 
     /**
      * Gets the last character that attacked the controller.
-     * 
+     *
      * @return the last character that attacked.
      */
     public CharacterNode getLastAttacker() {
@@ -242,9 +245,9 @@ public final class CombatBuilder {
 
     /**
      * Sets the value for {@link CombatBuilder#lastAttacker}.
-     * 
+     *
      * @param lastAttacker
-     *            the new value to set.
+     *         the new value to set.
      */
     public void setLastAttacker(CharacterNode lastAttacker) {
         this.lastAttacker = lastAttacker;
@@ -252,7 +255,7 @@ public final class CombatBuilder {
 
     /**
      * Gets the combat strategy this character attacking with.
-     * 
+     *
      * @return the combat strategy.
      */
     public CombatStrategy getStrategy() {
@@ -261,7 +264,7 @@ public final class CombatBuilder {
 
     /**
      * Gets the task that handles the entire combat process.
-     * 
+     *
      * @return the task for the combat process.
      */
     public CombatSession getCombatTask() {
@@ -270,7 +273,7 @@ public final class CombatBuilder {
 
     /**
      * Gets the cache of damage dealt to this controller during combat.
-     * 
+     *
      * @return the cache of damage.
      */
     public CombatDamage getDamageCache() {
@@ -280,7 +283,7 @@ public final class CombatBuilder {
     /**
      * An {@link EventListener} implementation that is used to listen for the
      * controller to become in proper range of the victim.
-     * 
+     *
      * @author lare96
      */
     private static final class CombatDistanceListener extends EventListener {
@@ -297,13 +300,14 @@ public final class CombatBuilder {
 
         /**
          * Create a new {@link CombatDistanceListener}.
-         * 
+         *
          * @param builder
-         *            the combat builder owned by the controller.
+         *         the combat builder owned by the controller.
          * @param victim
-         *            the victim that will be listened for.
+         *         the victim that will be listened for.
          */
-        public CombatDistanceListener(CombatBuilder builder, CharacterNode victim) {
+        public CombatDistanceListener(CombatBuilder builder, CharacterNode
+                victim) {
             super.attach(builder);
             this.builder = builder;
             this.victim = victim;
@@ -315,7 +319,8 @@ public final class CombatBuilder {
             builder.attackTimer = 0;
             builder.cooldown = 0;
 
-            if (!builder.character.getPosition().isViewableFrom(victim.getPosition())) {
+            if (!builder.character.getPosition().isViewableFrom(victim
+                    .getPosition())) {
                 builder.reset();
                 this.cancel();
                 return true;
@@ -324,15 +329,17 @@ public final class CombatBuilder {
             if (builder.character.getType() == NodeType.NPC) {
                 Npc npc = (Npc) builder.character;
 
-                if (!npc.getPosition().isViewableFrom(npc.getOriginalPosition()) && npc.getDefinition().isRetreats()) {
+                if (!npc.getPosition().isViewableFrom(npc.getOriginalPosition
+                        ()) && npc.getDefinition().isRetreats()) {
                     npc.getMovementQueue().walk(npc.getOriginalPosition());
                     builder.reset();
                     this.cancel();
                     return true;
                 }
             }
-            return builder.character.getPosition().withinDistance(victim.getPosition(),
-                builder.strategy.attackDistance(builder.getCharacter()));
+            return builder.character.getPosition().withinDistance(victim
+                    .getPosition(), builder.strategy.attackDistance(builder
+                    .getCharacter()));
         }
 
         @Override

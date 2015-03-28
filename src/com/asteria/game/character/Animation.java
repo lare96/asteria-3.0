@@ -2,7 +2,7 @@ package com.asteria.game.character;
 
 /**
  * The container class that represents an animation.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public final class Animation {
@@ -24,13 +24,13 @@ public final class Animation {
 
     /**
      * Creates a new {@link Animation}.
-     * 
+     *
      * @param id
-     *            the identification for this animation.
+     *         the identification for this animation.
      * @param delay
-     *            the delay for this animation.
+     *         the delay for this animation.
      * @param priority
-     *            the priority of this animation.
+     *         the priority of this animation.
      */
     public Animation(int id, int delay, AnimationPriority priority) {
         this.id = id;
@@ -40,24 +40,25 @@ public final class Animation {
 
     /**
      * Creates a new {@link Animation} with a delay of {@code 0}.
-     * 
+     *
      * @param id
-     *            the identification for this animation.
+     *         the identification for this animation.
      * @param delay
-     *            the delay for this animation.
+     *         the delay for this animation.
      * @param priority
-     *            the priority of this animation.
+     *         the priority of this animation.
      */
     public Animation(int id, AnimationPriority priority) {
         this(id, 0, priority);
     }
 
     /**
-     * Creates a new {@link Animation} with a delay of {@code 0}, and a priority
+     * Creates a new {@link Animation} with a delay of {@code 0}, and a
+     * priority
      * of {@code NORMAL}.
-     * 
+     *
      * @param id
-     *            the identification for this animation.
+     *         the identification for this animation.
      */
     public Animation(int id) {
         this(id, AnimationPriority.NORMAL);
@@ -67,7 +68,7 @@ public final class Animation {
      * A substitute for {@link Object#clone()} that creates another 'copy' of
      * this instance. The created copy is <i>safe</i> meaning it does not hold
      * <b>any</b> references to the original instance.
-     * 
+     *
      * @return a reference-free copy of this instance.
      */
     public Animation copy() {
@@ -76,7 +77,7 @@ public final class Animation {
 
     /**
      * Gets the identification for this animation.
-     * 
+     *
      * @return the identification for this animation.
      */
     public int getId() {
@@ -85,7 +86,7 @@ public final class Animation {
 
     /**
      * Gets the delay for this animation.
-     * 
+     *
      * @return the delay for this animation.
      */
     public int getDelay() {
@@ -94,7 +95,7 @@ public final class Animation {
 
     /**
      * Gets the priority of this animation.
-     * 
+     *
      * @return the priority of this animation.
      */
     public AnimationPriority getPriority() {

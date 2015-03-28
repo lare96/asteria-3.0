@@ -11,7 +11,7 @@ import java.lang.annotation.Target;
  * container and maps a collection of plugin listeners to it. Every plugin
  * listener must have this annotation as its header or a
  * {@link PluginSignatureException} will be thrown.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 @Retention(RetentionPolicy.RUNTIME)
@@ -21,7 +21,7 @@ public @interface PluginSignature {
     /**
      * The {@link PluginContext} that represents the context plugin listeners
      * will be stored and executed in.
-     * 
+     *
      * @return the plugin signature.
      */
     public Class<? extends PluginContext> value();

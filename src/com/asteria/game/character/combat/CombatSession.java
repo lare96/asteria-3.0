@@ -21,7 +21,7 @@ import com.asteria.utility.Settings;
 /**
  * The combat session controls the mechanics of when and how the controller of
  * the builder will attack.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public final class CombatSession extends Task {
@@ -38,9 +38,9 @@ public final class CombatSession extends Task {
 
     /**
      * Create a new {@link CombatSession}.
-     * 
+     *
      * @param builder
-     *            the builder assigned to this combat session.
+     *         the builder assigned to this combat session.
      */
     public CombatSession(CombatBuilder builder) {
         super(1, false);
@@ -69,17 +69,22 @@ public final class CombatSession extends Task {
             if (!Combat.checkAttackDistance(builder)) {
                 return;
             }
-            if (!builder.getStrategy().canAttack(builder.getCharacter(), builder.getVictim())) {
+            if (!builder.getStrategy().canAttack(builder.getCharacter(),
+                    builder.getVictim())) {
                 return;
             }
-            CombatSessionData data = builder.getStrategy().attack(builder.getCharacter(), builder.getVictim());
+            CombatSessionData data = builder.getStrategy().attack(builder
+                    .getCharacter(), builder.getVictim());
 
             if (builder.getCharacter().getType() == NodeType.PLAYER) {
                 Player player = (Player) builder.getCharacter();
                 player.getEncoder().sendCloseWindows();
-                if (player.isSpecialActivated() && player.getCastSpell() == null) {
-                    data = player.getCombatSpecial().container(player, builder.getVictim());
-                    CombatSpecial.drain(player, player.getCombatSpecial().getAmount());
+                if (player.isSpecialActivated() && player.getCastSpell() ==
+                        null) {
+                    data = player.getCombatSpecial().container(player,
+                            builder.getVictim());
+                    CombatSpecial.drain(player, player.getCombatSpecial()
+                            .getAmount());
                 }
             }
 
@@ -87,10 +92,12 @@ public final class CombatSession extends Task {
                 if (data.getHits().length > 0) {
                     applyPrayerEffects(data);
                 }
-                builder.getVictim().getCombatBuilder().setLastAttacker(builder.getCharacter());
+                builder.getVictim().getCombatBuilder().setLastAttacker
+                        (builder.getCharacter());
                 builder.getVictim().getLastCombat().reset();
 
-                if (data.getType() == CombatType.MAGIC && builder.getCharacter().getType() == NodeType.PLAYER) {
+                if (data.getType() == CombatType.MAGIC && builder
+                        .getCharacter().getType() == NodeType.PLAYER) {
                     Player player = (Player) builder.getCharacter();
 
                     if (!player.isAutocast()) {
@@ -111,13 +118,14 @@ public final class CombatSession extends Task {
     /**
      * Determines if the combat session can continue on, this method is invoked
      * before the attack timers are evaluated.
-     * 
+     *
      * @return {@code true} if this combat session can continue on,
-     *         {@code false} otherwise.
+     * {@code false} otherwise.
      */
     private boolean sessionCanAttack() {
-        if (!builder.getVictim().isRegistered() || !builder.getCharacter().isRegistered() || builder.getCharacter().isDead() || builder
-            .getVictim().isDead()) {
+        if (!builder.getVictim().isRegistered() || !builder.getCharacter()
+                .isRegistered() || builder.getCharacter().isDead() || builder
+                .getVictim().isDead()) {
             builder.reset();
             return false;
         }
@@ -127,17 +135,22 @@ public final class CombatSession extends Task {
                 return false;
             }
         }
-        if (!Location.inMultiCombat(builder.getCharacter()) && builder.isBeingAttacked() && !builder.getVictim().equals(
-            builder.getLastAttacker())) {
+        if (!Location.inMultiCombat(builder.getCharacter()) && builder
+                .isBeingAttacked() && !builder.getVictim().equals(builder
+                .getLastAttacker())) {
             if (builder.getCharacter().getType() == NodeType.PLAYER)
-                ((Player) builder.getCharacter()).getEncoder().sendMessage("You are already under attack!");
+                ((Player) builder.getCharacter()).getEncoder().sendMessage
+                        ("You are already under attack!");
             builder.reset();
             return false;
         }
-        if (!Location.inMultiCombat(builder.getCharacter()) && builder.getVictim().getCombatBuilder().isBeingAttacked() && !builder
-            .getVictim().getCombatBuilder().getLastAttacker().equals(builder.getCharacter())) {
+        if (!Location.inMultiCombat(builder.getCharacter()) && builder
+                .getVictim().getCombatBuilder().isBeingAttacked() && !builder
+                .getVictim().getCombatBuilder().getLastAttacker().equals
+                        (builder.getCharacter())) {
             if (builder.getCharacter().getType() == NodeType.PLAYER)
-                ((Player) builder.getCharacter()).getEncoder().sendMessage("They are already under attack!");
+                ((Player) builder.getCharacter()).getEncoder().sendMessage
+                        ("They are already under attack!");
             builder.reset();
             return false;
         }
@@ -149,8 +162,11 @@ public final class CombatSession extends Task {
                 if (!optional.get().canHit(player, builder.getVictim())) {
                     return false;
                 }
-            } else if (Location.inWilderness(builder.getCharacter()) && !Location.inWilderness(builder.getVictim())) {
-                player.getEncoder().sendMessage("They are not in the wilderness!");
+            }
+            else if (Location.inWilderness(builder.getCharacter()) &&
+                    !Location.inWilderness(builder.getVictim())) {
+                player.getEncoder().sendMessage("They are not in the " +
+                        "wilderness!");
                 builder.reset();
                 return false;
             }
@@ -158,9 +174,11 @@ public final class CombatSession extends Task {
         if (builder.getCharacter().getType() == NodeType.NPC) {
             Npc npc = (Npc) builder.getCharacter();
 
-            if (builder.getVictim().getCombatBuilder().isCooldown() && !npc.getPosition().isViewableFrom(
-                npc.getOriginalPosition()) || !builder.getVictim().getCombatBuilder().isBeingAttacked() && !npc.getPosition()
-                .isViewableFrom(npc.getOriginalPosition())) {
+            if (builder.getVictim().getCombatBuilder().isCooldown() && !npc
+                    .getPosition().isViewableFrom(npc.getOriginalPosition())
+                    || !builder.getVictim().getCombatBuilder()
+                    .isBeingAttacked() && !npc.getPosition().isViewableFrom
+                    (npc.getOriginalPosition())) {
                 builder.reset();
                 return false;
             }
@@ -169,13 +187,14 @@ public final class CombatSession extends Task {
     }
 
     /**
-     * Applies combat prayer accuracy and damage reductions before executing the
+     * Applies combat prayer accuracy and damage reductions before executing
+     * the
      * {@link CombatSessionAttack}.
-     * 
+     *
      * @param data
-     *            the data for this combat session.
+     *         the data for this combat session.
      * @throws IllegalStateException
-     *             if the character node type is invalid.
+     *         if the character node type is invalid.
      */
     private void applyPrayerEffects(CombatSessionData data) {
         if (!data.isCheckAccuracy()) {
@@ -185,39 +204,48 @@ public final class CombatSession extends Task {
             return;
         }
         if (Combat.isFullVeracs(builder.getCharacter())) {
-            if (Settings.DEBUG && builder.getCharacter().getType() == NodeType.PLAYER)
-                ((Player) builder.getCharacter()).getEncoder().sendMessage(
-                    "[DEBUG]: Chance of opponents prayer cancelling hit [0%:" + Combat.PRAYER_ACCURACY_REDUCTION + "%]");
+            if (Settings.DEBUG && builder.getCharacter().getType() ==
+                    NodeType.PLAYER)
+                ((Player) builder.getCharacter()).getEncoder().sendMessage
+                        ("[DEBUG]: Chance of opponents prayer cancelling hit " +
+                                "[0%:" + Combat.PRAYER_ACCURACY_REDUCTION +
+                                "%]");
             return;
         }
         Player player = (Player) builder.getVictim();
 
-        if (CombatPrayer.isActivated(player, CombatPrayer.getProtectingPrayer(data.getType()))) {
+        if (CombatPrayer.isActivated(player, CombatPrayer.getProtectingPrayer
+                (data.getType()))) {
             switch (builder.getCharacter().getType()) {
-            case PLAYER:
-                for (CombatHit h : data.getHits()) {
-                    int hit = h.getHit().getDamage();
-                    double mod = Math.abs(1 - Combat.PRAYER_DAMAGE_REDUCTION);
-                    h.setHit(new Hit((int) (hit * mod), h.getHit().getType()));
-                    if (Settings.DEBUG)
-                        player.getEncoder().sendMessage(
-                            "[DEBUG]: Damage reduced by opponents prayer [" + (hit - h.getHit().getDamage()) + "]");
-                    mod = Math.round(random.nextDouble() * 100.0) / 100.0;
-                    if (Settings.DEBUG)
-                        player
-                            .getEncoder()
-                            .sendMessage(
-                                "[DEBUG]: Chance of opponents prayer cancelling hit [" + mod + "/" + Combat.PRAYER_ACCURACY_REDUCTION + "]");
-                    if (mod <= Combat.PRAYER_ACCURACY_REDUCTION) {
-                        h.setAccurate(false);
+                case PLAYER:
+                    for (CombatHit h : data.getHits()) {
+                        int hit = h.getHit().getDamage();
+                        double mod = Math.abs(1 - Combat
+                                .PRAYER_DAMAGE_REDUCTION);
+                        h.setHit(new Hit((int) (hit * mod), h.getHit()
+                                .getType()));
+                        if (Settings.DEBUG)
+                            player.getEncoder().sendMessage("[DEBUG]: Damage " +
+                                    "reduced by opponents prayer [" + (hit -
+                                    h.getHit().getDamage()) + "]");
+                        mod = Math.round(random.nextDouble() * 100.0) / 100.0;
+                        if (Settings.DEBUG)
+                            player.getEncoder().sendMessage("[DEBUG]: Chance " +
+                                    "of opponents prayer cancelling hit [" +
+                                    mod + "/" + Combat
+                                    .PRAYER_ACCURACY_REDUCTION + "]");
+                        if (mod <= Combat.PRAYER_ACCURACY_REDUCTION) {
+                            h.setAccurate(false);
+                        }
                     }
-                }
-                break;
-            case NPC:
-                Arrays.stream(data.getHits()).filter(Objects::nonNull).forEach(h -> h.setAccurate(false));
-                break;
-            default:
-                throw new IllegalStateException("Invalid character node type!");
+                    break;
+                case NPC:
+                    Arrays.stream(data.getHits()).filter(Objects::nonNull)
+                            .forEach(h -> h.setAccurate(false));
+                    break;
+                default:
+                    throw new IllegalStateException("Invalid character node " +
+                            "type!");
             }
         }
     }

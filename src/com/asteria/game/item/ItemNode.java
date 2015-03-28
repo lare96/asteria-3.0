@@ -9,7 +9,7 @@ import com.asteria.utility.MutableNumber;
 
 /**
  * The node implementation that represents an item on the ground.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public class ItemNode extends Node {
@@ -36,13 +36,13 @@ public class ItemNode extends Node {
 
     /**
      * Creates new {@link ItemNode}.
-     * 
+     *
      * @param item
-     *            the item concealed within this node.
+     *         the item concealed within this node.
      * @param position
-     *            the position this node is on.
+     *         the position this node is on.
      * @param player
-     *            the player attached to this node.
+     *         the player attached to this node.
      */
     public ItemNode(Item item, Position position, Player player) {
         super(position, NodeType.ITEM);
@@ -73,17 +73,20 @@ public class ItemNode extends Node {
         if (counter == null) {
             if (other.counter != null)
                 return false;
-        } else if (!counter.equals(other.counter))
+        }
+        else if (!counter.equals(other.counter))
             return false;
         if (item == null) {
             if (other.item != null)
                 return false;
-        } else if (!item.equals(other.item))
+        }
+        else if (!item.equals(other.item))
             return false;
         if (player == null) {
             if (other.player != null)
                 return false;
-        } else if (!player.equals(other.player))
+        }
+        else if (!player.equals(other.player))
             return false;
         if (state != other.state)
             return false;
@@ -98,51 +101,55 @@ public class ItemNode extends Node {
     @Override
     public void dispose() {
         switch (state) {
-        case SEEN_BY_EVERYONE:
-            World.getPlayers().forEach(p -> {
-                if (super.getPosition().withinDistance(p.getPosition(), 60)) {
-                    p.getEncoder().sendRemoveGroundItem(this);
-                }
-            });
-            break;
-        case SEEN_BY_OWNER:
-            World.getPlayer(player.getUsernameHash()).ifPresent(p -> p.getEncoder().sendRemoveGroundItem(this));
-            break;
-        default:
-            throw new IllegalStateException("Invalid item node state!");
+            case SEEN_BY_EVERYONE:
+                World.getPlayers().forEach(p -> {
+                    if (super.getPosition().withinDistance(p.getPosition(),
+                            60)) {
+                        p.getEncoder().sendRemoveGroundItem(this);
+                    }
+                });
+                break;
+            case SEEN_BY_OWNER:
+                World.getPlayer(player.getUsernameHash()).ifPresent(p -> p
+                        .getEncoder().sendRemoveGroundItem(this));
+                break;
+            default:
+                throw new IllegalStateException("Invalid item node state!");
         }
     }
 
     /**
      * The method executed on every sequence by the item node manager.
-     * 
+     *
      * @throws IllegalStateException
-     *             if the item node is in an incorrect state.
+     *         if the item node is in an incorrect state.
      */
     public void onSequence() {
         switch (state) {
-        case SEEN_BY_OWNER:
-            World.getPlayers().forEach(p -> {
-                if (super.getPosition().withinDistance(p.getPosition(), 60) && !p.equals(player)) {
-                    p.getEncoder().sendGroundItem(new ItemNode(item, super.getPosition(), null));
-                }
-            });
-            player = null;
-            state = ItemState.SEEN_BY_EVERYONE;
-            break;
-        case SEEN_BY_EVERYONE:
-            super.setRegistered(false);
-            break;
-        default:
-            throw new IllegalStateException("Invalid item node state!");
+            case SEEN_BY_OWNER:
+                World.getPlayers().forEach(p -> {
+                    if (super.getPosition().withinDistance(p.getPosition(),
+                            60) && !p.equals(player)) {
+                        p.getEncoder().sendGroundItem(new ItemNode(item,
+                                super.getPosition(), null));
+                    }
+                });
+                player = null;
+                state = ItemState.SEEN_BY_EVERYONE;
+                break;
+            case SEEN_BY_EVERYONE:
+                super.setRegistered(false);
+                break;
+            default:
+                throw new IllegalStateException("Invalid item node state!");
         }
     }
 
     /**
      * The method executed when {@code player} attempts to pickup this item.
-     * 
+     *
      * @param player
-     *            the player attempting to pickup this item.
+     *         the player attempting to pickup this item.
      */
     public void onPickup(Player player) {
         ItemNodeManager.unregister(this);
@@ -151,7 +158,7 @@ public class ItemNode extends Node {
 
     /**
      * Gets the item state of this node.
-     * 
+     *
      * @return the item state.
      */
     public final ItemState getState() {
@@ -160,9 +167,9 @@ public class ItemNode extends Node {
 
     /**
      * Sets the value for {@link ItemNode#state}.
-     * 
+     *
      * @param state
-     *            the new value to set.
+     *         the new value to set.
      */
     public final void setState(ItemState state) {
         this.state = state;
@@ -170,7 +177,7 @@ public class ItemNode extends Node {
 
     /**
      * Gets the player attached to this node.
-     * 
+     *
      * @return the player attached.
      */
     public final Player getPlayer() {
@@ -179,9 +186,9 @@ public class ItemNode extends Node {
 
     /**
      * Sets the value for {@link ItemNode#player}.
-     * 
+     *
      * @param player
-     *            the new value to set.
+     *         the new value to set.
      */
     public final void setPlayer(Player player) {
         this.player = player;
@@ -189,7 +196,7 @@ public class ItemNode extends Node {
 
     /**
      * Gets the item concealed within this node.
-     * 
+     *
      * @return the item concealed.
      */
     public final Item getItem() {
@@ -198,7 +205,7 @@ public class ItemNode extends Node {
 
     /**
      * Gets the counter that contains the amount of ticks this node has.
-     * 
+     *
      * @return the counter that contains the ticks.
      */
     public final MutableNumber getCounter() {

@@ -10,7 +10,7 @@ import com.asteria.utility.Settings;
 /**
  * The packet sent from the client when a player sends the load map region
  * packet.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public final class UpdateRegionPacket extends PacketDecoder {
@@ -25,7 +25,8 @@ public final class UpdateRegionPacket extends PacketDecoder {
             player.setUpdateRegion(false);
 
             if (Settings.DEBUG)
-                player.getEncoder().sendMessage("DEBUG[region= " + player.getPosition().getRegion() + "]");
+                player.getEncoder().sendMessage("DEBUG[region= " + player
+                        .getPosition().getRegion() + "]");
         }
     }
 }

@@ -5,7 +5,7 @@ import com.asteria.game.item.Item;
 
 /**
  * The container that manages the inventory for a player.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public final class Inventory extends ItemContainer {
@@ -17,9 +17,9 @@ public final class Inventory extends ItemContainer {
 
     /**
      * Create a new {@link Inventory}.
-     * 
+     *
      * @param player
-     *            the player who's inventory is being managed.
+     *         the player who's inventory is being managed.
      */
     public Inventory(Player player) {
         super(28, ItemContainerPolicy.NORMAL);
@@ -39,7 +39,8 @@ public final class Inventory extends ItemContainer {
             return false;
         if (!contains(item.getId()) && !item.getDefinition().isStackable()) {
             if (freeSlot() == -1) {
-                player.getEncoder().sendMessage("You don't have enough space in your inventory!");
+                player.getEncoder().sendMessage("You don't have enough space " +
+                        "in your inventory!");
                 return false;
             }
         }

@@ -4,7 +4,7 @@ import com.asteria.game.character.combat.Combat;
 
 /**
  * The enumerated type whose elements represent the fighting types.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public enum FightType {
@@ -59,8 +59,10 @@ public enum FightType {
     SPEAR_POUND(2082, 43, 2, Combat.ATTACK_CRUSH, FightStyle.CONTROLLED),
     SPEAR_BLOCK(2080, 43, 3, Combat.ATTACK_STAB, FightStyle.DEFENSIVE),
     TWOHANDEDSWORD_CHOP(407, 43, 0, Combat.ATTACK_SLASH, FightStyle.ACCURATE),
-    TWOHANDEDSWORD_SLASH(407, 43, 1, Combat.ATTACK_SLASH, FightStyle.AGGRESSIVE),
-    TWOHANDEDSWORD_SMASH(406, 43, 2, Combat.ATTACK_CRUSH, FightStyle.AGGRESSIVE),
+    TWOHANDEDSWORD_SLASH(407, 43, 1, Combat.ATTACK_SLASH, FightStyle
+            .AGGRESSIVE),
+    TWOHANDEDSWORD_SMASH(406, 43, 2, Combat.ATTACK_CRUSH, FightStyle
+            .AGGRESSIVE),
     TWOHANDEDSWORD_BLOCK(407, 43, 3, Combat.ATTACK_SLASH, FightStyle.DEFENSIVE),
     PICKAXE_SPIKE(412, 43, 0, Combat.ATTACK_STAB, FightStyle.ACCURATE),
     PICKAXE_IMPALE(412, 43, 1, Combat.ATTACK_STAB, FightStyle.AGGRESSIVE),
@@ -116,19 +118,20 @@ public enum FightType {
 
     /**
      * Creates a new {@link FightType}.
-     * 
+     *
      * @param animation
-     *            the animation executed when this type is active.
+     *         the animation executed when this type is active.
      * @param parent
-     *            the parent config identification.
+     *         the parent config identification.
      * @param child
-     *            the child config identification.
+     *         the child config identification.
      * @param bonus
-     *            the type of bonus this type will apply.
+     *         the type of bonus this type will apply.
      * @param style
-     *            the style active when this type is active.
+     *         the style active when this type is active.
      */
-    private FightType(int animation, int parent, int child, int bonus, FightStyle style) {
+    private FightType(int animation, int parent, int child, int bonus,
+                      FightStyle style) {
         this.animation = animation;
         this.parent = parent;
         this.child = child;
@@ -138,29 +141,29 @@ public enum FightType {
 
     /**
      * Determines the corresponding bonus for this fight type.
-     * 
+     *
      * @return the corresponding.
      */
     public final int getCorrespondingBonus() {
         switch (bonus) {
-        case Combat.ATTACK_CRUSH:
-            return Combat.DEFENCE_CRUSH;
-        case Combat.ATTACK_MAGIC:
-            return Combat.DEFENCE_MAGIC;
-        case Combat.ATTACK_RANGED:
-            return Combat.DEFENCE_RANGED;
-        case Combat.ATTACK_SLASH:
-            return Combat.DEFENCE_SLASH;
-        case Combat.ATTACK_STAB:
-            return Combat.DEFENCE_STAB;
-        default:
-            return Combat.DEFENCE_CRUSH;
+            case Combat.ATTACK_CRUSH:
+                return Combat.DEFENCE_CRUSH;
+            case Combat.ATTACK_MAGIC:
+                return Combat.DEFENCE_MAGIC;
+            case Combat.ATTACK_RANGED:
+                return Combat.DEFENCE_RANGED;
+            case Combat.ATTACK_SLASH:
+                return Combat.DEFENCE_SLASH;
+            case Combat.ATTACK_STAB:
+                return Combat.DEFENCE_STAB;
+            default:
+                return Combat.DEFENCE_CRUSH;
         }
     }
 
     /**
      * Gets the animation executed when this type is active.
-     * 
+     *
      * @return the animation executed.
      */
     public final int getAnimation() {
@@ -169,7 +172,7 @@ public enum FightType {
 
     /**
      * Gets the parent config identification.
-     * 
+     *
      * @return the parent config.
      */
     public final int getParent() {
@@ -178,7 +181,7 @@ public enum FightType {
 
     /**
      * Gets the child config identification.
-     * 
+     *
      * @return the child config.
      */
     public final int getChild() {
@@ -187,7 +190,7 @@ public enum FightType {
 
     /**
      * Gets the type of bonus this type will apply
-     * 
+     *
      * @return the bonus type.
      */
     public final int getBonus() {
@@ -196,7 +199,7 @@ public enum FightType {
 
     /**
      * Gets the style active when this type is active.
-     * 
+     *
      * @return the fighting style.
      */
     public final FightStyle getStyle() {

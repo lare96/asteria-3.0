@@ -9,7 +9,7 @@ import com.asteria.game.location.Position;
 /**
  * The container class that handles the opening, closing, and navigation of
  * viewing orbs.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public final class ViewingOrb {
@@ -51,22 +51,23 @@ public final class ViewingOrb {
 
     /**
      * Creates a new {@link ViewingOrb}.
-     * 
+     *
      * @param player
-     *            the player that is viewing the orb.
+     *         the player that is viewing the orb.
      * @param centre
-     *            the centre position corresponding to the viewing orb.
+     *         the centre position corresponding to the viewing orb.
      * @param northWest
-     *            the north-west position corresponding to the viewing orb.
+     *         the north-west position corresponding to the viewing orb.
      * @param northEast
-     *            the north-east position corresponding to the viewing orb.
+     *         the north-east position corresponding to the viewing orb.
      * @param southWest
-     *            the south-west position corresponding to the viewing orb.
+     *         the south-west position corresponding to the viewing orb.
      * @param southEast
-     *            the south-east position corresponding to the viewing orb.
+     *         the south-east position corresponding to the viewing orb.
      */
-    public ViewingOrb(Player player, Position centre, Position northWest, Position northEast, Position southWest,
-        Position southEast) {
+    public ViewingOrb(Player player, Position centre, Position northWest,
+                      Position northEast, Position southWest, Position
+                              southEast) {
         this.player = player;
         this.start = player.getPosition().copy();
         this.centre = centre;
@@ -80,7 +81,8 @@ public final class ViewingOrb {
      * Opens the viewing orb navigation interface in the sidebar.
      */
     public void open() {
-        IntStream.rangeClosed(0, 13).filter(v -> v != 7 && v != 10).forEach(v -> player.getEncoder().sendSidebarInterface(v, -1));
+        IntStream.rangeClosed(0, 13).filter(v -> v != 7 && v != 10).forEach(v
+                -> player.getEncoder().sendSidebarInterface(v, -1));
         player.getEncoder().sendSidebarInterface(10, 3209);
         player.getEncoder().sendForceTab(10);
         player.getEncoder().sendString("@yel@Centre", 15239);
@@ -107,7 +109,8 @@ public final class ViewingOrb {
         player.getEncoder().sendSidebarInterface(3, 3213);
         player.getEncoder().sendSidebarInterface(4, 1644);
         player.getEncoder().sendSidebarInterface(5, 5608);
-        player.getEncoder().sendSidebarInterface(6, player.getSpellbook().getId());
+        player.getEncoder().sendSidebarInterface(6, player.getSpellbook()
+                .getId());
         player.getEncoder().sendSidebarInterface(8, 5065);
         player.getEncoder().sendSidebarInterface(9, 5715);
         player.getEncoder().sendSidebarInterface(10, 2449);
@@ -125,17 +128,19 @@ public final class ViewingOrb {
     }
 
     /**
-     * Moves the player to {@code position} and updates the navigation interface
+     * Moves the player to {@code position} and updates the navigation
+     * interface
      * with the position that the player is being moved to.
-     * 
+     *
      * @param positionName
-     *            the name of the position being moved to.
+     *         the name of the position being moved to.
      * @param positionLineId
-     *            the interface string id of the position being moved to.
+     *         the interface string id of the position being moved to.
      * @param position
-     *            the position being moved to.
+     *         the position being moved to.
      */
-    public void move(String positionName, int positionLineId, Position position) {
+    public void move(String positionName, int positionLineId, Position
+            position) {
         if (position.equals(player.getPosition()))
             return;
         player.getEncoder().sendString("@yel@Centre", 15239);
@@ -149,7 +154,7 @@ public final class ViewingOrb {
 
     /**
      * Gets the starting position of the player viewing the orb.
-     * 
+     *
      * @return the starting position.
      */
     public Position getStart() {
@@ -158,7 +163,7 @@ public final class ViewingOrb {
 
     /**
      * Gets the centre position corresponding to the viewing orb.
-     * 
+     *
      * @return the centre position.
      */
     public Position getCentre() {
@@ -167,7 +172,7 @@ public final class ViewingOrb {
 
     /**
      * Gets the north-west position corresponding to the viewing orb.
-     * 
+     *
      * @return the north-west position.
      */
     public Position getNorthWest() {
@@ -176,7 +181,7 @@ public final class ViewingOrb {
 
     /**
      * Gets the north-east position corresponding to the viewing orb.
-     * 
+     *
      * @return the north-east position.
      */
     public Position getNorthEast() {
@@ -185,7 +190,7 @@ public final class ViewingOrb {
 
     /**
      * Gets the south-west position corresponding to the viewing orb.
-     * 
+     *
      * @return the south-west position.
      */
     public Position getSouthWest() {
@@ -194,7 +199,7 @@ public final class ViewingOrb {
 
     /**
      * Gets the south-east position corresponding to the viewing orb.
-     * 
+     *
      * @return the south-east position.
      */
     public Position getSouthEast() {

@@ -5,7 +5,7 @@ import com.asteria.task.Task;
 
 /**
  * An effect that usually takes places as a result of combat.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public abstract class CombatEffect extends Task {
@@ -17,11 +17,11 @@ public abstract class CombatEffect extends Task {
 
     /**
      * Creates a new {@link CombatEffect}.
-     * 
+     *
      * @param character
-     *            the character this effect is being applied to
+     *         the character this effect is being applied to
      * @param delay
-     *            the delay for how often this effect will be sequenced.
+     *         the delay for how often this effect will be sequenced.
      */
     public CombatEffect(CharacterNode character, int delay) {
         super(delay, false);
@@ -31,17 +31,17 @@ public abstract class CombatEffect extends Task {
 
     /**
      * Applies this effect to {@code character}.
-     * 
+     *
      * @return {@code true} if the effect could be applied, {@code false}
-     *         otherwise.
+     * otherwise.
      */
     public abstract boolean apply();
 
     /**
      * Removes this effect from {@code character} if needed.
-     * 
+     *
      * @return {@code true} if this effect should be stopped, {@code false}
-     *         otherwise.
+     * otherwise.
      */
     public abstract boolean removeOn();
 

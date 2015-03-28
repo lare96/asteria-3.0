@@ -4,7 +4,7 @@ import com.asteria.utility.RandomGen;
 
 /**
  * The container class that represents a coordinate anywhere in the world.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  * @author blakeman8192
  */
@@ -27,13 +27,13 @@ public class Position {
 
     /**
      * Creates a new {@link Position}.
-     * 
+     *
      * @param x
-     *            the {@code X} coordinate.
+     *         the {@code X} coordinate.
      * @param y
-     *            the {@code Y} coordinate.
+     *         the {@code Y} coordinate.
      * @param z
-     *            the {@code Z} coordinate.
+     *         the {@code Z} coordinate.
      */
     public Position(int x, int y, int z) {
         this.x = x;
@@ -44,11 +44,11 @@ public class Position {
     /**
      * Creates a new {@link Position} with the {@code Z} coordinate value as
      * {@code 0}.
-     * 
+     *
      * @param x
-     *            the {@code X} coordinate.
+     *         the {@code X} coordinate.
      * @param y
-     *            the {@code Y} coordinate.
+     *         the {@code Y} coordinate.
      */
     public Position(int x, int y) {
         this(x, y, 0);
@@ -91,11 +91,11 @@ public class Position {
      * Returns the delta coordinates. Note that the returned position is not an
      * actual position, instead it's values represent the delta values between
      * the two arguments.
-     * 
+     *
      * @param a
-     *            the first position.
+     *         the first position.
      * @param b
-     *            the second position.
+     *         the second position.
      * @return the delta coordinates contained within a position.
      */
     public static Position delta(Position a, Position b) {
@@ -106,7 +106,7 @@ public class Position {
      * A substitute for {@link Object#clone()} that creates another 'copy' of
      * this instance. The created copy <i>safe</i> meaning it does not hold
      * <b>any</b> references to the original instance.
-     * 
+     *
      * @return the copy of this instance that does not hold any references.
      */
     public Position copy() {
@@ -115,11 +115,11 @@ public class Position {
 
     /**
      * Determines if this position is viewable from {@code other}.
-     * 
+     *
      * @param other
-     *            the other position to determine if viewable from.
+     *         the other position to determine if viewable from.
      * @return {@code true} if this position is viewable, {@code false}
-     *         otherwise.
+     * otherwise.
      */
     public final boolean isViewableFrom(Position other) {
         if (this.getZ() != other.getZ())
@@ -131,31 +131,32 @@ public class Position {
     /**
      * Determines if this position is within {@code amount} distance of
      * {@code other}.
-     * 
+     *
      * @param other
-     *            the position to check the distance for.
+     *         the position to check the distance for.
      * @param amount
-     *            the distance to check.
+     *         the distance to check.
      * @return {@code true} if this position is within the distance,
-     *         {@code false} otherwise.
+     * {@code false} otherwise.
      */
     public final boolean withinDistance(Position other, int amount) {
         if (this.z != other.z)
             return false;
-        return Math.abs(other.x - this.x) <= amount && Math.abs(other.y - this.y) <= amount;
+        return Math.abs(other.x - this.x) <= amount && Math.abs(other.y -
+                this.y) <= amount;
     }
 
     /**
      * Increments the {@code X}, {@code Y}, and {@code Z} coordinate values
      * within this container by {@code amountX}, {@code amountY}, and
      * {@code amountZ}.
-     * 
+     *
      * @param amountX
-     *            the amount to increment the {@code X} coordinate by.
+     *         the amount to increment the {@code X} coordinate by.
      * @param amountY
-     *            the amount to increment the {@code Y} coordinate by.
+     *         the amount to increment the {@code Y} coordinate by.
      * @param amountZ
-     *            the amount to increment the {@code Z} coordinate by.
+     *         the amount to increment the {@code Z} coordinate by.
      * @return an instance of this position.
      */
     public final Position move(int amountX, int amountY, int amountZ) {
@@ -168,11 +169,11 @@ public class Position {
     /**
      * Increments the {@code X} and {@code Y} coordinate values within this
      * container by {@code amountX} and {@code amountY}.
-     * 
+     *
      * @param amountX
-     *            the amount to increment the {@code X} coordinate by.
+     *         the amount to increment the {@code X} coordinate by.
      * @param amountY
-     *            the amount to increment the {@code Y} coordinate by.
+     *         the amount to increment the {@code Y} coordinate by.
      * @return an instance of this position.
      */
     public final Position move(int amountX, int amountY) {
@@ -182,7 +183,7 @@ public class Position {
     /**
      * Increments the {@code X} and {@code Y} coordinate values within this
      * container by random amounts positive and negative of {@code amount}.
-     * 
+     *
      * @return an instance of this position.
      */
     public final Position random(int amount) {
@@ -190,20 +191,20 @@ public class Position {
         int x = random.inclusive(amount);
         int y = random.inclusive(amount);
         switch (random.inclusive(3)) {
-        case 1:
-            return move(-x, -y);
-        case 2:
-            return move(-x, y);
-        case 3:
-            return move(x, -y);
-        default:
-            return move(x, y);
+            case 1:
+                return move(-x, -y);
+            case 2:
+                return move(-x, y);
+            case 3:
+                return move(x, -y);
+            default:
+                return move(x, y);
         }
     }
 
     /**
      * Gets the {@code X} coordinate of the region containing this position.
-     * 
+     *
      * @return the {@code X} coordinate of the region.
      */
     public final int getRegionX() {
@@ -212,7 +213,7 @@ public class Position {
 
     /**
      * Gets the {@code Y} coordinate of the region containing this position.
-     * 
+     *
      * @return the {@code Y} coordinate of the region
      */
     public final int getRegionY() {
@@ -221,9 +222,9 @@ public class Position {
 
     /**
      * Gets the local {@code X} coordinate relative to {@code base}.
-     * 
+     *
      * @param base
-     *            the relative base position.
+     *         the relative base position.
      * @return the local {@code X} coordinate.
      */
     public final int getLocalX(Position base) {
@@ -232,9 +233,9 @@ public class Position {
 
     /**
      * Gets the local {@code Y} coordinate relative to {@code base}.
-     * 
+     *
      * @param base
-     *            the relative base position.
+     *         the relative base position.
      * @return the local {@code Y} coordinate.
      */
     public final int getLocalY(Position base) {
@@ -243,7 +244,7 @@ public class Position {
 
     /**
      * Gets the local {@code X} coordinate relative to this position.
-     * 
+     *
      * @return the local {@code X} coordinate.
      */
     public final int getLocalX() {
@@ -252,7 +253,7 @@ public class Position {
 
     /**
      * Gets the local {@code Y} coordinate relative to this Position.
-     * 
+     *
      * @return the local {@code Y} coordinate.
      */
     public final int getLocalY() {
@@ -261,7 +262,7 @@ public class Position {
 
     /**
      * Gets the {@code X} region chunk relative to this position.
-     * 
+     *
      * @return the {@code X} region chunk.
      */
     public final int getChunkX() {
@@ -270,7 +271,7 @@ public class Position {
 
     /**
      * Gets the {@code Y} region chunk relative to this position.
-     * 
+     *
      * @return the {@code Y} region chunk.
      */
     public final int getChunkY() {
@@ -279,7 +280,7 @@ public class Position {
 
     /**
      * Gets the region identification relative to this position.
-     * 
+     *
      * @return the region identification.
      */
     public final int getRegion() {
@@ -288,7 +289,7 @@ public class Position {
 
     /**
      * Gets the {@code X} coordinate.
-     * 
+     *
      * @return the {@code X} coordinate.
      */
     public final int getX() {
@@ -297,9 +298,9 @@ public class Position {
 
     /**
      * Sets the {@code X} coordinate.
-     * 
+     *
      * @param x
-     *            the new {@code X} coordinate.
+     *         the new {@code X} coordinate.
      */
     public final void setX(int x) {
         this.x = x;
@@ -307,7 +308,7 @@ public class Position {
 
     /**
      * Gets the {@code Y} coordinate.
-     * 
+     *
      * @return the {@code Y} coordinate.
      */
     public final int getY() {
@@ -316,9 +317,9 @@ public class Position {
 
     /**
      * Sets the {@code Y} coordinate.
-     * 
+     *
      * @param y
-     *            the new {@code Y} coordinate.
+     *         the new {@code Y} coordinate.
      */
     public final void setY(int y) {
         this.y = y;
@@ -326,7 +327,7 @@ public class Position {
 
     /**
      * Gets the {@code Z} coordinate.
-     * 
+     *
      * @return the {@code Z} coordinate.
      */
     public final int getZ() {
@@ -335,9 +336,9 @@ public class Position {
 
     /**
      * Sets the {@code Z} coordinate.
-     * 
+     *
      * @param z
-     *            the new {@code Z} coordinate.
+     *         the new {@code Z} coordinate.
      */
     public final void setZ(int z) {
         this.z = z;

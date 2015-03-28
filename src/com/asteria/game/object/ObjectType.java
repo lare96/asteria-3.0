@@ -2,7 +2,7 @@ package com.asteria.game.object;
 
 /**
  * The enumerated type whose elements represent all of the object types.
- * 
+ *
  * @author Ryley Kimmel <ryley.kimmel@live.com>
  * @author Maxi <http://www.rune-server.org/members/maxi/>
  * @author lare96 <http://github.com/lare96>
@@ -39,9 +39,9 @@ public enum ObjectType {
 
     /**
      * Creates a new {@link ObjectType}.
-     * 
+     *
      * @param id
-     *            the identification of this type
+     *         the identification of this type
      */
     private ObjectType(int id) {
         this.id = id;
@@ -49,7 +49,7 @@ public enum ObjectType {
 
     /**
      * Gets the identification of this type.
-     * 
+     *
      * @return the identification of this type.
      */
     public final int getId() {

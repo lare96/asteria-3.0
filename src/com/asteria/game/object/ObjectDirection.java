@@ -2,7 +2,7 @@ package com.asteria.game.object;
 
 /**
  * The enumerated type whose elements represent the directions for objects.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public enum ObjectDirection {
@@ -18,9 +18,9 @@ public enum ObjectDirection {
 
     /**
      * Creates a new {@link ObjectDirection}.
-     * 
+     *
      * @param id
-     *            the identification of this direction.
+     *         the identification of this direction.
      */
     private ObjectDirection(int id) {
         this.id = id;
@@ -28,7 +28,7 @@ public enum ObjectDirection {
 
     /**
      * Gets the identification of this direction.
-     * 
+     *
      * @return the identification of this direction.
      */
     public final int getId() {

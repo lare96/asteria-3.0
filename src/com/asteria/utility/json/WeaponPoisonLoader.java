@@ -11,7 +11,7 @@ import com.google.gson.JsonObject;
 /**
  * The {@link JsonLoader} implementation that loads all weapons that poison
  * players.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public final class WeaponPoisonLoader extends JsonLoader {
@@ -26,7 +26,8 @@ public final class WeaponPoisonLoader extends JsonLoader {
     @Override
     public void load(JsonObject reader, Gson builder) {
         int id = reader.get("id").getAsInt();
-        PoisonType type = Objects.requireNonNull(PoisonType.valueOf(reader.get("type").getAsString()));
+        PoisonType type = Objects.requireNonNull(PoisonType.valueOf(reader
+                .get("type").getAsString()));
         CombatPoisonEffect.TYPES.put(id, type);
     }
 }

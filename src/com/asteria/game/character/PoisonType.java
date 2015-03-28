@@ -4,7 +4,7 @@ import com.asteria.utility.RandomGen;
 
 /**
  * The enumerated type whose elements represent the different levels of poison.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public enum PoisonType {
@@ -34,9 +34,9 @@ public enum PoisonType {
 
     /**
      * Creates a new {@link PoisonType}.
-     * 
+     *
      * @param damage
-     *            the starting damage for this poison type.
+     *         the starting damage for this poison type.
      */
     private PoisonType(int damage) {
         this.damage = damage;
@@ -45,17 +45,17 @@ public enum PoisonType {
     /**
      * Determines if a poison effect with this poison type will be applied. The
      * {@code random} will be used to determine this.
-     * 
+     *
      * @param random
-     *            the random number generator that will be used.
+     *         the random number generator that will be used.
      * @return {@code true} if the effect will be applied, {@code false}
-     *         otherwise.
+     * otherwise.
      */
     public abstract boolean apply(RandomGen random);
 
     /**
      * Gets the starting damage for this poison type.
-     * 
+     *
      * @return the starting damage.
      */
     public final int getDamage() {

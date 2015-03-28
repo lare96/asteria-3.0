@@ -16,7 +16,7 @@ import com.asteria.task.Task;
  * <p>
  * The skills that may use this type skill action include, but are not limited
  * to {@code COOKING}.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  * @see SkillAction
  * @see DestructionSkillAction
@@ -26,11 +26,11 @@ public abstract class ProducingSkillAction extends SkillAction {
 
     /**
      * Creates a new {@link ProducingSkillAction}.
-     * 
+     *
      * @param player
-     *            the player this skill action is for.
+     *         the player this skill action is for.
      * @param position
-     *            the position the player should face.
+     *         the position the player should face.
      */
     public ProducingSkillAction(Player player, Optional<Position> position) {
         super(player, position);
@@ -44,8 +44,10 @@ public abstract class ProducingSkillAction extends SkillAction {
             Skills.experience(player, experience(), skill().getId());
             player.getInventory().add(produceItem());
             onProduce(t, true);
-        } else {
-            player.getEncoder().sendMessage("You do not have any " + removeItem.getDefinition().getName() + " left.");
+        }
+        else {
+            player.getEncoder().sendMessage("You do not have any " +
+                    removeItem.getDefinition().getName() + " left.");
             t.cancel();
             onProduce(t, false);
             return;
@@ -54,11 +56,11 @@ public abstract class ProducingSkillAction extends SkillAction {
 
     /**
      * The method executed upon production of an item.
-     * 
+     *
      * @param t
-     *            the task executing this method.
+     *         the task executing this method.
      * @param success
-     *            determines if the production was successful or not.
+     *         determines if the production was successful or not.
      */
     public void onProduce(Task t, boolean success) {
 
@@ -66,14 +68,14 @@ public abstract class ProducingSkillAction extends SkillAction {
 
     /**
      * The item that will be removed upon production.
-     * 
+     *
      * @return the item that will be removed.
      */
     public abstract Item removeItem();
 
     /**
      * The item that will be added upon production.
-     * 
+     *
      * @return the item that will be added.
      */
     public abstract Item produceItem();

@@ -1,7 +1,5 @@
 package com.asteria.game.character.player.skill.action;
 
-import java.util.Optional;
-
 import com.asteria.game.character.Animation;
 import com.asteria.game.character.player.Player;
 import com.asteria.game.character.player.skill.SkillData;
@@ -10,6 +8,8 @@ import com.asteria.game.plugin.PluginContext;
 import com.asteria.task.Task;
 import com.asteria.task.TaskHandler;
 
+import java.util.Optional;
+
 /**
  * The skill action that is the parent class of all other skill actions. This
  * type of skill action is extremely broad and should almost <b>always</b> be
@@ -17,7 +17,7 @@ import com.asteria.task.TaskHandler;
  * <p>
  * <p>
  * To reiterate, no actual skills should be extending this skill action.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  * @see HarvestingSkillAction
  * @see DestructionSkillAction
@@ -37,11 +37,11 @@ public abstract class SkillAction implements PluginContext {
 
     /**
      * Creates a new {@link DestructionSkillAction}.
-     * 
+     *
      * @param player
-     *            the player this skill action is for.
+     *         the player this skill action is for.
      * @param position
-     *            the position the player should face.
+     *         the position the player should face.
      */
     public SkillAction(Player player, Optional<Position> position) {
         this.player = player;
@@ -60,7 +60,7 @@ public abstract class SkillAction implements PluginContext {
 
     /**
      * The delay intervals of this skill action in ticks.
-     * 
+     *
      * @return the delay intervals.
      */
     public abstract int delay();
@@ -68,46 +68,46 @@ public abstract class SkillAction implements PluginContext {
     /**
      * Determines if this skill action should be executed instantly rather than
      * after the delay.
-     * 
+     *
      * @return {@code true} if this skill action should be instant,
-     *         {@code false} otherwise.
+     * {@code false} otherwise.
      */
     public abstract boolean instant();
 
     /**
      * Initializes this skill action and performs any pre-checks.
-     * 
+     *
      * @return {@code true} if the skill action can proceed, {@code false}
-     *         otherwise.
+     * otherwise.
      */
     public abstract boolean init();
 
     /**
      * Determines if this skill can be executed.
-     * 
+     *
      * @return {@code true} if this skill can be executed, {@code false}
-     *         otherwise.
+     * otherwise.
      */
     public abstract boolean canExecute();
 
     /**
      * The method executed when the delay has elapsed.
-     * 
+     *
      * @param t
-     *            the task executing this skill action.
+     *         the task executing this skill action.
      */
     public abstract void execute(Task t);
 
     /**
      * The experience given from this skill action.
-     * 
+     *
      * @return the experience given.
      */
     public abstract double experience();
 
     /**
      * The skill that this skill action is for.
-     * 
+     *
      * @return the skill data.
      */
     public abstract SkillData skill();
@@ -121,7 +121,7 @@ public abstract class SkillAction implements PluginContext {
 
     /**
      * The animation played periodically during this skill action.
-     * 
+     *
      * @return the animation played.
      */
     public Optional<Animation> animation() {
@@ -130,7 +130,7 @@ public abstract class SkillAction implements PluginContext {
 
     /**
      * Gets the player this skill action is for.
-     * 
+     *
      * @return the player.
      */
     public final Player getPlayer() {
@@ -139,7 +139,7 @@ public abstract class SkillAction implements PluginContext {
 
     /**
      * Gets the position the player should face.
-     * 
+     *
      * @return the position.
      */
     public final Optional<Position> getPosition() {

@@ -2,7 +2,7 @@ package com.asteria.game.character.player.skill;
 
 /**
  * The representation of a single skill that can be trained by a player.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public final class Skill {
@@ -24,7 +24,7 @@ public final class Skill {
 
     /**
      * Gets the level based on the experience the player has.
-     * 
+     *
      * @return the level based on experience.
      */
     public int getLevelForExperience() {
@@ -49,11 +49,11 @@ public final class Skill {
 
     /**
      * Determines if your level is greater than or equal to {@code level}.
-     * 
+     *
      * @param level
-     *            the level to compare against this one.
+     *         the level to compare against this one.
      * @return {@code true} if this level is greater than or equal to the other
-     *         one, {@code false} otherwise.
+     * one, {@code false} otherwise.
      */
     public boolean reqLevel(int level) {
         return this.level >= level;
@@ -61,9 +61,9 @@ public final class Skill {
 
     /**
      * Increments this level by {@code amount} to a maximum of {@code 120}.
-     * 
+     *
      * @param amount
-     *            the amount to increase this level by.
+     *         the amount to increase this level by.
      */
     public void increaseLevel(int amount) {
         increaseLevel(amount, 120);
@@ -71,11 +71,11 @@ public final class Skill {
 
     /**
      * Increments this level by {@code amount} to {@code maximum}.
-     * 
+     *
      * @param amount
-     *            the amount to increase this level by.
+     *         the amount to increase this level by.
      * @param maximum
-     *            the maximum level to increase this to.
+     *         the maximum level to increase this to.
      */
     public void increaseLevel(int amount, int maximum) {
         if ((level + amount) > maximum) {
@@ -87,9 +87,9 @@ public final class Skill {
 
     /**
      * Decrements this level by {@code amount} to a minimum of {@code 0}.
-     * 
+     *
      * @param amount
-     *            the amount to decrease this level by.
+     *         the amount to decrease this level by.
      */
     public void decreaseLevel(int amount) {
         decreaseLevel(amount, 0);
@@ -97,9 +97,9 @@ public final class Skill {
 
     /**
      * Decrements this level by {@code amount} to {@code minimum}.
-     * 
+     *
      * @param amount
-     *            the amount to decrease this level by.
+     *         the amount to decrease this level by.
      */
     public void decreaseLevel(int amount, int minimum) {
         if ((level - amount) < minimum) {
@@ -111,7 +111,7 @@ public final class Skill {
 
     /**
      * Gets the experience for this skill.
-     * 
+     *
      * @return the experience.
      */
     public double getExperience() {
@@ -120,9 +120,9 @@ public final class Skill {
 
     /**
      * Sets the value for {@link Skill#experience}.
-     * 
+     *
      * @param experience
-     *            the new value to set.
+     *         the new value to set.
      */
     public void setExperience(double experience) {
         this.experience = experience;
@@ -134,7 +134,7 @@ public final class Skill {
 
     /**
      * Gets the level for this skill.
-     * 
+     *
      * @return the level.
      */
     public int getLevel() {
@@ -143,11 +143,11 @@ public final class Skill {
 
     /**
      * Sets the value for {@link Skill#level}.
-     * 
+     *
      * @param level
-     *            the new value to set.
+     *         the new value to set.
      * @param restriction
-     *            if the level should be modified before being set.
+     *         if the level should be modified before being set.
      */
     public void setLevel(int level, boolean restriction) {
         this.level = level;
@@ -155,7 +155,8 @@ public final class Skill {
         if (restriction) {
             if (this.level < 0) {
                 this.level = 0;
-            } else if (this.level > 120) {
+            }
+            else if (this.level > 120) {
                 this.level = 120;
             }
         }
@@ -163,7 +164,7 @@ public final class Skill {
 
     /**
      * Gets the level based on how much experience you have.
-     * 
+     *
      * @return the level based on how much experience you have.
      */
     public int getRealLevel() {
@@ -172,9 +173,9 @@ public final class Skill {
 
     /**
      * Sets the value for {@link Skill#realLevel}.
-     * 
+     *
      * @param realLevel
-     *            the new value to set.
+     *         the new value to set.
      */
     protected void setRealLevel(int realLevel) {
         this.realLevel = realLevel;

@@ -7,7 +7,7 @@ import com.asteria.network.packet.PacketDecoder;
 /**
  * The packet sent from the client when the player clicks on the 'Click this to
  * continue' link to forward a dialogue.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public final class AdvanceDialoguePacket extends PacketDecoder {

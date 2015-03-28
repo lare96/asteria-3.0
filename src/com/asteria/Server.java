@@ -14,7 +14,7 @@ import com.asteria.utility.Settings;
 /**
  * The main class that will prepare the server builder and put the server
  * online.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public final class Server {
@@ -31,24 +31,27 @@ public final class Server {
 
     /**
      * The default constructor.
-     * 
+     *
      * @throws UnsupportedOperationException
-     *             if this class is instantiated.
+     *         if this class is instantiated.
      */
     private Server() {
-        throw new UnsupportedOperationException("This class cannot be instantiated!");
+        throw new UnsupportedOperationException("This class cannot be " +
+                "instantiated!");
     }
 
     /**
      * The main method that will put the server online.
-     * 
+     *
      * @param args
-     *            the runtime arguments.
+     *         the runtime arguments.
      */
     public static void main(String[] args) {
         try {
-            boolean concurrent = (Runtime.getRuntime().availableProcessors() > 1);
-            builder = new ServerBuilder().setParallelEngine(concurrent).setServerPort(Settings.PORT);
+            boolean concurrent = (Runtime.getRuntime().availableProcessors()
+                    > 1);
+            builder = new ServerBuilder().setParallelEngine(concurrent)
+                    .setServerPort(Settings.PORT);
             builder.build();
 
             logger.info(Settings.NAME + " is now online!");
@@ -57,14 +60,15 @@ public final class Server {
             TaskHandler.submit(new MinigameHandler());
             PlayerSerialization.getCache().init();
         } catch (Exception e) {
-            logger.log(Level.SEVERE, "An error occurred while starting " + Settings.NAME + "!", e);
+            logger.log(Level.SEVERE, "An error occurred while starting " +
+                    Settings.NAME + "!", e);
             System.exit(1);
         }
     }
 
     /**
      * Gets the server builder that will prepare the server.
-     * 
+     *
      * @return the server builder.
      */
     public static ServerBuilder getBuilder() {

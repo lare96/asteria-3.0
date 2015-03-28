@@ -9,7 +9,7 @@ import com.google.gson.JsonObject;
 
 /**
  * The {@link JsonLoader} implementation that loads all weapon interfaces.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public final class WeaponInterfaceLoader extends JsonLoader {
@@ -24,7 +24,8 @@ public final class WeaponInterfaceLoader extends JsonLoader {
     @Override
     public void load(JsonObject reader, Gson builder) {
         int id = reader.get("id").getAsInt();
-        WeaponInterface interfaces = Objects.requireNonNull(builder.fromJson(reader.get("interface"), WeaponInterface.class));
+        WeaponInterface interfaces = Objects.requireNonNull(builder.fromJson
+                (reader.get("interface"), WeaponInterface.class));
         WeaponInterface.INTERFACES.put(id, interfaces);
     }
 }

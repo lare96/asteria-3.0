@@ -17,7 +17,7 @@ import com.asteria.network.packet.PacketDecoder;
 
 /**
  * The packet sent from the client when the player clicks an item.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public final class ItemActionPacket extends PacketDecoder {
@@ -28,26 +28,27 @@ public final class ItemActionPacket extends PacketDecoder {
             return;
 
         switch (opcode) {
-        case 122:
-            firstClick(player, buf);
-            break;
+            case 122:
+                firstClick(player, buf);
+                break;
         }
     }
 
     /**
      * Handles the first slot of an item action.
-     * 
+     *
      * @param player
-     *            the player to handle this for.
+     *         the player to handle this for.
      * @param buf
-     *            the buffer for reading the sent data.
+     *         the buffer for reading the sent data.
      */
     private void firstClick(Player player, DataBuffer buf) {
         int container = buf.getShort(true, ValueType.A, ByteOrder.LITTLE);
         int slot = buf.getShort(false, ValueType.A);
         int id = buf.getShort(false, ByteOrder.LITTLE);
 
-        if (slot < 0 || container < 0 || id < 0 || id > ItemDefinition.DEFINITIONS.length)
+        if (slot < 0 || container < 0 || id < 0 || id > ItemDefinition
+                .DEFINITIONS.length)
             return;
 
         player.setSkillAction(false);
@@ -71,7 +72,8 @@ public final class ItemActionPacket extends PacketDecoder {
                 buryAction.start();
                 return;
             }
-            PluginHandler.execute(player, ItemFirstClickPlugin.class, new ItemFirstClickPlugin(slot, item));
+            PluginHandler.execute(player, ItemFirstClickPlugin.class, new
+                    ItemFirstClickPlugin(slot, item));
         }
     }
 }

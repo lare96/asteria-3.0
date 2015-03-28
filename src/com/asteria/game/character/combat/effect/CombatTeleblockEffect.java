@@ -5,7 +5,7 @@ import com.asteria.task.TaskHandler;
 
 /**
  * The combat effect applied when a player needs to be teleblocked.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public final class CombatTeleblockEffect extends CombatEffect {
@@ -17,9 +17,9 @@ public final class CombatTeleblockEffect extends CombatEffect {
 
     /**
      * Creates a new {@link CombatTeleblockEffect}.
-     * 
+     *
      * @param player
-     *            the player this effect is being applied to.
+     *         the player this effect is being applied to.
      */
     public CombatTeleblockEffect(Player player) {
         super(player, 1);
@@ -39,7 +39,8 @@ public final class CombatTeleblockEffect extends CombatEffect {
     @Override
     public boolean removeOn() {
         if (player.getTeleblockTimer().get() <= 0) {
-            player.getEncoder().sendMessage("You feel the effects of the teleblock spell go away.");
+            player.getEncoder().sendMessage("You feel the effects of the " +
+                    "teleblock spell go away.");
             return true;
         }
         return false;

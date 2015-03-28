@@ -11,15 +11,17 @@ import com.asteria.utility.RandomGen;
 import com.google.common.base.Preconditions;
 
 /**
- * The skill action that represents an action where items are periodically added
+ * The skill action that represents an action where items are periodically
+ * added
  * to and removed from an inventory based on a success factor. This type of
- * skill action is more complicated and requires that a player have the items to
+ * skill action is more complicated and requires that a player have the items
+ * to
  * be removed and the space for the items to harvest.
  * <p>
  * <p>
  * The skills that may use this type skill action include, but are not limited
  * to {@code FISHING} and {@code WOODCUTTING}.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  * @see SkillAction
  * @see DestructionSkillAction
@@ -28,7 +30,8 @@ import com.google.common.base.Preconditions;
 public abstract class HarvestingSkillAction extends SkillAction {
 
     /**
-     * The factor boost that determines the success rate for harvesting based on
+     * The factor boost that determines the success rate for harvesting based
+     * on
      * skill level. The higher the number the less frequently harvest will be
      * obtained. A value higher than {@code 99} or lower than {@code 0} will
      * throw an {@link IllegalStateException}.
@@ -42,11 +45,11 @@ public abstract class HarvestingSkillAction extends SkillAction {
 
     /**
      * Creates a new {@link HarvestingSkillAction}.
-     * 
+     *
      * @param player
-     *            the player this skill action is for.
+     *         the player this skill action is for.
      * @param position
-     *            the position the player should face.
+     *         the position the player should face.
      */
     public HarvestingSkillAction(Player player, Optional<Position> position) {
         super(player, position);
@@ -54,9 +57,11 @@ public abstract class HarvestingSkillAction extends SkillAction {
 
     @Override
     public final void execute(Task t) {
-        Preconditions.checkState(SUCCESS_FACTOR >= 0 && SUCCESS_FACTOR <= 99, "Invalid success factor for harvesting!");
+        Preconditions.checkState(SUCCESS_FACTOR >= 0 && SUCCESS_FACTOR <= 99,
+                "Invalid success factor for harvesting!");
         Player player = getPlayer();
-        int factor = (player.getSkills()[skill().getId()].getLevel() / SUCCESS_FACTOR);
+        int factor = (player.getSkills()[skill().getId()].getLevel() /
+                SUCCESS_FACTOR);
         double boost = (factor * 0.01);
         if (random.roll((successFactor() + boost))) {
             Optional<Item[]> removeItems = removeItems();
@@ -64,20 +69,24 @@ public abstract class HarvestingSkillAction extends SkillAction {
 
             if (removeItems.isPresent()) {
                 if (!player.getInventory().containsAll(removeItems.get())) {
-                    player.getEncoder().sendMessage("You do not have the required items to perform this!");
+                    player.getEncoder().sendMessage("You do not have the " +
+                            "required items to perform this!");
                     t.cancel();
                     return;
                 }
             }
             for (Item item : harvestItems) {
                 if (player.getInventory().add(item)) {
-                    player.getEncoder().sendMessage("You get some " + item.getDefinition().getName() + ".");
+                    player.getEncoder().sendMessage("You get some " + item
+                            .getDefinition().getName() + ".");
                     Skills.experience(player, experience(), skill().getId());
                     removeItems.ifPresent(player.getInventory()::removeAll);
                     onHarvest(t, item, true);
-                } else {
+                }
+                else {
                     onHarvest(t, item, false);
-                    player.getEncoder().sendMessage("You do not have any space left in your inventory!");
+                    player.getEncoder().sendMessage("You do not have any " +
+                            "space left in your inventory!");
                     t.cancel();
                     return;
                 }
@@ -92,13 +101,13 @@ public abstract class HarvestingSkillAction extends SkillAction {
 
     /**
      * The method executed upon harvest of the items.
-     * 
+     *
      * @param t
-     *            the task executing this method.
+     *         the task executing this method.
      * @param item
-     *            the item being harvested.
+     *         the item being harvested.
      * @param success
-     *            determines if the harvest was successful or not.
+     *         determines if the harvest was successful or not.
      */
     public void onHarvest(Task t, Item item, boolean success) {
 
@@ -107,21 +116,21 @@ public abstract class HarvestingSkillAction extends SkillAction {
     /**
      * The success factor for the harvest. The higher the number means the more
      * frequently harvest will be obtained.
-     * 
+     *
      * @return the success factor.
      */
     public abstract double successFactor();
 
     /**
      * The items to be removed upon a successful harvest.
-     * 
+     *
      * @return the items to be removed.
      */
     public abstract Optional<Item[]> removeItems();
 
     /**
      * The items to be harvested upon a successful harvest.
-     * 
+     *
      * @return the items to be harvested.
      */
     public abstract Item[] harvestItems();

@@ -1,12 +1,5 @@
 package com.asteria.game.character.player;
 
-import java.nio.ByteBuffer;
-import java.nio.channels.SelectionKey;
-import java.nio.channels.SocketChannel;
-import java.util.logging.Logger;
-
-import plugin.minigames.fightcaves.FightCavesHandler;
-
 import com.asteria.game.World;
 import com.asteria.game.character.player.login.LoginProtocolDecoderChain;
 import com.asteria.game.character.player.login.LoginResponse;
@@ -22,11 +15,17 @@ import com.asteria.task.TaskHandler;
 import com.asteria.utility.LoggerUtils;
 import com.asteria.utility.MutableNumber;
 import com.asteria.utility.Stopwatch;
+import plugin.minigames.fightcaves.FightCavesHandler;
+
+import java.nio.ByteBuffer;
+import java.nio.channels.SelectionKey;
+import java.nio.channels.SocketChannel;
+import java.util.logging.Logger;
 
 /**
  * The session handler dedicated to a player that will handle input and output
  * operations.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  * @author blakeman8192
  */
@@ -119,20 +118,22 @@ public final class PlayerIO {
 
     /**
      * Creates a new {@link PlayerIO}.
-     * 
+     *
      * @param key
-     *            the selection key registered to the selector.
+     *         the selection key registered to the selector.
      * @param response
-     *            the current login response for this session.
+     *         the current login response for this session.
      */
     public PlayerIO(SelectionKey key, LoginResponse response) {
         this.key = key;
         this.response = response;
         this.channel = (SocketChannel) key.channel();
-        this.host = channel.socket().getInetAddress().getHostAddress().toLowerCase();
+        this.host = channel.socket().getInetAddress().getHostAddress()
+                .toLowerCase();
         this.player = new Player(this);
-        this.chain = new LoginProtocolDecoderChain(2).append(new HandshakeLoginDecoder(this)).append(
-            new PostHandshakeLoginDecoder(this));
+        this.chain = new LoginProtocolDecoderChain(2).append(new
+                HandshakeLoginDecoder(this)).append(new
+                PostHandshakeLoginDecoder(this));
     }
 
     @Override
@@ -143,16 +144,17 @@ public final class PlayerIO {
     /**
      * Disconnects this session from the server by canceling the registered key
      * and closing the socket channel.
-     * 
+     *
      * @param forced
-     *            if the session must be disconnected because of an IO issue.
+     *         if the session must be disconnected because of an IO issue.
      */
     public void disconnect(boolean forced) {
         try {
             packetDisconnect = forced;
             if (state == IOState.LOGGED_IN) {
                 if (player.getOpenShop() != null)
-                    Shop.SHOPS.get(player.getOpenShop()).getPlayers().remove(player);
+                    Shop.SHOPS.get(player.getOpenShop()).getPlayers().remove
+                            (player);
                 TaskHandler.cancel(player.getCombatBuilder());
                 TaskHandler.cancel(player);
                 player.setSkillAction(false);
@@ -168,7 +170,8 @@ public final class PlayerIO {
             key.cancel();
             channel.close();
             ConnectionHandler.remove(host);
-            logger.info(state == IOState.LOGGED_IN ? player + " has logged out." : this + " has logged out.");
+            logger.info(state == IOState.LOGGED_IN ? player + " has logged " +
+                    "out." : this + " has logged out.");
             state = IOState.LOGGED_OUT;
         } catch (Exception e) {
             e.printStackTrace();
@@ -177,9 +180,9 @@ public final class PlayerIO {
 
     /**
      * Sends a packet of data to the client through {@code buffer}.
-     * 
+     *
      * @param buffer
-     *            the packet of data to send.
+     *         the packet of data to send.
      */
     public void send(ByteBuffer buffer) {
         if (!channel.isOpen() || packetDisconnect)
@@ -195,9 +198,9 @@ public final class PlayerIO {
 
     /**
      * Sends a packet of data to the client through {@code buffer}.
-     * 
+     *
      * @param buffer
-     *            the packet of data to send.
+     *         the packet of data to send.
      */
     public void send(DataBuffer buffer) {
         send(buffer.buffer());
@@ -205,7 +208,7 @@ public final class PlayerIO {
 
     /**
      * Gets the byte buffer for reading data from the client.
-     * 
+     *
      * @return the buffer for reading.
      */
     public ByteBuffer getInData() {
@@ -214,7 +217,7 @@ public final class PlayerIO {
 
     /**
      * Gets the byte buffer for writing data to the client.
-     * 
+     *
      * @return the buffer for writing.
      */
     public ByteBuffer getOutData() {
@@ -223,7 +226,7 @@ public final class PlayerIO {
 
     /**
      * Gets the selection key registered to the selector.
-     * 
+     *
      * @return the selection key.
      */
     public SelectionKey getKey() {
@@ -232,7 +235,7 @@ public final class PlayerIO {
 
     /**
      * Gets the socket channel for sending and receiving raw data.
-     * 
+     *
      * @return the socket channel.
      */
     public SocketChannel getChannel() {
@@ -241,7 +244,7 @@ public final class PlayerIO {
 
     /**
      * Gets the player I/O operations will be executed for.
-     * 
+     *
      * @return the player I/O operations.
      */
     public Player getPlayer() {
@@ -250,7 +253,7 @@ public final class PlayerIO {
 
     /**
      * Gets the host address this session is bound to.
-     * 
+     *
      * @return the host address.
      */
     public String getHost() {
@@ -259,7 +262,7 @@ public final class PlayerIO {
 
     /**
      * Gets the login protocol decoder chain of events.
-     * 
+     *
      * @return the chain of events.
      */
     public LoginProtocolDecoderChain getChain() {
@@ -268,7 +271,7 @@ public final class PlayerIO {
 
     /**
      * Gets the stopwatch that determines when this I/O session will timeout.
-     * 
+     *
      * @return the stopwatch for determining timeout.
      */
     public Stopwatch getTimeout() {
@@ -277,7 +280,7 @@ public final class PlayerIO {
 
     /**
      * Gets the amount of packets that have been decoded this sequence.
-     * 
+     *
      * @return the amount of packets decoded.
      */
     public MutableNumber getPacketCount() {
@@ -286,7 +289,7 @@ public final class PlayerIO {
 
     /**
      * Gets the current state of this I/O session.
-     * 
+     *
      * @return the current state.
      */
     public IOState getState() {
@@ -295,9 +298,9 @@ public final class PlayerIO {
 
     /**
      * Sets the value for {@link PlayerIO#state}.
-     * 
+     *
      * @param state
-     *            the new value to set.
+     *         the new value to set.
      */
     public void setState(IOState state) {
         this.state = state;
@@ -305,7 +308,7 @@ public final class PlayerIO {
 
     /**
      * Gets the current login response for this session.
-     * 
+     *
      * @return the current login response.
      */
     public LoginResponse getResponse() {
@@ -314,9 +317,9 @@ public final class PlayerIO {
 
     /**
      * Sets the value for {@link PlayerIO#response}.
-     * 
+     *
      * @param response
-     *            the new value to set.
+     *         the new value to set.
      */
     public void setResponse(LoginResponse response) {
         this.response = response;
@@ -324,7 +327,7 @@ public final class PlayerIO {
 
     /**
      * Gets the opcode of the packet currently being decoded.
-     * 
+     *
      * @return the opcode of the packet.
      */
     public int getPacketOpcode() {
@@ -333,9 +336,9 @@ public final class PlayerIO {
 
     /**
      * Sets the value for {@link PlayerIO#packetOpcode}.
-     * 
+     *
      * @param packetOpcode
-     *            the new value to set.
+     *         the new value to set.
      */
     public void setPacketOpcode(int packetOpcode) {
         this.packetOpcode = packetOpcode;
@@ -343,7 +346,7 @@ public final class PlayerIO {
 
     /**
      * Gets the size of the packet currently being decoded.
-     * 
+     *
      * @return the size of the packet.
      */
     public int getPacketSize() {
@@ -352,9 +355,9 @@ public final class PlayerIO {
 
     /**
      * Sets the value for {@link PlayerIO#packetSize}.
-     * 
+     *
      * @param packetSize
-     *            the new value to set.
+     *         the new value to set.
      */
     public void setPacketSize(int packetSize) {
         this.packetSize = packetSize;
@@ -362,7 +365,7 @@ public final class PlayerIO {
 
     /**
      * Gets the encryptor that will encode sent packets.
-     * 
+     *
      * @return the encryptor.
      */
     public ISAACCipher getEncryptor() {
@@ -371,9 +374,9 @@ public final class PlayerIO {
 
     /**
      * Sets the value for {@link PlayerIO#encryptor}.
-     * 
+     *
      * @param encryptor
-     *            the new value to set.
+     *         the new value to set.
      */
     public void setEncryptor(ISAACCipher encryptor) {
         this.encryptor = encryptor;
@@ -381,7 +384,7 @@ public final class PlayerIO {
 
     /**
      * Gets the decryptor that will decode received packets.
-     * 
+     *
      * @return the decryptor.
      */
     public ISAACCipher getDecryptor() {
@@ -390,9 +393,9 @@ public final class PlayerIO {
 
     /**
      * Sets the value for {@link PlayerIO#decryptor}.
-     * 
+     *
      * @param decryptor
-     *            the new value to set.
+     *         the new value to set.
      */
     public void setDecryptor(ISAACCipher decryptor) {
         this.decryptor = decryptor;

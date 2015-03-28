@@ -5,7 +5,7 @@ import com.asteria.utility.RandomGen;
 
 /**
  * The container class that represents one NPC drop within a table.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public final class NpcDrop {
@@ -32,15 +32,15 @@ public final class NpcDrop {
 
     /**
      * Creates a new {@link NpcDrop}.
-     * 
+     *
      * @param id
-     *            the identification of this NPC drop.
+     *         the identification of this NPC drop.
      * @param minimum
-     *            the minimum amount that will be dropped.
+     *         the minimum amount that will be dropped.
      * @param maximum
-     *            the maximum amount that will be dropped.
+     *         the maximum amount that will be dropped.
      * @param chance
-     *            the chance of this item being dropped.
+     *         the chance of this item being dropped.
      */
     public NpcDrop(int id, int minimum, int maximum, NpcDropChance chance) {
         this.id = id;
@@ -51,9 +51,9 @@ public final class NpcDrop {
 
     /**
      * Converts this NPC drop into an {@link Item} object.
-     * 
+     *
      * @param random
-     *            the random number generator to use.
+     *         the random number generator to use.
      * @return the converted NPC drop.
      */
     public Item toItem(RandomGen random) {
@@ -62,7 +62,7 @@ public final class NpcDrop {
 
     /**
      * Gets the identification of this NPC drop.
-     * 
+     *
      * @return the identification.
      */
     public int getId() {
@@ -71,7 +71,7 @@ public final class NpcDrop {
 
     /**
      * Gets the minimum amount that will be dropped.
-     * 
+     *
      * @return the minimum amount.
      */
     public int getMinimum() {
@@ -80,7 +80,7 @@ public final class NpcDrop {
 
     /**
      * Gets the maximum amount that will be dropped.
-     * 
+     *
      * @return the maximum amount.
      */
     public int getMaximum() {
@@ -89,7 +89,7 @@ public final class NpcDrop {
 
     /**
      * Gets the chance of this item being dropped.
-     * 
+     *
      * @return the drop chance.
      */
     public NpcDropChance getChance() {

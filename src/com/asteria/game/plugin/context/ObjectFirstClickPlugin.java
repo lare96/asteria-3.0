@@ -5,7 +5,7 @@ import com.asteria.game.plugin.PluginContext;
 
 /**
  * The plugin context for the first object click packet.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public final class ObjectFirstClickPlugin implements PluginContext {
@@ -27,13 +27,13 @@ public final class ObjectFirstClickPlugin implements PluginContext {
 
     /**
      * Creates a new {@link ObjectFirstClickPlugin}.
-     * 
+     *
      * @param id
-     *            the identifier for the object that was clicked.
+     *         the identifier for the object that was clicked.
      * @param position
-     *            the position of the object that was clicked.
+     *         the position of the object that was clicked.
      * @param size
-     *            the size of the object that was clicked.
+     *         the size of the object that was clicked.
      */
     public ObjectFirstClickPlugin(int id, Position position, int size) {
         this.id = id;
@@ -43,7 +43,7 @@ public final class ObjectFirstClickPlugin implements PluginContext {
 
     /**
      * Gets the identifier for the object that was clicked.
-     * 
+     *
      * @return the object identifier.
      */
     public int getId() {
@@ -52,7 +52,7 @@ public final class ObjectFirstClickPlugin implements PluginContext {
 
     /**
      * Gets the position of the object that was clicked.
-     * 
+     *
      * @return the position of the object.
      */
     public Position getPosition() {
@@ -61,7 +61,7 @@ public final class ObjectFirstClickPlugin implements PluginContext {
 
     /**
      * Gets the size of the object that was clicked.
-     * 
+     *
      * @return the size of the object.
      */
     public int getSize() {

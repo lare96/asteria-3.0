@@ -6,7 +6,7 @@ import com.asteria.utility.MutableNumber;
  * The class that provides all of the functionality needed for minigames cannot
  * usually be ran on their own meaning they are dependent on some sort of
  * sequencer or task.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public abstract class SequencedMinigame extends Minigame {
@@ -18,9 +18,9 @@ public abstract class SequencedMinigame extends Minigame {
 
     /**
      * Creates a new {@link SequencedMinigame}.
-     * 
+     *
      * @param name
-     *            the current name of this minigame.
+     *         the current name of this minigame.
      */
     public SequencedMinigame(String name) {
         super(name, MinigameType.SEQUENCED);
@@ -33,14 +33,14 @@ public abstract class SequencedMinigame extends Minigame {
 
     /**
      * The delay interval for the sequencing of this minigame.
-     * 
+     *
      * @return the delay interval.
      */
     public abstract int delay();
 
     /**
      * Gets the counter that conceals the tick amount.
-     * 
+     *
      * @return the tick amount.
      */
     public final MutableNumber getCounter() {

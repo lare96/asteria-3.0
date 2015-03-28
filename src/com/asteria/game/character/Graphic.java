@@ -2,7 +2,7 @@ package com.asteria.game.character;
 
 /**
  * The container class that represents an graphic.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public final class Graphic {
@@ -19,11 +19,11 @@ public final class Graphic {
 
     /**
      * Creates a new {@link Graphic}.
-     * 
+     *
      * @param id
-     *            the identification for this graphic.
+     *         the identification for this graphic.
      * @param height
-     *            the height of this graphic.
+     *         the height of this graphic.
      */
     public Graphic(int id, int height) {
         this.id = id;
@@ -32,9 +32,9 @@ public final class Graphic {
 
     /**
      * Creates a new {@link Graphic} with a {@code height} of {@code 0}.
-     * 
+     *
      * @param id
-     *            the identification for this graphic.
+     *         the identification for this graphic.
      */
     public Graphic(int id) {
         this(id, 0);
@@ -44,7 +44,7 @@ public final class Graphic {
      * A substitute for {@link Object#clone()} that creates another 'copy' of
      * this instance. The created copy is <i>safe</i> meaning it does not hold
      * <b>any</b> references to the original instance.
-     * 
+     *
      * @return a reference-free copy of this instance.
      */
     public Graphic copy() {
@@ -53,7 +53,7 @@ public final class Graphic {
 
     /**
      * Gets the identification for this graphic.
-     * 
+     *
      * @return the identification for this graphic.
      */
     public int getId() {
@@ -62,7 +62,7 @@ public final class Graphic {
 
     /**
      * Gets the height of this graphic.
-     * 
+     *
      * @return the height of this graphic.
      */
     public int getHeight() {

@@ -10,7 +10,7 @@ import com.asteria.game.item.Item;
 
 /**
  * The container that manages the equipment for a player.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public final class Equipment extends ItemContainer {
@@ -77,9 +77,9 @@ public final class Equipment extends ItemContainer {
 
     /**
      * Creates a new {@link Equipment}.
-     * 
+     *
      * @param player
-     *            the player who's equipment is being managed.
+     *         the player who's equipment is being managed.
      */
     public Equipment(Player player) {
         super(14, ItemContainerPolicy.NORMAL);
@@ -95,16 +95,17 @@ public final class Equipment extends ItemContainer {
 
     /**
      * Equips the item in {@code inventorySlot} to the equipment container.
-     * 
+     *
      * @param inventorySlot
-     *            the slot to equip the item on.
+     *         the slot to equip the item on.
      * @return {@code true} if the item was equipped, {@code false} otherwise.
      */
     public boolean equipItem(int inventorySlot) {
         Item item = player.getInventory().get(inventorySlot);
         if (!Item.valid(item))
             return false;
-        if (!MinigameHandler.execute(player, true, m -> m.canEquip(player, item, item.getDefinition().getEquipmentSlot())))
+        if (!MinigameHandler.execute(player, true, m -> m.canEquip(player,
+                item, item.getDefinition().getEquipmentSlot())))
             return false;
         if (!Requirement.canEquip(player, item))
             return false;
@@ -113,23 +114,29 @@ public final class Equipment extends ItemContainer {
             Item equipItem = get(designatedSlot);
             if (used(designatedSlot)) {
                 if (item.getId() == equipItem.getId()) {
-                    set(designatedSlot, new Item(item.getId(), item.getAmount() + equipItem.getAmount()));
-                } else {
+                    set(designatedSlot, new Item(item.getId(), item.getAmount
+                            () + equipItem.getAmount()));
+                }
+                else {
                     player.getInventory().set(inventorySlot, equipItem);
                     player.getInventory().refresh();
                     set(designatedSlot, item);
                 }
-            } else {
+            }
+            else {
                 set(designatedSlot, item);
             }
             player.getInventory().remove(item, inventorySlot);
-        } else {
+        }
+        else {
             int designatedSlot = item.getDefinition().getEquipmentSlot();
-            if (designatedSlot == Equipment.WEAPON_SLOT && item.getDefinition().isTwoHanded() && used(Equipment.SHIELD_SLOT)) {
+            if (designatedSlot == Equipment.WEAPON_SLOT && item.getDefinition
+                    ().isTwoHanded() && used(Equipment.SHIELD_SLOT)) {
                 if (!unequipItem(Equipment.SHIELD_SLOT, true))
                     return false;
             }
-            if (designatedSlot == Equipment.SHIELD_SLOT && used(Equipment.WEAPON_SLOT)) {
+            if (designatedSlot == Equipment.SHIELD_SLOT && used(Equipment
+                    .WEAPON_SLOT)) {
                 if (get(Equipment.WEAPON_SLOT).getDefinition().isTwoHanded()) {
                     if (!unequipItem(Equipment.WEAPON_SLOT, true))
                         return false;
@@ -139,12 +146,14 @@ public final class Equipment extends ItemContainer {
                 Item equipItem = get(designatedSlot);
                 if (!equipItem.getDefinition().isStackable()) {
                     player.getInventory().set(inventorySlot, equipItem);
-                } else {
+                }
+                else {
                     player.getInventory().add(equipItem);
                     player.getInventory().set(inventorySlot, null);
                 }
                 player.getInventory().refresh();
-            } else {
+            }
+            else {
                 player.getInventory().remove(item, inventorySlot);
             }
             set(designatedSlot, new Item(item.getId(), item.getAmount()));
@@ -167,21 +176,23 @@ public final class Equipment extends ItemContainer {
 
     /**
      * Unequips the item in {@code equipmentSlot} from the equipment container.
-     * 
+     *
      * @param equipmentSlot
-     *            the slot to unequip the item on.
+     *         the slot to unequip the item on.
      * @param addItem
-     *            if the unequipped item should be added to the inventory.
+     *         if the unequipped item should be added to the inventory.
      * @return {@code true} if the item was unequipped, {@code false} otherwise.
      */
     public boolean unequipItem(int equipmentSlot, boolean addItem) {
         if (free(equipmentSlot))
             return false;
         Item item = get(equipmentSlot);
-        if (!MinigameHandler.execute(player, true, m -> m.canUnequip(player, item, item.getDefinition().getEquipmentSlot())))
+        if (!MinigameHandler.execute(player, true, m -> m.canUnequip(player,
+                item, item.getDefinition().getEquipmentSlot())))
             return false;
         if (!player.getInventory().spaceFor(item)) {
-            player.getEncoder().sendMessage("You do not have enough space in your inventory!");
+            player.getEncoder().sendMessage("You do not have enough space in " +
+                    "your inventory!");
             return false;
         }
         super.remove(item, equipmentSlot);
@@ -206,11 +217,11 @@ public final class Equipment extends ItemContainer {
 
     /**
      * Unequips {@code item} from the equipment container.
-     * 
+     *
      * @param item
-     *            the item to unequip from this container.
+     *         the item to unequip from this container.
      * @param addItem
-     *            if the unequipped item should be added to the inventory.
+     *         if the unequipped item should be added to the inventory.
      * @return {@code true} if the item was unequipped, {@code false} otherwise.
      */
     public boolean unequipItem(Item item, boolean addItem) {
@@ -222,22 +233,23 @@ public final class Equipment extends ItemContainer {
 
     /**
      * This method is not supported by this container implementation.
-     * 
+     *
      * @throws UnsupportedOperationException
-     *             if this method is invoked by default, this method will always
-     *             throw an exception.
+     *         if this method is invoked by default, this method will always
+     *         throw an exception.
      */
     @Override
     public boolean add(Item item, int slot) {
-        throw new UnsupportedOperationException("This method is not supported by this container implementation!");
+        throw new UnsupportedOperationException("This method is not supported" +
+                " by this container implementation!");
     }
 
     /**
      * This method is not supported by this container implementation.
-     * 
+     *
      * @throws UnsupportedOperationException
-     *             if this method is invoked by default, this method will always
-     *             throw an exception.
+     *         if this method is invoked by default, this method will always
+     *         throw an exception.
      */
     @Override
     public boolean remove(Item item, int slot) {

@@ -14,7 +14,7 @@ import com.asteria.utility.LoggerUtils;
  * The login protocol decoder that handles the handshake between the client and
  * the server. This marks the beginning of the entire login protocol in one of
  * two stages.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public final class HandshakeLoginDecoder extends LoginProtocolDecoder {
@@ -26,9 +26,9 @@ public final class HandshakeLoginDecoder extends LoginProtocolDecoder {
 
     /**
      * Creates a new {@link HandshakeLoginDecoder}.
-     * 
+     *
      * @param session
-     *            the session that is decoding this protocol.
+     *         the session that is decoding this protocol.
      */
     public HandshakeLoginDecoder(PlayerIO session) {
         super(session, IOState.CONNECTED);

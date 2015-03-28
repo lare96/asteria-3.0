@@ -12,7 +12,7 @@ import com.asteria.task.TaskHandler;
 
 /**
  * The class that contains methods to handle the functionality of minigames.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public final class MinigameHandler extends Task {
@@ -49,11 +49,11 @@ public final class MinigameHandler extends Task {
 
     /**
      * The method that executes {@code action} for {@code player}.
-     * 
+     *
      * @param player
-     *            the player to execute the action for.
+     *         the player to execute the action for.
      * @param action
-     *            the backed minigame action to execute.
+     *         the backed minigame action to execute.
      */
     public static void execute(Player player, Consumer<Minigame> action) {
         Optional<Minigame> minigame = search(player);
@@ -61,17 +61,19 @@ public final class MinigameHandler extends Task {
     }
 
     /**
-     * The method that executes {@code function} for {@code player} that returns
+     * The method that executes {@code function} for {@code player} that
+     * returns
      * a result.
-     * 
+     *
      * @param player
-     *            the player to execute the function for.
+     *         the player to execute the function for.
      * @param defaultValue
-     *            the default value to return if the player isn't in a minigame.
+     *         the default value to return if the player isn't in a minigame.
      * @param function
-     *            the function to execute that returns a result.
+     *         the function to execute that returns a result.
      */
-    public static <T> T execute(Player player, T defaultValue, Function<Minigame, T> function) {
+    public static <T> T execute(Player player, T defaultValue,
+                                Function<Minigame, T> function) {
         Optional<Minigame> minigame = search(player);
         if (!minigame.isPresent())
             return defaultValue;
@@ -80,11 +82,11 @@ public final class MinigameHandler extends Task {
 
     /**
      * Determines if {@code player} is in any minigame.
-     * 
+     *
      * @param player
-     *            the player to determine this for.
+     *         the player to determine this for.
      * @return {@code true} if the player is in a minigame, {@code false}
-     *         otherwise.
+     * otherwise.
      */
     public static boolean contains(Player player) {
         return search(player).isPresent();
@@ -92,9 +94,9 @@ public final class MinigameHandler extends Task {
 
     /**
      * Retrieves the minigame that {@code player} is currently in.
-     * 
+     *
      * @param player
-     *            the player to determine the minigame for.
+     *         the player to determine the minigame for.
      * @return the minigame that the player is currently in.
      */
     public static Optional<Minigame> search(Player player) {

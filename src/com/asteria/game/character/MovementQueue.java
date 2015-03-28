@@ -15,7 +15,7 @@ import java.util.Optional;
 /**
  * The movement queue sequencer that handles the entire movement process for
  * characters.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public final class MovementQueue {
@@ -23,12 +23,14 @@ public final class MovementQueue {
     /**
      * The direction delta {@code X} coordinates for movement.
      */
-    public static final byte[] DIRECTION_DELTA_X = new byte[] { -1, 0, 1, -1, 1, -1, 0, 1 };
+    public static final byte[] DIRECTION_DELTA_X = new byte[] {-1, 0, 1, -1, 1,
+            -1, 0, 1};
 
     /**
      * The direction delta {@code Y} coordinates for movement.
      */
-    public static final byte[] DIRECTION_DELTA_Y = new byte[] { 1, 1, 1, 0, 0, -1, -1, -1 };
+    public static final byte[] DIRECTION_DELTA_Y = new byte[] {1, 1, 1, 0, 0,
+            -1, -1, -1};
 
     /**
      * The character this movement queue is for.
@@ -62,9 +64,9 @@ public final class MovementQueue {
 
     /**
      * Creates a new {@link MovementQueue}.
-     * 
+     *
      * @param character
-     *            the character this movement queue is for.
+     *         the character this movement queue is for.
      */
     public MovementQueue(CharacterNode character) {
         this.character = character;
@@ -73,9 +75,9 @@ public final class MovementQueue {
     /**
      * Executes movement processing which primarily consists of polling
      * waypoints, and updating the map region.
-     * 
+     *
      * @throws Exception
-     *             if any errors occur while sequencing movement.
+     *         if any errors occur while sequencing movement.
      */
     public void sequence() throws Exception {
         if (lockMovement || character.isFrozen()) {
@@ -97,8 +99,10 @@ public final class MovementQueue {
             int x = MovementQueue.DIRECTION_DELTA_X[walkPoint.getDirection()];
             int y = MovementQueue.DIRECTION_DELTA_Y[walkPoint.getDirection()];
 
-            if (character.isFollowing() && character.getFollowCharacter() != null) {
-                if (character.getPosition().copy().move(x, y).equals(character.getFollowCharacter().getPosition())) {
+            if (character.isFollowing() && character.getFollowCharacter() !=
+                    null) {
+                if (character.getPosition().copy().move(x, y).equals
+                        (character.getFollowCharacter().getPosition())) {
                     return;
                 }
             }
@@ -117,8 +121,10 @@ public final class MovementQueue {
             int x = MovementQueue.DIRECTION_DELTA_X[runPoint.getDirection()];
             int y = MovementQueue.DIRECTION_DELTA_Y[runPoint.getDirection()];
 
-            if (character.isFollowing() && character.getFollowCharacter() != null) {
-                if (character.getPosition().copy().move(x, y).equals(character.getFollowCharacter().getPosition())) {
+            if (character.isFollowing() && character.getFollowCharacter() !=
+                    null) {
+                if (character.getPosition().copy().move(x, y).equals
+                        (character.getFollowCharacter().getPosition())) {
                     return;
                 }
             }
@@ -127,8 +133,10 @@ public final class MovementQueue {
                 Player player = (Player) character;
                 if (player.getRunEnergy().getAndDecrement() > 0) {
                     player.sendInterfaces();
-                    player.getEncoder().sendString(player.getRunEnergy() + "%", 149);
-                } else {
+                    player.getEncoder().sendString(player.getRunEnergy() +
+                            "%", 149);
+                }
+                else {
                     running = false;
                     player.getEncoder().sendByteState(173, 0);
                 }
@@ -141,8 +149,10 @@ public final class MovementQueue {
         }
 
         if (character.getType() == NodeType.PLAYER) {
-            int deltaX = character.getPosition().getX() - character.getCurrentRegion().getRegionX() * 8;
-            int deltaY = character.getPosition().getY() - character.getCurrentRegion().getRegionY() * 8;
+            int deltaX = character.getPosition().getX() - character
+                    .getCurrentRegion().getRegionX() * 8;
+            int deltaY = character.getPosition().getY() - character
+                    .getCurrentRegion().getRegionY() * 8;
 
             if (deltaX < 16 || deltaX >= 88 || deltaY < 16 || deltaY > 88) {
                 ((Player) character).getEncoder().sendMapRegion();
@@ -153,22 +163,23 @@ public final class MovementQueue {
     /**
      * Forces the character to walk to a certain position point relevant to its
      * current position.
-     * 
+     *
      * @param addX
-     *            the amount of spaces to walk to the {@code X}.
+     *         the amount of spaces to walk to the {@code X}.
      * @param addY
-     *            the amount of spaces to walk to the {@code Y}.
+     *         the amount of spaces to walk to the {@code Y}.
      */
     public void walk(int addX, int addY) {
-        walk(new Position(character.getPosition().getX() + addX, character.getPosition().getY() + addY));
+        walk(new Position(character.getPosition().getX() + addX, character
+                .getPosition().getY() + addY));
     }
 
     /**
      * Forces the character to walk to a certain position point not relevant to
      * its current position.
-     * 
+     *
      * @param position
-     *            the position the character is moving too.
+     *         the position the character is moving too.
      */
     public void walk(Position position) {
         reset();
@@ -195,9 +206,9 @@ public final class MovementQueue {
 
     /**
      * Determines if this walking queue is finished or not.
-     * 
+     *
      * @return {@code true} if this walking queue is finished, {@code false}
-     *         otherwise.
+     * otherwise.
      */
     public boolean isMovementDone() {
         return waypoints.size() == 0;
@@ -205,9 +216,9 @@ public final class MovementQueue {
 
     /**
      * Adds a new position to the walking queue.
-     * 
+     *
      * @param position
-     *            the position to add.
+     *         the position to add.
      */
     public void addToPath(Position position) {
         if (waypoints.size() == 0) {
@@ -220,12 +231,14 @@ public final class MovementQueue {
         for (int i = 0; i < max; i++) {
             if (deltaX < 0) {
                 deltaX++;
-            } else if (deltaX > 0) {
+            }
+            else if (deltaX > 0) {
                 deltaX--;
             }
             if (deltaY < 0) {
                 deltaY++;
-            } else if (deltaY > 0) {
+            }
+            else if (deltaY > 0) {
                 deltaY--;
             }
             addStep(position.getX() - deltaX, position.getY() - deltaY);
@@ -234,11 +247,11 @@ public final class MovementQueue {
 
     /**
      * Adds a step to the walking queue.
-     * 
+     *
      * @param x
-     *            the {@code X} coordinate of the step.
+     *         the {@code X} coordinate of the step.
      * @param y
-     *            the {@code Y} coordinate of the step.
+     *         the {@code Y} coordinate of the step.
      */
     private void addStep(int x, int y) {
         if (waypoints.size() >= 100) {
@@ -255,36 +268,44 @@ public final class MovementQueue {
 
     /**
      * Calculates the direction between the two coordinates.
-     * 
+     *
      * @param dx
-     *            the first coordinate.
+     *         the first coordinate.
      * @param dy
-     *            the second coordinate.
+     *         the second coordinate.
      * @return the direction.
      */
     private int direction(int dx, int dy) {
         if (dx < 0) {
             if (dy < 0) {
                 return 5;
-            } else if (dy > 0) {
+            }
+            else if (dy > 0) {
                 return 0;
-            } else {
+            }
+            else {
                 return 3;
             }
-        } else if (dx > 0) {
+        }
+        else if (dx > 0) {
             if (dy < 0) {
                 return 7;
-            } else if (dy > 0) {
+            }
+            else if (dy > 0) {
                 return 2;
-            } else {
+            }
+            else {
                 return 4;
             }
-        } else {
+        }
+        else {
             if (dy < 0) {
                 return 6;
-            } else if (dy > 0) {
+            }
+            else if (dy > 0) {
                 return 1;
-            } else {
+            }
+            else {
                 return -1;
             }
         }
@@ -292,15 +313,17 @@ public final class MovementQueue {
 
     /**
      * Prompts the controller of this movement queue to follow {@code leader}.
-     * 
+     *
      * @param leader
-     *            the character being followed.
+     *         the character being followed.
      */
     public void follow(CharacterNode leader) {
-        if (character.getFollowCharacter() != null && character.getFollowCharacter().equals(leader)) {
+        if (character.getFollowCharacter() != null && character
+                .getFollowCharacter().equals(leader)) {
             return;
         }
-        if (character.isFollowing() && !leader.equals(character.getFollowCharacter())) {
+        if (character.isFollowing() && !leader.equals(character
+                .getFollowCharacter())) {
             character.faceCharacter(null);
             character.setFollowing(false);
             character.setFollowCharacter(null);
@@ -311,16 +334,17 @@ public final class MovementQueue {
         if (!followTask.isPresent()) {
             character.setFollowing(true);
             character.setFollowCharacter(leader);
-            followTask = Optional.of(new CharacterFollowTask(character, leader));
+            followTask = Optional.of(new CharacterFollowTask(character,
+                    leader));
             TaskHandler.submit(followTask.get());
         }
     }
 
     /**
      * Determines if the run button is toggled.
-     * 
+     *
      * @return {@code true} if the run button is toggled, {@code false}
-     *         otherwise.
+     * otherwise.
      */
     public boolean isRunning() {
         return running;
@@ -328,9 +352,9 @@ public final class MovementQueue {
 
     /**
      * Sets the value for {@link MovementQueue#running}.
-     * 
+     *
      * @param runToggled
-     *            the new value to set.
+     *         the new value to set.
      */
     public void setRunning(boolean runToggled) {
         this.running = runToggled;
@@ -338,9 +362,9 @@ public final class MovementQueue {
 
     /**
      * Determines if the current path is a run path.
-     * 
+     *
      * @return {@code true} if the current path is a run path, {@code false}
-     *         otherwise.
+     * otherwise.
      */
     public boolean isRunPath() {
         return runPath;
@@ -348,9 +372,9 @@ public final class MovementQueue {
 
     /**
      * Sets the value for {@link MovementQueue#runPath}.
-     * 
+     *
      * @param runPath
-     *            the new value to set.
+     *         the new value to set.
      */
     public void setRunPath(boolean runPath) {
         this.runPath = runPath;
@@ -358,9 +382,9 @@ public final class MovementQueue {
 
     /**
      * Determines if the movement queue is locked.
-     * 
+     *
      * @return {@code true} if the movement queue is locked, {@code false}
-     *         otherwise.
+     * otherwise.
      */
     public boolean isLockMovement() {
         return lockMovement;
@@ -368,9 +392,9 @@ public final class MovementQueue {
 
     /**
      * Sets the value for {@link MovementQueue#lockMovement}.
-     * 
+     *
      * @param lockMovement
-     *            the new value to set.
+     *         the new value to set.
      */
     public void setLockMovement(boolean lockMovement) {
         this.lockMovement = lockMovement;
@@ -378,7 +402,7 @@ public final class MovementQueue {
 
     /**
      * The internal position type class with support for direction.
-     * 
+     *
      * @author blakeman8192
      */
     private final class Point extends Position {
@@ -390,13 +414,13 @@ public final class MovementQueue {
 
         /**
          * Creates a new {@link Point}.
-         * 
+         *
          * @param x
-         *            the {@code X} coordinate.
+         *         the {@code X} coordinate.
          * @param y
-         *            the {@code Y} coordinate.
+         *         the {@code Y} coordinate.
          * @param direction
-         *            the direction to this point.
+         *         the direction to this point.
          */
         public Point(int x, int y, int direction) {
             super(x, y);
@@ -405,7 +429,7 @@ public final class MovementQueue {
 
         /**
          * Gets the direction to this point.
-         * 
+         *
          * @return the direction.
          */
         public int getDirection() {
@@ -416,7 +440,7 @@ public final class MovementQueue {
     /**
      * The {@link Task} implementation that handles the entire following
      * process.
-     * 
+     *
      * @author lare96 <http://github.com/lare96>
      */
     private static final class CharacterFollowTask extends Task {
@@ -438,13 +462,14 @@ public final class MovementQueue {
 
         /**
          * Creates a new {@link CharacterFollowTask}.
-         * 
+         *
          * @param character
-         *            the character this process is being executed for.
+         *         the character this process is being executed for.
          * @param leader
-         *            the character being followed in this process.
+         *         the character being followed in this process.
          */
-        public CharacterFollowTask(CharacterNode character, CharacterNode leader) {
+        public CharacterFollowTask(CharacterNode character, CharacterNode
+                leader) {
             super(1, true);
             this.character = character;
             this.leader = leader;
@@ -452,8 +477,9 @@ public final class MovementQueue {
 
         @Override
         public void execute() {
-            if (!character.isFollowing() || !character.getPosition().withinDistance(leader.getPosition(), 20) || character
-                .isDead() || leader.isDead()) {
+            if (!character.isFollowing() || !character.getPosition()
+                    .withinDistance(leader.getPosition(), 20) || character
+                    .isDead() || leader.isDead()) {
                 character.faceCharacter(null);
                 character.setFollowing(false);
                 character.setFollowCharacter(null);
@@ -462,28 +488,32 @@ public final class MovementQueue {
             }
 
             character.faceCharacter(leader);
-            if (character.getMovementQueue().isLockMovement() || character.isFrozen()) {
+            if (character.getMovementQueue().isLockMovement() || character
+                    .isFrozen()) {
                 return;
             }
             if (character.getPosition().equals(leader.getPosition().copy())) {
                 character.getMovementQueue().reset();
-                int[] dir = { 1, -1 };
+                int[] dir = {1, -1};
 
                 if (random.nextBoolean()) {
                     character.getMovementQueue().walk(random.random(dir), 0);
-                } else {
+                }
+                else {
                     character.getMovementQueue().walk(0, random.random(dir));
                 }
                 return;
             }
-            if (character.getCombatBuilder().isAttacking() && character.getType() == NodeType.PLAYER) {
+            if (character.getCombatBuilder().isAttacking() && character
+                    .getType() == NodeType.PLAYER) {
                 character.getCombatBuilder().determineStrategy();
 
                 if (Combat.checkAttackDistance(character.getCombatBuilder())) {
                     return;
                 }
             }
-            if (character.getPosition().withinDistance(leader.getPosition(), 1)) {
+            if (character.getPosition().withinDistance(leader.getPosition(),
+                    1)) {
                 return;
             }
             character.getMovementQueue().walk(leader.getPosition().copy());

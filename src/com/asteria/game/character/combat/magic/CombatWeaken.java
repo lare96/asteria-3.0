@@ -3,7 +3,7 @@ package com.asteria.game.character.combat.magic;
 /**
  * The enumerated type whose elements represent the types of stats that can be
  * weakened by combat spells.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public enum CombatWeaken {
@@ -21,9 +21,9 @@ public enum CombatWeaken {
 
     /**
      * Creates a new {@link CombatWeaken}.
-     * 
+     *
      * @param rate
-     *            the rate at which this element weakens.
+     *         the rate at which this element weakens.
      */
     private CombatWeaken(double rate) {
         this.rate = rate;
@@ -31,7 +31,7 @@ public enum CombatWeaken {
 
     /**
      * Gets the rate at which this element weakens.
-     * 
+     *
      * @return the rate.
      */
     public final double getRate() {

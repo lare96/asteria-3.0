@@ -2,7 +2,7 @@ package com.asteria.game.character.player.dialogue;
 
 /**
  * The dialogue chain entry that sends the player a dialogue from a player.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public final class PlayerDialogue implements DialogueChain {
@@ -19,11 +19,11 @@ public final class PlayerDialogue implements DialogueChain {
 
     /**
      * Creates a new {@link PlayerDialogue}.
-     * 
+     *
      * @param expression
-     *            the expression that this player will display.
+     *         the expression that this player will display.
      * @param text
-     *            the text that will be displayed on the dialogue.
+     *         the text that will be displayed on the dialogue.
      */
     public PlayerDialogue(Expression expression, String... text) {
         this.expression = expression;
@@ -32,9 +32,9 @@ public final class PlayerDialogue implements DialogueChain {
 
     /**
      * Creates a new {@link PlayerDialogue} with the default expression.
-     * 
+     *
      * @param text
-     *            the text that will be displayed on the dialogue.
+     *         the text that will be displayed on the dialogue.
      */
     public PlayerDialogue(String... text) {
         this(Expression.CALM, text);

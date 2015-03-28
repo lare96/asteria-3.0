@@ -3,7 +3,7 @@ package com.asteria.game.character.player;
 /**
  * The enumerated type whose elements represent the types of authority a player
  * can have.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public enum Rights {
@@ -48,11 +48,11 @@ public enum Rights {
 
     /**
      * Create a new {@link Rights}.
-     * 
+     *
      * @param protocolValue
-     *            the value of this rank as seen by the protocol.
+     *         the value of this rank as seen by the protocol.
      * @param value
-     *            the value of this rank as seen by the server.
+     *         the value of this rank as seen by the server.
      */
     private Rights(int protocolValue, int value) {
         this.protocolValue = protocolValue;
@@ -64,9 +64,9 @@ public enum Rights {
      * that this method <b>does not</b> compare the Objects themselves, but
      * instead compares the value behind them as specified by {@code value} in
      * the enumerated type.
-     * 
+     *
      * @param other
-     *            the argued right to compare.
+     *         the argued right to compare.
      * @return {@code true} if this right is greater, {@code false} otherwise.
      */
     public final boolean greater(Rights other) {
@@ -78,9 +78,9 @@ public enum Rights {
      * that this method <b>does not</b> compare the Objects themselves, but
      * instead compares the value behind them as specified by {@code value} in
      * the enumerated type.
-     * 
+     *
      * @param other
-     *            the argued right to compare.
+     *         the argued right to compare.
      * @return {@code true} if this right is lesser, {@code false} otherwise.
      */
     public final boolean less(Rights other) {
@@ -89,12 +89,13 @@ public enum Rights {
 
     /**
      * Determines if this right is equal in power to the argued right. Please
-     * note that this method <b>does not</b> compare the Objects themselves, but
+     * note that this method <b>does not</b> compare the Objects themselves,
+     * but
      * instead compares the value behind them as specified by {@code value} in
      * the enumerated type.
-     * 
+     *
      * @param other
-     *            the argued right to compare.
+     *         the argued right to compare.
      * @return {@code true} if this right is equal, {@code false} otherwise.
      */
     public final boolean equal(Rights other) {
@@ -103,7 +104,7 @@ public enum Rights {
 
     /**
      * Gets the value of this rank as seen by the protocol.
-     * 
+     *
      * @return the protocol value of this rank.
      */
     public final int getProtocolValue() {
@@ -112,7 +113,7 @@ public enum Rights {
 
     /**
      * Gets the value of this rank as seen by the server.
-     * 
+     *
      * @return the server value of this rank.
      */
     public final int getValue() {

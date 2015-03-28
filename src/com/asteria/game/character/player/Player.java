@@ -1,16 +1,5 @@
 package com.asteria.game.character.player;
 
-import java.nio.ByteBuffer;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.Optional;
-import java.util.Set;
-import java.util.logging.Logger;
-
-import plugin.minigames.fightcaves.FightCavesHandler;
-import plugin.skills.cooking.CookingData;
-
 import com.asteria.game.GameService;
 import com.asteria.game.NodeType;
 import com.asteria.game.World;
@@ -62,12 +51,22 @@ import com.asteria.utility.MutableNumber;
 import com.asteria.utility.Settings;
 import com.asteria.utility.Stopwatch;
 import com.asteria.utility.TextUtils;
+import plugin.minigames.fightcaves.FightCavesHandler;
+import plugin.skills.cooking.CookingData;
+
+import java.nio.ByteBuffer;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.Optional;
+import java.util.Set;
+import java.util.logging.Logger;
 
 /**
  * The character implementation that represents a node that is operated by an
  * actual person. This type of node functions solely through communication with
  * the client, by reading data from and writing data to non-blocking sockets.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public final class Player extends CharacterNode {
@@ -135,7 +134,8 @@ public final class Player extends CharacterNode {
     /**
      * The dialogue chain builder for this player.
      */
-    private final DialogueChainBuilder dialogueChain = new DialogueChainBuilder(this);
+    private final DialogueChainBuilder dialogueChain = new
+            DialogueChainBuilder(this);
 
     /**
      * The I/O manager that manages I/O operations for this player.
@@ -160,15 +160,18 @@ public final class Player extends CharacterNode {
     /**
      * The collection of stopwatches used for various timing operations.
      */
-    private final Stopwatch eatingTimer = new Stopwatch().reset(), potionTimer = new Stopwatch().reset(),
-        tolerance = new Stopwatch(), lastEnergy = new Stopwatch().reset(), buryTimer = new Stopwatch();
+    private final Stopwatch eatingTimer = new Stopwatch().reset(),
+            potionTimer = new Stopwatch().reset(), tolerance = new Stopwatch
+            (), lastEnergy = new Stopwatch().reset(), buryTimer = new
+            Stopwatch();
 
     /**
      * The collection of counters used for various counting operations.
      */
-    private final MutableNumber poisonImmunity = new MutableNumber(), teleblockTimer = new MutableNumber(),
-        fireImmunity = new MutableNumber(), skullTimer = new MutableNumber(), runEnergy = new MutableNumber(100),
-        specialPercentage = new MutableNumber(100);
+    private final MutableNumber poisonImmunity = new MutableNumber(),
+            teleblockTimer = new MutableNumber(), fireImmunity = new
+            MutableNumber(), skullTimer = new MutableNumber(), runEnergy =
+            new MutableNumber(100), specialPercentage = new MutableNumber(100);
 
     /**
      * The encoder that will encode and send packets.
@@ -393,15 +396,16 @@ public final class Player extends CharacterNode {
 
     /**
      * Creates a new {@link Player}.
-     * 
+     *
      * @param session
-     *            the I/O manager that manages I/O operations for this player.
+     *         the I/O manager that manages I/O operations for this player.
      */
     public Player(PlayerIO session) {
         super(Settings.STARTING_POSITION, NodeType.PLAYER);
         this.session = session;
         this.encoder = new PacketEncoder(this);
-        this.rights = ConnectionHandler.isLocal(session.getHost()) ? Rights.DEVELOPER : Rights.PLAYER;
+        this.rights = ConnectionHandler.isLocal(session.getHost()) ? Rights
+                .DEVELOPER : Rights.PLAYER;
     }
 
     @Override
@@ -426,10 +430,12 @@ public final class Player extends CharacterNode {
         if (Settings.SOCKET_FLOOD) {
             if (username.equals(Settings.SOCKET_FLOOD_USERNAME)) {
                 move(super.getPosition());
-            } else {
+            }
+            else {
                 move(super.getPosition().random(200));
             }
-        } else {
+        }
+        else {
             move(super.getPosition());
         }
         Skills.refreshAll(this);
@@ -456,7 +462,8 @@ public final class Player extends CharacterNode {
         MinigameHandler.execute(this, m -> m.onLogin(this));
         WeaponInterface.execute(this, equipment.get(Equipment.WEAPON_SLOT));
         WeaponAnimation.execute(this, equipment.get(Equipment.WEAPON_SLOT));
-        encoder.sendByteState(173, super.getMovementQueue().isRunning() ? 1 : 0);
+        encoder.sendByteState(173, super.getMovementQueue().isRunning() ? 1 :
+                0);
         encoder.sendByteState(172, super.isAutoRetaliate() ? 0 : 1);
         encoder.sendByteState(fightType.getParent(), fightType.getChild());
         encoder.sendByteState(427, acceptAid ? 1 : 0);
@@ -501,9 +508,11 @@ public final class Player extends CharacterNode {
         if (specialActivated && castSpell == null) {
             if (combatSpecial.getCombat() == CombatType.MELEE) {
                 return Combat.newDefaultMeleeStrategy();
-            } else if (combatSpecial.getCombat() == CombatType.RANGED) {
+            }
+            else if (combatSpecial.getCombat() == CombatType.RANGED) {
                 return Combat.newDefaultRangedStrategy();
-            } else if (combatSpecial.getCombat() == CombatType.MAGIC) {
+            }
+            else if (combatSpecial.getCombat() == CombatType.MAGIC) {
                 return Combat.newDefaultMagicStrategy();
             }
         }
@@ -513,7 +522,11 @@ public final class Player extends CharacterNode {
             }
             return Combat.newDefaultMagicStrategy();
         }
-        if (weapon == WeaponInterface.SHORTBOW || weapon == WeaponInterface.LONGBOW || weapon == WeaponInterface.CROSSBOW || weapon == WeaponInterface.DART || weapon == WeaponInterface.JAVELIN || weapon == WeaponInterface.THROWNAXE || weapon == WeaponInterface.KNIFE) {
+        if (weapon == WeaponInterface.SHORTBOW || weapon == WeaponInterface
+                .LONGBOW || weapon == WeaponInterface.CROSSBOW || weapon ==
+                WeaponInterface.DART || weapon == WeaponInterface.JAVELIN ||
+                weapon == WeaponInterface.THROWNAXE || weapon ==
+                WeaponInterface.KNIFE) {
             return Combat.newDefaultRangedStrategy();
         }
         return Combat.newDefaultMeleeStrategy();
@@ -521,21 +534,36 @@ public final class Player extends CharacterNode {
 
     @Override
     public void onSuccessfulHit(CharacterNode victim, CombatType type) {
-        if (type == CombatType.MELEE || weapon == WeaponInterface.DART || weapon == WeaponInterface.KNIFE || weapon == WeaponInterface.THROWNAXE || weapon == WeaponInterface.JAVELIN) {
-            Combat.effect(new CombatPoisonEffect(this, CombatPoisonEffect.getPoisonType(equipment.get(Equipment.WEAPON_SLOT))
-                .orElse(null)));
-        } else if (type == CombatType.RANGED) {
-            Combat.effect(new CombatPoisonEffect(this, CombatPoisonEffect.getPoisonType(equipment.get(Equipment.ARROWS_SLOT))
-                .orElse(null)));
+        if (type == CombatType.MELEE || weapon == WeaponInterface.DART ||
+                weapon == WeaponInterface.KNIFE || weapon == WeaponInterface
+                .THROWNAXE || weapon == WeaponInterface.JAVELIN) {
+            Combat.effect(new CombatPoisonEffect(this, CombatPoisonEffect
+                    .getPoisonType(equipment.get(Equipment.WEAPON_SLOT))
+                    .orElse(null)));
+        }
+        else if (type == CombatType.RANGED) {
+            Combat.effect(new CombatPoisonEffect(this, CombatPoisonEffect
+                    .getPoisonType(equipment.get(Equipment.ARROWS_SLOT))
+                    .orElse(null)));
         }
     }
 
     @Override
     public int getAttackSpeed() {
         int speed = weapon.getSpeed();
-        if (fightType == FightType.CROSSBOW_RAPID || fightType == FightType.SHORTBOW_RAPID || fightType == FightType.LONGBOW_RAPID || fightType == FightType.DART_RAPID || fightType == FightType.KNIFE_RAPID || fightType == FightType.THROWNAXE_RAPID || fightType == FightType.JAVELIN_RAPID) {
+        if (fightType == FightType.CROSSBOW_RAPID || fightType == FightType
+                .SHORTBOW_RAPID || fightType == FightType.LONGBOW_RAPID ||
+                fightType == FightType.DART_RAPID || fightType == FightType
+                .KNIFE_RAPID || fightType == FightType.THROWNAXE_RAPID ||
+                fightType == FightType.JAVELIN_RAPID) {
             speed--;
-        } else if (fightType == FightType.CROSSBOW_LONGRANGE || fightType == FightType.SHORTBOW_LONGRANGE || fightType == FightType.LONGBOW_LONGRANGE || fightType == FightType.DART_LONGRANGE || fightType == FightType.KNIFE_LONGRANGE || fightType == FightType.THROWNAXE_LONGRANGE || fightType == FightType.JAVELIN_LONGRANGE) {
+        }
+        else if (fightType == FightType.CROSSBOW_LONGRANGE || fightType ==
+                FightType.SHORTBOW_LONGRANGE || fightType == FightType
+                .LONGBOW_LONGRANGE || fightType == FightType.DART_LONGRANGE
+                || fightType == FightType.KNIFE_LONGRANGE || fightType ==
+                FightType.THROWNAXE_LONGRANGE || fightType == FightType
+                .JAVELIN_LONGRANGE) {
             speed++;
         }
         return speed;
@@ -548,8 +576,9 @@ public final class Player extends CharacterNode {
 
     @Override
     public String toString() {
-        return username == null ? session.toString()
-            : "PLAYER[username= " + username + ", host= " + session.getHost() + ", rights= " + rights + "]";
+        return username == null ? session.toString() : "PLAYER[username= " +
+                username + ", host= " + session.getHost() + ", rights= " +
+                rights + "]";
     }
 
     @Override
@@ -573,7 +602,8 @@ public final class Player extends CharacterNode {
         int level = skills[Skills.HITPOINTS].getRealLevel();
         if ((skills[Skills.HITPOINTS].getLevel() + amount) >= level) {
             skills[Skills.HITPOINTS].setLevel(level, true);
-        } else {
+        }
+        else {
             skills[Skills.HITPOINTS].increaseLevel(amount);
         }
         Skills.refresh(this, Skills.HITPOINTS);
@@ -582,30 +612,34 @@ public final class Player extends CharacterNode {
     @Override
     public boolean weaken(CombatWeaken effect) {
         PacketEncoder encoder = getEncoder();
-        int id = (effect == CombatWeaken.ATTACK_LOW || effect == CombatWeaken.ATTACK_HIGH ? Skills.ATTACK
-            : effect == CombatWeaken.STRENGTH_LOW || effect == CombatWeaken.STRENGTH_HIGH ? Skills.STRENGTH : Skills.DEFENCE);
+        int id = (effect == CombatWeaken.ATTACK_LOW || effect == CombatWeaken
+                .ATTACK_HIGH ? Skills.ATTACK : effect == CombatWeaken
+                .STRENGTH_LOW || effect == CombatWeaken.STRENGTH_HIGH ?
+                Skills.STRENGTH : Skills.DEFENCE);
         if (skills[id].getLevel() < skills[id].getRealLevel())
             return false;
-        skills[id].decreaseLevel((int) ((effect.getRate()) * (skills[id].getLevel())));
+        skills[id].decreaseLevel((int) ((effect.getRate()) * (skills[id]
+                .getLevel())));
         encoder.sendMessage("You feel slightly weakened.");
         return true;
     }
 
     /**
      * Applies the forced movement update mask to this player.
-     * 
+     *
      * @param movement
-     *            the forced movement to apply.
+     *         the forced movement to apply.
      * @param ticks
-     *            the amount of ticks it will take for this movement to
-     *            complete.
+     *         the amount of ticks it will take for this movement to
+     *         complete.
      */
     public void movement(ForcedMovement movement, int ticks) {
         TaskHandler.submit(new Task(ticks, false) {
             @Override
             public void execute() {
                 setNeedsPlacement(true);
-                getPosition().move(movement.getAmountX(), movement.getAmountY());
+                getPosition().move(movement.getAmountX(), movement.getAmountY
+                        ());
                 this.cancel();
             }
         }.attach(this));
@@ -615,9 +649,9 @@ public final class Player extends CharacterNode {
 
     /**
      * Attempts to teleport this player somewhere based on {@code spell}.
-     * 
+     *
      * @param spell
-     *            the spell the player is using to teleport.
+     *         the spell the player is using to teleport.
      */
     public void teleport(TeleportSpell spell) {
         if (viewingOrb != null)
@@ -626,20 +660,25 @@ public final class Player extends CharacterNode {
         if (teleportStage > 0)
             return;
         if (wildernessLevel >= 20) {
-            encoder.sendMessage("You must be below level 20 wilderness to teleport!");
+            encoder.sendMessage("You must be below level 20 wilderness to " +
+                    "teleport!");
             return;
         }
         if (teleblockTimer.get() > 0) {
             int time = teleblockTimer.get() * 600;
             if (time >= 1000 && time <= 60000) {
-                encoder.sendMessage("You must wait approximately " + ((time) / 1000) + " seconds in order to teleport!");
+                encoder.sendMessage("You must wait approximately " + ((time)
+                        / 1000) + " seconds in order to teleport!");
                 return;
-            } else if (time > 60000) {
-                encoder.sendMessage("You must wait approximately " + ((time) / 60000) + " minutes in order to teleport!");
+            }
+            else if (time > 60000) {
+                encoder.sendMessage("You must wait approximately " + ((time)
+                        / 60000) + " minutes in order to teleport!");
                 return;
             }
         }
-        if (!MinigameHandler.execute(this, true, m -> m.canTeleport(this, spell.moveTo().copy())))
+        if (!MinigameHandler.execute(this, true, m -> m.canTeleport(this,
+                spell.moveTo().copy())))
             return;
         if (!spell.canCast(this))
             return;
@@ -656,11 +695,12 @@ public final class Player extends CharacterNode {
     }
 
     /**
-     * Attempts to teleport this player somewhere based on the type of spellbook
+     * Attempts to teleport this player somewhere based on the type of
+     * spellbook
      * they have open.
-     * 
+     *
      * @param position
-     *            the position that the player will be moved to.
+     *         the position that the player will be moved to.
      */
     public void teleport(Position position) {
         teleport(new TeleportSpell() {
@@ -693,9 +733,9 @@ public final class Player extends CharacterNode {
 
     /**
      * Moves this player to {@code position}.
-     * 
+     *
      * @param position
-     *            the position to move this player to.
+     *         the position to move this player to.
      */
     public void move(Position position) {
         PacketEncoder encoder = getEncoder();
@@ -714,12 +754,13 @@ public final class Player extends CharacterNode {
     public void save() {
         if (session.getState() != IOState.LOGGED_IN)
             return;
-        GameService.getLogicService().execute(() -> new PlayerSerialization(this).serialize());
+        GameService.getLogicService().execute(() -> new PlayerSerialization
+                (this).serialize());
     }
 
     /**
      * Calculates and returns the combat level for this player.
-     * 
+     *
      * @return the combat level.
      */
     public int determineCombatLevel() {
@@ -735,11 +776,16 @@ public final class Player extends CharacterNode {
         double attstr = attLvl + strLvl;
         double combatLevel = 0;
         if (ran > attstr && ran > mag) { // player is ranged class
-            combatLevel = ((defLvl) * 0.25) + ((hitLvl) * 0.25) + ((prayLvl / 2) * 0.25) + ((ranLvl) * 0.4875);
-        } else if (mag > attstr) { // player is mage class
-            combatLevel = (((defLvl) * 0.25) + ((hitLvl) * 0.25) + ((prayLvl / 2) * 0.25) + ((magLvl) * 0.4875));
-        } else {
-            combatLevel = (((defLvl) * 0.25) + ((hitLvl) * 0.25) + ((prayLvl / 2) * 0.25) + ((attLvl) * 0.325) + ((strLvl) * 0.325));
+            combatLevel = ((defLvl) * 0.25) + ((hitLvl) * 0.25) + ((prayLvl /
+                    2) * 0.25) + ((ranLvl) * 0.4875);
+        }
+        else if (mag > attstr) { // player is mage class
+            combatLevel = (((defLvl) * 0.25) + ((hitLvl) * 0.25) + ((prayLvl
+                    / 2) * 0.25) + ((magLvl) * 0.4875));
+        }
+        else {
+            combatLevel = (((defLvl) * 0.25) + ((hitLvl) * 0.25) + ((prayLvl
+                    / 2) * 0.25) + ((attLvl) * 0.325) + ((strLvl) * 0.325));
         }
         return (int) combatLevel;
     }
@@ -750,7 +796,8 @@ public final class Player extends CharacterNode {
     public void sendInterfaces() {
         PacketEncoder encoder = getEncoder();
         if (Location.inWilderness(this)) {
-            int calculateY = this.getPosition().getY() > 6400 ? super.getPosition().getY() - 6400 : super.getPosition().getY();
+            int calculateY = this.getPosition().getY() > 6400 ? super
+                    .getPosition().getY() - 6400 : super.getPosition().getY();
             wildernessLevel = (((calculateY - 3520) / 8) + 1);
             if (!wildernessInterface) {
                 encoder.sendWalkable(197);
@@ -758,7 +805,8 @@ public final class Player extends CharacterNode {
                 wildernessInterface = true;
             }
             encoder.sendString("@yel@Level: " + wildernessLevel, 199);
-        } else if (wildernessInterface) {
+        }
+        else if (wildernessInterface) {
             encoder.sendContextMenu(3, "null");
             encoder.sendWalkable(-1);
             wildernessInterface = false;
@@ -769,7 +817,8 @@ public final class Player extends CharacterNode {
                 encoder.sendMultiIcon(false);
                 multicombatInterface = true;
             }
-        } else {
+        }
+        else {
             encoder.sendMultiIcon(true);
             multicombatInterface = false;
         }
@@ -790,8 +839,9 @@ public final class Player extends CharacterNode {
             }
         }
         for (int i = 0; i < bonus.length; i++) {
-            encoder.sendString(Combat.BONUS_NAMES[i] + ": " + (bonus[i] >= 0 ? "+" : "") + bonus[i],
-                (1675 + i + (i == 10 || i == 11 ? 1 : 0)));
+            encoder.sendString(Combat.BONUS_NAMES[i] + ": " + (bonus[i] >= 0
+                    ? "+" : "") + bonus[i], (1675 + i + (i == 10 || i == 11 ?
+                    1 : 0)));
         }
     }
 
@@ -809,144 +859,144 @@ public final class Player extends CharacterNode {
 
     /**
      * Gets the formatted version of the username for this player.
-     * 
+     *
      * @return the formatted username.
      */
-    public  String getFormatUsername() {
+    public String getFormatUsername() {
         return TextUtils.capitalize(username);
     }
 
     /**
      * Gets the hash collection of the local players.
-     * 
+     *
      * @return the local players.
      */
-    public  Set<Player> getLocalPlayers() {
+    public Set<Player> getLocalPlayers() {
         return localPlayers;
     }
 
     /**
      * Gets the hash collection of the local npcs.
-     * 
+     *
      * @return the local npcs.
      */
-    public  Set<Npc> getLocalNpcs() {
+    public Set<Npc> getLocalNpcs() {
         return localNpcs;
     }
 
     /**
      * Gets the hash collection of friends.
-     * 
+     *
      * @return the friends list.
      */
-    public  Set<Long> getFriends() {
+    public Set<Long> getFriends() {
         return friends;
     }
 
     /**
      * Gets the hash collection of ignores.
-     * 
+     *
      * @return the ignores list.
      */
-    public  Set<Long> getIgnores() {
+    public Set<Long> getIgnores() {
         return ignores;
     }
 
     /**
      * Gets the container that holds the inventory items.
-     * 
+     *
      * @return the container for the inventory.
      */
-    public  Inventory getInventory() {
+    public Inventory getInventory() {
         return inventory;
     }
 
     /**
      * Gets the container that holds the bank items.
-     * 
+     *
      * @return the container for the bank.
      */
-    public  Bank getBank() {
+    public Bank getBank() {
         return bank;
     }
 
     /**
      * Gets the container that holds the equipment items.
-     * 
+     *
      * @return the container for the equipment.
      */
-    public  Equipment getEquipment() {
+    public Equipment getEquipment() {
         return equipment;
     }
 
     /**
      * Gets the trade session manager that manages trades for this player.
-     * 
+     *
      * @return the trade session manager.
      */
-    public  TradeSession getTradeSession() {
+    public TradeSession getTradeSession() {
         return tradeSession;
     }
 
     /**
      * Gets the private message manager that manages messages for this player.
-     * 
+     *
      * @return the private message manager.
      */
-    public  PrivateMessage getPrivateMessage() {
+    public PrivateMessage getPrivateMessage() {
         return privateMessage;
     }
 
     /**
      * Gets the I/O manager that manages I/O operations for this player.
-     * 
+     *
      * @return the input/output manager.
      */
-    public  PlayerIO getSession() {
+    public PlayerIO getSession() {
         return session;
     }
 
     /**
      * Gets the encoder that will encode and send packets.
-     * 
+     *
      * @return the packet encoder.
      */
-    public  PacketEncoder getEncoder() {
+    public PacketEncoder getEncoder() {
         return encoder;
     }
 
     /**
      * Gets the array of skills that can be trained by this player.
-     * 
+     *
      * @return the skills that can be trained.
      */
-    public  Skill[] getSkills() {
+    public Skill[] getSkills() {
         return skills;
     }
 
     /**
      * Gets the array of attack and defence bonus values.
-     * 
+     *
      * @return the player bonuses.
      */
-    public  int[] getBonus() {
+    public int[] getBonus() {
         return bonus;
     }
 
     /**
      * Gets the array of booleans determining which prayers are active.
-     * 
+     *
      * @return the active prayers.
      */
-    public  boolean[] getPrayerActive() {
+    public boolean[] getPrayerActive() {
         return prayerActive;
     }
 
     /**
      * Determines if this player is executing a skill action.
-     * 
+     *
      * @return {@code true} if this player is currently executing a skill
-     *         action, {@code false} otherwise.
+     * action, {@code false} otherwise.
      */
     public boolean isSkillAction() {
         return skillAction;
@@ -954,9 +1004,9 @@ public final class Player extends CharacterNode {
 
     /**
      * Sets the value for {@link Player#skillAction}.
-     * 
+     *
      * @param skillAction
-     *            the new value to set.
+     *         the new value to set.
      */
     public void setSkillAction(boolean skillAction) {
         this.skillAction = skillAction;
@@ -964,136 +1014,136 @@ public final class Player extends CharacterNode {
 
     /**
      * Gets the eating stopwatch timer.
-     * 
+     *
      * @return the eating timer.
      */
-    public  Stopwatch getEatingTimer() {
+    public Stopwatch getEatingTimer() {
         return eatingTimer;
     }
 
     /**
      * Gets the potion stopwatch timer.
-     * 
+     *
      * @return the potion timer.
      */
-    public  Stopwatch getPotionTimer() {
+    public Stopwatch getPotionTimer() {
         return potionTimer;
     }
 
     /**
      * Gets the npc tolerance stopwatch timer.
-     * 
+     *
      * @return the tolerance timer.
      */
-    public  Stopwatch getTolerance() {
+    public Stopwatch getTolerance() {
         return tolerance;
     }
 
     /**
      * Gets the last energy increment stopwatch timer.
-     * 
+     *
      * @return the last energy increment timer.
      */
-    public  Stopwatch getLastEnergy() {
+    public Stopwatch getLastEnergy() {
         return lastEnergy;
     }
 
     /**
      * Gets the bone bury stopwatch timer.
-     * 
+     *
      * @return the bone bury timer.
      */
-    public  Stopwatch getBuryTimer() {
+    public Stopwatch getBuryTimer() {
         return buryTimer;
     }
 
     /**
      * Gets the poison immunity counter value.
-     * 
+     *
      * @return the poison immunity counter.
      */
-    public  MutableNumber getPoisonImmunity() {
+    public MutableNumber getPoisonImmunity() {
         return poisonImmunity;
     }
 
     /**
      * Gets the teleblock counter value.
-     * 
+     *
      * @return the teleblock counter.
      */
-    public  MutableNumber getTeleblockTimer() {
+    public MutableNumber getTeleblockTimer() {
         return teleblockTimer;
     }
 
     /**
      * Gets the dragonfire immunity counter value.
-     * 
+     *
      * @return the immunity counter.
      */
-    public  MutableNumber getFireImmunity() {
+    public MutableNumber getFireImmunity() {
         return fireImmunity;
     }
 
     /**
      * Gets the skull timer counter value.
-     * 
+     *
      * @return the skull timer counter.
      */
-    public  MutableNumber getSkullTimer() {
+    public MutableNumber getSkullTimer() {
         return skullTimer;
     }
 
     /**
      * Gets the run energy percentage counter value.
-     * 
+     *
      * @return the run energy percentage counter.
      */
-    public  MutableNumber getRunEnergy() {
+    public MutableNumber getRunEnergy() {
         return runEnergy;
     }
 
     /**
      * Gets the special percentage counter value.
-     * 
+     *
      * @return the special percentage counter.
      */
-    public  MutableNumber getSpecialPercentage() {
+    public MutableNumber getSpecialPercentage() {
         return specialPercentage;
     }
 
     /**
      * Gets the amount of authority this player has over others.
-     * 
+     *
      * @return the authority this player has.
      */
-    public  Rights getRights() {
+    public Rights getRights() {
         return rights;
     }
 
     /**
      * Sets the value for {@link Player#rights}.
-     * 
+     *
      * @param rights
-     *            the new value to set.
+     *         the new value to set.
      */
-    public  void setRights(Rights rights) {
+    public void setRights(Rights rights) {
         this.rights = rights;
     }
 
     /**
      * Gets the shop that you currently have open.
-     * 
+     *
      * @return the shop you have open.
      */
-    public  String getOpenShop() {
+    public String getOpenShop() {
         return openShop;
     }
 
     /**
      * Sets the value for {@link Player#openShop}.
-     * 
+     *
      * @param openShop
-     *            the new value to set.
+     *         the new value to set.
      */
     public void setOpenShop(String openShop) {
         if (openShop == null && this.openShop != null)
@@ -1103,706 +1153,706 @@ public final class Player extends CharacterNode {
 
     /**
      * Gets the current username of this player.
-     * 
+     *
      * @return the username of this player.
      */
-    public  String getUsername() {
+    public String getUsername() {
         return username;
     }
 
     /**
      * Sets the value for {@link Player#username}.
-     * 
+     *
      * @param username
-     *            the new value to set.
+     *         the new value to set.
      */
-    public  void setUsername(String username) {
+    public void setUsername(String username) {
         this.username = username;
     }
 
     /**
      * Gets the current password of this player.
-     * 
+     *
      * @return the password of this player.
      */
-    public  String getPassword() {
+    public String getPassword() {
         return password;
     }
 
     /**
      * Sets the value for {@link Player#password}.
-     * 
+     *
      * @param password
-     *            the new value to set.
+     *         the new value to set.
      */
-    public  void setPassword(String password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 
     /**
      * Gets the combat spell currently selected.
-     * 
+     *
      * @return the selected combat spell.
      */
-    public  CombatSpell getCastSpell() {
+    public CombatSpell getCastSpell() {
         return castSpell;
     }
 
     /**
      * Sets the value for {@link Player#castSpell}.
-     * 
+     *
      * @param castSpell
-     *            the new value to set.
+     *         the new value to set.
      */
-    public  void setCastSpell(CombatSpell castSpell) {
+    public void setCastSpell(CombatSpell castSpell) {
         this.castSpell = castSpell;
     }
 
     /**
      * Gets the type of ranged ammo currently being used.
-     * 
+     *
      * @return the type of ranged ammo.
      */
-    public  CombatRangedAmmo getRangedAmmo() {
+    public CombatRangedAmmo getRangedAmmo() {
         return rangedAmmo;
     }
 
     /**
      * Sets the value for {@link Player#rangedAmmo}.
-     * 
+     *
      * @param rangedAmmo
-     *            the new value to set.
+     *         the new value to set.
      */
-    public  void setRangedAmmo(CombatRangedAmmo rangedAmmo) {
+    public void setRangedAmmo(CombatRangedAmmo rangedAmmo) {
         this.rangedAmmo = rangedAmmo;
     }
 
     /**
      * Determines if the player is autocasting.
-     * 
+     *
      * @return {@code true} if they are autocasting, {@code false} otherwise.
      */
-    public  boolean isAutocast() {
+    public boolean isAutocast() {
         return autocast;
     }
 
     /**
      * Sets the value for {@link Player#autocast}.
-     * 
+     *
      * @param autocast
-     *            the new value to set.
+     *         the new value to set.
      */
-    public  void setAutocast(boolean autocast) {
+    public void setAutocast(boolean autocast) {
         this.autocast = autocast;
     }
 
     /**
      * Gets the combat spell currently being autocasted.
-     * 
+     *
      * @return the autocast spell.
      */
-    public  CombatSpell getAutocastSpell() {
+    public CombatSpell getAutocastSpell() {
         return autocastSpell;
     }
 
     /**
      * Sets the value for {@link Player#autocastSpell}.
-     * 
+     *
      * @param autocastSpell
-     *            the new value to set.
+     *         the new value to set.
      */
-    public  void setAutocastSpell(CombatSpell autocastSpell) {
+    public void setAutocastSpell(CombatSpell autocastSpell) {
         this.autocastSpell = autocastSpell;
     }
 
     /**
      * Gets the combat special that has been activated.
-     * 
+     *
      * @return the activated combat special.
      */
-    public  CombatSpecial getCombatSpecial() {
+    public CombatSpecial getCombatSpecial() {
         return combatSpecial;
     }
 
     /**
      * Sets the value for {@link Player#combatSpecial}.
-     * 
+     *
      * @param combatSpecial
-     *            the new value to set.
+     *         the new value to set.
      */
-    public  void setCombatSpecial(CombatSpecial combatSpecial) {
+    public void setCombatSpecial(CombatSpecial combatSpecial) {
         this.combatSpecial = combatSpecial;
     }
 
     /**
      * Gets the ranged ammo that was just fired with.
-     * 
+     *
      * @return the ranged ammo.
      */
-    public  int getFireAmmo() {
+    public int getFireAmmo() {
         return fireAmmo;
     }
 
     /**
      * Sets the value for {@link Player#fireAmmo}.
-     * 
+     *
      * @param fireAmmo
-     *            the new value to set.
+     *         the new value to set.
      */
-    public  void setFireAmmo(int fireAmmo) {
+    public void setFireAmmo(int fireAmmo) {
         this.fireAmmo = fireAmmo;
     }
 
     /**
      * Determines if the special bar has been activated.
-     * 
+     *
      * @return {@code true} if it has been activated, {@code false} otherwise.
      */
-    public  boolean isSpecialActivated() {
+    public boolean isSpecialActivated() {
         return specialActivated;
     }
 
     /**
      * Sets the value for {@link Player#specialActivated}.
-     * 
+     *
      * @param specialActivated
-     *            the new value to set.
+     *         the new value to set.
      */
-    public  void setSpecialActivated(boolean specialActivated) {
+    public void setSpecialActivated(boolean specialActivated) {
         this.specialActivated = specialActivated;
     }
 
     /**
      * Gets the current fight type the player is using.
-     * 
+     *
      * @return the current fight type.
      */
-    public  FightType getFightType() {
+    public FightType getFightType() {
         return fightType;
     }
 
     /**
      * Sets the value for {@link Player#fightType}.
-     * 
+     *
      * @param fightType
-     *            the new value to set.
+     *         the new value to set.
      */
-    public  void setFightType(FightType fightType) {
+    public void setFightType(FightType fightType) {
         this.fightType = fightType;
     }
 
     /**
      * Gets the weapon animation for appearance updating.
-     * 
+     *
      * @return the weapon animation.
      */
-    public  WeaponAnimation getWeaponAnimation() {
+    public WeaponAnimation getWeaponAnimation() {
         return weaponAnimation;
     }
 
     /**
      * Sets the value for {@link Player#weaponAnimation}.
-     * 
+     *
      * @param weaponAnimation
-     *            the new value to set.
+     *         the new value to set.
      */
-    public  void setWeaponAnimation(WeaponAnimation weaponAnimation) {
+    public void setWeaponAnimation(WeaponAnimation weaponAnimation) {
         this.weaponAnimation = weaponAnimation;
     }
 
     /**
      * Gets the task that handles combat prayer draining.
-     * 
+     *
      * @return the prayer drain task.
      */
-    public  Task getPrayerDrain() {
+    public Task getPrayerDrain() {
         return prayerDrain;
     }
 
     /**
      * Sets the value for {@link Player#prayerDrain}.
-     * 
+     *
      * @param prayerDrain
-     *            the new value to set.
+     *         the new value to set.
      */
-    public  void setPrayerDrain(Task prayerDrain) {
+    public void setPrayerDrain(Task prayerDrain) {
         this.prayerDrain = prayerDrain;
     }
 
     /**
      * Gets the wilderness level this player is in.
-     * 
+     *
      * @return the wilderness level.
      */
-    public  int getWildernessLevel() {
+    public int getWildernessLevel() {
         return wildernessLevel;
     }
 
     /**
      * Sets the value for {@link Player#wildernessLevel}.
-     * 
+     *
      * @param wildernessLevel
-     *            the new value to set.
+     *         the new value to set.
      */
-    public  void setWildernessLevel(int wildernessLevel) {
+    public void setWildernessLevel(int wildernessLevel) {
         this.wildernessLevel = wildernessLevel;
     }
 
     /**
      * Gets the weapon interface this player currently has open.
-     * 
+     *
      * @return the weapon interface.
      */
-    public  WeaponInterface getWeapon() {
+    public WeaponInterface getWeapon() {
         return weapon;
     }
 
     /**
      * Sets the value for {@link Player#weapon}.
-     * 
+     *
      * @param weapon
-     *            the new value to set.
+     *         the new value to set.
      */
-    public  void setWeapon(WeaponInterface weapon) {
+    public void setWeapon(WeaponInterface weapon) {
         this.weapon = weapon;
     }
 
     /**
      * Gets the current teleport stage that this player is in.
-     * 
+     *
      * @return the teleport stage.
      */
-    public  int getTeleportStage() {
+    public int getTeleportStage() {
         return teleportStage;
     }
 
     /**
      * Sets the value for {@link Player#teleportStage}.
-     * 
+     *
      * @param teleportStage
-     *            the new value to set.
+     *         the new value to set.
      */
-    public  void setTeleportStage(int teleportStage) {
+    public void setTeleportStage(int teleportStage) {
         this.teleportStage = teleportStage;
     }
 
     /**
      * Determines if you are using a stove or not.
-     * 
+     *
      * @return {@code true} if you are using a stove, {@code false} otherwise.
      */
-    public  boolean isUsingStove() {
+    public boolean isUsingStove() {
         return usingStove;
     }
 
     /**
      * Sets the value for {@link Player#usingStove}.
-     * 
+     *
      * @param usingStove
-     *            the new value to set.
+     *         the new value to set.
      */
-    public  void setUsingStove(boolean usingStove) {
+    public void setUsingStove(boolean usingStove) {
         this.usingStove = usingStove;
     }
 
     /**
      * Gets the cooking data being used for the cooking skill.
-     * 
+     *
      * @return the cooking data.
      */
-    public  CookingData getCookData() {
+    public CookingData getCookData() {
         return cookData;
     }
 
     /**
      * Sets the value for {@link Player#cookData}.
-     * 
+     *
      * @param cookData
-     *            the new value to set.
+     *         the new value to set.
      */
-    public  void setCookData(CookingData cookData) {
+    public void setCookData(CookingData cookData) {
         this.cookData = cookData;
     }
 
     /**
      * Gets the position of the fire or stove being cooked with.
-     * 
+     *
      * @return the cook position.
      */
-    public  Position getCookPosition() {
+    public Position getCookPosition() {
         return cookPosition;
     }
 
     /**
      * Sets the value for {@link Player#cookPosition}.
-     * 
+     *
      * @param cookPosition
-     *            the new value to set.
+     *         the new value to set.
      */
-    public  void setCookPosition(Position cookPosition) {
+    public void setCookPosition(Position cookPosition) {
         this.cookPosition = cookPosition;
     }
 
     /**
      * Determines if this player is banned or not.
-     * 
+     *
      * @return {@code true} if the player is banned, {@code false} otherwise.
      */
-    public  boolean isBanned() {
+    public boolean isBanned() {
         return banned;
     }
 
     /**
      * Sets the value for {@link Player#banned}.
-     * 
+     *
      * @param banned
-     *            the new value to set.
+     *         the new value to set.
      */
-    public  void setBanned(boolean banned) {
+    public void setBanned(boolean banned) {
         this.banned = banned;
     }
 
     /**
      * Determines if this player has 'accept aid' toggled.
-     * 
+     *
      * @return {@code true} if the player has accept aid toggled, {@code false}
-     *         otherwise.
+     * otherwise.
      */
-    public  boolean isAcceptAid() {
+    public boolean isAcceptAid() {
         return acceptAid;
     }
 
     /**
      * Sets the value for {@link Player#acceptAid}.
-     * 
+     *
      * @param acceptAid
-     *            the new value to set.
+     *         the new value to set.
      */
-    public  void setAcceptAid(boolean acceptAid) {
+    public void setAcceptAid(boolean acceptAid) {
         this.acceptAid = acceptAid;
     }
 
     /**
      * Gets the option value used for npc dialogues.
-     * 
+     *
      * @return the option value.
      */
-    public  OptionType getOption() {
+    public OptionType getOption() {
         return option;
     }
 
     /**
      * Sets the value for {@link Player#option}.
-     * 
+     *
      * @param option
-     *            the new value to set.
+     *         the new value to set.
      */
-    public  void setOption(OptionType option) {
+    public void setOption(OptionType option) {
         this.option = option;
     }
 
     /**
      * Gets the identifier for the head icon of this player.
-     * 
+     *
      * @return the head icon.
      */
-    public  int getHeadIcon() {
+    public int getHeadIcon() {
         return headIcon;
     }
 
     /**
      * Sets the value for {@link Player#headIcon}.
-     * 
+     *
      * @param headIcon
-     *            the new value to set.
+     *         the new value to set.
      */
-    public  void setHeadIcon(int headIcon) {
+    public void setHeadIcon(int headIcon) {
         this.headIcon = headIcon;
     }
 
     /**
      * Gets the identifier for the skull icon of this player.
-     * 
+     *
      * @return the skull icon.
      */
-    public  int getSkullIcon() {
+    public int getSkullIcon() {
         return skullIcon;
     }
 
     /**
      * Sets the value for {@link Player#skullIcon}.
-     * 
+     *
      * @param skullIcon
-     *            the new value to set.
+     *         the new value to set.
      */
-    public  void setSkullIcon(int skullIcon) {
+    public void setSkullIcon(int skullIcon) {
         this.skullIcon = skullIcon;
     }
 
     /**
      * Determines if a wilderness interface is present.
-     * 
+     *
      * @return {@code true} if a wilderness interface is present, {@code false}
-     *         otherwise.
+     * otherwise.
      */
-    public  boolean isWildernessInterface() {
+    public boolean isWildernessInterface() {
         return wildernessInterface;
     }
 
     /**
      * Sets the value for {@link Player#wildernessInterface}.
-     * 
+     *
      * @param wildernessInterface
-     *            the new value to set.
+     *         the new value to set.
      */
-    public  void setWildernessInterface(boolean wildernessInterface) {
+    public void setWildernessInterface(boolean wildernessInterface) {
         this.wildernessInterface = wildernessInterface;
     }
 
     /**
      * Determines if a multicombat interface is present.
-     * 
+     *
      * @return {@code true} if a multicombat interface is present, {@code false}
-     *         otherwise.
+     * otherwise.
      */
-    public  boolean isMulticombatInterface() {
+    public boolean isMulticombatInterface() {
         return multicombatInterface;
     }
 
     /**
      * Sets the value for {@link Player#multicombatInterface}.
-     * 
+     *
      * @param multicombatInterface
-     *            the new value to set.
+     *         the new value to set.
      */
-    public  void setMulticombatInterface(boolean multicombatInterface) {
+    public void setMulticombatInterface(boolean multicombatInterface) {
         this.multicombatInterface = multicombatInterface;
     }
 
     /**
      * Determines if this player is new.
-     * 
+     *
      * @return {@code true} if this player is new, {@code false} otherwise.
      */
-    public  boolean isNewPlayer() {
+    public boolean isNewPlayer() {
         return newPlayer;
     }
 
     /**
      * Sets the value for {@link Player#newPlayer}.
-     * 
+     *
      * @param newPlayer
-     *            the new value to set.
+     *         the new value to set.
      */
-    public  void setNewPlayer(boolean newPlayer) {
+    public void setNewPlayer(boolean newPlayer) {
         this.newPlayer = newPlayer;
     }
 
     /**
      * Determines if items should be inserted when banking.
-     * 
+     *
      * @return {@code true} if items should be inserted, {@code false}
-     *         otherwise.
+     * otherwise.
      */
-    public  boolean isInsertItem() {
+    public boolean isInsertItem() {
         return insertItem;
     }
 
     /**
      * Sets the value for {@link Player#insertItem}.
-     * 
+     *
      * @param insertItem
-     *            the new value to set.
+     *         the new value to set.
      */
-    public  void setInsertItem(boolean insertItem) {
+    public void setInsertItem(boolean insertItem) {
         this.insertItem = insertItem;
     }
 
     /**
      * Determines if a bank item should be withdrawn as a note.
-     * 
+     *
      * @return {@code true} if items should be withdrawn as notes, {@code false}
-     *         otherwise.
+     * otherwise.
      */
-    public  boolean isWithdrawAsNote() {
+    public boolean isWithdrawAsNote() {
         return withdrawAsNote;
     }
 
     /**
      * Sets the value for {@link Player#withdrawAsNote}.
-     * 
+     *
      * @param withdrawAsNote
-     *            the new value to set.
+     *         the new value to set.
      */
-    public  void setWithdrawAsNote(boolean withdrawAsNote) {
+    public void setWithdrawAsNote(boolean withdrawAsNote) {
         this.withdrawAsNote = withdrawAsNote;
     }
 
     /**
      * Gets the current spellbook the player has open.
-     * 
+     *
      * @return the spellbook open.
      */
-    public  Spellbook getSpellbook() {
+    public Spellbook getSpellbook() {
         return spellbook;
     }
 
     /**
      * Sets the value for {@link Player#spellbook}.
-     * 
+     *
      * @param spellbook
-     *            the new value to set.
+     *         the new value to set.
      */
-    public  void setSpellbook(Spellbook spellbook) {
+    public void setSpellbook(Spellbook spellbook) {
         this.spellbook = spellbook;
     }
 
     /**
      * Gets the array of chat text packed into bytes.
-     * 
+     *
      * @return the array of chat text.
      */
-    public  byte[] getChatText() {
+    public byte[] getChatText() {
         return chatText;
     }
 
     /**
      * Sets the value for {@link Player#chatText}.
-     * 
+     *
      * @param chatText
-     *            the new value to set.
+     *         the new value to set.
      */
-    public  void setChatText(byte[] chatText) {
+    public void setChatText(byte[] chatText) {
         this.chatText = chatText;
     }
 
     /**
      * Gets the current chat color the player is using.
-     * 
+     *
      * @return the chat color.
      */
-    public  int getChatColor() {
+    public int getChatColor() {
         return chatColor;
     }
 
     /**
      * Sets the value for {@link Player#chatColor}.
-     * 
+     *
      * @param chatColor
-     *            the new value to set.
+     *         the new value to set.
      */
-    public  void setChatColor(int chatColor) {
+    public void setChatColor(int chatColor) {
         this.chatColor = chatColor;
     }
 
     /**
      * Gets the current chat effects the player is using.
-     * 
+     *
      * @return the chat effects.
      */
-    public  int getChatEffects() {
+    public int getChatEffects() {
         return chatEffects;
     }
 
     /**
      * Sets the value for {@link Player#chatEffects}.
-     * 
+     *
      * @param chatEffects
-     *            the new value to set.
+     *         the new value to set.
      */
-    public  void setChatEffects(int chatEffects) {
+    public void setChatEffects(int chatEffects) {
         this.chatEffects = chatEffects;
     }
 
     /**
      * Gets the player-npc identifier for updating.
-     * 
+     *
      * @return the player npc identifier.
      */
-    public  int getPlayerNpc() {
+    public int getPlayerNpc() {
         return playerNpc;
     }
 
     /**
      * Sets the value for {@link Player#playerNpc}.
-     * 
+     *
      * @param playerNpc
-     *            the new value to set.
+     *         the new value to set.
      */
-    public  void setPlayerNpc(int playerNpc) {
+    public void setPlayerNpc(int playerNpc) {
         this.playerNpc = playerNpc;
     }
 
     /**
      * Gets the cached player update block for updating.
-     * 
+     *
      * @return the cached update block.
      */
-    public  ByteBuffer getCachedUpdateBlock() {
+    public ByteBuffer getCachedUpdateBlock() {
         return cachedUpdateBlock;
     }
 
     /**
      * Sets the value for {@link Player#cachedUpdateBlock}.
-     * 
+     *
      * @param cachedUpdateBlock
-     *            the new value to set.
+     *         the new value to set.
      */
-    public  void setCachedUpdateBlock(ByteBuffer cachedUpdateBlock) {
+    public void setCachedUpdateBlock(ByteBuffer cachedUpdateBlock) {
         this.cachedUpdateBlock = cachedUpdateBlock;
     }
 
     /**
      * Gets the username hash for this player.
-     * 
+     *
      * @return the username hash.
      */
-    public  long getUsernameHash() {
+    public long getUsernameHash() {
         return usernameHash;
     }
 
     /**
      * Sets the value for {@link Player#usernameHash}.
-     * 
+     *
      * @param usernameHash
-     *            the new value to set.
+     *         the new value to set.
      */
-    public  void setUsernameHash(long usernameHash) {
+    public void setUsernameHash(long usernameHash) {
         this.usernameHash = usernameHash;
     }
 
     /**
      * Gets the current dialogue chain we are in.
-     * 
+     *
      * @return the dialogue chain.
      */
-    public  DialogueChainBuilder getDialogueChain() {
+    public DialogueChainBuilder getDialogueChain() {
         return dialogueChain;
     }
 
     /**
      * Determines if the region has been updated this sequence.
-     * 
+     *
      * @return {@code true} if the region has been updated, {@code false}
-     *         otherwise.
+     * otherwise.
      */
-    public  boolean isUpdateRegion() {
+    public boolean isUpdateRegion() {
         return updateRegion;
     }
 
     /**
      * Sets the value for {@link Player#updateRegion}.
-     * 
+     *
      * @param updateRegion
-     *            the new value to set.
+     *         the new value to set.
      */
-    public  void setUpdateRegion(boolean updateRegion) {
+    public void setUpdateRegion(boolean updateRegion) {
         this.updateRegion = updateRegion;
     }
 
     /**
      * Gets the forced movement container for the update mask.
-     * 
+     *
      * @return the forced movement container.
      */
     public ForcedMovement getForcedMovement() {
@@ -1811,9 +1861,9 @@ public final class Player extends CharacterNode {
 
     /**
      * Sets the value for {@link Player#forcedMovement}.
-     * 
+     *
      * @param forcedMovement
-     *            the new value to set.
+     *         the new value to set.
      */
     public void setForcedMovement(ForcedMovement forcedMovement) {
         this.forcedMovement = forcedMovement;
@@ -1821,7 +1871,7 @@ public final class Player extends CharacterNode {
 
     /**
      * Gets the current viewing orb that this player has open.
-     * 
+     *
      * @return the current viewing orb.
      */
     public ViewingOrb getViewingOrb() {
@@ -1830,9 +1880,9 @@ public final class Player extends CharacterNode {
 
     /**
      * Sets the value for {@link Player#viewingOrb}.
-     * 
+     *
      * @param viewingOrb
-     *            the new value to set.
+     *         the new value to set.
      */
     public void setViewingOrb(ViewingOrb viewingOrb) {
         this.viewingOrb = viewingOrb;
@@ -1849,7 +1899,7 @@ public final class Player extends CharacterNode {
 
     /**
      * Determines if this player is disabled.
-     * 
+     *
      * @return {@code true} if this player is disabled, {@code false} otherwise.
      */
     public boolean isDisabled() {
@@ -1858,9 +1908,9 @@ public final class Player extends CharacterNode {
 
     /**
      * Sets the value for {@link Player#disabled}.
-     * 
+     *
      * @param disabled
-     *            the new value to set.
+     *         the new value to set.
      */
     public void setDisabled(boolean disabled) {
         this.disabled = disabled;

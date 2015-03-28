@@ -12,7 +12,7 @@ import com.asteria.network.packet.PacketDecoder;
 
 /**
  * The packet sent from the client when the player drops an item.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public final class DropItemPacket extends PacketDecoder {
@@ -32,9 +32,11 @@ public final class DropItemPacket extends PacketDecoder {
         if (item == null || item.getId() != id)
             return;
         player.setSkillAction(false);
-        int amount = ItemDefinition.DEFINITIONS[id].isStackable() ? item.getAmount() : 1;
+        int amount = ItemDefinition.DEFINITIONS[id].isStackable() ? item
+                .getAmount() : 1;
         player.getInventory().remove(new Item(id, amount), slot);
-        Position p = new Position(player.getPosition().getX(), player.getPosition().getY(), player.getPosition().getZ());
+        Position p = new Position(player.getPosition().getX(), player
+                .getPosition().getY(), player.getPosition().getZ());
         ItemNodeManager.register(new ItemNode(new Item(id, amount), p, player));
     }
 }

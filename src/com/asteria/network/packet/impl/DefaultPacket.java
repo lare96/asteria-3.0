@@ -6,7 +6,7 @@ import com.asteria.network.packet.PacketDecoder;
 
 /**
  * The decoder used to handle useless packets sent from the client.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public final class DefaultPacket extends PacketDecoder {

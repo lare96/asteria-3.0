@@ -7,9 +7,10 @@ import com.asteria.network.packet.PacketDecoder;
 import com.asteria.utility.Settings;
 
 /**
- * The packet sent from the client when a player makes a yellow {@code X} click,
+ * The packet sent from the client when a player makes a yellow {@code X}
+ * click,
  * a red {@code X} click, or when they click the minimap.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public final class MovementQueuePacket extends PacketDecoder {
@@ -32,12 +33,14 @@ public final class MovementQueuePacket extends PacketDecoder {
             player.setSkillAction(false);
             player.setFollowing(false);
             player.getCombatBuilder().cooldown(false);
-        } else if (opcode == 98) {
+        }
+        else if (opcode == 98) {
 
         }
 
         if (player.isFrozen()) {
-            player.getEncoder().sendMessage("You are frozen and unable to move!");
+            player.getEncoder().sendMessage("You are frozen and unable to " +
+                    "move!");
             return;
         }
 
@@ -53,7 +56,8 @@ public final class MovementQueuePacket extends PacketDecoder {
 
         int steps = (size - 5) / 2;
         int[][] path = new int[steps][2];
-        int firstStepX = buf.getShort(com.asteria.network.ValueType.A, com.asteria.network.ByteOrder.LITTLE);
+        int firstStepX = buf.getShort(com.asteria.network.ValueType.A, com
+                .asteria.network.ByteOrder.LITTLE);
 
         for (int i = 0; i < steps; i++) {
             path[i][0] = buf.get();
@@ -61,17 +65,21 @@ public final class MovementQueuePacket extends PacketDecoder {
         }
         int firstStepY = buf.getShort(com.asteria.network.ByteOrder.LITTLE);
         player.getMovementQueue().reset();
-        player.getMovementQueue().setRunPath(buf.get(com.asteria.network.ValueType.C) == 1);
-        player.getMovementQueue().addToPath(new Position(firstStepX, firstStepY));
+        player.getMovementQueue().setRunPath(buf.get(com.asteria.network
+                .ValueType.C) == 1);
+        player.getMovementQueue().addToPath(new Position(firstStepX,
+                firstStepY));
 
         for (int i = 0; i < steps; i++) {
             path[i][0] += firstStepX;
             path[i][1] += firstStepY;
-            player.getMovementQueue().addToPath(new Position(path[i][0], path[i][1]));
+            player.getMovementQueue().addToPath(new Position(path[i][0],
+                    path[i][1]));
         }
         player.getMovementQueue().finish();
 
         if (Settings.DEBUG)
-            player.getEncoder().sendMessage("DEBUG[walking= " + player.getPosition().getRegion() + "]");
+            player.getEncoder().sendMessage("DEBUG[walking= " + player
+                    .getPosition().getRegion() + "]");
     }
 }

@@ -10,7 +10,7 @@ import com.asteria.game.character.player.Player;
 /**
  * The dialogue chain builder that contains functions for building and managing
  * dialogues.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public final class DialogueChainBuilder {
@@ -32,9 +32,9 @@ public final class DialogueChainBuilder {
 
     /**
      * Creates a new {@link DialogueChainBuilder}.
-     * 
+     *
      * @param player
-     *            the player that this chain builder is dedicated to.
+     *         the player that this chain builder is dedicated to.
      */
     public DialogueChainBuilder(Player player) {
         this.player = player;
@@ -42,9 +42,9 @@ public final class DialogueChainBuilder {
 
     /**
      * Appends {@code entry} to this chain builder.
-     * 
+     *
      * @param entry
-     *            the dialogue chain to append to this chain builder.
+     *         the dialogue chain to append to this chain builder.
      * @return an instance of this chain builder.
      */
     public DialogueChainBuilder append(DialogueChain entry) {
@@ -54,9 +54,9 @@ public final class DialogueChainBuilder {
 
     /**
      * Appends {@code optionListener} to this chain builder.
-     * 
+     *
      * @param optionListener
-     *            the option listener to append to this builder.
+     *         the option listener to append to this builder.
      * @return an instance of this chain builder.
      */
     protected void append(Optional<Consumer<OptionType>> optionListener) {
@@ -65,15 +65,16 @@ public final class DialogueChainBuilder {
 
     /**
      * Advances this chain builder by one dialogue chain.
-     * 
+     *
      * @throws IllegalStateException
-     *             if this dialogue chain builder is empty.
+     *         if this dialogue chain builder is empty.
      */
     public void advance() {
         DialogueChain entry = chain.poll();
         if (entry == null) {
             player.getEncoder().sendCloseWindows();
-        } else {
+        }
+        else {
             entry.accept(this);
         }
     }
@@ -91,9 +92,9 @@ public final class DialogueChainBuilder {
     /**
      * Executes the dialogue option listener with {@code type} if it is
      * available.
-     * 
+     *
      * @param type
-     *            the dialogue option type.
+     *         the dialogue option type.
      * @return {@code true} if the option was executed, {@code false} otherwise.
      */
     public boolean executeOptions(OptionType type) {
@@ -107,7 +108,7 @@ public final class DialogueChainBuilder {
 
     /**
      * The size of the backing chain list in this chain builder.
-     * 
+     *
      * @return the size of this chain builder.
      */
     public int size() {
@@ -116,7 +117,7 @@ public final class DialogueChainBuilder {
 
     /**
      * Gets the player that this chain builder is dedicated to.
-     * 
+     *
      * @return the player for this chain builder.
      */
     public Player getPlayer() {

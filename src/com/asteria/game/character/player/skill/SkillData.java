@@ -4,7 +4,7 @@ import com.asteria.utility.TextUtils;
 
 /**
  * The enumerated type whose elements represent data for the skills.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public enum SkillData {
@@ -52,17 +52,17 @@ public enum SkillData {
 
     /**
      * Creates a new {@link SkillData}.
-     * 
+     *
      * @param id
-     *            the identification for this skill in the skills array.
+     *         the identification for this skill in the skills array.
      * @param firstLine
-     *            the first line that level up text will be printed on.
+     *         the first line that level up text will be printed on.
      * @param secondLine
-     *            the second line that level up text will be printed on.
+     *         the second line that level up text will be printed on.
      * @param chatbox
-     *            the chatbox interface displayed on level up.
+     *         the chatbox interface displayed on level up.
      * @param index
-     *            the index in the skill event array.
+     *         the index in the skill event array.
      */
     private SkillData(int id, int firstLine, int secondLine, int chatbox) {
         this.id = id;
@@ -78,7 +78,7 @@ public enum SkillData {
 
     /**
      * Gets the identification for this skill in the skills array.
-     * 
+     *
      * @return the identification for this skill.
      */
     public final int getId() {
@@ -87,7 +87,7 @@ public enum SkillData {
 
     /**
      * Gets the first line that level up text will be printed on.
-     * 
+     *
      * @return the first line.
      */
     public final int getFirstLine() {
@@ -96,7 +96,7 @@ public enum SkillData {
 
     /**
      * Gets the second line that level up text will be printed on.
-     * 
+     *
      * @return the second line.
      */
     public final int getSecondLine() {
@@ -105,7 +105,7 @@ public enum SkillData {
 
     /**
      * Gets the chatbox interface displayed on level up.
-     * 
+     *
      * @return the chatbox interface.
      */
     public final int getChatbox() {

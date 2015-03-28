@@ -5,7 +5,7 @@ import com.asteria.game.plugin.PluginContext;
 
 /**
  * The plugin context for the item on item packet.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public final class ItemOnItemPlugin implements PluginContext {
@@ -22,11 +22,11 @@ public final class ItemOnItemPlugin implements PluginContext {
 
     /**
      * Creates a new {@link ItemOnItemPlugin}.
-     * 
+     *
      * @param itemUsed
-     *            the item that was used on the other item.
+     *         the item that was used on the other item.
      * @param itemOn
-     *            the item that the other item was used on.
+     *         the item that the other item was used on.
      */
     public ItemOnItemPlugin(Item itemUsed, Item itemOn) {
         this.itemUsed = itemUsed;
@@ -35,7 +35,7 @@ public final class ItemOnItemPlugin implements PluginContext {
 
     /**
      * Gets the item that was used on the other item.
-     * 
+     *
      * @return the item that was used.
      */
     public Item getItemUsed() {
@@ -44,7 +44,7 @@ public final class ItemOnItemPlugin implements PluginContext {
 
     /**
      * Gets the item that the other item was used on.
-     * 
+     *
      * @return the item that was used on.
      */
     public Item getItemOn() {

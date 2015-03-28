@@ -3,7 +3,7 @@ package com.asteria.game.character.player.dialogue;
 /**
  * The enumerated type whose elements represent the expressions a character can
  * take on.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public enum Expression {
@@ -45,9 +45,9 @@ public enum Expression {
 
     /**
      * Creates a new {@link Expression}.
-     * 
+     *
      * @param expression
-     *            the identification for this expression.
+     *         the identification for this expression.
      */
     private Expression(int expression) {
         this.expression = expression;
@@ -55,7 +55,7 @@ public enum Expression {
 
     /**
      * Gets the identification for this expression.
-     * 
+     *
      * @return the expression.
      */
     public final int getExpression() {

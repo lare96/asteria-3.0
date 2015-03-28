@@ -5,7 +5,7 @@ import java.util.function.Consumer;
 
 /**
  * The dialogue chain entry that sends the player an option dialogue.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public class OptionDialogue implements DialogueChain {
@@ -17,9 +17,9 @@ public class OptionDialogue implements DialogueChain {
 
     /**
      * Creates a new {@link OptionDialogue}.
-     * 
+     *
      * @param options
-     *            the different options that will be displayed.
+     *         the different options that will be displayed.
      */
     public OptionDialogue(String... options) {
         this.options = options;
@@ -33,9 +33,10 @@ public class OptionDialogue implements DialogueChain {
     }
 
     /**
-     * Retrieves the option listener for this option dialogue entry. This can be
+     * Retrieves the option listener for this option dialogue entry. This can
+     * be
      * overridden to provide functionality for the displayed options.
-     * 
+     *
      * @return the option listener.
      */
     public Optional<Consumer<OptionType>> getOptionListener() {

@@ -25,7 +25,7 @@ package com.asteria.game.location;
 
 /**
  * Represents a tile to copy in the palette.
- * 
+ *
  * @author Graham Edgecombe
  * @author lare96 <http://github.com/lare96>
  */
@@ -53,11 +53,11 @@ public final class PaletteTile {
 
     /**
      * Creates a tile.
-     * 
+     *
      * @param x
-     *            The x coordinate.
+     *         The x coordinate.
      * @param y
-     *            The y coordinate.
+     *         The y coordinate.
      */
     public PaletteTile(int x, int y) {
         this(x, y, 0);
@@ -65,13 +65,13 @@ public final class PaletteTile {
 
     /**
      * Creates a tile.
-     * 
+     *
      * @param x
-     *            The x coordinate.
+     *         The x coordinate.
      * @param y
-     *            The y coordinate.
+     *         The y coordinate.
      * @param z
-     *            The z coordinate.
+     *         The z coordinate.
      */
     public PaletteTile(int x, int y, int z) {
         this(x, y, z, Palette.DIRECTION_NORMAL);
@@ -79,15 +79,15 @@ public final class PaletteTile {
 
     /**
      * Creates a tile.
-     * 
+     *
      * @param x
-     *            The x coordinate.
+     *         The x coordinate.
      * @param y
-     *            The y coordinate.
+     *         The y coordinate.
      * @param z
-     *            The z coordinate.
+     *         The z coordinate.
      * @param rot
-     *            The rotation.
+     *         The rotation.
      */
     public PaletteTile(int x, int y, int z, int rot) {
         this.x = x;
@@ -131,7 +131,7 @@ public final class PaletteTile {
      * A substitute for {@link Object#clone()} that creates another 'copy' of
      * this instance. The created copy <i>safe</i> meaning it does not hold
      * <b>any</b> references to the original instance.
-     * 
+     *
      * @return the copy of this instance that does not hold any references.
      */
     public PaletteTile copy() {
@@ -140,7 +140,7 @@ public final class PaletteTile {
 
     /**
      * Gets the x coordinate.
-     * 
+     *
      * @return The x coordinate.
      */
     public int getX() {
@@ -149,7 +149,7 @@ public final class PaletteTile {
 
     /**
      * Gets the y coordinate.
-     * 
+     *
      * @return The y coordinate.
      */
     public int getY() {
@@ -158,7 +158,7 @@ public final class PaletteTile {
 
     /**
      * Gets the z coordinate.
-     * 
+     *
      * @return The z coordinate.
      */
     public int getZ() {
@@ -167,7 +167,7 @@ public final class PaletteTile {
 
     /**
      * Gets the rotation.
-     * 
+     *
      * @return The rotation.
      */
     public int getRotation() {

@@ -18,7 +18,7 @@ import com.google.common.base.Preconditions;
  * contrast to other reactor implementations, this one runs on the main game
  * thread selecting and handling network events either asynchronously or right
  * on the underlying thread every {@code 600}ms.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public final class ServerHandler {
@@ -40,9 +40,9 @@ public final class ServerHandler {
 
     /**
      * The default constructor.
-     * 
+     *
      * @throws UnsupportedOperationException
-     *             if this class is instantiated.
+     *         if this class is instantiated.
      */
     private ServerHandler() {
         throw new UnsupportedOperationException();
@@ -51,11 +51,11 @@ public final class ServerHandler {
     /**
      * Starts the server handler by opening and configuring the selector and
      * server socket channel.
-     * 
+     *
      * @param port
-     *            the port to open this server handler on.
+     *         the port to open this server handler on.
      * @throws Exception
-     *             if any errors occur while starting the server handler.
+     *         if any errors occur while starting the server handler.
      */
     public static void start(int port) throws Exception {
         Preconditions.checkState(server == null && selector == null);
@@ -81,13 +81,14 @@ public final class ServerHandler {
                 it.remove();
             }
         } catch (Exception e) {
-            logger.log(Level.SEVERE, "An error has occured while selecting network events!", e);
+            logger.log(Level.SEVERE, "An error has occured while selecting " +
+                    "network events!", e);
         }
     }
 
     /**
      * Gets the selector that will determine which network events to handle.
-     * 
+     *
      * @return the selector to determine network events.
      */
     public static Selector getSelector() {
@@ -96,7 +97,7 @@ public final class ServerHandler {
 
     /**
      * Gets the server socket channel that the selector will be bound to.
-     * 
+     *
      * @return the server socket channel.
      */
     public static ServerSocketChannel getServer() {

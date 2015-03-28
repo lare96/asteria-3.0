@@ -5,7 +5,7 @@ import com.asteria.game.character.player.PlayerIO;
 
 /**
  * The parent class that provides functions for decoding the login protocol.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public abstract class LoginProtocolDecoder implements Runnable {
@@ -22,11 +22,11 @@ public abstract class LoginProtocolDecoder implements Runnable {
 
     /**
      * Creates a new {@link LoginProtocolDecoder}.
-     * 
+     *
      * @param session
-     *            the session that is decoding this protocol.
+     *         the session that is decoding this protocol.
      * @param state
-     *            the IO state the session must have to proceed.
+     *         the IO state the session must have to proceed.
      */
     public LoginProtocolDecoder(PlayerIO session, IOState state) {
         this.session = session;
@@ -54,7 +54,7 @@ public abstract class LoginProtocolDecoder implements Runnable {
 
     /**
      * Gets the session that is decoding this protocol.
-     * 
+     *
      * @return the session decoding the protocol.
      */
     public final PlayerIO getSession() {

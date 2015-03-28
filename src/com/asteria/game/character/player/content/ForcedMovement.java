@@ -4,7 +4,7 @@ import com.google.common.base.Preconditions;
 
 /**
  * The container class that represents a forced movement.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public final class ForcedMovement {
@@ -51,13 +51,13 @@ public final class ForcedMovement {
 
     /**
      * Creates a new {@link ForcedMovement}.
-     * 
+     *
      * @param amountX
-     *            the amount to move either east or west.
+     *         the amount to move either east or west.
      * @param amountY
-     *            the amount to move either north or south.
+     *         the amount to move either north or south.
      * @param direction
-     *            the direction to turn when moving.
+     *         the direction to turn when moving.
      */
     public ForcedMovement(int amountX, int amountY, int direction) {
         Preconditions.checkArgument(direction >= 0 && direction <= 3);
@@ -70,7 +70,7 @@ public final class ForcedMovement {
      * A substitute for {@link Object#clone()} that creates another 'copy' of
      * this instance. The created copy is <i>safe</i> meaning it does not hold
      * <b>any</b> references to the original instance.
-     * 
+     *
      * @return a reference-free copy of this instance.
      */
     public ForcedMovement copy() {
@@ -79,7 +79,7 @@ public final class ForcedMovement {
 
     /**
      * Gets the amount to move either east or west.
-     * 
+     *
      * @return the {@code X} amount to move.
      */
     public int getAmountX() {
@@ -88,7 +88,7 @@ public final class ForcedMovement {
 
     /**
      * Gets the amount to move either north or south.
-     * 
+     *
      * @return the {@code Y} amount to move.
      */
     public int getAmountY() {
@@ -97,7 +97,7 @@ public final class ForcedMovement {
 
     /**
      * Gets the direction to turn when moving.
-     * 
+     *
      * @return the direction to turn.
      */
     public int getDirection() {

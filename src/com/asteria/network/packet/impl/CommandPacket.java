@@ -9,7 +9,7 @@ import com.asteria.network.packet.PacketDecoder;
 /**
  * The packet that is sent from the client when the player chats anything
  * beginning with '::'.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public final class CommandPacket extends PacketDecoder {
@@ -20,6 +20,7 @@ public final class CommandPacket extends PacketDecoder {
             return;
 
         String[] text = buf.getString().toLowerCase().split(" ");
-        PluginHandler.execute(player, CommandPlugin.class, new CommandPlugin(text));
+        PluginHandler.execute(player, CommandPlugin.class, new CommandPlugin
+                (text));
     }
 }

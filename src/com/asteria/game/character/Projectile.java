@@ -7,7 +7,7 @@ import com.asteria.game.location.Position;
 /**
  * A container representing a graphic propelled through the air by some sort of
  * spell, weapon, or other miscellaneous force.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public final class Projectile {
@@ -59,30 +59,32 @@ public final class Projectile {
 
     /**
      * Creates a new {@link Projectile}.
-     * 
+     *
      * @param start
-     *            the starting position of the projectile.
+     *         the starting position of the projectile.
      * @param end
-     *            the ending position of the projectile.
+     *         the ending position of the projectile.
      * @param lockon
-     *            the lock on value of the projectile.
+     *         the lock on value of the projectile.
      * @param projectileId
-     *            the id of the projectile.
+     *         the id of the projectile.
      * @param speed
-     *            the speed of the projectile.
+     *         the speed of the projectile.
      * @param delay
-     *            the delay of the projectile.
+     *         the delay of the projectile.
      * @param startHeight
-     *            the starting height of the projectile.
+     *         the starting height of the projectile.
      * @param endHeight
-     *            the ending height of the projectile.
+     *         the ending height of the projectile.
      * @param curve
-     *            the curve angle of the projectile.
+     *         the curve angle of the projectile.
      */
-    public Projectile(Position start, Position end, int lockon, int projectileId, int speed, int delay, int startHeight,
-        int endHeight, int curve) {
+    public Projectile(Position start, Position end, int lockon, int
+            projectileId, int speed, int delay, int startHeight, int
+            endHeight, int curve) {
         this.start = start;
-        this.offset = new Position((end.getX() - start.getX()), (end.getY() - start.getY()));
+        this.offset = new Position((end.getX() - start.getX()), (end.getY() -
+                start.getY()));
         this.lockon = lockon;
         this.projectileId = projectileId;
         this.delay = delay;
@@ -95,28 +97,30 @@ public final class Projectile {
     /**
      * Creates a new {@link Projectile} based on the difference between the
      * {@code source} and {@code victim}.
-     * 
+     *
      * @param source
-     *            the character that is firing this projectile.
+     *         the character that is firing this projectile.
      * @param victim
-     *            the victim that this projectile is being fired at.
+     *         the victim that this projectile is being fired at.
      * @param projectileId
-     *            the id of the projectile.
+     *         the id of the projectile.
      * @param speed
-     *            the speed of the projectile.
+     *         the speed of the projectile.
      * @param delay
-     *            the delay of the projectile.
+     *         the delay of the projectile.
      * @param startHeight
-     *            the starting height of the projectile.
+     *         the starting height of the projectile.
      * @param endHeight
-     *            the ending height of the projectile.
+     *         the ending height of the projectile.
      * @param curve
-     *            the curve angle of the projectile.
+     *         the curve angle of the projectile.
      */
-    public Projectile(CharacterNode source, CharacterNode victim, int projectileId, int delay, int speed, int startHeight,
-        int endHeight, int curve) {
-        this(source.getPosition(), victim.getPosition(), (victim.getType() == NodeType.PLAYER ? -victim.getSlot() - 1 : victim
-            .getSlot() + 1), projectileId, delay, speed, startHeight, endHeight, curve);
+    public Projectile(CharacterNode source, CharacterNode victim, int
+            projectileId, int delay, int speed, int startHeight, int
+            endHeight, int curve) {
+        this(source.getPosition(), victim.getPosition(), (victim.getType() ==
+                NodeType.PLAYER ? -victim.getSlot() - 1 : victim.getSlot() +
+                1), projectileId, delay, speed, startHeight, endHeight, curve);
     }
 
     /**
@@ -126,7 +130,8 @@ public final class Projectile {
     public void sendProjectile() {
         World.getPlayers().forEach(player -> {
             if (start.isViewableFrom(player.getPosition())) {
-                player.getEncoder().sendProjectile(start, offset, 0, speed, projectileId, startHeight, endHeight, lockon, delay);
+                player.getEncoder().sendProjectile(start, offset, 0, speed,
+                        projectileId, startHeight, endHeight, lockon, delay);
 
             }
         });
@@ -134,7 +139,7 @@ public final class Projectile {
 
     /**
      * Gets the starting position of the projectile.
-     * 
+     *
      * @return the starting position of the projectile.
      */
     public Position getStart() {
@@ -143,7 +148,7 @@ public final class Projectile {
 
     /**
      * Gets the offset position of the projectile.
-     * 
+     *
      * @return the offset position of the projectile.
      */
     public Position getOffset() {
@@ -152,7 +157,7 @@ public final class Projectile {
 
     /**
      * Gets the speed of the projectile.
-     * 
+     *
      * @return the speed of the projectile.
      */
     public int getSpeed() {
@@ -161,7 +166,7 @@ public final class Projectile {
 
     /**
      * Gets the id of the projectile.
-     * 
+     *
      * @return the id of the projectile.
      */
     public int getProjectileId() {
@@ -170,7 +175,7 @@ public final class Projectile {
 
     /**
      * Gets the starting height of the projectile.
-     * 
+     *
      * @return the starting height of the projectile.
      */
     public int getStartHeight() {
@@ -179,7 +184,7 @@ public final class Projectile {
 
     /**
      * Gets the ending height of the projectile.
-     * 
+     *
      * @return the ending height of the projectile
      */
     public int getEndHeight() {
@@ -188,7 +193,7 @@ public final class Projectile {
 
     /**
      * Gets the lock on value of the projectile.
-     * 
+     *
      * @return the lock on value of the projectile.
      */
     public int getLockon() {
@@ -197,7 +202,7 @@ public final class Projectile {
 
     /**
      * Gets the delay of the projectile.
-     * 
+     *
      * @return the delay of the projectile.
      */
     public int getDelay() {
@@ -206,7 +211,7 @@ public final class Projectile {
 
     /**
      * Gets the curve angle of the projectile.
-     * 
+     *
      * @return the curve angle of the projectile.
      */
     public int getCurve() {

@@ -9,9 +9,10 @@ import com.asteria.game.character.player.content.WeaponInterface;
 import com.asteria.game.item.container.Equipment;
 
 /**
- * The enumerated type whose elements represent the ranged ammo that can be used
+ * The enumerated type whose elements represent the ranged ammo that can be
+ * used
  * in combat.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public enum CombatRangedAmmo {
@@ -92,23 +93,24 @@ public enum CombatRangedAmmo {
 
     /**
      * Creates a new {@link CombatRangedAmmo}.
-     * 
+     *
      * @param strength
-     *            the strength of this ranged ammo.
+     *         the strength of this ranged ammo.
      * @param projectile
-     *            the projectile identification for this ranged ammo.
+     *         the projectile identification for this ranged ammo.
      * @param delay
-     *            the delay of the projectile for this ranged ammo.
+     *         the delay of the projectile for this ranged ammo.
      * @param speed
-     *            the speed of the projectile for this ranged ammo.
+     *         the speed of the projectile for this ranged ammo.
      * @param startHeight
-     *            the starting height of the projectile for this ranged ammo.
+     *         the starting height of the projectile for this ranged ammo.
      * @param endHeight
-     *            the ending height of the projectile for this ranged ammo.
+     *         the ending height of the projectile for this ranged ammo.
      * @param graphic
-     *            the graphic for this ranged ammo.
+     *         the graphic for this ranged ammo.
      */
-    private CombatRangedAmmo(int strength, int projectile, int delay, int speed, int startHeight, int endHeight, int graphic) {
+    private CombatRangedAmmo(int strength, int projectile, int delay, int
+            speed, int startHeight, int endHeight, int graphic) {
         this.strength = strength;
         this.projectile = projectile;
         this.delay = delay;
@@ -127,26 +129,29 @@ public enum CombatRangedAmmo {
     /**
      * Gets the ammo from {@code player} that's currently in the weapon or
      * arrows slot.
-     * 
+     *
      * @param player
-     *            the player who's ammo will be retrieved.
+     *         the player who's ammo will be retrieved.
      * @return the ammo wrapped in an optional, or an empty optional if no ammo
-     *         was found.
+     * was found.
      */
     public static Optional<CombatRangedAmmo> getPlayerAmmo(Player player) {
-        int slot = player.getWeapon() == WeaponInterface.SHORTBOW || player.getWeapon() == WeaponInterface.LONGBOW || player
-            .getWeapon() == WeaponInterface.CROSSBOW ? Equipment.ARROWS_SLOT : Equipment.WEAPON_SLOT;
+        int slot = player.getWeapon() == WeaponInterface.SHORTBOW || player
+                .getWeapon() == WeaponInterface.LONGBOW || player.getWeapon()
+                == WeaponInterface.CROSSBOW ? Equipment.ARROWS_SLOT :
+                Equipment.WEAPON_SLOT;
         if (Combat.isCrystalBow(player))
             return Optional.of(CombatRangedAmmo.CRYSTAL_ARROW);
         if (player.getEquipment().get(slot) == null)
             return Optional.empty();
-        return Arrays.stream(CombatRangedAmmo.values()).filter(
-            c -> player.getEquipment().get(slot).getDefinition().getName().toLowerCase().contains(c.toString())).findFirst();
+        return Arrays.stream(CombatRangedAmmo.values()).filter(c -> player
+                .getEquipment().get(slot).getDefinition().getName()
+                .toLowerCase().contains(c.toString())).findFirst();
     }
 
     /**
      * Gets the strength of this ranged ammo.
-     * 
+     *
      * @return the strength.
      */
     public final int getStrength() {
@@ -155,7 +160,7 @@ public enum CombatRangedAmmo {
 
     /**
      * Gets the projectile identification for this ranged ammo.
-     * 
+     *
      * @return the projectile identification.
      */
     public final int getProjectile() {
@@ -164,7 +169,7 @@ public enum CombatRangedAmmo {
 
     /**
      * Gets the delay of the projectile for this ranged ammo.
-     * 
+     *
      * @return the projectile delay.
      */
     public final int getDelay() {
@@ -173,7 +178,7 @@ public enum CombatRangedAmmo {
 
     /**
      * Gets the speed of the projectile for this ranged ammo.
-     * 
+     *
      * @return the projectile speed.
      */
     public final int getSpeed() {
@@ -182,7 +187,7 @@ public enum CombatRangedAmmo {
 
     /**
      * Gets the starting height of the projectile for this ranged ammo.
-     * 
+     *
      * @return the projectile starting height.
      */
     public final int getStartHeight() {
@@ -191,7 +196,7 @@ public enum CombatRangedAmmo {
 
     /**
      * Gets the ending height of the projectile for this ranged ammo.
-     * 
+     *
      * @return the projectile ending height.
      */
     public final int getEndHeight() {
@@ -200,7 +205,7 @@ public enum CombatRangedAmmo {
 
     /**
      * Gets the graphic for this ranged ammo.
-     * 
+     *
      * @return the graphic.
      */
     public final int getGraphic() {

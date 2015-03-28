@@ -16,7 +16,7 @@ import com.asteria.task.TaskHandler;
  * The character implementation that represents a node that is operated by the
  * server. This type of node functions solely through the server executing
  * functions.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public final class Npc extends CharacterNode {
@@ -39,7 +39,8 @@ public final class Npc extends CharacterNode {
     /**
      * The movement coordinator for this NPC.
      */
-    private final NpcMovementCoordinator movementCoordinator = new NpcMovementCoordinator(this);
+    private final NpcMovementCoordinator movementCoordinator = new
+            NpcMovementCoordinator(this);
 
     /**
      * The current health of this NPC.
@@ -63,11 +64,11 @@ public final class Npc extends CharacterNode {
 
     /**
      * Creates a new {@link Npc}.
-     * 
+     *
      * @param id
-     *            the identification for this NPC.
+     *         the identification for this NPC.
      * @param position
-     *            the position of this character in the world.
+     *         the position of this character in the world.
      */
     public Npc(int id, Position position) {
         super(position, NodeType.NPC);
@@ -115,7 +116,8 @@ public final class Npc extends CharacterNode {
 
     @Override
     public String toString() {
-        return "NPC[slot= " + getSlot() + ", name=" + getDefinition().getName() + "]";
+        return "NPC[slot= " + getSlot() + ", name=" + getDefinition().getName
+                () + "]";
     }
 
     @Override
@@ -126,16 +128,20 @@ public final class Npc extends CharacterNode {
     @Override
     public int getBaseAttack(CombatType type) {
         int value = getDefinition().getAttackBonus();
-        if (weakenedBy == CombatWeaken.ATTACK_LOW || weakenedBy == CombatWeaken.ATTACK_HIGH)
+        if (weakenedBy == CombatWeaken.ATTACK_LOW || weakenedBy ==
+                CombatWeaken.ATTACK_HIGH)
             value -= (int) ((weakenedBy.getRate()) * (value));
         return value;
     }
 
     @Override
     public int getBaseDefence(CombatType type) {
-        int value = type == CombatType.MAGIC ? getDefinition().getMagicDefence() : type == CombatType.RANGED ? getDefinition()
-            .getRangedDefence() : getDefinition().getMeleeDefence();
-        if (weakenedBy == CombatWeaken.DEFENCE_LOW || weakenedBy == CombatWeaken.DEFENCE_HIGH)
+        int value = type == CombatType.MAGIC ? getDefinition()
+                .getMagicDefence() : type == CombatType.RANGED ?
+                getDefinition().getRangedDefence() : getDefinition()
+                .getMeleeDefence();
+        if (weakenedBy == CombatWeaken.DEFENCE_LOW || weakenedBy ==
+                CombatWeaken.DEFENCE_HIGH)
             value -= (int) ((weakenedBy.getRate()) * (value));
         return value;
     }
@@ -143,8 +149,9 @@ public final class Npc extends CharacterNode {
     @Override
     public void onSuccessfulHit(CharacterNode victim, CombatType type) {
         if (getDefinition().isPoisonous()) {
-            Combat.effect(new CombatPoisonEffect(victim, type == CombatType.RANGED || type == CombatType.MAGIC ? PoisonType.MILD
-                : PoisonType.EXTRA));
+            Combat.effect(new CombatPoisonEffect(victim, type == CombatType
+                    .RANGED || type == CombatType.MAGIC ? PoisonType.MILD :
+                    PoisonType.EXTRA));
         }
     }
 
@@ -168,16 +175,17 @@ public final class Npc extends CharacterNode {
 
     /**
      * Gets the respawn time for this NPC in ticks.
-     * 
+     *
      * @return the respawn time.
      */
     public int getRespawnTime() {
-        return ((getDefinition().getRespawnTime() - 1) <= 0 ? 1 : (getDefinition().getRespawnTime() - 1));
+        return ((getDefinition().getRespawnTime() - 1) <= 0 ? 1 :
+                (getDefinition().getRespawnTime() - 1));
     }
 
     /**
      * Gets the movement coordinator for this NPC.
-     * 
+     *
      * @return the movement coordinator.
      */
     public NpcMovementCoordinator getMovementCoordinator() {
@@ -186,9 +194,9 @@ public final class Npc extends CharacterNode {
 
     /**
      * Determines if this NPC was originally random walking.
-     * 
+     *
      * @return {@code true} if this NPC was originally walking, {@code false}
-     *         otherwise.
+     * otherwise.
      */
     public boolean isOriginalRandomWalk() {
         return originalRandomWalk;
@@ -196,9 +204,9 @@ public final class Npc extends CharacterNode {
 
     /**
      * Sets the value for {@link Npc#originalRandomWalk}.
-     * 
+     *
      * @param originalRandomWalk
-     *            the new value to set.
+     *         the new value to set.
      */
     public void setOriginalRandomWalk(boolean originalRandomWalk) {
         this.originalRandomWalk = originalRandomWalk;
@@ -206,7 +214,7 @@ public final class Npc extends CharacterNode {
 
     /**
      * Determines if this NPC respawns.
-     * 
+     *
      * @return {@code true} if this NPC respawns, {@code false} otherwise.
      */
     public boolean isRespawn() {
@@ -215,9 +223,9 @@ public final class Npc extends CharacterNode {
 
     /**
      * Sets the value for {@link Npc#respawn}.
-     * 
+     *
      * @param respawn
-     *            the new value to set.
+     *         the new value to set.
      */
     public void setRespawn(boolean respawn) {
         this.respawn = respawn;
@@ -225,7 +233,7 @@ public final class Npc extends CharacterNode {
 
     /**
      * Gets the identification for this NPC.
-     * 
+     *
      * @return the identification.
      */
     public int getId() {
@@ -234,7 +242,7 @@ public final class Npc extends CharacterNode {
 
     /**
      * Gets the maximum health of this NPC.
-     * 
+     *
      * @return the maximum health.
      */
     public int getMaxHealth() {
@@ -243,7 +251,7 @@ public final class Npc extends CharacterNode {
 
     /**
      * Gets the original position that this NPC was created on.
-     * 
+     *
      * @return the original position.
      */
     public Position getOriginalPosition() {
@@ -252,9 +260,9 @@ public final class Npc extends CharacterNode {
 
     /**
      * Sets the value for {@link Npc#currentHealth}.
-     * 
+     *
      * @param currentHealth
-     *            the new value to set.
+     *         the new value to set.
      */
     public void setCurrentHealth(int currentHealth) {
         this.currentHealth = currentHealth;
@@ -271,9 +279,9 @@ public final class Npc extends CharacterNode {
 
     /**
      * Sets the value for {@link Npc#weakenedBy}.
-     * 
+     *
      * @param weakenedBy
-     *            the new value to set.
+     *         the new value to set.
      */
     public void setWeakenedBy(CombatWeaken weakenedBy) {
         this.weakenedBy = weakenedBy;
@@ -281,7 +289,7 @@ public final class Npc extends CharacterNode {
 
     /**
      * Gets the definition for this NPC.
-     * 
+     *
      * @return the definition.
      */
     public NpcDefinition getDefinition() {

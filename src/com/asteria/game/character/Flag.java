@@ -3,7 +3,7 @@ package com.asteria.game.character;
 /**
  * The enumerated type whose elements represent the update flags used for the
  * update blocks.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public enum Flag {
@@ -26,9 +26,9 @@ public enum Flag {
 
     /**
      * Creates a new {@link Flag}.
-     * 
+     *
      * @param id
-     *            the identification for this update flag.
+     *         the identification for this update flag.
      */
     private Flag(int id) {
         this.id = id;
@@ -36,7 +36,7 @@ public enum Flag {
 
     /**
      * Gets the identification for this update flag.
-     * 
+     *
      * @return the identification for this update flag.
      */
     public final int getId() {
@@ -45,7 +45,7 @@ public enum Flag {
 
     /**
      * Gets the size of this enumerated type.
-     * 
+     *
      * @return the size.
      */
     public static int size() {

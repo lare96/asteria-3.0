@@ -4,7 +4,7 @@ import com.asteria.game.item.Item;
 
 /**
  * The dialogue chain entry that gives the player an item.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public final class GiveItemDialogue implements DialogueChain {
@@ -21,11 +21,11 @@ public final class GiveItemDialogue implements DialogueChain {
 
     /**
      * Creates a new {@link GiveItemDialogue}.
-     * 
+     *
      * @param item
-     *            the item to give to the player during this chain.
+     *         the item to give to the player during this chain.
      * @param text
-     *            the text to display when the item is given.
+     *         the text to display when the item is given.
      */
     public GiveItemDialogue(Item item, String text) {
         this.item = item;
@@ -36,10 +36,13 @@ public final class GiveItemDialogue implements DialogueChain {
     public void accept(DialogueChainBuilder dialogue) {
         if (dialogue.getPlayer().getInventory().add(item)) {
             dialogue.getPlayer().getEncoder().sendString(text, 308);
-            dialogue.getPlayer().getEncoder().sendItemModelOnInterface(307, 200, item.getId());
+            dialogue.getPlayer().getEncoder().sendItemModelOnInterface(307,
+                    200, item.getId());
             dialogue.getPlayer().getEncoder().sendChatInterface(306);
-        } else {
-            dialogue.getPlayer().getEncoder().sendChatboxString("You do not have enough space in your inventory!");
+        }
+        else {
+            dialogue.getPlayer().getEncoder().sendChatboxString("You do not " +
+                    "have enough space in your inventory!");
             dialogue.interrupt();
         }
     }

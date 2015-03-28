@@ -8,7 +8,7 @@ import com.google.gson.FieldAttributes;
 /**
  * The serialization exclusion strategy that will filter certain fields from
  * being serialized by the player serializer.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public class PlayerSerializationFilter implements ExclusionStrategy {
@@ -20,7 +20,8 @@ public class PlayerSerializationFilter implements ExclusionStrategy {
 
     @Override
     public boolean shouldSkipField(FieldAttributes attr) {
-        return attr.hasModifier(Modifier.STATIC) || attr.hasModifier(Modifier.TRANSIENT) || attr
-            .getAnnotation(SerializationExclude.class) != null;
+        return attr.hasModifier(Modifier.STATIC) || attr.hasModifier(Modifier
+                .TRANSIENT) || attr.getAnnotation(SerializationExclude.class)
+                != null;
     }
 }

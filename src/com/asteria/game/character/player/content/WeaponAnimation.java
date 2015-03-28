@@ -7,9 +7,10 @@ import com.asteria.game.character.player.Player;
 import com.asteria.game.item.Item;
 
 /**
- * The container class that represents one equipment animation that is used with
+ * The container class that represents one equipment animation that is used
+ * with
  * weapons.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public final class WeaponAnimation {
@@ -17,7 +18,8 @@ public final class WeaponAnimation {
     /**
      * The hash collection of weapon animations.
      */
-    public static final Map<Integer, WeaponAnimation> ANIMATIONS = new HashMap<>();
+    public static final Map<Integer, WeaponAnimation> ANIMATIONS = new
+            HashMap<>();
 
     /**
      * The standing animation for this weapon animation.
@@ -36,13 +38,13 @@ public final class WeaponAnimation {
 
     /**
      * Creates a new {@link WeaponAnimation}.
-     * 
+     *
      * @param standing
-     *            the standing animation for this weapon animation.
+     *         the standing animation for this weapon animation.
      * @param walking
-     *            the walking animation for this weapon animation.
+     *         the walking animation for this weapon animation.
      * @param running
-     *            the running animation for this weapon animation.
+     *         the running animation for this weapon animation.
      */
     public WeaponAnimation(int standing, int walking, int running) {
         this.standing = standing;
@@ -54,7 +56,7 @@ public final class WeaponAnimation {
      * A substitute for {@link Object#clone()} that creates another 'copy' of
      * this instance. The created copy is <i>safe</i> meaning it does not hold
      * <b>any</b> references to the original instance.
-     * 
+     *
      * @return a reference-free copy of this instance.
      */
     public WeaponAnimation copy() {
@@ -64,11 +66,11 @@ public final class WeaponAnimation {
     /**
      * The method executed when weapon {@code item} is equipped that assigns a
      * weapon animation to {@code player}.
-     * 
+     *
      * @param player
-     *            the player equipping the item.
+     *         the player equipping the item.
      * @param item
-     *            the item the player is equipping.
+     *         the item the player is equipping.
      */
     public static void execute(Player player, Item item) {
         if (item == null)
@@ -79,7 +81,7 @@ public final class WeaponAnimation {
 
     /**
      * Gets the standing animation for this weapon animation.
-     * 
+     *
      * @return the standing animation.
      */
     public int getStanding() {
@@ -88,7 +90,7 @@ public final class WeaponAnimation {
 
     /**
      * Gets the walking animation for this weapon animation.
-     * 
+     *
      * @return the walking animation.
      */
     public int getWalking() {
@@ -97,7 +99,7 @@ public final class WeaponAnimation {
 
     /**
      * Gets the running animation for this weapon animation.
-     * 
+     *
      * @return the running animation.
      */
     public int getRunning() {

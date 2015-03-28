@@ -8,7 +8,7 @@ import com.google.common.base.Preconditions;
 
 /**
  * The container that holds data for an entire combat session attack.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public class CombatSessionData {
@@ -50,19 +50,21 @@ public class CombatSessionData {
 
     /**
      * Creates a new {@link CombatSessionData}.
-     * 
+     *
      * @param attacker
-     *            the attacker in this combat session.
+     *         the attacker in this combat session.
      * @param victim
-     *            the victim in this combat session.
+     *         the victim in this combat session.
      * @param amount
-     *            the amount of hits to calculate.
+     *         the amount of hits to calculate.
      * @param type
-     *            the combat type the attacker is using.
+     *         the combat type the attacker is using.
      * @param checkAccuracy
-     *            determines if accuracy should be calculated for hits.
+     *         determines if accuracy should be calculated for hits.
      */
-    public CombatSessionData(CharacterNode attacker, CharacterNode victim, int amount, CombatType type, boolean checkAccuracy) {
+    public CombatSessionData(CharacterNode attacker, CharacterNode victim,
+                             int amount, CombatType type, boolean
+                                     checkAccuracy) {
         this.attacker = attacker;
         this.victim = victim;
         this.type = type;
@@ -74,27 +76,28 @@ public class CombatSessionData {
     /**
      * Creates a new {@link CombatSessionData} with an {@code amount} of
      * {@code 0}.
-     * 
+     *
      * @param attacker
-     *            the attacker in this combat session.
+     *         the attacker in this combat session.
      * @param victim
-     *            the victim in this combat session.
+     *         the victim in this combat session.
      * @param type
-     *            the combat type the attacker is using.
+     *         the combat type the attacker is using.
      * @param checkAccuracy
-     *            determines if accuracy should be calculated for hits.
+     *         determines if accuracy should be calculated for hits.
      */
-    public CombatSessionData(CharacterNode attacker, CharacterNode victim, CombatType type, boolean checkAccuracy) {
+    public CombatSessionData(CharacterNode attacker, CharacterNode victim,
+                             CombatType type, boolean checkAccuracy) {
         this(attacker, victim, 0, type, checkAccuracy);
     }
 
     /**
      * Calculates all of the hits that will be dealt before the attack is
      * launched.
-     * 
+     *
      * @param amount
-     *            the amount of hits to calculate, with minimum of {@code 0} and
-     *            a maximum of {@code 1}.
+     *         the amount of hits to calculate, with minimum of {@code 0} and
+     *         a maximum of {@code 1}.
      * @return an array of the calculated hits.
      */
     private final CombatHit[] calculateHits(int amount) {
@@ -105,7 +108,8 @@ public class CombatSessionData {
         }
         CombatHit[] array = new CombatHit[amount];
         for (int i = 0; i < array.length; i++) {
-            array[i] = new CombatHit(Combat.calculateRandomHit(attacker, victim, type), calculateAccuracy());
+            array[i] = new CombatHit(Combat.calculateRandomHit(attacker,
+                    victim, type), calculateAccuracy());
             if (array[i].isAccurate())
                 accurate = true;
         }
@@ -115,7 +119,7 @@ public class CombatSessionData {
     /**
      * Determines if a hit is accurate or not. This method may return different
      * values if called multiple times.
-     * 
+     *
      * @return {@code true} if the hit is accurate, {@code false} otherwise.
      */
     private boolean calculateAccuracy() {
@@ -124,7 +128,7 @@ public class CombatSessionData {
 
     /**
      * Launches all of the damage concealed within this container.
-     * 
+     *
      * @return the amount of damage that was dealt.
      */
     public final int attack() {
@@ -147,17 +151,18 @@ public class CombatSessionData {
     /**
      * Determines which skills will be given experience based on the combat
      * type.
-     * 
+     *
      * @return an array of skills that will be given experience for this attack.
      */
     private final int[] determineExperience() {
-        return attacker.getType() == NodeType.NPC ? new int[] {} : ((Player) attacker).getFightType().getStyle().skills(type);
+        return attacker.getType() == NodeType.NPC ? new int[] {} : ((Player)
+                attacker).getFightType().getStyle().skills(type);
     }
 
     /**
      * The method that can be overridden to do any last second modifications to
      * the container before hits are dealt to the victim.
-     * 
+     *
      * @return the modified combat session data container.
      */
     public CombatSessionData preAttack() {
@@ -167,10 +172,10 @@ public class CombatSessionData {
     /**
      * The method that can be overridden to do any post-attack effects to the
      * victim. Do <b>not</b> reset the combat builder here!
-     * 
+     *
      * @param counter
-     *            the amount of damage this attack inflicted, always {@code 0}
-     *            if the attack was inaccurate.
+     *         the amount of damage this attack inflicted, always {@code 0}
+     *         if the attack was inaccurate.
      */
     public void postAttack(int counter) {
 
@@ -178,7 +183,7 @@ public class CombatSessionData {
 
     /**
      * Gets the attacker in this combat session.
-     * 
+     *
      * @return the attacker.
      */
     public final CharacterNode getAttacker() {
@@ -187,7 +192,7 @@ public class CombatSessionData {
 
     /**
      * Gets the victim in this combat session.
-     * 
+     *
      * @return the victim.
      */
     public final CharacterNode getVictim() {
@@ -196,7 +201,7 @@ public class CombatSessionData {
 
     /**
      * Determines if at least one hit in this container is accurate.
-     * 
+     *
      * @return {@code true} if one hit is accurate, {@code false} otherwise.
      */
     public final boolean isAccurate() {
@@ -205,9 +210,9 @@ public class CombatSessionData {
 
     /**
      * Sets the value for {@link CombatSessionData#accurate}.
-     * 
+     *
      * @param accurate
-     *            the new value to set.
+     *         the new value to set.
      */
     public final void setAccurate(boolean accurate) {
         this.accurate = accurate;
@@ -215,7 +220,7 @@ public class CombatSessionData {
 
     /**
      * Gets the hits that will be sent when the attacker attacks.
-     * 
+     *
      * @return the hits that will be sent.
      */
     public final CombatHit[] getHits() {
@@ -224,7 +229,7 @@ public class CombatSessionData {
 
     /**
      * Gets the skills that experience will be given to.
-     * 
+     *
      * @return the skills for experience.
      */
     public final int[] getExperience() {
@@ -233,7 +238,7 @@ public class CombatSessionData {
 
     /**
      * Gets the combat type the attacker is using.
-     * 
+     *
      * @return the combat type.
      */
     public final CombatType getType() {
@@ -242,9 +247,9 @@ public class CombatSessionData {
 
     /**
      * Determines if accuracy should be taken into account.
-     * 
+     *
      * @return {@code true} if accuracy should be calculated, {@code false}
-     *         otherwise.
+     * otherwise.
      */
     public final boolean isCheckAccuracy() {
         return checkAccuracy;

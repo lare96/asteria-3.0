@@ -10,7 +10,7 @@ import com.asteria.utility.RandomGen;
 /**
  * The container class that contains the drop tables for a set of NPCs along
  * with functions to manage these tables.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public final class NpcDropTable {
@@ -44,13 +44,13 @@ public final class NpcDropTable {
 
     /**
      * Creates a new {@link NpcDropTable}.
-     * 
+     *
      * @param npcs
-     *            the NPC identifiers that these drop tables are for.
+     *         the NPC identifiers that these drop tables are for.
      * @param dynamic
-     *            the dynamic drop table.
+     *         the dynamic drop table.
      * @param rare
-     *            the rare drop table.
+     *         the rare drop table.
      */
     public NpcDropTable(int[] npcs, NpcDrop[] dynamic, NpcDrop[] rare) {
         this.npcs = npcs;
@@ -63,9 +63,9 @@ public final class NpcDropTable {
      * container to determine an array of items to drop. Please note that this
      * is not a static implementation meaning that calling this multiple times
      * will return a different array of items.
-     * 
+     *
      * @param player
-     *            the player that these calculations are being performed for.
+     *         the player that these calculations are being performed for.
      * @return the array of items that were calculated.
      */
     public Item[] toItems(Player player) {
@@ -84,7 +84,7 @@ public final class NpcDropTable {
 
     /**
      * Gets the NPC identifiers that these drop tables are for.
-     * 
+     *
      * @return the NPC identifiers for these tables.
      */
     public int[] getNpcs() {
@@ -93,7 +93,7 @@ public final class NpcDropTable {
 
     /**
      * Gets the dynamic drop table.
-     * 
+     *
      * @return the dynamic table.
      */
     public NpcDrop[] getDynamic() {
@@ -102,7 +102,7 @@ public final class NpcDropTable {
 
     /**
      * Gets the rare drop table.
-     * 
+     *
      * @return the rare table.
      */
     public NpcDrop[] getRare() {

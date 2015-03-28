@@ -3,7 +3,7 @@ package com.asteria.game.character;
 /**
  * The enumerated type whose elements represent the levels an animation can be
  * prioritized with.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public enum AnimationPriority {
@@ -18,9 +18,9 @@ public enum AnimationPriority {
 
     /**
      * Creates a new {@link AnimationPriority}.
-     * 
+     *
      * @param value
-     *            the value of this priority.
+     *         the value of this priority.
      */
     private AnimationPriority(int value) {
         this.value = value;
@@ -28,7 +28,7 @@ public enum AnimationPriority {
 
     /**
      * Gets the value of this priority.
-     * 
+     *
      * @return the value of this priority.
      */
     public final int getValue() {

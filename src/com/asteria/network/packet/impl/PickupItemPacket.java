@@ -13,7 +13,7 @@ import com.asteria.network.packet.PacketDecoder;
 
 /**
  * The packet sent from the client when a player attempts to pick up an item.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public final class PickupItemPacket extends PacketDecoder {
@@ -30,13 +30,18 @@ public final class PickupItemPacket extends PacketDecoder {
             return;
         player.setSkillAction(false);
         player.getMovementListener().append(() -> {
-            if (player.getPosition().equals(new Position(itemX, itemY, player.getPosition().getZ()))) {
-                Position position = new Position(itemX, itemY, player.getPosition().getZ());
-                Optional<ItemNode> item = ItemNodeManager.getItem(itemId, position);
+            if (player.getPosition().equals(new Position(itemX, itemY, player
+                    .getPosition().getZ()))) {
+                Position position = new Position(itemX, itemY, player
+                        .getPosition().getZ());
+                Optional<ItemNode> item = ItemNodeManager.getItem(itemId,
+                        position);
 
                 if (item.isPresent()) {
-                    if (!player.getInventory().spaceFor(new Item(itemId, item.get().getItem().getAmount()))) {
-                        player.getEncoder().sendMessage("You don't have enough inventory space to pick this item up.");
+                    if (!player.getInventory().spaceFor(new Item(itemId, item
+                            .get().getItem().getAmount()))) {
+                        player.getEncoder().sendMessage("You don't have " +
+                                "enough inventory space to pick this item up.");
                         return;
                     }
                     item.get().onPickup(player);

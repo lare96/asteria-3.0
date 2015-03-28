@@ -4,7 +4,7 @@ import com.asteria.utility.RandomGen;
 
 /**
  * The location type that models any area in a square or rectangle shape.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public final class SquareLocation extends Location {
@@ -36,17 +36,17 @@ public final class SquareLocation extends Location {
 
     /**
      * Creates a new {@link SquareLocation}.
-     * 
+     *
      * @param swX
-     *            the south-west {@code X} corner of the box.
+     *         the south-west {@code X} corner of the box.
      * @param swY
-     *            the south-west {@code Y} corner of the box.
+     *         the south-west {@code Y} corner of the box.
      * @param neX
-     *            the north-east {@code X} corner of the box.
+     *         the north-east {@code X} corner of the box.
      * @param neY
-     *            the north-east {@code Y} corner of the box.
+     *         the north-east {@code Y} corner of the box.
      * @param z
-     *            the {@code Z} level of the box.
+     *         the {@code Z} level of the box.
      */
     public SquareLocation(int swX, int swY, int neX, int neY, int z) {
         this.swX = swX;
@@ -57,16 +57,17 @@ public final class SquareLocation extends Location {
     }
 
     /**
-     * Creates a new {@link SquareLocation} from the center position and radius.
-     * 
+     * Creates a new {@link SquareLocation} from the center position and
+     * radius.
+     *
      * @param x
-     *            the center {@code X} coordinate.
+     *         the center {@code X} coordinate.
      * @param y
-     *            the center {@code Y} coordinate.
+     *         the center {@code Y} coordinate.
      * @param z
-     *            the center {@code Z} coordinate.
+     *         the center {@code Z} coordinate.
      * @param radius
-     *            the radius of this location from the center coordinates.
+     *         the radius of this location from the center coordinates.
      */
     public SquareLocation(int x, int y, int z, int radius) {
         this(x - radius, y - radius, x + radius, y + radius, z);
@@ -79,7 +80,8 @@ public final class SquareLocation extends Location {
         if (!(obj instanceof SquareLocation))
             return false;
         SquareLocation other = (SquareLocation) obj;
-        return other.swX == swX && other.swY == swY && other.neX == neX && other.neY == neY && other.z == z;
+        return other.swX == swX && other.swY == swY && other.neX == neX &&
+                other.neY == neY && other.z == z;
     }
 
     @Override
@@ -98,19 +100,23 @@ public final class SquareLocation extends Location {
     public boolean inLocation(Position position) {
         if (position.getZ() != z)
             return false;
-        return position.getX() >= swX && position.getX() <= neX && position.getY() >= swY && position.getY() <= neY;
+        return position.getX() >= swX && position.getX() <= neX && position
+                .getY() >= swY && position.getY() <= neY;
     }
 
     @Override
     public String toString() {
-        return "SQUARE_LOCATION[swX= " + swX + ", swY= " + swY + ", neX= " + neX + ", neY= " + neY + "]";
+        return "SQUARE_LOCATION[swX= " + swX + ", swY= " + swY + ", neX= " +
+                neX + ", neY= " + neY + "]";
     }
 
     @Override
     public Position random() {
         RandomGen r = new RandomGen();
-        int x = r.nextInt((Math.max(swX, neX) - Math.min(swX, neX) + 1) + Math.min(swX, neX));
-        int y = r.nextInt(Math.max(swY, neY) - Math.min(swY, neY) + 1) + Math.min(swY, neY);
+        int x = r.nextInt((Math.max(swX, neX) - Math.min(swX, neX) + 1) +
+                Math.min(swX, neX));
+        int y = r.nextInt(Math.max(swY, neY) - Math.min(swY, neY) + 1) + Math
+                .min(swY, neY);
         return new Position(x, y, z);
     }
 
@@ -118,7 +124,7 @@ public final class SquareLocation extends Location {
      * A substitute for {@link Object#clone()} that creates another 'copy' of
      * this instance. The created copy <i>safe</i> meaning it does not hold
      * <b>any</b> references to the original instance.
-     * 
+     *
      * @return the copy of this instance that does not hold any references.
      */
     public SquareLocation copy() {
@@ -127,7 +133,7 @@ public final class SquareLocation extends Location {
 
     /**
      * Gets the south-west {@code X} corner of the box.
-     * 
+     *
      * @return the {@code X} corner of the box.
      */
     public int getSwX() {
@@ -136,7 +142,7 @@ public final class SquareLocation extends Location {
 
     /**
      * Gets the south-west {@code Y} corner of the box.
-     * 
+     *
      * @return the {@code Y} corner of the box.
      */
     public int getSwY() {
@@ -145,7 +151,7 @@ public final class SquareLocation extends Location {
 
     /**
      * Gets the north-east {@code X} corner of the box.
-     * 
+     *
      * @return the {@code X} corner of the box.
      */
     public int getNeX() {
@@ -154,7 +160,7 @@ public final class SquareLocation extends Location {
 
     /**
      * Gets the north-east {@code Y} corner of the box.
-     * 
+     *
      * @return the {@code Y} corner of the box.
      */
     public int getNeY() {
@@ -163,7 +169,7 @@ public final class SquareLocation extends Location {
 
     /**
      * Gets the {@code Z} level of the box.
-     * 
+     *
      * @return the {@code Z} level of the box.
      */
     public int getZ() {

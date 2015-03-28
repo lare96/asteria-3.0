@@ -2,7 +2,7 @@ package com.asteria.game.character.player.login;
 
 /**
  * The enumerated type whose elements represent the login response types.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public enum LoginResponse {
@@ -29,9 +29,9 @@ public enum LoginResponse {
 
     /**
      * Creates a new {@link LoginResponse}.
-     * 
+     *
      * @param code
-     *            the response code that the protocol recognizes.
+     *         the response code that the protocol recognizes.
      */
     private LoginResponse(int code) {
         this.code = code;
@@ -39,7 +39,7 @@ public enum LoginResponse {
 
     /**
      * Gets the response code that the protocol recognizes.
-     * 
+     *
      * @return the response code.
      */
     public final int getCode() {

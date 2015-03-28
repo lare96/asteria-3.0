@@ -17,7 +17,7 @@ import com.asteria.task.Task;
  * <p>
  * The skills that may use this type skill action include, but are not limited
  * to {@code PRAYER}.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  * @see SkillAction
  * @see HarvestingSkillAction
@@ -27,11 +27,11 @@ public abstract class DestructionSkillAction extends SkillAction {
 
     /**
      * Creates a new {@link DestructionSkillAction}.
-     * 
+     *
      * @param player
-     *            the player this skill action is for.
+     *         the player this skill action is for.
      * @param position
-     *            the position the player should face.
+     *         the position the player should face.
      */
     public DestructionSkillAction(Player player, Optional<Position> position) {
         super(player, position);
@@ -40,9 +40,11 @@ public abstract class DestructionSkillAction extends SkillAction {
     @Override
     public boolean init() {
         Player player = getPlayer();
-        String name = ItemDefinition.DEFINITIONS[destructItem().getId()].getName();
+        String name = ItemDefinition.DEFINITIONS[destructItem().getId()]
+                .getName();
         if (!player.getInventory().contains(destructItem().getId())) {
-            player.getEncoder().sendMessage("You do not have any " + name + " in your inventory.");
+            player.getEncoder().sendMessage("You do not have any " + name + "" +
+                    " in your inventory.");
             return false;
         }
         return true;
@@ -62,11 +64,11 @@ public abstract class DestructionSkillAction extends SkillAction {
 
     /**
      * The method executed upon destruction of the item.
-     * 
+     *
      * @param t
-     *            the task executing this method.
+     *         the task executing this method.
      * @param success
-     *            determines if the destruction was successful or not.
+     *         determines if the destruction was successful or not.
      */
     public void onDestruct(Task t, boolean success) {
 
@@ -74,7 +76,7 @@ public abstract class DestructionSkillAction extends SkillAction {
 
     /**
      * The item that will be removed upon destruction.
-     * 
+     *
      * @return the item that will be removed.
      */
     public abstract Item destructItem();

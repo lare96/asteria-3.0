@@ -2,7 +2,7 @@ package com.asteria.game.character.npc;
 
 /**
  * The container that represents an NPC definition.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public final class NpcDefinition {
@@ -114,52 +114,56 @@ public final class NpcDefinition {
 
     /**
      * Creates a new {@link NpcDefintion}.
-     * 
+     *
      * @param id
-     *            the identification for this NPC.
+     *         the identification for this NPC.
      * @param name
-     *            the name of this NPC.
+     *         the name of this NPC.
      * @param description
-     *            the description of this NPC.
+     *         the description of this NPC.
      * @param combatLevel
-     *            the combat level of this NPC.
+     *         the combat level of this NPC.
      * @param size
-     *            the size of this NPC.
+     *         the size of this NPC.
      * @param attackable
-     *            determines if this NPC can be attacked.
+     *         determines if this NPC can be attacked.
      * @param aggressive
-     *            determines if this NPC is aggressive.
+     *         determines if this NPC is aggressive.
      * @param retreats
-     *            determines if this NPC retreats.
+     *         determines if this NPC retreats.
      * @param poisonous
-     *            determines if this NPC is poisonous.
+     *         determines if this NPC is poisonous.
      * @param respawnTime
-     *            the time it takes for this NPC to respawn.
+     *         the time it takes for this NPC to respawn.
      * @param maxHit
-     *            the max hit of this NPC.
+     *         the max hit of this NPC.
      * @param hitpoints
-     *            the maximum amount of hitpoints this NPC has.
+     *         the maximum amount of hitpoints this NPC has.
      * @param attackSpeed
-     *            the attack speed of this NPC.
+     *         the attack speed of this NPC.
      * @param attackAnimation
-     *            the attack animation of this NPC.
+     *         the attack animation of this NPC.
      * @param defenceAnimation
-     *            the defence animation of this NPC.
+     *         the defence animation of this NPC.
      * @param deathAnimation
-     *            the death animation of this NPC.
+     *         the death animation of this NPC.
      * @param attackBonus
-     *            the attack bonus of this NPC.
+     *         the attack bonus of this NPC.
      * @param meleeDefence
-     *            the melee defence bonus of this NPC.
+     *         the melee defence bonus of this NPC.
      * @param rangedDefence
-     *            the ranged defence of this NPC.
+     *         the ranged defence of this NPC.
      * @param magicDefence
-     *            the magic defence of this NPC.
+     *         the magic defence of this NPC.
      */
-    public NpcDefinition(int id, String name, String description, int combatLevel, int size, boolean attackable,
-        boolean aggressive, boolean retreats, boolean poisonous, int respawnTime, int maxHit, int hitpoints, int attackSpeed,
-        int attackAnimation, int defenceAnimation, int deathAnimation, int attackBonus, int meleeDefence, int rangedDefence,
-        int magicDefence) {
+    public NpcDefinition(int id, String name, String description, int
+            combatLevel, int size, boolean attackable, boolean aggressive,
+                         boolean retreats, boolean poisonous, int
+                                 respawnTime, int maxHit, int hitpoints, int
+                                 attackSpeed, int attackAnimation, int
+                                 defenceAnimation, int deathAnimation, int
+                                 attackBonus, int meleeDefence, int
+                                 rangedDefence, int magicDefence) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -184,7 +188,7 @@ public final class NpcDefinition {
 
     /**
      * Gets the identification for this NPC.
-     * 
+     *
      * @return the identification.
      */
     public int getId() {
@@ -193,7 +197,7 @@ public final class NpcDefinition {
 
     /**
      * Gets the name of this NPC.
-     * 
+     *
      * @return the name.
      */
     public String getName() {
@@ -202,7 +206,7 @@ public final class NpcDefinition {
 
     /**
      * Gets the description of this NPC.
-     * 
+     *
      * @return the description.
      */
     public String getDescription() {
@@ -211,7 +215,7 @@ public final class NpcDefinition {
 
     /**
      * Gets the combat level of this npc.
-     * 
+     *
      * @return the combat level
      */
     public int getCombatLevel() {
@@ -220,7 +224,7 @@ public final class NpcDefinition {
 
     /**
      * Gets the size of this NPC.
-     * 
+     *
      * @return the size.
      */
     public int getSize() {
@@ -229,9 +233,9 @@ public final class NpcDefinition {
 
     /**
      * Determines if this NPC can be attacked.
-     * 
+     *
      * @return {@code true} if this NPC can be attacked, {@code false}
-     *         otherwise.
+     * otherwise.
      */
     public boolean isAttackable() {
         return attackable;
@@ -239,7 +243,7 @@ public final class NpcDefinition {
 
     /**
      * Determines if this NPC is aggressive.
-     * 
+     *
      * @return {@code true} if this NPC is aggressive, {@code false} otherwise.
      */
     public boolean isAggressive() {
@@ -248,7 +252,7 @@ public final class NpcDefinition {
 
     /**
      * Determines if this NPC retreats.
-     * 
+     *
      * @return {@code true} if this NPC can retreat, {@code false} otherwise.
      */
     public boolean isRetreats() {
@@ -257,7 +261,7 @@ public final class NpcDefinition {
 
     /**
      * Determines if this NPC is poisonous.
-     * 
+     *
      * @return {@code true} if this NPC is poisonous, {@code false} otherwise.
      */
     public boolean isPoisonous() {
@@ -266,7 +270,7 @@ public final class NpcDefinition {
 
     /**
      * Gets the time it takes for this NPC to respawn.
-     * 
+     *
      * @return the respawn time.
      */
     public int getRespawnTime() {
@@ -275,7 +279,7 @@ public final class NpcDefinition {
 
     /**
      * Gets the max hit of this NPC.
-     * 
+     *
      * @return the max hit.
      */
     public int getMaxHit() {
@@ -284,7 +288,7 @@ public final class NpcDefinition {
 
     /**
      * Gets the maximum amount of hitpoints this NPC has.
-     * 
+     *
      * @return the maximum amount of hitpoints.
      */
     public int getHitpoints() {
@@ -293,7 +297,7 @@ public final class NpcDefinition {
 
     /**
      * Gets the maximum amount of hitpoints this NPC has.
-     * 
+     *
      * @return the attack speed.
      */
     public int getAttackSpeed() {
@@ -302,7 +306,7 @@ public final class NpcDefinition {
 
     /**
      * Gets the attack animation of this NPC.
-     * 
+     *
      * @return the attack animation.
      */
     public int getAttackAnimation() {
@@ -311,7 +315,7 @@ public final class NpcDefinition {
 
     /**
      * Gets the defence animation of this NPC.
-     * 
+     *
      * @return the defence animation.
      */
     public int getDefenceAnimation() {
@@ -320,7 +324,7 @@ public final class NpcDefinition {
 
     /**
      * Gets the death animation of this NPC.
-     * 
+     *
      * @return the death animation.
      */
     public int getDeathAnimation() {
@@ -329,7 +333,7 @@ public final class NpcDefinition {
 
     /**
      * Gets the attack bonus of this NPC.
-     * 
+     *
      * @return the attack bonus.
      */
     public int getAttackBonus() {
@@ -338,7 +342,7 @@ public final class NpcDefinition {
 
     /**
      * Gets the melee defence bonus of this NPC.
-     * 
+     *
      * @return the melee defence bonus.
      */
     public int getMeleeDefence() {
@@ -347,7 +351,7 @@ public final class NpcDefinition {
 
     /**
      * Gets the ranged defence of this NPC.
-     * 
+     *
      * @return the ranged defence bonus.
      */
     public int getRangedDefence() {
@@ -356,7 +360,7 @@ public final class NpcDefinition {
 
     /**
      * Gets the magic defence of this NPC.
-     * 
+     *
      * @return the magic defence bonus.
      */
     public int getMagicDefence() {

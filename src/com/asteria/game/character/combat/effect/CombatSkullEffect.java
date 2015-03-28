@@ -8,7 +8,7 @@ import com.asteria.task.TaskHandler;
 
 /**
  * The combat effect applied when a player needs to be skulled.
- * 
+ *
  * @author lare96 <http://github.com/lare96>
  */
 public final class CombatSkullEffect extends CombatEffect {
@@ -20,9 +20,9 @@ public final class CombatSkullEffect extends CombatEffect {
 
     /**
      * Creates a new {@link CombatSkullEffect}.
-     * 
+     *
      * @param player
-     *            the player this effect is being applied to.
+     *         the player this effect is being applied to.
      */
     public CombatSkullEffect(Player player) {
         super(player, 50);
