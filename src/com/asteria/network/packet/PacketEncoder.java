@@ -606,21 +606,21 @@ public final class PacketEncoder {
      *         the {@code X} coordinate within the region.
      * @param y
      *         the {@code Y} coordinate within the region.
-     * @param level
-     *         the level of the camera from the ground.
+     * @param z
+     *         the {@code Z} coordinate within the region.
      * @param speed
      *         how fast the camera will move.
      * @param angle
      *         the angle the camera will turn to while moving.
      * @return an instance of this encoder.
      */
-    public PacketEncoder sendCameraMovement(int x, int y, int height, int
+    public PacketEncoder sendCameraMovement(int x, int y, int z, int
             speed, int angle) {
         DataBuffer out = DataBuffer.create();
         out.newPacket(166, player.getSession().getEncryptor());
         out.put(x / 64);
         out.put(y / 64);
-        out.putShort(height);
+        out.putShort(z);
         out.put(speed);
         out.put(angle);
         player.getSession().send(out);
@@ -875,8 +875,8 @@ public final class PacketEncoder {
     public PacketEncoder sendIntState(int id, int state) {
         DataBuffer out = DataBuffer.create();
         out.newPacket(87, player.getSession().getEncryptor());
-        out.putShort(id);
-        out.putInt(state);
+        out.putShort(id, ByteOrder.LITTLE);
+        out.putInt(state, ByteOrder.MIDDLE);
         player.getSession().send(out);
         return this;
     }
@@ -903,8 +903,8 @@ public final class PacketEncoder {
     /**
      * The packet that removes an object only the underlying player can see.
      *
-     * @param object
-     *         the object to remove for the player.
+     * @param position
+     *         the position of the object to remove for the player.
      * @return an instance of this encoder.
      */
     public PacketEncoder sendRemoveObject(Position position) {
