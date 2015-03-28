@@ -132,7 +132,7 @@ public class Position {
      * Determines if this position is within {@code amount} distance of
      * {@code other}.
      * 
-     * @param position
+     * @param other
      *            the position to check the distance for.
      * @param amount
      *            the distance to check.
@@ -140,9 +140,9 @@ public class Position {
      *         {@code false} otherwise.
      */
     public final boolean withinDistance(Position other, int amount) {
-        if (this.getZ() != other.getZ())
+        if (this.z != other.z)
             return false;
-        return Math.abs(other.getX() - this.getX()) <= amount && Math.abs(other.getY() - this.getY()) <= amount;
+        return Math.abs(other.x - this.x) <= amount && Math.abs(other.y - this.y) <= amount;
     }
 
     /**
