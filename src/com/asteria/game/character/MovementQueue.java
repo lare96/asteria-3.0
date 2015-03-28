@@ -1,9 +1,5 @@
 package com.asteria.game.character;
 
-import java.util.Deque;
-import java.util.LinkedList;
-import java.util.Optional;
-
 import com.asteria.game.NodeType;
 import com.asteria.game.character.combat.Combat;
 import com.asteria.game.character.player.Player;
@@ -11,6 +7,10 @@ import com.asteria.game.location.Position;
 import com.asteria.task.Task;
 import com.asteria.task.TaskHandler;
 import com.asteria.utility.RandomGen;
+
+import java.util.Deque;
+import java.util.LinkedList;
+import java.util.Optional;
 
 /**
  * The movement queue sequencer that handles the entire movement process for
@@ -103,6 +103,7 @@ public final class MovementQueue {
                 }
             }
 
+            character.setLastPosition(character.getPosition().copy());
             character.getPosition().move(x, y);
             character.setPrimaryDirection(walkPoint.getDirection());
             character.setLastDirection(walkPoint.getDirection());
@@ -133,7 +134,7 @@ public final class MovementQueue {
                 }
             }
 
-            character.setLastPosition(character.getPosition());
+            character.setLastPosition(character.getPosition().copy());
             character.getPosition().move(x, y);
             character.setSecondaryDirection(runPoint.getDirection());
             character.setLastDirection(runPoint.getDirection());
@@ -299,13 +300,13 @@ public final class MovementQueue {
         if (character.getFollowCharacter() != null && character.getFollowCharacter().equals(leader)) {
             return;
         }
-        if (character.isFollowing() && !character.getFollowCharacter().equals(leader)) {
+        if (character.isFollowing() && !leader.equals(character.getFollowCharacter())) {
             character.faceCharacter(null);
             character.setFollowing(false);
             character.setFollowCharacter(null);
         }
         if (!character.isFollowing()) {
-            followTask.ifPresent(t -> t.cancel());
+            followTask.ifPresent(Task::cancel);
         }
         if (!followTask.isPresent()) {
             character.setFollowing(true);
