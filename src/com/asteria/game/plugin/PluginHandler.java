@@ -32,7 +32,7 @@ public final class PluginHandler {
 
     /**
      * The map of {@link PluginContext}s mapped to their collection of
-     * {@link PluginListner}s.
+     * {@link PluginListener}s.
      */
     public static final Multimap<Class<? extends PluginContext>,
             PluginListener> PLUGINS = ArrayListMultimap.create();
@@ -82,9 +82,8 @@ public final class PluginHandler {
 
     /**
      * Submits a new plugin listener into the multimap of plugins. This
-     * function
-     * will throw a {@link PluginSignatureException} if there is no plugin
-     * signature for {@code clazz}.
+     * function will throw a {@link PluginSignatureException} if there is no
+     * plugin signature for {@code clazz}.
      *
      * @param clazz
      *         the class of the plugin listener that will be submitted.
