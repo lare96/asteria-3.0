@@ -46,7 +46,7 @@ public final class CharacterList<E extends CharacterNode> implements
     /**
      * Creates a new {@link CharacterList}.
      *
-     * @param cap
+     * @param capacity
      *         the finite capacity of this collection.
      */
     @SuppressWarnings("unchecked")
