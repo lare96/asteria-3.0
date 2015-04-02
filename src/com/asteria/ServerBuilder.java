@@ -40,16 +40,12 @@ public final class ServerBuilder {
      * The executor service that will load various utilities in the background
      * while the rest of the server is being constructed.
      */
-    private final ExecutorService serviceLoader = Executors
-            .newSingleThreadExecutor(new ThreadFactoryBuilder().setNameFormat
-                    ("ServiceLoaderThread").build());
+    private final ExecutorService serviceLoader = Executors.newSingleThreadExecutor(new ThreadFactoryBuilder().setNameFormat("ServiceLoaderThread").build());
 
     /**
      * The scheduled executor service that will run the {@link GameService}.
      */
-    private final ScheduledExecutorService sequencer = Executors
-            .newSingleThreadScheduledExecutor(new ThreadFactoryBuilder()
-                    .setNameFormat("GameThread").build());
+    private final ScheduledExecutorService sequencer = Executors.newSingleThreadScheduledExecutor(new ThreadFactoryBuilder().setNameFormat("GameThread").build());
 
     /**
      * The flag that determines if the engine should update {@link Player}s in
@@ -89,18 +85,15 @@ public final class ServerBuilder {
      *         background service load takes too long.
      */
     public void build() throws Exception {
-        Preconditions.checkState(!serviceLoader.isShutdown(), "The server has" +
-                " been started already!");
+        Preconditions.checkState(!serviceLoader.isShutdown(), "The server has" + " been started already!");
         executeServiceLoad();
 
         ServerHandler.start(serverPort);
-        sequencer.scheduleAtFixedRate(new GameService(), 0, 600, TimeUnit
-                .MILLISECONDS);
+        sequencer.scheduleAtFixedRate(new GameService(), 0, 600, TimeUnit.MILLISECONDS);
 
         serviceLoader.shutdown();
         if (!serviceLoader.awaitTermination(15, TimeUnit.MINUTES)) {
-            throw new IllegalStateException("The background service load took" +
-                    " too long!");
+            throw new IllegalStateException("The background service load took" + " too long!");
         }
     }
 
@@ -116,7 +109,7 @@ public final class ServerBuilder {
         serviceLoader.execute(() -> new WeaponPoisonLoader().load());
         serviceLoader.execute(() -> new PacketOpcodeLoader().load());
         serviceLoader.execute(() -> new PacketSizeLoader().load());
-        serviceLoader.execute(() -> ConnectionHandler.parseIPBans());
+        serviceLoader.execute(ConnectionHandler::parseIPBans);
         serviceLoader.execute(() -> new NpcNodeLoader().load());
         serviceLoader.execute(() -> new ShopLoader().load());
         serviceLoader.execute(() -> new ItemNodeLoader().load());
@@ -126,7 +119,7 @@ public final class ServerBuilder {
         serviceLoader.execute(() -> new WeaponInterfaceLoader().load());
         serviceLoader.execute(() -> new WeaponRequirementLoader().load());
         serviceLoader.execute(() -> new ObjectNodeRemoveLoader().load());
-        serviceLoader.execute(() -> PluginHandler.init());
+        serviceLoader.execute(PluginHandler::init);
     }
 
     /**
@@ -147,8 +140,7 @@ public final class ServerBuilder {
      * @return an instance of this builder, for chaining.
      */
     protected ServerBuilder setParallelEngine(boolean parallelEngine) {
-        Preconditions.checkState(!serviceLoader.isShutdown(), "The server has" +
-                " been started already!");
+        Preconditions.checkState(!serviceLoader.isShutdown(), "The server has" + " been started already!");
         this.parallelEngine = parallelEngine;
         return this;
     }
@@ -170,8 +162,7 @@ public final class ServerBuilder {
      * @return an instance of this builder, for chaining.
      */
     protected ServerBuilder setServerPort(int serverPort) {
-        Preconditions.checkState(!serviceLoader.isShutdown(), "The server has" +
-                " been started already!");
+        Preconditions.checkState(!serviceLoader.isShutdown(), "The server has" + " been started already!");
         this.serverPort = serverPort;
         return this;
     }
