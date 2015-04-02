@@ -21,9 +21,9 @@ import java.util.logging.Logger;
  * submitted, and executed from this class.
  * <p>
  * <p>
- * The data structures that hold the plugin listeners are not thread safe,
- * which
- * means that plugin listeners should only be executed on the main game thread.
+ * The data structures that hold the plugin listeners are not thread safe
+ * which means that plugin listeners should only be executed on the main game
+ * thread.
  *
  * @author lare96 <http://github.com/lare96>
  */
