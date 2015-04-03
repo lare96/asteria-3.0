@@ -91,6 +91,7 @@ public final class Equipment extends ItemContainer {
      */
     public void refresh() {
         refresh(player, 1688);
+        player.sendBonus();
     }
 
     /**
@@ -159,7 +160,6 @@ public final class Equipment extends ItemContainer {
             player.getEncoder().sendByteState(301, 0);
             player.setSpecialActivated(false);
         }
-        player.sendBonus();
         refresh();
         player.getFlags().set(Flag.APPEARANCE);
         return true;
@@ -197,7 +197,6 @@ public final class Equipment extends ItemContainer {
             player.getEncoder().sendByteState(301, 0);
             player.setSpecialActivated(false);
         }
-        player.sendBonus();
         refresh();
         player.getInventory().refresh();
         player.getFlags().set(Flag.APPEARANCE);

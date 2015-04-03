@@ -432,7 +432,6 @@ public final class Player extends CharacterNode {
         Skills.refreshAll(this);
         equipment.refresh();
         inventory.refresh();
-        sendBonus();
         encoder.sendPrivateMessageListStatus(2);
         privateMessage.updateThisList();
         privateMessage.updateOtherList(true);

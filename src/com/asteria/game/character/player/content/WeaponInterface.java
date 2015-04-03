@@ -172,6 +172,13 @@ public enum WeaponInterface {
             player.getEncoder().sendString("Unarmed", WeaponInterface.UNARMED.nameLine);
             player.setWeapon(WeaponInterface.UNARMED);
             CombatSpecial.assign(player);
+            for (FightType type : player.getWeapon().getFightTypes()) {
+                if (type.getStyle() == player.getFightType().getStyle()) {
+                    player.setFightType(type);
+                    player.getEncoder().sendByteState(player.getFightType().getParent(), player.getFightType().getChild());
+                    return;
+                }
+            }
             return;
         }
         WeaponInterface weapon = INTERFACES.get(item.getId());
