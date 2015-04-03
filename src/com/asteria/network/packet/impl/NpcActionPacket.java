@@ -73,8 +73,7 @@ public final class NpcActionPacket extends PacketDecoder {
         int index = buf.getShort(true, ValueType.A, ByteOrder.LITTLE);
         int spellId = buf.getShort(true, ValueType.A);
         Npc npc = World.getNpcs().get(index);
-        CombatSpell spell = CombatSpells.getSpell(spellId).orElse(null)
-                .getSpell();
+        CombatSpell spell = CombatSpells.getSpell(spellId).orElse(null).getSpell();
         if (npc == null || spell == null || !checkAttack(player, npc))
             return;
         player.setAutocastSpell(null);
@@ -103,10 +102,8 @@ public final class NpcActionPacket extends PacketDecoder {
             if (player.getPosition().withinDistance(position, 1)) {
                 player.facePosition(npc.getPosition());
                 npc.facePosition(player.getPosition());
-                MinigameHandler.execute(player, m -> m.onFirstClickNpc
-                        (player, npc));
-                PluginHandler.execute(player, NpcFirstClickPlugin.class, new
-                        NpcFirstClickPlugin(npc));
+                MinigameHandler.execute(player, m -> m.onFirstClickNpc(player, npc));
+                PluginHandler.execute(player, NpcFirstClickPlugin.class, new NpcFirstClickPlugin(npc));
             }
         });
     }
@@ -129,10 +126,8 @@ public final class NpcActionPacket extends PacketDecoder {
             if (player.getPosition().withinDistance(position, 1)) {
                 player.facePosition(npc.getPosition());
                 npc.facePosition(player.getPosition());
-                MinigameHandler.execute(player, m -> m.onSecondClickNpc
-                        (player, npc));
-                PluginHandler.execute(player, NpcSecondClickPlugin.class, new
-                        NpcSecondClickPlugin(npc));
+                MinigameHandler.execute(player, m -> m.onSecondClickNpc(player, npc));
+                PluginHandler.execute(player, NpcSecondClickPlugin.class, new NpcSecondClickPlugin(npc));
             }
         });
     }
@@ -152,9 +147,7 @@ public final class NpcActionPacket extends PacketDecoder {
             return false;
         if (!MinigameHandler.execute(player, true, m -> m.canHit(player, npc)))
             return false;
-        if (!Location.inMultiCombat(player) && player.getCombatBuilder()
-                .isBeingAttacked() && !npc.equals(player.getCombatBuilder()
-                .getLastAttacker())) {
+        if (!Location.inMultiCombat(player) && player.getCombatBuilder().isBeingAttacked() && !npc.equals(player.getCombatBuilder().getLastAttacker())) {
             player.getEncoder().sendMessage("You are already under attack!");
             return false;
         }

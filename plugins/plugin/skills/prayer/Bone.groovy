@@ -25,7 +25,7 @@ enum Bone {
     static Bone getBone(int id) {
         Bone bone = null
         values().each {
-            if(it.id == id)
+            if (it.id == id)
                 bone = it
         }
         return bone

@@ -72,8 +72,7 @@ public final class MinigameHandler extends Task {
      * @param function
      *         the function to execute that returns a result.
      */
-    public static <T> T execute(Player player, T defaultValue,
-                                Function<Minigame, T> function) {
+    public static <T> T execute(Player player, T defaultValue, Function<Minigame, T> function) {
         Optional<Minigame> minigame = search(player);
         if (!minigame.isPresent())
             return defaultValue;

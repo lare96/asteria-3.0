@@ -112,8 +112,7 @@ public final class PrivateMessagingPacket extends PacketDecoder {
         if (to < 0 || newSize < 0 || message == null)
             return;
         if (!player.getFriends().contains(to)) {
-            player.getEncoder().sendMessage("You cannot send a message to a " +
-                    "player not on your friends list!");
+            player.getEncoder().sendMessage("You cannot send a message to a " + "player not on your friends list!");
             return;
         }
         player.getPrivateMessage().sendPrivateMessage(to, message, newSize);

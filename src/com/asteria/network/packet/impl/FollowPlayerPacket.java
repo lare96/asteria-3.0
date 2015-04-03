@@ -22,8 +22,7 @@ public final class FollowPlayerPacket extends PacketDecoder {
         int index = buf.getShort(false, ByteOrder.LITTLE);
         Player follow = World.getPlayers().get(index);
 
-        if (follow == null || !follow.getPosition().isViewableFrom(player
-                .getPosition()) || follow.equals(player))
+        if (follow == null || !follow.getPosition().isViewableFrom(player.getPosition()) || follow.equals(player))
             return;
         player.setSkillAction(false);
         player.getMovementQueue().follow(follow);

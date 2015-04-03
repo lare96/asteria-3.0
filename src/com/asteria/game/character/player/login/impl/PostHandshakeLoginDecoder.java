@@ -84,9 +84,7 @@ public final class PostHandshakeLoginDecoder extends LoginProtocolDecoder {
         if (Settings.DECODE_RSA) {
             byte[] encryptionBytes = new byte[loginEncryptPacketSize];
             in.buffer().get(encryptionBytes);
-            ByteBuffer rsaBuffer = ByteBuffer.wrap(new BigInteger
-                    (encryptionBytes).modPow(Settings.RSA_EXPONENT, Settings
-                    .RSA_MODULUS).toByteArray());
+            ByteBuffer rsaBuffer = ByteBuffer.wrap(new BigInteger(encryptionBytes).modPow(Settings.RSA_EXPONENT, Settings.RSA_MODULUS).toByteArray());
             int rsaOpcode = rsaBuffer.get();
             if (rsaOpcode != 10) {
                 logger.warning(session + " unable to decode RSA block " +
@@ -106,8 +104,7 @@ public final class PostHandshakeLoginDecoder extends LoginProtocolDecoder {
             DataBuffer readStr = DataBuffer.create(rsaBuffer);
             username = readStr.getString();
             password = readStr.getString();
-        }
-        else {
+        } else {
             in.buffer().get();
             long clientHalf = in.buffer().getLong();
             long serverHalf = in.buffer().getLong();
@@ -123,11 +120,8 @@ public final class PostHandshakeLoginDecoder extends LoginProtocolDecoder {
         }
         username = username.toLowerCase().replaceAll("_", " ").trim();
         password = password.toLowerCase();
-        boolean invalidCredentials = !username.matches("^[a-zA-Z0-9_ ]{1," +
-                "12}$") || password.isEmpty() || password.length() > 20;
-        session.setResponse(invalidCredentials ? LoginResponse
-                .INVALID_CREDENTIALS : World.getPlayers().spaceLeft() == 0 ?
-                LoginResponse.WORLD_FULL : session.getResponse());
+        boolean invalidCredentials = !username.matches("^[a-zA-Z0-9_ ]{1," + "12}$") || password.isEmpty() || password.length() > 20;
+        session.setResponse(invalidCredentials ? LoginResponse.INVALID_CREDENTIALS : World.getPlayers().spaceLeft() == 0 ? LoginResponse.WORLD_FULL : session.getResponse());
         Player player = session.getPlayer();
         if (session.getResponse() == LoginResponse.NORMAL) {
             player.setUsername(username);
@@ -137,8 +131,7 @@ public final class PostHandshakeLoginDecoder extends LoginProtocolDecoder {
                 session.setResponse(LoginResponse.ACCOUNT_ONLINE);
             }
             if (session.getResponse() == LoginResponse.NORMAL) {
-                session.setResponse(new PlayerSerialization(player)
-                        .deserialize(password));
+                session.setResponse(new PlayerSerialization(player).deserialize(password));
             }
         }
         DataBuffer resp = DataBuffer.create(3);

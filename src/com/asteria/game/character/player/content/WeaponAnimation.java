@@ -18,8 +18,7 @@ public final class WeaponAnimation {
     /**
      * The hash collection of weapon animations.
      */
-    public static final Map<Integer, WeaponAnimation> ANIMATIONS = new
-            HashMap<>();
+    public static final Map<Integer, WeaponAnimation> ANIMATIONS = new HashMap<>();
 
     /**
      * The standing animation for this weapon animation.

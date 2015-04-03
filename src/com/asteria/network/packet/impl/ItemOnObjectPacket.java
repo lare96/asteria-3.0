@@ -1,8 +1,5 @@
 package com.asteria.network.packet.impl;
 
-import plugin.skills.prayer.Bone;
-import plugin.skills.prayer.PrayerBoneAltar;
-
 import com.asteria.game.character.player.Player;
 import com.asteria.game.item.Item;
 import com.asteria.game.location.Position;
@@ -12,6 +9,9 @@ import com.asteria.network.ByteOrder;
 import com.asteria.network.DataBuffer;
 import com.asteria.network.ValueType;
 import com.asteria.network.packet.PacketDecoder;
+
+import plugin.skills.prayer.Bone;
+import plugin.skills.prayer.PrayerBoneAltar;
 
 /**
  * The packet sent from the client when a player uses an item on an object.
@@ -35,29 +35,22 @@ public final class ItemOnObjectPacket extends PacketDecoder {
         int itemId = buf.getShort(false);
         int objectSize = 1;
         Item item = player.getInventory().get(slot);
-        Position position = new Position(objectX, objectY, player.getPosition
-                ().getZ());
-        if (item == null || container != 3214 || objectId < 0 || objectY < 0
-                || slot < 0 || objectX < 0 || itemId < 0)
+        Position position = new Position(objectX, objectY, player.getPosition().getZ());
+        if (item == null || container != 3214 || objectId < 0 || objectY < 0 || slot < 0 || objectX < 0 || itemId < 0)
             return;
         if (item.getId() != itemId)
             return;
         player.facePosition(position);
         player.getMovementListener().append(() -> {
-                    if (player.getPosition().withinDistance(position,
-                            objectSize)) {
-                        Bone bone = Bone.getBone(itemId);
-                        if (bone != null) {
-                            PrayerBoneAltar altarAction = new PrayerBoneAltar
-                                    (player, bone, new Position(objectX,
-                                            objectY));
-                            altarAction.start();
-                            return;
-                        }
-                        PluginHandler.execute(player, ItemOnObjectPlugin
-                                .class, new ItemOnObjectPlugin(objectId,
-                                position, objectSize, item, slot));
-                    }
-                });
+            if (player.getPosition().withinDistance(position, objectSize)) {
+                Bone bone = Bone.getBone(itemId);
+                if (bone != null) {
+                    PrayerBoneAltar altarAction = new PrayerBoneAltar(player, bone, new Position(objectX, objectY));
+                    altarAction.start();
+                    return;
+                }
+                PluginHandler.execute(player, ItemOnObjectPlugin.class, new ItemOnObjectPlugin(objectId, position, objectSize, item, slot));
+            }
+        });
     }
 }

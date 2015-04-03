@@ -52,7 +52,7 @@ enum CookingData {
     static CookingData getData(int id) {
         CookingData cook = null
         values().each {
-            if(it.rawId == id) {
+            if (it.rawId == id) {
                 cook = it
             }
         }

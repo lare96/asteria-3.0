@@ -1,11 +1,7 @@
 package plugin.combat
 
 import com.asteria.game.NodeType
-import com.asteria.game.character.Animation
-import com.asteria.game.character.CharacterNode
-import com.asteria.game.character.Flag
-import com.asteria.game.character.Graphic
-import com.asteria.game.character.Projectile
+import com.asteria.game.character.*
 import com.asteria.game.character.combat.Combat
 import com.asteria.game.character.combat.CombatSessionData
 import com.asteria.game.character.combat.CombatStrategy
@@ -105,12 +101,12 @@ final class DefaultRangedCombatStrategy implements CombatStrategy {
             }
         } else if (player.weapon == WeaponInterface.CROSSBOW) {
             if (player.equipment.get(Equipment.WEAPON_SLOT).getDefinition().name.startsWith("Karils") && !item
-            .getDefinition().name.endsWith("rack")) {
+                    .getDefinition().name.endsWith("rack")) {
                 player.encoder.sendMessage "You need to use bolt racks with this crossbow."
                 player.combatBuilder.reset()
                 return false
             } else if (!player.equipment.get(Equipment.WEAPON_SLOT).getDefinition().name.startsWith("Karils") && !Combat
-            .isBolts(player)) {
+                    .isBolts(player)) {
                 player.encoder.sendMessage "You need to use bolts with your crossbow."
                 player.combatBuilder.reset()
                 return false

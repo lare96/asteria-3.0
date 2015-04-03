@@ -65,9 +65,7 @@ public final class ViewingOrb {
      * @param southEast
      *         the south-east position corresponding to the viewing orb.
      */
-    public ViewingOrb(Player player, Position centre, Position northWest,
-                      Position northEast, Position southWest, Position
-                              southEast) {
+    public ViewingOrb(Player player, Position centre, Position northWest, Position northEast, Position southWest, Position southEast) {
         this.player = player;
         this.start = player.getPosition().copy();
         this.centre = centre;
@@ -81,8 +79,7 @@ public final class ViewingOrb {
      * Opens the viewing orb navigation interface in the sidebar.
      */
     public void open() {
-        IntStream.rangeClosed(0, 13).filter(v -> v != 7 && v != 10).forEach(v
-                -> player.getEncoder().sendSidebarInterface(v, -1));
+        IntStream.rangeClosed(0, 13).filter(v -> v != 7 && v != 10).forEach(v -> player.getEncoder().sendSidebarInterface(v, -1));
         player.getEncoder().sendSidebarInterface(10, 3209);
         player.getEncoder().sendForceTab(10);
         player.getEncoder().sendString("@yel@Centre", 15239);
@@ -109,8 +106,7 @@ public final class ViewingOrb {
         player.getEncoder().sendSidebarInterface(3, 3213);
         player.getEncoder().sendSidebarInterface(4, 1644);
         player.getEncoder().sendSidebarInterface(5, 5608);
-        player.getEncoder().sendSidebarInterface(6, player.getSpellbook()
-                .getId());
+        player.getEncoder().sendSidebarInterface(6, player.getSpellbook().getId());
         player.getEncoder().sendSidebarInterface(8, 5065);
         player.getEncoder().sendSidebarInterface(9, 5715);
         player.getEncoder().sendSidebarInterface(10, 2449);
@@ -139,8 +135,7 @@ public final class ViewingOrb {
      * @param position
      *         the position being moved to.
      */
-    public void move(String positionName, int positionLineId, Position
-            position) {
+    public void move(String positionName, int positionLineId, Position position) {
         if (position.equals(player.getPosition()))
             return;
         player.getEncoder().sendString("@yel@Centre", 15239);

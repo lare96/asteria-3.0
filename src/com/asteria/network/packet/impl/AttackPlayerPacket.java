@@ -52,8 +52,7 @@ public final class AttackPlayerPacket extends PacketDecoder {
         Player victim = World.getPlayers().get(index);
         CombatSpell spell = CombatSpells.getSpell(spellId).get().getSpell();
 
-        if (index < 0 || index > World.getPlayers().capacity() || spellId < 0
-                || !checkAttack(player, victim))
+        if (index < 0 || index > World.getPlayers().capacity() || spellId < 0 || !checkAttack(player, victim))
             return;
         player.setAutocastSpell(null);
         player.setAutocast(false);
@@ -94,37 +93,27 @@ public final class AttackPlayerPacket extends PacketDecoder {
     private boolean checkAttack(Player attacker, Player victim) {
         if (victim == null || victim.equals(attacker))
             return false;
-        if (!Location.inMultiCombat(attacker) && attacker.getCombatBuilder()
-                .isBeingAttacked() && attacker.getCombatBuilder()
-                .getLastAttacker() != victim) {
+        if (!Location.inMultiCombat(attacker) && attacker.getCombatBuilder().isBeingAttacked() && attacker.getCombatBuilder().getLastAttacker() != victim) {
             attacker.getEncoder().sendMessage("You are already under attack!");
             return false;
         }
         Optional<Minigame> optional = MinigameHandler.search(attacker);
         if (!optional.isPresent()) {
-            if (!Location.inWilderness(attacker) || !Location.inWilderness
-                    (victim)) {
-                attacker.getEncoder().sendMessage("Both you and " + victim
-                        .getFormatUsername() + " need to be in the wilderness" +
+            if (!Location.inWilderness(attacker) || !Location.inWilderness(victim)) {
+                attacker.getEncoder().sendMessage("Both you and " + victim.getFormatUsername() + " need to be in the wilderness" +
                         " to fight!");
                 return false;
             }
-            int combatDifference = Combat.combatLevelDifference(attacker
-                    .determineCombatLevel(), victim.determineCombatLevel());
-            if (combatDifference > attacker.getWildernessLevel() ||
-                    combatDifference > victim.getWildernessLevel()) {
-                attacker.getEncoder().sendMessage("Your combat level " +
-                        "difference is too great to attack that player here.");
+            int combatDifference = Combat.combatLevelDifference(attacker.determineCombatLevel(), victim.determineCombatLevel());
+            if (combatDifference > attacker.getWildernessLevel() || combatDifference > victim.getWildernessLevel()) {
+                attacker.getEncoder().sendMessage("Your combat level " + "difference is too great to attack that player here.");
                 return false;
             }
-            if (!attacker.getCombatBuilder().isBeingAttacked() || attacker
-                    .getCombatBuilder().isBeingAttacked() && attacker
-                    .getCombatBuilder().getLastAttacker() != victim &&
+            if (!attacker.getCombatBuilder().isBeingAttacked() || attacker.getCombatBuilder().isBeingAttacked() && attacker.getCombatBuilder().getLastAttacker() != victim &&
                     Location.inMultiCombat(attacker)) {
                 Combat.effect(new CombatSkullEffect(attacker));
             }
-        }
-        else {
+        } else {
             if (!optional.get().canHit(attacker, victim))
                 return false;
         }

@@ -39,8 +39,7 @@ public final class Npc extends CharacterNode {
     /**
      * The movement coordinator for this NPC.
      */
-    private final NpcMovementCoordinator movementCoordinator = new
-            NpcMovementCoordinator(this);
+    private final NpcMovementCoordinator movementCoordinator = new NpcMovementCoordinator(this);
 
     /**
      * The current health of this NPC.
@@ -116,8 +115,7 @@ public final class Npc extends CharacterNode {
 
     @Override
     public String toString() {
-        return "NPC[slot= " + getSlot() + ", name=" + getDefinition().getName
-                () + "]";
+        return "NPC[slot= " + getSlot() + ", name=" + getDefinition().getName() + "]";
     }
 
     @Override
@@ -128,20 +126,15 @@ public final class Npc extends CharacterNode {
     @Override
     public int getBaseAttack(CombatType type) {
         int value = getDefinition().getAttackBonus();
-        if (weakenedBy == CombatWeaken.ATTACK_LOW || weakenedBy ==
-                CombatWeaken.ATTACK_HIGH)
+        if (weakenedBy == CombatWeaken.ATTACK_LOW || weakenedBy == CombatWeaken.ATTACK_HIGH)
             value -= (int) ((weakenedBy.getRate()) * (value));
         return value;
     }
 
     @Override
     public int getBaseDefence(CombatType type) {
-        int value = type == CombatType.MAGIC ? getDefinition()
-                .getMagicDefence() : type == CombatType.RANGED ?
-                getDefinition().getRangedDefence() : getDefinition()
-                .getMeleeDefence();
-        if (weakenedBy == CombatWeaken.DEFENCE_LOW || weakenedBy ==
-                CombatWeaken.DEFENCE_HIGH)
+        int value = type == CombatType.MAGIC ? getDefinition().getMagicDefence() : type == CombatType.RANGED ? getDefinition().getRangedDefence() : getDefinition().getMeleeDefence();
+        if (weakenedBy == CombatWeaken.DEFENCE_LOW || weakenedBy == CombatWeaken.DEFENCE_HIGH)
             value -= (int) ((weakenedBy.getRate()) * (value));
         return value;
     }
@@ -149,9 +142,7 @@ public final class Npc extends CharacterNode {
     @Override
     public void onSuccessfulHit(CharacterNode victim, CombatType type) {
         if (getDefinition().isPoisonous()) {
-            Combat.effect(new CombatPoisonEffect(victim, type == CombatType
-                    .RANGED || type == CombatType.MAGIC ? PoisonType.MILD :
-                    PoisonType.EXTRA));
+            Combat.effect(new CombatPoisonEffect(victim, type == CombatType.RANGED || type == CombatType.MAGIC ? PoisonType.MILD : PoisonType.EXTRA));
         }
     }
 
@@ -179,8 +170,7 @@ public final class Npc extends CharacterNode {
      * @return the respawn time.
      */
     public int getRespawnTime() {
-        return ((getDefinition().getRespawnTime() - 1) <= 0 ? 1 :
-                (getDefinition().getRespawnTime() - 1));
+        return ((getDefinition().getRespawnTime() - 1) <= 0 ? 1 : (getDefinition().getRespawnTime() - 1));
     }
 
     /**

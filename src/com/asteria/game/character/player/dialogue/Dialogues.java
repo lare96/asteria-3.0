@@ -16,8 +16,7 @@ public final class Dialogues {
     /**
      * The maximum length of a single line of dialogue.
      */
-    private static final int MAXIMUM_LENGTH = ("A string representing maximum " +
-            "dialogue text length!!").length();
+    private static final int MAXIMUM_LENGTH = ("A string representing maximum " + "dialogue text length!!").length();
 
     /**
      * The default constructor.
@@ -26,8 +25,7 @@ public final class Dialogues {
      *         if this class is instantiated.
      */
     private Dialogues() {
-        throw new UnsupportedOperationException("This class cannot be " +
-                "instantiated!");
+        throw new UnsupportedOperationException("This class cannot be " + "instantiated!");
     }
 
     /**
@@ -45,34 +43,27 @@ public final class Dialogues {
      *         if the text array is greater than {@code 4} or less than
      *         {@code 1}.
      */
-    public static void npcDialogue(Player player, Expression expression, int
-            npc, String... text) {
+    public static void npcDialogue(Player player, Expression expression, int npc, String... text) {
         validateLength(text);
         switch (text.length) {
             case 1:
-                player.getEncoder().sendInterfaceAnimation(4883, expression
-                        .getExpression());
-                player.getEncoder().sendString(NpcDefinition.DEFINITIONS[npc]
-                        .getName(), 4884);
+                player.getEncoder().sendInterfaceAnimation(4883, expression.getExpression());
+                player.getEncoder().sendString(NpcDefinition.DEFINITIONS[npc].getName(), 4884);
                 player.getEncoder().sendString(text[0], 4885);
                 player.getEncoder().sendNpcModelOnInterface(4883, npc);
                 player.getEncoder().sendChatInterface(4882);
                 break;
             case 2:
-                player.getEncoder().sendInterfaceAnimation(4888, expression
-                        .getExpression());
-                player.getEncoder().sendString(NpcDefinition.DEFINITIONS[npc]
-                        .getName(), 4889);
+                player.getEncoder().sendInterfaceAnimation(4888, expression.getExpression());
+                player.getEncoder().sendString(NpcDefinition.DEFINITIONS[npc].getName(), 4889);
                 player.getEncoder().sendString(text[0], 4890);
                 player.getEncoder().sendString(text[1], 4891);
                 player.getEncoder().sendNpcModelOnInterface(4888, npc);
                 player.getEncoder().sendChatInterface(4887);
                 break;
             case 3:
-                player.getEncoder().sendInterfaceAnimation(4894, expression
-                        .getExpression());
-                player.getEncoder().sendString(NpcDefinition.DEFINITIONS[npc]
-                        .getName(), 4895);
+                player.getEncoder().sendInterfaceAnimation(4894, expression.getExpression());
+                player.getEncoder().sendString(NpcDefinition.DEFINITIONS[npc].getName(), 4895);
                 player.getEncoder().sendString(text[0], 4896);
                 player.getEncoder().sendString(text[1], 4897);
                 player.getEncoder().sendString(text[2], 4898);
@@ -80,10 +71,8 @@ public final class Dialogues {
                 player.getEncoder().sendChatInterface(4893);
                 break;
             case 4:
-                player.getEncoder().sendInterfaceAnimation(4901, expression
-                        .getExpression());
-                player.getEncoder().sendString(NpcDefinition.DEFINITIONS[npc]
-                        .getName(), 4902);
+                player.getEncoder().sendInterfaceAnimation(4901, expression.getExpression());
+                player.getEncoder().sendString(NpcDefinition.DEFINITIONS[npc].getName(), 4902);
                 player.getEncoder().sendString(text[0], 4903);
                 player.getEncoder().sendString(text[1], 4904);
                 player.getEncoder().sendString(text[2], 4905);
@@ -110,21 +99,18 @@ public final class Dialogues {
      *         if the text array is greater than {@code 4} or less than
      *         {@code 1}.
      */
-    public static void playerDialogue(Player player, Expression expression,
-                                      String... text) {
+    public static void playerDialogue(Player player, Expression expression, String... text) {
         validateLength(text);
         switch (text.length) {
             case 1:
-                player.getEncoder().sendInterfaceAnimation(969, expression
-                        .getExpression());
+                player.getEncoder().sendInterfaceAnimation(969, expression.getExpression());
                 player.getEncoder().sendString(player.getFormatUsername(), 970);
                 player.getEncoder().sendString(text[0], 971);
                 player.getEncoder().sendPlayerModelOnInterface(969);
                 player.getEncoder().sendChatInterface(968);
                 break;
             case 2:
-                player.getEncoder().sendInterfaceAnimation(974, expression
-                        .getExpression());
+                player.getEncoder().sendInterfaceAnimation(974, expression.getExpression());
                 player.getEncoder().sendString(player.getFormatUsername(), 975);
                 player.getEncoder().sendString(text[0], 976);
                 player.getEncoder().sendString(text[1], 977);
@@ -132,8 +118,7 @@ public final class Dialogues {
                 player.getEncoder().sendChatInterface(973);
                 break;
             case 3:
-                player.getEncoder().sendInterfaceAnimation(980, expression
-                        .getExpression());
+                player.getEncoder().sendInterfaceAnimation(980, expression.getExpression());
                 player.getEncoder().sendString(player.getFormatUsername(), 981);
                 player.getEncoder().sendString(text[0], 982);
                 player.getEncoder().sendString(text[1], 983);
@@ -142,8 +127,7 @@ public final class Dialogues {
                 player.getEncoder().sendChatInterface(979);
                 break;
             case 4:
-                player.getEncoder().sendInterfaceAnimation(987, expression
-                        .getExpression());
+                player.getEncoder().sendInterfaceAnimation(987, expression.getExpression());
                 player.getEncoder().sendString(player.getFormatUsername(), 988);
                 player.getEncoder().sendString(text[0], 989);
                 player.getEncoder().sendString(text[1], 990);

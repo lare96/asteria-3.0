@@ -73,20 +73,17 @@ public class ItemNode extends Node {
         if (counter == null) {
             if (other.counter != null)
                 return false;
-        }
-        else if (!counter.equals(other.counter))
+        } else if (!counter.equals(other.counter))
             return false;
         if (item == null) {
             if (other.item != null)
                 return false;
-        }
-        else if (!item.equals(other.item))
+        } else if (!item.equals(other.item))
             return false;
         if (player == null) {
             if (other.player != null)
                 return false;
-        }
-        else if (!player.equals(other.player))
+        } else if (!player.equals(other.player))
             return false;
         if (state != other.state)
             return false;
@@ -103,15 +100,13 @@ public class ItemNode extends Node {
         switch (state) {
             case SEEN_BY_EVERYONE:
                 World.getPlayers().forEach(p -> {
-                    if (super.getPosition().withinDistance(p.getPosition(),
-                            60)) {
+                    if (super.getPosition().withinDistance(p.getPosition(), 60)) {
                         p.getEncoder().sendRemoveGroundItem(this);
                     }
                 });
                 break;
             case SEEN_BY_OWNER:
-                World.getPlayer(player.getUsernameHash()).ifPresent(p -> p
-                        .getEncoder().sendRemoveGroundItem(this));
+                World.getPlayer(player.getUsernameHash()).ifPresent(p -> p.getEncoder().sendRemoveGroundItem(this));
                 break;
             default:
                 throw new IllegalStateException("Invalid item node state!");
@@ -128,10 +123,8 @@ public class ItemNode extends Node {
         switch (state) {
             case SEEN_BY_OWNER:
                 World.getPlayers().forEach(p -> {
-                    if (super.getPosition().withinDistance(p.getPosition(),
-                            60) && !p.equals(player)) {
-                        p.getEncoder().sendGroundItem(new ItemNode(item,
-                                super.getPosition(), null));
+                    if (super.getPosition().withinDistance(p.getPosition(), 60) && !p.equals(player)) {
+                        p.getEncoder().sendGroundItem(new ItemNode(item, super.getPosition(), null));
                     }
                 });
                 player = null;

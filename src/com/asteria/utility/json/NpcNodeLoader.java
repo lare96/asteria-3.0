@@ -27,8 +27,7 @@ public final class NpcNodeLoader extends JsonLoader {
     @Override
     public void load(JsonObject reader, Gson builder) {
         int id = reader.get("id").getAsInt();
-        Position position = Objects.requireNonNull(builder.fromJson(reader
-                .get("position").getAsJsonObject(), Position.class));
+        Position position = Objects.requireNonNull(builder.fromJson(reader.get("position").getAsJsonObject(), Position.class));
         boolean coordinate = reader.get("random-walk").getAsBoolean();
         int radius = reader.get("walk-radius").getAsInt();
         Preconditions.checkState(!(coordinate && radius == 0));
@@ -39,7 +38,6 @@ public final class NpcNodeLoader extends JsonLoader {
         npc.getMovementCoordinator().setRadius(radius);
         npc.setRespawn(true);
         if (!World.getNpcs().add(npc))
-            throw new IllegalStateException("NPC could not be added to the " +
-                    "world!");
+            throw new IllegalStateException("NPC could not be added to the " + "world!");
     }
 }

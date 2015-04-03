@@ -37,8 +37,7 @@ public final class ItemOnPlayerPacket extends PacketDecoder {
 
         player.getMovementListener().append(() -> {
             if (player.getPosition().withinDistance(usedOn.getPosition(), 1)) {
-                PluginHandler.execute(player, ItemOnPlayerPlugin.class, new
-                        ItemOnPlayerPlugin(player, item));
+                PluginHandler.execute(player, ItemOnPlayerPlugin.class, new ItemOnPlayerPlugin(player, item));
             }
         });
     }

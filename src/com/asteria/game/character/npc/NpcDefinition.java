@@ -156,14 +156,7 @@ public final class NpcDefinition {
      * @param magicDefence
      *         the magic defence of this NPC.
      */
-    public NpcDefinition(int id, String name, String description, int
-            combatLevel, int size, boolean attackable, boolean aggressive,
-                         boolean retreats, boolean poisonous, int
-                                 respawnTime, int maxHit, int hitpoints, int
-                                 attackSpeed, int attackAnimation, int
-                                 defenceAnimation, int deathAnimation, int
-                                 attackBonus, int meleeDefence, int
-                                 rangedDefence, int magicDefence) {
+    public NpcDefinition(int id, String name, String description, int combatLevel, int size, boolean attackable, boolean aggressive, boolean retreats, boolean poisonous, int respawnTime, int maxHit, int hitpoints, int attackSpeed, int attackAnimation, int defenceAnimation, int deathAnimation, int attackBonus, int meleeDefence, int rangedDefence, int magicDefence) {
         this.id = id;
         this.name = name;
         this.description = description;

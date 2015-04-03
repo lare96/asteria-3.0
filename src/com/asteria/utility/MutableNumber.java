@@ -14,8 +14,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  *
  * @author lare96 <http://github.com/lare96>
  */
-public final class MutableNumber extends Number implements
-        Comparable<MutableNumber> {
+public final class MutableNumber extends Number implements Comparable<MutableNumber> {
 
     /**
      * The constant serial version UID for serialization.

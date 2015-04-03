@@ -33,11 +33,9 @@ public final class RestoreStatTask extends Task {
             for (int i = 0; i < player.getSkills().length; i++) {
                 int realLevel = player.getSkills()[i].getRealLevel();
                 if (i == Skills.HITPOINTS) {
-                    if (player.getSkills()[i].getLevel() < realLevel &&
-                            player.isAcceptAid()) {
+                    if (player.getSkills()[i].getLevel() < realLevel && player.isAcceptAid()) {
                         player.getSkills()[i].increaseLevel(1);
-                        if (CombatPrayer.isActivated(player, CombatPrayer
-                                .RAPID_HEAL)) {
+                        if (CombatPrayer.isActivated(player, CombatPrayer.RAPID_HEAL)) {
                             if (player.getSkills()[i].getLevel() < realLevel) {
                                 player.getSkills()[i].increaseLevel(1);
                             }
@@ -46,20 +44,16 @@ public final class RestoreStatTask extends Task {
                     }
                     continue;
                 }
-                if (player.getSkills()[i].getLevel() < realLevel && i !=
-                        Skills.PRAYER) {
+                if (player.getSkills()[i].getLevel() < realLevel && i != Skills.PRAYER) {
                     player.getSkills()[i].increaseLevel(1);
 
-                    if (CombatPrayer.isActivated(player, CombatPrayer
-                            .RAPID_RESTORE)) {
+                    if (CombatPrayer.isActivated(player, CombatPrayer.RAPID_RESTORE)) {
                         if (player.getSkills()[i].getLevel() < realLevel) {
                             player.getSkills()[i].increaseLevel(1);
                         }
                     }
                     Skills.refresh(player, i);
-                }
-                else if (player.getSkills()[i].getLevel() > realLevel && i !=
-                        Skills.PRAYER) {
+                } else if (player.getSkills()[i].getLevel() > realLevel && i != Skills.PRAYER) {
                     player.getSkills()[i].decreaseLevel(1);
                     Skills.refresh(player, i);
                 }

@@ -20,8 +20,7 @@ import java.util.stream.Stream;
  *         the type of character being managed with this collection.
  * @author lare96 <http://github.com/lare96>
  */
-public final class CharacterList<E extends CharacterNode> implements
-        Iterable<E> {
+public final class CharacterList<E extends CharacterNode> implements Iterable<E> {
 
     /**
      * The backing array of {@link CharacterNode}s within this collection.
@@ -251,8 +250,7 @@ public final class CharacterList<E extends CharacterNode> implements
      *         the type of character being iterated over.
      * @author lare96 <http://github.com/lare96>
      */
-    private static final class CharacterListIterator<E extends CharacterNode>
-            implements Iterator<E> {
+    private static final class CharacterListIterator<E extends CharacterNode> implements Iterator<E> {
 
         /**
          * The {@link CharacterList} that is storing the elements.
@@ -287,8 +285,7 @@ public final class CharacterList<E extends CharacterNode> implements
         @Override
         public E next() {
             if (index >= list.capacity()) {
-                throw new ArrayIndexOutOfBoundsException("There are no " +
-                        "elements left to iterate over!");
+                throw new ArrayIndexOutOfBoundsException("There are no " + "elements left to iterate over!");
             }
 
             lastIndex = index;
@@ -299,8 +296,7 @@ public final class CharacterList<E extends CharacterNode> implements
         @Override
         public void remove() {
             if (lastIndex == -1) {
-                throw new IllegalStateException("This method can only be " +
-                        "called once after \"next\".");
+                throw new IllegalStateException("This method can only be " + "called once after \"next\".");
             }
             list.remove(list.characters[lastIndex]);
             index = lastIndex;

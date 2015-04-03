@@ -24,8 +24,7 @@ public final class WeaponInterfaceLoader extends JsonLoader {
     @Override
     public void load(JsonObject reader, Gson builder) {
         int id = reader.get("id").getAsInt();
-        WeaponInterface interfaces = Objects.requireNonNull(builder.fromJson
-                (reader.get("interface"), WeaponInterface.class));
+        WeaponInterface interfaces = Objects.requireNonNull(builder.fromJson(reader.get("interface"), WeaponInterface.class));
         WeaponInterface.INTERFACES.put(id, interfaces);
     }
 }

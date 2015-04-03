@@ -2,7 +2,6 @@ package plugin.minigames.fightcaves
 
 import com.asteria.game.World
 import com.asteria.game.character.Animation
-import com.asteria.game.character.AnimationPriority
 import com.asteria.game.character.Flag
 import com.asteria.game.character.combat.prayer.CombatPrayer
 import com.asteria.game.character.player.Player
@@ -31,8 +30,8 @@ final class FightCavesHandler {
         timeoutCounter.reset()
         RandomGen random = new RandomGen()
         Player player = null
-        while((player = awaiting.poll()) != null) {
-            if(player.viewingOrb != null) {
+        while ((player = awaiting.poll()) != null) {
+            if (player.viewingOrb != null) {
                 player.viewingOrb.close()
                 player.viewingOrb = null
             }
@@ -49,11 +48,11 @@ final class FightCavesHandler {
     }
 
     static def end(boolean timeout) {
-        if(players.size() > 1 && !timeout)
+        if (players.size() > 1 && !timeout)
             return
-        if(timeout) {
+        if (timeout) {
             players.each {
-                if(!it.registered)
+                if (!it.registered)
                     return
                 it.encoder.sendContextMenu(3, "null")
                 it.encoder.sendWalkable(-1)
@@ -68,12 +67,12 @@ final class FightCavesHandler {
             }
         } else {
             def player = World.getPlayer currentChampion
-            if(player.present) {
+            if (player.present) {
                 player.get().skullIcon = -1
                 player.get().flags.set Flag.APPEARANCE
             }
             players.each {
-                if(!it.registered)
+                if (!it.registered)
                     return
                 currentChampion = it.getFormatUsername()
                 it.inventory.add new Item(6529, 100)
@@ -104,7 +103,7 @@ final class FightCavesHandler {
         String champion = currentChampion ?: "Xil"
         player.encoder.sendString("Current champion: JalYt-Ket-${champion}", 2805)
         player.encoder.sendString(players.size() >= 1 ? "Game currently in progress!" : awaiting.size() < PLAYERS_NEEDED ? "Waiting for ${needed} more players!" : "Minutes Left: ${minutes}", 2806)
-        if(champion != null)
+        if (champion != null)
             player.encoder.sendByteState(560, champion.equalsIgnoreCase(player.username) ? 0 : 1)
     }
 

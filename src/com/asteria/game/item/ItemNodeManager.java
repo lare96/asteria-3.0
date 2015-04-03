@@ -39,8 +39,7 @@ public final class ItemNodeManager extends Task {
         Iterator<ItemNode> it = ITEMS.iterator();
         while (it.hasNext()) {
             ItemNode item = it.next();
-            if (item.getCounter().incrementAndGet(10) >= ItemNodeManager
-                    .SEQUENCE_TICKS) {
+            if (item.getCounter().incrementAndGet(10) >= ItemNodeManager.SEQUENCE_TICKS) {
                 item.onSequence();
                 item.getCounter().set(0);
             }
@@ -79,8 +78,7 @@ public final class ItemNodeManager extends Task {
                 int counter = 0;
                 for (Iterator<ItemNode> it = ITEMS.iterator(); it.hasNext(); ) {
                     ItemNode next = it.next();
-                    if (next.getPlayer() == null || next.getPosition() ==
-                            null || next.getItem() == null)
+                    if (next.getPlayer() == null || next.getPosition() == null || next.getItem() == null)
                         continue;
                     if (next.getItem().getId() == item.getItem().getId() &&
                             next.getPosition().equals(item.getPosition()) &&
@@ -143,8 +141,7 @@ public final class ItemNodeManager extends Task {
      */
     public static Optional<ItemNode> getItem(int id, Position position) {
         return ITEMS.stream().filter(i -> i.getState() != ItemState.HIDDEN &&
-                i.isRegistered() && i.getItem().getId() == id && i
-                .getPosition().equals(position)).findFirst();
+                i.isRegistered() && i.getItem().getId() == id && i.getPosition().equals(position)).findFirst();
     }
 
     /**
@@ -159,13 +156,11 @@ public final class ItemNodeManager extends Task {
                 continue;
             player.getEncoder().sendRemoveGroundItem(item);
             if (item.getPosition().withinDistance(player.getPosition(), 60)) {
-                if (item.getPlayer() == null && item.getState() == ItemState
-                        .SEEN_BY_EVERYONE) {
+                if (item.getPlayer() == null && item.getState() == ItemState.SEEN_BY_EVERYONE) {
                     player.getEncoder().sendGroundItem(item);
                     continue;
                 }
-                if (item.getPlayer().equals(player) && item.getState() ==
-                        ItemState.SEEN_BY_OWNER) {
+                if (item.getPlayer().equals(player) && item.getState() == ItemState.SEEN_BY_OWNER) {
                     player.getEncoder().sendGroundItem(item);
                     continue;
                 }

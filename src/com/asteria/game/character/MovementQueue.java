@@ -1,5 +1,9 @@
 package com.asteria.game.character;
 
+import java.util.Deque;
+import java.util.LinkedList;
+import java.util.Optional;
+
 import com.asteria.game.NodeType;
 import com.asteria.game.character.combat.Combat;
 import com.asteria.game.character.player.Player;
@@ -7,10 +11,6 @@ import com.asteria.game.location.Position;
 import com.asteria.task.Task;
 import com.asteria.task.TaskHandler;
 import com.asteria.utility.RandomGen;
-
-import java.util.Deque;
-import java.util.LinkedList;
-import java.util.Optional;
 
 /**
  * The movement queue sequencer that handles the entire movement process for
@@ -99,10 +99,8 @@ public final class MovementQueue {
             int x = MovementQueue.DIRECTION_DELTA_X[walkPoint.getDirection()];
             int y = MovementQueue.DIRECTION_DELTA_Y[walkPoint.getDirection()];
 
-            if (character.isFollowing() && character.getFollowCharacter() !=
-                    null) {
-                if (character.getPosition().copy().move(x, y).equals
-                        (character.getFollowCharacter().getPosition())) {
+            if (character.isFollowing() && character.getFollowCharacter() != null) {
+                if (character.getPosition().copy().move(x, y).equals(character.getFollowCharacter().getPosition())) {
                     return;
                 }
             }
@@ -121,10 +119,8 @@ public final class MovementQueue {
             int x = MovementQueue.DIRECTION_DELTA_X[runPoint.getDirection()];
             int y = MovementQueue.DIRECTION_DELTA_Y[runPoint.getDirection()];
 
-            if (character.isFollowing() && character.getFollowCharacter() !=
-                    null) {
-                if (character.getPosition().copy().move(x, y).equals
-                        (character.getFollowCharacter().getPosition())) {
+            if (character.isFollowing() && character.getFollowCharacter() != null) {
+                if (character.getPosition().copy().move(x, y).equals(character.getFollowCharacter().getPosition())) {
                     return;
                 }
             }
@@ -133,10 +129,8 @@ public final class MovementQueue {
                 Player player = (Player) character;
                 if (player.getRunEnergy().getAndDecrement() > 0) {
                     player.sendInterfaces();
-                    player.getEncoder().sendString(player.getRunEnergy() +
-                            "%", 149);
-                }
-                else {
+                    player.getEncoder().sendString(player.getRunEnergy() + "%", 149);
+                } else {
                     running = false;
                     player.getEncoder().sendByteState(173, 0);
                 }
@@ -149,10 +143,8 @@ public final class MovementQueue {
         }
 
         if (character.getType() == NodeType.PLAYER) {
-            int deltaX = character.getPosition().getX() - character
-                    .getCurrentRegion().getRegionX() * 8;
-            int deltaY = character.getPosition().getY() - character
-                    .getCurrentRegion().getRegionY() * 8;
+            int deltaX = character.getPosition().getX() - character.getCurrentRegion().getRegionX() * 8;
+            int deltaY = character.getPosition().getY() - character.getCurrentRegion().getRegionY() * 8;
 
             if (deltaX < 16 || deltaX >= 88 || deltaY < 16 || deltaY > 88) {
                 ((Player) character).getEncoder().sendMapRegion();
@@ -170,8 +162,7 @@ public final class MovementQueue {
      *         the amount of spaces to walk to the {@code Y}.
      */
     public void walk(int addX, int addY) {
-        walk(new Position(character.getPosition().getX() + addX, character
-                .getPosition().getY() + addY));
+        walk(new Position(character.getPosition().getX() + addX, character.getPosition().getY() + addY));
     }
 
     /**
@@ -231,14 +222,12 @@ public final class MovementQueue {
         for (int i = 0; i < max; i++) {
             if (deltaX < 0) {
                 deltaX++;
-            }
-            else if (deltaX > 0) {
+            } else if (deltaX > 0) {
                 deltaX--;
             }
             if (deltaY < 0) {
                 deltaY++;
-            }
-            else if (deltaY > 0) {
+            } else if (deltaY > 0) {
                 deltaY--;
             }
             addStep(position.getX() - deltaX, position.getY() - deltaY);
@@ -279,33 +268,25 @@ public final class MovementQueue {
         if (dx < 0) {
             if (dy < 0) {
                 return 5;
-            }
-            else if (dy > 0) {
+            } else if (dy > 0) {
                 return 0;
-            }
-            else {
+            } else {
                 return 3;
             }
-        }
-        else if (dx > 0) {
+        } else if (dx > 0) {
             if (dy < 0) {
                 return 7;
-            }
-            else if (dy > 0) {
+            } else if (dy > 0) {
                 return 2;
-            }
-            else {
+            } else {
                 return 4;
             }
-        }
-        else {
+        } else {
             if (dy < 0) {
                 return 6;
-            }
-            else if (dy > 0) {
+            } else if (dy > 0) {
                 return 1;
-            }
-            else {
+            } else {
                 return -1;
             }
         }
@@ -318,12 +299,10 @@ public final class MovementQueue {
      *         the character being followed.
      */
     public void follow(CharacterNode leader) {
-        if (character.getFollowCharacter() != null && character
-                .getFollowCharacter().equals(leader)) {
+        if (character.getFollowCharacter() != null && character.getFollowCharacter().equals(leader)) {
             return;
         }
-        if (character.isFollowing() && !leader.equals(character
-                .getFollowCharacter())) {
+        if (character.isFollowing() && !leader.equals(character.getFollowCharacter())) {
             character.faceCharacter(null);
             character.setFollowing(false);
             character.setFollowCharacter(null);
@@ -334,8 +313,7 @@ public final class MovementQueue {
         if (!followTask.isPresent()) {
             character.setFollowing(true);
             character.setFollowCharacter(leader);
-            followTask = Optional.of(new CharacterFollowTask(character,
-                    leader));
+            followTask = Optional.of(new CharacterFollowTask(character, leader));
             TaskHandler.submit(followTask.get());
         }
     }
@@ -468,8 +446,7 @@ public final class MovementQueue {
          * @param leader
          *         the character being followed in this process.
          */
-        public CharacterFollowTask(CharacterNode character, CharacterNode
-                leader) {
+        public CharacterFollowTask(CharacterNode character, CharacterNode leader) {
             super(1, true);
             this.character = character;
             this.leader = leader;
@@ -477,9 +454,7 @@ public final class MovementQueue {
 
         @Override
         public void execute() {
-            if (!character.isFollowing() || !character.getPosition()
-                    .withinDistance(leader.getPosition(), 20) || character
-                    .isDead() || leader.isDead()) {
+            if (!character.isFollowing() || !character.getPosition().withinDistance(leader.getPosition(), 20) || character.isDead() || leader.isDead()) {
                 character.faceCharacter(null);
                 character.setFollowing(false);
                 character.setFollowCharacter(null);
@@ -488,8 +463,7 @@ public final class MovementQueue {
             }
 
             character.faceCharacter(leader);
-            if (character.getMovementQueue().isLockMovement() || character
-                    .isFrozen()) {
+            if (character.getMovementQueue().isLockMovement() || character.isFrozen()) {
                 return;
             }
             if (character.getPosition().equals(leader.getPosition().copy())) {
@@ -498,22 +472,19 @@ public final class MovementQueue {
 
                 if (random.nextBoolean()) {
                     character.getMovementQueue().walk(random.random(dir), 0);
-                }
-                else {
+                } else {
                     character.getMovementQueue().walk(0, random.random(dir));
                 }
                 return;
             }
-            if (character.getCombatBuilder().isAttacking() && character
-                    .getType() == NodeType.PLAYER) {
+            if (character.getCombatBuilder().isAttacking() && character.getType() == NodeType.PLAYER) {
                 character.getCombatBuilder().determineStrategy();
 
                 if (Combat.checkAttackDistance(character.getCombatBuilder())) {
                     return;
                 }
             }
-            if (character.getPosition().withinDistance(leader.getPosition(),
-                    1)) {
+            if (character.getPosition().withinDistance(leader.getPosition(), 1)) {
                 return;
             }
             character.getMovementQueue().walk(leader.getPosition().copy());

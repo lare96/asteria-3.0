@@ -1,5 +1,7 @@
 package com.asteria.game.character.player.content;
 
+import java.util.Optional;
+
 import com.asteria.game.character.Animation;
 import com.asteria.game.character.player.Player;
 import com.asteria.game.character.player.skill.Skill;
@@ -7,8 +9,6 @@ import com.asteria.game.character.player.skill.SkillData;
 import com.asteria.game.character.player.skill.Skills;
 import com.asteria.game.item.Item;
 import com.asteria.utility.RandomGen;
-
-import java.util.Optional;
 
 /**
  * The enumerated type managing consumable food types.
@@ -115,47 +115,35 @@ public enum FoodConsumable {
             if (random.floatRandom(100F) >= 61.24F) {
                 int healAmount = Math.round((10 * 100F) / realLevel);
                 skill.increaseLevel(healAmount, realLevel);
-                player.getEncoder().sendMessage("It restores some life points" +
-                        ".");
+                player.getEncoder().sendMessage("It restores some life points" + ".");
                 return;
             }
             if (random.floatRandom(100F) >= 21.12F) {
                 skill.increaseLevel(random.inclusive(10, 20), realLevel);
-                player.getEncoder().sendMessage("That was a good kebab. You " +
-                        "feel a lot better.");
+                player.getEncoder().sendMessage("That was a good kebab. You " + "feel a lot better.");
                 return;
             }
             if (random.floatRandom(100F) >= 8.71F) {
-                player.getEncoder().sendMessage("The kebab didn't seem to do " +
-                        "a lot.");
+                player.getEncoder().sendMessage("The kebab didn't seem to do " + "a lot.");
                 return;
             }
             if (random.floatRandom(100F) >= 3.65F) {
                 skill.increaseLevel(30, realLevel);
-                player.getSkills()[Skills.ATTACK].increaseLevel(random
-                        .exclusive(3));
-                player.getSkills()[Skills.STRENGTH].increaseLevel(random
-                        .exclusive(3));
-                player.getSkills()[Skills.DEFENCE].increaseLevel(random
-                        .exclusive(3));
-                player.getEncoder().sendMessage("Wow, that was an amazing " +
-                        "kebab! You feel really invigorated.");
+                player.getSkills()[Skills.ATTACK].increaseLevel(random.exclusive(3));
+                player.getSkills()[Skills.STRENGTH].increaseLevel(random.exclusive(3));
+                player.getSkills()[Skills.DEFENCE].increaseLevel(random.exclusive(3));
+                player.getEncoder().sendMessage("Wow, that was an amazing " + "kebab! You feel really invigorated.");
                 return;
             }
             if (random.floatRandom(100F) >= 3.28F) {
-                player.getSkills()[Skills.ATTACK].decreaseLevel(random
-                        .exclusive(3));
-                player.getSkills()[Skills.STRENGTH].decreaseLevel(random
-                        .exclusive(3));
-                player.getSkills()[Skills.DEFENCE].decreaseLevel(random
-                        .exclusive(3));
-                player.getEncoder().sendMessage("That tasted a bit dodgy. You" +
-                        " feel a bit ill.");
+                player.getSkills()[Skills.ATTACK].decreaseLevel(random.exclusive(3));
+                player.getSkills()[Skills.STRENGTH].decreaseLevel(random.exclusive(3));
+                player.getSkills()[Skills.DEFENCE].decreaseLevel(random.exclusive(3));
+                player.getEncoder().sendMessage("That tasted a bit dodgy. You" + " feel a bit ill.");
                 return;
             }
             if (random.floatRandom(100F) >= 2.00F) {
-                int id = random.inclusiveExcludes(0, player.getSkills()
-                        .length, Skills.HITPOINTS);
+                int id = random.inclusiveExcludes(0, player.getSkills().length, Skills.HITPOINTS);
                 Skill randomSkill = player.getSkills()[id];
                 randomSkill.decreaseLevel(random.exclusive(3));
                 player.getEncoder().sendMessage("Eating the kebab has damaged" +
@@ -207,8 +195,7 @@ public enum FoodConsumable {
     public static boolean consume(Player player, Item item, int slot) {
         Optional<FoodConsumable> food = forId(item.getId());
         // TODO: Check duel rule for no food.
-        if (!food.isPresent() || player.isDead() || !player.getEatingTimer()
-                .elapsed(food.get().getDelay()))
+        if (!food.isPresent() || player.isDead() || !player.getEatingTimer().elapsed(food.get().getDelay()))
             return false;
         player.animation(new Animation(829));
         player.getEatingTimer().reset();
@@ -264,8 +251,7 @@ public enum FoodConsumable {
      * @return the chatbox message printed when a food is consumed.
      */
     public String getMessage() {
-        return (ids.length > 1 ? "You eat a slice of the " : "You eat the ")
-                + toString() + ".";
+        return (ids.length > 1 ? "You eat a slice of the " : "You eat the ") + toString() + ".";
     }
 
     /**
@@ -281,10 +267,8 @@ public enum FoodConsumable {
         if (food.isPresent()) {
             int length = food.get().getIds().length;
             for (int index = 0; index < length; index++) {
-                if (food.get().getIds()[index] == item.getId() && index + 1 <
-                        length) {
-                    return Optional.of(new Item(food.get().getIds()[index +
-                            1]));
+                if (food.get().getIds()[index] == item.getId() && index + 1 < length) {
+                    return Optional.of(new Item(food.get().getIds()[index + 1]));
                 }
             }
         }

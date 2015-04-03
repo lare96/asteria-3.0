@@ -20,8 +20,7 @@ public final class ChatPacket extends PacketDecoder {
         int effects = buf.get(false, com.asteria.network.ValueType.S);
         int color = buf.get(false, com.asteria.network.ValueType.S);
         int chatLength = (size - 2);
-        byte[] text = buf.getBytesReverse(chatLength, com.asteria.network
-                .ValueType.A);
+        byte[] text = buf.getBytesReverse(chatLength, com.asteria.network.ValueType.A);
         if (effects < 0 || color < 0 || chatLength < 0)
             return;
         player.setChatEffects(effects);

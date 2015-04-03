@@ -7,13 +7,13 @@ import com.asteria.game.item.Item
 import com.asteria.utility.RandomGen
 
 enum Tool {
-    NET(303, 1, -1, 0.30, 621, [Catchable.SHRIMP, Catchable.ANCHOVY]) {
+    NET(303, 1, -1, 0.30, 621, [Catchable.SHRIMP, Catchable.ANCHOVY]){
         @Override
         Catchable catchable() {
             Catchable.SHRIMP
         }
     },
-    BIG_NET(305, 16, -1, 0.25, 620, [Catchable.MACKEREL, Catchable.OYSTER, Catchable.COD, Catchable.BASS, Catchable.CASKET]) {
+    BIG_NET(305, 16, -1, 0.25, 620, [Catchable.MACKEREL, Catchable.OYSTER, Catchable.COD, Catchable.BASS, Catchable.CASKET]){
         @Override
         Item[] onCatch(Player player) {
             int amount = random.inclusive(1, 4)
@@ -33,31 +33,31 @@ enum Tool {
             Catchable.MACKEREL
         }
     },
-    FISHING_ROD(307, 5, 313, 0.40, 622, [Catchable.SARDINE, Catchable.HERRING, Catchable.PIKE, Catchable.SLIMY_EEL, Catchable.CAVE_EEL, Catchable.LAVA_EEL]) {
+    FISHING_ROD(307, 5, 313, 0.40, 622, [Catchable.SARDINE, Catchable.HERRING, Catchable.PIKE, Catchable.SLIMY_EEL, Catchable.CAVE_EEL, Catchable.LAVA_EEL]){
         @Override
         Catchable catchable() {
             Catchable.SARDINE
         }
     },
-    FLY_FISHING_ROD(309, 20, 314, 0.45, 622, [Catchable.TROUT, Catchable.SALMON]) {
+    FLY_FISHING_ROD(309, 20, 314, 0.45, 622, [Catchable.TROUT, Catchable.SALMON]){
         @Override
         Catchable catchable() {
             Catchable.TROUT
         }
     },
-    HARPOON(311, 35, -1, 0.15, 618, [Catchable.TUNA, Catchable.SWORDFISH]) {
+    HARPOON(311, 35, -1, 0.15, 618, [Catchable.TUNA, Catchable.SWORDFISH]){
         @Override
         Catchable catchable() {
             Catchable.TUNA
         }
     },
-    SHARK_HARPOON(311, 76, -1, 0.05, 618, [Catchable.SHARK]) {
+    SHARK_HARPOON(311, 76, -1, 0.05, 618, [Catchable.SHARK]){
         @Override
         Catchable catchable() {
             Catchable.SHARK
         }
     },
-    LOBSTER_POT(301, 40, -1, 0.20, 619, [Catchable.LOBSTER]) {
+    LOBSTER_POT(301, 40, -1, 0.20, 619, [Catchable.LOBSTER]){
         @Override
         Catchable catchable() {
             Catchable.LOBSTER
@@ -93,13 +93,13 @@ enum Tool {
     Catchable calculate(Player player) {
         List<Catchable> success = new ArrayList<>(catchables.length)
         catchables.each {
-            if(it.level <= player.skills[Skills.FISHING].level && it.catchable(player))
+            if (it.level <= player.skills[Skills.FISHING].level && it.catchable(player))
                 success.add it
         }
         Collections.shuffle(success, random)
         Catchable c = null
         success.each {
-            if(random.roll(it.chance)) {
+            if (random.roll(it.chance)) {
                 c = it
                 return
             }

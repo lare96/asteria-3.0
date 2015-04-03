@@ -33,17 +33,14 @@ public final class PlayerSerializationCache implements Runnable {
     /**
      * The logger that will print important information.
      */
-    private static Logger logger = LoggerUtils.getLogger
-            (PlayerSerializationCache.class);
+    private static Logger logger = LoggerUtils.getLogger(PlayerSerializationCache.class);
 
     /**
      * The collection of character files that have been cached by the
      * {@link PlayerSerializer}. These character files will be removed from the
      * cache {@code 15} minutes after they've been added to free up memory.
      */
-    private final Cache<Long, JsonObject> cache = CacheBuilder.newBuilder()
-            .initialCapacity(100).expireAfterWrite(15, TimeUnit.MINUTES)
-            .concurrencyLevel(2).build();
+    private final Cache<Long, JsonObject> cache = CacheBuilder.newBuilder().initialCapacity(100).expireAfterWrite(15, TimeUnit.MINUTES).concurrencyLevel(2).build();
 
     /**
      * The flag that determines if entries should be automatically invalidated.
@@ -82,8 +79,7 @@ public final class PlayerSerializationCache implements Runnable {
      */
     public void init() {
         if (automatic)
-            GameService.getLogicService().scheduleAtFixedRate(this, 15, 15,
-                    TimeUnit.MINUTES);
+            GameService.getLogicService().scheduleAtFixedRate(this, 15, 15, TimeUnit.MINUTES);
     }
 
     /**

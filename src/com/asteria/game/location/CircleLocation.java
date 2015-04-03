@@ -64,16 +64,14 @@ public final class CircleLocation extends Location {
         if (!(obj instanceof CircleLocation))
             return false;
         CircleLocation other = (CircleLocation) obj;
-        return other.x == x && other.y == y && other.z == z && other.radius
-                == radius;
+        return other.x == x && other.y == y && other.z == z && other.radius == radius;
     }
 
     @Override
     public boolean inLocation(Position position) {
         if (position.getZ() != z)
             return false;
-        return Math.pow((position.getX() - x), 2) + Math.pow((position.getY()
-                - y), 2) <= Math.pow(radius, 2);
+        return Math.pow((position.getX() - x), 2) + Math.pow((position.getY() - y), 2) <= Math.pow(radius, 2);
     }
 
     @Override

@@ -100,8 +100,7 @@ public final class SquareLocation extends Location {
     public boolean inLocation(Position position) {
         if (position.getZ() != z)
             return false;
-        return position.getX() >= swX && position.getX() <= neX && position
-                .getY() >= swY && position.getY() <= neY;
+        return position.getX() >= swX && position.getX() <= neX && position.getY() >= swY && position.getY() <= neY;
     }
 
     @Override
@@ -113,10 +112,8 @@ public final class SquareLocation extends Location {
     @Override
     public Position random() {
         RandomGen r = new RandomGen();
-        int x = r.nextInt((Math.max(swX, neX) - Math.min(swX, neX) + 1) +
-                Math.min(swX, neX));
-        int y = r.nextInt(Math.max(swY, neY) - Math.min(swY, neY) + 1) + Math
-                .min(swY, neY);
+        int x = r.nextInt((Math.max(swX, neX) - Math.min(swX, neX) + 1) + Math.min(swX, neX));
+        int y = r.nextInt(Math.max(swY, neY) - Math.min(swY, neY) + 1) + Math.min(swY, neY);
         return new Position(x, y, z);
     }
 

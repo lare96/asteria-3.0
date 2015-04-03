@@ -1,9 +1,5 @@
 package com.asteria.game.item.container;
 
-import com.asteria.game.character.player.Player;
-import com.asteria.game.item.Item;
-import com.google.common.base.Preconditions;
-
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
@@ -16,6 +12,10 @@ import java.util.Spliterators;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
+
+import com.asteria.game.character.player.Player;
+import com.asteria.game.item.Item;
+import com.google.common.base.Preconditions;
 
 /**
  * The container that represents a collection of items.
@@ -70,8 +70,7 @@ public class ItemContainer implements Iterable<Item> {
 
     @Override
     public Spliterator<Item> spliterator() {
-        return Spliterators.spliterator(items, 0, items.length, Spliterator
-                .ORDERED | Spliterator.IMMUTABLE);
+        return Spliterators.spliterator(items, 0, items.length, Spliterator.ORDERED | Spliterator.IMMUTABLE);
     }
 
     @Override
@@ -94,9 +93,7 @@ public class ItemContainer implements Iterable<Item> {
             return false;
         }
         int newSlot = (slot > -1) ? slot : freeSlot();
-        if ((item.getDefinition().isStackable() || policy.equals
-                (ItemContainerPolicy.STACK_ALWAYS)) && !policy.equals
-                (ItemContainerPolicy.STACK_NEVER)) {
+        if ((item.getDefinition().isStackable() || policy.equals(ItemContainerPolicy.STACK_ALWAYS)) && !policy.equals(ItemContainerPolicy.STACK_NEVER)) {
             if (amount(item.getId()) > 0) {
                 newSlot = searchSlot(item.getId());
             }
@@ -108,21 +105,16 @@ public class ItemContainer implements Iterable<Item> {
         if (get(newSlot) != null) {
             newSlot = freeSlot();
         }
-        if (item.getDefinition().isStackable() || policy ==
-                ItemContainerPolicy.STACK_ALWAYS && policy !=
-                ItemContainerPolicy.STACK_NEVER) {
+        if (item.getDefinition().isStackable() || policy == ItemContainerPolicy.STACK_ALWAYS && policy != ItemContainerPolicy.STACK_NEVER) {
             for (int i = 0; i < items.length; i++) {
                 if (items[i] != null && items[i].getId() == item.getId()) {
-                    set(i, new Item(items[i].getId(), items[i].getAmount() +
-                            item.getAmount()));
-                    listeners.forEach(l -> l.onAdd(ItemContainer.this, item,
-                            true));
+                    set(i, new Item(items[i].getId(), items[i].getAmount() + item.getAmount()));
+                    listeners.forEach(l -> l.onAdd(ItemContainer.this, item, true));
                     return true;
                 }
             }
             if (newSlot == -1) {
-                listeners.forEach(l -> l.onAdd(ItemContainer.this, item,
-                        false));
+                listeners.forEach(l -> l.onAdd(ItemContainer.this, item, false));
                 return false;
             }
             set(slot > -1 ? newSlot : freeSlot(), item);
@@ -130,8 +122,7 @@ public class ItemContainer implements Iterable<Item> {
             return true;
         }
         int remainingSlots = remaining();
-        if (item.getAmount() > remainingSlots && !item.getDefinition()
-                .isStackable()) {
+        if (item.getAmount() > remainingSlots && !item.getDefinition().isStackable()) {
             item.setAmount(remainingSlots);
         }
         for (int i = 0; i < item.getAmount(); i++) {
@@ -211,32 +202,25 @@ public class ItemContainer implements Iterable<Item> {
             listeners.forEach(l -> l.onRemove(ItemContainer.this, item, false));
             return false;
         }
-        if ((item.getDefinition().isStackable() || policy.equals
-                (ItemContainerPolicy.STACK_ALWAYS)) && !policy.equals
-                (ItemContainerPolicy.STACK_NEVER)) {
+        if ((item.getDefinition().isStackable() || policy.equals(ItemContainerPolicy.STACK_ALWAYS)) && !policy.equals(ItemContainerPolicy.STACK_NEVER)) {
             int slotHolder = searchSlot(item.getId());
             Item stack = get(slotHolder);
             if (stack == null) {
-                listeners.forEach(l -> l.onRemove(ItemContainer.this, item,
-                        false));
+                listeners.forEach(l -> l.onRemove(ItemContainer.this, item, false));
                 return false;
             }
             if (stack.getAmount() > item.getAmount()) {
-                set(slotHolder, new Item(stack.getId(), stack.getAmount() -
-                        item.getAmount()));
-            }
-            else {
+                set(slotHolder, new Item(stack.getId(), stack.getAmount() - item.getAmount()));
+            } else {
                 set(slotHolder, null);
             }
-        }
-        else {
+        } else {
             for (int i = 0; i < item.getAmount(); i++) {
                 int slotHolder = searchSlot(item.getId());
                 if (i == 0 && slot != -1) {
                     Item inSlot = get(slot);
                     if (inSlot == null) {
-                        listeners.forEach(l -> l.onRemove(ItemContainer.this,
-                                item, false));
+                        listeners.forEach(l -> l.onRemove(ItemContainer.this, item, false));
                         return false;
                     }
                     if (inSlot.getId() == item.getId()) {
@@ -245,10 +229,8 @@ public class ItemContainer implements Iterable<Item> {
                 }
                 if (slotHolder != -1) {
                     set(slotHolder, null);
-                }
-                else {
-                    listeners.forEach(l -> l.onRemove(ItemContainer.this,
-                            item, false));
+                } else {
+                    listeners.forEach(l -> l.onRemove(ItemContainer.this, item, false));
                     return false;
                 }
             }
@@ -309,9 +291,7 @@ public class ItemContainer implements Iterable<Item> {
      * @return {@code true} if there is enough space, {@code false} otherwise.
      */
     public boolean spaceFor(Item item) {
-        if (item.getDefinition().isStackable() || policy ==
-                ItemContainerPolicy.STACK_ALWAYS && policy !=
-                ItemContainerPolicy.STACK_NEVER) {
+        if (item.getDefinition().isStackable() || policy == ItemContainerPolicy.STACK_ALWAYS && policy != ItemContainerPolicy.STACK_NEVER) {
             for (int i = 0; i < items.length; i++) {
                 if (items[i] != null && items[i].getId() == item.getId()) {
                     int totalCount = item.getAmount() + items[i].getAmount();
@@ -375,8 +355,7 @@ public class ItemContainer implements Iterable<Item> {
      * otherwise.
      */
     public boolean contains(Item item) {
-        return stream().filter(Objects::nonNull).anyMatch(i -> i.getId() ==
-                item.getId() && i.getAmount() >= item.getAmount());
+        return stream().filter(Objects::nonNull).anyMatch(i -> i.getId() == item.getId() && i.getAmount() >= item.getAmount());
     }
 
     /**
@@ -388,8 +367,7 @@ public class ItemContainer implements Iterable<Item> {
      * {@code false} otherwise.
      */
     public boolean containsAll(Item... items) {
-        return Arrays.stream(items).filter(Objects::nonNull).allMatch
-                (this::contains);
+        return Arrays.stream(items).filter(Objects::nonNull).allMatch(this::contains);
     }
 
     /**
@@ -401,8 +379,7 @@ public class ItemContainer implements Iterable<Item> {
      * {@code false} otherwise.
      */
     public boolean containsAny(Item... items) {
-        return Arrays.stream(items).filter(Objects::nonNull).anyMatch
-                (this::contains);
+        return Arrays.stream(items).filter(Objects::nonNull).anyMatch(this::contains);
     }
 
     /**
@@ -436,8 +413,7 @@ public class ItemContainer implements Iterable<Item> {
             Item[] slice = new Item[shiftTo - shiftFrom];
             System.arraycopy(items, shiftFrom, slice, 0, slice.length);
             System.arraycopy(slice, 0, items, shiftFrom + 1, slice.length);
-        }
-        else {
+        } else {
             int sliceStart = slot + 1;
             int sliceEnd = newSlot;
             for (int i = (sliceEnd - 1); i >= sliceStart; i--) {
@@ -613,8 +589,7 @@ public class ItemContainer implements Iterable<Item> {
      * identifier.
      */
     public int amount(int id) {
-        return stream().filter(i -> Item.valid(i) && i.getId() == id)
-                .mapToInt(i -> i.getAmount()).sum();
+        return stream().filter(i -> Item.valid(i) && i.getId() == id).mapToInt(i -> i.getAmount()).sum();
     }
 
     /**
@@ -777,8 +752,7 @@ public class ItemContainer implements Iterable<Item> {
         @Override
         public Item next() {
             if (index >= container.capacity())
-                throw new ArrayIndexOutOfBoundsException("There are no " +
-                        "elements left to iterate over!");
+                throw new ArrayIndexOutOfBoundsException("There are no " + "elements left to iterate over!");
             lastIndex = index;
             index++;
             return container.get(lastIndex);
@@ -787,8 +761,7 @@ public class ItemContainer implements Iterable<Item> {
         @Override
         public void remove() {
             if (lastIndex == -1)
-                throw new IllegalStateException("This method can only be " +
-                        "called once after \"next\".");
+                throw new IllegalStateException("This method can only be " + "called once after \"next\".");
             Item item = container.get(lastIndex);
             container.remove(item, lastIndex);
             index = lastIndex;

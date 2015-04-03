@@ -14,7 +14,7 @@ enum Catchable {
     TROUT(335, 20, 0.95, 50),
     COD(341, 23, 0.9, 45),
     PIKE(349, 25, 0.9, 60),
-    SLIMY_EEL(3379, 28, 0.05, 65) {
+    SLIMY_EEL(3379, 28, 0.05, 65){
         @Override
         boolean catchable(Player player) {
             Location.inWilderness(player)
@@ -22,7 +22,7 @@ enum Catchable {
     },
     SALMON(331, 30, 0.75, 70),
     TUNA(359, 35, 0.95, 80),
-    CAVE_EEL(5001, 38, 0.07, 80) {
+    CAVE_EEL(5001, 38, 0.07, 80){
         @Override
         boolean catchable(Player player) {
             Location.inWilderness(player)
@@ -31,7 +31,7 @@ enum Catchable {
     LOBSTER(377, 40, 0.85, 90),
     BASS(363, 46, 0.5, 100),
     SWORDFISH(371, 50, 0.75, 100),
-    LAVA_EEL(2148, 53, 0.85, 60) {
+    LAVA_EEL(2148, 53, 0.85, 60){
         @Override
         boolean catchable(Player player) {
             Location.inWilderness(player)
@@ -63,7 +63,7 @@ enum Catchable {
     static Catchable getCatchable(int id) {
         Catchable catchable = null
         values().each {
-            if(it.id == id)
+            if (it.id == id)
                 catchable = it
         }
         return catchable

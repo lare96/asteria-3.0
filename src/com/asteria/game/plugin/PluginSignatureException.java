@@ -20,7 +20,6 @@ public final class PluginSignatureException extends RuntimeException {
      *         the class that the plugin signature is missing from.
      */
     public PluginSignatureException(Class<?> clazz) {
-        super("Plugin signature invalid or missing in " + clazz.getSimpleName
-                () + ".class");
+        super("Plugin signature invalid or missing in " + clazz.getSimpleName() + ".class");
     }
 }

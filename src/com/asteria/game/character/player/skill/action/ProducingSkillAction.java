@@ -44,8 +44,7 @@ public abstract class ProducingSkillAction extends SkillAction {
             Skills.experience(player, experience(), skill().getId());
             player.getInventory().add(produceItem());
             onProduce(t, true);
-        }
-        else {
+        } else {
             player.getEncoder().sendMessage("You do not have any " +
                     removeItem.getDefinition().getName() + " left.");
             t.cancel();

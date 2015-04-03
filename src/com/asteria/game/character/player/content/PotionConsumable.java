@@ -1,12 +1,6 @@
 package com.asteria.game.character.player.content;
 
-import static com.asteria.game.character.player.skill.Skills.ATTACK;
-import static com.asteria.game.character.player.skill.Skills.DEFENCE;
-import static com.asteria.game.character.player.skill.Skills.HITPOINTS;
-import static com.asteria.game.character.player.skill.Skills.MAGIC;
-import static com.asteria.game.character.player.skill.Skills.PRAYER;
-import static com.asteria.game.character.player.skill.Skills.RANGED;
-import static com.asteria.game.character.player.skill.Skills.STRENGTH;
+import static com.asteria.game.character.player.skill.Skills.*;
 
 import java.util.Optional;
 
@@ -150,8 +144,7 @@ public enum PotionConsumable {
     public static boolean consume(Player player, Item item, int slot) {
         Optional<PotionConsumable> potion = forId(item.getId());
         // TODO: Check duel rule for no potions.
-        if (!potion.isPresent() || player.isDead() || !player.getPotionTimer
-                ().elapsed(1200))
+        if (!potion.isPresent() || player.isDead() || !player.getPotionTimer().elapsed(1200))
             return false;
         player.animation(new Animation(829));
         player.getPotionTimer().reset();
@@ -196,38 +189,31 @@ public enum PotionConsumable {
     private static void onAntiPoisonEffect(Player player, boolean superPotion) {
         if (player.isPoisoned()) {
             player.setPoisonDamage(0);
-            player.getEncoder().sendMessage("You have been cured of your " +
-                    "poison!");
+            player.getEncoder().sendMessage("You have been cured of your " + "poison!");
         }
         if (superPotion) {
             if (player.getPoisonImmunity().get() <= 0) {
-                player.getEncoder().sendMessage("You have been granted " +
-                        "immunity against poison.");
+                player.getEncoder().sendMessage("You have been granted " + "immunity against poison.");
                 player.getPoisonImmunity().incrementAndGet(500);
                 TaskHandler.submit(new Task(50, false) {
                     @Override
                     public void execute() {
                         player.getPoisonImmunity().decrementAndGet(50);
                         if (player.getPoisonImmunity().get() <= 50) {
-                            player.getEncoder().sendMessage("Your resistance " +
-                                    "to poison is about to wear off!");
-                        }
-                        else if (player.getPoisonImmunity().get() <= 0) {
+                            player.getEncoder().sendMessage("Your resistance " + "to poison is about to wear off!");
+                        } else if (player.getPoisonImmunity().get() <= 0) {
                             this.cancel();
                         }
                     }
 
                     @Override
                     public void onCancel() {
-                        player.getEncoder().sendMessage("Your resistance to " +
-                                "poison has worn off!");
+                        player.getEncoder().sendMessage("Your resistance to " + "poison has worn off!");
                         player.getPoisonImmunity().set(0);
                     }
                 }.attach(player));
-            }
-            else if (player.getPoisonImmunity().get() > 0) {
-                player.getEncoder().sendMessage("Your immunity against poison" +
-                        " has been restored!");
+            } else if (player.getPoisonImmunity().get() > 0) {
+                player.getEncoder().sendMessage("Your immunity against poison" + " has been restored!");
                 player.getPoisonImmunity().set(500);
             }
         }
@@ -275,27 +261,22 @@ public enum PotionConsumable {
      */
     private static void onAntiFireEffect(Player player) {
         int count = player.getFireImmunity().get();
-        player.getEncoder().sendMessage(count <= 0 ? "You have been granted " +
-                "immunity against dragon fire." : "Your immunity against " +
-                "dragon fire has been restored.");
+        player.getEncoder().sendMessage(count <= 0 ? "You have been granted " + "immunity against dragon fire." : "Your immunity against " + "dragon fire has been restored.");
         if (count <= 0) {
             TaskHandler.submit(new Task(30, false) {
                 @Override
                 public void execute() {
                     player.getFireImmunity().decrementAndGet(30);
                     if (player.getFireImmunity().get() == 30) {
-                        player.getEncoder().sendMessage("Your resistance to " +
-                                "dragon fire is about to wear off!");
-                    }
-                    else if (player.getFireImmunity().get() <= 0) {
+                        player.getEncoder().sendMessage("Your resistance to " + "dragon fire is about to wear off!");
+                    } else if (player.getFireImmunity().get() <= 0) {
                         this.cancel();
                     }
                 }
 
                 @Override
                 public void onCancel() {
-                    player.getEncoder().sendMessage("Your resistance to " +
-                            "dragon fire has worn off!");
+                    player.getEncoder().sendMessage("Your resistance to " + "dragon fire has worn off!");
                     player.getFireImmunity().set(0);
                 }
             }.attach(player));
@@ -310,8 +291,7 @@ public enum PotionConsumable {
      * @param player
      *         the player to do this action for.
      */
-    private static void onBasicEffect(Player player, int skill, BoostType
-            type) {
+    private static void onBasicEffect(Player player, int skill, BoostType type) {
         Skill s = player.getSkills()[skill];
         int realLevel = s.getRealLevel();
         int boostLevel = Math.round(realLevel * type.getAmount());
@@ -339,8 +319,7 @@ public enum PotionConsumable {
         if (potion.isPresent()) {
             int length = potion.get().getIds().length;
             for (int index = 0; index < length; index++) {
-                if (potion.get().getIds()[index] == item.getId() && index + 1
-                        < length) {
+                if (potion.get().getIds()[index] == item.getId() && index + 1 < length) {
                     return new Item(potion.get().getIds()[index + 1]);
                 }
             }

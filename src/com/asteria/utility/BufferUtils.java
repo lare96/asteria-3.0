@@ -14,8 +14,7 @@ public final class BufferUtils {
      *         if this class is instantiated.
      */
     private BufferUtils() {
-        throw new UnsupportedOperationException("This class cannot be " +
-                "instantiated!");
+        throw new UnsupportedOperationException("This class cannot be " + "instantiated!");
     }
 
     /**

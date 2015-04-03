@@ -1,5 +1,10 @@
 package com.asteria;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
 import com.asteria.game.GameService;
 import com.asteria.game.character.player.Player;
 import com.asteria.game.plugin.PluginHandler;
@@ -22,11 +27,6 @@ import com.asteria.utility.json.WeaponPoisonLoader;
 import com.asteria.utility.json.WeaponRequirementLoader;
 import com.google.common.base.Preconditions;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
-
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 /**
  * The builder class that will prepare the game, network, and load various

@@ -129,8 +129,7 @@ public final class Item {
     public final void decrementAmountBy(int amount) {
         if ((this.amount - amount) < 1) {
             this.amount = 0;
-        }
-        else {
+        } else {
             this.amount -= amount;
         }
     }

@@ -12,8 +12,7 @@ import com.asteria.game.character.CharacterNode;
 public abstract class CombatNormalSpell extends CombatSpell {
 
     @Override
-    public final void executeOnHit(CharacterNode cast, CharacterNode castOn,
-                                   boolean accurate, int damage) {
+    public final void executeOnHit(CharacterNode cast, CharacterNode castOn, boolean accurate, int damage) {
 
     }
 }

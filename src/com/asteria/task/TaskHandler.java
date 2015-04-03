@@ -47,8 +47,7 @@ public final class TaskHandler {
             t.onSequence();
             if (t.needsExecute()) {
                 RUNNING_QUEUE.add(t);
-            }
-            else if (!t.isRunning()) {
+            } else if (!t.isRunning()) {
                 it.remove();
             }
         }
@@ -87,8 +86,7 @@ public final class TaskHandler {
      *         the key to cancel all tasks with.
      */
     public static void cancel(Object key) {
-        PENDING_LIST.stream().filter(t -> t.getKey().equals(key)).forEach(t
-                -> t.cancel());
+        PENDING_LIST.stream().filter(t -> t.getKey().equals(key)).forEach(t -> t.cancel());
     }
 
     /**
@@ -101,7 +99,6 @@ public final class TaskHandler {
      * {@code false} otherwise.
      */
     public static boolean running(Object key) {
-        return PENDING_LIST.stream().anyMatch(t -> t.getKey().equals(key) &&
-                t.isRunning());
+        return PENDING_LIST.stream().anyMatch(t -> t.getKey().equals(key) && t.isRunning());
     }
 }

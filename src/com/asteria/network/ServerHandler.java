@@ -81,8 +81,7 @@ public final class ServerHandler {
                 it.remove();
             }
         } catch (Exception e) {
-            logger.log(Level.SEVERE, "An error has occured while selecting " +
-                    "network events!", e);
+            logger.log(Level.SEVERE, "An error has occured while selecting " + "network events!", e);
         }
     }
 

@@ -62,9 +62,7 @@ public class CombatSessionData {
      * @param checkAccuracy
      *         determines if accuracy should be calculated for hits.
      */
-    public CombatSessionData(CharacterNode attacker, CharacterNode victim,
-                             int amount, CombatType type, boolean
-                                     checkAccuracy) {
+    public CombatSessionData(CharacterNode attacker, CharacterNode victim, int amount, CombatType type, boolean checkAccuracy) {
         this.attacker = attacker;
         this.victim = victim;
         this.type = type;
@@ -86,8 +84,7 @@ public class CombatSessionData {
      * @param checkAccuracy
      *         determines if accuracy should be calculated for hits.
      */
-    public CombatSessionData(CharacterNode attacker, CharacterNode victim,
-                             CombatType type, boolean checkAccuracy) {
+    public CombatSessionData(CharacterNode attacker, CharacterNode victim, CombatType type, boolean checkAccuracy) {
         this(attacker, victim, 0, type, checkAccuracy);
     }
 
@@ -108,8 +105,7 @@ public class CombatSessionData {
         }
         CombatHit[] array = new CombatHit[amount];
         for (int i = 0; i < array.length; i++) {
-            array[i] = new CombatHit(Combat.calculateRandomHit(attacker,
-                    victim, type), calculateAccuracy());
+            array[i] = new CombatHit(Combat.calculateRandomHit(attacker, victim, type), calculateAccuracy());
             if (array[i].isAccurate())
                 accurate = true;
         }
@@ -155,8 +151,7 @@ public class CombatSessionData {
      * @return an array of skills that will be given experience for this attack.
      */
     private final int[] determineExperience() {
-        return attacker.getType() == NodeType.NPC ? new int[] {} : ((Player)
-                attacker).getFightType().getStyle().skills(type);
+        return attacker.getType() == NodeType.NPC ? new int[] {} : ((Player) attacker).getFightType().getStyle().skills(type);
     }
 
     /**

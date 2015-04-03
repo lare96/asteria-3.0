@@ -79,12 +79,9 @@ public final class Projectile {
      * @param curve
      *         the curve angle of the projectile.
      */
-    public Projectile(Position start, Position end, int lockon, int
-            projectileId, int speed, int delay, int startHeight, int
-            endHeight, int curve) {
+    public Projectile(Position start, Position end, int lockon, int projectileId, int speed, int delay, int startHeight, int endHeight, int curve) {
         this.start = start;
-        this.offset = new Position((end.getX() - start.getX()), (end.getY() -
-                start.getY()));
+        this.offset = new Position((end.getX() - start.getX()), (end.getY() - start.getY()));
         this.lockon = lockon;
         this.projectileId = projectileId;
         this.delay = delay;
@@ -115,12 +112,8 @@ public final class Projectile {
      * @param curve
      *         the curve angle of the projectile.
      */
-    public Projectile(CharacterNode source, CharacterNode victim, int
-            projectileId, int delay, int speed, int startHeight, int
-            endHeight, int curve) {
-        this(source.getPosition(), victim.getPosition(), (victim.getType() ==
-                NodeType.PLAYER ? -victim.getSlot() - 1 : victim.getSlot() +
-                1), projectileId, delay, speed, startHeight, endHeight, curve);
+    public Projectile(CharacterNode source, CharacterNode victim, int projectileId, int delay, int speed, int startHeight, int endHeight, int curve) {
+        this(source.getPosition(), victim.getPosition(), (victim.getType() == NodeType.PLAYER ? -victim.getSlot() - 1 : victim.getSlot() + 1), projectileId, delay, speed, startHeight, endHeight, curve);
     }
 
     /**
@@ -130,8 +123,7 @@ public final class Projectile {
     public void sendProjectile() {
         World.getPlayers().forEach(player -> {
             if (start.isViewableFrom(player.getPosition())) {
-                player.getEncoder().sendProjectile(start, offset, 0, speed,
-                        projectileId, startHeight, endHeight, lockon, delay);
+                player.getEncoder().sendProjectile(start, offset, 0, speed, projectileId, startHeight, endHeight, lockon, delay);
 
             }
         });

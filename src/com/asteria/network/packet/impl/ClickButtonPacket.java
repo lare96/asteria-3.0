@@ -25,9 +25,7 @@ public final class ClickButtonPacket extends PacketDecoder {
 
     @Override
     public void decode(Player player, int opcode, int size, DataBuffer buf) {
-        int button = PROPER_READ ? buf.getShort() : BufferUtils.hexToInt(buf
-                .getBytes(2));
-        PluginHandler.execute(player, ButtonClickPlugin.class, new
-                ButtonClickPlugin(button));
+        int button = PROPER_READ ? buf.getShort() : BufferUtils.hexToInt(buf.getBytes(2));
+        PluginHandler.execute(player, ButtonClickPlugin.class, new ButtonClickPlugin(button));
     }
 }

@@ -1,5 +1,11 @@
 package com.asteria.game;
 
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+
 import com.asteria.Server;
 import com.asteria.game.character.CharacterList;
 import com.asteria.game.character.CharacterNode;
@@ -9,12 +15,6 @@ import com.asteria.game.item.ItemNodeManager;
 import com.asteria.game.object.ObjectNodeManager;
 import com.asteria.game.service.ConcurrentUpdateService;
 import com.asteria.game.service.SequentialUpdateService;
-
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
 
 /**
  * The static utility class that contains functions to manage and process game
@@ -43,8 +43,7 @@ public final class World {
      *         if any errors occur during the update sequence.
      */
     public static void sequence() throws Exception {
-        Runnable updateService = Server.getBuilder().isParallelEngine() ? new
-                ConcurrentUpdateService() : new SequentialUpdateService();
+        Runnable updateService = Server.getBuilder().isParallelEngine() ? new ConcurrentUpdateService() : new SequentialUpdateService();
         updateService.run();
     }
 

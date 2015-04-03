@@ -50,8 +50,7 @@ public final class ItemOnObjectPlugin implements PluginContext {
      * @param slot
      *         the slot of the item that was used with the object.
      */
-    public ItemOnObjectPlugin(int id, Position position, int size, Item item,
-                              int slot) {
+    public ItemOnObjectPlugin(int id, Position position, int size, Item item, int slot) {
         this.id = id;
         this.position = position;
         this.size = size;

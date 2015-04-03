@@ -16,8 +16,7 @@ public final class LoggerUtils {
      *         if this class is instantiated.
      */
     private LoggerUtils() {
-        throw new UnsupportedOperationException("This class cannot be " +
-                "instantiated!");
+        throw new UnsupportedOperationException("This class cannot be " + "instantiated!");
     }
 
     /**

@@ -27,8 +27,7 @@ public final class NpcUpdating {
      *         if this class is instantiated.
      */
     private NpcUpdating() {
-        throw new UnsupportedOperationException("This class cannot be " +
-                "instantiated!");
+        throw new UnsupportedOperationException("This class cannot be " + "instantiated!");
     }
 
     /**
@@ -45,17 +44,14 @@ public final class NpcUpdating {
         out.newVarShortPacket(65, player.getSession().getEncryptor());
         out.startBitAccess();
         out.putBits(8, player.getLocalNpcs().size());
-        for (Iterator<Npc> i = player.getLocalNpcs().iterator(); i.hasNext();
-                ) {
+        for (Iterator<Npc> i = player.getLocalNpcs().iterator(); i.hasNext(); ) {
             Npc npc = i.next();
-            if (npc.getPosition().isViewableFrom(player.getPosition()) && npc
-                    .isVisible()) {
+            if (npc.getPosition().isViewableFrom(player.getPosition()) && npc.isVisible()) {
                 NpcUpdating.updateNpcMovement(out, npc);
                 if (npc.getFlags().needsUpdate()) {
                     NpcUpdating.updateState(block, npc);
                 }
-            }
-            else {
+            } else {
                 out.putBit(true);
                 out.putBits(2, 3);
                 i.remove();
@@ -67,8 +63,7 @@ public final class NpcUpdating {
                 break;
             if (npc == null)
                 continue;
-            if (npc.getPosition().isViewableFrom(player.getPosition()) && npc
-                    .isVisible()) {
+            if (npc.getPosition().isViewableFrom(player.getPosition()) && npc.isVisible()) {
                 if (player.getLocalNpcs().add(npc)) {
                     npc.getFlags().set(Flag.APPEARANCE);
                     addNpc(out, player, npc);
@@ -83,8 +78,7 @@ public final class NpcUpdating {
             out.putBits(14, 16383);
             out.endBitAccess();
             out.putBytes(block.buffer());
-        }
-        else {
+        } else {
             out.endBitAccess();
         }
         out.endVarShortPacket();
@@ -103,8 +97,7 @@ public final class NpcUpdating {
      */
     private static void addNpc(DataBuffer out, Player player, Npc npc) {
         out.putBits(14, npc.getSlot());
-        Position delta = Position.delta(player.getPosition(), npc.getPosition
-                ());
+        Position delta = Position.delta(player.getPosition(), npc.getPosition());
         out.putBits(5, delta.getY());
         out.putBits(5, delta.getX());
         out.putBit(npc.getFlags().needsUpdate());
@@ -125,19 +118,16 @@ public final class NpcUpdating {
             if (npc.getFlags().needsUpdate()) {
                 out.putBit(true);
                 out.putBits(2, 0);
-            }
-            else {
+            } else {
                 out.putBit(false);
             }
-        }
-        else {
+        } else {
             out.putBit(true);
             out.putBits(2, 1);
             out.putBits(3, npc.getPrimaryDirection());
             if (npc.getFlags().needsUpdate()) {
                 out.putBit(true);
-            }
-            else {
+            } else {
                 out.putBit(false);
             }
         }
@@ -153,8 +143,7 @@ public final class NpcUpdating {
      * @throws Exception
      *         if any errors occur while updating the state.
      */
-    private static void updateState(DataBuffer block, Npc npc) throws
-            Exception {
+    private static void updateState(DataBuffer block, Npc npc) throws Exception {
         BitMask mask = new BitMask();
         if (npc.getFlags().get(Flag.ANIMATION)) {
             mask.set(0x10);
@@ -180,8 +169,7 @@ public final class NpcUpdating {
         if (mask.get() >= 0x100) {
             mask.set(0x40);
             block.putShort(mask.get(), com.asteria.network.ByteOrder.LITTLE);
-        }
-        else {
+        } else {
             block.put(mask.get());
         }
         if (npc.getFlags().get(Flag.ANIMATION)) {
@@ -228,8 +216,7 @@ public final class NpcUpdating {
      * @param out
      *         the buffer to append it to.
      */
-    private static void appendSecondaryHit(DataBuffer out, Npc npc) throws
-            Exception {
+    private static void appendSecondaryHit(DataBuffer out, Npc npc) throws Exception {
         if (!npc.isDead()) {
             if (npc.getCurrentHealth() <= 0) {
                 npc.setCurrentHealth(0);

@@ -1,16 +1,15 @@
 package plugin.npcs
 
+import com.asteria.game.character.player.Player
+import com.asteria.game.location.Position
+import com.asteria.game.plugin.PluginListener
+import com.asteria.game.plugin.PluginSignature
+import com.asteria.game.plugin.context.NpcSecondClickPlugin
 import plugin.skills.fishing.Fishing
 import plugin.skills.fishing.Tool
 
-import com.asteria.game.character.player.Player
-import com.asteria.game.location.Position
-import com.asteria.game.plugin.PluginSignature
-import com.asteria.game.plugin.PluginListener
-import com.asteria.game.plugin.context.NpcSecondClickPlugin
-
 @PluginSignature(NpcSecondClickPlugin.class)
-final class NpcSecondClick implements PluginListener<NpcSecondClickPlugin>{
+final class NpcSecondClick implements PluginListener<NpcSecondClickPlugin> {
 
     @Override
     void run(Player player, NpcSecondClickPlugin context) {

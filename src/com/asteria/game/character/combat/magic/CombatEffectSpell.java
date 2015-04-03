@@ -24,8 +24,7 @@ public abstract class CombatEffectSpell extends CombatSpell {
     }
 
     @Override
-    public final void executeOnHit(CharacterNode cast, CharacterNode castOn,
-                                   boolean accurate, int damage) {
+    public final void executeOnHit(CharacterNode cast, CharacterNode castOn, boolean accurate, int damage) {
         if (accurate) {
             effect(cast, castOn);
         }

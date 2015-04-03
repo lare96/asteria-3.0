@@ -23,11 +23,9 @@ public enum Spellbook {
                     if (player.getTeleportStage() == 1) {
                         player.graphic(new Graphic(308));
                         player.setTeleportStage(2);
-                    }
-                    else if (player.getTeleportStage() == 2) {
+                    } else if (player.getTeleportStage() == 2) {
                         player.setTeleportStage(3);
-                    }
-                    else if (player.getTeleportStage() == 3) {
+                    } else if (player.getTeleportStage() == 3) {
                         player.move(position);
                         player.animation(new Animation(715));
                         player.setTeleportStage(0);
@@ -47,14 +45,11 @@ public enum Spellbook {
                     if (player.getTeleportStage() == 1) {
                         player.graphic(new Graphic(392));
                         player.setTeleportStage(2);
-                    }
-                    else if (player.getTeleportStage() == 2) {
+                    } else if (player.getTeleportStage() == 2) {
                         player.setTeleportStage(3);
-                    }
-                    else if (player.getTeleportStage() == 3) {
+                    } else if (player.getTeleportStage() == 3) {
                         player.setTeleportStage(4);
-                    }
-                    else if (player.getTeleportStage() == 4) {
+                    } else if (player.getTeleportStage() == 4) {
                         player.move(position);
                         player.setTeleportStage(0);
                         this.cancel();
@@ -94,8 +89,7 @@ public enum Spellbook {
      */
     public static void convert(Player player, Spellbook book) {
         if (player.getSpellbook() == book) {
-            player.getEncoder().sendMessage("You have already converted to "
-                    + book + " magics!");
+            player.getEncoder().sendMessage("You have already converted to " + book + " magics!");
             return;
         }
         player.getEncoder().sendSidebarInterface(6, book.id);

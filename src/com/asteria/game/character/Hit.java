@@ -28,11 +28,9 @@ public final class Hit {
     public Hit(int damage, HitType type) {
         if (damage == 0 && type == HitType.NORMAL) {
             type = HitType.BLOCKED;
-        }
-        else if (damage > 0 && type == HitType.BLOCKED) {
+        } else if (damage > 0 && type == HitType.BLOCKED) {
             damage = 0;
-        }
-        else if (damage < 0) {
+        } else if (damage < 0) {
             damage = 0;
         }
         this.damage = damage;

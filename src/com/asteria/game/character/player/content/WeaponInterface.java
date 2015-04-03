@@ -79,8 +79,7 @@ public enum WeaponInterface {
     /**
      * The hash collection of weapon interfaces.
      */
-    public static final Map<Integer, WeaponInterface> INTERFACES = new
-            HashMap<>();
+    public static final Map<Integer, WeaponInterface> INTERFACES = new HashMap<>();
 
     /**
      * The identification of the interface that will be displayed.
@@ -129,8 +128,7 @@ public enum WeaponInterface {
      * @param specialMeter
      *         the identification of the special meter for this interface.
      */
-    private WeaponInterface(int id, int nameLine, int speed, FightType[]
-            fightTypes, int specialBar, int specialMeter) {
+    private WeaponInterface(int id, int nameLine, int speed, FightType[] fightTypes, int specialBar, int specialMeter) {
         this.id = id;
         this.nameLine = nameLine;
         this.speed = speed;
@@ -154,8 +152,7 @@ public enum WeaponInterface {
      * @param fightTypes
      *         the fight types that correspond with this interface.
      */
-    private WeaponInterface(int id, int nameLine, int speed, FightType[]
-            fightTypes) {
+    private WeaponInterface(int id, int nameLine, int speed, FightType[] fightTypes) {
         this(id, nameLine, speed, fightTypes, -1, -1);
     }
 
@@ -171,10 +168,8 @@ public enum WeaponInterface {
      */
     public static void execute(Player player, Item item) {
         if (item == null) {
-            player.getEncoder().sendSidebarInterface(0, WeaponInterface
-                    .UNARMED.id);
-            player.getEncoder().sendString("Unarmed", WeaponInterface.UNARMED
-                    .nameLine);
+            player.getEncoder().sendSidebarInterface(0, WeaponInterface.UNARMED.id);
+            player.getEncoder().sendString("Unarmed", WeaponInterface.UNARMED.nameLine);
             player.setWeapon(WeaponInterface.UNARMED);
             CombatSpecial.assign(player);
             return;
@@ -185,32 +180,26 @@ public enum WeaponInterface {
             player.getEncoder().sendString("Unarmed", weapon.nameLine);
             player.setWeapon(WeaponInterface.UNARMED);
             return;
-        }
-        else if (weapon == WeaponInterface.CROSSBOW) {
+        } else if (weapon == WeaponInterface.CROSSBOW) {
+            player.getEncoder().sendString("Weapon: ", weapon.nameLine - 1);
+        } else if (weapon == WeaponInterface.WHIP) {
             player.getEncoder().sendString("Weapon: ", weapon.nameLine - 1);
         }
-        else if (weapon == WeaponInterface.WHIP) {
-            player.getEncoder().sendString("Weapon: ", weapon.nameLine - 1);
-        }
-        player.getEncoder().sendItemModelOnInterface(weapon.id + 1, 200, item
-                .getId());
+        player.getEncoder().sendItemModelOnInterface(weapon.id + 1, 200, item.getId());
         player.getEncoder().sendSidebarInterface(0, weapon.id);
-        player.getEncoder().sendString(item.getDefinition().getName(), weapon
-                .nameLine);
+        player.getEncoder().sendString(item.getDefinition().getName(), weapon.nameLine);
         player.setWeapon(weapon);
         CombatSpecial.assign(player);
         CombatSpecial.updateSpecialAmount(player);
         for (FightType type : weapon.getFightTypes()) {
             if (type.getStyle() == player.getFightType().getStyle()) {
                 player.setFightType(type);
-                player.getEncoder().sendByteState(player.getFightType()
-                        .getParent(), player.getFightType().getChild());
+                player.getEncoder().sendByteState(player.getFightType().getParent(), player.getFightType().getChild());
                 return;
             }
         }
         player.setFightType(player.getWeapon().getFightTypes()[0]);
-        player.getEncoder().sendByteState(player.getFightType().getParent(),
-                player.getFightType().getChild());
+        player.getEncoder().sendByteState(player.getFightType().getParent(), player.getFightType().getChild());
     }
 
     /**

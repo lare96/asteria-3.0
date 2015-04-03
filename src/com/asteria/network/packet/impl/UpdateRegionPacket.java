@@ -25,8 +25,7 @@ public final class UpdateRegionPacket extends PacketDecoder {
             player.setUpdateRegion(false);
 
             if (Settings.DEBUG)
-                player.getEncoder().sendMessage("DEBUG[region= " + player
-                        .getPosition().getRegion() + "]");
+                player.getEncoder().sendMessage("DEBUG[region= " + player.getPosition().getRegion() + "]");
         }
     }
 }

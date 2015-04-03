@@ -40,8 +40,7 @@ public abstract class DestructionSkillAction extends SkillAction {
     @Override
     public boolean init() {
         Player player = getPlayer();
-        String name = ItemDefinition.DEFINITIONS[destructItem().getId()]
-                .getName();
+        String name = ItemDefinition.DEFINITIONS[destructItem().getId()].getName();
         if (!player.getInventory().contains(destructItem().getId())) {
             player.getEncoder().sendMessage("You do not have any " + name + "" +
                     " in your inventory.");

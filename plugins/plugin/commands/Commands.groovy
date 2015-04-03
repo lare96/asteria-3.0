@@ -46,14 +46,18 @@ final class Commands implements PluginListener<CommandPlugin> {
                     player.visible = true
                     break
                 case "save":
-                    World.players.each { GameService.getLogicService().execute({ -> new PlayerSerialization(it).serialize()}) }
+                    World.players.each {
+                        GameService.getLogicService().execute({ ->
+                            new PlayerSerialization(it).serialize()
+                        })
+                    }
                     player.encoder.sendMessage "Character files have been saved for everyone online!"
                     break
                 case "setlevel":
                     String skill = cmd[1]
                     int level = Integer.parseInt cmd[2]
                     SkillData.values().each {
-                        if(it.toString().equalsIgnoreCase(skill)) {
+                        if (it.toString().equalsIgnoreCase(skill)) {
                             player.skills[it.id].setLevel(level, false)
                             Skills.refresh(player, it.id)
                         }
@@ -61,14 +65,14 @@ final class Commands implements PluginListener<CommandPlugin> {
                     break
                 case "teleto":
                     Player p = World.getPlayer(cmd[1].replaceAll("_", " ")).orElse(null)
-                    if(p == null)
+                    if (p == null)
                         return
                     player.move p.position
                     player.encoder.sendMessage "You teleport to ${p.getFormatUsername()}'s position."
                     break
                 case "teletome":
                     Player p = World.getPlayer(cmd[1].replaceAll("_", " ")).orElse(null)
-                    if(p == null)
+                    if (p == null)
                         return
                     p.move player.position
                     p.encoder.sendMessage "You have been teleported to ${player.getFormatUsername()}'s position."

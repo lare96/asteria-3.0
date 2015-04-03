@@ -155,8 +155,7 @@ public final class Skill {
         if (restriction) {
             if (this.level < 0) {
                 this.level = 0;
-            }
-            else if (this.level > 120) {
+            } else if (this.level > 120) {
                 this.level = 120;
             }
         }

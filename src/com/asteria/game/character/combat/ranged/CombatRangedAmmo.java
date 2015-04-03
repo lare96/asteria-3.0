@@ -109,8 +109,7 @@ public enum CombatRangedAmmo {
      * @param graphic
      *         the graphic for this ranged ammo.
      */
-    private CombatRangedAmmo(int strength, int projectile, int delay, int
-            speed, int startHeight, int endHeight, int graphic) {
+    private CombatRangedAmmo(int strength, int projectile, int delay, int speed, int startHeight, int endHeight, int graphic) {
         this.strength = strength;
         this.projectile = projectile;
         this.delay = delay;
@@ -136,17 +135,12 @@ public enum CombatRangedAmmo {
      * was found.
      */
     public static Optional<CombatRangedAmmo> getPlayerAmmo(Player player) {
-        int slot = player.getWeapon() == WeaponInterface.SHORTBOW || player
-                .getWeapon() == WeaponInterface.LONGBOW || player.getWeapon()
-                == WeaponInterface.CROSSBOW ? Equipment.ARROWS_SLOT :
-                Equipment.WEAPON_SLOT;
+        int slot = player.getWeapon() == WeaponInterface.SHORTBOW || player.getWeapon() == WeaponInterface.LONGBOW || player.getWeapon() == WeaponInterface.CROSSBOW ? Equipment.ARROWS_SLOT : Equipment.WEAPON_SLOT;
         if (Combat.isCrystalBow(player))
             return Optional.of(CombatRangedAmmo.CRYSTAL_ARROW);
         if (player.getEquipment().get(slot) == null)
             return Optional.empty();
-        return Arrays.stream(CombatRangedAmmo.values()).filter(c -> player
-                .getEquipment().get(slot).getDefinition().getName()
-                .toLowerCase().contains(c.toString())).findFirst();
+        return Arrays.stream(CombatRangedAmmo.values()).filter(c -> player.getEquipment().get(slot).getDefinition().getName().toLowerCase().contains(c.toString())).findFirst();
     }
 
     /**

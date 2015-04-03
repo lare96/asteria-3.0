@@ -24,8 +24,7 @@ public final class WeaponAnimationLoader extends JsonLoader {
     @Override
     public void load(JsonObject reader, Gson builder) {
         int id = reader.get("id").getAsInt();
-        WeaponAnimation animation = Objects.requireNonNull(builder.fromJson
-                (reader.get("animation"), WeaponAnimation.class));
+        WeaponAnimation animation = Objects.requireNonNull(builder.fromJson(reader.get("animation"), WeaponAnimation.class));
         WeaponAnimation.ANIMATIONS.put(id, animation);
     }
 }

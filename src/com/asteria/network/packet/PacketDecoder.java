@@ -33,8 +33,7 @@ public abstract class PacketDecoder {
      * @param buf
      *         the buffer containing the decoded packet data.
      */
-    public abstract void decode(Player player, int opcode, int size,
-                                DataBuffer buf);
+    public abstract void decode(Player player, int opcode, int size, DataBuffer buf);
 
     /**
      * Determines if this packet should be counted.

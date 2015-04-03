@@ -41,8 +41,7 @@ public final class RequestPacket extends PacketDecoder {
         if (other == null || !validate(player, other))
             return;
         player.setSkillAction(false);
-        if (!MinigameHandler.execute(player, true, m -> m.canTrade(player,
-                other)))
+        if (!MinigameHandler.execute(player, true, m -> m.canTrade(player, other)))
             return;
         player.getTradeSession().request(other);
     }
@@ -58,8 +57,7 @@ public final class RequestPacket extends PacketDecoder {
      * otherwise.
      */
     private boolean validate(Player player, Player other) {
-        if (!other.getPosition().isViewableFrom(player.getPosition()) ||
-                other.equals(player))
+        if (!other.getPosition().isViewableFrom(player.getPosition()) || other.equals(player))
             return false;
         return true;
     }

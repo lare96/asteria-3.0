@@ -1,8 +1,8 @@
 package com.asteria.game;
 
-import com.asteria.game.location.Position;
-
 import java.util.Objects;
+
+import com.asteria.game.location.Position;
 
 /**
  * The parent class that represents anything that can be interacted with.

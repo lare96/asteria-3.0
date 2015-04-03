@@ -29,9 +29,7 @@ public final class ItemNodeLoader extends JsonLoader {
     public void load(JsonObject reader, Gson builder) {
         int id = reader.get("id").getAsInt();
         int amount = reader.get("amount").getAsInt();
-        Position position = Objects.requireNonNull(builder.fromJson(reader
-                .get("position"), Position.class));
-        ItemNodeManager.register(new ItemNodeStatic(new Item(id, amount),
-                position, ItemPolicy.TIMEOUT));
+        Position position = Objects.requireNonNull(builder.fromJson(reader.get("position"), Position.class));
+        ItemNodeManager.register(new ItemNodeStatic(new Item(id, amount), position, ItemPolicy.TIMEOUT));
     }
 }

@@ -20,8 +20,6 @@ public class PlayerSerializationFilter implements ExclusionStrategy {
 
     @Override
     public boolean shouldSkipField(FieldAttributes attr) {
-        return attr.hasModifier(Modifier.STATIC) || attr.hasModifier(Modifier
-                .TRANSIENT) || attr.getAnnotation(SerializationExclude.class)
-                != null;
+        return attr.hasModifier(Modifier.STATIC) || attr.hasModifier(Modifier.TRANSIENT) || attr.getAnnotation(SerializationExclude.class) != null;
     }
 }

@@ -49,15 +49,12 @@ public final class NpcMovementCoordinator {
      * The sequencer for this coordinator that forces this NPC to move.
      */
     public void sequence() {
-        if (!coordinate || npc.getCombatBuilder().isAttacking() || npc
-                .getCombatBuilder().isBeingAttacked())
+        if (!coordinate || npc.getCombatBuilder().isAttacking() || npc.getCombatBuilder().isBeingAttacked())
             return;
-        if (random.inclusive(13) == 5 && npc.getMovementQueue()
-                .isMovementDone()) {
+        if (random.inclusive(13) == 5 && npc.getMovementQueue().isMovementDone()) {
             switch (state) {
                 case HOME:
-                    npc.getMovementQueue().walk(npc.getPosition().copy()
-                            .random(radius));
+                    npc.getMovementQueue().walk(npc.getPosition().copy().random(radius));
                     state = CoordinateState.AWAY;
                     break;
                 case AWAY:

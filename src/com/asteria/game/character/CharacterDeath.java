@@ -70,14 +70,11 @@ public abstract class CharacterDeath<T extends CharacterNode> extends Task {
             character.setPoisonDamage(0);
             character.getMovementQueue().reset();
             character.unfreeze();
-        }
-        else if (counter == 1) {
+        } else if (counter == 1) {
             preDeath(character);
-        }
-        else if (counter == 5) {
+        } else if (counter == 5) {
             death(character);
-        }
-        else if (counter == 6) {
+        } else if (counter == 6) {
             postDeath(character);
             character.setDead(false);
             this.cancel();
@@ -89,8 +86,7 @@ public abstract class CharacterDeath<T extends CharacterNode> extends Task {
     public final void onThrowable(Throwable t) {
         if (character.getType() == NodeType.PLAYER) {
             World.getPlayers().remove((Player) character);
-        }
-        else if (character.getType() == NodeType.NPC) {
+        } else if (character.getType() == NodeType.NPC) {
             World.getNpcs().remove((Npc) character);
         }
     }

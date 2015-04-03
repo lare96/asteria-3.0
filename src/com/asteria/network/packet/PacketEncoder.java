@@ -1,5 +1,7 @@
 package com.asteria.network.packet;
 
+import java.util.Objects;
+
 import com.asteria.game.NodeType;
 import com.asteria.game.World;
 import com.asteria.game.character.CharacterNode;
@@ -16,8 +18,6 @@ import com.asteria.network.ByteOrder;
 import com.asteria.network.DataBuffer;
 import com.asteria.network.ValueType;
 import com.google.common.base.Preconditions;
-
-import java.util.Objects;
 
 /**
  * The class that contains functions that encode and send data to the client.
@@ -123,8 +123,7 @@ public final class PacketEncoder {
      *         the direction this object is facing.
      * @return an instance of this encoder.
      */
-    public PacketEncoder sendObjectAnimation(Position position, int
-            animation, ObjectType type, ObjectDirection direction) {
+    public PacketEncoder sendObjectAnimation(Position position, int animation, ObjectType type, ObjectDirection direction) {
         sendCoordinates(position);
         DataBuffer out = DataBuffer.create();
         out.newPacket(160, player.getSession().getEncryptor());
@@ -149,13 +148,9 @@ public final class PacketEncoder {
      *         the direction this object is facing.
      * @return an instance of this encoder.
      */
-    public PacketEncoder sendLocalObjectAnimation(Position position, int
-            animation, ObjectType type, ObjectDirection direction) {
-        player.getEncoder().sendObjectAnimation(position, animation, type,
-                direction);
-        player.getLocalPlayers().stream().filter(Objects::nonNull).forEach(p
-                -> p.getEncoder().sendObjectAnimation(position, animation,
-                type, direction));
+    public PacketEncoder sendLocalObjectAnimation(Position position, int animation, ObjectType type, ObjectDirection direction) {
+        player.getEncoder().sendObjectAnimation(position, animation, type, direction);
+        player.getLocalPlayers().stream().filter(Objects::nonNull).forEach(p -> p.getEncoder().sendObjectAnimation(position, animation, type, direction));
         return this;
     }
 
@@ -194,11 +189,9 @@ public final class PacketEncoder {
      *         the height of the graphic that will be created.
      * @return an instance of this encoder.
      */
-    public PacketEncoder sendLocalGraphic(int id, Position position, int
-            level) {
+    public PacketEncoder sendLocalGraphic(int id, Position position, int level) {
         player.getEncoder().sendGraphic(id, position, level);
-        player.getLocalPlayers().stream().filter(Objects::nonNull).forEach(p
-                -> p.getEncoder().sendGraphic(id, position, level));
+        player.getLocalPlayers().stream().filter(Objects::nonNull).forEach(p -> p.getEncoder().sendGraphic(id, position, level));
         return this;
     }
 
@@ -214,8 +207,7 @@ public final class PacketEncoder {
      * @return an instance of this encoder.
      */
     public static void sendAllGraphic(int id, Position position, int level) {
-        World.getPlayers().forEach(p -> p.getEncoder().sendGraphic(id,
-                position, level));
+        World.getPlayers().forEach(p -> p.getEncoder().sendGraphic(id, position, level));
     }
 
     /**
@@ -252,8 +244,7 @@ public final class PacketEncoder {
      */
     public PacketEncoder sendLocalSound(int id, int type, int delay) {
         player.getEncoder().sendSound(id, type, delay);
-        player.getLocalPlayers().stream().filter(Objects::nonNull).forEach(p
-                -> p.getEncoder().sendSound(id, type, delay));
+        player.getLocalPlayers().stream().filter(Objects::nonNull).forEach(p -> p.getEncoder().sendSound(id, type, delay));
         return this;
     }
 
@@ -311,8 +302,7 @@ public final class PacketEncoder {
         if (item.getAmount() > 254) {
             out.put(255);
             out.putShort(item.getAmount());
-        }
-        else {
+        } else {
             out.put(item.getAmount());
         }
         out.endVarShortPacket();
@@ -352,16 +342,13 @@ public final class PacketEncoder {
      *         the amount of items that will be sent on the interface.
      * @return an instance of this encoder.
      */
-    public PacketEncoder sendItemsOnInterface(int id, Item[] items, int
-            length) {
+    public PacketEncoder sendItemsOnInterface(int id, Item[] items, int length) {
         DataBuffer out = DataBuffer.create();
-        out.newVarShortPacket(53, player.getSession().getEncryptor())
-                .putShort(id);
+        out.newVarShortPacket(53, player.getSession().getEncryptor()).putShort(id);
         if (items == null) {
             out.putShort(0);
             out.put(0);
-            out.putShort(0, com.asteria.network.ValueType.A, com.asteria
-                    .network.ByteOrder.LITTLE);
+            out.putShort(0, com.asteria.network.ValueType.A, com.asteria.network.ByteOrder.LITTLE);
             out.endVarShortPacket();
             player.getSession().send(out);
             return this;
@@ -371,19 +358,14 @@ public final class PacketEncoder {
             if (item != null) {
                 if (item.getAmount() > 254) {
                     out.put(255);
-                    out.putInt(item.getAmount(), com.asteria.network
-                            .ByteOrder.INVERSE_MIDDLE);
-                }
-                else {
+                    out.putInt(item.getAmount(), com.asteria.network.ByteOrder.INVERSE_MIDDLE);
+                } else {
                     out.put(item.getAmount());
                 }
-                out.putShort(item.getId() + 1, com.asteria.network.ValueType
-                        .A, com.asteria.network.ByteOrder.LITTLE);
-            }
-            else {
+                out.putShort(item.getId() + 1, com.asteria.network.ValueType.A, com.asteria.network.ByteOrder.LITTLE);
+            } else {
                 out.put(0);
-                out.putShort(0, com.asteria.network.ValueType.A, com.asteria
-                        .network.ByteOrder.LITTLE);
+                out.putShort(0, com.asteria.network.ValueType.A, com.asteria.network.ByteOrder.LITTLE);
             }
         }
         out.endVarShortPacket();
@@ -446,8 +428,7 @@ public final class PacketEncoder {
                     PaletteTile tile = palette.getTile(x, y, z);
                     out.putBits(1, tile != null ? 1 : 0);
                     if (tile != null)
-                        out.putBits(26, tile.getX() << 14 | tile.getY() << 3
-                                | tile.getZ() << 24 | tile.getRotation() << 1);
+                        out.putBits(26, tile.getX() << 14 | tile.getY() << 3 | tile.getZ() << 24 | tile.getRotation() << 1);
                 }
             }
         }
@@ -585,8 +566,7 @@ public final class PacketEncoder {
      *         the angle the camera will turn to.
      * @return an instance of this encoder.
      */
-    public PacketEncoder sendCameraAngle(int x, int y, int level, int speed,
-                                         int angle) {
+    public PacketEncoder sendCameraAngle(int x, int y, int level, int speed, int angle) {
         DataBuffer out = DataBuffer.create();
         out.newPacket(177, player.getSession().getEncryptor());
         out.put(x / 64);
@@ -614,8 +594,7 @@ public final class PacketEncoder {
      *         the angle the camera will turn to while moving.
      * @return an instance of this encoder.
      */
-    public PacketEncoder sendCameraMovement(int x, int y, int z, int
-            speed, int angle) {
+    public PacketEncoder sendCameraMovement(int x, int y, int z, int speed, int angle) {
         DataBuffer out = DataBuffer.create();
         out.newPacket(166, player.getSession().getEncryptor());
         out.put(x / 64);
@@ -658,8 +637,7 @@ public final class PacketEncoder {
      *         how often the screen will shake (scaled by 100).
      * @return an instance of this encoder.
      */
-    public PacketEncoder sendCameraShake(int parameter, int jitter, int
-            amplitude, int frequency) {
+    public PacketEncoder sendCameraShake(int parameter, int jitter, int amplitude, int frequency) {
         Preconditions.checkArgument(parameter <= 4);
         DataBuffer out = DataBuffer.create();
         out.newPacket(35, player.getSession().getEncryptor());
@@ -788,10 +766,7 @@ public final class PacketEncoder {
      *         position.
      * @return an instance of this encoder.
      */
-    public PacketEncoder sendProjectile(Position position, Position offset,
-                                        int angle, int speed, int gfxMoving,
-                                        int startHeight, int endHeight, int
-                                                lockon, int time) {
+    public PacketEncoder sendProjectile(Position position, Position offset, int angle, int speed, int gfxMoving, int startHeight, int endHeight, int lockon, int time) {
         sendCoordinates(position);
         DataBuffer out = DataBuffer.create();
         out.newPacket(117, player.getSession().getEncryptor());
@@ -835,12 +810,8 @@ public final class PacketEncoder {
      *         position.
      * @return an instance of this encoder.
      */
-    public void sendAllProjectile(Position position, Position offset, int
-            angle, int speed, int gfxMoving, int startHeight, int endHeight,
-                                  int lockon, int time) {
-        player.getLocalPlayers().stream().filter(Objects::nonNull).forEach(p
-                -> p.getEncoder().sendProjectile(position, offset, angle,
-                speed, gfxMoving, startHeight, endHeight, lockon, time));
+    public void sendAllProjectile(Position position, Position offset, int angle, int speed, int gfxMoving, int startHeight, int endHeight, int lockon, int time) {
+        player.getLocalPlayers().stream().filter(Objects::nonNull).forEach(p -> p.getEncoder().sendProjectile(position, offset, angle, speed, gfxMoving, startHeight, endHeight, lockon, time));
     }
 
     /**
@@ -894,8 +865,7 @@ public final class PacketEncoder {
         out.newPacket(151, player.getSession().getEncryptor());
         out.put(0, ValueType.S);
         out.putShort(object.getId(), ByteOrder.LITTLE);
-        out.put((object.getObjectType().getId() << 2) + (object.getDirection
-                ().getId() & 3), ValueType.S);
+        out.put((object.getObjectType().getId() << 2) + (object.getDirection().getId() & 3), ValueType.S);
         player.getSession().send(out);
         return this;
     }
@@ -911,8 +881,7 @@ public final class PacketEncoder {
         sendCoordinates(position);
         DataBuffer out = DataBuffer.create();
         out.newPacket(101, player.getSession().getEncryptor());
-        out.put((ObjectType.DEFAULT.getId() << 2) + (ObjectDirection.SOUTH
-                .getId() & 3), ValueType.C);
+        out.put((ObjectType.DEFAULT.getId() << 2) + (ObjectDirection.SOUTH.getId() & 3), ValueType.C);
         out.put(0);
         player.getSession().send(out);
         return this;
@@ -947,8 +916,7 @@ public final class PacketEncoder {
      */
     public PacketEncoder sendSkill(int id, int level, int exp) {
         DataBuffer out = DataBuffer.create();
-        out.newPacket(134, player.getSession().getEncryptor()).put(id).putInt
-                (exp, ByteOrder.MIDDLE).put(level);
+        out.newPacket(134, player.getSession().getEncryptor()).put(id).putInt(exp, ByteOrder.MIDDLE).put(level);
         player.getSession().send(out);
         return this;
     }
@@ -1035,8 +1003,7 @@ public final class PacketEncoder {
      *         <p>
      * @return an instance of this encoder.
      */
-    public PacketEncoder sendPositionHintArrow(Position position, int
-            direction) {
+    public PacketEncoder sendPositionHintArrow(Position position, int direction) {
         DataBuffer out = DataBuffer.create();
         out.newPacket(254, player.getSession().getEncryptor());
         out.put(direction);
@@ -1056,8 +1023,7 @@ public final class PacketEncoder {
      */
     public PacketEncoder sendCharacterHintArrow(CharacterNode character) {
         DataBuffer out = DataBuffer.create();
-        out.newPacket(254, player.getSession().getEncryptor()).put(character
-                .getType() == NodeType.NPC ? 1 : 10);
+        out.newPacket(254, player.getSession().getEncryptor()).put(character.getType() == NodeType.NPC ? 1 : 10);
         out.putShort(character.getSlot());
         out.put(0);
         player.getSession().send(out);
@@ -1077,13 +1043,11 @@ public final class PacketEncoder {
      *         the size of the message being sent.
      * @return an instance of this encoder.
      */
-    public PacketEncoder sendPrivateMessage(long name, int rights, byte[]
-            message, int size) {
+    public PacketEncoder sendPrivateMessage(long name, int rights, byte[] message, int size) {
         DataBuffer out = DataBuffer.create();
         out.newVarPacket(196, player.getSession().getEncryptor());
         out.putLong(name);
-        out.putInt(player.getPrivateMessage().getLastMessage()
-                .getAndIncrement());
+        out.putInt(player.getPrivateMessage().getLastMessage().getAndIncrement());
         out.put(rights);
         out.putBytes(message, size);
         out.endVarPacket();
@@ -1101,10 +1065,8 @@ public final class PacketEncoder {
     public PacketEncoder sendCoordinates(Position position) {
         DataBuffer out = DataBuffer.create();
         out.newPacket(85, player.getSession().getEncryptor());
-        out.put(position.getY() - (player.getCurrentRegion().getRegionY() *
-                8), ValueType.C);
-        out.put(position.getX() - (player.getCurrentRegion().getRegionX() *
-                8), ValueType.C);
+        out.put(position.getY() - (player.getCurrentRegion().getRegionY() * 8), ValueType.C);
+        out.put(position.getX() - (player.getCurrentRegion().getRegionX() * 8), ValueType.C);
         player.getSession().send(out);
         return this;
     }
@@ -1277,8 +1239,7 @@ public final class PacketEncoder {
         player.setUpdateRegion(true);
         DataBuffer out = DataBuffer.create();
         out.newPacket(73, player.getSession().getEncryptor());
-        out.putShort(player.getPosition().getRegionX() + 6, com.asteria
-                .network.ValueType.A);
+        out.putShort(player.getPosition().getRegionX() + 6, com.asteria.network.ValueType.A);
         out.putShort(player.getPosition().getRegionY() + 6);
         player.getSession().send(out);
         return this;

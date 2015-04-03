@@ -34,8 +34,7 @@ public final class TextUtils {
      *         if this class is instantiated.
      */
     private TextUtils() {
-        throw new UnsupportedOperationException("This class cannot be " +
-                "instantiated!");
+        throw new UnsupportedOperationException("This class cannot be " + "instantiated!");
     }
 
     /**
@@ -89,8 +88,7 @@ public final class TextUtils {
      */
     public static String determineIndefiniteArticle(String thing) {
         char first = thing.toLowerCase().charAt(0);
-        boolean vowel = first == 'a' || first == 'e' || first == 'i' || first
-                == 'o' || first == 'u';
+        boolean vowel = first == 'a' || first == 'e' || first == 'i' || first == 'o' || first == 'u';
         return vowel ? "an" : "a";
     }
 
@@ -114,8 +112,7 @@ public final class TextUtils {
      * @return the capitalized string.
      */
     public static String capitalize(String str) {
-        return str.substring(0, 1).toUpperCase().concat(str.substring(1, str
-                .length()));
+        return str.substring(0, 1).toUpperCase().concat(str.substring(1, str.length()));
     }
 
     /**
@@ -128,8 +125,7 @@ public final class TextUtils {
     public static String formatPrice(int price) {
         if (price >= 1000 && price < 1000000) {
             return "(" + (price / 1000) + "K)";
-        }
-        else if (price >= 1000000) {
+        } else if (price >= 1000000) {
             return "(" + (price / 1000000) + " million)";
         }
         return Integer.toString(price);

@@ -55,15 +55,12 @@ public final class CharacterSelectionPacket extends PacketDecoder {
         int cursor = 0;
         int[] values = new int[13];
         int gender = buf.get();
-        if (gender != Appearance.GENDER_FEMALE && gender != Appearance
-                .GENDER_MALE)
+        if (gender != Appearance.GENDER_FEMALE && gender != Appearance.GENDER_MALE)
             return;
         values[cursor++] = gender;
         for (int i = 0; i < 7; i++) {
             int value = buf.get();
-            if ((value < (gender == 0 ? MALE_VALUES[i][0] :
-                    FEMALE_VALUES[i][0])) || (value > (gender == 0 ?
-                    MALE_VALUES[i][1] : FEMALE_VALUES[i][1]))) {
+            if ((value < (gender == 0 ? MALE_VALUES[i][0] : FEMALE_VALUES[i][0])) || (value > (gender == 0 ? MALE_VALUES[i][1] : FEMALE_VALUES[i][1]))) {
                 return;
             }
             values[cursor++] = value;

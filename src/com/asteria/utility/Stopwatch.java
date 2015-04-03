@@ -38,8 +38,7 @@ public final class Stopwatch {
      * @return the current time in milliseconds.
      */
     public static long currentTime() {
-        return TimeUnit.MILLISECONDS.convert(System.nanoTime(), TimeUnit
-                .NANOSECONDS);
+        return TimeUnit.MILLISECONDS.convert(System.nanoTime(), TimeUnit.NANOSECONDS);
     }
 
     /**
@@ -81,8 +80,7 @@ public final class Stopwatch {
     public long elapsedTime(TimeUnit unit) {
         if (state == State.STOPPED)
             throw new IllegalStateException("The timer has been stopped!");
-        return unit.convert((Stopwatch.currentTime() - cachedTime), TimeUnit
-                .MILLISECONDS);
+        return unit.convert((Stopwatch.currentTime() - cachedTime), TimeUnit.MILLISECONDS);
     }
 
     /**
@@ -153,8 +151,7 @@ public final class Stopwatch {
      * @param unit
      *         the time unit to check in.
      */
-    public void ifElapsed(long time, Consumer<? super Long> action, TimeUnit
-            unit) {
+    public void ifElapsed(long time, Consumer<? super Long> action, TimeUnit unit) {
         if (state == State.STOPPED) {
             action.accept((long) 0);
             return;

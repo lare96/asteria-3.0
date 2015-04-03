@@ -1,12 +1,5 @@
 package plugin.buttons
 
-
-import java.util.concurrent.TimeUnit
-import java.util.function.Function
-import java.util.logging.Logger
-
-import plugin.skills.cooking.Cooking
-
 import com.asteria.game.World
 import com.asteria.game.character.combat.magic.CombatSpells
 import com.asteria.game.character.combat.prayer.CombatPrayer
@@ -27,6 +20,11 @@ import com.asteria.task.Task
 import com.asteria.task.TaskHandler
 import com.asteria.utility.LoggerUtils
 import com.asteria.utility.Settings
+import plugin.skills.cooking.Cooking
+
+import java.util.concurrent.TimeUnit
+import java.util.function.Function
+import java.util.logging.Logger
 
 @PluginSignature(ButtonClickPlugin.class)
 final class ClickButtons implements PluginListener<ButtonClickPlugin> {
@@ -38,27 +36,27 @@ final class ClickButtons implements PluginListener<ButtonClickPlugin> {
         int button = context.getId()
         switch (button) {
             case 59135:
-                if(player.viewingOrb != null)
+                if (player.viewingOrb != null)
                     player.viewingOrb.move("Centre", 15239, player.viewingOrb.getCentre())
                 break
             case 59136:
-                if(player.viewingOrb != null)
+                if (player.viewingOrb != null)
                     player.viewingOrb.move("North-West", 15240, player.viewingOrb.getNorthWest())
                 break
             case 59137:
-                if(player.viewingOrb != null)
+                if (player.viewingOrb != null)
                     player.viewingOrb.move("North-East", 15241, player.viewingOrb.getNorthEast())
                 break
             case 59138:
-                if(player.viewingOrb != null)
+                if (player.viewingOrb != null)
                     player.viewingOrb.move("South-East", 15242, player.viewingOrb.getSouthEast())
                 break
             case 59139:
-                if(player.viewingOrb != null)
+                if (player.viewingOrb != null)
                     player.viewingOrb.move("South-West", 15243, player.viewingOrb.getSouthWest())
                 break
             case 17111:
-                if(player.viewingOrb != null) {
+                if (player.viewingOrb != null) {
                     player.viewingOrb.close()
                     player.viewingOrb = null
                 }
@@ -807,7 +805,7 @@ final class ClickButtons implements PluginListener<ButtonClickPlugin> {
             case 48023:
             case 33033:
             case 30108:
-                if (player.combatSpecial== null) {
+                if (player.combatSpecial == null) {
                     break
                 }
 
@@ -824,17 +822,17 @@ final class ClickButtons implements PluginListener<ButtonClickPlugin> {
                     player.specialActivated = true
 
                     TaskHandler.submit(new Task(1, false) {
-                                @Override
-                                void execute() {
-                                    if (!player.specialActivated) {
-                                        this.cancel()
-                                        return
-                                    }
+                        @Override
+                        void execute() {
+                            if (!player.specialActivated) {
+                                this.cancel()
+                                return
+                            }
 
-                                    player.combatSpecial.onActivation(player, player.combatBuilder.currentVictim)
-                                    this.cancel()
-                                }
-                            }.attach(player))
+                            player.combatSpecial.onActivation(player, player.combatBuilder.currentVictim)
+                            this.cancel()
+                        }
+                    }.attach(player))
                 }
                 break
             default:

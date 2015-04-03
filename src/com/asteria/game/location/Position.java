@@ -142,8 +142,7 @@ public class Position {
     public final boolean withinDistance(Position other, int amount) {
         if (this.z != other.z)
             return false;
-        return Math.abs(other.x - this.x) <= amount && Math.abs(other.y -
-                this.y) <= amount;
+        return Math.abs(other.x - this.x) <= amount && Math.abs(other.y - this.y) <= amount;
     }
 
     /**

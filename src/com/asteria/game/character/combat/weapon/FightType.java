@@ -59,10 +59,8 @@ public enum FightType {
     SPEAR_POUND(2082, 43, 2, Combat.ATTACK_CRUSH, FightStyle.CONTROLLED),
     SPEAR_BLOCK(2080, 43, 3, Combat.ATTACK_STAB, FightStyle.DEFENSIVE),
     TWOHANDEDSWORD_CHOP(407, 43, 0, Combat.ATTACK_SLASH, FightStyle.ACCURATE),
-    TWOHANDEDSWORD_SLASH(407, 43, 1, Combat.ATTACK_SLASH, FightStyle
-            .AGGRESSIVE),
-    TWOHANDEDSWORD_SMASH(406, 43, 2, Combat.ATTACK_CRUSH, FightStyle
-            .AGGRESSIVE),
+    TWOHANDEDSWORD_SLASH(407, 43, 1, Combat.ATTACK_SLASH, FightStyle.AGGRESSIVE),
+    TWOHANDEDSWORD_SMASH(406, 43, 2, Combat.ATTACK_CRUSH, FightStyle.AGGRESSIVE),
     TWOHANDEDSWORD_BLOCK(407, 43, 3, Combat.ATTACK_SLASH, FightStyle.DEFENSIVE),
     PICKAXE_SPIKE(412, 43, 0, Combat.ATTACK_STAB, FightStyle.ACCURATE),
     PICKAXE_IMPALE(412, 43, 1, Combat.ATTACK_STAB, FightStyle.AGGRESSIVE),
@@ -130,8 +128,7 @@ public enum FightType {
      * @param style
      *         the style active when this type is active.
      */
-    private FightType(int animation, int parent, int child, int bonus,
-                      FightStyle style) {
+    private FightType(int animation, int parent, int child, int bonus, FightStyle style) {
         this.animation = animation;
         this.parent = parent;
         this.child = child;

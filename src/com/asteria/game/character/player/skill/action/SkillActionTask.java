@@ -62,8 +62,7 @@ public final class SkillActionTask extends Task {
 
     @Override
     public void execute() {
-        if (player.getSession().getState() == IOState.LOGGED_OUT || !player
-                .isSkillAction()) {
+        if (player.getSession().getState() == IOState.LOGGED_OUT || !player.isSkillAction()) {
             this.cancel();
             return;
         }

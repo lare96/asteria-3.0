@@ -1,15 +1,15 @@
 package com.asteria.game.character.combat;
 
-import com.asteria.game.NodeType;
-import com.asteria.game.character.CharacterNode;
-import com.asteria.game.character.player.Player;
-import com.asteria.utility.Stopwatch;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
+
+import com.asteria.game.NodeType;
+import com.asteria.game.character.CharacterNode;
+import com.asteria.game.character.player.Player;
+import com.asteria.utility.Stopwatch;
 
 /**
  * A cache of players who have inflicted damage on a controller in a combat
@@ -41,8 +41,7 @@ public final class CombatDamage {
 
             if (counter == null) {
                 attackers.put(player, new DamageCounter(amount));
-            }
-            else {
+            } else {
                 counter.incrementAmount(amount);
             }
         }
@@ -65,8 +64,7 @@ public final class CombatDamage {
             if (counter.isTimeout()) {
                 continue;
             }
-            if (player.isDead() || !player.getPosition().withinDistance
-                    (player.getPosition(), 25) || !player.isRegistered()) {
+            if (player.isDead() || !player.getPosition().withinDistance(player.getPosition(), 25) || !player.isRegistered()) {
                 continue;
             }
             if (counter.getAmount() > amount) {
@@ -143,8 +141,7 @@ public final class CombatDamage {
          * otherwise.
          */
         public boolean isTimeout() {
-            return stopwatch.elapsed(Combat.DAMAGE_CACHE_TIMEOUT, TimeUnit
-                    .SECONDS);
+            return stopwatch.elapsed(Combat.DAMAGE_CACHE_TIMEOUT, TimeUnit.SECONDS);
         }
     }
 }

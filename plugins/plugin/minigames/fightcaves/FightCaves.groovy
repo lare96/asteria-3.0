@@ -1,7 +1,5 @@
 package plugin.minigames.fightcaves
 
-import java.util.concurrent.TimeUnit
-
 import com.asteria.game.NodeType
 import com.asteria.game.character.CharacterNode
 import com.asteria.game.character.player.Player
@@ -9,6 +7,8 @@ import com.asteria.game.character.player.minigame.Minigame
 import com.asteria.game.character.player.minigame.SequencedMinigame
 import com.asteria.game.location.Position
 import com.asteria.game.plugin.PluginSignature
+
+import java.util.concurrent.TimeUnit
 
 @PluginSignature(Minigame.class)
 final class FightCaves extends SequencedMinigame {
@@ -19,9 +19,9 @@ final class FightCaves extends SequencedMinigame {
 
     @Override
     void onSequence() {
-        if(FightCavesHandler.timeoutCounter.elapsed(20, TimeUnit.MINUTES) && !FightCavesHandler.timeoutCounter.isStopped())
+        if (FightCavesHandler.timeoutCounter.elapsed(20, TimeUnit.MINUTES) && !FightCavesHandler.timeoutCounter.isStopped())
             FightCavesHandler.end true
-        if(++FightCavesHandler.gameCounter >= FightCavesHandler.GAME_CYCLE_MINUTES && FightCavesHandler.players.size() == 0 && FightCavesHandler.awaiting.size() >= FightCavesHandler.PLAYERS_NEEDED)
+        if (++FightCavesHandler.gameCounter >= FightCavesHandler.GAME_CYCLE_MINUTES && FightCavesHandler.players.size() == 0 && FightCavesHandler.awaiting.size() >= FightCavesHandler.PLAYERS_NEEDED)
             FightCavesHandler.start()
         FightCavesHandler.update()
     }
@@ -69,7 +69,7 @@ final class FightCaves extends SequencedMinigame {
 
     @Override
     boolean canHit(Player player, CharacterNode other) {
-        if(other.type == NodeType.PLAYER)
-            return FightCavesHandler.players.contains (other as Player)
+        if (other.type == NodeType.PLAYER)
+            return FightCavesHandler.players.contains(other as Player)
     }
 }

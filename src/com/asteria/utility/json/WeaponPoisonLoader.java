@@ -26,8 +26,7 @@ public final class WeaponPoisonLoader extends JsonLoader {
     @Override
     public void load(JsonObject reader, Gson builder) {
         int id = reader.get("id").getAsInt();
-        PoisonType type = Objects.requireNonNull(PoisonType.valueOf(reader
-                .get("type").getAsString()));
+        PoisonType type = Objects.requireNonNull(PoisonType.valueOf(reader.get("type").getAsString()));
         CombatPoisonEffect.TYPES.put(id, type);
     }
 }

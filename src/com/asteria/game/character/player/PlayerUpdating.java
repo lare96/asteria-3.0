@@ -28,8 +28,7 @@ public final class PlayerUpdating {
      *         if this class is instantiated.
      */
     private PlayerUpdating() {
-        throw new UnsupportedOperationException("This class cannot be " +
-                "instantiated!");
+        throw new UnsupportedOperationException("This class cannot be " + "instantiated!");
     }
 
     /**
@@ -49,19 +48,16 @@ public final class PlayerUpdating {
         if (player.getFlags().needsUpdate())
             PlayerUpdating.updateState(player, player, block, false, true);
         out.putBits(8, player.getLocalPlayers().size());
-        for (Iterator<Player> i = player.getLocalPlayers().iterator(); i
-                .hasNext(); ) {
+        for (Iterator<Player> i = player.getLocalPlayers().iterator(); i.hasNext(); ) {
             Player other = i.next();
             if (other.getPosition().isViewableFrom(player.getPosition()) &&
                     other.getSession().getState() == IOState.LOGGED_IN &&
                     !other.isNeedsPlacement() && other.isVisible()) {
                 PlayerUpdating.updateOtherPlayerMovement(other, out);
                 if (other.getFlags().needsUpdate()) {
-                    PlayerUpdating.updateState(other, player, block, false,
-                            false);
+                    PlayerUpdating.updateState(other, player, block, false, false);
                 }
-            }
-            else {
+            } else {
                 out.putBit(true);
                 out.putBits(2, 3);
                 i.remove();
@@ -71,16 +67,13 @@ public final class PlayerUpdating {
         for (Player other : World.getPlayers()) {
             if (added == 15 || player.getLocalPlayers().size() >= 255)
                 break;
-            if (other == null || other.equals(player) || other.getSession()
-                    .getState() != IOState.LOGGED_IN)
+            if (other == null || other.equals(player) || other.getSession().getState() != IOState.LOGGED_IN)
                 continue;
-            if (other.getPosition().isViewableFrom(player.getPosition()) &&
-                    other.isVisible()) {
+            if (other.getPosition().isViewableFrom(player.getPosition()) && other.isVisible()) {
                 if (player.getLocalPlayers().add(other)) {
                     added++;
                     PlayerUpdating.addPlayer(out, player, other);
-                    PlayerUpdating.updateState(other, player, block, true,
-                            false);
+                    PlayerUpdating.updateState(other, player, block, true, false);
                 }
             }
         }
@@ -88,8 +81,7 @@ public final class PlayerUpdating {
             out.putBits(11, 2047);
             out.endBitAccess();
             out.putBytes(block.buffer());
-        }
-        else {
+        } else {
             out.endBitAccess();
         }
         out.endVarShortPacket();
@@ -105,8 +97,7 @@ public final class PlayerUpdating {
      *         the buffer to append it to.
      */
     private static void appendChat(Player player, DataBuffer out) {
-        out.putShort(((player.getChatColor() & 0xff) << 8) + (player
-                .getChatEffects() & 0xff), ByteOrder.LITTLE);
+        out.putShort(((player.getChatColor() & 0xff) << 8) + (player.getChatEffects() & 0xff), ByteOrder.LITTLE);
         out.put(player.getRights().getProtocolValue());
         out.put(player.getChatText().length, ValueType.C);
         out.putBytesReverse(player.getChatText());
@@ -128,104 +119,74 @@ public final class PlayerUpdating {
         block.put(player.getSkullIcon());
         if (player.getPlayerNpc() == -1) {
             if (player.getEquipment().getId(Equipment.HEAD_SLOT) > 1) {
-                block.putShort(0x200 + player.getEquipment().getId(Equipment
-                        .HEAD_SLOT));
-            }
-            else {
+                block.putShort(0x200 + player.getEquipment().getId(Equipment.HEAD_SLOT));
+            } else {
                 block.put(0);
             }
             if (player.getEquipment().getId(Equipment.CAPE_SLOT) > 1) {
-                block.putShort(0x200 + player.getEquipment().getId(Equipment
-                        .CAPE_SLOT));
-            }
-            else {
+                block.putShort(0x200 + player.getEquipment().getId(Equipment.CAPE_SLOT));
+            } else {
                 block.put(0);
             }
             if (player.getEquipment().getId(Equipment.AMULET_SLOT) > 1) {
-                block.putShort(0x200 + player.getEquipment().getId(Equipment
-                        .AMULET_SLOT));
-            }
-            else {
+                block.putShort(0x200 + player.getEquipment().getId(Equipment.AMULET_SLOT));
+            } else {
                 block.put(0);
             }
             if (player.getEquipment().getId(Equipment.WEAPON_SLOT) > 1) {
-                block.putShort(0x200 + player.getEquipment().getId(Equipment
-                        .WEAPON_SLOT));
-            }
-            else {
+                block.putShort(0x200 + player.getEquipment().getId(Equipment.WEAPON_SLOT));
+            } else {
                 block.put(0);
             }
             if (player.getEquipment().getId(Equipment.CHEST_SLOT) > 1) {
-                block.putShort(0x200 + player.getEquipment().getId(Equipment
-                        .CHEST_SLOT));
-            }
-            else {
+                block.putShort(0x200 + player.getEquipment().getId(Equipment.CHEST_SLOT));
+            } else {
                 block.putShort(0x100 + appearance.getChest());
             }
             if (player.getEquipment().getId(Equipment.SHIELD_SLOT) > 1) {
-                block.putShort(0x200 + player.getEquipment().getId(Equipment
-                        .SHIELD_SLOT));
-            }
-            else {
+                block.putShort(0x200 + player.getEquipment().getId(Equipment.SHIELD_SLOT));
+            } else {
                 block.put(0);
             }
             if (player.getEquipment().getId(Equipment.CHEST_SLOT) > 1) {
-                if (!player.getEquipment().get(Equipment.CHEST_SLOT)
-                        .getDefinition().isPlatebody()) {
+                if (!player.getEquipment().get(Equipment.CHEST_SLOT).getDefinition().isPlatebody()) {
                     block.putShort(0x100 + appearance.getArms());
-                }
-                else {
+                } else {
                     block.put(0);
                 }
-            }
-            else {
+            } else {
                 block.putShort(0x100 + appearance.getArms());
             }
             if (player.getEquipment().getId(Equipment.LEGS_SLOT) > 1) {
-                block.putShort(0x200 + player.getEquipment().getId(Equipment
-                        .LEGS_SLOT));
-            }
-            else {
+                block.putShort(0x200 + player.getEquipment().getId(Equipment.LEGS_SLOT));
+            } else {
                 block.putShort(0x100 + appearance.getLegs());
             }
-            if (player.getEquipment().getId(Equipment.HEAD_SLOT) > 1 &&
-                    player.getEquipment().get(Equipment.HEAD_SLOT)
-                            .getDefinition().isFullHelm()) {
+            if (player.getEquipment().getId(Equipment.HEAD_SLOT) > 1 && player.getEquipment().get(Equipment.HEAD_SLOT).getDefinition().isFullHelm()) {
                 block.put(0);
-            }
-            else {
+            } else {
                 block.putShort(0x100 + appearance.getHead());
             }
             if (player.getEquipment().getId(Equipment.HANDS_SLOT) > 1) {
-                block.putShort(0x200 + player.getEquipment().getId(Equipment
-                        .HANDS_SLOT));
-            }
-            else {
+                block.putShort(0x200 + player.getEquipment().getId(Equipment.HANDS_SLOT));
+            } else {
                 block.putShort(0x100 + appearance.getHands());
             }
             if (player.getEquipment().getId(Equipment.FEET_SLOT) > 1) {
-                block.putShort(0x200 + player.getEquipment().getId(Equipment
-                        .FEET_SLOT));
-            }
-            else {
+                block.putShort(0x200 + player.getEquipment().getId(Equipment.FEET_SLOT));
+            } else {
                 block.putShort(0x100 + appearance.getFeet());
             }
             if (appearance.isMale()) {
-                if (player.getEquipment().getId(Equipment.HEAD_SLOT) > 1 &&
-                        !player.getEquipment().get(Equipment.HEAD_SLOT)
-                                .getDefinition().isFullHelm() || player
-                        .getEquipment().free(Equipment.HEAD_SLOT)) {
+                if (player.getEquipment().getId(Equipment.HEAD_SLOT) > 1 && !player.getEquipment().get(Equipment.HEAD_SLOT).getDefinition().isFullHelm() || player.getEquipment().free(Equipment.HEAD_SLOT)) {
                     block.putShort(0x100 + appearance.getBeard());
-                }
-                else {
+                } else {
                     block.put(0);
                 }
-            }
-            else {
+            } else {
                 block.put(0);
             }
-        }
-        else {
+        } else {
             block.putShort(-1);
             block.putShort(player.getPlayerNpc());
         }
@@ -235,19 +196,13 @@ public final class PlayerUpdating {
         block.put(appearance.getFeetColor());
         block.put(appearance.getSkinColor());
 
-        block.putShort(player.getWeaponAnimation() == null || player
-                .getWeaponAnimation().getStanding() == -1 ? 0x328 : player
-                .getWeaponAnimation().getStanding());
+        block.putShort(player.getWeaponAnimation() == null || player.getWeaponAnimation().getStanding() == -1 ? 0x328 : player.getWeaponAnimation().getStanding());
         block.putShort(0x337);
-        block.putShort(player.getWeaponAnimation() == null || player
-                .getWeaponAnimation().getWalking() == -1 ? 0x333 : player
-                .getWeaponAnimation().getWalking());
+        block.putShort(player.getWeaponAnimation() == null || player.getWeaponAnimation().getWalking() == -1 ? 0x333 : player.getWeaponAnimation().getWalking());
         block.putShort(0x334);
         block.putShort(0x335);
         block.putShort(0x336);
-        block.putShort(player.getWeaponAnimation() == null || player
-                .getWeaponAnimation().getRunning() == -1 ? 0x338 : player
-                .getWeaponAnimation().getRunning());
+        block.putShort(player.getWeaponAnimation() == null || player.getWeaponAnimation().getRunning() == -1 ? 0x338 : player.getWeaponAnimation().getRunning());
 
         block.putLong(player.getUsernameHash());
         block.put(player.determineCombatLevel());
@@ -271,8 +226,7 @@ public final class PlayerUpdating {
         out.putBits(11, other.getSlot());
         out.putBit(true);
         out.putBit(true);
-        Position delta = Position.delta(player.getPosition(), other
-                .getPosition());
+        Position delta = Position.delta(player.getPosition(), other.getPosition());
         out.putBits(5, delta.getY());
         out.putBits(5, delta.getX());
     }
@@ -289,36 +243,28 @@ public final class PlayerUpdating {
      * @param out
      *         the buffer to write to data to.
      */
-    private static void updateLocalPlayerMovement(Player player, DataBuffer
-            out) {
+    private static void updateLocalPlayerMovement(Player player, DataBuffer out) {
         boolean updateRequired = player.getFlags().needsUpdate();
         if (player.isNeedsPlacement()) {
             out.putBit(true);
-            int posX = player.getPosition().getLocalX(player.getCurrentRegion
-                    ());
-            int posY = player.getPosition().getLocalY(player.getCurrentRegion
-                    ());
-            appendPlacement(out, posX, posY, player.getPosition().getZ(),
-                    player.isResetMovementQueue(), updateRequired);
-        }
-        else {
+            int posX = player.getPosition().getLocalX(player.getCurrentRegion());
+            int posY = player.getPosition().getLocalY(player.getCurrentRegion());
+            appendPlacement(out, posX, posY, player.getPosition().getZ(), player.isResetMovementQueue(), updateRequired);
+        } else {
             int pDir = player.getPrimaryDirection();
             int sDir = player.getSecondaryDirection();
             if (pDir != -1) {
                 out.putBit(true);
                 if (sDir != -1) {
                     appendRun(out, pDir, sDir, updateRequired);
-                }
-                else {
+                } else {
                     appendWalk(out, pDir, updateRequired);
                 }
-            }
-            else {
+            } else {
                 if (updateRequired) {
                     out.putBit(true);
                     appendStand(out);
-                }
-                else {
+                } else {
                     out.putBit(false);
                 }
             }
@@ -335,8 +281,7 @@ public final class PlayerUpdating {
      * @param out
      *         the buffer to write the data to.
      */
-    private static void updateOtherPlayerMovement(Player player, DataBuffer
-            out) {
+    private static void updateOtherPlayerMovement(Player player, DataBuffer out) {
         boolean updateRequired = player.getFlags().needsUpdate();
         int pDir = player.getPrimaryDirection();
         int sDir = player.getSecondaryDirection();
@@ -344,17 +289,14 @@ public final class PlayerUpdating {
             out.putBit(true);
             if (sDir != -1) {
                 appendRun(out, pDir, sDir, updateRequired);
-            }
-            else {
+            } else {
                 appendWalk(out, pDir, updateRequired);
             }
-        }
-        else {
+        } else {
             if (updateRequired) {
                 out.putBit(true);
                 appendStand(out);
-            }
-            else {
+            } else {
                 out.putBit(false);
             }
         }
@@ -376,14 +318,10 @@ public final class PlayerUpdating {
      * @throws Exception
      *         if any errors occur while updating the state.
      */
-    private static void updateState(Player player, Player thisPlayer,
-                                    DataBuffer block, boolean
-                                            forceAppearance, boolean noChat)
-            throws Exception {
+    private static void updateState(Player player, Player thisPlayer, DataBuffer block, boolean forceAppearance, boolean noChat) throws Exception {
         if (!player.getFlags().needsUpdate() && !forceAppearance)
             return;
-        if (player.getCachedUpdateBlock() != null && !player.equals
-                (thisPlayer) && !forceAppearance && !noChat) {
+        if (player.getCachedUpdateBlock() != null && !player.equals(thisPlayer) && !forceAppearance && !noChat) {
             block.putBytes(player.getCachedUpdateBlock());
             return;
         }
@@ -422,10 +360,8 @@ public final class PlayerUpdating {
         }
         if (mask.get() >= 0x100) {
             mask.set(0x40);
-            cachedBuffer.putShort(mask.get(), com.asteria.network.ByteOrder
-                    .LITTLE);
-        }
-        else {
+            cachedBuffer.putShort(mask.get(), com.asteria.network.ByteOrder.LITTLE);
+        } else {
             cachedBuffer.put(mask.get());
         }
 
@@ -520,8 +456,7 @@ public final class PlayerUpdating {
      *         the buffer to append it to.
      */
     private static void appendFaceCoordinates(Player player, DataBuffer out) {
-        out.putShort(player.getFacePosition().getX(), ValueType.A, ByteOrder
-                .LITTLE);
+        out.putShort(player.getFacePosition().getX(), ValueType.A, ByteOrder.LITTLE);
         out.putShort(player.getFacePosition().getY(), ByteOrder.LITTLE);
     }
 
@@ -546,8 +481,7 @@ public final class PlayerUpdating {
      * @param out
      *         the buffer to append it to.
      */
-    private static void appendPrimaryHit(Player player, DataBuffer out)
-            throws Exception {
+    private static void appendPrimaryHit(Player player, DataBuffer out) throws Exception {
         out.put(player.getPrimaryHit().getDamage());
         out.put(player.getPrimaryHit().getType().getId(), ValueType.A);
         if (!player.isDead()) {
@@ -569,8 +503,7 @@ public final class PlayerUpdating {
      * @param out
      *         the buffer to append it to.
      */
-    private static void appendSecondaryHit(Player player, DataBuffer out)
-            throws Exception {
+    private static void appendSecondaryHit(Player player, DataBuffer out) throws Exception {
         out.put(player.getSecondaryHit().getDamage());
         out.put(player.getSecondaryHit().getType().getId(), ValueType.S);
 
@@ -583,8 +516,7 @@ public final class PlayerUpdating {
         }
 
         out.put(player.getSkills()[Skills.HITPOINTS].getLevel());
-        out.put(player.getSkills()[Skills.HITPOINTS].getRealLevel(),
-                ValueType.C);
+        out.put(player.getSkills()[Skills.HITPOINTS].getRealLevel(), ValueType.C);
     }
 
     /**
@@ -623,8 +555,7 @@ public final class PlayerUpdating {
      * @param attributesUpdate
      *         whether or not a player attributes update is required.
      */
-    private static void appendWalk(DataBuffer out, int direction, boolean
-            attributesUpdate) {
+    private static void appendWalk(DataBuffer out, int direction, boolean attributesUpdate) {
         out.putBits(2, 1);
         out.putBits(3, direction);
         out.putBit(attributesUpdate);
@@ -643,8 +574,7 @@ public final class PlayerUpdating {
      * @param attributesUpdate
      *         whether or not a player attributes update is required.
      */
-    private static void appendRun(DataBuffer out, int direction, int
-            direction2, boolean attributesUpdate) {
+    private static void appendRun(DataBuffer out, int direction, int direction2, boolean attributesUpdate) {
         out.putBits(2, 2);
         out.putBits(3, direction);
         out.putBits(3, direction2);
@@ -669,9 +599,7 @@ public final class PlayerUpdating {
      * @param attributesUpdate
      *         whether or not a plater attributes update is required.
      */
-    private static void appendPlacement(DataBuffer out, int localX, int
-            localY, int z, boolean discardMovementQueue, boolean
-            attributesUpdate) {
+    private static void appendPlacement(DataBuffer out, int localX, int localY, int z, boolean discardMovementQueue, boolean attributesUpdate) {
         out.putBits(2, 3);
         out.putBits(2, z);
         out.putBit(discardMovementQueue);

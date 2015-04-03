@@ -39,8 +39,7 @@ public final class PrivateMessage {
         for (long name : player.getFriends()) {
             if (name == 0)
                 continue;
-            player.getEncoder().sendPrivateMessageFriend(name, World
-                    .getPlayer(name).isPresent());
+            player.getEncoder().sendPrivateMessageFriend(name, World.getPlayer(name).isPresent());
         }
     }
 
@@ -57,8 +56,7 @@ public final class PrivateMessage {
             if (players == null)
                 continue;
             if (players.getFriends().contains(player.getUsernameHash()))
-                players.getEncoder().sendPrivateMessageFriend(player
-                        .getUsernameHash(), online);
+                players.getEncoder().sendPrivateMessageFriend(player.getUsernameHash(), online);
         }
     }
 
@@ -74,12 +72,9 @@ public final class PrivateMessage {
             return;
         }
         if (player.getFriends().add(name)) {
-            player.getEncoder().sendPrivateMessageFriend(name, World
-                    .getPlayer(name).isPresent());
-        }
-        else {
-            player.getEncoder().sendMessage("They are already on your friends" +
-                    " list!");
+            player.getEncoder().sendPrivateMessageFriend(name, World.getPlayer(name).isPresent());
+        } else {
+            player.getEncoder().sendMessage("They are already on your friends" + " list!");
         }
     }
 
@@ -95,8 +90,7 @@ public final class PrivateMessage {
             return;
         }
         if (!player.getIgnores().add(name))
-            player.getEncoder().sendMessage("They are already on your ignores" +
-                    " list!");
+            player.getEncoder().sendMessage("They are already on your ignores" + " list!");
     }
 
     /**
@@ -107,8 +101,7 @@ public final class PrivateMessage {
      */
     public void removeFriend(long name) {
         if (!player.getFriends().remove(name)) {
-            player.getEncoder().sendMessage("They are not on your friends " +
-                    "list.");
+            player.getEncoder().sendMessage("They are not on your friends " + "list.");
         }
     }
 
@@ -120,8 +113,7 @@ public final class PrivateMessage {
      */
     public void removeIgnore(long name) {
         if (!player.getIgnores().remove(name)) {
-            player.getEncoder().sendMessage("They are not on your ignores " +
-                    "list.");
+            player.getEncoder().sendMessage("They are not on your ignores " + "list.");
         }
     }
 
@@ -138,8 +130,7 @@ public final class PrivateMessage {
     public void sendPrivateMessage(long name, byte[] message, int size) {
         int rights = player.getRights().getProtocolValue();
         long hash = player.getUsernameHash();
-        World.getPlayer(name).ifPresent(p -> p.getEncoder()
-                .sendPrivateMessage(hash, rights, message, size));
+        World.getPlayer(name).ifPresent(p -> p.getEncoder().sendPrivateMessage(hash, rights, message, size));
     }
 
     /**

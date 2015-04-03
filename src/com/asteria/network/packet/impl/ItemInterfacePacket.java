@@ -69,12 +69,10 @@ public final class ItemInterfacePacket extends PacketDecoder {
                 player.getBank().withdraw(slot, 1, true);
                 break;
             case 3900:
-                Shop.SHOPS.get(player.getOpenShop()).sendPurchasePrice
-                        (player, new Item(itemId));
+                Shop.SHOPS.get(player.getOpenShop()).sendPurchasePrice(player, new Item(itemId));
                 break;
             case 3823:
-                Shop.SHOPS.get(player.getOpenShop()).sendSellingPrice(player,
-                        new Item(itemId));
+                Shop.SHOPS.get(player.getOpenShop()).sendSellingPrice(player, new Item(itemId));
                 break;
             case 3322:
                 player.getTradeSession().add(new Item(itemId, 1), slot);
@@ -94,10 +92,8 @@ public final class ItemInterfacePacket extends PacketDecoder {
      *         the buffer for reading the sent data.
      */
     private void secondSlot(Player player, DataBuffer buf) {
-        int interfaceId = buf.getShort(true, com.asteria.network.ValueType.A,
-                com.asteria.network.ByteOrder.LITTLE);
-        int itemId = buf.getShort(true, com.asteria.network.ValueType.A, com
-                .asteria.network.ByteOrder.LITTLE);
+        int interfaceId = buf.getShort(true, com.asteria.network.ValueType.A, com.asteria.network.ByteOrder.LITTLE);
+        int itemId = buf.getShort(true, com.asteria.network.ValueType.A, com.asteria.network.ByteOrder.LITTLE);
         int slot = buf.getShort(true, com.asteria.network.ByteOrder.LITTLE);
         if (interfaceId < 0 || slot < 0 || itemId < 0)
             return;
@@ -110,12 +106,10 @@ public final class ItemInterfacePacket extends PacketDecoder {
                 player.getBank().withdraw(slot, 5, true);
                 break;
             case 3900:
-                Shop.SHOPS.get(player.getOpenShop()).purchase(player, new
-                        Item(itemId, 1));
+                Shop.SHOPS.get(player.getOpenShop()).purchase(player, new Item(itemId, 1));
                 break;
             case 3823:
-                Shop.SHOPS.get(player.getOpenShop()).sell(player, new Item
-                        (itemId, 1), slot);
+                Shop.SHOPS.get(player.getOpenShop()).sell(player, new Item(itemId, 1), slot);
                 break;
             case 3322:
                 player.getTradeSession().add(new Item(itemId, 5), slot);
@@ -150,12 +144,10 @@ public final class ItemInterfacePacket extends PacketDecoder {
                 player.getBank().withdraw(slot, 10, true);
                 break;
             case 3900:
-                Shop.SHOPS.get(player.getOpenShop()).purchase(player, new
-                        Item(itemId, 5));
+                Shop.SHOPS.get(player.getOpenShop()).purchase(player, new Item(itemId, 5));
                 break;
             case 3823:
-                Shop.SHOPS.get(player.getOpenShop()).sell(player, new Item
-                        (itemId, 5), slot);
+                Shop.SHOPS.get(player.getOpenShop()).sell(player, new Item(itemId, 5), slot);
                 break;
             case 3322:
                 player.getTradeSession().add(new Item(itemId, 10), slot);
@@ -185,41 +177,32 @@ public final class ItemInterfacePacket extends PacketDecoder {
         switch (interfaceId) {
 
             case 5064:
-                player.getBank().depositFromInventory(slot, player
-                        .getInventory().amount(player.getInventory().getId
-                                (slot)));
+                player.getBank().depositFromInventory(slot, player.getInventory().amount(player.getInventory().getId(slot)));
                 break;
 
             case 5382:
                 int amount = 0;
                 if (player.isWithdrawAsNote()) {
                     amount = player.getBank().amount(itemId);
-                }
-                else {
+                } else {
                     Item itemWithdrew = new Item(itemId, 1);
-                    amount = ItemDefinition.DEFINITIONS[itemWithdrew.getId()]
-                            .isStackable() ? player.getBank().amount(itemId)
-                            : 28;
+                    amount = ItemDefinition.DEFINITIONS[itemWithdrew.getId()].isStackable() ? player.getBank().amount(itemId) : 28;
                 }
 
                 player.getBank().withdraw(slot, amount, true);
                 break;
             case 3900:
-                Shop.SHOPS.get(player.getOpenShop()).purchase(player, new
-                        Item(itemId, 10));
+                Shop.SHOPS.get(player.getOpenShop()).purchase(player, new Item(itemId, 10));
                 break;
 
             case 3823:
-                Shop.SHOPS.get(player.getOpenShop()).sell(player, new Item
-                        (itemId, 10), slot);
+                Shop.SHOPS.get(player.getOpenShop()).sell(player, new Item(itemId, 10), slot);
                 break;
             case 3322:
-                player.getTradeSession().add(new Item(itemId, player
-                        .getInventory().amount(itemId)), slot);
+                player.getTradeSession().add(new Item(itemId, player.getInventory().amount(itemId)), slot);
                 break;
             case 3415:
-                player.getTradeSession().remove(new Item(itemId, player
-                        .getTradeSession().getContainer().amount(itemId)));
+                player.getTradeSession().remove(new Item(itemId, player.getTradeSession().getContainer().amount(itemId)));
                 break;
         }
     }
@@ -255,11 +238,9 @@ public final class ItemInterfacePacket extends PacketDecoder {
      *         the buffer for reading the sent data.
      */
     private void swapSlots(Player player, DataBuffer buf) {
-        int interfaceId = buf.getShort(com.asteria.network.ValueType.A, com
-                .asteria.network.ByteOrder.LITTLE);
+        int interfaceId = buf.getShort(com.asteria.network.ValueType.A, com.asteria.network.ByteOrder.LITTLE);
         buf.get(com.asteria.network.ValueType.C);
-        int fromSlot = buf.getShort(com.asteria.network.ValueType.A, com
-                .asteria.network.ByteOrder.LITTLE);
+        int fromSlot = buf.getShort(com.asteria.network.ValueType.A, com.asteria.network.ByteOrder.LITTLE);
         int toSlot = buf.getShort(com.asteria.network.ByteOrder.LITTLE);
         if (interfaceId < 0 || fromSlot < 0 || toSlot < 0)
             return;
@@ -272,8 +253,7 @@ public final class ItemInterfacePacket extends PacketDecoder {
             case 5382:
                 if (player.isInsertItem()) {
                     player.getBank().swap(fromSlot, toSlot);
-                }
-                else {
+                } else {
                     player.getBank().transfer(fromSlot, toSlot);
                 }
                 player.getBank().refresh();

@@ -79,8 +79,7 @@ public final class CombatPoisonEffect extends CombatEffect {
 
     @Override
     public void sequence() {
-        int counter = random.nextBoolean() ? character.getPoisonDamage() :
-                character.getAndDecrementPoisonDamage();
+        int counter = random.nextBoolean() ? character.getPoisonDamage() : character.getAndDecrementPoisonDamage();
         character.damage(new Hit(counter, HitType.POISON));
     }
 

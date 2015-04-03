@@ -51,8 +51,7 @@ public final class ObjectActionPacket extends PacketDecoder {
         int objectX = buf.getShort(true, ValueType.A, ByteOrder.LITTLE);
         int objectId = buf.getShort(false);
         int objectY = buf.getShort(false, ValueType.A);
-        Position position = new Position(objectX, objectY, player.getPosition
-                ().getZ());
+        Position position = new Position(objectX, objectY, player.getPosition().getZ());
         int size = 1;
         if (objectId < 0 || objectX < 0 || objectY < 0)
             return;
@@ -61,15 +60,11 @@ public final class ObjectActionPacket extends PacketDecoder {
                     "X - " + objectX + ", Y - " + objectY);
         player.facePosition(position);
         player.getMovementListener().append(() -> {
-                    if (player.getPosition().withinDistance(position, size)) {
-                        MinigameHandler.execute(player, m -> m
-                                .onFirstClickObject(player, objectId,
-                                        position.copy()));
-                        PluginHandler.execute(player, ObjectFirstClickPlugin
-                                .class, new ObjectFirstClickPlugin(objectId,
-                                position, size));
-                    }
-                });
+            if (player.getPosition().withinDistance(position, size)) {
+                MinigameHandler.execute(player, m -> m.onFirstClickObject(player, objectId, position.copy()));
+                PluginHandler.execute(player, ObjectFirstClickPlugin.class, new ObjectFirstClickPlugin(objectId, position, size));
+            }
+        });
     }
 
     /**
@@ -85,8 +80,7 @@ public final class ObjectActionPacket extends PacketDecoder {
         int objectY = buf.getShort(true, ByteOrder.LITTLE);
         int objectX = buf.getShort(false, ValueType.A);
         int size = 1;
-        Position position = new Position(objectX, objectY, player.getPosition
-                ().getZ());
+        Position position = new Position(objectX, objectY, player.getPosition().getZ());
         if (objectId < 0 || objectX < 0 || objectY < 0)
             return;
         if (Settings.DEBUG)
@@ -94,15 +88,11 @@ public final class ObjectActionPacket extends PacketDecoder {
                     "X - " + objectX + ", Y - " + objectY);
         player.facePosition(position);
         player.getMovementListener().append(() -> {
-                    if (player.getPosition().withinDistance(position, size)) {
-                        MinigameHandler.execute(player, m -> m
-                                .onSecondClickObject(player, objectId,
-                                        position.copy()));
-                        PluginHandler.execute(player, ObjectSecondClickPlugin
-                                .class, new ObjectSecondClickPlugin(objectId,
-                                position, size));
-                    }
-                });
+            if (player.getPosition().withinDistance(position, size)) {
+                MinigameHandler.execute(player, m -> m.onSecondClickObject(player, objectId, position.copy()));
+                PluginHandler.execute(player, ObjectSecondClickPlugin.class, new ObjectSecondClickPlugin(objectId, position, size));
+            }
+        });
     }
 
     /**
@@ -118,8 +108,7 @@ public final class ObjectActionPacket extends PacketDecoder {
         int objectY = buf.getShort(false);
         int objectId = buf.getShort(false, ValueType.A, ByteOrder.LITTLE);
         int size = 1;
-        Position position = new Position(objectX, objectY, player.getPosition
-                ().getZ());
+        Position position = new Position(objectX, objectY, player.getPosition().getZ());
         if (objectId < 0 || objectX < 0 || objectY < 0)
             return;
         player.facePosition(position);
@@ -127,8 +116,7 @@ public final class ObjectActionPacket extends PacketDecoder {
             @Override
             public void run() {
                 if (player.getPosition().withinDistance(position, size)) {
-                    MinigameHandler.execute(player, m -> m.onThirdClickObject
-                            (player, objectId, position.copy()));
+                    MinigameHandler.execute(player, m -> m.onThirdClickObject(player, objectId, position.copy()));
                     switch (objectId) {
 
                     }

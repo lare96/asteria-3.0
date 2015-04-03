@@ -1,9 +1,5 @@
 package com.asteria.network;
 
-import com.asteria.game.GameService;
-import com.asteria.game.character.player.login.LoginResponse;
-import com.asteria.utility.Stopwatch;
-
 import java.io.FileWriter;
 import java.nio.file.Paths;
 import java.util.Collections;
@@ -14,6 +10,10 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
+
+import com.asteria.game.GameService;
+import com.asteria.game.character.player.login.LoginResponse;
+import com.asteria.utility.Stopwatch;
 
 /**
  * The network security that handles and validates all incoming connections
@@ -37,14 +37,12 @@ public final class ConnectionHandler {
     /**
      * The concurrent map of registered connections.
      */
-    private static final Map<String, Connection> CONNECTIONS = new
-            ConcurrentHashMap<>(16, 0.9f, 2);
+    private static final Map<String, Connection> CONNECTIONS = new ConcurrentHashMap<>(16, 0.9f, 2);
 
     /**
      * The synchronized set of banned hosts.
      */
-    private static final Set<String> BANNED = Collections.synchronizedSet(new
-            HashSet<String>());
+    private static final Set<String> BANNED = Collections.synchronizedSet(new HashSet<String>());
 
     /**
      * The default constructor.
@@ -53,8 +51,7 @@ public final class ConnectionHandler {
      *         if this class is instantiated.
      */
     private ConnectionHandler() {
-        throw new UnsupportedOperationException("This class cannot be " +
-                "instantiated!");
+        throw new UnsupportedOperationException("This class cannot be " + "instantiated!");
     }
 
     /**
@@ -68,17 +65,14 @@ public final class ConnectionHandler {
     public static LoginResponse evaluate(String host) {
         if (ConnectionHandler.isLocal(host))
             return LoginResponse.NORMAL;
-        Optional<Connection> connection = Optional.ofNullable(CONNECTIONS
-                .putIfAbsent(host, new Connection()));
+        Optional<Connection> connection = Optional.ofNullable(CONNECTIONS.putIfAbsent(host, new Connection()));
         if (connection.isPresent()) {
             Connection c = connection.get();
             if (c.sessionLimit()) {
                 return LoginResponse.LOGIN_LIMIT_EXCEEDED;
-            }
-            else if (c.throttleLimit()) {
+            } else if (c.throttleLimit()) {
                 return LoginResponse.LOGIN_ATTEMPTS_EXCEEDED;
-            }
-            else if (BANNED.contains(host)) {
+            } else if (BANNED.contains(host)) {
                 return LoginResponse.ACCOUNT_DISABLED;
             }
             c.increment();
@@ -101,8 +95,7 @@ public final class ConnectionHandler {
         if (ConnectionHandler.isLocal(host))
             return;
         Optional<Connection> op = Optional.ofNullable(CONNECTIONS.get(host));
-        Connection c = op.orElseThrow(() -> new IllegalStateException("Host " +
-                "was not registered with the connection map!"));
+        Connection c = op.orElseThrow(() -> new IllegalStateException("Host " + "was not registered with the connection map!"));
         if (c.decrement() < 1)
             CONNECTIONS.remove(c);
     }
@@ -121,8 +114,7 @@ public final class ConnectionHandler {
         GameService.getLogicService().execute(() -> {
             if (BANNED.contains(host))
                 return;
-            try (FileWriter out = new FileWriter(Paths.get("./data/",
-                    "banned_ips.txt").toFile(), true)) {
+            try (FileWriter out = new FileWriter(Paths.get("./data/", "banned_ips.txt").toFile(), true)) {
                 out.write(host);
                 BANNED.add(host);
             } catch (Exception e) {
@@ -135,8 +127,7 @@ public final class ConnectionHandler {
      * Loads all of the banned hosts from the {@code banned_ips.txt} file.
      */
     public static void parseIPBans() {
-        try (Scanner s = new Scanner(Paths.get("./data/", "banned_ips.txt")
-                .toFile())) {
+        try (Scanner s = new Scanner(Paths.get("./data/", "banned_ips.txt").toFile())) {
             while (s.hasNextLine())
                 BANNED.add(s.nextLine());
         } catch (Exception e) {

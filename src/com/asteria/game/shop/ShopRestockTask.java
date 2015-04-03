@@ -35,8 +35,7 @@ public final class ShopRestockTask extends Task {
             this.cancel();
             return;
         }
-        container.getContainer().stream().filter(Objects::nonNull).forEach
-                (this::restock);
+        container.getContainer().stream().filter(Objects::nonNull).forEach(this::restock);
     }
 
     /**
@@ -46,13 +45,10 @@ public final class ShopRestockTask extends Task {
      *         the item to attempt to restock.
      */
     private void restock(Item item) {
-        if (container.getItemCache().containsKey(item.getId()) && item
-                .getAmount() < container.getItemCache().get(item.getId())) {
+        if (container.getItemCache().containsKey(item.getId()) && item.getAmount() < container.getItemCache().get(item.getId())) {
             item.incrementAmount();
             int size = container.getContainer().size();
-            container.getPlayers().stream().filter(Objects::nonNull).forEach
-                    (p -> p.getEncoder().sendItemsOnInterface(3900, container
-                            .getContainer().container(), size));
+            container.getPlayers().stream().filter(Objects::nonNull).forEach(p -> p.getEncoder().sendItemsOnInterface(3900, container.getContainer().container(), size));
         }
     }
 }

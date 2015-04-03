@@ -36,13 +36,10 @@ public final class GiveItemDialogue implements DialogueChain {
     public void accept(DialogueChainBuilder dialogue) {
         if (dialogue.getPlayer().getInventory().add(item)) {
             dialogue.getPlayer().getEncoder().sendString(text, 308);
-            dialogue.getPlayer().getEncoder().sendItemModelOnInterface(307,
-                    200, item.getId());
+            dialogue.getPlayer().getEncoder().sendItemModelOnInterface(307, 200, item.getId());
             dialogue.getPlayer().getEncoder().sendChatInterface(306);
-        }
-        else {
-            dialogue.getPlayer().getEncoder().sendChatboxString("You do not " +
-                    "have enough space in your inventory!");
+        } else {
+            dialogue.getPlayer().getEncoder().sendChatboxString("You do not " + "have enough space in your inventory!");
             dialogue.interrupt();
         }
     }

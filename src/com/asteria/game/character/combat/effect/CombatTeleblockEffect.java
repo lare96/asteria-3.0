@@ -39,8 +39,7 @@ public final class CombatTeleblockEffect extends CombatEffect {
     @Override
     public boolean removeOn() {
         if (player.getTeleblockTimer().get() <= 0) {
-            player.getEncoder().sendMessage("You feel the effects of the " +
-                    "teleblock spell go away.");
+            player.getEncoder().sendMessage("You feel the effects of the " + "teleblock spell go away.");
             return true;
         }
         return false;

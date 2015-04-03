@@ -16,8 +16,7 @@ public final class ArrayUtils {
      *         if this class is instantiated.
      */
     private ArrayUtils() {
-        throw new UnsupportedOperationException("This class cannot be " +
-                "instantiated!");
+        throw new UnsupportedOperationException("This class cannot be " + "instantiated!");
     }
 
     /**

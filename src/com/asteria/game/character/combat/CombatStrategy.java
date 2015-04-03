@@ -35,8 +35,7 @@ public interface CombatStrategy extends PluginContext {
      *         the character being attacked.
      * @return a container holding the data for the attack.
      */
-    public CombatSessionData attack(CharacterNode character, CharacterNode
-            victim);
+    public CombatSessionData attack(CharacterNode character, CharacterNode victim);
 
     /**
      * Determines the delay for when {@code character} will attack.

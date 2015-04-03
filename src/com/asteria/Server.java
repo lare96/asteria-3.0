@@ -36,8 +36,7 @@ public final class Server {
      *         if this class is instantiated.
      */
     private Server() {
-        throw new UnsupportedOperationException("This class cannot be " +
-                "instantiated!");
+        throw new UnsupportedOperationException("This class cannot be " + "instantiated!");
     }
 
     /**
@@ -48,10 +47,8 @@ public final class Server {
      */
     public static void main(String[] args) {
         try {
-            boolean concurrent = (Runtime.getRuntime().availableProcessors()
-                    > 1);
-            builder = new ServerBuilder().setParallelEngine(concurrent)
-                    .setServerPort(Settings.PORT);
+            boolean concurrent = (Runtime.getRuntime().availableProcessors() > 1);
+            builder = new ServerBuilder().setParallelEngine(concurrent).setServerPort(Settings.PORT);
             builder.build();
 
             logger.info(Settings.NAME + " is now online!");

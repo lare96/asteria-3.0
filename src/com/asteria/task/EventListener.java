@@ -5,7 +5,8 @@ package com.asteria.task;
  * assignment when some sort of occurrence happens. They can be configured to
  * stop listening after the occurrence happens, or to keep listening and
  * executing the assignment accordingly. These event listeners can also be
- * configured to check for the occurrence at certain rates (which of course, can
+ * configured to check for the occurrence at certain rates (which of course,
+ * can
  * be dynamically changed).
  *
  * @author lare96 <http://github.com/lare96>

@@ -190,8 +190,7 @@ public final class DataBuffer {
      */
     public DataBuffer endVarShortPacket() {
         requestSpace(2);
-        buf.putShort(varLengthIndex, (short) (buf.position() - varLengthIndex
-                - 2));
+        buf.putShort(varLengthIndex, (short) (buf.position() - varLengthIndex - 2));
         return this;
     }
 
@@ -252,8 +251,7 @@ public final class DataBuffer {
      */
     public DataBuffer putBits(int amount, int value) {
         if (amount < 0 || amount > 32)
-            throw new IllegalArgumentException("Number of bits must be " +
-                    "between 1 and 32 inclusive.");
+            throw new IllegalArgumentException("Number of bits must be " + "between 1 and 32 inclusive.");
         int bytePos = bitIndex >> 3;
         int bitOffset = 8 - (bitIndex & 7);
         bitIndex = bitIndex + amount;
@@ -277,8 +275,7 @@ public final class DataBuffer {
             tmp &= ~BIT_MASK[bitOffset];
             tmp |= value & BIT_MASK[bitOffset];
             buf.put(bytePos, tmp);
-        }
-        else {
+        } else {
             byte tmp = buf.get(bytePos);
             tmp &= ~(BIT_MASK[amount] << (bitOffset - amount));
             tmp |= (value & BIT_MASK[amount]) << (bitOffset - amount);
@@ -359,11 +356,9 @@ public final class DataBuffer {
                 put(value, type);
                 break;
             case MIDDLE:
-                throw new IllegalArgumentException("Middle-endian short is " +
-                        "impossible!");
+                throw new IllegalArgumentException("Middle-endian short is " + "impossible!");
             case INVERSE_MIDDLE:
-                throw new IllegalArgumentException("Inverse-middle-endian " +
-                        "short is impossible!");
+                throw new IllegalArgumentException("Inverse-middle-endian " + "short is impossible!");
             case LITTLE:
                 put(value, type);
                 put(value >> 8);
@@ -519,11 +514,9 @@ public final class DataBuffer {
                 put((int) value, type);
                 break;
             case MIDDLE:
-                throw new UnsupportedOperationException("Middle-endian long " +
-                        "is not implemented!");
+                throw new UnsupportedOperationException("Middle-endian long " + "is not implemented!");
             case INVERSE_MIDDLE:
-                throw new UnsupportedOperationException
-                        ("Inverse-middle-endian long is not implemented!");
+                throw new UnsupportedOperationException("Inverse-middle-endian long is not implemented!");
             case LITTLE:
                 put((int) value, type);
                 put((int) (value >> 8));
@@ -672,11 +665,9 @@ public final class DataBuffer {
                 value |= get(false, type);
                 break;
             case MIDDLE:
-                throw new UnsupportedOperationException("Middle-endian short " +
-                        "is impossible!");
+                throw new UnsupportedOperationException("Middle-endian short " + "is impossible!");
             case INVERSE_MIDDLE:
-                throw new UnsupportedOperationException
-                        ("Inverse-middle-endian short is impossible!");
+                throw new UnsupportedOperationException("Inverse-middle-endian short is impossible!");
             case LITTLE:
                 value |= get(false, type);
                 value |= get(false) << 8;
@@ -915,8 +906,7 @@ public final class DataBuffer {
                 break;
             case INVERSE_MIDDLE:
             case MIDDLE:
-                throw new UnsupportedOperationException("Middle and " +
-                        "inverse-middle value types not supported!");
+                throw new UnsupportedOperationException("Middle and " + "inverse-middle value types not supported!");
             case LITTLE:
                 value |= get(false, type);
                 value |= (long) get(false) << 8L;

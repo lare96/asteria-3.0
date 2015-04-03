@@ -26,11 +26,9 @@ public final class ItemOnItemPacket extends PacketDecoder {
         Item itemUsed = player.getInventory().get(firstSlot);
         Item itemOn = player.getInventory().get(secondSlot);
 
-        if (secondSlot < 0 || firstSlot < 0 || itemUsed == null || itemOn ==
-                null)
+        if (secondSlot < 0 || firstSlot < 0 || itemUsed == null || itemOn == null)
             return;
 
-        PluginHandler.execute(player, ItemOnItemPlugin.class, new
-                ItemOnItemPlugin(itemUsed, itemOn));
+        PluginHandler.execute(player, ItemOnItemPlugin.class, new ItemOnItemPlugin(itemUsed, itemOn));
     }
 }

@@ -41,8 +41,7 @@ public final class ObjectNode extends Node {
      * @param type
      *         the type of object that this is.
      */
-    public ObjectNode(int id, Position position, ObjectDirection direction,
-                      ObjectType type) {
+    public ObjectNode(int id, Position position, ObjectDirection direction, ObjectType type) {
         super(position, NodeType.OBJECT);
         this.id = id;
         this.direction = Objects.requireNonNull(direction);
@@ -74,19 +73,16 @@ public final class ObjectNode extends Node {
 
     @Override
     public void dispose() {
-        World.getPlayers().forEach(p -> p.getEncoder().sendRemoveObject(super
-                .getPosition()));
+        World.getPlayers().forEach(p -> p.getEncoder().sendRemoveObject(super.getPosition()));
     }
 
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = super.hashCode();
-        result = prime * result + ((direction == null) ? 0 : direction
-                .hashCode());
+        result = prime * result + ((direction == null) ? 0 : direction.hashCode());
         result = prime * result + id;
-        result = prime * result + ((objectType == null) ? 0 : objectType
-                .hashCode());
+        result = prime * result + ((objectType == null) ? 0 : objectType.hashCode());
         return result;
     }
 

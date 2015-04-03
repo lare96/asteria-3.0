@@ -43,8 +43,7 @@ public abstract class CharacterNode extends Node {
      * to
      * the end of the movement queue.
      */
-    private final MovementQueueListener movementListener = new
-            MovementQueueListener(this);
+    private final MovementQueueListener movementListener = new MovementQueueListener(this);
 
     /**
      * The update flags used for signifying that this character needs something
@@ -55,8 +54,7 @@ public abstract class CharacterNode extends Node {
     /**
      * The collection of stopwatches used for various timing operations.
      */
-    private final Stopwatch lastCombat = new Stopwatch(), freezeTimer = new
-            Stopwatch();
+    private final Stopwatch lastCombat = new Stopwatch(), freezeTimer = new Stopwatch();
 
     /**
      * The slot this character has been assigned to.
@@ -185,8 +183,7 @@ public abstract class CharacterNode extends Node {
     public CharacterNode(Position position, NodeType type) {
         super(position, type);
         this.autoRetaliate = (type == NodeType.NPC);
-        Preconditions.checkArgument(type == NodeType.PLAYER || type ==
-                NodeType.NPC);
+        Preconditions.checkArgument(type == NodeType.PLAYER || type == NodeType.NPC);
     }
 
     @Override
@@ -301,8 +298,7 @@ public abstract class CharacterNode extends Node {
      * @param type
      *         the combat type currently being used.
      */
-    public abstract void onSuccessfulHit(CharacterNode character, CombatType
-            type);
+    public abstract void onSuccessfulHit(CharacterNode character, CombatType type);
 
     /**
      * Restores this character's health level by {@code amount}.
@@ -343,8 +339,7 @@ public abstract class CharacterNode extends Node {
      *         animation.
      */
     public final void animation(Animation animation) {
-        if (this.animation == null || this.animation.getPriority().getValue()
-                <= animation.getPriority().getValue()) {
+        if (this.animation == null || this.animation.getPriority().getValue() <= animation.getPriority().getValue()) {
             this.animation = animation.copy();
             flags.set(Flag.ANIMATION);
         }
@@ -390,8 +385,7 @@ public abstract class CharacterNode extends Node {
      *         the character to face, or {@code null} to reset the face.
      */
     public final void faceCharacter(CharacterNode character) {
-        this.faceIndex = character == null ? 65535 : character.getType() ==
-                NodeType.PLAYER ? character.slot + 32768 : character.slot;
+        this.faceIndex = character == null ? 65535 : character.getType() == NodeType.PLAYER ? character.slot + 32768 : character.slot;
         flags.set(Flag.FACE_CHARACTER);
     }
 
@@ -402,8 +396,7 @@ public abstract class CharacterNode extends Node {
      *         the position to face.
      */
     public final void facePosition(Position position) {
-        facePosition = new Position(2 * position.getX() + 1, 2 * position
-                .getY() + 1);
+        facePosition = new Position(2 * position.getX() + 1, 2 * position.getY() + 1);
         flags.set(Flag.FACE_COORDINATE);
     }
 

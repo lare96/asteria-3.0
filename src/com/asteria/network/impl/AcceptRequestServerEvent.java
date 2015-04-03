@@ -40,10 +40,8 @@ public final class AcceptRequestServerEvent extends ServerSelectionEvent {
                 break;
             String host = socket.socket().getInetAddress().getHostAddress();
             socket.configureBlocking(false);
-            SelectionKey newKey = socket.register(ServerHandler.getSelector()
-                    , SelectionKey.OP_READ);
-            newKey.attach(new PlayerIO(newKey, ConnectionHandler.evaluate
-                    (host)));
+            SelectionKey newKey = socket.register(ServerHandler.getSelector(), SelectionKey.OP_READ);
+            newKey.attach(new PlayerIO(newKey, ConnectionHandler.evaluate(host)));
         }
     }
 }

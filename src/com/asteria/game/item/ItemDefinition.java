@@ -123,11 +123,7 @@ public final class ItemDefinition {
      * @param platebody
      *         the flag that determines if this item is a platebody.
      */
-    public ItemDefinition(int id, String name, String description, int
-            equipmentSlot, boolean noteable, boolean stackable, int
-            specialPrice, int generalPrice, int lowAlchValue, int
-            highAlchValue, double weight, int[] bonus, boolean twoHanded,
-                          boolean fullHelm, boolean platebody) {
+    public ItemDefinition(int id, String name, String description, int equipmentSlot, boolean noteable, boolean stackable, int specialPrice, int generalPrice, int lowAlchValue, int highAlchValue, double weight, int[] bonus, boolean twoHanded, boolean fullHelm, boolean platebody) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -150,8 +146,7 @@ public final class ItemDefinition {
      * The method that erases the prayer bonus from ranged weapons.
      */
     private void prayerBonus() {
-        if (equipmentSlot == Equipment.ARROWS_SLOT || name.contains("knife")
-                || name.contains("dart") || name.contains("thrownaxe") ||
+        if (equipmentSlot == Equipment.ARROWS_SLOT || name.contains("knife") || name.contains("dart") || name.contains("thrownaxe") ||
                 name.contains("javelin")) {
             bonus[11] = 0;
         }
@@ -199,8 +194,7 @@ public final class ItemDefinition {
      * @return {@code true} if the item is noted, {@code false} otherwise.
      */
     public boolean isNoted() {
-        return description.equals("Swap this note at any bank for the " +
-                "equivalent item.");
+        return description.equals("Swap this note at any bank for the " + "equivalent item.");
     }
 
     /**

@@ -104,8 +104,7 @@ public final class Equipment extends ItemContainer {
         Item item = player.getInventory().get(inventorySlot);
         if (!Item.valid(item))
             return false;
-        if (!MinigameHandler.execute(player, true, m -> m.canEquip(player,
-                item, item.getDefinition().getEquipmentSlot())))
+        if (!MinigameHandler.execute(player, true, m -> m.canEquip(player, item, item.getDefinition().getEquipmentSlot())))
             return false;
         if (!Requirement.canEquip(player, item))
             return false;
@@ -114,29 +113,23 @@ public final class Equipment extends ItemContainer {
             Item equipItem = get(designatedSlot);
             if (used(designatedSlot)) {
                 if (item.getId() == equipItem.getId()) {
-                    set(designatedSlot, new Item(item.getId(), item.getAmount
-                            () + equipItem.getAmount()));
-                }
-                else {
+                    set(designatedSlot, new Item(item.getId(), item.getAmount() + equipItem.getAmount()));
+                } else {
                     player.getInventory().set(inventorySlot, equipItem);
                     player.getInventory().refresh();
                     set(designatedSlot, item);
                 }
-            }
-            else {
+            } else {
                 set(designatedSlot, item);
             }
             player.getInventory().remove(item, inventorySlot);
-        }
-        else {
+        } else {
             int designatedSlot = item.getDefinition().getEquipmentSlot();
-            if (designatedSlot == Equipment.WEAPON_SLOT && item.getDefinition
-                    ().isTwoHanded() && used(Equipment.SHIELD_SLOT)) {
+            if (designatedSlot == Equipment.WEAPON_SLOT && item.getDefinition().isTwoHanded() && used(Equipment.SHIELD_SLOT)) {
                 if (!unequipItem(Equipment.SHIELD_SLOT, true))
                     return false;
             }
-            if (designatedSlot == Equipment.SHIELD_SLOT && used(Equipment
-                    .WEAPON_SLOT)) {
+            if (designatedSlot == Equipment.SHIELD_SLOT && used(Equipment.WEAPON_SLOT)) {
                 if (get(Equipment.WEAPON_SLOT).getDefinition().isTwoHanded()) {
                     if (!unequipItem(Equipment.WEAPON_SLOT, true))
                         return false;
@@ -146,14 +139,12 @@ public final class Equipment extends ItemContainer {
                 Item equipItem = get(designatedSlot);
                 if (!equipItem.getDefinition().isStackable()) {
                     player.getInventory().set(inventorySlot, equipItem);
-                }
-                else {
+                } else {
                     player.getInventory().add(equipItem);
                     player.getInventory().set(inventorySlot, null);
                 }
                 player.getInventory().refresh();
-            }
-            else {
+            } else {
                 player.getInventory().remove(item, inventorySlot);
             }
             set(designatedSlot, new Item(item.getId(), item.getAmount()));
@@ -187,12 +178,10 @@ public final class Equipment extends ItemContainer {
         if (free(equipmentSlot))
             return false;
         Item item = get(equipmentSlot);
-        if (!MinigameHandler.execute(player, true, m -> m.canUnequip(player,
-                item, item.getDefinition().getEquipmentSlot())))
+        if (!MinigameHandler.execute(player, true, m -> m.canUnequip(player, item, item.getDefinition().getEquipmentSlot())))
             return false;
         if (!player.getInventory().spaceFor(item)) {
-            player.getEncoder().sendMessage("You do not have enough space in " +
-                    "your inventory!");
+            player.getEncoder().sendMessage("You do not have enough space in " + "your inventory!");
             return false;
         }
         super.remove(item, equipmentSlot);
@@ -240,8 +229,7 @@ public final class Equipment extends ItemContainer {
      */
     @Override
     public boolean add(Item item, int slot) {
-        throw new UnsupportedOperationException("This method is not supported" +
-                " by this container implementation!");
+        throw new UnsupportedOperationException("This method is not supported" + " by this container implementation!");
     }
 
     /**

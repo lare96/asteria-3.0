@@ -18,8 +18,7 @@ public final class Requirement {
     /**
      * The hash collection of equipment requirements.
      */
-    public static final Map<Integer, Requirement[]> REQUIREMENTS = new
-            HashMap<>();
+    public static final Map<Integer, Requirement[]> REQUIREMENTS = new HashMap<>();
 
     /**
      * The level of this equipment requirement.
@@ -74,8 +73,7 @@ public final class Requirement {
             return true;
         for (Requirement r : req) {
             if (player.getSkills()[r.skill.getId()].getRealLevel() < r.level) {
-                String append = TextUtils.appendIndefiniteArticle(SkillData
-                        .values()[r.skill.getId()].toString());
+                String append = TextUtils.appendIndefiniteArticle(SkillData.values()[r.skill.getId()].toString());
                 player.getEncoder().sendMessage("You need " + append + " " +
                         "level of " + r.level + " to equip this item.");
                 return false;

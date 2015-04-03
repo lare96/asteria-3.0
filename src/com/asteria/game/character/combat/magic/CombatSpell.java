@@ -27,14 +27,11 @@ public abstract class CombatSpell extends Spell {
         if (cast.getType() == NodeType.PLAYER) {
             Optional<Animation> optional = castAnimation();
             if (optional.isPresent()) {
-                Animation animation = new Animation(optional.get().getId(),
-                        optional.get().getDelay(), AnimationPriority.NORMAL);
+                Animation animation = new Animation(optional.get().getId(), optional.get().getDelay(), AnimationPriority.NORMAL);
                 cast.animation(animation);
             }
-        }
-        else if (cast.getType() == NodeType.NPC) {
-            cast.animation(new Animation(((Npc) cast).getDefinition()
-                    .getAttackAnimation()));
+        } else if (cast.getType() == NodeType.NPC) {
+            cast.animation(new Animation(((Npc) cast).getDefinition().getAttackAnimation()));
         }
         startGraphic().ifPresent(cast::graphic);
 
@@ -86,8 +83,7 @@ public abstract class CombatSpell extends Spell {
      *         the character this spell is being cast on.
      * @return the cast projectile.
      */
-    public abstract Optional<Projectile> projectile(CharacterNode cast,
-                                                    CharacterNode castOn);
+    public abstract Optional<Projectile> projectile(CharacterNode cast, CharacterNode castOn);
 
     /**
      * The graphic played when this spell hits the victim.
@@ -108,6 +104,5 @@ public abstract class CombatSpell extends Spell {
      * @param damage
      *         the damage inflicted by this spell.
      */
-    public abstract void executeOnHit(CharacterNode cast, CharacterNode
-            castOn, boolean accurate, int damage);
+    public abstract void executeOnHit(CharacterNode cast, CharacterNode castOn, boolean accurate, int damage);
 }

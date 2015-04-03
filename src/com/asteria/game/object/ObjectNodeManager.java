@@ -59,8 +59,7 @@ public final class ObjectNodeManager {
      * @return {@code true} if the object was registered, {@code false}
      * otherwise.
      */
-    public static boolean register(ObjectNode object, int ticks,
-                                   Consumer<ObjectNode> action) {
+    public static boolean register(ObjectNode object, int ticks, Consumer<ObjectNode> action) {
         if (register(object)) {
             TaskHandler.submit(new Task(ticks, false) {
                 @Override
@@ -136,8 +135,7 @@ public final class ObjectNodeManager {
      * if no object is found.
      */
     public static Optional<ObjectNode> getObject(Position position) {
-        return OBJECTS.stream().filter(obj -> obj.getPosition().equals
-                (position)).findFirst();
+        return OBJECTS.stream().filter(obj -> obj.getPosition().equals(position)).findFirst();
     }
 
     /**

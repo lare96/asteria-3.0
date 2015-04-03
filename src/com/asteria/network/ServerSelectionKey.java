@@ -42,8 +42,7 @@ public final class ServerSelectionKey {
             return Optional.empty();
         if (key.isAcceptable()) {
             return Optional.of(new AcceptRequestServerEvent());
-        }
-        else if (key.isReadable()) {
+        } else if (key.isReadable()) {
             return Optional.of(new DecodePacketServerEvent());
         }
         return Optional.empty();

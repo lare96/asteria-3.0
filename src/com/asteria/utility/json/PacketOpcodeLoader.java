@@ -24,11 +24,9 @@ public final class PacketOpcodeLoader extends JsonLoader {
 
     @Override
     public void load(JsonObject reader, Gson builder) {
-        int[] opcodes = builder.fromJson(reader.get("opcodes").getAsJsonArray
-                (), int[].class);
+        int[] opcodes = builder.fromJson(reader.get("opcodes").getAsJsonArray(), int[].class);
         String name = Objects.requireNonNull(reader.get("class").getAsString());
-        boolean invalid = Arrays.stream(opcodes).anyMatch(op -> op < 0 || op
-                > PacketDecoder.PACKETS.length);
+        boolean invalid = Arrays.stream(opcodes).anyMatch(op -> op < 0 || op > PacketDecoder.PACKETS.length);
         if (invalid)
             throw new IllegalStateException("Invalid packet opcode!");
         execute(opcodes, name);
@@ -49,11 +47,9 @@ public final class PacketOpcodeLoader extends JsonLoader {
         try {
             Class<?> c = Class.forName(name);
             if (!(c.getSuperclass() == PacketDecoder.class))
-                throw new IllegalStateException("Class must have " +
-                        "PacketDecoder as its superclass!");
+                throw new IllegalStateException("Class must have " + "PacketDecoder as its superclass!");
             PacketDecoder packet = (PacketDecoder) c.newInstance();
-            Arrays.stream(opcodes).forEach(op -> PacketDecoder.PACKETS[op] =
-                    packet);
+            Arrays.stream(opcodes).forEach(op -> PacketDecoder.PACKETS[op] = packet);
         } catch (Exception e) {
             e.printStackTrace();
         }

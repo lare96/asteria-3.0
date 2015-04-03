@@ -1,4 +1,5 @@
 package plugin.skills.cooking
+
 import com.asteria.game.character.Animation
 import com.asteria.game.character.player.Player
 import com.asteria.game.character.player.skill.SkillData

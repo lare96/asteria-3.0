@@ -1,7 +1,5 @@
 package plugin.objects
 
-import plugin.minigames.fightcaves.FightCavesHandler
-
 import com.asteria.game.character.Animation
 import com.asteria.game.character.player.Player
 import com.asteria.game.character.player.content.Spellbook
@@ -11,6 +9,7 @@ import com.asteria.game.location.Position
 import com.asteria.game.plugin.PluginListener
 import com.asteria.game.plugin.PluginSignature
 import com.asteria.game.plugin.context.ObjectFirstClickPlugin
+import plugin.minigames.fightcaves.FightCavesHandler
 
 @PluginSignature(ObjectFirstClickPlugin.class)
 final class ObjectFirstClick implements PluginListener<ObjectFirstClickPlugin> {
@@ -20,8 +19,8 @@ final class ObjectFirstClick implements PluginListener<ObjectFirstClickPlugin> {
         switch (context.id) {
             case 9391:
                 player.viewingOrb = new ViewingOrb(player, new Position(2398, 5150),
-                new Position(2384, 5157), new Position(2409, 5158), new Position(2388, 5138),
-                new Position(2411, 5137))
+                        new Position(2384, 5157), new Position(2409, 5158), new Position(2388, 5138),
+                        new Position(2411, 5137))
                 player.viewingOrb.open()
                 break
             case 9368:
@@ -37,19 +36,21 @@ final class ObjectFirstClick implements PluginListener<ObjectFirstClickPlugin> {
                 }
                 break
             case 9369:
-                if(FightCavesHandler.awaiting.contains(player)) {
+                if (FightCavesHandler.awaiting.contains(player)) {
                     FightCavesHandler.awaiting.remove player
                     player.encoder.sendMessage "You exit the fight pits minigame waiting room!"
                     player.move new Position(2399, 5177)
                     player.encoder.sendWalkable(-1)
-                } else if(!FightCavesHandler.awaiting.contains(player)) {
+                } else if (!FightCavesHandler.awaiting.contains(player)) {
                     int minutes = FightCavesHandler.GAME_CYCLE_MINUTES - FightCavesHandler.gameCounter
                     FightCavesHandler.awaiting.add player
                     player.encoder.sendMessage "You enter the fight pits minigame waiting room!"
                     player.move new Position(2399, 5175)
                     player.encoder.sendWalkable 2804
                     FightCavesHandler.display player
-                    FightCavesHandler.awaiting.each { FightCavesHandler.display it }
+                    FightCavesHandler.awaiting.each {
+                        FightCavesHandler.display it
+                    }
                 }
                 break
             case 3193:

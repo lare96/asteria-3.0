@@ -20,7 +20,6 @@ public final class CommandPacket extends PacketDecoder {
             return;
 
         String[] text = buf.getString().toLowerCase().split(" ");
-        PluginHandler.execute(player, CommandPlugin.class, new CommandPlugin
-                (text));
+        PluginHandler.execute(player, CommandPlugin.class, new CommandPlugin(text));
     }
 }

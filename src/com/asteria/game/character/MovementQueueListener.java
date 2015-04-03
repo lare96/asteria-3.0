@@ -82,8 +82,7 @@ public final class MovementQueueListener {
          * @param task
          *         the queued task that will be executed by this listener.
          */
-        public MovementQueueListenerTask(CharacterNode character, Runnable
-                task) {
+        public MovementQueueListenerTask(CharacterNode character, Runnable task) {
             this.character = character;
             this.task = Objects.requireNonNull(task);
         }

@@ -129,8 +129,7 @@ public final class Skills {
      *         if this class is instantiated.
      */
     private Skills() {
-        throw new UnsupportedOperationException("This class cannot be " +
-                "instantiated!");
+        throw new UnsupportedOperationException("This class cannot be " + "instantiated!");
     }
 
     /**
@@ -155,17 +154,14 @@ public final class Skills {
             if (oldLevel < newLevel) {
                 if (skill != 3) {
                     player.getSkills()[skill].setLevel(newLevel, true);
-                }
-                else {
+                } else {
                     int old = player.getSkills()[skill].getLevel();
                     player.getSkills()[skill].setLevel(old + 1, true);
                 }
                 SkillData data = SkillData.values()[skill];
-                String append = TextUtils.appendIndefiniteArticle(data
-                        .toString());
+                String append = TextUtils.appendIndefiniteArticle(data.toString());
                 player.getEncoder().sendString("@dre@Congratulations, you've " +
-                        "just advanced " + append + " level!", data
-                        .getFirstLine());
+                        "just advanced " + append + " level!", data.getFirstLine());
                 player.getEncoder().sendString("Your " + data + " level is " +
                         "now " + newLevel + ".", data.getSecondLine());
                 player.getEncoder().sendMessage("Congratulations, you've just" +
@@ -197,8 +193,7 @@ public final class Skills {
             }
             player.getSkills()[skill] = s;
         }
-        player.getEncoder().sendSkill(skill, s.getLevel(), (int) s
-                .getExperience());
+        player.getEncoder().sendSkill(skill, s.getLevel(), (int) s.getExperience());
     }
 
     /**
@@ -238,8 +233,7 @@ public final class Skills {
      *         the skill to restore.
      */
     public static void restore(Player player, int skill) {
-        player.getSkills()[skill].setLevel(player.getSkills()[skill]
-                .getRealLevel(), true);
+        player.getSkills()[skill].setLevel(player.getSkills()[skill].getRealLevel(), true);
         refresh(player, skill);
     }
 

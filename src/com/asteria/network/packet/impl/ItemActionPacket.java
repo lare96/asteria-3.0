@@ -1,8 +1,5 @@
 package com.asteria.network.packet.impl;
 
-import plugin.skills.prayer.Bone;
-import plugin.skills.prayer.PrayerBoneBury;
-
 import com.asteria.game.character.player.Player;
 import com.asteria.game.character.player.content.FoodConsumable;
 import com.asteria.game.character.player.content.PotionConsumable;
@@ -14,6 +11,9 @@ import com.asteria.network.ByteOrder;
 import com.asteria.network.DataBuffer;
 import com.asteria.network.ValueType;
 import com.asteria.network.packet.PacketDecoder;
+
+import plugin.skills.prayer.Bone;
+import plugin.skills.prayer.PrayerBoneBury;
 
 /**
  * The packet sent from the client when the player clicks an item.
@@ -47,8 +47,7 @@ public final class ItemActionPacket extends PacketDecoder {
         int slot = buf.getShort(false, ValueType.A);
         int id = buf.getShort(false, ByteOrder.LITTLE);
 
-        if (slot < 0 || container < 0 || id < 0 || id > ItemDefinition
-                .DEFINITIONS.length)
+        if (slot < 0 || container < 0 || id < 0 || id > ItemDefinition.DEFINITIONS.length)
             return;
 
         player.setSkillAction(false);
@@ -72,8 +71,7 @@ public final class ItemActionPacket extends PacketDecoder {
                 buryAction.start();
                 return;
             }
-            PluginHandler.execute(player, ItemFirstClickPlugin.class, new
-                    ItemFirstClickPlugin(slot, item));
+            PluginHandler.execute(player, ItemFirstClickPlugin.class, new ItemFirstClickPlugin(slot, item));
         }
     }
 }

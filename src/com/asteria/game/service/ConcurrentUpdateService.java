@@ -1,15 +1,15 @@
 package com.asteria.game.service;
 
-import com.asteria.game.World;
-import com.asteria.game.character.npc.NpcUpdating;
-import com.asteria.game.character.player.PlayerUpdating;
-import com.google.common.util.concurrent.ThreadFactoryBuilder;
-
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Phaser;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.ThreadPoolExecutor.CallerRunsPolicy;
+
+import com.asteria.game.World;
+import com.asteria.game.character.npc.NpcUpdating;
+import com.asteria.game.character.player.PlayerUpdating;
+import com.google.common.util.concurrent.ThreadFactoryBuilder;
 
 /**
  * The concurrent update service that will execute the update sequence in
@@ -31,8 +31,7 @@ public final class ConcurrentUpdateService implements Runnable {
      * The executor that allows us to utilize multiple threads to update in
      * parallel.
      */
-    private static ExecutorService updateService = ConcurrentUpdateService
-            .create();
+    private static ExecutorService updateService = ConcurrentUpdateService.create();
 
     @Override
     public void run() {
@@ -120,11 +119,9 @@ public final class ConcurrentUpdateService implements Runnable {
      */
     private static ExecutorService create() {
         int nThreads = Runtime.getRuntime().availableProcessors();
-        ScheduledThreadPoolExecutor executor = (ScheduledThreadPoolExecutor)
-                Executors.newScheduledThreadPool(nThreads);
+        ScheduledThreadPoolExecutor executor = (ScheduledThreadPoolExecutor) Executors.newScheduledThreadPool(nThreads);
         executor.setRejectedExecutionHandler(new CallerRunsPolicy());
-        executor.setThreadFactory(new ThreadFactoryBuilder().setNameFormat
-                ("UpdateServiceThread").build());
+        executor.setThreadFactory(new ThreadFactoryBuilder().setNameFormat("UpdateServiceThread").build());
         return Executors.unconfigurableScheduledExecutorService(executor);
     }
 }

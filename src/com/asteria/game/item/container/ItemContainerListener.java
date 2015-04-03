@@ -34,6 +34,5 @@ public interface ItemContainerListener {
      * @param successful
      *         if the item was successfully removed.
      */
-    public void onRemove(ItemContainer container, Item item, boolean
-            successful);
+    public void onRemove(ItemContainer container, Item item, boolean successful);
 }
