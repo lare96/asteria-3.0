@@ -69,15 +69,12 @@ public final class ServerBuilder {
 
     @Override
     public String toString() {
-        return "SERVER_BUILDER[port= " + serverPort + ", concurrent= " +
-                parallelEngine + "]";
+        return "SERVER_BUILDER[port= " + serverPort + ", concurrent= " + parallelEngine + "]";
     }
 
     /**
-     * Builds the entire server which consists of loading the utilities,
-     * binding
-     * the network, and executing the game sequence. The utilities are loaded
-     * in
+     * Builds the entire server which consists of loading the utilities, binding
+     * the network, and executing the game sequence. The utilities are loaded in
      * the background while other functions are prepared.
      *
      * @throws Exception
@@ -87,20 +84,17 @@ public final class ServerBuilder {
     public void build() throws Exception {
         Preconditions.checkState(!serviceLoader.isShutdown(), "The server has" + " been started already!");
         executeServiceLoad();
-
         ServerHandler.start(serverPort);
-        sequencer.scheduleAtFixedRate(new GameService(), 0, 600, TimeUnit.MILLISECONDS);
-
         serviceLoader.shutdown();
         if (!serviceLoader.awaitTermination(15, TimeUnit.MINUTES)) {
             throw new IllegalStateException("The background service load took" + " too long!");
         }
+        sequencer.scheduleAtFixedRate(new GameService(), 0, 600, TimeUnit.MILLISECONDS);
     }
 
     /**
      * Submits all of the utilities to the {@link ServerBuilder#serviceLoader}
-     * to be loaded in the background. Please note that the loader uses
-     * multiple
+     * to be loaded in the background. Please note that the loader uses multiple
      * threads to load the utilities concurrently, so code must be thread safe.
      */
     private void executeServiceLoad() {
