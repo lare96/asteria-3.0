@@ -1,13 +1,13 @@
 package com.asteria.game.character.combat;
 
+import java.util.concurrent.TimeUnit;
+
 import com.asteria.game.NodeType;
 import com.asteria.game.character.CharacterNode;
 import com.asteria.game.character.npc.Npc;
 import com.asteria.game.character.player.Player;
 import com.asteria.task.EventListener;
 import com.asteria.task.TaskHandler;
-
-import java.util.concurrent.TimeUnit;
 
 /**
  * Controls and gives access to the main parts of the combat process such as
@@ -79,8 +79,7 @@ public final class CombatBuilder {
             return;
         if (target.equals(currentVictim)) {
             determineStrategy();
-            if (character.getPosition().withinDistance(currentVictim
-                    .getPosition(), strategy.attackDistance(character))) {
+            if (character.getPosition().withinDistance(currentVictim.getPosition(), strategy.attackDistance(character))) {
                 character.getMovementQueue().reset();
             }
         }
@@ -168,6 +167,17 @@ public final class CombatBuilder {
      */
     public boolean isBeingAttacked() {
         return !character.getLastCombat().elapsed(5, TimeUnit.SECONDS);
+    }
+
+    /**
+     * Determines if this character is being attacked by or attacking another
+     * character.
+     *
+     * @return {@code true} if this player is in combat, {@code false}
+     * otherwise.
+     */
+    public boolean inCombat() {
+        return isAttacking() || isBeingAttacked();
     }
 
     /**
@@ -306,8 +316,7 @@ public final class CombatBuilder {
          * @param victim
          *         the victim that will be listened for.
          */
-        public CombatDistanceListener(CombatBuilder builder, CharacterNode
-                victim) {
+        public CombatDistanceListener(CombatBuilder builder, CharacterNode victim) {
             super.attach(builder);
             this.builder = builder;
             this.victim = victim;
@@ -319,8 +328,7 @@ public final class CombatBuilder {
             builder.attackTimer = 0;
             builder.cooldown = 0;
 
-            if (!builder.character.getPosition().isViewableFrom(victim
-                    .getPosition())) {
+            if (!builder.character.getPosition().isViewableFrom(victim.getPosition())) {
                 builder.reset();
                 this.cancel();
                 return true;
@@ -329,17 +337,14 @@ public final class CombatBuilder {
             if (builder.character.getType() == NodeType.NPC) {
                 Npc npc = (Npc) builder.character;
 
-                if (!npc.getPosition().isViewableFrom(npc.getOriginalPosition
-                        ()) && npc.getDefinition().isRetreats()) {
+                if (!npc.getPosition().isViewableFrom(npc.getOriginalPosition()) && npc.getDefinition().isRetreats()) {
                     npc.getMovementQueue().walk(npc.getOriginalPosition());
                     builder.reset();
                     this.cancel();
                     return true;
                 }
             }
-            return builder.character.getPosition().withinDistance(victim
-                    .getPosition(), builder.strategy.attackDistance(builder
-                    .getCharacter()));
+            return builder.character.getPosition().withinDistance(victim.getPosition(), builder.strategy.attackDistance(builder.getCharacter()));
         }
 
         @Override

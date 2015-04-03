@@ -1,5 +1,13 @@
 package com.asteria.game.character.player;
 
+import java.nio.ByteBuffer;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.Optional;
+import java.util.Set;
+import java.util.logging.Logger;
+
 import com.asteria.game.GameService;
 import com.asteria.game.NodeType;
 import com.asteria.game.World;
@@ -51,16 +59,9 @@ import com.asteria.utility.MutableNumber;
 import com.asteria.utility.Settings;
 import com.asteria.utility.Stopwatch;
 import com.asteria.utility.TextUtils;
+
 import plugin.minigames.fightcaves.FightCavesHandler;
 import plugin.skills.cooking.CookingData;
-
-import java.nio.ByteBuffer;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.Optional;
-import java.util.Set;
-import java.util.logging.Logger;
 
 /**
  * The character implementation that represents a node that is operated by an
@@ -134,8 +135,7 @@ public final class Player extends CharacterNode {
     /**
      * The dialogue chain builder for this player.
      */
-    private final DialogueChainBuilder dialogueChain = new
-            DialogueChainBuilder(this);
+    private final DialogueChainBuilder dialogueChain = new DialogueChainBuilder(this);
 
     /**
      * The I/O manager that manages I/O operations for this player.
@@ -160,18 +160,12 @@ public final class Player extends CharacterNode {
     /**
      * The collection of stopwatches used for various timing operations.
      */
-    private final Stopwatch eatingTimer = new Stopwatch().reset(),
-            potionTimer = new Stopwatch().reset(), tolerance = new Stopwatch
-            (), lastEnergy = new Stopwatch().reset(), buryTimer = new
-            Stopwatch();
+    private final Stopwatch eatingTimer = new Stopwatch().reset(), potionTimer = new Stopwatch().reset(), tolerance = new Stopwatch(), lastEnergy = new Stopwatch().reset(), buryTimer = new Stopwatch();
 
     /**
      * The collection of counters used for various counting operations.
      */
-    private final MutableNumber poisonImmunity = new MutableNumber(),
-            teleblockTimer = new MutableNumber(), fireImmunity = new
-            MutableNumber(), skullTimer = new MutableNumber(), runEnergy =
-            new MutableNumber(100), specialPercentage = new MutableNumber(100);
+    private final MutableNumber poisonImmunity = new MutableNumber(), teleblockTimer = new MutableNumber(), fireImmunity = new MutableNumber(), skullTimer = new MutableNumber(), runEnergy = new MutableNumber(100), specialPercentage = new MutableNumber(100);
 
     /**
      * The encoder that will encode and send packets.
@@ -404,8 +398,7 @@ public final class Player extends CharacterNode {
         super(Settings.STARTING_POSITION, NodeType.PLAYER);
         this.session = session;
         this.encoder = new PacketEncoder(this);
-        this.rights = ConnectionHandler.isLocal(session.getHost()) ? Rights
-                .DEVELOPER : Rights.PLAYER;
+        this.rights = ConnectionHandler.isLocal(session.getHost()) ? Rights.DEVELOPER : Rights.PLAYER;
     }
 
     @Override
@@ -430,12 +423,10 @@ public final class Player extends CharacterNode {
         if (Settings.SOCKET_FLOOD) {
             if (username.equals(Settings.SOCKET_FLOOD_USERNAME)) {
                 move(super.getPosition());
-            }
-            else {
+            } else {
                 move(super.getPosition().random(200));
             }
-        }
-        else {
+        } else {
             move(super.getPosition());
         }
         Skills.refreshAll(this);
@@ -462,8 +453,7 @@ public final class Player extends CharacterNode {
         MinigameHandler.execute(this, m -> m.onLogin(this));
         WeaponInterface.execute(this, equipment.get(Equipment.WEAPON_SLOT));
         WeaponAnimation.execute(this, equipment.get(Equipment.WEAPON_SLOT));
-        encoder.sendByteState(173, super.getMovementQueue().isRunning() ? 1 :
-                0);
+        encoder.sendByteState(173, super.getMovementQueue().isRunning() ? 1 : 0);
         encoder.sendByteState(172, super.isAutoRetaliate() ? 0 : 1);
         encoder.sendByteState(fightType.getParent(), fightType.getChild());
         encoder.sendByteState(427, acceptAid ? 1 : 0);
@@ -478,12 +468,16 @@ public final class Player extends CharacterNode {
 
     @Override
     public void dispose() {
+        if (session.isCombatLogout()) {
+            session.disconnect(true);
+            return;
+        }
         encoder.sendLogout();
     }
 
     @Override
     public void sequence() throws Exception {
-        if (session.getTimeout().elapsed(5000)) {
+        if (session.getTimeout().elapsed(5000) && !session.isCombatLogout()) {
             World.getPlayers().remove(this);
             return;
         }
@@ -508,11 +502,9 @@ public final class Player extends CharacterNode {
         if (specialActivated && castSpell == null) {
             if (combatSpecial.getCombat() == CombatType.MELEE) {
                 return Combat.newDefaultMeleeStrategy();
-            }
-            else if (combatSpecial.getCombat() == CombatType.RANGED) {
+            } else if (combatSpecial.getCombat() == CombatType.RANGED) {
                 return Combat.newDefaultRangedStrategy();
-            }
-            else if (combatSpecial.getCombat() == CombatType.MAGIC) {
+            } else if (combatSpecial.getCombat() == CombatType.MAGIC) {
                 return Combat.newDefaultMagicStrategy();
             }
         }
@@ -522,11 +514,8 @@ public final class Player extends CharacterNode {
             }
             return Combat.newDefaultMagicStrategy();
         }
-        if (weapon == WeaponInterface.SHORTBOW || weapon == WeaponInterface
-                .LONGBOW || weapon == WeaponInterface.CROSSBOW || weapon ==
-                WeaponInterface.DART || weapon == WeaponInterface.JAVELIN ||
-                weapon == WeaponInterface.THROWNAXE || weapon ==
-                WeaponInterface.KNIFE) {
+        if (weapon == WeaponInterface.SHORTBOW || weapon == WeaponInterface.LONGBOW || weapon == WeaponInterface.CROSSBOW || weapon == WeaponInterface.DART || weapon == WeaponInterface.JAVELIN ||
+                weapon == WeaponInterface.THROWNAXE || weapon == WeaponInterface.KNIFE) {
             return Combat.newDefaultRangedStrategy();
         }
         return Combat.newDefaultMeleeStrategy();
@@ -535,35 +524,21 @@ public final class Player extends CharacterNode {
     @Override
     public void onSuccessfulHit(CharacterNode victim, CombatType type) {
         if (type == CombatType.MELEE || weapon == WeaponInterface.DART ||
-                weapon == WeaponInterface.KNIFE || weapon == WeaponInterface
-                .THROWNAXE || weapon == WeaponInterface.JAVELIN) {
-            Combat.effect(new CombatPoisonEffect(this, CombatPoisonEffect
-                    .getPoisonType(equipment.get(Equipment.WEAPON_SLOT))
-                    .orElse(null)));
-        }
-        else if (type == CombatType.RANGED) {
-            Combat.effect(new CombatPoisonEffect(this, CombatPoisonEffect
-                    .getPoisonType(equipment.get(Equipment.ARROWS_SLOT))
-                    .orElse(null)));
+                weapon == WeaponInterface.KNIFE || weapon == WeaponInterface.THROWNAXE || weapon == WeaponInterface.JAVELIN) {
+            Combat.effect(new CombatPoisonEffect(this, CombatPoisonEffect.getPoisonType(equipment.get(Equipment.WEAPON_SLOT)).orElse(null)));
+        } else if (type == CombatType.RANGED) {
+            Combat.effect(new CombatPoisonEffect(this, CombatPoisonEffect.getPoisonType(equipment.get(Equipment.ARROWS_SLOT)).orElse(null)));
         }
     }
 
     @Override
     public int getAttackSpeed() {
         int speed = weapon.getSpeed();
-        if (fightType == FightType.CROSSBOW_RAPID || fightType == FightType
-                .SHORTBOW_RAPID || fightType == FightType.LONGBOW_RAPID ||
-                fightType == FightType.DART_RAPID || fightType == FightType
-                .KNIFE_RAPID || fightType == FightType.THROWNAXE_RAPID ||
+        if (fightType == FightType.CROSSBOW_RAPID || fightType == FightType.SHORTBOW_RAPID || fightType == FightType.LONGBOW_RAPID ||
+                fightType == FightType.DART_RAPID || fightType == FightType.KNIFE_RAPID || fightType == FightType.THROWNAXE_RAPID ||
                 fightType == FightType.JAVELIN_RAPID) {
             speed--;
-        }
-        else if (fightType == FightType.CROSSBOW_LONGRANGE || fightType ==
-                FightType.SHORTBOW_LONGRANGE || fightType == FightType
-                .LONGBOW_LONGRANGE || fightType == FightType.DART_LONGRANGE
-                || fightType == FightType.KNIFE_LONGRANGE || fightType ==
-                FightType.THROWNAXE_LONGRANGE || fightType == FightType
-                .JAVELIN_LONGRANGE) {
+        } else if (fightType == FightType.CROSSBOW_LONGRANGE || fightType == FightType.SHORTBOW_LONGRANGE || fightType == FightType.LONGBOW_LONGRANGE || fightType == FightType.DART_LONGRANGE || fightType == FightType.KNIFE_LONGRANGE || fightType == FightType.THROWNAXE_LONGRANGE || fightType == FightType.JAVELIN_LONGRANGE) {
             speed++;
         }
         return speed;
@@ -602,8 +577,7 @@ public final class Player extends CharacterNode {
         int level = skills[Skills.HITPOINTS].getRealLevel();
         if ((skills[Skills.HITPOINTS].getLevel() + amount) >= level) {
             skills[Skills.HITPOINTS].setLevel(level, true);
-        }
-        else {
+        } else {
             skills[Skills.HITPOINTS].increaseLevel(amount);
         }
         Skills.refresh(this, Skills.HITPOINTS);
@@ -612,14 +586,10 @@ public final class Player extends CharacterNode {
     @Override
     public boolean weaken(CombatWeaken effect) {
         PacketEncoder encoder = getEncoder();
-        int id = (effect == CombatWeaken.ATTACK_LOW || effect == CombatWeaken
-                .ATTACK_HIGH ? Skills.ATTACK : effect == CombatWeaken
-                .STRENGTH_LOW || effect == CombatWeaken.STRENGTH_HIGH ?
-                Skills.STRENGTH : Skills.DEFENCE);
+        int id = (effect == CombatWeaken.ATTACK_LOW || effect == CombatWeaken.ATTACK_HIGH ? Skills.ATTACK : effect == CombatWeaken.STRENGTH_LOW || effect == CombatWeaken.STRENGTH_HIGH ? Skills.STRENGTH : Skills.DEFENCE);
         if (skills[id].getLevel() < skills[id].getRealLevel())
             return false;
-        skills[id].decreaseLevel((int) ((effect.getRate()) * (skills[id]
-                .getLevel())));
+        skills[id].decreaseLevel((int) ((effect.getRate()) * (skills[id].getLevel())));
         encoder.sendMessage("You feel slightly weakened.");
         return true;
     }
@@ -638,8 +608,7 @@ public final class Player extends CharacterNode {
             @Override
             public void execute() {
                 setNeedsPlacement(true);
-                getPosition().move(movement.getAmountX(), movement.getAmountY
-                        ());
+                getPosition().move(movement.getAmountX(), movement.getAmountY());
                 this.cancel();
             }
         }.attach(this));
@@ -660,25 +629,20 @@ public final class Player extends CharacterNode {
         if (teleportStage > 0)
             return;
         if (wildernessLevel >= 20) {
-            encoder.sendMessage("You must be below level 20 wilderness to " +
-                    "teleport!");
+            encoder.sendMessage("You must be below level 20 wilderness to " + "teleport!");
             return;
         }
         if (teleblockTimer.get() > 0) {
             int time = teleblockTimer.get() * 600;
             if (time >= 1000 && time <= 60000) {
-                encoder.sendMessage("You must wait approximately " + ((time)
-                        / 1000) + " seconds in order to teleport!");
+                encoder.sendMessage("You must wait approximately " + ((time) / 1000) + " seconds in order to teleport!");
                 return;
-            }
-            else if (time > 60000) {
-                encoder.sendMessage("You must wait approximately " + ((time)
-                        / 60000) + " minutes in order to teleport!");
+            } else if (time > 60000) {
+                encoder.sendMessage("You must wait approximately " + ((time) / 60000) + " minutes in order to teleport!");
                 return;
             }
         }
-        if (!MinigameHandler.execute(this, true, m -> m.canTeleport(this,
-                spell.moveTo().copy())))
+        if (!MinigameHandler.execute(this, true, m -> m.canTeleport(this, spell.moveTo().copy())))
             return;
         if (!spell.canCast(this))
             return;
@@ -754,8 +718,7 @@ public final class Player extends CharacterNode {
     public void save() {
         if (session.getState() != IOState.LOGGED_IN)
             return;
-        GameService.getLogicService().execute(() -> new PlayerSerialization
-                (this).serialize());
+        GameService.getLogicService().execute(() -> new PlayerSerialization(this).serialize());
     }
 
     /**
@@ -776,16 +739,11 @@ public final class Player extends CharacterNode {
         double attstr = attLvl + strLvl;
         double combatLevel = 0;
         if (ran > attstr && ran > mag) { // player is ranged class
-            combatLevel = ((defLvl) * 0.25) + ((hitLvl) * 0.25) + ((prayLvl /
-                    2) * 0.25) + ((ranLvl) * 0.4875);
-        }
-        else if (mag > attstr) { // player is mage class
-            combatLevel = (((defLvl) * 0.25) + ((hitLvl) * 0.25) + ((prayLvl
-                    / 2) * 0.25) + ((magLvl) * 0.4875));
-        }
-        else {
-            combatLevel = (((defLvl) * 0.25) + ((hitLvl) * 0.25) + ((prayLvl
-                    / 2) * 0.25) + ((attLvl) * 0.325) + ((strLvl) * 0.325));
+            combatLevel = ((defLvl) * 0.25) + ((hitLvl) * 0.25) + ((prayLvl / 2) * 0.25) + ((ranLvl) * 0.4875);
+        } else if (mag > attstr) { // player is mage class
+            combatLevel = (((defLvl) * 0.25) + ((hitLvl) * 0.25) + ((prayLvl / 2) * 0.25) + ((magLvl) * 0.4875));
+        } else {
+            combatLevel = (((defLvl) * 0.25) + ((hitLvl) * 0.25) + ((prayLvl / 2) * 0.25) + ((attLvl) * 0.325) + ((strLvl) * 0.325));
         }
         return (int) combatLevel;
     }
@@ -796,8 +754,7 @@ public final class Player extends CharacterNode {
     public void sendInterfaces() {
         PacketEncoder encoder = getEncoder();
         if (Location.inWilderness(this)) {
-            int calculateY = this.getPosition().getY() > 6400 ? super
-                    .getPosition().getY() - 6400 : super.getPosition().getY();
+            int calculateY = this.getPosition().getY() > 6400 ? super.getPosition().getY() - 6400 : super.getPosition().getY();
             wildernessLevel = (((calculateY - 3520) / 8) + 1);
             if (!wildernessInterface) {
                 encoder.sendWalkable(197);
@@ -805,8 +762,7 @@ public final class Player extends CharacterNode {
                 wildernessInterface = true;
             }
             encoder.sendString("@yel@Level: " + wildernessLevel, 199);
-        }
-        else if (wildernessInterface) {
+        } else if (wildernessInterface) {
             encoder.sendContextMenu(3, "null");
             encoder.sendWalkable(-1);
             wildernessInterface = false;
@@ -817,8 +773,7 @@ public final class Player extends CharacterNode {
                 encoder.sendMultiIcon(false);
                 multicombatInterface = true;
             }
-        }
-        else {
+        } else {
             encoder.sendMultiIcon(true);
             multicombatInterface = false;
         }
@@ -839,9 +794,7 @@ public final class Player extends CharacterNode {
             }
         }
         for (int i = 0; i < bonus.length; i++) {
-            encoder.sendString(Combat.BONUS_NAMES[i] + ": " + (bonus[i] >= 0
-                    ? "+" : "") + bonus[i], (1675 + i + (i == 10 || i == 11 ?
-                    1 : 0)));
+            encoder.sendString(Combat.BONUS_NAMES[i] + ": " + (bonus[i] >= 0 ? "+" : "") + bonus[i], (1675 + i + (i == 10 || i == 11 ? 1 : 0)));
         }
     }
 

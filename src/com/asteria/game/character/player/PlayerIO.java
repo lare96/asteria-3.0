@@ -1,5 +1,10 @@
 package com.asteria.game.character.player;
 
+import java.nio.ByteBuffer;
+import java.nio.channels.SelectionKey;
+import java.nio.channels.SocketChannel;
+import java.util.logging.Logger;
+
 import com.asteria.game.World;
 import com.asteria.game.character.player.login.LoginProtocolDecoderChain;
 import com.asteria.game.character.player.login.LoginResponse;
@@ -11,16 +16,13 @@ import com.asteria.game.shop.Shop;
 import com.asteria.network.ConnectionHandler;
 import com.asteria.network.DataBuffer;
 import com.asteria.network.ISAACCipher;
+import com.asteria.task.Task;
 import com.asteria.task.TaskHandler;
 import com.asteria.utility.LoggerUtils;
 import com.asteria.utility.MutableNumber;
 import com.asteria.utility.Stopwatch;
-import plugin.minigames.fightcaves.FightCavesHandler;
 
-import java.nio.ByteBuffer;
-import java.nio.channels.SelectionKey;
-import java.nio.channels.SocketChannel;
-import java.util.logging.Logger;
+import plugin.minigames.fightcaves.FightCavesHandler;
 
 /**
  * The session handler dedicated to a player that will handle input and output
@@ -117,6 +119,11 @@ public final class PlayerIO {
     private boolean packetDisconnect;
 
     /**
+     * The flag that determines if the player disconnected while in combat.
+     */
+    private boolean combatLogout;
+
+    /**
      * Creates a new {@link PlayerIO}.
      *
      * @param key
@@ -128,12 +135,9 @@ public final class PlayerIO {
         this.key = key;
         this.response = response;
         this.channel = (SocketChannel) key.channel();
-        this.host = channel.socket().getInetAddress().getHostAddress()
-                .toLowerCase();
+        this.host = channel.socket().getInetAddress().getHostAddress().toLowerCase();
         this.player = new Player(this);
-        this.chain = new LoginProtocolDecoderChain(2).append(new
-                HandshakeLoginDecoder(this)).append(new
-                PostHandshakeLoginDecoder(this));
+        this.chain = new LoginProtocolDecoderChain(2).append(new HandshakeLoginDecoder(this)).append(new PostHandshakeLoginDecoder(this));
     }
 
     @Override
@@ -150,11 +154,26 @@ public final class PlayerIO {
      */
     public void disconnect(boolean forced) {
         try {
+            if (!forced && player.getCombatBuilder().isAttacking() || player.getCombatBuilder().isBeingAttacked()) {
+                combatLogout = true;
+                key.attach(null);
+                key.cancel();
+                channel.close();
+                TaskHandler.submit(new Task(150, false) {
+                    @Override
+                    public void execute() {
+                        if (!player.getCombatBuilder().inCombat()) {
+                            disconnect(true);
+                            this.cancel();
+                        }
+                    }
+                });
+                return;
+            }
             packetDisconnect = forced;
             if (state == IOState.LOGGED_IN) {
                 if (player.getOpenShop() != null)
-                    Shop.SHOPS.get(player.getOpenShop()).getPlayers().remove
-                            (player);
+                    Shop.SHOPS.get(player.getOpenShop()).getPlayers().remove(player);
                 TaskHandler.cancel(player.getCombatBuilder());
                 TaskHandler.cancel(player);
                 player.setSkillAction(false);
@@ -185,7 +204,7 @@ public final class PlayerIO {
      *         the packet of data to send.
      */
     public void send(ByteBuffer buffer) {
-        if (!channel.isOpen() || packetDisconnect)
+        if (!channel.isOpen() || packetDisconnect || combatLogout)
             return;
         buffer.flip();
         try {
@@ -399,5 +418,15 @@ public final class PlayerIO {
      */
     public void setDecryptor(ISAACCipher decryptor) {
         this.decryptor = decryptor;
+    }
+
+    /**
+     * Determines if the player disconnected while in combat.
+     *
+     * @return {@code true} if the player disconnected while in combat, {@code
+     * false} otherwise.
+     */
+    public boolean isCombatLogout() {
+        return combatLogout;
     }
 }
