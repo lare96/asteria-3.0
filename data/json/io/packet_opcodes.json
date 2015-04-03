@@ -1,6 +1,12 @@
 [
   {
     "opcodes": [
+      202
+    ],
+    "class": "com.asteria.network.packet.impl.IdleStatePacket"
+  },
+  {
+    "opcodes": [
       249,
       73
     ],
