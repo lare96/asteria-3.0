@@ -154,7 +154,7 @@ public final class PlayerIO {
      */
     public void disconnect(boolean forced) {
         try {
-            if (!forced && player.getCombatBuilder().isAttacking() || player.getCombatBuilder().isBeingAttacked()) {
+            if (!forced && player.getCombatBuilder().inCombat()) {
                 combatLogout = true;
                 key.attach(null);
                 key.cancel();
