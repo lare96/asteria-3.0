@@ -2,11 +2,15 @@ package com.asteria.game;
 
 import java.util.Objects;
 
+import com.asteria.game.character.npc.Npc;
+import com.asteria.game.character.player.Player;
+import com.asteria.game.item.ItemNode;
 import com.asteria.game.location.Position;
 
 /**
  * The parent class that represents anything that can be interacted with. This
- * includes {@code ITEM}s, {@code OBJECT}s, {@code PLAYER}s, and {@code NPC}s.
+ * includes {@link ItemNode}s, {@link ObjectNode}s, {@link Player}s, and
+ * {@link Npc}s.
  *
  * @author lare96 <http://github.com/lare96>
  */

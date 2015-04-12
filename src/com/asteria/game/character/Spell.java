@@ -39,7 +39,7 @@ public abstract class Spell {
             Item[] items = MagicStaff.suppressRunes(player, inventory.get());
 
             if (!player.getInventory().containsAll(items)) {
-                player.getEncoder().sendMessage("You do not have the required" + " items to cast this spell.");
+                player.getEncoder().sendMessage("You do not have the required items to cast this spell.");
                 resetPlayerSpell(player);
                 player.getCombatBuilder().reset();
                 return false;
@@ -49,7 +49,7 @@ public abstract class Spell {
 
         if (equipment.isPresent()) {
             if (!player.getEquipment().containsAll(equipment.get())) {
-                player.getEncoder().sendMessage("You do not have the required" + " equipment to cast this spell.");
+                player.getEncoder().sendMessage("You do not have the required equipment to cast this spell.");
                 resetPlayerSpell(player);
                 player.getCombatBuilder().reset();
                 return false;

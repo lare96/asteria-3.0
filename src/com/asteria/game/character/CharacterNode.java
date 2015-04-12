@@ -20,7 +20,8 @@ import com.asteria.utility.Stopwatch;
 import com.google.common.base.Preconditions;
 
 /**
- * The node that can represent either a {@link Player} or {@link Npc}.
+ * The {@link Node} implementation representing a node that is mobile. This
+ * includes {@link Player}s and {@link Npc}s.
  *
  * @author lare96 <http://github.com/lare96>
  */
