@@ -5,7 +5,8 @@ import java.util.Objects;
 import com.asteria.game.location.Position;
 
 /**
- * The parent class that represents anything that can be interacted with.
+ * The parent class that represents anything that can be interacted with. This
+ * includes {@code ITEM}s, {@code OBJECT}s, {@code PLAYER}s, and {@code NPC}s.
  *
  * @author lare96 <http://github.com/lare96>
  */
@@ -30,12 +31,12 @@ public abstract class Node {
      * Creates a new {@link Node}.
      *
      * @param position
-     *         the position of this node in the world.
+     *            the position of this node in the world.
      * @param type
-     *         the type of node that this node is.
+     *            the type of node that this node is.
      */
     public Node(Position position, NodeType type) {
-        this.position = Objects.requireNonNull(position.copy());
+        this.position = position.copy();
         this.type = Objects.requireNonNull(type);
     }
 
@@ -67,7 +68,7 @@ public abstract class Node {
      * Sets the value for {@link Node#position}.
      *
      * @param position
-     *         the new value to set.
+     *            the new value to set.
      */
     public final void setPosition(Position position) {
         this.position = position;
@@ -86,7 +87,7 @@ public abstract class Node {
      * Determines if this node has been registered or not.
      *
      * @return {@code true} if this node has been registered, {@code false}
-     * otherwise.
+     *         otherwise.
      */
     public final boolean isRegistered() {
         return registered;
@@ -96,7 +97,7 @@ public abstract class Node {
      * Sets the value for {@link Node#registered}.
      *
      * @param registered
-     *         the new value to set.
+     *            the new value to set.
      */
     public final void setRegistered(boolean registered) {
         this.registered = registered;
