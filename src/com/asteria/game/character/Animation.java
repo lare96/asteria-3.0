@@ -26,11 +26,11 @@ public final class Animation {
      * Creates a new {@link Animation}.
      *
      * @param id
-     *         the identification for this animation.
+     *            the identification for this animation.
      * @param delay
-     *         the delay for this animation.
+     *            the delay for this animation.
      * @param priority
-     *         the priority of this animation.
+     *            the priority of this animation.
      */
     public Animation(int id, int delay, AnimationPriority priority) {
         this.id = id;
@@ -42,23 +42,22 @@ public final class Animation {
      * Creates a new {@link Animation} with a delay of {@code 0}.
      *
      * @param id
-     *         the identification for this animation.
+     *            the identification for this animation.
      * @param delay
-     *         the delay for this animation.
+     *            the delay for this animation.
      * @param priority
-     *         the priority of this animation.
+     *            the priority of this animation.
      */
     public Animation(int id, AnimationPriority priority) {
         this(id, 0, priority);
     }
 
     /**
-     * Creates a new {@link Animation} with a delay of {@code 0}, and a
-     * priority
+     * Creates a new {@link Animation} with a delay of {@code 0}, and a priority
      * of {@code NORMAL}.
      *
      * @param id
-     *         the identification for this animation.
+     *            the identification for this animation.
      */
     public Animation(int id) {
         this(id, AnimationPriority.NORMAL);
