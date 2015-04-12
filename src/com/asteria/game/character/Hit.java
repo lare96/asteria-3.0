@@ -21,9 +21,9 @@ public final class Hit {
      * Creates a new {@link Hit}.
      *
      * @param damage
-     *         the amount of damage within this hit.
+     *            the amount of damage within this hit.
      * @param type
-     *         the hit type represented by this hit.
+     *            the hit type represented by this hit.
      */
     public Hit(int damage, HitType type) {
         if (damage == 0 && type == HitType.NORMAL) {
@@ -41,7 +41,7 @@ public final class Hit {
      * Creates a new {@link Hit} with a {@code type} of {@code NORMAL}.
      *
      * @param damage
-     *         the amount of damage within this hit.
+     *            the amount of damage within this hit.
      */
     public Hit(int damage) {
         this(damage, HitType.NORMAL);

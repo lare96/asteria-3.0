@@ -20,7 +20,7 @@ public abstract class ServerSelectionEvent {
      * Creates a new {@link ServerSelectionEvent}.
      *
      * @param asynchronous
-     *         determines if this server selection event is asynchronous.
+     *            determines if this server selection event is asynchronous.
      */
     public ServerSelectionEvent(boolean asynchronous) {
         this.asynchronous = asynchronous;
@@ -30,19 +30,18 @@ public abstract class ServerSelectionEvent {
      * The method that determines what happens when this event is executed.
      *
      * @param key
-     *         the wrapped selection key for network operations.
+     *            the wrapped selection key for network operations.
      * @throws Exception
-     *         if any errors occur during execution.
+     *             if any errors occur during execution.
      */
     public abstract void executeEvent(ServerSelectionKey key) throws Exception;
 
     /**
-     * Executes this event either asynchronously on the logic service thread,
-     * or
+     * Executes this event either asynchronously on the logic service thread, or
      * right on the underlying game thread.
      *
      * @param key
-     *         the wrapped selection key for network operations.
+     *            the wrapped selection key for network operations.
      */
     protected final void execute(ServerSelectionKey key) {
         Runnable r = construct(key);
@@ -58,7 +57,7 @@ public abstract class ServerSelectionEvent {
      * event will be executed in.
      *
      * @param key
-     *         the key that that event is being executed for.
+     *            the key that that event is being executed for.
      * @return the runnable event containing the event context.
      */
     private final Runnable construct(ServerSelectionKey key) {
@@ -76,9 +75,9 @@ public abstract class ServerSelectionEvent {
      * The method executed if a throwable is thrown while executing this event.
      *
      * @param t
-     *         the throwable that was thrown.
+     *            the throwable that was thrown.
      * @param key
-     *         the wrapped selection key for network operations.
+     *            the wrapped selection key for network operations.
      */
     public void onThrowable(Throwable t, ServerSelectionKey key) {
 

@@ -68,7 +68,7 @@ public enum Spellbook {
      * Creates a new {@link Spellbook}.
      *
      * @param id
-     *         the identifier for this spellbook interface.
+     *            the identifier for this spellbook interface.
      */
     private Spellbook(int id) {
         this.id = id;
@@ -83,9 +83,9 @@ public enum Spellbook {
      * Attempts to convert the spellbook for {@code player} to {@code book}.
      *
      * @param player
-     *         the player to convert the spellbook for.
+     *            the player to convert the spellbook for.
      * @param book
-     *         the type of spellbook to convert to.
+     *            the type of spellbook to convert to.
      */
     public static void convert(Player player, Spellbook book) {
         if (player.getSpellbook() == book) {
@@ -102,9 +102,9 @@ public enum Spellbook {
      * while converted to this spellbook type.
      *
      * @param player
-     *         the player that is teleporting.
+     *            the player that is teleporting.
      * @param position
-     *         the position the player is teleporting to.
+     *            the position the player is teleporting to.
      */
     public abstract void execute(Player player, Position position);
 

@@ -14,8 +14,7 @@ import com.asteria.task.Task;
 import com.asteria.task.TaskHandler;
 
 /**
- * The {@link Spell} extension with support for combat related functions such
- * as
+ * The {@link Spell} extension with support for combat related functions such as
  * effects and damage.
  *
  * @author lare96 <http://github.com/lare96>
@@ -78,9 +77,9 @@ public abstract class CombatSpell extends Spell {
      * The projectile played when this spell is cast.
      *
      * @param cast
-     *         the character casting this spell.
+     *            the character casting this spell.
      * @param castOn
-     *         the character this spell is being cast on.
+     *            the character this spell is being cast on.
      * @return the cast projectile.
      */
     public abstract Optional<Projectile> projectile(CharacterNode cast, CharacterNode castOn);
@@ -96,13 +95,13 @@ public abstract class CombatSpell extends Spell {
      * Executes when this spell hits {@code castOn}.
      *
      * @param cast
-     *         the character casting this spell.
+     *            the character casting this spell.
      * @param castOn
-     *         the character this spell is being cast on.
+     *            the character this spell is being cast on.
      * @param accurate
-     *         if this spell was accurate.
+     *            if this spell was accurate.
      * @param damage
-     *         the damage inflicted by this spell.
+     *            the damage inflicted by this spell.
      */
     public abstract void executeOnHit(CharacterNode cast, CharacterNode castOn, boolean accurate, int damage);
 }

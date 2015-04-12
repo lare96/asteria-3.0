@@ -6,8 +6,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 /**
- * The {@link JsonLoader} implementation that loads all of the sizes of
- * incoming
+ * The {@link JsonLoader} implementation that loads all of the sizes of incoming
  * packets.
  *
  * @author lare96 <http://github.com/lare96>

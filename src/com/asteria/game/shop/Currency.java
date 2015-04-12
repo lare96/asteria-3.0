@@ -21,7 +21,7 @@ public enum Currency {
      * Creates a new {@link Currency}.
      *
      * @param currency
-     *         the currency that is represented by this element.
+     *            the currency that is represented by this element.
      */
     private Currency(GeneralCurrency currency) {
         this.currency = currency;

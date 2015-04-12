@@ -25,20 +25,19 @@ public abstract class JsonLoader {
      * Creates a new {@link JsonLoader}.
      *
      * @param path
-     *         the path to the {@code .json} file being parsed.
+     *            the path to the {@code .json} file being parsed.
      */
     public JsonLoader(String path) {
         this.path = path;
     }
 
     /**
-     * A dynamic method that allows the user to read and modify the parsed
-     * data.
+     * A dynamic method that allows the user to read and modify the parsed data.
      *
      * @param reader
-     *         the reader for retrieving the parsed data.
+     *            the reader for retrieving the parsed data.
      * @param builder
-     *         the builder for retrieving the parsed data.
+     *            the builder for retrieving the parsed data.
      */
     public abstract void load(JsonObject reader, Gson builder);
 

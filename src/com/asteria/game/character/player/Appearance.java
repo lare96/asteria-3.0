@@ -108,7 +108,7 @@ public final class Appearance {
      * Determines if the gender value equates to a male.
      *
      * @return {@code true} if the gender value is a male, {@code false}
-     * otherwise.
+     *         otherwise.
      */
     public boolean isMale() {
         return gender == Appearance.GENDER_MALE;
@@ -118,7 +118,7 @@ public final class Appearance {
      * Determines if the gender value equates to a female.
      *
      * @return {@code true} if the gender value is a female, {@code false}
-     * otherwise.
+     *         otherwise.
      */
     public boolean isFemale() {
         return gender == Appearance.GENDER_FEMALE;
@@ -129,7 +129,7 @@ public final class Appearance {
      * {@code values}.
      *
      * @param values
-     *         the array of appearance values that will be set.
+     *            the array of appearance values that will be set.
      */
     public void setValues(int[] values) {
         Preconditions.checkArgument(values.length == 13);
@@ -155,8 +155,7 @@ public final class Appearance {
      * @return the array of appearance values.
      */
     public int[] getValues() {
-        return new int[] {gender, head, beard, chest, arms, hands, legs, feet,
-                hairColor, torsoColor, legColor, feetColor, skinColor};
+        return new int[] { gender, head, beard, chest, arms, hands, legs, feet, hairColor, torsoColor, legColor, feetColor, skinColor };
     }
 
     /**
@@ -172,7 +171,7 @@ public final class Appearance {
      * Sets the value for {@link Appearance#gender}.
      *
      * @param gender
-     *         the new value to set.
+     *            the new value to set.
      */
     public void setGender(int gender) {
         this.gender = gender;
@@ -191,7 +190,7 @@ public final class Appearance {
      * Sets the value for {@link Appearance#chest}.
      *
      * @param chest
-     *         the new value to set.
+     *            the new value to set.
      */
     public void setChest(int chest) {
         this.chest = chest;
@@ -210,7 +209,7 @@ public final class Appearance {
      * Sets the value for {@link Appearance#arms}.
      *
      * @param arms
-     *         the new value to set.
+     *            the new value to set.
      */
     public void setArms(int arms) {
         this.arms = arms;
@@ -229,7 +228,7 @@ public final class Appearance {
      * Sets the value for {@link Appearance#legs}.
      *
      * @param legs
-     *         the new value to set.
+     *            the new value to set.
      */
     public void setLegs(int legs) {
         this.legs = legs;
@@ -248,7 +247,7 @@ public final class Appearance {
      * Sets the value for {@link Appearance#head}.
      *
      * @param head
-     *         the new value to set.
+     *            the new value to set.
      */
     public void setHead(int head) {
         this.head = head;
@@ -267,7 +266,7 @@ public final class Appearance {
      * Sets the value for {@link Appearance#hands}.
      *
      * @param hands
-     *         the new value to set.
+     *            the new value to set.
      */
     public void setHands(int hands) {
         this.hands = hands;
@@ -286,7 +285,7 @@ public final class Appearance {
      * Sets the value for {@link Appearance#feet}.
      *
      * @param feet
-     *         the new value to set.
+     *            the new value to set.
      */
     public void setFeet(int feet) {
         this.feet = feet;
@@ -305,7 +304,7 @@ public final class Appearance {
      * Sets the value for {@link Appearance#beard}.
      *
      * @param beard
-     *         the new value to set.
+     *            the new value to set.
      */
     public void setBeard(int beard) {
         this.beard = beard;
@@ -324,7 +323,7 @@ public final class Appearance {
      * Sets the value for {@link Appearance#hairColor}.
      *
      * @param hairColor
-     *         the new value to set.
+     *            the new value to set.
      */
     public void setHairColor(int hairColor) {
         this.hairColor = hairColor;
@@ -343,7 +342,7 @@ public final class Appearance {
      * Sets the value for {@link Appearance#torsoColor}.
      *
      * @param torsoColor
-     *         the new value to set.
+     *            the new value to set.
      */
     public void setTorsoColor(int torsoColor) {
         this.torsoColor = torsoColor;
@@ -362,7 +361,7 @@ public final class Appearance {
      * Sets the value for {@link Appearance#legColor}.
      *
      * @param legColor
-     *         the new value to set.
+     *            the new value to set.
      */
     public void setLegColor(int legColor) {
         this.legColor = legColor;
@@ -381,14 +380,14 @@ public final class Appearance {
      * Sets the value for {@link Appearance#feetColor}.
      *
      * @param feetColor
-     *         the new value to set.
+     *            the new value to set.
      */
     public void setFeetColor(int feetColor) {
         this.feetColor = feetColor;
     }
 
     /**
-     * Gets  the skin color value for the appearance of a player.
+     * Gets the skin color value for the appearance of a player.
      *
      * @return the skin color value.
      */
@@ -400,7 +399,7 @@ public final class Appearance {
      * Sets the value for {@link Appearance#skinColor}.
      *
      * @param skinColor
-     *         the new value to set.
+     *            the new value to set.
      */
     public void setSkinColor(int skinColor) {
         this.skinColor = skinColor;

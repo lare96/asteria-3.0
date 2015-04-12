@@ -20,7 +20,7 @@ public enum ObjectDirection {
      * Creates a new {@link ObjectDirection}.
      *
      * @param id
-     *         the identification of this direction.
+     *            the identification of this direction.
      */
     private ObjectDirection(int id) {
         this.id = id;

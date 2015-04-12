@@ -48,9 +48,9 @@ public class ItemContainer implements Iterable<Item> {
      * Creates a new {@link ItemContainer}.
      *
      * @param capacity
-     *         the capacity of this item container.
+     *            the capacity of this item container.
      * @param policy
-     *         the policy of this item container.
+     *            the policy of this item container.
      */
     public ItemContainer(int capacity, ItemContainerPolicy policy) {
         this.capacity = capacity;
@@ -82,9 +82,9 @@ public class ItemContainer implements Iterable<Item> {
      * Attempts to add {@code item} to {@code slot} in this container.
      *
      * @param item
-     *         the item to add to this container.
+     *            the item to add to this container.
      * @param slot
-     *         the slot to add this item in ({@code -1} for any slot).
+     *            the slot to add this item in ({@code -1} for any slot).
      * @return {@code true} if the item was added, {@code false} otherwise.
      */
     public boolean add(Item item, int slot) {
@@ -93,7 +93,8 @@ public class ItemContainer implements Iterable<Item> {
             return false;
         }
         int newSlot = (slot > -1) ? slot : freeSlot();
-        if ((item.getDefinition().isStackable() || policy.equals(ItemContainerPolicy.STACK_ALWAYS)) && !policy.equals(ItemContainerPolicy.STACK_NEVER)) {
+        if ((item.getDefinition().isStackable() || policy.equals(ItemContainerPolicy.STACK_ALWAYS)) && !policy
+            .equals(ItemContainerPolicy.STACK_NEVER)) {
             if (amount(item.getId()) > 0) {
                 newSlot = searchSlot(item.getId());
             }
@@ -136,7 +137,7 @@ public class ItemContainer implements Iterable<Item> {
      * Attempts to add {@code item} to any slot in this container.
      *
      * @param item
-     *         the item to add to this container.
+     *            the item to add to this container.
      * @return {@code true} if the item was added, {@code false} otherwise.
      */
     public boolean add(Item item) {
@@ -147,9 +148,9 @@ public class ItemContainer implements Iterable<Item> {
      * Attempts to add all items from {@code c} to any slots in this container.
      *
      * @param c
-     *         the items to add to this container.
+     *            the items to add to this container.
      * @return {@code true} if this container changed as a result of the
-     * operation, {@code false} otherwise.
+     *         operation, {@code false} otherwise.
      */
     public boolean addAll(Collection<? extends Item> c) {
         boolean val = false;
@@ -167,9 +168,9 @@ public class ItemContainer implements Iterable<Item> {
      * container.
      *
      * @param items
-     *         the items to add to this container.
+     *            the items to add to this container.
      * @return {@code true} if this container changed as a result of the
-     * operation, {@code false} otherwise.
+     *         operation, {@code false} otherwise.
      */
     public boolean addAll(Item... items) {
         return addAll(Arrays.asList(items));
@@ -180,9 +181,9 @@ public class ItemContainer implements Iterable<Item> {
      * container.
      *
      * @param container
-     *         the container of items to add to this container.
+     *            the container of items to add to this container.
      * @return {@code true} if this container changed as a result of the
-     * operation, {@code false} otherwise.
+     *         operation, {@code false} otherwise.
      */
     public boolean addAll(ItemContainer container) {
         return addAll(Arrays.asList(container.container()));
@@ -192,9 +193,9 @@ public class ItemContainer implements Iterable<Item> {
      * Attempts to remove {@code item} from {@code slot} in this container.
      *
      * @param item
-     *         the item to remove from this container.
+     *            the item to remove from this container.
      * @param slot
-     *         the slot to remove this item from ({@code -1} for any slot).
+     *            the slot to remove this item from ({@code -1} for any slot).
      * @return {@code true} if the item was removed, {@code false} otherwise.
      */
     public boolean remove(Item item, int slot) {
@@ -202,7 +203,8 @@ public class ItemContainer implements Iterable<Item> {
             listeners.forEach(l -> l.onRemove(ItemContainer.this, item, false));
             return false;
         }
-        if ((item.getDefinition().isStackable() || policy.equals(ItemContainerPolicy.STACK_ALWAYS)) && !policy.equals(ItemContainerPolicy.STACK_NEVER)) {
+        if ((item.getDefinition().isStackable() || policy.equals(ItemContainerPolicy.STACK_ALWAYS)) && !policy
+            .equals(ItemContainerPolicy.STACK_NEVER)) {
             int slotHolder = searchSlot(item.getId());
             Item stack = get(slotHolder);
             if (stack == null) {
@@ -243,7 +245,7 @@ public class ItemContainer implements Iterable<Item> {
      * Attempts to remove {@code item} from any slot in this container.
      *
      * @param item
-     *         the item to remove from this container.
+     *            the item to remove from this container.
      * @return {@code true} if the item was removed, {@code false} otherwise.
      */
     public boolean remove(Item item) {
@@ -255,9 +257,9 @@ public class ItemContainer implements Iterable<Item> {
      * container.
      *
      * @param c
-     *         the items to remove from this container.
+     *            the items to remove from this container.
      * @return {@code true} if this container changed as a result of the
-     * operation, {@code false} otherwise.
+     *         operation, {@code false} otherwise.
      */
     public boolean removeAll(Collection<? extends Item> c) {
         boolean val = false;
@@ -275,9 +277,9 @@ public class ItemContainer implements Iterable<Item> {
      * container.
      *
      * @param items
-     *         the items to remove from this container.
+     *            the items to remove from this container.
      * @return {@code true} if this container changed as a result of the
-     * operation, {@code false} otherwise.
+     *         operation, {@code false} otherwise.
      */
     public boolean removeAll(Item... items) {
         return removeAll(Arrays.asList(items));
@@ -287,7 +289,7 @@ public class ItemContainer implements Iterable<Item> {
      * Determines if there is enough space in this container for {@code item}.
      *
      * @param item
-     *         the item to determine if enough space for.
+     *            the item to determine if enough space for.
      * @return {@code true} if there is enough space, {@code false} otherwise.
      */
     public boolean spaceFor(Item item) {
@@ -312,9 +314,9 @@ public class ItemContainer implements Iterable<Item> {
      * Determines if this container contains any items with {@code id}.
      *
      * @param id
-     *         the identifier to check this container for.
+     *            the identifier to check this container for.
      * @return {@code true} if this container contains the identifier,
-     * {@code false} otherwise.
+     *         {@code false} otherwise.
      */
     public boolean contains(int id) {
         return searchSlot(id) != -1;
@@ -325,9 +327,9 @@ public class ItemContainer implements Iterable<Item> {
      * {@code identifiers}.
      *
      * @param identifiers
-     *         the identifiers to check this container for.
+     *            the identifiers to check this container for.
      * @return {@code true} if this container contains all of the identifiers,
-     * {@code false} otherwise.
+     *         {@code false} otherwise.
      */
     public boolean containsAll(int... identifiers) {
         return Arrays.stream(identifiers).allMatch(this::contains);
@@ -338,9 +340,9 @@ public class ItemContainer implements Iterable<Item> {
      * {@code identifiers}.
      *
      * @param identifiers
-     *         the identifiers to check this container for.
+     *            the identifiers to check this container for.
      * @return {@code true} if this container contains any of the identifiers,
-     * {@code false} otherwise.
+     *         {@code false} otherwise.
      */
     public boolean containsAny(int... identifiers) {
         return Arrays.stream(identifiers).anyMatch(this::contains);
@@ -350,9 +352,9 @@ public class ItemContainer implements Iterable<Item> {
      * Determines if this container contains {@code item}.
      *
      * @param item
-     *         the item to check this container for.
+     *            the item to check this container for.
      * @return {@code true} if this container contains the item, {@code false}
-     * otherwise.
+     *         otherwise.
      */
     public boolean contains(Item item) {
         return stream().filter(Objects::nonNull).anyMatch(i -> i.getId() == item.getId() && i.getAmount() >= item.getAmount());
@@ -362,9 +364,9 @@ public class ItemContainer implements Iterable<Item> {
      * Determines if this container contains all of {@code items}.
      *
      * @param items
-     *         the items to check this container for.
+     *            the items to check this container for.
      * @return {@code true} if this container contains all of the items,
-     * {@code false} otherwise.
+     *         {@code false} otherwise.
      */
     public boolean containsAll(Item... items) {
         return Arrays.stream(items).filter(Objects::nonNull).allMatch(this::contains);
@@ -374,26 +376,25 @@ public class ItemContainer implements Iterable<Item> {
      * Determines if this container contains any of {@code items}.
      *
      * @param items
-     *         the items to check this container for.
+     *            the items to check this container for.
      * @return {@code true} if this container contains any of the items,
-     * {@code false} otherwise.
+     *         {@code false} otherwise.
      */
     public boolean containsAny(Item... items) {
         return Arrays.stream(items).filter(Objects::nonNull).anyMatch(this::contains);
     }
 
     /**
-     * Transfers the item in {@code slot} to {@code newSlot}. If an item
-     * already
+     * Transfers the item in {@code slot} to {@code newSlot}. If an item already
      * exists in the new slot, the items in this container will be shifted to
      * accommodate for the transfer.
      *
      * @param slot
-     *         the slot of the item to transfer.
+     *            the slot of the item to transfer.
      * @param newSlot
-     *         the slot to transfer the item to.
+     *            the slot to transfer the item to.
      * @return {@code true} if the transfer was successful, {@code false}
-     * otherwise.
+     *         otherwise.
      */
     public boolean transfer(int slot, int newSlot) {
         Item from = items[slot];
@@ -450,9 +451,9 @@ public class ItemContainer implements Iterable<Item> {
      * Refreshes the contents of this container to {@code widget}.
      *
      * @param player
-     *         the player to refresh this container for.
+     *            the player to refresh this container for.
      * @param widget
-     *         the interface to refresh the contents of this container on.
+     *            the interface to refresh the contents of this container on.
      */
     public void refresh(Player player, int widget) {
         player.getEncoder().sendItemsOnInterface(widget, container());
@@ -462,9 +463,9 @@ public class ItemContainer implements Iterable<Item> {
      * Swaps the positions of two items in this container.
      *
      * @param slot
-     *         the slot of the first item to swap.
+     *            the slot of the first item to swap.
      * @param otherSlot
-     *         the slot of the second item to swap.
+     *            the slot of the second item to swap.
      */
     public void swap(int slot, int otherSlot) {
         Item temp = get(slot);
@@ -473,13 +474,12 @@ public class ItemContainer implements Iterable<Item> {
     }
 
     /**
-     * Sets the container of items to {@code items}. The container will not
-     * hold
+     * Sets the container of items to {@code items}. The container will not hold
      * any references to the array, nor the item instances in the array.
      *
      * @param items
-     *         the new array of items, the capacities of this must be equal
-     *         to or lesser than the container.
+     *            the new array of items, the capacities of this must be equal
+     *            to or lesser than the container.
      */
     public final void setItems(Item[] items) {
         Preconditions.checkArgument(items.length <= capacity);
@@ -492,7 +492,7 @@ public class ItemContainer implements Iterable<Item> {
      * Determines if {@code slot} does not have an item on it.
      *
      * @param slot
-     *         the to determine if free or not.
+     *            the to determine if free or not.
      * @return {@code true} if the slot is free, {@code false} otherwise.
      */
     public boolean free(int slot) {
@@ -503,7 +503,7 @@ public class ItemContainer implements Iterable<Item> {
      * Determines if {@code slot} does have an item on it.
      *
      * @param slot
-     *         the to determine if used or not.
+     *            the to determine if used or not.
      * @return {@code true} if the slot is used, {@code false} otherwise.
      */
     public boolean used(int slot) {
@@ -511,14 +511,13 @@ public class ItemContainer implements Iterable<Item> {
     }
 
     /**
-     * Places {@code item} on {@code slot} regardless of if there is an
-     * existing
+     * Places {@code item} on {@code slot} regardless of if there is an existing
      * item on the slot or not.
      *
      * @param slot
-     *         the slot to place the item on.
+     *            the slot to place the item on.
      * @param item
-     *         the item to place on the slot.
+     *            the item to place on the slot.
      */
     public void set(int slot, Item item) {
         items[slot] = item;
@@ -528,9 +527,9 @@ public class ItemContainer implements Iterable<Item> {
      * Searches and returns the first item found with {@code id}.
      *
      * @param id
-     *         the identifier to search this container for.
+     *            the identifier to search this container for.
      * @return the item wrapped within an optional, or an empty optional if no
-     * item was found.
+     *         item was found.
      */
     public Optional<Item> searchItem(int id) {
         return stream().filter(i -> i != null && id == i.getId()).findFirst();
@@ -540,7 +539,7 @@ public class ItemContainer implements Iterable<Item> {
      * Retrieves the slot of the first item found with {@code id}.
      *
      * @param id
-     *         the identifier to search this container for.
+     *            the identifier to search this container for.
      * @return the slot of the item with the identifier.
      */
     public int searchSlot(int id) {
@@ -556,9 +555,9 @@ public class ItemContainer implements Iterable<Item> {
      * Retrieves the item located on {@code slot}.
      *
      * @param slot
-     *         the slot to get the item on.
+     *            the slot to get the item on.
      * @return the item on the slot, or {@code null} if no item exists on the
-     * slot.
+     *         slot.
      */
     public Item get(int slot) {
         if (slot == -1 || slot >= items.length)
@@ -570,9 +569,9 @@ public class ItemContainer implements Iterable<Item> {
      * Retrieves the identifier for the item located on {@code slot}.
      *
      * @param slot
-     *         the slot to get the item identifier on.
+     *            the slot to get the item identifier on.
      * @return the item identifier on the slot, or {@code -1} if no item exists
-     * on the slot.
+     *         on the slot.
      */
     public int getId(int slot) {
         if (items[slot] == null)
@@ -584,9 +583,9 @@ public class ItemContainer implements Iterable<Item> {
      * Gets the total quantity of all items with {@code id}.
      *
      * @param id
-     *         the item identifier to retrieve the total quantity of.
+     *            the item identifier to retrieve the total quantity of.
      * @return the total quantity of items in this container with the
-     * identifier.
+     *         identifier.
      */
     public int amount(int id) {
         return stream().filter(i -> Item.valid(i) && i.getId() == id).mapToInt(i -> i.getAmount()).sum();
@@ -632,8 +631,7 @@ public class ItemContainer implements Iterable<Item> {
     }
 
     /**
-     * The amount of elements without a value of {@code null} in this
-     * container.
+     * The amount of elements without a value of {@code null} in this container.
      *
      * @return the size of this container.
      */
@@ -654,9 +652,9 @@ public class ItemContainer implements Iterable<Item> {
      * Adds a new listener to this item container.
      *
      * @param listener
-     *         the listener to add to this container.
+     *            the listener to add to this container.
      * @return {@code true} if the listener was successfully added,
-     * {@code false} otherwise.
+     *         {@code false} otherwise.
      */
     public final boolean addListener(ItemContainerListener listener) {
         return listeners.add(listener);
@@ -666,14 +664,13 @@ public class ItemContainer implements Iterable<Item> {
      * Removes an existing listener from this item container.
      *
      * @param listener
-     *         the listener to remove from this container.
+     *            the listener to remove from this container.
      * @return {@code true} if the listener was successfully removed,
-     * {@code false} otherwise.
+     *         {@code false} otherwise.
      */
     public final boolean removeListener(ItemContainerListener listener) {
         return listeners.remove(listener);
     }
-
 
     /**
      * Gets the list of listeners in this container. Changes made to the
@@ -738,7 +735,7 @@ public class ItemContainer implements Iterable<Item> {
          * Creates a new {@link ItemContainer}.
          *
          * @param container
-         *         the container that is storing the elements.
+         *            the container that is storing the elements.
          */
         public ItemContainerIterator(ItemContainer container) {
             this.container = container;

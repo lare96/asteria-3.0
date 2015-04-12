@@ -31,7 +31,7 @@ public final class CombatPrayerTask extends Task {
      * Creates a new {@link CombatPrayerTask}.
      *
      * @param player
-     *         the player attached to this task.
+     *            the player attached to this task.
      */
     public CombatPrayerTask(Player player) {
         super(1, false);

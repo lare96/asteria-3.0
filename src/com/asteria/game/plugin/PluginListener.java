@@ -13,9 +13,9 @@ public interface PluginListener<T extends PluginContext> {
      * Executes the code within this listener.
      *
      * @param player
-     *         the player to execute this for.
+     *            the player to execute this for.
      * @param context
-     *         the context to execute this listener in.
+     *            the context to execute this listener in.
      */
     public void run(Player player, T context);
 }

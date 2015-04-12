@@ -28,7 +28,7 @@ public final class HandshakeLoginDecoder extends LoginProtocolDecoder {
      * Creates a new {@link HandshakeLoginDecoder}.
      *
      * @param session
-     *         the session that is decoding this protocol.
+     *            the session that is decoding this protocol.
      */
     public HandshakeLoginDecoder(PlayerIO session) {
         super(session, IOState.CONNECTED);

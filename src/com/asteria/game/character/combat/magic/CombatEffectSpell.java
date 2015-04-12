@@ -34,9 +34,9 @@ public abstract class CombatEffectSpell extends CombatSpell {
      * Executed when the spell casted by {@code cast} hits {@code castOn}.
      *
      * @param cast
-     *         the character who casted the spell.
+     *            the character who casted the spell.
      * @param castOn
-     *         the character who the spell was casted on.
+     *            the character who the spell was casted on.
      */
     public abstract void effect(CharacterNode cast, CharacterNode castOn);
 }

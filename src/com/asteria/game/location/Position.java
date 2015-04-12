@@ -29,11 +29,11 @@ public class Position {
      * Creates a new {@link Position}.
      *
      * @param x
-     *         the {@code X} coordinate.
+     *            the {@code X} coordinate.
      * @param y
-     *         the {@code Y} coordinate.
+     *            the {@code Y} coordinate.
      * @param z
-     *         the {@code Z} coordinate.
+     *            the {@code Z} coordinate.
      */
     public Position(int x, int y, int z) {
         this.x = x;
@@ -46,9 +46,9 @@ public class Position {
      * {@code 0}.
      *
      * @param x
-     *         the {@code X} coordinate.
+     *            the {@code X} coordinate.
      * @param y
-     *         the {@code Y} coordinate.
+     *            the {@code Y} coordinate.
      */
     public Position(int x, int y) {
         this(x, y, 0);
@@ -93,9 +93,9 @@ public class Position {
      * the two arguments.
      *
      * @param a
-     *         the first position.
+     *            the first position.
      * @param b
-     *         the second position.
+     *            the second position.
      * @return the delta coordinates contained within a position.
      */
     public static Position delta(Position a, Position b) {
@@ -117,9 +117,9 @@ public class Position {
      * Determines if this position is viewable from {@code other}.
      *
      * @param other
-     *         the other position to determine if viewable from.
+     *            the other position to determine if viewable from.
      * @return {@code true} if this position is viewable, {@code false}
-     * otherwise.
+     *         otherwise.
      */
     public final boolean isViewableFrom(Position other) {
         if (this.getZ() != other.getZ())
@@ -133,11 +133,11 @@ public class Position {
      * {@code other}.
      *
      * @param other
-     *         the position to check the distance for.
+     *            the position to check the distance for.
      * @param amount
-     *         the distance to check.
+     *            the distance to check.
      * @return {@code true} if this position is within the distance,
-     * {@code false} otherwise.
+     *         {@code false} otherwise.
      */
     public final boolean withinDistance(Position other, int amount) {
         if (this.z != other.z)
@@ -151,11 +151,11 @@ public class Position {
      * {@code amountZ}.
      *
      * @param amountX
-     *         the amount to increment the {@code X} coordinate by.
+     *            the amount to increment the {@code X} coordinate by.
      * @param amountY
-     *         the amount to increment the {@code Y} coordinate by.
+     *            the amount to increment the {@code Y} coordinate by.
      * @param amountZ
-     *         the amount to increment the {@code Z} coordinate by.
+     *            the amount to increment the {@code Z} coordinate by.
      * @return an instance of this position.
      */
     public final Position move(int amountX, int amountY, int amountZ) {
@@ -170,9 +170,9 @@ public class Position {
      * container by {@code amountX} and {@code amountY}.
      *
      * @param amountX
-     *         the amount to increment the {@code X} coordinate by.
+     *            the amount to increment the {@code X} coordinate by.
      * @param amountY
-     *         the amount to increment the {@code Y} coordinate by.
+     *            the amount to increment the {@code Y} coordinate by.
      * @return an instance of this position.
      */
     public final Position move(int amountX, int amountY) {
@@ -190,14 +190,14 @@ public class Position {
         int x = random.inclusive(amount);
         int y = random.inclusive(amount);
         switch (random.inclusive(3)) {
-            case 1:
-                return move(-x, -y);
-            case 2:
-                return move(-x, y);
-            case 3:
-                return move(x, -y);
-            default:
-                return move(x, y);
+        case 1:
+            return move(-x, -y);
+        case 2:
+            return move(-x, y);
+        case 3:
+            return move(x, -y);
+        default:
+            return move(x, y);
         }
     }
 
@@ -223,7 +223,7 @@ public class Position {
      * Gets the local {@code X} coordinate relative to {@code base}.
      *
      * @param base
-     *         the relative base position.
+     *            the relative base position.
      * @return the local {@code X} coordinate.
      */
     public final int getLocalX(Position base) {
@@ -234,7 +234,7 @@ public class Position {
      * Gets the local {@code Y} coordinate relative to {@code base}.
      *
      * @param base
-     *         the relative base position.
+     *            the relative base position.
      * @return the local {@code Y} coordinate.
      */
     public final int getLocalY(Position base) {
@@ -299,7 +299,7 @@ public class Position {
      * Sets the {@code X} coordinate.
      *
      * @param x
-     *         the new {@code X} coordinate.
+     *            the new {@code X} coordinate.
      */
     public final void setX(int x) {
         this.x = x;
@@ -318,7 +318,7 @@ public class Position {
      * Sets the {@code Y} coordinate.
      *
      * @param y
-     *         the new {@code Y} coordinate.
+     *            the new {@code Y} coordinate.
      */
     public final void setY(int y) {
         this.y = y;
@@ -337,7 +337,7 @@ public class Position {
      * Sets the {@code Z} coordinate.
      *
      * @param z
-     *         the new {@code Z} coordinate.
+     *            the new {@code Z} coordinate.
      */
     public final void setZ(int z) {
         this.z = z;

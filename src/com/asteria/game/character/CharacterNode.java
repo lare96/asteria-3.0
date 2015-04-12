@@ -39,8 +39,7 @@ public abstract class CharacterNode extends Node {
     private final MovementQueue movementQueue = new MovementQueue(this);
 
     /**
-     * The movement queue listener that will allow for actions to be appended
-     * to
+     * The movement queue listener that will allow for actions to be appended to
      * the end of the movement queue.
      */
     private final MovementQueueListener movementListener = new MovementQueueListener(this);
@@ -176,9 +175,9 @@ public abstract class CharacterNode extends Node {
      * Creates a new {@link CharacterNode}.
      *
      * @param position
-     *         the position of this character in the world.
+     *            the position of this character in the world.
      * @param type
-     *         the type of node that this character is.
+     *            the type of node that this character is.
      */
     public CharacterNode(Position position, NodeType type) {
         super(position, type);
@@ -225,7 +224,7 @@ public abstract class CharacterNode extends Node {
      * logic processing.
      *
      * @throws Exception
-     *         if any errors occur while executing code.
+     *             if any errors occur while executing code.
      */
     public abstract void sequence() throws Exception;
 
@@ -233,9 +232,9 @@ public abstract class CharacterNode extends Node {
      * Weakens this character using {@code effect}.
      *
      * @param effect
-     *         the effect to use to weaken this character.
+     *            the effect to use to weaken this character.
      * @return {@code true} if the character was weakened, {@code false}
-     * otherwise.
+     *         otherwise.
      */
     public abstract boolean weaken(CombatWeaken effect);
 
@@ -257,7 +256,7 @@ public abstract class CharacterNode extends Node {
      * Decrements this character's health based on {@code hit}.
      *
      * @param hit
-     *         the hit to decrement this character's health by.
+     *            the hit to decrement this character's health by.
      * @return the modified hit after the health was decremented.
      */
     public abstract Hit decrementHealth(Hit hit);
@@ -270,12 +269,11 @@ public abstract class CharacterNode extends Node {
     public abstract CombatStrategy determineStrategy();
 
     /**
-     * Gets the base attack level for this character based on {@code type},
-     * used
+     * Gets the base attack level for this character based on {@code type}, used
      * for combat calculations.
      *
      * @param type
-     *         the combat type.
+     *            the combat type.
      * @return the base attack level.
      */
     public abstract int getBaseAttack(CombatType type);
@@ -285,7 +283,7 @@ public abstract class CharacterNode extends Node {
      * used for combat calculations.
      *
      * @param type
-     *         the combat type.
+     *            the combat type.
      * @return the base defence level.
      */
     public abstract int getBaseDefence(CombatType type);
@@ -294,9 +292,9 @@ public abstract class CharacterNode extends Node {
      * Executed on a successful hit, used primarily for poison effects.
      *
      * @param character
-     *         the victim in this successful hit.
+     *            the victim in this successful hit.
      * @param type
-     *         the combat type currently being used.
+     *            the combat type currently being used.
      */
     public abstract void onSuccessfulHit(CharacterNode character, CombatType type);
 
@@ -304,7 +302,7 @@ public abstract class CharacterNode extends Node {
      * Restores this character's health level by {@code amount}.
      *
      * @param amount
-     *         the amount to restore this health level by.
+     *            the amount to restore this health level by.
      */
     public abstract void healCharacter(int amount);
 
@@ -335,8 +333,8 @@ public abstract class CharacterNode extends Node {
      * Executes {@code animation} for this character.
      *
      * @param animation
-     *         the animation to execute, or {@code null} to reset the current
-     *         animation.
+     *            the animation to execute, or {@code null} to reset the current
+     *            animation.
      */
     public final void animation(Animation animation) {
         if (this.animation == null || this.animation.getPriority().getValue() <= animation.getPriority().getValue()) {
@@ -349,7 +347,7 @@ public abstract class CharacterNode extends Node {
      * Executes {@code graphic} for this character.
      *
      * @param graphic
-     *         the graphic to execute.
+     *            the graphic to execute.
      */
     public final void graphic(Graphic graphic) {
         this.graphic = graphic.copy();
@@ -360,7 +358,7 @@ public abstract class CharacterNode extends Node {
      * Executes {@code graphic} for this character at a higher height level.
      *
      * @param graphic
-     *         the graphic to execute.
+     *            the graphic to execute.
      */
     public final void highGraphic(Graphic graphic) {
         this.graphic = new Graphic(graphic.getId(), 6553600);
@@ -371,7 +369,7 @@ public abstract class CharacterNode extends Node {
      * Executes {@code forcedText} for this character.
      *
      * @param forcedText
-     *         the forced text to execute.
+     *            the forced text to execute.
      */
     public final void forceChat(String forcedText) {
         this.forcedText = forcedText;
@@ -382,7 +380,7 @@ public abstract class CharacterNode extends Node {
      * Prompts this character to face {@code character}.
      *
      * @param character
-     *         the character to face, or {@code null} to reset the face.
+     *            the character to face, or {@code null} to reset the face.
      */
     public final void faceCharacter(CharacterNode character) {
         this.faceIndex = character == null ? 65535 : character.getType() == NodeType.PLAYER ? character.slot + 32768 : character.slot;
@@ -393,7 +391,7 @@ public abstract class CharacterNode extends Node {
      * Prompts this character to face {@code position}.
      *
      * @param position
-     *         the position to face.
+     *            the position to face.
      */
     public final void facePosition(Position position) {
         facePosition = new Position(2 * position.getX() + 1, 2 * position.getY() + 1);
@@ -404,7 +402,7 @@ public abstract class CharacterNode extends Node {
      * Deals {@code hit} on this character as a primary hitmark.
      *
      * @param hit
-     *         the hit to deal on this character.
+     *            the hit to deal on this character.
      */
     private final void primaryDamage(Hit hit) {
         primaryHit = decrementHealth(Objects.requireNonNull(hit));
@@ -415,7 +413,7 @@ public abstract class CharacterNode extends Node {
      * Deals {@code hit} on this character as a secondary hitmark.
      *
      * @param hit
-     *         the hit to deal on this character.
+     *            the hit to deal on this character.
      */
     private final void secondaryDamage(Hit hit) {
         secondaryHit = decrementHealth(Objects.requireNonNull(hit));
@@ -426,24 +424,24 @@ public abstract class CharacterNode extends Node {
      * Deals a series of hits to this character.
      *
      * @param hits
-     *         the hits to deal to this character.
+     *            the hits to deal to this character.
      */
     public final void damage(Hit... hits) {
         Preconditions.checkArgument(hits.length >= 1 && hits.length <= 4);
 
         switch (hits.length) {
-            case 1:
-                sendDamage(hits[0]);
-                break;
-            case 2:
-                sendDamage(hits[0], hits[1]);
-                break;
-            case 3:
-                sendDamage(hits[0], hits[1], hits[2]);
-                break;
-            case 4:
-                sendDamage(hits[0], hits[1], hits[2], hits[3]);
-                break;
+        case 1:
+            sendDamage(hits[0]);
+            break;
+        case 2:
+            sendDamage(hits[0], hits[1]);
+            break;
+        case 3:
+            sendDamage(hits[0], hits[1], hits[2]);
+            break;
+        case 4:
+            sendDamage(hits[0], hits[1], hits[2], hits[3]);
+            break;
         }
     }
 
@@ -451,7 +449,7 @@ public abstract class CharacterNode extends Node {
      * Deals {@code hit} to this character.
      *
      * @param hit
-     *         the hit to deal to this character.
+     *            the hit to deal to this character.
      */
     private final void sendDamage(Hit hit) {
         if (flags.get(Flag.HIT)) {
@@ -465,9 +463,9 @@ public abstract class CharacterNode extends Node {
      * Deals {@code hit} and {@code hit2} to this character.
      *
      * @param hit
-     *         the first hit to deal to this character.
+     *            the first hit to deal to this character.
      * @param hit2
-     *         the second hit to deal to this character.
+     *            the second hit to deal to this character.
      */
     private final void sendDamage(Hit hit, Hit hit2) {
         sendDamage(hit);
@@ -478,11 +476,11 @@ public abstract class CharacterNode extends Node {
      * Deals {@code hit}, {@code hit2}, and {@code hit3} to this character.
      *
      * @param hit
-     *         the first hit to deal to this character.
+     *            the first hit to deal to this character.
      * @param hit2
-     *         the second hit to deal to this character.
+     *            the second hit to deal to this character.
      * @param hit3
-     *         the third hit to deal to this character.
+     *            the third hit to deal to this character.
      */
     private final void sendDamage(Hit hit, Hit hit2, Hit hit3) {
         sendDamage(hit, hit2);
@@ -504,13 +502,13 @@ public abstract class CharacterNode extends Node {
      * character.
      *
      * @param hit
-     *         the first hit to deal to this character.
+     *            the first hit to deal to this character.
      * @param hit2
-     *         the second hit to deal to this character.
+     *            the second hit to deal to this character.
      * @param hit3
-     *         the third hit to deal to this character.
+     *            the third hit to deal to this character.
      * @param hit4
-     *         the fourth hit to deal to this character.
+     *            the fourth hit to deal to this character.
      */
     private final void sendDamage(Hit hit, Hit hit2, Hit hit3, Hit hit4) {
         sendDamage(hit, hit2);
@@ -531,9 +529,9 @@ public abstract class CharacterNode extends Node {
      * Prepares to cast the {@code spell} on {@code victim}.
      *
      * @param spell
-     *         the spell to cast on the victim.
+     *            the spell to cast on the victim.
      * @param victim
-     *         the victim that the spell will be cast on.
+     *            the victim that the spell will be cast on.
      */
     public final void prepareSpell(CombatSpell spell, CharacterNode victim) {
         currentlyCasting = spell;
@@ -544,7 +542,7 @@ public abstract class CharacterNode extends Node {
      * Freezes this character for the desired time in {@code SECONDS}.
      *
      * @param time
-     *         the time to freeze this character for.
+     *            the time to freeze this character for.
      */
     public final void freeze(long time) {
         freezeDelay = time;
@@ -565,7 +563,7 @@ public abstract class CharacterNode extends Node {
      * Determines if this character is poisoned.
      *
      * @return {@code true} if this character is poisoned, {@code false}
-     * otherwise.
+     *         otherwise.
      */
     public final boolean isPoisoned() {
         return poisonDamage != 0;
@@ -575,7 +573,7 @@ public abstract class CharacterNode extends Node {
      * Determines if this character is frozen.
      *
      * @return {@code true} if this character is frozen, {@code false}
-     * otherwise.
+     *         otherwise.
      */
     public final boolean isFrozen() {
         return !freezeTimer.elapsed(freezeDelay, TimeUnit.SECONDS);
@@ -594,7 +592,7 @@ public abstract class CharacterNode extends Node {
      * Sets the value for {@link CharacterNode#slot}.
      *
      * @param slot
-     *         the new value to set.
+     *            the new value to set.
      */
     public final void setSlot(int slot) {
         this.slot = slot;
@@ -622,7 +620,7 @@ public abstract class CharacterNode extends Node {
      * Sets the value for {@link CharacterNode#poisonDamage}.
      *
      * @param poisonDamage
-     *         the new value to set.
+     *            the new value to set.
      */
     public final void setPoisonDamage(int poisonDamage) {
         this.poisonDamage = poisonDamage;
@@ -641,7 +639,7 @@ public abstract class CharacterNode extends Node {
      * Sets the value for {@link CharacterNode#primaryDirection}.
      *
      * @param primaryDirection
-     *         the new value to set.
+     *            the new value to set.
      */
     public final void setPrimaryDirection(int primaryDirection) {
         this.primaryDirection = primaryDirection;
@@ -660,7 +658,7 @@ public abstract class CharacterNode extends Node {
      * Sets the value for {@link CharacterNode#secondaryDirection}.
      *
      * @param secondaryDirection
-     *         the new value to set.
+     *            the new value to set.
      */
     public final void setSecondaryDirection(int secondaryDirection) {
         this.secondaryDirection = secondaryDirection;
@@ -679,7 +677,7 @@ public abstract class CharacterNode extends Node {
      * Sets the value for {@link CharacterNode#lastDirection}.
      *
      * @param lastDirection
-     *         the new value to set.
+     *            the new value to set.
      */
     public final void setLastDirection(int lastDirection) {
         this.lastDirection = lastDirection;
@@ -689,7 +687,7 @@ public abstract class CharacterNode extends Node {
      * Determines if this character needs placement.
      *
      * @return {@code true} if this character needs placement, {@code false}
-     * otherwise.
+     *         otherwise.
      */
     public final boolean isNeedsPlacement() {
         return needsPlacement;
@@ -699,7 +697,7 @@ public abstract class CharacterNode extends Node {
      * Sets the value for {@link CharacterNode#needsPlacement}.
      *
      * @param needsPlacement
-     *         the new value to set.
+     *            the new value to set.
      */
     public final void setNeedsPlacement(boolean needsPlacement) {
         this.needsPlacement = needsPlacement;
@@ -709,7 +707,7 @@ public abstract class CharacterNode extends Node {
      * Determines if this character needs to reset their movement queue.
      *
      * @return {@code true} if this character needs to reset their movement
-     * queue, {@code false} otherwise.
+     *         queue, {@code false} otherwise.
      */
     public final boolean isResetMovementQueue() {
         return resetMovementQueue;
@@ -719,7 +717,7 @@ public abstract class CharacterNode extends Node {
      * Sets the value for {@link CharacterNode#resetMovementQueue}.
      *
      * @param resetMovementQueue
-     *         the new value to set.
+     *            the new value to set.
      */
     public final void setResetMovementQueue(boolean resetMovementQueue) {
         this.resetMovementQueue = resetMovementQueue;
@@ -738,7 +736,7 @@ public abstract class CharacterNode extends Node {
      * Sets the value for {@link CharacterNode#currentlyCasting}.
      *
      * @param currentlyCasting
-     *         the new value to set.
+     *            the new value to set.
      */
     public final void setCurrentlyCasting(CombatSpell currentlyCasting) {
         this.currentlyCasting = currentlyCasting;
@@ -757,7 +755,7 @@ public abstract class CharacterNode extends Node {
      * Sets the value for {@link CharacterNode#currentRegion}.
      *
      * @param currentRegion
-     *         the new value to set.
+     *            the new value to set.
      */
     public final void setCurrentRegion(Position currentRegion) {
         this.currentRegion = currentRegion;
@@ -767,7 +765,7 @@ public abstract class CharacterNode extends Node {
      * Determines if this character is auto-retaliating.
      *
      * @return {@code true} if this character is auto-retaliating, {@code false}
-     * otherwise.
+     *         otherwise.
      */
     public final boolean isAutoRetaliate() {
         return autoRetaliate;
@@ -777,7 +775,7 @@ public abstract class CharacterNode extends Node {
      * Sets the value for {@link CharacterNode#autoRetaliate}.
      *
      * @param autoRetaliate
-     *         the new value to set.
+     *            the new value to set.
      */
     public final void setAutoRetaliate(boolean autoRetaliate) {
         this.autoRetaliate = autoRetaliate;
@@ -787,7 +785,7 @@ public abstract class CharacterNode extends Node {
      * Determines if this character is following someone.
      *
      * @return {@code true} if this character is following someone,
-     * {@code false} otherwise.
+     *         {@code false} otherwise.
      */
     public final boolean isFollowing() {
         return following;
@@ -797,7 +795,7 @@ public abstract class CharacterNode extends Node {
      * Sets the value for {@link CharacterNode#following}.
      *
      * @param following
-     *         the new value to set.
+     *            the new value to set.
      */
     public final void setFollowing(boolean following) {
         this.following = following;
@@ -816,7 +814,7 @@ public abstract class CharacterNode extends Node {
      * Sets the value for {@link CharacterNode#followCharacter}.
      *
      * @param followCharacter
-     *         the new value to set.
+     *            the new value to set.
      */
     public final void setFollowCharacter(CharacterNode followCharacter) {
         this.followCharacter = followCharacter;
@@ -835,7 +833,7 @@ public abstract class CharacterNode extends Node {
      * Sets the value for {@link CharacterNode#dead}.
      *
      * @param dead
-     *         the new value to set.
+     *            the new value to set.
      */
     public final void setDead(boolean dead) {
         this.dead = dead;
@@ -854,7 +852,7 @@ public abstract class CharacterNode extends Node {
      * Sets the value for {@link CharacterNode#lastPosition}.
      *
      * @param lastPosition
-     *         the new value to set.
+     *            the new value to set.
      */
     public final void setLastPosition(Position lastPosition) {
         this.lastPosition = lastPosition;
@@ -864,7 +862,7 @@ public abstract class CharacterNode extends Node {
      * Determines if this character is visible or not.
      *
      * @return {@code true} if this character is visible, {@code false}
-     * otherwise.
+     *         otherwise.
      */
     public boolean isVisible() {
         return visible;
@@ -874,7 +872,7 @@ public abstract class CharacterNode extends Node {
      * Sets the value for {@link CharacterNode#visible}.
      *
      * @param visible
-     *         the new value to set.
+     *            the new value to set.
      */
     public void setVisible(boolean visible) {
         this.visible = visible;
@@ -891,8 +889,7 @@ public abstract class CharacterNode extends Node {
     }
 
     /**
-     * Gets the movement queue that will handle all movement processing for
-     * this
+     * Gets the movement queue that will handle all movement processing for this
      * character.
      *
      * @return the movement queue.

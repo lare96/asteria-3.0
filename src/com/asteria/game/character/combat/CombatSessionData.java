@@ -52,15 +52,15 @@ public class CombatSessionData {
      * Creates a new {@link CombatSessionData}.
      *
      * @param attacker
-     *         the attacker in this combat session.
+     *            the attacker in this combat session.
      * @param victim
-     *         the victim in this combat session.
+     *            the victim in this combat session.
      * @param amount
-     *         the amount of hits to calculate.
+     *            the amount of hits to calculate.
      * @param type
-     *         the combat type the attacker is using.
+     *            the combat type the attacker is using.
      * @param checkAccuracy
-     *         determines if accuracy should be calculated for hits.
+     *            determines if accuracy should be calculated for hits.
      */
     public CombatSessionData(CharacterNode attacker, CharacterNode victim, int amount, CombatType type, boolean checkAccuracy) {
         this.attacker = attacker;
@@ -76,13 +76,13 @@ public class CombatSessionData {
      * {@code 0}.
      *
      * @param attacker
-     *         the attacker in this combat session.
+     *            the attacker in this combat session.
      * @param victim
-     *         the victim in this combat session.
+     *            the victim in this combat session.
      * @param type
-     *         the combat type the attacker is using.
+     *            the combat type the attacker is using.
      * @param checkAccuracy
-     *         determines if accuracy should be calculated for hits.
+     *            determines if accuracy should be calculated for hits.
      */
     public CombatSessionData(CharacterNode attacker, CharacterNode victim, CombatType type, boolean checkAccuracy) {
         this(attacker, victim, 0, type, checkAccuracy);
@@ -93,8 +93,8 @@ public class CombatSessionData {
      * launched.
      *
      * @param amount
-     *         the amount of hits to calculate, with minimum of {@code 0} and
-     *         a maximum of {@code 1}.
+     *            the amount of hits to calculate, with minimum of {@code 0} and
+     *            a maximum of {@code 1}.
      * @return an array of the calculated hits.
      */
     private final CombatHit[] calculateHits(int amount) {
@@ -169,8 +169,8 @@ public class CombatSessionData {
      * victim. Do <b>not</b> reset the combat builder here!
      *
      * @param counter
-     *         the amount of damage this attack inflicted, always {@code 0}
-     *         if the attack was inaccurate.
+     *            the amount of damage this attack inflicted, always {@code 0}
+     *            if the attack was inaccurate.
      */
     public void postAttack(int counter) {
 
@@ -207,7 +207,7 @@ public class CombatSessionData {
      * Sets the value for {@link CombatSessionData#accurate}.
      *
      * @param accurate
-     *         the new value to set.
+     *            the new value to set.
      */
     public final void setAccurate(boolean accurate) {
         this.accurate = accurate;
@@ -244,7 +244,7 @@ public class CombatSessionData {
      * Determines if accuracy should be taken into account.
      *
      * @return {@code true} if accuracy should be calculated, {@code false}
-     * otherwise.
+     *         otherwise.
      */
     public final boolean isCheckAccuracy() {
         return checkAccuracy;

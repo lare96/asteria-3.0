@@ -6,8 +6,8 @@ package com.asteria.utility;
  * <p>
  * <p>
  * Please note that a maximum of only {@code 32} masks can be used.
- * Alternatively, a backing {@code long} can be used to ensure that a maximum
- * of {@code 64} masks can be used.
+ * Alternatively, a backing {@code long} can be used to ensure that a maximum of
+ * {@code 64} masks can be used.
  *
  * @author lare96 <http://github.com/lare96>
  */
@@ -22,7 +22,7 @@ public final class BitMask {
      * Creates a new {@link BitMask}.
      *
      * @param flags
-     *         the initial flags to create this bit mask with.
+     *            the initial flags to create this bit mask with.
      */
     public BitMask(int flags) {
         this.flags = flags;
@@ -51,7 +51,7 @@ public final class BitMask {
      * current state.
      *
      * @param mask
-     *         the mask to activate in this bit mask.
+     *            the mask to activate in this bit mask.
      */
     public void set(int mask) {
         flags |= mask;
@@ -62,7 +62,7 @@ public final class BitMask {
      * its current state.
      *
      * @param mask
-     *         the mask to deactivate in this bit mask.
+     *            the mask to deactivate in this bit mask.
      */
     public void unset(int mask) {
         flags &= ~mask;
@@ -72,7 +72,7 @@ public final class BitMask {
      * Checks if the state of {@code mask} is active in this bit mask.
      *
      * @param mask
-     *         the mask to has the state of.
+     *            the mask to has the state of.
      * @return {@code true} if the mask is activated, {@code false} otherwise.
      */
     public boolean has(int mask) {
@@ -83,7 +83,7 @@ public final class BitMask {
      * Flips {@code mask} in this bit mask, effectively toggling the state.
      *
      * @param mask
-     *         the mask to toggle the state of.
+     *            the mask to toggle the state of.
      */
     public void flip(int mask) {
         flags ^= mask;
@@ -97,8 +97,8 @@ public final class BitMask {
     }
 
     /**
-     * The flag that determines if this bit mask is empty, or in other words
-     * if this bit mask does not have any active or inactivate flags.
+     * The flag that determines if this bit mask is empty, or in other words if
+     * this bit mask does not have any active or inactivate flags.
      *
      * @return {@code true} if this bit mask is empty, {@code false} otherwise.
      */

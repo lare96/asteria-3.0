@@ -5,8 +5,7 @@ package com.asteria.task;
  * assignment when some sort of occurrence happens. They can be configured to
  * stop listening after the occurrence happens, or to keep listening and
  * executing the assignment accordingly. These event listeners can also be
- * configured to check for the occurrence at certain rates (which of course,
- * can
+ * configured to check for the occurrence at certain rates (which of course, can
  * be dynamically changed).
  *
  * @author lare96 <http://github.com/lare96>
@@ -22,9 +21,9 @@ public abstract class EventListener extends Task {
      * Create a new {@link EventListener}.
      *
      * @param shutdown
-     *         if the listener should shutdown after execution.
+     *            if the listener should shutdown after execution.
      * @param rate
-     *         the rate in which the listener will listen.
+     *            the rate in which the listener will listen.
      */
     public EventListener(boolean shutdown, int rate) {
         super(rate, true);
@@ -44,7 +43,7 @@ public abstract class EventListener extends Task {
      * this method returns {@code false}.
      *
      * @return {@code true} if the code can be executed, {@code false} if the
-     * listener should keep listening.
+     *         listener should keep listening.
      */
     public abstract boolean canExecute();
 

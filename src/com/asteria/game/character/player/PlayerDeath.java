@@ -43,7 +43,7 @@ public final class PlayerDeath extends CharacterDeath<Player> {
      * Creates a new {@link PlayerDeath}.
      *
      * @param player
-     *         the player who has died and needs the death process.
+     *            the player who has died and needs the death process.
      */
     public PlayerDeath(Player player) {
         super(player);
@@ -60,7 +60,9 @@ public final class PlayerDeath extends CharacterDeath<Player> {
     public void death(Player character) {
         Optional<Player> killer = character.getCombatBuilder().getDamageCache().calculateKiller();
         Optional<Minigame> optional = MinigameHandler.search(character);
-        killer.ifPresent(k -> k.getEncoder().sendMessage(random.random(Settings.DEATH_MESSAGES).replaceAll("-victim-", character.getFormatUsername()).replaceAll("-killer-", k.getFormatUsername())));
+        killer.ifPresent(k -> k.getEncoder().sendMessage(
+            random.random(Settings.DEATH_MESSAGES).replaceAll("-victim-", character.getFormatUsername()).replaceAll("-killer-",
+                k.getFormatUsername())));
         if (optional.isPresent()) {
             optional.get().onDeath(character);
             if (!optional.get().canKeepItems(character)) {
@@ -92,7 +94,9 @@ public final class PlayerDeath extends CharacterDeath<Player> {
         character.getTeleblockTimer().set(0);
         character.animation(new Animation(65535));
         WeaponInterface.execute(character, character.getEquipment().get(Equipment.WEAPON_SLOT));
-        character.getEncoder().sendMessage(character.getRights().less(Rights.ADMINISTRATOR) ? "Oh dear, you're dead!" : "You are " + "unaffected by death because of your rank.");
+        character.getEncoder().sendMessage(
+            character.getRights().less(Rights.ADMINISTRATOR) ? "Oh dear, you're dead!"
+                : "You are " + "unaffected by death because of your rank.");
         character.getEncoder().sendWalkable(65535);
         CombatPrayer.deactivateAll(character);
         Skills.restoreAll(character);
@@ -104,13 +108,15 @@ public final class PlayerDeath extends CharacterDeath<Player> {
      * {@code killer}.
      *
      * @param character
-     *         the character whose items are being dropped.
+     *            the character whose items are being dropped.
      * @param killer
-     *         the killer who the items are being dropped for.
+     *            the killer who the items are being dropped for.
      */
     private void calculateDropItems(Player character, Optional<Player> killer) {
         List<Item> keep = new LinkedList<>();
-        Arrays.stream(Settings.KEEP_ON_DEATH).filter(id -> character.getEquipment().unequipItem(new Item(id), false) || character.getInventory().remove(new Item(id))).forEach(id -> keep.add(new Item(id)));
+        Arrays.stream(Settings.KEEP_ON_DEATH).filter(
+            id -> character.getEquipment().unequipItem(new Item(id), false) || character.getInventory().remove(new Item(id))).forEach(
+            id -> keep.add(new Item(id)));
         List<Item> items = new LinkedList<>();
         Collections.addAll(items, character.getEquipment().containerCopy());
         Collections.addAll(items, character.getInventory().containerCopy());
@@ -122,8 +128,9 @@ public final class PlayerDeath extends CharacterDeath<Player> {
         if (CombatPrayer.isActivated(character, CombatPrayer.PROTECT_ITEM))
             amount++;
         if (amount > 0) {
-            items.sort(Collections.reverseOrder((one, two) -> Integer.compare(one.getDefinition().getGeneralPrice(), two.getDefinition().getGeneralPrice())));
-            for (Iterator<Item> it = items.iterator(); it.hasNext(); ) {
+            items.sort(Collections.reverseOrder((one, two) -> Integer.compare(one.getDefinition().getGeneralPrice(), two.getDefinition()
+                .getGeneralPrice())));
+            for (Iterator<Item> it = items.iterator(); it.hasNext();) {
                 Item next = it.next();
                 if (amount == 0) {
                     break;
@@ -137,7 +144,9 @@ public final class PlayerDeath extends CharacterDeath<Player> {
                 amount--;
             }
         }
-        items.stream().forEach(item -> ItemNodeManager.register(!killer.isPresent() ? new ItemNodeStatic(item, character.getPosition()) : new ItemNode(item, character.getPosition(), killer.get())));
+        items.stream().forEach(
+            item -> ItemNodeManager.register(!killer.isPresent() ? new ItemNodeStatic(item, character.getPosition()) : new ItemNode(item,
+                character.getPosition(), killer.get())));
         character.getInventory().addAll(keep);
     }
 }

@@ -3,8 +3,7 @@ package com.asteria.game.character.combat.magic;
 import com.asteria.game.character.CharacterNode;
 
 /**
- * The {@link CombatSpell} extension with support for normal spells that have
- * no
+ * The {@link CombatSpell} extension with support for normal spells that have no
  * effects whatsoever.
  *
  * @author lare96 <http://github.com/lare96>

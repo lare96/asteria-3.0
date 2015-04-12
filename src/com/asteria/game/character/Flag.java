@@ -28,7 +28,7 @@ public enum Flag {
      * Creates a new {@link Flag}.
      *
      * @param id
-     *         the identification for this update flag.
+     *            the identification for this update flag.
      */
     private Flag(int id) {
         this.id = id;

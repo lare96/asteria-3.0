@@ -34,13 +34,13 @@ public final class NpcDrop {
      * Creates a new {@link NpcDrop}.
      *
      * @param id
-     *         the identification of this NPC drop.
+     *            the identification of this NPC drop.
      * @param minimum
-     *         the minimum amount that will be dropped.
+     *            the minimum amount that will be dropped.
      * @param maximum
-     *         the maximum amount that will be dropped.
+     *            the maximum amount that will be dropped.
      * @param chance
-     *         the chance of this item being dropped.
+     *            the chance of this item being dropped.
      */
     public NpcDrop(int id, int minimum, int maximum, NpcDropChance chance) {
         this.id = id;
@@ -53,7 +53,7 @@ public final class NpcDrop {
      * Converts this NPC drop into an {@link Item} object.
      *
      * @param random
-     *         the random number generator to use.
+     *            the random number generator to use.
      * @return the converted NPC drop.
      */
     public Item toItem(RandomGen random) {

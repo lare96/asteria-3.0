@@ -47,7 +47,7 @@ public enum Expression {
      * Creates a new {@link Expression}.
      *
      * @param expression
-     *         the identification for this expression.
+     *            the identification for this expression.
      */
     private Expression(int expression) {
         this.expression = expression;

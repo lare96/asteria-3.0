@@ -42,7 +42,7 @@ public final class ServerHandler {
      * The default constructor.
      *
      * @throws UnsupportedOperationException
-     *         if this class is instantiated.
+     *             if this class is instantiated.
      */
     private ServerHandler() {
         throw new UnsupportedOperationException();
@@ -53,9 +53,9 @@ public final class ServerHandler {
      * server socket channel.
      *
      * @param port
-     *         the port to open this server handler on.
+     *            the port to open this server handler on.
      * @throws Exception
-     *         if any errors occur while starting the server handler.
+     *             if any errors occur while starting the server handler.
      */
     public static void start(int port) throws Exception {
         Preconditions.checkState(server == null && selector == null);

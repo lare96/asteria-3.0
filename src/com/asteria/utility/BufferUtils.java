@@ -11,7 +11,7 @@ public final class BufferUtils {
      * The default constructor.
      *
      * @throws UnsupportedOperationException
-     *         if this class is instantiated.
+     *             if this class is instantiated.
      */
     private BufferUtils() {
         throw new UnsupportedOperationException("This class cannot be " + "instantiated!");
@@ -21,7 +21,7 @@ public final class BufferUtils {
      * Converts an array of bytes to an {@code int}.
      *
      * @param data
-     *         the array of bytes.
+     *            the array of bytes.
      * @return the newly constructed {@code int}.
      */
     public static int hexToInt(byte[] data) {

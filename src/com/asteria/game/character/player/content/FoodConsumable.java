@@ -146,8 +146,7 @@ public enum FoodConsumable {
                 int id = random.inclusiveExcludes(0, player.getSkills().length, Skills.HITPOINTS);
                 Skill randomSkill = player.getSkills()[id];
                 randomSkill.decreaseLevel(random.exclusive(3));
-                player.getEncoder().sendMessage("Eating the kebab has damaged" +
-                        " your " + SkillData.values()[id] + " stat.");
+                player.getEncoder().sendMessage("Eating the kebab has damaged" + " your " + SkillData.values()[id] + " stat.");
                 return;
             }
         }
@@ -167,9 +166,9 @@ public enum FoodConsumable {
      * Creates a new {@link FoodConsumable}.
      *
      * @param healAmount
-     *         the amount of hit points this food heals.
+     *            the amount of hit points this food heals.
      * @param ids
-     *         the identifiers which represent this food type.
+     *            the identifiers which represent this food type.
      */
     private FoodConsumable(int healAmount, int... ids) {
         this.ids = ids;
@@ -185,11 +184,11 @@ public enum FoodConsumable {
      * Attempts to consume {@code item} in {@code slot} for {@code player}.
      *
      * @param player
-     *         the player attempting to consume the item.
+     *            the player attempting to consume the item.
      * @param item
-     *         the item being consumed by the player.
+     *            the item being consumed by the player.
      * @param slot
-     *         the slot the player is consuming from.
+     *            the slot the player is consuming from.
      * @return {@code true} if the item was consumed, {@code false} otherwise.
      */
     public static boolean consume(Player player, Item item, int slot) {
@@ -214,13 +213,12 @@ public enum FoodConsumable {
     }
 
     /**
-     * The method executed after the player has successfully consumed this
-     * food.
+     * The method executed after the player has successfully consumed this food.
      * This method may be overridden to provide a different functionality for
      * such foods as kebabs.
      *
      * @param player
-     *         the player that has consumed the food.
+     *            the player that has consumed the food.
      */
     public void onEffect(Player player) {
         Skill skill = player.getSkills()[Skills.HITPOINTS];
@@ -258,9 +256,9 @@ public enum FoodConsumable {
      * Retrieves the replacement item for {@code item}.
      *
      * @param item
-     *         the item to retrieve the replacement item for.
+     *            the item to retrieve the replacement item for.
      * @return the replacement item wrapped in an optional, or an empty optional
-     * if no replacement item is available.
+     *         if no replacement item is available.
      */
     private static Optional<Item> getReplacementItem(Item item) {
         Optional<FoodConsumable> food = forId(item.getId());
@@ -279,9 +277,9 @@ public enum FoodConsumable {
      * Retrieves the food consumable element for {@code id}.
      *
      * @param id
-     *         the id that the food consumable is attached to.
+     *            the id that the food consumable is attached to.
      * @return the food consumable wrapped in an optional, or an empty optional
-     * if no food consumable was found.
+     *         if no food consumable was found.
      */
     private static Optional<FoodConsumable> forId(int id) {
         for (FoodConsumable food : FoodConsumable.values()) {

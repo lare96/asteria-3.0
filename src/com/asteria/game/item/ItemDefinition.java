@@ -93,37 +93,39 @@ public final class ItemDefinition {
      * Creates a new {@link ItemDefinition}.
      *
      * @param id
-     *         the identifier for the item.
+     *            the identifier for the item.
      * @param name
-     *         the proper name of the item.
+     *            the proper name of the item.
      * @param description
-     *         the description of the item.
+     *            the description of the item.
      * @param equipmentSlot
-     *         the equipment slot of this item.
+     *            the equipment slot of this item.
      * @param noteable
-     *         the flag that determines if the item is noteable.
+     *            the flag that determines if the item is noteable.
      * @param stackable
-     *         the flag that determines if the item is stackable.
+     *            the flag that determines if the item is stackable.
      * @param specialPrice
-     *         the special store price of this item.
+     *            the special store price of this item.
      * @param generalPrice
-     *         the general store price of this item.
+     *            the general store price of this item.
      * @param lowAlchValue
-     *         the low alch value of this item.
+     *            the low alch value of this item.
      * @param highAlchValue
-     *         the high alch value of this item.
+     *            the high alch value of this item.
      * @param weight
-     *         the weight value of this item.
+     *            the weight value of this item.
      * @param bonus
-     *         the array of bonuses for this item.
+     *            the array of bonuses for this item.
      * @param twoHanded
-     *         the flag that determines if this item is two-handed.
+     *            the flag that determines if this item is two-handed.
      * @param fullHelm
-     *         the flag that determines if this item is a full helmet.
+     *            the flag that determines if this item is a full helmet.
      * @param platebody
-     *         the flag that determines if this item is a platebody.
+     *            the flag that determines if this item is a platebody.
      */
-    public ItemDefinition(int id, String name, String description, int equipmentSlot, boolean noteable, boolean stackable, int specialPrice, int generalPrice, int lowAlchValue, int highAlchValue, double weight, int[] bonus, boolean twoHanded, boolean fullHelm, boolean platebody) {
+    public ItemDefinition(int id, String name, String description, int equipmentSlot, boolean noteable, boolean stackable,
+        int specialPrice, int generalPrice, int lowAlchValue, int highAlchValue, double weight, int[] bonus, boolean twoHanded,
+        boolean fullHelm, boolean platebody) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -146,8 +148,8 @@ public final class ItemDefinition {
      * The method that erases the prayer bonus from ranged weapons.
      */
     private void prayerBonus() {
-        if (equipmentSlot == Equipment.ARROWS_SLOT || name.contains("knife") || name.contains("dart") || name.contains("thrownaxe") ||
-                name.contains("javelin")) {
+        if (equipmentSlot == Equipment.ARROWS_SLOT || name.contains("knife") || name.contains("dart") || name.contains("thrownaxe") || name
+            .contains("javelin")) {
             bonus[11] = 0;
         }
     }
@@ -282,7 +284,7 @@ public final class ItemDefinition {
      * Determines if this item is a full helmet or not.
      *
      * @return {@code true} if this item is a full helmet, {@code false}
-     * otherwise.
+     *         otherwise.
      */
     public boolean isFullHelm() {
         return fullHelm;
@@ -292,7 +294,7 @@ public final class ItemDefinition {
      * Determines if this item is a platebody or not.
      *
      * @return {@code true} if this item is a platebody, {@code false}
-     * otherwise.
+     *         otherwise.
      */
     public boolean isPlatebody() {
         return platebody;

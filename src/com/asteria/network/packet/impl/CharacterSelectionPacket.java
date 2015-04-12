@@ -17,35 +17,35 @@ public final class CharacterSelectionPacket extends PacketDecoder {
     /**
      * The valid colors for the character selection packet.
      */
-    private static final int[][] VALID_COLORS = {{0, 11}, // hair color
-            {0, 15}, // torso color
-            {0, 15}, // legs color
-            {0, 5}, // feet color
-            {0, 7} // skin color
+    private static final int[][] VALID_COLORS = { { 0, 11 }, // hair color
+            { 0, 15 }, // torso color
+            { 0, 15 }, // legs color
+            { 0, 5 }, // feet color
+            { 0, 7 } // skin color
     };
 
     /**
      * The valid female appearance values for the character selection packet.
      */
-    private static final int[][] FEMALE_VALUES = {{45, 54}, // head
-            {-1, -1}, // jaw
-            {56, 60}, // torso
-            {61, 65}, // arms
-            {67, 68}, // hands
-            {70, 77}, // legs
-            {79, 80}, // feet
+    private static final int[][] FEMALE_VALUES = { { 45, 54 }, // head
+            { -1, -1 }, // jaw
+            { 56, 60 }, // torso
+            { 61, 65 }, // arms
+            { 67, 68 }, // hands
+            { 70, 77 }, // legs
+            { 79, 80 }, // feet
     };
 
     /**
      * The valid male appearance values for the character selection packet.
      */
-    private static final int[][] MALE_VALUES = {{0, 8}, // head
-            {10, 17}, // jaw
-            {18, 25}, // torso
-            {26, 31}, // arms
-            {33, 34}, // hands
-            {36, 40}, // legs
-            {42, 43}, // feet
+    private static final int[][] MALE_VALUES = { { 0, 8 }, // head
+            { 10, 17 }, // jaw
+            { 18, 25 }, // torso
+            { 26, 31 }, // arms
+            { 33, 34 }, // hands
+            { 36, 40 }, // legs
+            { 42, 43 }, // feet
     };
 
     @Override
@@ -60,7 +60,8 @@ public final class CharacterSelectionPacket extends PacketDecoder {
         values[cursor++] = gender;
         for (int i = 0; i < 7; i++) {
             int value = buf.get();
-            if ((value < (gender == 0 ? MALE_VALUES[i][0] : FEMALE_VALUES[i][0])) || (value > (gender == 0 ? MALE_VALUES[i][1] : FEMALE_VALUES[i][1]))) {
+            if ((value < (gender == 0 ? MALE_VALUES[i][0] : FEMALE_VALUES[i][0])) || (value > (gender == 0 ? MALE_VALUES[i][1]
+                : FEMALE_VALUES[i][1]))) {
                 return;
             }
             values[cursor++] = value;

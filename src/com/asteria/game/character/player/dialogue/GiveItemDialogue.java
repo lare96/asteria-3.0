@@ -23,9 +23,9 @@ public final class GiveItemDialogue implements DialogueChain {
      * Creates a new {@link GiveItemDialogue}.
      *
      * @param item
-     *         the item to give to the player during this chain.
+     *            the item to give to the player during this chain.
      * @param text
-     *         the text to display when the item is given.
+     *            the text to display when the item is given.
      */
     public GiveItemDialogue(Item item, String text) {
         this.item = item;

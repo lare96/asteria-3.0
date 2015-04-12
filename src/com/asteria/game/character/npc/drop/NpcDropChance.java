@@ -33,9 +33,9 @@ public enum NpcDropChance {
      * Creates a new {@link NpcDropChance}.
      *
      * @param numerator
-     *         the numerator of this NPC drop rate.
+     *            the numerator of this NPC drop rate.
      * @param denominator
-     *         the denominator of this NPC drop rate.
+     *            the denominator of this NPC drop rate.
      */
     private NpcDropChance(int numerator, int denominator) {
         this.numerator = numerator;
@@ -46,7 +46,7 @@ public enum NpcDropChance {
      * Determines if an NPC drop will be successful or not.
      *
      * @param random
-     *         the random number generator used to determine this.
+     *            the random number generator used to determine this.
      * @return {@code true} if the drop was successful, {@code false} otherwise.
      */
     public boolean successful(RandomGen random) {

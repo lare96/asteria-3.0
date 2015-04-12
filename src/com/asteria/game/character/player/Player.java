@@ -160,12 +160,15 @@ public final class Player extends CharacterNode {
     /**
      * The collection of stopwatches used for various timing operations.
      */
-    private final Stopwatch eatingTimer = new Stopwatch().reset(), potionTimer = new Stopwatch().reset(), tolerance = new Stopwatch(), lastEnergy = new Stopwatch().reset(), buryTimer = new Stopwatch();
+    private final Stopwatch eatingTimer = new Stopwatch().reset(), potionTimer = new Stopwatch().reset(), tolerance = new Stopwatch(),
+        lastEnergy = new Stopwatch().reset(), buryTimer = new Stopwatch();
 
     /**
      * The collection of counters used for various counting operations.
      */
-    private final MutableNumber poisonImmunity = new MutableNumber(), teleblockTimer = new MutableNumber(), fireImmunity = new MutableNumber(), skullTimer = new MutableNumber(), runEnergy = new MutableNumber(100), specialPercentage = new MutableNumber(100);
+    private final MutableNumber poisonImmunity = new MutableNumber(), teleblockTimer = new MutableNumber(),
+        fireImmunity = new MutableNumber(), skullTimer = new MutableNumber(), runEnergy = new MutableNumber(100),
+        specialPercentage = new MutableNumber(100);
 
     /**
      * The encoder that will encode and send packets.
@@ -392,7 +395,7 @@ public final class Player extends CharacterNode {
      * Creates a new {@link Player}.
      *
      * @param session
-     *         the I/O manager that manages I/O operations for this player.
+     *            the I/O manager that manages I/O operations for this player.
      */
     public Player(PlayerIO session) {
         super(Settings.STARTING_POSITION, NodeType.PLAYER);
@@ -513,8 +516,7 @@ public final class Player extends CharacterNode {
             }
             return Combat.newDefaultMagicStrategy();
         }
-        if (weapon == WeaponInterface.SHORTBOW || weapon == WeaponInterface.LONGBOW || weapon == WeaponInterface.CROSSBOW || weapon == WeaponInterface.DART || weapon == WeaponInterface.JAVELIN ||
-                weapon == WeaponInterface.THROWNAXE || weapon == WeaponInterface.KNIFE) {
+        if (weapon == WeaponInterface.SHORTBOW || weapon == WeaponInterface.LONGBOW || weapon == WeaponInterface.CROSSBOW || weapon == WeaponInterface.DART || weapon == WeaponInterface.JAVELIN || weapon == WeaponInterface.THROWNAXE || weapon == WeaponInterface.KNIFE) {
             return Combat.newDefaultRangedStrategy();
         }
         return Combat.newDefaultMeleeStrategy();
@@ -522,20 +524,19 @@ public final class Player extends CharacterNode {
 
     @Override
     public void onSuccessfulHit(CharacterNode victim, CombatType type) {
-        if (type == CombatType.MELEE || weapon == WeaponInterface.DART ||
-                weapon == WeaponInterface.KNIFE || weapon == WeaponInterface.THROWNAXE || weapon == WeaponInterface.JAVELIN) {
-            Combat.effect(new CombatPoisonEffect(this, CombatPoisonEffect.getPoisonType(equipment.get(Equipment.WEAPON_SLOT)).orElse(null)));
+        if (type == CombatType.MELEE || weapon == WeaponInterface.DART || weapon == WeaponInterface.KNIFE || weapon == WeaponInterface.THROWNAXE || weapon == WeaponInterface.JAVELIN) {
+            Combat
+                .effect(new CombatPoisonEffect(this, CombatPoisonEffect.getPoisonType(equipment.get(Equipment.WEAPON_SLOT)).orElse(null)));
         } else if (type == CombatType.RANGED) {
-            Combat.effect(new CombatPoisonEffect(this, CombatPoisonEffect.getPoisonType(equipment.get(Equipment.ARROWS_SLOT)).orElse(null)));
+            Combat
+                .effect(new CombatPoisonEffect(this, CombatPoisonEffect.getPoisonType(equipment.get(Equipment.ARROWS_SLOT)).orElse(null)));
         }
     }
 
     @Override
     public int getAttackSpeed() {
         int speed = weapon.getSpeed();
-        if (fightType == FightType.CROSSBOW_RAPID || fightType == FightType.SHORTBOW_RAPID || fightType == FightType.LONGBOW_RAPID ||
-                fightType == FightType.DART_RAPID || fightType == FightType.KNIFE_RAPID || fightType == FightType.THROWNAXE_RAPID ||
-                fightType == FightType.JAVELIN_RAPID) {
+        if (fightType == FightType.CROSSBOW_RAPID || fightType == FightType.SHORTBOW_RAPID || fightType == FightType.LONGBOW_RAPID || fightType == FightType.DART_RAPID || fightType == FightType.KNIFE_RAPID || fightType == FightType.THROWNAXE_RAPID || fightType == FightType.JAVELIN_RAPID) {
             speed--;
         } else if (fightType == FightType.CROSSBOW_LONGRANGE || fightType == FightType.SHORTBOW_LONGRANGE || fightType == FightType.LONGBOW_LONGRANGE || fightType == FightType.DART_LONGRANGE || fightType == FightType.KNIFE_LONGRANGE || fightType == FightType.THROWNAXE_LONGRANGE || fightType == FightType.JAVELIN_LONGRANGE) {
             speed++;
@@ -550,9 +551,8 @@ public final class Player extends CharacterNode {
 
     @Override
     public String toString() {
-        return username == null ? session.toString() : "PLAYER[username= " +
-                username + ", host= " + session.getHost() + ", rights= " +
-                rights + "]";
+        return username == null ? session.toString()
+            : "PLAYER[username= " + username + ", host= " + session.getHost() + ", rights= " + rights + "]";
     }
 
     @Override
@@ -585,7 +585,8 @@ public final class Player extends CharacterNode {
     @Override
     public boolean weaken(CombatWeaken effect) {
         PacketEncoder encoder = getEncoder();
-        int id = (effect == CombatWeaken.ATTACK_LOW || effect == CombatWeaken.ATTACK_HIGH ? Skills.ATTACK : effect == CombatWeaken.STRENGTH_LOW || effect == CombatWeaken.STRENGTH_HIGH ? Skills.STRENGTH : Skills.DEFENCE);
+        int id = (effect == CombatWeaken.ATTACK_LOW || effect == CombatWeaken.ATTACK_HIGH ? Skills.ATTACK
+            : effect == CombatWeaken.STRENGTH_LOW || effect == CombatWeaken.STRENGTH_HIGH ? Skills.STRENGTH : Skills.DEFENCE);
         if (skills[id].getLevel() < skills[id].getRealLevel())
             return false;
         skills[id].decreaseLevel((int) ((effect.getRate()) * (skills[id].getLevel())));
@@ -597,10 +598,10 @@ public final class Player extends CharacterNode {
      * Applies the forced movement update mask to this player.
      *
      * @param movement
-     *         the forced movement to apply.
+     *            the forced movement to apply.
      * @param ticks
-     *         the amount of ticks it will take for this movement to
-     *         complete.
+     *            the amount of ticks it will take for this movement to
+     *            complete.
      */
     public void movement(ForcedMovement movement, int ticks) {
         TaskHandler.submit(new Task(ticks, false) {
@@ -619,7 +620,7 @@ public final class Player extends CharacterNode {
      * Attempts to teleport this player somewhere based on {@code spell}.
      *
      * @param spell
-     *         the spell the player is using to teleport.
+     *            the spell the player is using to teleport.
      */
     public void teleport(TeleportSpell spell) {
         if (viewingOrb != null)
@@ -658,12 +659,11 @@ public final class Player extends CharacterNode {
     }
 
     /**
-     * Attempts to teleport this player somewhere based on the type of
-     * spellbook
+     * Attempts to teleport this player somewhere based on the type of spellbook
      * they have open.
      *
      * @param position
-     *         the position that the player will be moved to.
+     *            the position that the player will be moved to.
      */
     public void teleport(Position position) {
         teleport(new TeleportSpell() {
@@ -698,7 +698,7 @@ public final class Player extends CharacterNode {
      * Moves this player to {@code position}.
      *
      * @param position
-     *         the position to move this player to.
+     *            the position to move this player to.
      */
     public void move(Position position) {
         PacketEncoder encoder = getEncoder();
@@ -793,7 +793,8 @@ public final class Player extends CharacterNode {
             }
         }
         for (int i = 0; i < bonus.length; i++) {
-            encoder.sendString(Combat.BONUS_NAMES[i] + ": " + (bonus[i] >= 0 ? "+" : "") + bonus[i], (1675 + i + (i == 10 || i == 11 ? 1 : 0)));
+            encoder.sendString(Combat.BONUS_NAMES[i] + ": " + (bonus[i] >= 0 ? "+" : "") + bonus[i], (1675 + i + (i == 10 || i == 11 ? 1
+                : 0)));
         }
     }
 
@@ -948,7 +949,7 @@ public final class Player extends CharacterNode {
      * Determines if this player is executing a skill action.
      *
      * @return {@code true} if this player is currently executing a skill
-     * action, {@code false} otherwise.
+     *         action, {@code false} otherwise.
      */
     public boolean isSkillAction() {
         return skillAction;
@@ -958,7 +959,7 @@ public final class Player extends CharacterNode {
      * Sets the value for {@link Player#skillAction}.
      *
      * @param skillAction
-     *         the new value to set.
+     *            the new value to set.
      */
     public void setSkillAction(boolean skillAction) {
         this.skillAction = skillAction;
@@ -1076,7 +1077,7 @@ public final class Player extends CharacterNode {
      * Sets the value for {@link Player#rights}.
      *
      * @param rights
-     *         the new value to set.
+     *            the new value to set.
      */
     public void setRights(Rights rights) {
         this.rights = rights;
@@ -1095,7 +1096,7 @@ public final class Player extends CharacterNode {
      * Sets the value for {@link Player#openShop}.
      *
      * @param openShop
-     *         the new value to set.
+     *            the new value to set.
      */
     public void setOpenShop(String openShop) {
         if (openShop == null && this.openShop != null)
@@ -1116,7 +1117,7 @@ public final class Player extends CharacterNode {
      * Sets the value for {@link Player#username}.
      *
      * @param username
-     *         the new value to set.
+     *            the new value to set.
      */
     public void setUsername(String username) {
         this.username = username;
@@ -1135,7 +1136,7 @@ public final class Player extends CharacterNode {
      * Sets the value for {@link Player#password}.
      *
      * @param password
-     *         the new value to set.
+     *            the new value to set.
      */
     public void setPassword(String password) {
         this.password = password;
@@ -1154,7 +1155,7 @@ public final class Player extends CharacterNode {
      * Sets the value for {@link Player#castSpell}.
      *
      * @param castSpell
-     *         the new value to set.
+     *            the new value to set.
      */
     public void setCastSpell(CombatSpell castSpell) {
         this.castSpell = castSpell;
@@ -1173,7 +1174,7 @@ public final class Player extends CharacterNode {
      * Sets the value for {@link Player#rangedAmmo}.
      *
      * @param rangedAmmo
-     *         the new value to set.
+     *            the new value to set.
      */
     public void setRangedAmmo(CombatRangedAmmo rangedAmmo) {
         this.rangedAmmo = rangedAmmo;
@@ -1192,7 +1193,7 @@ public final class Player extends CharacterNode {
      * Sets the value for {@link Player#autocast}.
      *
      * @param autocast
-     *         the new value to set.
+     *            the new value to set.
      */
     public void setAutocast(boolean autocast) {
         this.autocast = autocast;
@@ -1211,7 +1212,7 @@ public final class Player extends CharacterNode {
      * Sets the value for {@link Player#autocastSpell}.
      *
      * @param autocastSpell
-     *         the new value to set.
+     *            the new value to set.
      */
     public void setAutocastSpell(CombatSpell autocastSpell) {
         this.autocastSpell = autocastSpell;
@@ -1230,7 +1231,7 @@ public final class Player extends CharacterNode {
      * Sets the value for {@link Player#combatSpecial}.
      *
      * @param combatSpecial
-     *         the new value to set.
+     *            the new value to set.
      */
     public void setCombatSpecial(CombatSpecial combatSpecial) {
         this.combatSpecial = combatSpecial;
@@ -1249,7 +1250,7 @@ public final class Player extends CharacterNode {
      * Sets the value for {@link Player#fireAmmo}.
      *
      * @param fireAmmo
-     *         the new value to set.
+     *            the new value to set.
      */
     public void setFireAmmo(int fireAmmo) {
         this.fireAmmo = fireAmmo;
@@ -1268,7 +1269,7 @@ public final class Player extends CharacterNode {
      * Sets the value for {@link Player#specialActivated}.
      *
      * @param specialActivated
-     *         the new value to set.
+     *            the new value to set.
      */
     public void setSpecialActivated(boolean specialActivated) {
         this.specialActivated = specialActivated;
@@ -1287,7 +1288,7 @@ public final class Player extends CharacterNode {
      * Sets the value for {@link Player#fightType}.
      *
      * @param fightType
-     *         the new value to set.
+     *            the new value to set.
      */
     public void setFightType(FightType fightType) {
         this.fightType = fightType;
@@ -1306,7 +1307,7 @@ public final class Player extends CharacterNode {
      * Sets the value for {@link Player#weaponAnimation}.
      *
      * @param weaponAnimation
-     *         the new value to set.
+     *            the new value to set.
      */
     public void setWeaponAnimation(WeaponAnimation weaponAnimation) {
         this.weaponAnimation = weaponAnimation;
@@ -1325,7 +1326,7 @@ public final class Player extends CharacterNode {
      * Sets the value for {@link Player#prayerDrain}.
      *
      * @param prayerDrain
-     *         the new value to set.
+     *            the new value to set.
      */
     public void setPrayerDrain(Task prayerDrain) {
         this.prayerDrain = prayerDrain;
@@ -1344,7 +1345,7 @@ public final class Player extends CharacterNode {
      * Sets the value for {@link Player#wildernessLevel}.
      *
      * @param wildernessLevel
-     *         the new value to set.
+     *            the new value to set.
      */
     public void setWildernessLevel(int wildernessLevel) {
         this.wildernessLevel = wildernessLevel;
@@ -1363,7 +1364,7 @@ public final class Player extends CharacterNode {
      * Sets the value for {@link Player#weapon}.
      *
      * @param weapon
-     *         the new value to set.
+     *            the new value to set.
      */
     public void setWeapon(WeaponInterface weapon) {
         this.weapon = weapon;
@@ -1382,7 +1383,7 @@ public final class Player extends CharacterNode {
      * Sets the value for {@link Player#teleportStage}.
      *
      * @param teleportStage
-     *         the new value to set.
+     *            the new value to set.
      */
     public void setTeleportStage(int teleportStage) {
         this.teleportStage = teleportStage;
@@ -1401,7 +1402,7 @@ public final class Player extends CharacterNode {
      * Sets the value for {@link Player#usingStove}.
      *
      * @param usingStove
-     *         the new value to set.
+     *            the new value to set.
      */
     public void setUsingStove(boolean usingStove) {
         this.usingStove = usingStove;
@@ -1420,7 +1421,7 @@ public final class Player extends CharacterNode {
      * Sets the value for {@link Player#cookData}.
      *
      * @param cookData
-     *         the new value to set.
+     *            the new value to set.
      */
     public void setCookData(CookingData cookData) {
         this.cookData = cookData;
@@ -1439,7 +1440,7 @@ public final class Player extends CharacterNode {
      * Sets the value for {@link Player#cookPosition}.
      *
      * @param cookPosition
-     *         the new value to set.
+     *            the new value to set.
      */
     public void setCookPosition(Position cookPosition) {
         this.cookPosition = cookPosition;
@@ -1458,7 +1459,7 @@ public final class Player extends CharacterNode {
      * Sets the value for {@link Player#banned}.
      *
      * @param banned
-     *         the new value to set.
+     *            the new value to set.
      */
     public void setBanned(boolean banned) {
         this.banned = banned;
@@ -1468,7 +1469,7 @@ public final class Player extends CharacterNode {
      * Determines if this player has 'accept aid' toggled.
      *
      * @return {@code true} if the player has accept aid toggled, {@code false}
-     * otherwise.
+     *         otherwise.
      */
     public boolean isAcceptAid() {
         return acceptAid;
@@ -1478,7 +1479,7 @@ public final class Player extends CharacterNode {
      * Sets the value for {@link Player#acceptAid}.
      *
      * @param acceptAid
-     *         the new value to set.
+     *            the new value to set.
      */
     public void setAcceptAid(boolean acceptAid) {
         this.acceptAid = acceptAid;
@@ -1497,7 +1498,7 @@ public final class Player extends CharacterNode {
      * Sets the value for {@link Player#option}.
      *
      * @param option
-     *         the new value to set.
+     *            the new value to set.
      */
     public void setOption(OptionType option) {
         this.option = option;
@@ -1516,7 +1517,7 @@ public final class Player extends CharacterNode {
      * Sets the value for {@link Player#headIcon}.
      *
      * @param headIcon
-     *         the new value to set.
+     *            the new value to set.
      */
     public void setHeadIcon(int headIcon) {
         this.headIcon = headIcon;
@@ -1535,7 +1536,7 @@ public final class Player extends CharacterNode {
      * Sets the value for {@link Player#skullIcon}.
      *
      * @param skullIcon
-     *         the new value to set.
+     *            the new value to set.
      */
     public void setSkullIcon(int skullIcon) {
         this.skullIcon = skullIcon;
@@ -1545,7 +1546,7 @@ public final class Player extends CharacterNode {
      * Determines if a wilderness interface is present.
      *
      * @return {@code true} if a wilderness interface is present, {@code false}
-     * otherwise.
+     *         otherwise.
      */
     public boolean isWildernessInterface() {
         return wildernessInterface;
@@ -1555,7 +1556,7 @@ public final class Player extends CharacterNode {
      * Sets the value for {@link Player#wildernessInterface}.
      *
      * @param wildernessInterface
-     *         the new value to set.
+     *            the new value to set.
      */
     public void setWildernessInterface(boolean wildernessInterface) {
         this.wildernessInterface = wildernessInterface;
@@ -1565,7 +1566,7 @@ public final class Player extends CharacterNode {
      * Determines if a multicombat interface is present.
      *
      * @return {@code true} if a multicombat interface is present, {@code false}
-     * otherwise.
+     *         otherwise.
      */
     public boolean isMulticombatInterface() {
         return multicombatInterface;
@@ -1575,7 +1576,7 @@ public final class Player extends CharacterNode {
      * Sets the value for {@link Player#multicombatInterface}.
      *
      * @param multicombatInterface
-     *         the new value to set.
+     *            the new value to set.
      */
     public void setMulticombatInterface(boolean multicombatInterface) {
         this.multicombatInterface = multicombatInterface;
@@ -1594,7 +1595,7 @@ public final class Player extends CharacterNode {
      * Sets the value for {@link Player#newPlayer}.
      *
      * @param newPlayer
-     *         the new value to set.
+     *            the new value to set.
      */
     public void setNewPlayer(boolean newPlayer) {
         this.newPlayer = newPlayer;
@@ -1604,7 +1605,7 @@ public final class Player extends CharacterNode {
      * Determines if items should be inserted when banking.
      *
      * @return {@code true} if items should be inserted, {@code false}
-     * otherwise.
+     *         otherwise.
      */
     public boolean isInsertItem() {
         return insertItem;
@@ -1614,7 +1615,7 @@ public final class Player extends CharacterNode {
      * Sets the value for {@link Player#insertItem}.
      *
      * @param insertItem
-     *         the new value to set.
+     *            the new value to set.
      */
     public void setInsertItem(boolean insertItem) {
         this.insertItem = insertItem;
@@ -1624,7 +1625,7 @@ public final class Player extends CharacterNode {
      * Determines if a bank item should be withdrawn as a note.
      *
      * @return {@code true} if items should be withdrawn as notes, {@code false}
-     * otherwise.
+     *         otherwise.
      */
     public boolean isWithdrawAsNote() {
         return withdrawAsNote;
@@ -1634,7 +1635,7 @@ public final class Player extends CharacterNode {
      * Sets the value for {@link Player#withdrawAsNote}.
      *
      * @param withdrawAsNote
-     *         the new value to set.
+     *            the new value to set.
      */
     public void setWithdrawAsNote(boolean withdrawAsNote) {
         this.withdrawAsNote = withdrawAsNote;
@@ -1653,7 +1654,7 @@ public final class Player extends CharacterNode {
      * Sets the value for {@link Player#spellbook}.
      *
      * @param spellbook
-     *         the new value to set.
+     *            the new value to set.
      */
     public void setSpellbook(Spellbook spellbook) {
         this.spellbook = spellbook;
@@ -1672,7 +1673,7 @@ public final class Player extends CharacterNode {
      * Sets the value for {@link Player#chatText}.
      *
      * @param chatText
-     *         the new value to set.
+     *            the new value to set.
      */
     public void setChatText(byte[] chatText) {
         this.chatText = chatText;
@@ -1691,7 +1692,7 @@ public final class Player extends CharacterNode {
      * Sets the value for {@link Player#chatColor}.
      *
      * @param chatColor
-     *         the new value to set.
+     *            the new value to set.
      */
     public void setChatColor(int chatColor) {
         this.chatColor = chatColor;
@@ -1710,7 +1711,7 @@ public final class Player extends CharacterNode {
      * Sets the value for {@link Player#chatEffects}.
      *
      * @param chatEffects
-     *         the new value to set.
+     *            the new value to set.
      */
     public void setChatEffects(int chatEffects) {
         this.chatEffects = chatEffects;
@@ -1729,7 +1730,7 @@ public final class Player extends CharacterNode {
      * Sets the value for {@link Player#playerNpc}.
      *
      * @param playerNpc
-     *         the new value to set.
+     *            the new value to set.
      */
     public void setPlayerNpc(int playerNpc) {
         this.playerNpc = playerNpc;
@@ -1748,7 +1749,7 @@ public final class Player extends CharacterNode {
      * Sets the value for {@link Player#cachedUpdateBlock}.
      *
      * @param cachedUpdateBlock
-     *         the new value to set.
+     *            the new value to set.
      */
     public void setCachedUpdateBlock(ByteBuffer cachedUpdateBlock) {
         this.cachedUpdateBlock = cachedUpdateBlock;
@@ -1767,7 +1768,7 @@ public final class Player extends CharacterNode {
      * Sets the value for {@link Player#usernameHash}.
      *
      * @param usernameHash
-     *         the new value to set.
+     *            the new value to set.
      */
     public void setUsernameHash(long usernameHash) {
         this.usernameHash = usernameHash;
@@ -1786,7 +1787,7 @@ public final class Player extends CharacterNode {
      * Determines if the region has been updated this sequence.
      *
      * @return {@code true} if the region has been updated, {@code false}
-     * otherwise.
+     *         otherwise.
      */
     public boolean isUpdateRegion() {
         return updateRegion;
@@ -1796,7 +1797,7 @@ public final class Player extends CharacterNode {
      * Sets the value for {@link Player#updateRegion}.
      *
      * @param updateRegion
-     *         the new value to set.
+     *            the new value to set.
      */
     public void setUpdateRegion(boolean updateRegion) {
         this.updateRegion = updateRegion;
@@ -1815,7 +1816,7 @@ public final class Player extends CharacterNode {
      * Sets the value for {@link Player#forcedMovement}.
      *
      * @param forcedMovement
-     *         the new value to set.
+     *            the new value to set.
      */
     public void setForcedMovement(ForcedMovement forcedMovement) {
         this.forcedMovement = forcedMovement;
@@ -1834,7 +1835,7 @@ public final class Player extends CharacterNode {
      * Sets the value for {@link Player#viewingOrb}.
      *
      * @param viewingOrb
-     *         the new value to set.
+     *            the new value to set.
      */
     public void setViewingOrb(ViewingOrb viewingOrb) {
         this.viewingOrb = viewingOrb;
@@ -1862,7 +1863,7 @@ public final class Player extends CharacterNode {
      * Sets the value for {@link Player#disabled}.
      *
      * @param disabled
-     *         the new value to set.
+     *            the new value to set.
      */
     public void setDisabled(boolean disabled) {
         this.disabled = disabled;

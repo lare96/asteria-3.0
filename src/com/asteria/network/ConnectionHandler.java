@@ -48,7 +48,7 @@ public final class ConnectionHandler {
      * The default constructor.
      *
      * @throws UnsupportedOperationException
-     *         if this class is instantiated.
+     *             if this class is instantiated.
      */
     private ConnectionHandler() {
         throw new UnsupportedOperationException("This class cannot be " + "instantiated!");
@@ -59,7 +59,7 @@ public final class ConnectionHandler {
      * result of evaluation.
      *
      * @param host
-     *         the host that will be evaluated.
+     *            the host that will be evaluated.
      * @return the login response as a result of evaluating the host.
      */
     public static LoginResponse evaluate(String host) {
@@ -86,10 +86,10 @@ public final class ConnectionHandler {
      * connections currently registered to this host.
      *
      * @param host
-     *         the host that will be removed.
+     *            the host that will be removed.
      * @throws IllegalStateException
-     *         if the specified host is not registered within the connection
-     *         map.
+     *             if the specified host is not registered within the connection
+     *             map.
      */
     public static void remove(String host) {
         if (ConnectionHandler.isLocal(host))
@@ -104,9 +104,9 @@ public final class ConnectionHandler {
      * Adds a banned host to the internal set and {@code banned_ips.txt} file.
      *
      * @param host
-     *         the new host to add to the database of banned IP addresses.
+     *            the new host to add to the database of banned IP addresses.
      * @throws IllegalStateException
-     *         if the host is already banned.
+     *             if the host is already banned.
      */
     public static void addIPBan(String host) {
         if (ConnectionHandler.isLocal(host))
@@ -139,9 +139,9 @@ public final class ConnectionHandler {
      * Determines if the specified host is connecting locally.
      *
      * @param host
-     *         the host to check if connecting locally.
+     *            the host to check if connecting locally.
      * @return {@code true} if the host is connecting locally, {@code false}
-     * otherwise.
+     *         otherwise.
      */
     public static boolean isLocal(String host) {
         return host.equals("127.0.0.1") || host.equals("localhost");
@@ -168,8 +168,8 @@ public final class ConnectionHandler {
          * Determines if the maximum amount of connections have been reached.
          *
          * @return {@code true} if the amount of connections is above or equal
-         * to {@link ConnectionHandler#CONNECTION_AMOUNT}, {@code false}
-         * otherwise.
+         *         to {@link ConnectionHandler#CONNECTION_AMOUNT}, {@code false}
+         *         otherwise.
          */
         public boolean sessionLimit() {
             return amount.get() >= CONNECTION_AMOUNT;
@@ -180,7 +180,7 @@ public final class ConnectionHandler {
          * throttled.
          *
          * @return {@code true} if the host needs to be throttled, {@code false}
-         * otherwise.
+         *         otherwise.
          */
         public boolean throttleLimit() {
             return throttler.elapsedTime() <= CONNECTION_INTERVAL;

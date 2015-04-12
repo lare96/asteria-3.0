@@ -116,47 +116,49 @@ public final class NpcDefinition {
      * Creates a new {@link NpcDefintion}.
      *
      * @param id
-     *         the identification for this NPC.
+     *            the identification for this NPC.
      * @param name
-     *         the name of this NPC.
+     *            the name of this NPC.
      * @param description
-     *         the description of this NPC.
+     *            the description of this NPC.
      * @param combatLevel
-     *         the combat level of this NPC.
+     *            the combat level of this NPC.
      * @param size
-     *         the size of this NPC.
+     *            the size of this NPC.
      * @param attackable
-     *         determines if this NPC can be attacked.
+     *            determines if this NPC can be attacked.
      * @param aggressive
-     *         determines if this NPC is aggressive.
+     *            determines if this NPC is aggressive.
      * @param retreats
-     *         determines if this NPC retreats.
+     *            determines if this NPC retreats.
      * @param poisonous
-     *         determines if this NPC is poisonous.
+     *            determines if this NPC is poisonous.
      * @param respawnTime
-     *         the time it takes for this NPC to respawn.
+     *            the time it takes for this NPC to respawn.
      * @param maxHit
-     *         the max hit of this NPC.
+     *            the max hit of this NPC.
      * @param hitpoints
-     *         the maximum amount of hitpoints this NPC has.
+     *            the maximum amount of hitpoints this NPC has.
      * @param attackSpeed
-     *         the attack speed of this NPC.
+     *            the attack speed of this NPC.
      * @param attackAnimation
-     *         the attack animation of this NPC.
+     *            the attack animation of this NPC.
      * @param defenceAnimation
-     *         the defence animation of this NPC.
+     *            the defence animation of this NPC.
      * @param deathAnimation
-     *         the death animation of this NPC.
+     *            the death animation of this NPC.
      * @param attackBonus
-     *         the attack bonus of this NPC.
+     *            the attack bonus of this NPC.
      * @param meleeDefence
-     *         the melee defence bonus of this NPC.
+     *            the melee defence bonus of this NPC.
      * @param rangedDefence
-     *         the ranged defence of this NPC.
+     *            the ranged defence of this NPC.
      * @param magicDefence
-     *         the magic defence of this NPC.
+     *            the magic defence of this NPC.
      */
-    public NpcDefinition(int id, String name, String description, int combatLevel, int size, boolean attackable, boolean aggressive, boolean retreats, boolean poisonous, int respawnTime, int maxHit, int hitpoints, int attackSpeed, int attackAnimation, int defenceAnimation, int deathAnimation, int attackBonus, int meleeDefence, int rangedDefence, int magicDefence) {
+    public NpcDefinition(int id, String name, String description, int combatLevel, int size, boolean attackable, boolean aggressive,
+        boolean retreats, boolean poisonous, int respawnTime, int maxHit, int hitpoints, int attackSpeed, int attackAnimation,
+        int defenceAnimation, int deathAnimation, int attackBonus, int meleeDefence, int rangedDefence, int magicDefence) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -228,7 +230,7 @@ public final class NpcDefinition {
      * Determines if this NPC can be attacked.
      *
      * @return {@code true} if this NPC can be attacked, {@code false}
-     * otherwise.
+     *         otherwise.
      */
     public boolean isAttackable() {
         return attackable;

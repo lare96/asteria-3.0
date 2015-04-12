@@ -30,9 +30,9 @@ public final class CombatDamage {
      * {@code amount} is below {@code 0}.
      *
      * @param character
-     *         the character to register damage for.
+     *            the character to register damage for.
      * @param amount
-     *         the amount of damage to register.
+     *            the amount of damage to register.
      */
     public void add(CharacterNode character, int amount) {
         if (character.getType() == NodeType.PLAYER && amount > 0) {
@@ -52,7 +52,7 @@ public final class CombatDamage {
      * damage.
      *
      * @return the player who has inflicted the most damage, or an empty
-     * optional if there are no entries.
+     *         optional if there are no entries.
      */
     public Optional<Player> calculateKiller() {
         int amount = 0;
@@ -104,7 +104,7 @@ public final class CombatDamage {
          * Creates a new {@link DamageCounter}.
          *
          * @param amount
-         *         the amount of damage within this counter.
+         *            the amount of damage within this counter.
          */
         public DamageCounter(int amount) {
             this.amount = amount;
@@ -124,7 +124,7 @@ public final class CombatDamage {
          * Increments the amount of damage within this counter.
          *
          * @param amount
-         *         the amount to increment by.
+         *            the amount to increment by.
          */
         public void incrementAmount(int amount) {
             if (this.isTimeout()) {
@@ -138,7 +138,7 @@ public final class CombatDamage {
          * Determines if this counter has timed out or not.
          *
          * @return {@code true} if this counter has timed out, {@code false}
-         * otherwise.
+         *         otherwise.
          */
         public boolean isTimeout() {
             return stopwatch.elapsed(Combat.DAMAGE_CACHE_TIMEOUT, TimeUnit.SECONDS);

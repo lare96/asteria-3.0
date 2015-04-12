@@ -27,9 +27,9 @@ public final class UpdateFlags {
      * Sets an update flag in the bit buffer to {@code value}.
      *
      * @param flag
-     *         the flag in the bit buffer to set.
+     *            the flag in the bit buffer to set.
      * @param value
-     *         the value to set the flag with.
+     *            the value to set the flag with.
      */
     public void set(Flag flag, boolean value) {
         bits.set(flag.getId(), value);
@@ -39,7 +39,7 @@ public final class UpdateFlags {
      * Sets an update flag in the bit buffer to {@code true}.
      *
      * @param flag
-     *         the flag in the bit buffer to set.
+     *            the flag in the bit buffer to set.
      */
     public void set(Flag flag) {
         set(flag, true);
@@ -49,7 +49,7 @@ public final class UpdateFlags {
      * Retrieves the value of an update flag in the bit buffer.
      *
      * @param flag
-     *         the flag in the bit buffer to retrieve the value of.
+     *            the flag in the bit buffer to retrieve the value of.
      * @return the value of the retrieved flag.
      */
     public boolean get(Flag flag) {
@@ -61,7 +61,7 @@ public final class UpdateFlags {
      * {@code true}.
      *
      * @return {@code true} if at least one flag in the bit buffer is flagged,
-     * {@code false} otherwise.
+     *         {@code false} otherwise.
      */
     public boolean needsUpdate() {
         return !bits.isEmpty();

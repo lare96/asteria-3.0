@@ -14,11 +14,9 @@ public final class DataBuffer {
     /**
      * An array of the bit masks used for writing bits.
      */
-    private static final int[] BIT_MASK = {0, 0x1, 0x3, 0x7, 0xf, 0x1f, 0x3f,
-            0x7f, 0xff, 0x1ff, 0x3ff, 0x7ff, 0xfff, 0x1fff, 0x3fff, 0x7fff,
-            0xffff, 0x1ffff, 0x3ffff, 0x7ffff, 0xfffff, 0x1fffff, 0x3fffff,
-            0x7fffff, 0xffffff, 0x1ffffff, 0x3ffffff, 0x7ffffff, 0xfffffff,
-            0x1fffffff, 0x3fffffff, 0x7fffffff, -1};
+    private static final int[] BIT_MASK = { 0, 0x1, 0x3, 0x7, 0xf, 0x1f, 0x3f, 0x7f, 0xff, 0x1ff, 0x3ff, 0x7ff, 0xfff, 0x1fff, 0x3fff,
+            0x7fff, 0xffff, 0x1ffff, 0x3ffff, 0x7ffff, 0xfffff, 0x1fffff, 0x3fffff, 0x7fffff, 0xffffff, 0x1ffffff, 0x3ffffff, 0x7ffffff,
+            0xfffffff, 0x1fffffff, 0x3fffffff, 0x7fffffff, -1 };
 
     /**
      * The default capacity of this buffer.
@@ -44,7 +42,7 @@ public final class DataBuffer {
      * Creates a new {@link DataBuffer} with the {@code buf} backing buffer.
      *
      * @param buf
-     *         the backing byte buffer used to read and write data.
+     *            the backing byte buffer used to read and write data.
      */
     private DataBuffer(ByteBuffer buf) {
         this.buf = buf;
@@ -54,7 +52,7 @@ public final class DataBuffer {
      * Creates a new {@link DataBuffer} with the {@code buf} backing buffer.
      *
      * @param buf
-     *         the backing byte buffer used to read and write data.
+     *            the backing byte buffer used to read and write data.
      * @return the newly created buffer.
      */
     public static DataBuffer create(ByteBuffer buf) {
@@ -65,7 +63,7 @@ public final class DataBuffer {
      * Creates a new {@link DataBuffer} with the {@code cap} as the capacity.
      *
      * @param cap
-     *         the capacity of the buffer.
+     *            the capacity of the buffer.
      * @return the newly created buffer.
      */
     public static DataBuffer create(int cap) {
@@ -101,7 +99,7 @@ public final class DataBuffer {
      * is able to.
      *
      * @param requested
-     *         the amount of requested bytes.
+     *            the amount of requested bytes.
      */
     private void requestSpace(int requested) {
         if ((buf.position() + requested + 1) >= buf.capacity()) {
@@ -119,9 +117,9 @@ public final class DataBuffer {
      * Builds a new packet header.
      *
      * @param opcode
-     *         the opcode of the packet.
+     *            the opcode of the packet.
      * @param encryptor
-     *         the encryptor for encrypting the packet header.
+     *            the encryptor for encrypting the packet header.
      * @return an instance of this data buffer.
      */
     public DataBuffer newPacket(int opcode, ISAACCipher encryptor) {
@@ -135,9 +133,9 @@ public final class DataBuffer {
      * finish the packet.
      *
      * @param opcode
-     *         the opcode of the packet.
+     *            the opcode of the packet.
      * @param encryptor
-     *         the encryptor for encrypting the packet header.
+     *            the encryptor for encrypting the packet header.
      * @return an instance of this data buffer.
      */
     public DataBuffer newVarPacket(int opcode, ISAACCipher encryptor) {
@@ -148,16 +146,15 @@ public final class DataBuffer {
     }
 
     /**
-     * Builds a new packet header for a variable length packet, where the
-     * length
+     * Builds a new packet header for a variable length packet, where the length
      * is written as a short instead of a byte. Note that the corresponding
      * {@link DataBuffer#endVarShortPacket()} method must be called to finish
      * the packet.
      *
      * @param opcode
-     *         the opcode of the packet.
+     *            the opcode of the packet.
      * @param encryptor
-     *         the encryptor for encrypting the packet header.
+     *            the encryptor for encrypting the packet header.
      * @return an instance of this data buffer.
      */
     public DataBuffer newVarShortPacket(int opcode, ISAACCipher encryptor) {
@@ -169,8 +166,7 @@ public final class DataBuffer {
 
     /**
      * Finishes a variable packet header by writing the actual packet length at
-     * the length byte's position. Call this when the construction of the
-     * actual
+     * the length byte's position. Call this when the construction of the actual
      * variable length packet is complete.
      *
      * @return an instance of this data buffer.
@@ -200,7 +196,7 @@ public final class DataBuffer {
      * beforehand.
      *
      * @param from
-     *         the argued buffer that bytes will be written from.
+     *            the argued buffer that bytes will be written from.
      * @return an instance of this data buffer.
      */
     public DataBuffer putBytes(ByteBuffer from) {
@@ -214,7 +210,7 @@ public final class DataBuffer {
      * Writes the bytes from the argued buffer into this buffer.
      *
      * @param from
-     *         the argued buffer that bytes will be written from.
+     *            the argued buffer that bytes will be written from.
      * @return an instance of this data buffer.
      */
     public DataBuffer putBytes(byte[] from, int size) {
@@ -224,11 +220,10 @@ public final class DataBuffer {
     }
 
     /**
-     * Writes the bytes from the argued byte array into this buffer, in
-     * reverse.
+     * Writes the bytes from the argued byte array into this buffer, in reverse.
      *
      * @param data
-     *         the data to write to this buffer.
+     *            the data to write to this buffer.
      */
     public DataBuffer putBytesReverse(byte[] data) {
         for (int i = data.length - 1; i >= 0; i--) {
@@ -241,13 +236,13 @@ public final class DataBuffer {
      * Writes the value as a variable amount of bits.
      *
      * @param amount
-     *         the amount of bits to write.
+     *            the amount of bits to write.
      * @param value
-     *         the value of the bits.
+     *            the value of the bits.
      * @return an instance of this data buffer.
      * @throws IllegalArgumentException
-     *         if the number of bits is not between {@code 1} and {@code 32}
-     *         inclusive.
+     *             if the number of bits is not between {@code 1} and {@code 32}
+     *             inclusive.
      */
     public DataBuffer putBits(int amount, int value) {
         if (amount < 0 || amount > 32)
@@ -288,7 +283,7 @@ public final class DataBuffer {
      * Writes a boolean bit flag.
      *
      * @param flag
-     *         the flag to write.
+     *            the flag to write.
      * @return an instance of this data buffer.
      */
     public DataBuffer putBit(boolean flag) {
@@ -300,25 +295,25 @@ public final class DataBuffer {
      * Writes a value as a byte.
      *
      * @param value
-     *         the value to write.
+     *            the value to write.
      * @param type
-     *         the value type.
+     *            the value type.
      * @return an instance of this data buffer.
      */
     public DataBuffer put(int value, ValueType type) {
         requestSpace(1);
         switch (type) {
-            case A:
-                value += 128;
-                break;
-            case C:
-                value = -value;
-                break;
-            case S:
-                value = 128 - value;
-                break;
-            case STANDARD:
-                break;
+        case A:
+            value += 128;
+            break;
+        case C:
+            value = -value;
+            break;
+        case S:
+            value = 128 - value;
+            break;
+        case STANDARD:
+            break;
         }
         buf.put((byte) value);
         return this;
@@ -328,7 +323,7 @@ public final class DataBuffer {
      * Writes a value as a normal byte.
      *
      * @param value
-     *         the value to write.
+     *            the value to write.
      * @return an instance of this data buffer.
      */
     public DataBuffer put(int value) {
@@ -340,29 +335,29 @@ public final class DataBuffer {
      * Writes a value as a short.
      *
      * @param value
-     *         the value to write.
+     *            the value to write.
      * @param type
-     *         the value type.
+     *            the value type.
      * @param order
-     *         the byte order.
+     *            the byte order.
      * @return an instance of this data buffer.
      * @throws IllegalArgumentExcpetion
-     *         if middle or inverse-middle value types are selected.
+     *             if middle or inverse-middle value types are selected.
      */
     public DataBuffer putShort(int value, ValueType type, ByteOrder order) {
         switch (order) {
-            case BIG:
-                put(value >> 8);
-                put(value, type);
-                break;
-            case MIDDLE:
-                throw new IllegalArgumentException("Middle-endian short is " + "impossible!");
-            case INVERSE_MIDDLE:
-                throw new IllegalArgumentException("Inverse-middle-endian " + "short is impossible!");
-            case LITTLE:
-                put(value, type);
-                put(value >> 8);
-                break;
+        case BIG:
+            put(value >> 8);
+            put(value, type);
+            break;
+        case MIDDLE:
+            throw new IllegalArgumentException("Middle-endian short is " + "impossible!");
+        case INVERSE_MIDDLE:
+            throw new IllegalArgumentException("Inverse-middle-endian " + "short is impossible!");
+        case LITTLE:
+            put(value, type);
+            put(value >> 8);
+            break;
         }
         return this;
     }
@@ -371,7 +366,7 @@ public final class DataBuffer {
      * Writes a value as a normal big-endian short.
      *
      * @param value
-     *         the value to write.
+     *            the value to write.
      * @return an instance of this data buffer.
      */
     public DataBuffer putShort(int value) {
@@ -383,9 +378,9 @@ public final class DataBuffer {
      * Writes a value as a big-endian short.
      *
      * @param value
-     *         the value to write.
+     *            the value to write.
      * @param type
-     *         the value type.
+     *            the value type.
      * @return an instance of this data buffer.
      */
     public DataBuffer putShort(int value, ValueType type) {
@@ -397,9 +392,9 @@ public final class DataBuffer {
      * Writes a value as a standard short.
      *
      * @param value
-     *         the value to write.
+     *            the value to write.
      * @param order
-     *         the byte order.
+     *            the byte order.
      * @return an instance of this data buffer.
      */
     public DataBuffer putShort(int value, ByteOrder order) {
@@ -411,39 +406,39 @@ public final class DataBuffer {
      * Writes a value as an integer.
      *
      * @param value
-     *         the value to write.
+     *            the value to write.
      * @param type
-     *         the value type.
+     *            the value type.
      * @param order
-     *         the byte order.
+     *            the byte order.
      * @return an instance of this data buffer.
      */
     public DataBuffer putInt(int value, ValueType type, ByteOrder order) {
         switch (order) {
-            case BIG:
-                put(value >> 24);
-                put(value >> 16);
-                put(value >> 8);
-                put(value, type);
-                break;
-            case MIDDLE:
-                put(value >> 8);
-                put(value, type);
-                put(value >> 24);
-                put(value >> 16);
-                break;
-            case INVERSE_MIDDLE:
-                put(value >> 16);
-                put(value >> 24);
-                put(value, type);
-                put(value >> 8);
-                break;
-            case LITTLE:
-                put(value, type);
-                put(value >> 8);
-                put(value >> 16);
-                put(value >> 24);
-                break;
+        case BIG:
+            put(value >> 24);
+            put(value >> 16);
+            put(value >> 8);
+            put(value, type);
+            break;
+        case MIDDLE:
+            put(value >> 8);
+            put(value, type);
+            put(value >> 24);
+            put(value >> 16);
+            break;
+        case INVERSE_MIDDLE:
+            put(value >> 16);
+            put(value >> 24);
+            put(value, type);
+            put(value >> 8);
+            break;
+        case LITTLE:
+            put(value, type);
+            put(value >> 8);
+            put(value >> 16);
+            put(value >> 24);
+            break;
         }
         return this;
     }
@@ -452,7 +447,7 @@ public final class DataBuffer {
      * Writes a value as a standard big-endian integer.
      *
      * @param value
-     *         the value to write.
+     *            the value to write.
      * @return an instance of this data buffer.
      */
     public DataBuffer putInt(int value) {
@@ -464,9 +459,9 @@ public final class DataBuffer {
      * Writes a value as a big-endian integer.
      *
      * @param value
-     *         the value to write.
+     *            the value to write.
      * @param type
-     *         the value type.
+     *            the value type.
      * @return an instance of this data buffer.
      */
     public DataBuffer putInt(int value, ValueType type) {
@@ -478,9 +473,9 @@ public final class DataBuffer {
      * Writes a value as a standard integer.
      *
      * @param value
-     *         the value to write.
+     *            the value to write.
      * @param order
-     *         the byte order.
+     *            the byte order.
      * @return an instance of this data buffer.
      */
     public DataBuffer putInt(int value, ByteOrder order) {
@@ -492,41 +487,41 @@ public final class DataBuffer {
      * Writes a value as a long.
      *
      * @param value
-     *         the value to write.
+     *            the value to write.
      * @param type
-     *         the value type.
+     *            the value type.
      * @param order
-     *         the byte order.
+     *            the byte order.
      * @return an instance of this data buffer.
      * @throws UnsupportedOperationException
-     *         if middle or inverse-middle value types are selected.
+     *             if middle or inverse-middle value types are selected.
      */
     public DataBuffer putLong(long value, ValueType type, ByteOrder order) {
         switch (order) {
-            case BIG:
-                put((int) (value >> 56));
-                put((int) (value >> 48));
-                put((int) (value >> 40));
-                put((int) (value >> 32));
-                put((int) (value >> 24));
-                put((int) (value >> 16));
-                put((int) (value >> 8));
-                put((int) value, type);
-                break;
-            case MIDDLE:
-                throw new UnsupportedOperationException("Middle-endian long " + "is not implemented!");
-            case INVERSE_MIDDLE:
-                throw new UnsupportedOperationException("Inverse-middle-endian long is not implemented!");
-            case LITTLE:
-                put((int) value, type);
-                put((int) (value >> 8));
-                put((int) (value >> 16));
-                put((int) (value >> 24));
-                put((int) (value >> 32));
-                put((int) (value >> 40));
-                put((int) (value >> 48));
-                put((int) (value >> 56));
-                break;
+        case BIG:
+            put((int) (value >> 56));
+            put((int) (value >> 48));
+            put((int) (value >> 40));
+            put((int) (value >> 32));
+            put((int) (value >> 24));
+            put((int) (value >> 16));
+            put((int) (value >> 8));
+            put((int) value, type);
+            break;
+        case MIDDLE:
+            throw new UnsupportedOperationException("Middle-endian long " + "is not implemented!");
+        case INVERSE_MIDDLE:
+            throw new UnsupportedOperationException("Inverse-middle-endian long is not implemented!");
+        case LITTLE:
+            put((int) value, type);
+            put((int) (value >> 8));
+            put((int) (value >> 16));
+            put((int) (value >> 24));
+            put((int) (value >> 32));
+            put((int) (value >> 40));
+            put((int) (value >> 48));
+            put((int) (value >> 56));
+            break;
         }
         return this;
     }
@@ -535,7 +530,7 @@ public final class DataBuffer {
      * Writes a value as a standard big-endian long.
      *
      * @param value
-     *         the value to write.
+     *            the value to write.
      * @return an instance of this data buffer.
      */
     public DataBuffer putLong(long value) {
@@ -547,9 +542,9 @@ public final class DataBuffer {
      * Writes a value as a big-endian long.
      *
      * @param value
-     *         the value to write.
+     *            the value to write.
      * @param type
-     *         the value type.
+     *            the value type.
      * @return an instance of this data buffer.
      */
     public DataBuffer putLong(long value, ValueType type) {
@@ -561,9 +556,9 @@ public final class DataBuffer {
      * Writes a value as a standard long.
      *
      * @param value
-     *         the value to write.
+     *            the value to write.
      * @param order
-     *         the byte order to write.
+     *            the byte order to write.
      * @return an instance of this data buffer.
      */
     public DataBuffer putLong(long value, ByteOrder order) {
@@ -575,7 +570,7 @@ public final class DataBuffer {
      * Writes a RuneScape string value.
      *
      * @param string
-     *         the string to write.
+     *            the string to write.
      * @return an instance of this data buffer.
      */
     public DataBuffer putString(String string) {
@@ -590,25 +585,25 @@ public final class DataBuffer {
      * Reads a value as a byte.
      *
      * @param signed
-     *         if the byte is signed.
+     *            if the byte is signed.
      * @param type
-     *         the value type.
+     *            the value type.
      * @return the value of the byte.
      */
     public int get(boolean signed, ValueType type) {
         int value = buf.get();
         switch (type) {
-            case A:
-                value = value - 128;
-                break;
-            case C:
-                value = -value;
-                break;
-            case S:
-                value = 128 - value;
-                break;
-            case STANDARD:
-                break;
+        case A:
+            value = value - 128;
+            break;
+        case C:
+            value = -value;
+            break;
+        case S:
+            value = 128 - value;
+            break;
+        case STANDARD:
+            break;
         }
         return signed ? value : value & 0xff;
     }
@@ -626,7 +621,7 @@ public final class DataBuffer {
      * Reads a standard byte.
      *
      * @param signed
-     *         if the byte is signed.
+     *            if the byte is signed.
      * @return the value of the byte.
      */
     public int get(boolean signed) {
@@ -637,7 +632,7 @@ public final class DataBuffer {
      * Reads a signed byte.
      *
      * @param type
-     *         the value type.
+     *            the value type.
      * @return the value of the byte.
      */
     public int get(ValueType type) {
@@ -648,30 +643,30 @@ public final class DataBuffer {
      * Reads a short value.
      *
      * @param signed
-     *         if the short is signed.
+     *            if the short is signed.
      * @param type
-     *         the value type.
+     *            the value type.
      * @param order
-     *         the byte order.
+     *            the byte order.
      * @return the value of the short.
      * @throws UnsupportedOperationException
-     *         if middle or inverse-middle value types are selected.
+     *             if middle or inverse-middle value types are selected.
      */
     public int getShort(boolean signed, ValueType type, ByteOrder order) {
         int value = 0;
         switch (order) {
-            case BIG:
-                value |= get(false) << 8;
-                value |= get(false, type);
-                break;
-            case MIDDLE:
-                throw new UnsupportedOperationException("Middle-endian short " + "is impossible!");
-            case INVERSE_MIDDLE:
-                throw new UnsupportedOperationException("Inverse-middle-endian short is impossible!");
-            case LITTLE:
-                value |= get(false, type);
-                value |= get(false) << 8;
-                break;
+        case BIG:
+            value |= get(false) << 8;
+            value |= get(false, type);
+            break;
+        case MIDDLE:
+            throw new UnsupportedOperationException("Middle-endian short " + "is impossible!");
+        case INVERSE_MIDDLE:
+            throw new UnsupportedOperationException("Inverse-middle-endian short is impossible!");
+        case LITTLE:
+            value |= get(false, type);
+            value |= get(false) << 8;
+            break;
         }
         return signed ? value : value & 0xffff;
     }
@@ -689,7 +684,7 @@ public final class DataBuffer {
      * Reads a standard big-endian short.
      *
      * @param signed
-     *         if the short is signed.
+     *            if the short is signed.
      * @return the value of the short.
      */
     public int getShort(boolean signed) {
@@ -700,7 +695,7 @@ public final class DataBuffer {
      * Reads a signed big-endian short.
      *
      * @param type
-     *         the value type.
+     *            the value type.
      * @return the value of the short.
      */
     public int getShort(ValueType type) {
@@ -711,9 +706,9 @@ public final class DataBuffer {
      * Reads a big-endian short.
      *
      * @param signed
-     *         if the short is signed.
+     *            if the short is signed.
      * @param type
-     *         the value type.
+     *            the value type.
      * @return the value of the short.
      */
     public int getShort(boolean signed, ValueType type) {
@@ -724,7 +719,7 @@ public final class DataBuffer {
      * Reads a signed standard short.
      *
      * @param order
-     *         the byte order.
+     *            the byte order.
      * @return the value of the short.
      */
     public int getShort(ByteOrder order) {
@@ -735,9 +730,9 @@ public final class DataBuffer {
      * Reads a standard short.
      *
      * @param signed
-     *         if the short is signed.
+     *            if the short is signed.
      * @param order
-     *         the byte order.
+     *            the byte order.
      * @return the value of the short.
      */
     public int getShort(boolean signed, ByteOrder order) {
@@ -748,9 +743,9 @@ public final class DataBuffer {
      * Reads a signed short.
      *
      * @param type
-     *         the value type.
+     *            the value type.
      * @param order
-     *         the byte order.
+     *            the byte order.
      * @return the value of the short.
      */
     public int getShort(ValueType type, ByteOrder order) {
@@ -761,40 +756,40 @@ public final class DataBuffer {
      * Reads an integer.
      *
      * @param signed
-     *         if the short is signed.
+     *            if the short is signed.
      * @param type
-     *         the value type.
+     *            the value type.
      * @param order
-     *         the byte order.
+     *            the byte order.
      * @return the value of the integer.
      */
     public int getInt(boolean signed, ValueType type, ByteOrder order) {
         long value = 0;
         switch (order) {
-            case BIG:
-                value |= get(false) << 24;
-                value |= get(false) << 16;
-                value |= get(false) << 8;
-                value |= get(false, type);
-                break;
-            case MIDDLE:
-                value |= get(false) << 8;
-                value |= get(false, type);
-                value |= get(false) << 24;
-                value |= get(false) << 16;
-                break;
-            case INVERSE_MIDDLE:
-                value |= get(false) << 16;
-                value |= get(false) << 24;
-                value |= get(false, type);
-                value |= get(false) << 8;
-                break;
-            case LITTLE:
-                value |= get(false, type);
-                value |= get(false) << 8;
-                value |= get(false) << 16;
-                value |= get(false) << 24;
-                break;
+        case BIG:
+            value |= get(false) << 24;
+            value |= get(false) << 16;
+            value |= get(false) << 8;
+            value |= get(false, type);
+            break;
+        case MIDDLE:
+            value |= get(false) << 8;
+            value |= get(false, type);
+            value |= get(false) << 24;
+            value |= get(false) << 16;
+            break;
+        case INVERSE_MIDDLE:
+            value |= get(false) << 16;
+            value |= get(false) << 24;
+            value |= get(false, type);
+            value |= get(false) << 8;
+            break;
+        case LITTLE:
+            value |= get(false, type);
+            value |= get(false) << 8;
+            value |= get(false) << 16;
+            value |= get(false) << 24;
+            break;
         }
         return (int) (signed ? value : value & 0xffffffffL);
     }
@@ -812,7 +807,7 @@ public final class DataBuffer {
      * Reads a standard big-endian integer.
      *
      * @param signed
-     *         if the short is signed.
+     *            if the short is signed.
      * @return the value of the integer.
      */
     public int getInt(boolean signed) {
@@ -823,7 +818,7 @@ public final class DataBuffer {
      * Reads a signed big-endian integer.
      *
      * @param type
-     *         the value type.
+     *            the value type.
      * @return the value of the integer.
      */
     public int getInt(ValueType type) {
@@ -834,9 +829,9 @@ public final class DataBuffer {
      * Reads a big-endian integer.
      *
      * @param signed
-     *         if the short is signed.
+     *            if the short is signed.
      * @param type
-     *         the value type.
+     *            the value type.
      * @return the value of the integer.
      */
     public int getInt(boolean signed, ValueType type) {
@@ -847,7 +842,7 @@ public final class DataBuffer {
      * Reads a signed standard integer.
      *
      * @param order
-     *         the byte order.
+     *            the byte order.
      * @return the value of the integer.
      */
     public int getInt(ByteOrder order) {
@@ -858,9 +853,9 @@ public final class DataBuffer {
      * Reads a standard integer.
      *
      * @param signed
-     *         if the short is signed.
+     *            if the short is signed.
      * @param order
-     *         the byte order.
+     *            the byte order.
      * @return the value of the integer.
      */
     public int getInt(boolean signed, ByteOrder order) {
@@ -871,9 +866,9 @@ public final class DataBuffer {
      * Reads a signed integer.
      *
      * @param type
-     *         the value type.
+     *            the value type.
      * @param order
-     *         the byte order.
+     *            the byte order.
      * @return the value of the integer.
      */
     public int getInt(ValueType type, ByteOrder order) {
@@ -884,39 +879,39 @@ public final class DataBuffer {
      * Reads a signed long value.
      *
      * @param type
-     *         the value type.
+     *            the value type.
      * @param order
-     *         the byte order.
+     *            the byte order.
      * @return the value of the integer.
      * @throws UnsupportedOperationException
-     *         if middle or inverse-middle value types are selected.
+     *             if middle or inverse-middle value types are selected.
      */
     public long getLong(ValueType type, ByteOrder order) {
         long value = 0;
         switch (order) {
-            case BIG:
-                value |= (long) get(false) << 56L;
-                value |= (long) get(false) << 48L;
-                value |= (long) get(false) << 40L;
-                value |= (long) get(false) << 32L;
-                value |= (long) get(false) << 24L;
-                value |= (long) get(false) << 16L;
-                value |= (long) get(false) << 8L;
-                value |= get(false, type);
-                break;
-            case INVERSE_MIDDLE:
-            case MIDDLE:
-                throw new UnsupportedOperationException("Middle and " + "inverse-middle value types not supported!");
-            case LITTLE:
-                value |= get(false, type);
-                value |= (long) get(false) << 8L;
-                value |= (long) get(false) << 16L;
-                value |= (long) get(false) << 24L;
-                value |= (long) get(false) << 32L;
-                value |= (long) get(false) << 40L;
-                value |= (long) get(false) << 48L;
-                value |= (long) get(false) << 56L;
-                break;
+        case BIG:
+            value |= (long) get(false) << 56L;
+            value |= (long) get(false) << 48L;
+            value |= (long) get(false) << 40L;
+            value |= (long) get(false) << 32L;
+            value |= (long) get(false) << 24L;
+            value |= (long) get(false) << 16L;
+            value |= (long) get(false) << 8L;
+            value |= get(false, type);
+            break;
+        case INVERSE_MIDDLE:
+        case MIDDLE:
+            throw new UnsupportedOperationException("Middle and " + "inverse-middle value types not supported!");
+        case LITTLE:
+            value |= get(false, type);
+            value |= (long) get(false) << 8L;
+            value |= (long) get(false) << 16L;
+            value |= (long) get(false) << 24L;
+            value |= (long) get(false) << 32L;
+            value |= (long) get(false) << 40L;
+            value |= (long) get(false) << 48L;
+            value |= (long) get(false) << 56L;
+            break;
         }
         return value;
     }
@@ -934,7 +929,7 @@ public final class DataBuffer {
      * Reads a signed big-endian long
      *
      * @param type
-     *         the value type
+     *            the value type
      * @return the value of the long.
      */
     public long getLong(ValueType type) {
@@ -945,7 +940,7 @@ public final class DataBuffer {
      * Reads a signed standard long.
      *
      * @param order
-     *         the byte order
+     *            the byte order
      * @return the value of the long.
      */
     public long getLong(ByteOrder order) {
@@ -971,7 +966,7 @@ public final class DataBuffer {
      * position.
      *
      * @param amount
-     *         the amount to read.
+     *            the amount to read.
      * @return a buffer filled with the data.
      */
     public byte[] getBytes(int amount) {
@@ -983,9 +978,9 @@ public final class DataBuffer {
      * position.
      *
      * @param amount
-     *         the amount of bytes.
+     *            the amount of bytes.
      * @param type
-     *         the value type of each byte.
+     *            the value type of each byte.
      * @return a buffer filled with the data.
      */
     public byte[] getBytes(int amount, ValueType type) {
@@ -997,14 +992,13 @@ public final class DataBuffer {
     }
 
     /**
-     * Reads the amount of bytes from the buffer in reverse, starting at
-     * current
+     * Reads the amount of bytes from the buffer in reverse, starting at current
      * position + amount and reading in reverse until the current position.
      *
      * @param amount
-     *         the amount of bytes to read.
+     *            the amount of bytes to read.
      * @param type
-     *         the value type of each byte.
+     *            the value type of each byte.
      * @return a buffer filled with the data.
      */
     public byte[] getBytesReverse(int amount, ValueType type) {
@@ -1013,17 +1007,17 @@ public final class DataBuffer {
         for (int i = buf.position() + amount - 1; i >= buf.position(); i--) {
             int value = buf.get(i);
             switch (type) {
-                case A:
-                    value -= 128;
-                    break;
-                case C:
-                    value = -value;
-                    break;
-                case S:
-                    value = 128 - value;
-                    break;
-                case STANDARD:
-                    break;
+            case A:
+                value -= 128;
+                break;
+            case C:
+                value = -value;
+                break;
+            case S:
+                value = 128 - value;
+                break;
+            case STANDARD:
+                break;
             }
             data[dataPosition++] = (byte) value;
         }

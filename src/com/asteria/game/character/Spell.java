@@ -20,9 +20,9 @@ public abstract class Spell {
      * Determines if {@code player} can cast this spell.
      *
      * @param player
-     *         the player attempting to cast this spell.
+     *            the player attempting to cast this spell.
      * @return {@code true} if the player can cast the spell, {@code false}
-     * otherwise.
+     *         otherwise.
      */
     public boolean canCast(Player player) {
         int level = levelRequired();
@@ -30,8 +30,7 @@ public abstract class Spell {
         Optional<Item[]> equipment = equipmentRequired(player);
 
         if (player.getSkills()[Skills.MAGIC].getLevel() < level) {
-            player.getEncoder().sendMessage("You need a Magic level of " +
-                    level + " to cast this spell.");
+            player.getEncoder().sendMessage("You need a Magic level of " + level + " to cast this spell.");
             player.getCombatBuilder().reset();
             return false;
         }
@@ -63,7 +62,7 @@ public abstract class Spell {
      * Resets the {@code player}'s autocasting if they're currently in combat.
      *
      * @param player
-     *         the player to reset.
+     *            the player to reset.
      */
     private final void resetPlayerSpell(Player player) {
         if (player.getCombatBuilder().isAttacking() || player.getCombatBuilder().isBeingAttacked() && player.isAutocast()) {
@@ -92,9 +91,9 @@ public abstract class Spell {
      * The items required in the inventory to cast this spell.
      *
      * @param player
-     *         the player who's inventory will be checked.
+     *            the player who's inventory will be checked.
      * @return the items required to cast this spell, or an empty optional if
-     * there are no items required.
+     *         there are no items required.
      */
     public abstract Optional<Item[]> itemsRequired(Player player);
 
@@ -102,9 +101,9 @@ public abstract class Spell {
      * The items required in the equipment to cast this spell.
      *
      * @param player
-     *         the player who's equipment will be checked.
+     *            the player who's equipment will be checked.
      * @return the equipment required to cast this spell, or an empty optional
-     * if there is no equipment required.
+     *         if there is no equipment required.
      */
     public abstract Optional<Item[]> equipmentRequired(Player player);
 
@@ -112,10 +111,10 @@ public abstract class Spell {
      * The dynamic method executed when the spell is cast.
      *
      * @param cast
-     *         the character casting the spell.
+     *            the character casting the spell.
      * @param castOn
-     *         the character the spell is being cast on, this may be
-     *         {@code null}.
+     *            the character the spell is being cast on, this may be
+     *            {@code null}.
      */
     public abstract void startCast(CharacterNode cast, CharacterNode castOn);
 }

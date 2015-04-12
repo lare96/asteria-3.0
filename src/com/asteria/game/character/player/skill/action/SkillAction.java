@@ -39,9 +39,9 @@ public abstract class SkillAction implements PluginContext {
      * Creates a new {@link DestructionSkillAction}.
      *
      * @param player
-     *         the player this skill action is for.
+     *            the player this skill action is for.
      * @param position
-     *         the position the player should face.
+     *            the position the player should face.
      */
     public SkillAction(Player player, Optional<Position> position) {
         this.player = player;
@@ -70,7 +70,7 @@ public abstract class SkillAction implements PluginContext {
      * after the delay.
      *
      * @return {@code true} if this skill action should be instant,
-     * {@code false} otherwise.
+     *         {@code false} otherwise.
      */
     public abstract boolean instant();
 
@@ -78,7 +78,7 @@ public abstract class SkillAction implements PluginContext {
      * Initializes this skill action and performs any pre-checks.
      *
      * @return {@code true} if the skill action can proceed, {@code false}
-     * otherwise.
+     *         otherwise.
      */
     public abstract boolean init();
 
@@ -86,7 +86,7 @@ public abstract class SkillAction implements PluginContext {
      * Determines if this skill can be executed.
      *
      * @return {@code true} if this skill can be executed, {@code false}
-     * otherwise.
+     *         otherwise.
      */
     public abstract boolean canExecute();
 
@@ -94,7 +94,7 @@ public abstract class SkillAction implements PluginContext {
      * The method executed when the delay has elapsed.
      *
      * @param t
-     *         the task executing this skill action.
+     *            the task executing this skill action.
      */
     public abstract void execute(Task t);
 

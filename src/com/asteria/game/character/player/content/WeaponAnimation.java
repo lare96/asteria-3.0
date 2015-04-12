@@ -7,8 +7,7 @@ import com.asteria.game.character.player.Player;
 import com.asteria.game.item.Item;
 
 /**
- * The container class that represents one equipment animation that is used
- * with
+ * The container class that represents one equipment animation that is used with
  * weapons.
  *
  * @author lare96 <http://github.com/lare96>
@@ -39,11 +38,11 @@ public final class WeaponAnimation {
      * Creates a new {@link WeaponAnimation}.
      *
      * @param standing
-     *         the standing animation for this weapon animation.
+     *            the standing animation for this weapon animation.
      * @param walking
-     *         the walking animation for this weapon animation.
+     *            the walking animation for this weapon animation.
      * @param running
-     *         the running animation for this weapon animation.
+     *            the running animation for this weapon animation.
      */
     public WeaponAnimation(int standing, int walking, int running) {
         this.standing = standing;
@@ -67,9 +66,9 @@ public final class WeaponAnimation {
      * weapon animation to {@code player}.
      *
      * @param player
-     *         the player equipping the item.
+     *            the player equipping the item.
      * @param item
-     *         the item the player is equipping.
+     *            the item the player is equipping.
      */
     public static void execute(Player player, Item item) {
         if (item == null)

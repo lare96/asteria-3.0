@@ -31,13 +31,13 @@ public final class CircleLocation extends Location {
      * Creates a new {@link CircleLocation}.
      *
      * @param x
-     *         the center {@code X} coordinate.
+     *            the center {@code X} coordinate.
      * @param y
-     *         the center {@code Y} coordinate.
+     *            the center {@code Y} coordinate.
      * @param z
-     *         the center {@code Z} coordinate.
+     *            the center {@code Z} coordinate.
      * @param radius
-     *         the radius of this location from the center coordinates.
+     *            the radius of this location from the center coordinates.
      */
     public CircleLocation(int x, int y, int z, int radius) {
         this.x = x;
@@ -76,8 +76,7 @@ public final class CircleLocation extends Location {
 
     @Override
     public String toString() {
-        return "CIRCLE_LOCATION[x= " + x + ", y= " + y + ", z= " + z + ", " +
-                "radius= " + radius + "]";
+        return "CIRCLE_LOCATION[x= " + x + ", y= " + y + ", z= " + z + ", " + "radius= " + radius + "]";
     }
 
     /**

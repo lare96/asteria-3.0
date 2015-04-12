@@ -41,16 +41,18 @@ public final class ItemOnObjectPacket extends PacketDecoder {
         if (item.getId() != itemId)
             return;
         player.facePosition(position);
-        player.getMovementListener().append(() -> {
-            if (player.getPosition().withinDistance(position, objectSize)) {
-                Bone bone = Bone.getBone(itemId);
-                if (bone != null) {
-                    PrayerBoneAltar altarAction = new PrayerBoneAltar(player, bone, new Position(objectX, objectY));
-                    altarAction.start();
-                    return;
+        player.getMovementListener().append(
+            () -> {
+                if (player.getPosition().withinDistance(position, objectSize)) {
+                    Bone bone = Bone.getBone(itemId);
+                    if (bone != null) {
+                        PrayerBoneAltar altarAction = new PrayerBoneAltar(player, bone, new Position(objectX, objectY));
+                        altarAction.start();
+                        return;
+                    }
+                    PluginHandler.execute(player, ItemOnObjectPlugin.class, new ItemOnObjectPlugin(objectId, position, objectSize, item,
+                        slot));
                 }
-                PluginHandler.execute(player, ItemOnObjectPlugin.class, new ItemOnObjectPlugin(objectId, position, objectSize, item, slot));
-            }
-        });
+            });
     }
 }

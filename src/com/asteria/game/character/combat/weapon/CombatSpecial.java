@@ -29,8 +29,7 @@ import com.asteria.task.TaskHandler;
  * @author lare96 <http://github.com/lare96>
  */
 public enum CombatSpecial {
-    DRAGON_DAGGER(new int[] {1215, 1231, 5680,
-            5698}, 25, 1.15, 1.25, CombatType.MELEE, WeaponInterface.DAGGER) {
+    DRAGON_DAGGER(new int[] { 1215, 1231, 5680, 5698 }, 25, 1.15, 1.25, CombatType.MELEE, WeaponInterface.DAGGER) {
         @Override
         public CombatSessionData container(Player player, CharacterNode target) {
             player.animation(new Animation(1062, AnimationPriority.HIGH));
@@ -38,8 +37,7 @@ public enum CombatSpecial {
             return new CombatSessionData(player, target, 2, CombatType.MELEE, true);
         }
     },
-    GRANITE_MAUL(new int[] {
-            4153}, 50, 1.5, 1, CombatType.MELEE, WeaponInterface.WARHAMMER) {
+    GRANITE_MAUL(new int[] { 4153 }, 50, 1.5, 1, CombatType.MELEE, WeaponInterface.WARHAMMER) {
         @Override
         public CombatSessionData container(Player player, CharacterNode target) {
             player.animation(new Animation(1667, AnimationPriority.HIGH));
@@ -47,8 +45,7 @@ public enum CombatSpecial {
             return new CombatSessionData(player, target, 1, CombatType.MELEE, true);
         }
     },
-    ABYSSAL_WHIP(new int[] {
-            4151}, 50, 1, 1, CombatType.MELEE, WeaponInterface.WHIP) {
+    ABYSSAL_WHIP(new int[] { 4151 }, 50, 1, 1, CombatType.MELEE, WeaponInterface.WHIP) {
         @Override
         public CombatSessionData container(Player player, CharacterNode target) {
             player.animation(new Animation(1658, AnimationPriority.HIGH));
@@ -56,8 +53,7 @@ public enum CombatSpecial {
             return new CombatSessionData(player, target, 1, CombatType.MELEE, false);
         }
     },
-    DRAGON_LONGSWORD(new int[] {
-            1305}, 25, 1.25, 1.25, CombatType.MELEE, WeaponInterface.LONGSWORD) {
+    DRAGON_LONGSWORD(new int[] { 1305 }, 25, 1.25, 1.25, CombatType.MELEE, WeaponInterface.LONGSWORD) {
         @Override
         public CombatSessionData container(Player player, CharacterNode target) {
             player.animation(new Animation(1058, AnimationPriority.HIGH));
@@ -65,8 +61,7 @@ public enum CombatSpecial {
             return new CombatSessionData(player, target, 1, CombatType.MELEE, true);
         }
     },
-    MAGIC_SHORTBOW(new int[] {
-            861}, 50, 1, 1.1, CombatType.RANGED, WeaponInterface.SHORTBOW) {
+    MAGIC_SHORTBOW(new int[] { 861 }, 50, 1, 1.1, CombatType.RANGED, WeaponInterface.SHORTBOW) {
         @Override
         public CombatSessionData container(Player player, CharacterNode target) {
             player.animation(new Animation(426, AnimationPriority.HIGH));
@@ -85,8 +80,7 @@ public enum CombatSpecial {
             return new CombatSessionData(player, target, 2, CombatType.RANGED, true);
         }
     },
-    MAGIC_LONGBOW(new int[] {
-            859}, 35, 1, 5, CombatType.RANGED, WeaponInterface.LONGBOW) {
+    MAGIC_LONGBOW(new int[] { 859 }, 35, 1, 5, CombatType.RANGED, WeaponInterface.LONGBOW) {
         @Override
         public CombatSessionData container(Player player, CharacterNode target) {
             player.animation(new Animation(426, AnimationPriority.HIGH));
@@ -95,8 +89,7 @@ public enum CombatSpecial {
             return new CombatSessionData(player, target, 1, CombatType.RANGED, true);
         }
     },
-    DRAGON_BATTLEAXE(new int[] {
-            1377}, 100, 1, 1, CombatType.MELEE, WeaponInterface.BATTLEAXE) {
+    DRAGON_BATTLEAXE(new int[] { 1377 }, 100, 1, 1, CombatType.MELEE, WeaponInterface.BATTLEAXE) {
         @Override
         public void onActivation(Player player, CharacterNode target) {
             int newStrength = (int) (player.getSkills()[Skills.STRENGTH].getRealLevel() * 0.2);
@@ -126,8 +119,7 @@ public enum CombatSpecial {
             throw new UnsupportedOperationException("Dragon battleaxe does " + "not have a special attack!");
         }
     },
-    DRAGON_SPEAR(new int[] {1249, 1263, 5716,
-            5730}, 25, 1, 1, CombatType.MELEE, WeaponInterface.SPEAR) {
+    DRAGON_SPEAR(new int[] { 1249, 1263, 5716, 5730 }, 25, 1, 1, CombatType.MELEE, WeaponInterface.SPEAR) {
         @Override
         public CombatSessionData container(Player player, CharacterNode target) {
             player.animation(new Animation(1064, AnimationPriority.HIGH));
@@ -136,7 +128,8 @@ public enum CombatSpecial {
                 @Override
                 public void postAttack(int counter) {
                     if (target.getType() == NodeType.PLAYER) {
-                        target.getMovementQueue().walk(MovementQueue.DIRECTION_DELTA_X[player.getLastDirection()], MovementQueue.DIRECTION_DELTA_Y[player.getLastDirection()]);
+                        target.getMovementQueue().walk(MovementQueue.DIRECTION_DELTA_X[player.getLastDirection()],
+                            MovementQueue.DIRECTION_DELTA_Y[player.getLastDirection()]);
                     }
                     target.graphic(new Graphic(80));
                     target.getMovementListener().append(() -> target.freeze(6));
@@ -144,8 +137,7 @@ public enum CombatSpecial {
             };
         }
     },
-    DRAGON_MACE(new int[] {
-            1434}, 25, 1.45, 0.9, CombatType.MELEE, WeaponInterface.MACE) {
+    DRAGON_MACE(new int[] { 1434 }, 25, 1.45, 0.9, CombatType.MELEE, WeaponInterface.MACE) {
         @Override
         public CombatSessionData container(Player player, CharacterNode target) {
             player.animation(new Animation(1060, AnimationPriority.HIGH));
@@ -153,8 +145,7 @@ public enum CombatSpecial {
             return new CombatSessionData(player, target, 1, CombatType.MELEE, true);
         }
     },
-    DRAGON_SCIMITAR(new int[] {
-            4587}, 55, 1, 1, CombatType.MELEE, WeaponInterface.SCIMITAR) {
+    DRAGON_SCIMITAR(new int[] { 4587 }, 55, 1, 1, CombatType.MELEE, WeaponInterface.SCIMITAR) {
         @Override
         public CombatSessionData container(Player player, CharacterNode target) {
             player.animation(new Animation(1872, AnimationPriority.HIGH));
@@ -162,8 +153,7 @@ public enum CombatSpecial {
             return new CombatSessionData(player, target, 1, CombatType.MELEE, true);
         }
     },
-    DRAGON_2H_SWORD(new int[] {
-            7158}, 60, 1, 1, CombatType.MELEE, WeaponInterface.TWO_HANDED_SWORD) {
+    DRAGON_2H_SWORD(new int[] { 7158 }, 60, 1, 1, CombatType.MELEE, WeaponInterface.TWO_HANDED_SWORD) {
         @Override
         public CombatSessionData container(Player player, CharacterNode target) {
             player.animation(new Animation(3157, AnimationPriority.HIGH));
@@ -184,9 +174,8 @@ public enum CombatSpecial {
                                 continue;
                             }
 
-                            if (character.getPosition().withinDistance(target.getPosition(), 1) && !character.equals(target) && !character.equals(player) &&
-                                    character.getCurrentHealth() > 0 &&
-                                    !character.isDead()) {
+                            if (character.getPosition().withinDistance(target.getPosition(), 1) && !character.equals(target) && !character
+                                .equals(player) && character.getCurrentHealth() > 0 && !character.isDead()) {
                                 Hit hit = Combat.calculateRandomHit(player, target, CombatType.MELEE);
                                 character.damage(hit);
                                 character.getCombatBuilder().getDamageCache().add(player, hit.getDamage());
@@ -197,8 +186,7 @@ public enum CombatSpecial {
             };
         }
     },
-    DRAGON_HALBERD(new int[] {
-            3204}, 30, 1.1, 1, CombatType.MELEE, WeaponInterface.HALBERD) {
+    DRAGON_HALBERD(new int[] { 3204 }, 30, 1.1, 1, CombatType.MELEE, WeaponInterface.HALBERD) {
         @Override
         public CombatSessionData container(Player player, CharacterNode target) {
             player.animation(new Animation(1203, AnimationPriority.HIGH));
@@ -241,17 +229,17 @@ public enum CombatSpecial {
      * Creates a new {@link CombatSpecial}.
      *
      * @param ids
-     *         the identifiers for the weapons that perform this special.
+     *            the identifiers for the weapons that perform this special.
      * @param amount
-     *         the amount of special energy drained by this attack.
+     *            the amount of special energy drained by this attack.
      * @param strength
-     *         the strength bonus added when performing this special attack.
+     *            the strength bonus added when performing this special attack.
      * @param accuracy
-     *         the accuracy bonus added when performing this special attack.
+     *            the accuracy bonus added when performing this special attack.
      * @param combat
-     *         the combat type used when performing this special attack.
+     *            the combat type used when performing this special attack.
      * @param weapon
-     *         the weapon type used when performing this special attack.
+     *            the weapon type used when performing this special attack.
      */
     private CombatSpecial(int[] ids, int amount, double strength, double accuracy, CombatType combat, WeaponInterface weapon) {
         this.ids = ids;
@@ -266,10 +254,10 @@ public enum CombatSpecial {
      * Executes exactly when {@code player} activates the special bar.
      *
      * @param player
-     *         the player who activated the special bar.
+     *            the player who activated the special bar.
      * @param target
-     *         the target when activating the special attack bar, will be
-     *         {@code null} if the player is not in combat.
+     *            the target when activating the special attack bar, will be
+     *            {@code null} if the player is not in combat.
      */
     public void onActivation(Player player, CharacterNode target) {
 
@@ -279,9 +267,9 @@ public enum CombatSpecial {
      * The combat data that will be used to make an attack on {@code target}.
      *
      * @param player
-     *         the player who is making an attack.
+     *            the player who is making an attack.
      * @param target
-     *         the main target of the attack.
+     *            the main target of the attack.
      * @return the combat data.
      */
     public abstract CombatSessionData container(Player player, CharacterNode target);
@@ -290,9 +278,9 @@ public enum CombatSpecial {
      * Drains the special bar for {@code player}.
      *
      * @param player
-     *         the player who's special bar will be drained.
+     *            the player who's special bar will be drained.
      * @param amount
-     *         the amount of energy to drain from the special bar.
+     *            the amount of energy to drain from the special bar.
      */
     public static void drain(Player player, int amount) {
         player.getSpecialPercentage().decrementAndGet(amount, 0);
@@ -305,9 +293,9 @@ public enum CombatSpecial {
      * Restores the special bar for {@code player}.
      *
      * @param player
-     *         the player who's special bar will be restored.
+     *            the player who's special bar will be restored.
      * @param amount
-     *         the amount of energy to restore to the special bar.
+     *            the amount of energy to restore to the special bar.
      */
     public static void restore(Player player, int amount) {
         player.getSpecialPercentage().incrementAndGet(amount, 100);
@@ -319,7 +307,7 @@ public enum CombatSpecial {
      * has.
      *
      * @param player
-     *         the player who's special bar will be updated.
+     *            the player who's special bar will be updated.
      */
     public static void updateSpecialAmount(Player player) {
         if (player.getWeapon().getSpecialBar() == -1 || player.getWeapon().getSpecialMeter() == -1) {
@@ -340,7 +328,7 @@ public enum CombatSpecial {
      * Updates the weapon interface with a special bar if needed.
      *
      * @param player
-     *         the player to update the interface for.
+     *            the player to update the interface for.
      */
     public static void assign(Player player) {
         if (player.getWeapon().getSpecialBar() == -1) {
@@ -348,7 +336,8 @@ public enum CombatSpecial {
             return;
         }
 
-        Optional<CombatSpecial> special = Arrays.stream(CombatSpecial.values()).filter(c -> Arrays.stream(c.getIds()).anyMatch(id -> player.getEquipment().getId(Equipment.WEAPON_SLOT) == id)).findFirst();
+        Optional<CombatSpecial> special = Arrays.stream(CombatSpecial.values()).filter(
+            c -> Arrays.stream(c.getIds()).anyMatch(id -> player.getEquipment().getId(Equipment.WEAPON_SLOT) == id)).findFirst();
         if (special.isPresent()) {
             player.getEncoder().sendInterfaceLayer(player.getWeapon().getSpecialBar(), false);
             player.setCombatSpecial(special.get());

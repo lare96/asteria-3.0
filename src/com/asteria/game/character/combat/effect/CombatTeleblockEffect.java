@@ -19,7 +19,7 @@ public final class CombatTeleblockEffect extends CombatEffect {
      * Creates a new {@link CombatTeleblockEffect}.
      *
      * @param player
-     *         the player this effect is being applied to.
+     *            the player this effect is being applied to.
      */
     public CombatTeleblockEffect(Player player) {
         super(player, 1);

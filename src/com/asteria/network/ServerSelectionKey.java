@@ -8,8 +8,7 @@ import com.asteria.network.impl.DecodePacketServerEvent;
 
 /**
  * The container class that serves as a wrapper for selection keys. Its main
- * purpose is to determine which type of networking event should be executed
- * for
+ * purpose is to determine which type of networking event should be executed for
  * this key.
  *
  * @author lare96 <http://github.com/lare96>
@@ -25,7 +24,7 @@ public final class ServerSelectionKey {
      * Creates a new {@link ServerSelectionKey}.
      *
      * @param key
-     *         the internal selection key wrapped by this container.
+     *            the internal selection key wrapped by this container.
      */
     public ServerSelectionKey(SelectionKey key) {
         this.key = key;
@@ -35,7 +34,7 @@ public final class ServerSelectionKey {
      * Determines the event that this key is ready for.
      *
      * @return the event wrapped in an optional, or an empty optional if this
-     * key is not ready for any events.
+     *         key is not ready for any events.
      */
     public Optional<ServerSelectionEvent> determineEvent() {
         if (!key.isValid())

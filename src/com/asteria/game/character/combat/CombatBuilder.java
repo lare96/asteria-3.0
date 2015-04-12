@@ -61,7 +61,7 @@ public final class CombatBuilder {
      * Creates a new {@link CombatBuilder}.
      *
      * @param character
-     *         the character in control of this combat builder.
+     *            the character in control of this combat builder.
      */
     public CombatBuilder(CharacterNode character) {
         this.character = character;
@@ -72,7 +72,7 @@ public final class CombatBuilder {
      * already attacking the target this method has no effect.
      *
      * @param target
-     *         the character that this controller will be prompted to attack.
+     *            the character that this controller will be prompted to attack.
      */
     public void attack(CharacterNode target) {
         if (character.equals(target))
@@ -88,8 +88,7 @@ public final class CombatBuilder {
             currentVictim = target;
             if (character.getType() == NodeType.PLAYER) {
                 Player player = (Player) character;
-                if (player.isAutocast() || player.getCastSpell() == null ||
-                        attackTimer < 1) {
+                if (player.isAutocast() || player.getCastSpell() == null || attackTimer < 1) {
                     cooldown = 0;
                 }
             }
@@ -130,7 +129,7 @@ public final class CombatBuilder {
      * Starts the cooldown sequence for this controller.
      *
      * @param resetAttack
-     *         if the attack timer should be reset.
+     *            if the attack timer should be reset.
      */
     public void cooldown(boolean resetAttack) {
         if (strategy == null)
@@ -153,7 +152,7 @@ public final class CombatBuilder {
      * Determines if this character is attacking another character.
      *
      * @return {@code true} if this character is attacking another character,
-     * {@code false} otherwise.
+     *         {@code false} otherwise.
      */
     public boolean isAttacking() {
         return currentVictim != null;
@@ -163,7 +162,7 @@ public final class CombatBuilder {
      * Determines if this character is being attacked by another character.
      *
      * @return {@code true} if this character is being attacked by another
-     * character, {@code false} otherwise.
+     *         character, {@code false} otherwise.
      */
     public boolean isBeingAttacked() {
         return !character.getLastCombat().elapsed(5, TimeUnit.SECONDS);
@@ -174,7 +173,7 @@ public final class CombatBuilder {
      * character.
      *
      * @return {@code true} if this player is in combat, {@code false}
-     * otherwise.
+     *         otherwise.
      */
     public boolean inCombat() {
         return isAttacking() || isBeingAttacked();
@@ -184,7 +183,7 @@ public final class CombatBuilder {
      * Determines if this combat builder is in cooldown mode.
      *
      * @return {@code true} if this combat builder is in cooldown mode,
-     * {@code false} otherwise.
+     *         {@code false} otherwise.
      */
     public boolean isCooldown() {
         return cooldown > 0;
@@ -209,8 +208,7 @@ public final class CombatBuilder {
     }
 
     /**
-     * Gets the timer that controls how long this character must wait to
-     * attack.
+     * Gets the timer that controls how long this character must wait to attack.
      *
      * @return the timer determines when the controller attacks.
      */
@@ -257,7 +255,7 @@ public final class CombatBuilder {
      * Sets the value for {@link CombatBuilder#lastAttacker}.
      *
      * @param lastAttacker
-     *         the new value to set.
+     *            the new value to set.
      */
     public void setLastAttacker(CharacterNode lastAttacker) {
         this.lastAttacker = lastAttacker;
@@ -312,9 +310,9 @@ public final class CombatBuilder {
          * Create a new {@link CombatDistanceListener}.
          *
          * @param builder
-         *         the combat builder owned by the controller.
+         *            the combat builder owned by the controller.
          * @param victim
-         *         the victim that will be listened for.
+         *            the victim that will be listened for.
          */
         public CombatDistanceListener(CombatBuilder builder, CharacterNode victim) {
             super.attach(builder);
@@ -344,7 +342,8 @@ public final class CombatBuilder {
                     return true;
                 }
             }
-            return builder.character.getPosition().withinDistance(victim.getPosition(), builder.strategy.attackDistance(builder.getCharacter()));
+            return builder.character.getPosition().withinDistance(victim.getPosition(),
+                builder.strategy.attackDistance(builder.getCharacter()));
         }
 
         @Override

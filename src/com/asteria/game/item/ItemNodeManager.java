@@ -65,9 +65,9 @@ public final class ItemNodeManager extends Task {
      * The method that attempts to register {@code item}.
      *
      * @param item
-     *         the item to attempt to register.
+     *            the item to attempt to register.
      * @param stack
-     *         if the item should stack upon registration.
+     *            if the item should stack upon registration.
      * @return {@code true} if the item was registered, {@code false} otherwise.
      */
     public static boolean register(ItemNode item, boolean stack) {
@@ -76,13 +76,12 @@ public final class ItemNodeManager extends Task {
         if (ITEMS.add(item)) {
             if (stack) {
                 int counter = 0;
-                for (Iterator<ItemNode> it = ITEMS.iterator(); it.hasNext(); ) {
+                for (Iterator<ItemNode> it = ITEMS.iterator(); it.hasNext();) {
                     ItemNode next = it.next();
                     if (next.getPlayer() == null || next.getPosition() == null || next.getItem() == null)
                         continue;
-                    if (next.getItem().getId() == item.getItem().getId() &&
-                            next.getPosition().equals(item.getPosition()) &&
-                            next.getPlayer().equals(item.getPlayer())) {
+                    if (next.getItem().getId() == item.getItem().getId() && next.getPosition().equals(item.getPosition()) && next
+                        .getPlayer().equals(item.getPlayer())) {
                         counter += next.getItem().getAmount();
                         next.dispose();
                         next.setRegistered(false);
@@ -103,7 +102,7 @@ public final class ItemNodeManager extends Task {
      * default.
      *
      * @param item
-     *         the item to attempt to register.
+     *            the item to attempt to register.
      * @return {@code true} if the item was registered, {@code false} otherwise.
      */
     public static boolean register(ItemNode item) {
@@ -114,9 +113,9 @@ public final class ItemNodeManager extends Task {
      * The method that attempts to unregister {@code item}.
      *
      * @param item
-     *         the item to attempt to unregister.
+     *            the item to attempt to unregister.
      * @return {@code true} if the item was unregistered, {@code false}
-     * otherwise.
+     *         otherwise.
      */
     public static boolean unregister(ItemNode item) {
         if (!item.isRegistered())
@@ -133,22 +132,23 @@ public final class ItemNodeManager extends Task {
      * The method that retrieves the item with {@code id} on {@code position}.
      *
      * @param id
-     *         the identifier to retrieve the item with.
+     *            the identifier to retrieve the item with.
      * @param position
-     *         the position to retrieve the item on.
+     *            the position to retrieve the item on.
      * @return the item instance wrapped in an optional, or an empty optional if
-     * no item is found.
+     *         no item is found.
      */
     public static Optional<ItemNode> getItem(int id, Position position) {
-        return ITEMS.stream().filter(i -> i.getState() != ItemState.HIDDEN &&
-                i.isRegistered() && i.getItem().getId() == id && i.getPosition().equals(position)).findFirst();
+        return ITEMS.stream().filter(
+            i -> i.getState() != ItemState.HIDDEN && i.isRegistered() && i.getItem().getId() == id && i.getPosition().equals(position))
+            .findFirst();
     }
 
     /**
      * The method that updates all items in the region for {@code player}.
      *
      * @param player
-     *         the player to update items for.
+     *            the player to update items for.
      */
     public static void updateRegion(Player player) {
         for (ItemNode item : ITEMS) {

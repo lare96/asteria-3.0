@@ -32,9 +32,9 @@ public final class ObjectNodeManager {
      * The method that attempts to register {@code object}.
      *
      * @param object
-     *         the object to attempt to register.
+     *            the object to attempt to register.
      * @return {@code true} if the object was registered, {@code false}
-     * otherwise.
+     *         otherwise.
      */
     public static boolean register(ObjectNode object) {
         if (object.isRegistered())
@@ -53,11 +53,11 @@ public final class ObjectNodeManager {
      * {@code action} after specified amount of ticks.
      *
      * @param object
-     *         the object to attempt to register.
+     *            the object to attempt to register.
      * @param ticks
-     *         the amount of ticks to unregister this object after.
+     *            the amount of ticks to unregister this object after.
      * @return {@code true} if the object was registered, {@code false}
-     * otherwise.
+     *         otherwise.
      */
     public static boolean register(ObjectNode object, int ticks, Consumer<ObjectNode> action) {
         if (register(object)) {
@@ -77,17 +77,16 @@ public final class ObjectNodeManager {
      * amount of ticks.
      *
      * @param object
-     *         the object to attempt to register.
+     *            the object to attempt to register.
      * @param ticks
-     *         the amount of ticks to unregister this object after.
+     *            the amount of ticks to unregister this object after.
      * @return {@code true} if the object was registered, {@code false}
-     * otherwise.
+     *         otherwise.
      */
     public static boolean register(ObjectNode object, int ticks) {
         return register(object, ticks, n -> {
             if (!unregister(n))
-                throw new IllegalStateException(n + " could not be removed " +
-                        "after " + ticks + " ticks!");
+                throw new IllegalStateException(n + " could not be removed " + "after " + ticks + " ticks!");
         });
     }
 
@@ -95,9 +94,9 @@ public final class ObjectNodeManager {
      * The method that attempts to unregister {@code object}.
      *
      * @param object
-     *         the object to attempt to unregister.
+     *            the object to attempt to unregister.
      * @return {@code true} if the object was unregistered, {@code false}
-     * otherwise.
+     *         otherwise.
      */
     public static boolean unregister(ObjectNode object) {
         if (!object.isRegistered())
@@ -109,12 +108,12 @@ public final class ObjectNodeManager {
      * The method that attempts to unregister the object on {@code position}.
      *
      * @param object
-     *         the object to attempt to unregister.
+     *            the object to attempt to unregister.
      * @return {@code true} if the object was unregistered, {@code false}
-     * otherwise.
+     *         otherwise.
      */
     public static boolean unregister(Position position) {
-        for (Iterator<ObjectNode> iter = OBJECTS.iterator(); iter.hasNext(); ) {
+        for (Iterator<ObjectNode> iter = OBJECTS.iterator(); iter.hasNext();) {
             ObjectNode next = iter.next();
             if (next.getPosition().equals(position)) {
                 next.setRegistered(false);
@@ -130,9 +129,9 @@ public final class ObjectNodeManager {
      * The method that retrieves the object on {@code position}.
      *
      * @param position
-     *         the position to retrieve the object on.
+     *            the position to retrieve the object on.
      * @return the object instance wrapped in an optional, or an empty optional
-     * if no object is found.
+     *         if no object is found.
      */
     public static Optional<ObjectNode> getObject(Position position) {
         return OBJECTS.stream().filter(obj -> obj.getPosition().equals(position)).findFirst();
@@ -142,7 +141,7 @@ public final class ObjectNodeManager {
      * The method that updates all objects in the region for {@code player}.
      *
      * @param player
-     *         the player to update objects for.
+     *            the player to update objects for.
      */
     public static void updateRegion(Player player) {
         OBJECTS.forEach(obj -> {

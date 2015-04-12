@@ -27,15 +27,15 @@ public final class ObjectActionPacket extends PacketDecoder {
             return;
 
         switch (opcode) {
-            case 132:
-                firstClick(player, buf);
-                break;
-            case 252:
-                secondClick(player, buf);
-                break;
-            case 70:
-                thirdClick(player, buf);
-                break;
+        case 132:
+            firstClick(player, buf);
+            break;
+        case 252:
+            secondClick(player, buf);
+            break;
+        case 70:
+            thirdClick(player, buf);
+            break;
         }
     }
 
@@ -43,9 +43,9 @@ public final class ObjectActionPacket extends PacketDecoder {
      * Handles the first slot object click for {@code player}.
      *
      * @param player
-     *         the player to handle this for.
+     *            the player to handle this for.
      * @param buf
-     *         the buffer for reading the sent data.
+     *            the buffer for reading the sent data.
      */
     private void firstClick(Player player, DataBuffer buf) {
         int objectX = buf.getShort(true, ValueType.A, ByteOrder.LITTLE);
@@ -56,8 +56,7 @@ public final class ObjectActionPacket extends PacketDecoder {
         if (objectId < 0 || objectX < 0 || objectY < 0)
             return;
         if (Settings.DEBUG)
-            player.getEncoder().sendMessage("[DEBUG]: ID - " + objectId + ", " +
-                    "X - " + objectX + ", Y - " + objectY);
+            player.getEncoder().sendMessage("[DEBUG]: ID - " + objectId + ", " + "X - " + objectX + ", Y - " + objectY);
         player.facePosition(position);
         player.getMovementListener().append(() -> {
             if (player.getPosition().withinDistance(position, size)) {
@@ -71,9 +70,9 @@ public final class ObjectActionPacket extends PacketDecoder {
      * Handles the second slot object click for {@code player}.
      *
      * @param player
-     *         the player to handle this for.
+     *            the player to handle this for.
      * @param buf
-     *         the buffer for reading the sent data.
+     *            the buffer for reading the sent data.
      */
     private void secondClick(Player player, DataBuffer buf) {
         int objectId = buf.getShort(false, ValueType.A, ByteOrder.LITTLE);
@@ -84,8 +83,7 @@ public final class ObjectActionPacket extends PacketDecoder {
         if (objectId < 0 || objectX < 0 || objectY < 0)
             return;
         if (Settings.DEBUG)
-            player.getEncoder().sendMessage("[DEBUG]: ID - " + objectId + ", " +
-                    "X - " + objectX + ", Y - " + objectY);
+            player.getEncoder().sendMessage("[DEBUG]: ID - " + objectId + ", " + "X - " + objectX + ", Y - " + objectY);
         player.facePosition(position);
         player.getMovementListener().append(() -> {
             if (player.getPosition().withinDistance(position, size)) {
@@ -99,9 +97,9 @@ public final class ObjectActionPacket extends PacketDecoder {
      * Handles the third slot object click for {@code player}.
      *
      * @param player
-     *         the player to handle this for.
+     *            the player to handle this for.
      * @param buf
-     *         the buffer for reading the sent data.
+     *            the buffer for reading the sent data.
      */
     private void thirdClick(Player player, DataBuffer buf) {
         int objectX = buf.getShort(true, ByteOrder.LITTLE);

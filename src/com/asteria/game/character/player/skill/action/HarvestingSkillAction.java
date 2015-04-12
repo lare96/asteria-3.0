@@ -11,11 +11,9 @@ import com.asteria.utility.RandomGen;
 import com.google.common.base.Preconditions;
 
 /**
- * The skill action that represents an action where items are periodically
- * added
+ * The skill action that represents an action where items are periodically added
  * to and removed from an inventory based on a success factor. This type of
- * skill action is more complicated and requires that a player have the items
- * to
+ * skill action is more complicated and requires that a player have the items to
  * be removed and the space for the items to harvest.
  * <p>
  * <p>
@@ -30,8 +28,7 @@ import com.google.common.base.Preconditions;
 public abstract class HarvestingSkillAction extends SkillAction {
 
     /**
-     * The factor boost that determines the success rate for harvesting based
-     * on
+     * The factor boost that determines the success rate for harvesting based on
      * skill level. The higher the number the less frequently harvest will be
      * obtained. A value higher than {@code 99} or lower than {@code 0} will
      * throw an {@link IllegalStateException}.
@@ -47,9 +44,9 @@ public abstract class HarvestingSkillAction extends SkillAction {
      * Creates a new {@link HarvestingSkillAction}.
      *
      * @param player
-     *         the player this skill action is for.
+     *            the player this skill action is for.
      * @param position
-     *         the position the player should face.
+     *            the position the player should face.
      */
     public HarvestingSkillAction(Player player, Optional<Position> position) {
         super(player, position);
@@ -97,11 +94,11 @@ public abstract class HarvestingSkillAction extends SkillAction {
      * The method executed upon harvest of the items.
      *
      * @param t
-     *         the task executing this method.
+     *            the task executing this method.
      * @param item
-     *         the item being harvested.
+     *            the item being harvested.
      * @param success
-     *         determines if the harvest was successful or not.
+     *            determines if the harvest was successful or not.
      */
     public void onHarvest(Task t, Item item, boolean success) {
 

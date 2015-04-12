@@ -25,7 +25,7 @@ public final class PrivateMessage {
      * Creates a new {@link PrivateMessage}.
      *
      * @param player
-     *         the player this private messaging list belongs to.
+     *            the player this private messaging list belongs to.
      */
     public PrivateMessage(Player player) {
         this.player = player;
@@ -44,12 +44,11 @@ public final class PrivateMessage {
     }
 
     /**
-     * Updates {@code player} friends lists with with whether they are online
-     * or
+     * Updates {@code player} friends lists with with whether they are online or
      * offline.
      *
      * @param online
-     *         the status to update the other players friends lists with.
+     *            the status to update the other players friends lists with.
      */
     public void updateOtherList(boolean online) {
         for (Player players : World.getPlayers()) {
@@ -64,7 +63,7 @@ public final class PrivateMessage {
      * Attempts to add {@code name} to the friends list.
      *
      * @param name
-     *         the name of the new friend to add.
+     *            the name of the new friend to add.
      */
     public void addFriend(long name) {
         if (player.getFriends().size() >= 200) {
@@ -82,7 +81,7 @@ public final class PrivateMessage {
      * Attempts to add {@code name} to the friends list.
      *
      * @param name
-     *         the name of the new ignore to add.
+     *            the name of the new ignore to add.
      */
     public void addIgnore(long name) {
         if (player.getIgnores().size() >= 100) {
@@ -97,7 +96,7 @@ public final class PrivateMessage {
      * Attempts to remove {@code name} from the friends list.
      *
      * @param name
-     *         the name of the existing friend to remove.
+     *            the name of the existing friend to remove.
      */
     public void removeFriend(long name) {
         if (!player.getFriends().remove(name)) {
@@ -109,7 +108,7 @@ public final class PrivateMessage {
      * Attempts to remove {@code name} from the ignores list.
      *
      * @param name
-     *         the name of the existing ignore to remove.
+     *            the name of the existing ignore to remove.
      */
     public void removeIgnore(long name) {
         if (!player.getIgnores().remove(name)) {
@@ -121,11 +120,11 @@ public final class PrivateMessage {
      * Attempts to send {@code message} to the player with {@code name}.
      *
      * @param name
-     *         the player with this name to send the message to.
+     *            the player with this name to send the message to.
      * @param message
-     *         the message to send to the player.
+     *            the message to send to the player.
      * @param size
-     *         the size of the message to send.
+     *            the size of the message to send.
      */
     public void sendPrivateMessage(long name, byte[] message, int size) {
         int rights = player.getRights().getProtocolValue();

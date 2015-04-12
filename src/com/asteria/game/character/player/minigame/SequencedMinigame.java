@@ -20,7 +20,7 @@ public abstract class SequencedMinigame extends Minigame {
      * Creates a new {@link SequencedMinigame}.
      *
      * @param name
-     *         the current name of this minigame.
+     *            the current name of this minigame.
      */
     public SequencedMinigame(String name) {
         super(name, MinigameType.SEQUENCED);

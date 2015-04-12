@@ -38,15 +38,15 @@ public final class SquareLocation extends Location {
      * Creates a new {@link SquareLocation}.
      *
      * @param swX
-     *         the south-west {@code X} corner of the box.
+     *            the south-west {@code X} corner of the box.
      * @param swY
-     *         the south-west {@code Y} corner of the box.
+     *            the south-west {@code Y} corner of the box.
      * @param neX
-     *         the north-east {@code X} corner of the box.
+     *            the north-east {@code X} corner of the box.
      * @param neY
-     *         the north-east {@code Y} corner of the box.
+     *            the north-east {@code Y} corner of the box.
      * @param z
-     *         the {@code Z} level of the box.
+     *            the {@code Z} level of the box.
      */
     public SquareLocation(int swX, int swY, int neX, int neY, int z) {
         this.swX = swX;
@@ -57,17 +57,16 @@ public final class SquareLocation extends Location {
     }
 
     /**
-     * Creates a new {@link SquareLocation} from the center position and
-     * radius.
+     * Creates a new {@link SquareLocation} from the center position and radius.
      *
      * @param x
-     *         the center {@code X} coordinate.
+     *            the center {@code X} coordinate.
      * @param y
-     *         the center {@code Y} coordinate.
+     *            the center {@code Y} coordinate.
      * @param z
-     *         the center {@code Z} coordinate.
+     *            the center {@code Z} coordinate.
      * @param radius
-     *         the radius of this location from the center coordinates.
+     *            the radius of this location from the center coordinates.
      */
     public SquareLocation(int x, int y, int z, int radius) {
         this(x - radius, y - radius, x + radius, y + radius, z);
@@ -80,8 +79,7 @@ public final class SquareLocation extends Location {
         if (!(obj instanceof SquareLocation))
             return false;
         SquareLocation other = (SquareLocation) obj;
-        return other.swX == swX && other.swY == swY && other.neX == neX &&
-                other.neY == neY && other.z == z;
+        return other.swX == swX && other.swY == swY && other.neX == neX && other.neY == neY && other.z == z;
     }
 
     @Override
@@ -105,8 +103,7 @@ public final class SquareLocation extends Location {
 
     @Override
     public String toString() {
-        return "SQUARE_LOCATION[swX= " + swX + ", swY= " + swY + ", neX= " +
-                neX + ", neY= " + neY + "]";
+        return "SQUARE_LOCATION[swX= " + swX + ", swY= " + swY + ", neX= " + neX + ", neY= " + neY + "]";
     }
 
     @Override

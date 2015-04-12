@@ -19,7 +19,7 @@ public final class Bank extends ItemContainer {
      * Creates a new {@link Bank}.
      *
      * @param player
-     *         the player who's bank is being managed.
+     *            the player who's bank is being managed.
      */
     public Bank(Player player) {
         super(250, ItemContainerPolicy.STACK_ALWAYS);
@@ -50,9 +50,9 @@ public final class Bank extends ItemContainer {
      * using the banking interface.
      *
      * @param inventorySlot
-     *         the slot from the player's inventory.
+     *            the slot from the player's inventory.
      * @param amount
-     *         the amount of the item being deposited.
+     *            the amount of the item being deposited.
      * @return {@code true} if the item was deposited, {@code false} otherwise.
      */
     public boolean depositFromInventory(int inventorySlot, int amount) {
@@ -76,7 +76,7 @@ public final class Bank extends ItemContainer {
      * Deposits {@code item} directly into this bank.
      *
      * @param item
-     *         the item to deposit into this bank.
+     *            the item to deposit into this bank.
      * @return {@code true} if the item was deposited, {@code false} otherwise.
      */
     public boolean deposit(Item item) {
@@ -100,12 +100,12 @@ public final class Bank extends ItemContainer {
      * interface.
      *
      * @param bankSlot
-     *         the slot from the player's bank.
+     *            the slot from the player's bank.
      * @param amount
-     *         the amount of the item being withdrawn.
+     *            the amount of the item being withdrawn.
      * @param addItem
-     *         if the item should be added back into the player's inventory
-     *         after being withdrawn.
+     *            if the item should be added back into the player's inventory
+     *            after being withdrawn.
      * @return {@code true} if the item was withdrawn, {@code false} otherwise.
      */
     public boolean withdraw(int bankSlot, int amount, boolean addItem) {
@@ -132,7 +132,8 @@ public final class Bank extends ItemContainer {
                 return false;
             }
         } else {
-            if (player.getInventory().remaining() < 1 && !player.getInventory().contains(!player.isWithdrawAsNote() ? item.getId() : item.getId() + 1)) {
+            if (player.getInventory().remaining() < 1 && !player.getInventory().contains(
+                !player.isWithdrawAsNote() ? item.getId() : item.getId() + 1)) {
                 player.getEncoder().sendMessage("You do not have enough space" + " in your inventory!");
                 return false;
             }
@@ -163,10 +164,10 @@ public final class Bank extends ItemContainer {
      * Withdraws {@code item} from this bank.
      *
      * @param item
-     *         the item to withdraw.
+     *            the item to withdraw.
      * @param addItem
-     *         if the item should be added back into the player's inventory
-     *         after being withdrawn.
+     *            if the item should be added back into the player's inventory
+     *            after being withdrawn.
      * @return {@code true} if the item was withdrawn, {@code false} otherwise.
      */
     public boolean withdraw(Item item, boolean addItem) {
@@ -177,8 +178,8 @@ public final class Bank extends ItemContainer {
      * This method is not supported by this container implementation.
      *
      * @throws UnsupportedOperationException
-     *         if this method is invoked by default, this method will always
-     *         throw an exception.
+     *             if this method is invoked by default, this method will always
+     *             throw an exception.
      */
     @Override
     public boolean add(Item item, int slot) {
@@ -189,8 +190,8 @@ public final class Bank extends ItemContainer {
      * This method is not supported by this container implementation.
      *
      * @throws UnsupportedOperationException
-     *         if this method is invoked by default, this method will always
-     *         throw an exception.
+     *             if this method is invoked by default, this method will always
+     *             throw an exception.
      */
     @Override
     public boolean remove(Item item, int slot) {

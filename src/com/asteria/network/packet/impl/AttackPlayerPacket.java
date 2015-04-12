@@ -29,12 +29,12 @@ public final class AttackPlayerPacket extends PacketDecoder {
             return;
 
         switch (opcode) {
-            case 249:
-                attackMagic(player, buf);
-                break;
-            case 73:
-                attackOther(player, buf);
-                break;
+        case 249:
+            attackMagic(player, buf);
+            break;
+        case 73:
+            attackOther(player, buf);
+            break;
         }
     }
 
@@ -42,9 +42,9 @@ public final class AttackPlayerPacket extends PacketDecoder {
      * Attempts to attack a player with a magic spell.
      *
      * @param player
-     *         the player to attempt to attack.
+     *            the player to attempt to attack.
      * @param buf
-     *         the buffer for reading the sent data.
+     *            the buffer for reading the sent data.
      */
     private void attackMagic(Player player, DataBuffer buf) {
         int index = buf.getShort(true, ValueType.A);
@@ -66,16 +66,15 @@ public final class AttackPlayerPacket extends PacketDecoder {
      * or ranged.
      *
      * @param player
-     *         the player to attempt to attack.
+     *            the player to attempt to attack.
      * @param buf
-     *         the buffer for reading the sent data.
+     *            the buffer for reading the sent data.
      */
     private void attackOther(Player player, DataBuffer buf) {
         int index = buf.getShort(true, ByteOrder.LITTLE);
         Player victim = World.getPlayers().get(index);
 
-        if (index < 0 || index > World.getPlayers().capacity() ||
-                !checkAttack(player, victim))
+        if (index < 0 || index > World.getPlayers().capacity() || !checkAttack(player, victim))
             return;
         player.getCombatBuilder().attack(victim);
     }
@@ -85,23 +84,24 @@ public final class AttackPlayerPacket extends PacketDecoder {
      * {@code victim}.
      *
      * @param attacker
-     *         the player that is trying to attack.
+     *            the player that is trying to attack.
      * @param victim
-     *         the player that is being targeted.
+     *            the player that is being targeted.
      * @return {@code true} if an attack can be made, {@code false} otherwise.
      */
     private boolean checkAttack(Player attacker, Player victim) {
         if (victim == null || victim.equals(attacker))
             return false;
-        if (!Location.inMultiCombat(attacker) && attacker.getCombatBuilder().isBeingAttacked() && attacker.getCombatBuilder().getLastAttacker() != victim) {
+        if (!Location.inMultiCombat(attacker) && attacker.getCombatBuilder().isBeingAttacked() && attacker.getCombatBuilder()
+            .getLastAttacker() != victim) {
             attacker.getEncoder().sendMessage("You are already under attack!");
             return false;
         }
         Optional<Minigame> optional = MinigameHandler.search(attacker);
         if (!optional.isPresent()) {
             if (!Location.inWilderness(attacker) || !Location.inWilderness(victim)) {
-                attacker.getEncoder().sendMessage("Both you and " + victim.getFormatUsername() + " need to be in the wilderness" +
-                        " to fight!");
+                attacker.getEncoder().sendMessage(
+                    "Both you and " + victim.getFormatUsername() + " need to be in the wilderness" + " to fight!");
                 return false;
             }
             int combatDifference = Combat.combatLevelDifference(attacker.determineCombatLevel(), victim.determineCombatLevel());
@@ -109,8 +109,8 @@ public final class AttackPlayerPacket extends PacketDecoder {
                 attacker.getEncoder().sendMessage("Your combat level " + "difference is too great to attack that player here.");
                 return false;
             }
-            if (!attacker.getCombatBuilder().isBeingAttacked() || attacker.getCombatBuilder().isBeingAttacked() && attacker.getCombatBuilder().getLastAttacker() != victim &&
-                    Location.inMultiCombat(attacker)) {
+            if (!attacker.getCombatBuilder().isBeingAttacked() || attacker.getCombatBuilder().isBeingAttacked() && attacker
+                .getCombatBuilder().getLastAttacker() != victim && Location.inMultiCombat(attacker)) {
                 Combat.effect(new CombatSkullEffect(attacker));
             }
         } else {

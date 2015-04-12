@@ -65,11 +65,11 @@ public final class Palette {
      * Gets a tile.
      *
      * @param x
-     *         X position.
+     *            X position.
      * @param y
-     *         Y position.
+     *            Y position.
      * @param z
-     *         Z position.
+     *            Z position.
      * @return The tile.
      */
     public PaletteTile getTile(int x, int y, int z) {
@@ -80,13 +80,13 @@ public final class Palette {
      * Sets a tile.
      *
      * @param x
-     *         X position.
+     *            X position.
      * @param y
-     *         Y position.
+     *            Y position.
      * @param z
-     *         Z position.
+     *            Z position.
      * @param tile
-     *         The tile.
+     *            The tile.
      */
     public void setTile(int x, int y, int z, PaletteTile tile) {
         tiles[x][y][z] = tile;

@@ -27,7 +27,7 @@ public final class NpcDeath extends CharacterDeath<Npc> {
      * Creates a new {@link NpcDeath}.
      *
      * @param npc
-     *         the NPC who has died and needs the death process.
+     *            the NPC who has died and needs the death process.
      */
     public NpcDeath(Npc npc) {
         super(npc);
@@ -47,7 +47,8 @@ public final class NpcDeath extends CharacterDeath<Npc> {
             for (Item drop : dropItems) {
                 if (drop == null)
                     continue;
-                ItemNodeManager.register(!killer.isPresent() ? new ItemNodeStatic(drop, character.getPosition()) : new ItemNode(drop, character.getPosition(), killer.get()));
+                ItemNodeManager.register(!killer.isPresent() ? new ItemNodeStatic(drop, character.getPosition()) : new ItemNode(drop,
+                    character.getPosition(), killer.get()));
             }
             killer.ifPresent(k -> MinigameHandler.search(k).ifPresent(m -> m.onKill(k, character)));
         });

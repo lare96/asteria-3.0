@@ -25,7 +25,7 @@ public final class PlayerUpdating {
      * The default constructor.
      *
      * @throws UnsupportedOperationException
-     *         if this class is instantiated.
+     *             if this class is instantiated.
      */
     private PlayerUpdating() {
         throw new UnsupportedOperationException("This class cannot be " + "instantiated!");
@@ -35,9 +35,9 @@ public final class PlayerUpdating {
      * The method that performs updating on {@code player}.
      *
      * @param player
-     *         the player being updated.
+     *            the player being updated.
      * @throws Exception
-     *         if any errors occur while updating the player.
+     *             if any errors occur while updating the player.
      */
     public static void update(Player player) throws Exception {
         DataBuffer out = DataBuffer.create(16384);
@@ -48,11 +48,10 @@ public final class PlayerUpdating {
         if (player.getFlags().needsUpdate())
             PlayerUpdating.updateState(player, player, block, false, true);
         out.putBits(8, player.getLocalPlayers().size());
-        for (Iterator<Player> i = player.getLocalPlayers().iterator(); i.hasNext(); ) {
+        for (Iterator<Player> i = player.getLocalPlayers().iterator(); i.hasNext();) {
             Player other = i.next();
-            if (other.getPosition().isViewableFrom(player.getPosition()) &&
-                    other.getSession().getState() == IOState.LOGGED_IN &&
-                    !other.isNeedsPlacement() && other.isVisible()) {
+            if (other.getPosition().isViewableFrom(player.getPosition()) && other.getSession().getState() == IOState.LOGGED_IN && !other
+                .isNeedsPlacement() && other.isVisible()) {
                 PlayerUpdating.updateOtherPlayerMovement(other, out);
                 if (other.getFlags().needsUpdate()) {
                     PlayerUpdating.updateState(other, player, block, false, false);
@@ -92,9 +91,9 @@ public final class PlayerUpdating {
      * Appends the state of chat to {@code out} for {@code player}.
      *
      * @param player
-     *         the player to append the state for.
+     *            the player to append the state for.
      * @param out
-     *         the buffer to append it to.
+     *            the buffer to append it to.
      */
     private static void appendChat(Player player, DataBuffer out) {
         out.putShort(((player.getChatColor() & 0xff) << 8) + (player.getChatEffects() & 0xff), ByteOrder.LITTLE);
@@ -107,9 +106,9 @@ public final class PlayerUpdating {
      * Appends the state of appearance to {@code out} for {@code player}.
      *
      * @param player
-     *         the player to append the state for.
+     *            the player to append the state for.
      * @param out
-     *         the buffer to append it to.
+     *            the buffer to append it to.
      */
     private static void appendAppearance(Player player, DataBuffer out) {
         Appearance appearance = player.getAppearance();
@@ -162,7 +161,8 @@ public final class PlayerUpdating {
             } else {
                 block.putShort(0x100 + appearance.getLegs());
             }
-            if (player.getEquipment().getId(Equipment.HEAD_SLOT) > 1 && player.getEquipment().get(Equipment.HEAD_SLOT).getDefinition().isFullHelm()) {
+            if (player.getEquipment().getId(Equipment.HEAD_SLOT) > 1 && player.getEquipment().get(Equipment.HEAD_SLOT).getDefinition()
+                .isFullHelm()) {
                 block.put(0);
             } else {
                 block.putShort(0x100 + appearance.getHead());
@@ -178,7 +178,8 @@ public final class PlayerUpdating {
                 block.putShort(0x100 + appearance.getFeet());
             }
             if (appearance.isMale()) {
-                if (player.getEquipment().getId(Equipment.HEAD_SLOT) > 1 && !player.getEquipment().get(Equipment.HEAD_SLOT).getDefinition().isFullHelm() || player.getEquipment().free(Equipment.HEAD_SLOT)) {
+                if (player.getEquipment().getId(Equipment.HEAD_SLOT) > 1 && !player.getEquipment().get(Equipment.HEAD_SLOT).getDefinition()
+                    .isFullHelm() || player.getEquipment().free(Equipment.HEAD_SLOT)) {
                     block.putShort(0x100 + appearance.getBeard());
                 } else {
                     block.put(0);
@@ -196,13 +197,16 @@ public final class PlayerUpdating {
         block.put(appearance.getFeetColor());
         block.put(appearance.getSkinColor());
 
-        block.putShort(player.getWeaponAnimation() == null || player.getWeaponAnimation().getStanding() == -1 ? 0x328 : player.getWeaponAnimation().getStanding());
+        block.putShort(player.getWeaponAnimation() == null || player.getWeaponAnimation().getStanding() == -1 ? 0x328 : player
+            .getWeaponAnimation().getStanding());
         block.putShort(0x337);
-        block.putShort(player.getWeaponAnimation() == null || player.getWeaponAnimation().getWalking() == -1 ? 0x333 : player.getWeaponAnimation().getWalking());
+        block.putShort(player.getWeaponAnimation() == null || player.getWeaponAnimation().getWalking() == -1 ? 0x333 : player
+            .getWeaponAnimation().getWalking());
         block.putShort(0x334);
         block.putShort(0x335);
         block.putShort(0x336);
-        block.putShort(player.getWeaponAnimation() == null || player.getWeaponAnimation().getRunning() == -1 ? 0x338 : player.getWeaponAnimation().getRunning());
+        block.putShort(player.getWeaponAnimation() == null || player.getWeaponAnimation().getRunning() == -1 ? 0x338 : player
+            .getWeaponAnimation().getRunning());
 
         block.putLong(player.getUsernameHash());
         block.put(player.determineCombatLevel());
@@ -216,11 +220,11 @@ public final class PlayerUpdating {
      * Puts {@code player} in the client local list of {@code other}.
      *
      * @param out
-     *         the buffer to write the data to.
+     *            the buffer to write the data to.
      * @param player
-     *         the player to add to the other player's list.
+     *            the player to add to the other player's list.
      * @param other
-     *         the player who's list will be modified.
+     *            the player who's list will be modified.
      */
     private static void addPlayer(DataBuffer out, Player player, Player other) {
         out.putBits(11, other.getSlot());
@@ -239,9 +243,9 @@ public final class PlayerUpdating {
      * instead).
      *
      * @param player
-     *         the player to update movement for.
+     *            the player to update movement for.
      * @param out
-     *         the buffer to write to data to.
+     *            the buffer to write to data to.
      */
     private static void updateLocalPlayerMovement(Player player, DataBuffer out) {
         boolean updateRequired = player.getFlags().needsUpdate();
@@ -272,14 +276,13 @@ public final class PlayerUpdating {
     }
 
     /**
-     * Updates the movement of a player for another player (does not make use
-     * of
+     * Updates the movement of a player for another player (does not make use of
      * sector 2,3).
      *
      * @param player
-     *         the player to update movement for.
+     *            the player to update movement for.
      * @param out
-     *         the buffer to write the data to.
+     *            the buffer to write the data to.
      */
     private static void updateOtherPlayerMovement(Player player, DataBuffer out) {
         boolean updateRequired = player.getFlags().needsUpdate();
@@ -306,17 +309,17 @@ public final class PlayerUpdating {
      * Updates the state of {@code thisPlayer} for {@code player}.
      *
      * @param player
-     *         the player to update the state for.
+     *            the player to update the state for.
      * @param thisPlayer
-     *         the player who's state is being updated.
+     *            the player who's state is being updated.
      * @param block
-     *         the buffer that the data will be written to.
+     *            the buffer that the data will be written to.
      * @param forceAppearance
-     *         if the appearance block is being forced.
+     *            if the appearance block is being forced.
      * @param noChat
-     *         if the chat block is being disabled.
+     *            if the chat block is being disabled.
      * @throws Exception
-     *         if any errors occur while updating the state.
+     *             if any errors occur while updating the state.
      */
     private static void updateState(Player player, Player thisPlayer, DataBuffer block, boolean forceAppearance, boolean noChat) throws Exception {
         if (!player.getFlags().needsUpdate() && !forceAppearance)
@@ -405,9 +408,9 @@ public final class PlayerUpdating {
      * Appends the state of forced movement to {@code out} for {@code player}.
      *
      * @param player
-     *         the player to append the state for.
+     *            the player to append the state for.
      * @param out
-     *         the buffer to append it to.
+     *            the buffer to append it to.
      */
     private static void appendForcedMovement(Player player, DataBuffer out) {
         int localX = player.getPosition().getLocalX();
@@ -425,9 +428,9 @@ public final class PlayerUpdating {
      * Appends the state of forced chat to {@code out} for {@code player}.
      *
      * @param player
-     *         the player to append the state for.
+     *            the player to append the state for.
      * @param out
-     *         the buffer to append it to.
+     *            the buffer to append it to.
      */
     private static void appendForcedChat(Player player, DataBuffer out) {
         out.putString(player.getForcedText());
@@ -438,9 +441,9 @@ public final class PlayerUpdating {
      * {@code player}.
      *
      * @param player
-     *         the player to append the state for.
+     *            the player to append the state for.
      * @param out
-     *         the buffer to append it to.
+     *            the buffer to append it to.
      */
     private static void appendFaceCharacter(Player player, DataBuffer out) {
         out.putShort(player.getFaceIndex(), ByteOrder.LITTLE);
@@ -451,9 +454,9 @@ public final class PlayerUpdating {
      * {@code player}.
      *
      * @param player
-     *         the player to append the state for.
+     *            the player to append the state for.
      * @param out
-     *         the buffer to append it to.
+     *            the buffer to append it to.
      */
     private static void appendFaceCoordinates(Player player, DataBuffer out) {
         out.putShort(player.getFacePosition().getX(), ValueType.A, ByteOrder.LITTLE);
@@ -464,9 +467,9 @@ public final class PlayerUpdating {
      * Appends the state of animation to {@code out} for {@code player}.
      *
      * @param player
-     *         the player to append the state for.
+     *            the player to append the state for.
      * @param out
-     *         the buffer to append it to.
+     *            the buffer to append it to.
      */
     private static void appendAnimation(Player player, DataBuffer out) {
         out.putShort(player.getAnimation().getId(), ByteOrder.LITTLE);
@@ -477,9 +480,9 @@ public final class PlayerUpdating {
      * Appends the state of a primary hit to {@code out} for {@code player}.
      *
      * @param player
-     *         the player to append the state for.
+     *            the player to append the state for.
      * @param out
-     *         the buffer to append it to.
+     *            the buffer to append it to.
      */
     private static void appendPrimaryHit(Player player, DataBuffer out) throws Exception {
         out.put(player.getPrimaryHit().getDamage());
@@ -499,9 +502,9 @@ public final class PlayerUpdating {
      * Appends the state of a secondary hit to {@code out} for {@code player}.
      *
      * @param player
-     *         the player to append the state for.
+     *            the player to append the state for.
      * @param out
-     *         the buffer to append it to.
+     *            the buffer to append it to.
      */
     private static void appendSecondaryHit(Player player, DataBuffer out) throws Exception {
         out.put(player.getSecondaryHit().getDamage());
@@ -523,9 +526,9 @@ public final class PlayerUpdating {
      * Appends the state of a graphic to {@code out} for {@code player}.
      *
      * @param player
-     *         the player to append the state for.
+     *            the player to append the state for.
      * @param out
-     *         the buffer to append it to.
+     *            the buffer to append it to.
      */
     private static void appendGraphic(Player player, DataBuffer out) {
         out.putShort(player.getGraphic().getId(), ByteOrder.LITTLE);
@@ -538,7 +541,7 @@ public final class PlayerUpdating {
      * assumes that there is a required attribute update afterwards.
      *
      * @param out
-     *         the buffer to write the data to.
+     *            the buffer to write the data to.
      */
     private static void appendStand(DataBuffer out) {
         out.putBits(2, 0);
@@ -549,11 +552,11 @@ public final class PlayerUpdating {
      * (sector 2,1).
      *
      * @param out
-     *         the buffer to write the data to.
+     *            the buffer to write the data to.
      * @param direction
-     *         the walking direction to append.
+     *            the walking direction to append.
      * @param attributesUpdate
-     *         whether or not a player attributes update is required.
+     *            whether or not a player attributes update is required.
      */
     private static void appendWalk(DataBuffer out, int direction, boolean attributesUpdate) {
         out.putBits(2, 1);
@@ -566,13 +569,13 @@ public final class PlayerUpdating {
      * (sector 2,2).
      *
      * @param out
-     *         the buffer to write the data to.
+     *            the buffer to write the data to.
      * @param direction
-     *         the walking direction to append.
+     *            the walking direction to append.
      * @param direction2
-     *         the running direction to append.
+     *            the running direction to append.
      * @param attributesUpdate
-     *         whether or not a player attributes update is required.
+     *            whether or not a player attributes update is required.
      */
     private static void appendRun(DataBuffer out, int direction, int direction2, boolean attributesUpdate) {
         out.putBits(2, 2);
@@ -587,17 +590,17 @@ public final class PlayerUpdating {
      * called the "teleport update".
      *
      * @param out
-     *         the buffer to write the data to.
+     *            the buffer to write the data to.
      * @param localX
-     *         the local {@code X} coordinate.
+     *            the local {@code X} coordinate.
      * @param localY
-     *         the local {@code Y} coordinate.
+     *            the local {@code Y} coordinate.
      * @param z
-     *         the {@code Z} coordinate.
+     *            the {@code Z} coordinate.
      * @param discardMovementQueue
-     *         whether or not the client should discard the movement queue.
+     *            whether or not the client should discard the movement queue.
      * @param attributesUpdate
-     *         whether or not a plater attributes update is required.
+     *            whether or not a plater attributes update is required.
      */
     private static void appendPlacement(DataBuffer out, int localX, int localY, int z, boolean discardMovementQueue, boolean attributesUpdate) {
         out.putBits(2, 3);

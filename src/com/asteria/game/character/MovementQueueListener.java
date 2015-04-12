@@ -29,7 +29,7 @@ public final class MovementQueueListener {
      * Creates a new {@link MovementQueueListener}.
      *
      * @param character
-     *         the character this listener is dedicated to.
+     *            the character this listener is dedicated to.
      */
     public MovementQueueListener(CharacterNode character) {
         this.character = character;
@@ -47,7 +47,7 @@ public final class MovementQueueListener {
      * and a new listener is started to run the new task.
      *
      * @param task
-     *         the task that will be ran once the walking queue is finished.
+     *            the task that will be ran once the walking queue is finished.
      */
     public void append(Runnable task) {
         listener.ifPresent(t -> t.cancel());
@@ -78,9 +78,9 @@ public final class MovementQueueListener {
          * Creates a new {@link MovementQueueListenerTask}.
          *
          * @param character
-         *         the character that the queued task will be ran for.
+         *            the character that the queued task will be ran for.
          * @param task
-         *         the queued task that will be executed by this listener.
+         *            the queued task that will be executed by this listener.
          */
         public MovementQueueListenerTask(CharacterNode character, Runnable task) {
             this.character = character;

@@ -38,7 +38,7 @@ public final class NpcAggression {
      * {@code player}.
      *
      * @param player
-     *         the player that will be targeted by aggressive NPCs.
+     *            the player that will be targeted by aggressive NPCs.
      */
     public static void sequence(Player player) {
         for (Npc npc : player.getLocalNpcs()) {
@@ -54,11 +54,11 @@ public final class NpcAggression {
      * Determines if {@code npc} is able to target {@code player}.
      *
      * @param npc
-     *         the npc trying to target the player.
+     *            the npc trying to target the player.
      * @param player
-     *         the player that is being targeted by the NPC.
+     *            the player that is being targeted by the NPC.
      * @return {@code true} if the player can be targeted, {@code false}
-     * otherwise.
+     *         otherwise.
      */
     private static boolean validate(Npc npc, Player player) {
         Position position = npc.getOriginalPosition();
@@ -68,6 +68,7 @@ public final class NpcAggression {
             return false;
         if (player.determineCombatLevel() > (npc.getDefinition().getCombatLevel() * 2) && !Location.inWilderness(player))
             return false;
-        return position.withinDistance(player.getPosition(), TARGET_DISTANCE) && !npc.getCombatBuilder().isAttacking() && !npc.getCombatBuilder().isBeingAttacked() && !player.getTolerance().elapsed(TOLERANCE_SECONDS, TimeUnit.SECONDS);
+        return position.withinDistance(player.getPosition(), TARGET_DISTANCE) && !npc.getCombatBuilder().isAttacking() && !npc
+            .getCombatBuilder().isBeingAttacked() && !player.getTolerance().elapsed(TOLERANCE_SECONDS, TimeUnit.SECONDS);
     }
 }

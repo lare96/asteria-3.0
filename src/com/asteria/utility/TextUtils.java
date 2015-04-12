@@ -10,28 +10,22 @@ public final class TextUtils {
     /**
      * The array of characters used for unpacking text.
      */
-    public static final char CHARACTER_TABLE[] = {' ', 'e', 't', 'a', 'o', 'i',
-            'h', 'n', 's', 'r', 'd', 'l', 'u', 'm', 'w', 'c', 'y', 'f', 'g',
-            'p', 'b', 'v', 'k', 'x', 'j', 'q', 'z', '0', '1', '2', '3', '4',
-            '5', '6', '7', '8', '9', ' ', '!', '?', '.', ',', ':', ';', '(',
-            ')', '-', '&', '*', '\\', '\'', '@', '#', '+', '=', '\243', '$',
-            '%', '"', '[', ']'};
+    public static final char CHARACTER_TABLE[] = { ' ', 'e', 't', 'a', 'o', 'i', 'h', 'n', 's', 'r', 'd', 'l', 'u', 'm', 'w', 'c', 'y',
+            'f', 'g', 'p', 'b', 'v', 'k', 'x', 'j', 'q', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ' ', '!', '?', '.', ',',
+            ':', ';', '(', ')', '-', '&', '*', '\\', '\'', '@', '#', '+', '=', '\243', '$', '%', '"', '[', ']' };
 
     /**
      * The array of valid characters.
      */
-    public static final char VALID_CHARACTERS[] = {'_', 'a', 'b', 'c', 'd', 'e',
-            'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r',
-            's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2', '3', '4',
-            '5', '6', '7', '8', '9', '!', '@', '#', '$', '%', '^', '&', '*',
-            '(', ')', '-', '+', '=', ':', ';', '.', '>', '<', ',', '"', '[',
-            ']', '|', '?', '/', '`'};
+    public static final char VALID_CHARACTERS[] = { '_', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p',
+            'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '!', '@', '#', '$', '%',
+            '^', '&', '*', '(', ')', '-', '+', '=', ':', ';', '.', '>', '<', ',', '"', '[', ']', '|', '?', '/', '`' };
 
     /**
      * The default constructor.
      *
      * @throws UnsupportedOperationException
-     *         if this class is instantiated.
+     *             if this class is instantiated.
      */
     private TextUtils() {
         throw new UnsupportedOperationException("This class cannot be " + "instantiated!");
@@ -41,7 +35,7 @@ public final class TextUtils {
      * Converts a {@code long} hash into a string value.
      *
      * @param l
-     *         the long to convert.
+     *            the long to convert.
      * @return the converted string.
      */
     public static String hashToName(long l) {
@@ -59,7 +53,7 @@ public final class TextUtils {
      * Converts a string to a {@code long} hash value.
      *
      * @param s
-     *         the string to convert.
+     *            the string to convert.
      * @return the long hash value.
      */
     public static long nameToHash(String s) {
@@ -83,7 +77,7 @@ public final class TextUtils {
      * Determines the indefinite article of {@code thing}.
      *
      * @param thing
-     *         the thing to determine for.
+     *            the thing to determine for.
      * @return the indefinite article.
      */
     public static String determineIndefiniteArticle(String thing) {
@@ -96,7 +90,7 @@ public final class TextUtils {
      * Appends the determined indefinite article to {@code thing}.
      *
      * @param thing
-     *         the thing to append.
+     *            the thing to append.
      * @return the {@code thing} after the indefinite article has been appended.
      */
     public static String appendIndefiniteArticle(String thing) {
@@ -108,7 +102,7 @@ public final class TextUtils {
      * whitespace in the string should be trimmed before using this method.
      *
      * @param str
-     *         the string to capitalize.
+     *            the string to capitalize.
      * @return the capitalized string.
      */
     public static String capitalize(String str) {
@@ -119,7 +113,7 @@ public final class TextUtils {
      * Formats {@code price} into K, million, or its default value.
      *
      * @param price
-     *         the price to format.
+     *            the price to format.
      * @return the newly formatted price.
      */
     public static String formatPrice(int price) {

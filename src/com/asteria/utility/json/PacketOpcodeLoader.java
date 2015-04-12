@@ -37,11 +37,11 @@ public final class PacketOpcodeLoader extends JsonLoader {
      * {@code opcodes}.
      *
      * @param opcodes
-     *         the opcodes of the packet.
+     *            the opcodes of the packet.
      * @param name
-     *         the name and path to the class.
+     *            the name and path to the class.
      * @throws IllegalStateException
-     *         if the superclass of the class isn't {@link PacketDecoder}.
+     *             if the superclass of the class isn't {@link PacketDecoder}.
      */
     private static void execute(int[] opcodes, String name) {
         try {

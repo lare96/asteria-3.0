@@ -29,9 +29,9 @@ public abstract class DestructionSkillAction extends SkillAction {
      * Creates a new {@link DestructionSkillAction}.
      *
      * @param player
-     *         the player this skill action is for.
+     *            the player this skill action is for.
      * @param position
-     *         the position the player should face.
+     *            the position the player should face.
      */
     public DestructionSkillAction(Player player, Optional<Position> position) {
         super(player, position);
@@ -42,8 +42,7 @@ public abstract class DestructionSkillAction extends SkillAction {
         Player player = getPlayer();
         String name = ItemDefinition.DEFINITIONS[destructItem().getId()].getName();
         if (!player.getInventory().contains(destructItem().getId())) {
-            player.getEncoder().sendMessage("You do not have any " + name + "" +
-                    " in your inventory.");
+            player.getEncoder().sendMessage("You do not have any " + name + "" + " in your inventory.");
             return false;
         }
         return true;
@@ -65,9 +64,9 @@ public abstract class DestructionSkillAction extends SkillAction {
      * The method executed upon destruction of the item.
      *
      * @param t
-     *         the task executing this method.
+     *            the task executing this method.
      * @param success
-     *         determines if the destruction was successful or not.
+     *            determines if the destruction was successful or not.
      */
     public void onDestruct(Task t, boolean success) {
 

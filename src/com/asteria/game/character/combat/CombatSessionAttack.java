@@ -50,9 +50,9 @@ public final class CombatSessionAttack extends Task {
      * Creates a new {@link CombatSessionAttack}.
      *
      * @param builder
-     *         the builder this attack is executed for.
+     *            the builder this attack is executed for.
      * @param data
-     *         the combat data from the combat session.
+     *            the combat data from the combat session.
      */
     public CombatSessionAttack(CombatBuilder builder, CombatSessionData data) {
         super(Combat.getDelay(data.getType()), data.getType() == CombatType.MELEE);
@@ -129,11 +129,13 @@ public final class CombatSessionAttack extends Task {
                 if (Combat.isFullTorags(builder.getCharacter())) {
                     victim.getRunEnergy().decrementAndGet(random.inclusive(1, 100));
                     victim.graphic(new Graphic(399));
-                } else if (Combat.isFullAhrims(builder.getCharacter()) && victim.getSkills()[Skills.STRENGTH].getLevel() >= victim.getSkills()[Skills.STRENGTH].getRealLevel()) {
+                } else if (Combat.isFullAhrims(builder.getCharacter()) && victim.getSkills()[Skills.STRENGTH].getLevel() >= victim
+                    .getSkills()[Skills.STRENGTH].getRealLevel()) {
                     victim.getSkills()[Skills.STRENGTH].decreaseLevel(random.inclusive(1, 10));
                     Skills.refresh(victim, Skills.STRENGTH);
                     victim.graphic(new Graphic(400));
-                } else if (Combat.isFullKarils(builder.getCharacter()) && victim.getSkills()[Skills.AGILITY].getLevel() >= victim.getSkills()[Skills.AGILITY].getRealLevel()) {
+                } else if (Combat.isFullKarils(builder.getCharacter()) && victim.getSkills()[Skills.AGILITY].getLevel() >= victim
+                    .getSkills()[Skills.AGILITY].getRealLevel()) {
                     victim.graphic(new Graphic(401));
                     victim.getSkills()[Skills.AGILITY].decreaseLevel(random.inclusive(1, 10));
                     Skills.refresh(victim, Skills.AGILITY);
@@ -149,7 +151,8 @@ public final class CombatSessionAttack extends Task {
         if (builder.getVictim().getType() == NodeType.PLAYER && data.getHits().length != 0) {
             Player victim = (Player) builder.getVictim();
 
-            if (CombatPrayer.isActivated(victim, CombatPrayer.REDEMPTION) && victim.getSkills()[Skills.HITPOINTS].getLevel() <= (victim.getSkills()[Skills.HITPOINTS].getRealLevel() / 10)) {
+            if (CombatPrayer.isActivated(victim, CombatPrayer.REDEMPTION) && victim.getSkills()[Skills.HITPOINTS].getLevel() <= (victim
+                .getSkills()[Skills.HITPOINTS].getRealLevel() / 10)) {
                 int heal = (int) (victim.getSkills()[Skills.HITPOINTS].getRealLevel() * Combat.REDEMPTION_PRAYER_HEAL);
                 victim.getSkills()[Skills.HITPOINTS].increaseLevel(random.inclusive(1, heal));
                 victim.graphic(new Graphic(436));
@@ -174,7 +177,8 @@ public final class CombatSessionAttack extends Task {
                                 continue;
                             }
 
-                            if (!player.equals(victim) && player.getPosition().withinDistance(victim.getPosition(), Combat.RETRIBUTION_RADIUS)) {
+                            if (!player.equals(victim) && player.getPosition().withinDistance(victim.getPosition(),
+                                Combat.RETRIBUTION_RADIUS)) {
                                 player.damage(new Hit(random.inclusive(Combat.MAXIMUM_RETRIBUTION_DAMAGE)));
                             }
                         }

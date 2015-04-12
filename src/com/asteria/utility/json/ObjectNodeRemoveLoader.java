@@ -10,8 +10,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 /**
- * The {@link JsonLoader} implementation that loads the removal of object
- * nodes.
+ * The {@link JsonLoader} implementation that loads the removal of object nodes.
  *
  * @author lare96 <http://github.com/lare96>
  */

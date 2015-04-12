@@ -79,7 +79,7 @@ public final class Equipment extends ItemContainer {
      * Creates a new {@link Equipment}.
      *
      * @param player
-     *         the player who's equipment is being managed.
+     *            the player who's equipment is being managed.
      */
     public Equipment(Player player) {
         super(14, ItemContainerPolicy.NORMAL);
@@ -98,7 +98,7 @@ public final class Equipment extends ItemContainer {
      * Equips the item in {@code inventorySlot} to the equipment container.
      *
      * @param inventorySlot
-     *         the slot to equip the item on.
+     *            the slot to equip the item on.
      * @return {@code true} if the item was equipped, {@code false} otherwise.
      */
     public boolean equipItem(int inventorySlot) {
@@ -169,9 +169,9 @@ public final class Equipment extends ItemContainer {
      * Unequips the item in {@code equipmentSlot} from the equipment container.
      *
      * @param equipmentSlot
-     *         the slot to unequip the item on.
+     *            the slot to unequip the item on.
      * @param addItem
-     *         if the unequipped item should be added to the inventory.
+     *            if the unequipped item should be added to the inventory.
      * @return {@code true} if the item was unequipped, {@code false} otherwise.
      */
     public boolean unequipItem(int equipmentSlot, boolean addItem) {
@@ -207,9 +207,9 @@ public final class Equipment extends ItemContainer {
      * Unequips {@code item} from the equipment container.
      *
      * @param item
-     *         the item to unequip from this container.
+     *            the item to unequip from this container.
      * @param addItem
-     *         if the unequipped item should be added to the inventory.
+     *            if the unequipped item should be added to the inventory.
      * @return {@code true} if the item was unequipped, {@code false} otherwise.
      */
     public boolean unequipItem(Item item, boolean addItem) {
@@ -223,8 +223,8 @@ public final class Equipment extends ItemContainer {
      * This method is not supported by this container implementation.
      *
      * @throws UnsupportedOperationException
-     *         if this method is invoked by default, this method will always
-     *         throw an exception.
+     *             if this method is invoked by default, this method will always
+     *             throw an exception.
      */
     @Override
     public boolean add(Item item, int slot) {
@@ -235,8 +235,8 @@ public final class Equipment extends ItemContainer {
      * This method is not supported by this container implementation.
      *
      * @throws UnsupportedOperationException
-     *         if this method is invoked by default, this method will always
-     *         throw an exception.
+     *             if this method is invoked by default, this method will always
+     *             throw an exception.
      */
     @Override
     public boolean remove(Item item, int slot) {

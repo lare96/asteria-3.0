@@ -45,7 +45,9 @@ public final class NpcDefinitionLoader extends JsonLoader {
         int rangedDefence = reader.get("defenceRange").getAsInt();
         int magicDefence = reader.get("defenceMage").getAsInt();
 
-        NpcDefinition.DEFINITIONS[index] = new NpcDefinition(index, name, description, combatLevel, size, attackable, aggressive, retreats, poisonous, respawnTime, maxHit, hitpoints, attackSpeed, attackAnim, defenceAnim, deathAnim, attackBonus, meleeDefence, rangedDefence, magicDefence);
+        NpcDefinition.DEFINITIONS[index] = new NpcDefinition(index, name, description, combatLevel, size, attackable, aggressive, retreats,
+            poisonous, respawnTime, maxHit, hitpoints, attackSpeed, attackAnim, defenceAnim, deathAnim, attackBonus, meleeDefence,
+            rangedDefence, magicDefence);
 
         if (aggressive)
             NpcAggression.AGGRESSIVE.add(index);

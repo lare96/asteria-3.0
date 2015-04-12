@@ -7,8 +7,7 @@ import com.asteria.network.packet.PacketDecoder;
 import com.asteria.utility.Settings;
 
 /**
- * The packet sent from the client when a player makes a yellow {@code X}
- * click,
+ * The packet sent from the client when a player makes a yellow {@code X} click,
  * a red {@code X} click, or when they click the minimap.
  *
  * @author lare96 <http://github.com/lare96>

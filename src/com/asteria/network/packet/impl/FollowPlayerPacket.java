@@ -7,8 +7,7 @@ import com.asteria.network.DataBuffer;
 import com.asteria.network.packet.PacketDecoder;
 
 /**
- * The packet sent from the client when a player tries to follow another
- * player.
+ * The packet sent from the client when a player tries to follow another player.
  *
  * @author lare96 <http://github.com/lare96>
  */

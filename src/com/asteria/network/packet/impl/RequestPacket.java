@@ -21,9 +21,9 @@ public final class RequestPacket extends PacketDecoder {
             return;
 
         switch (opcode) {
-            case 139:
-                tradeRequest(player, buf);
-                break;
+        case 139:
+            tradeRequest(player, buf);
+            break;
         }
     }
 
@@ -31,9 +31,9 @@ public final class RequestPacket extends PacketDecoder {
      * Handles a trade request for {@code player}.
      *
      * @param player
-     *         the player to handle this for.
+     *            the player to handle this for.
      * @param buf
-     *         the buffer for reading the sent data.
+     *            the buffer for reading the sent data.
      */
     private void tradeRequest(Player player, DataBuffer buf) {
         int index = buf.getShort(true, ByteOrder.LITTLE);
@@ -50,11 +50,11 @@ public final class RequestPacket extends PacketDecoder {
      * Determines if {@code player} can be a valid request to {@code other}.
      *
      * @param player
-     *         the player making the request.
+     *            the player making the request.
      * @param other
-     *         the player being requested.
+     *            the player being requested.
      * @return {@code true} if the player can make a request, {@code false}
-     * otherwise.
+     *         otherwise.
      */
     private boolean validate(Player player, Player other) {
         if (!other.getPosition().isViewableFrom(player.getPosition()) || other.equals(player))

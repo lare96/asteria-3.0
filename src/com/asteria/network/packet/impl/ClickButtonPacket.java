@@ -8,8 +8,7 @@ import com.asteria.network.packet.PacketDecoder;
 import com.asteria.utility.BufferUtils;
 
 /**
- * The packet sent from the client when the player clicks some sort of button
- * or
+ * The packet sent from the client when the player clicks some sort of button or
  * module.
  *
  * @author lare96 <http://github.com/lare96>

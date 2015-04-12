@@ -60,7 +60,7 @@ public enum CombatSpells {
 
         @Override
         public Optional<Item[]> itemsRequired(Player player) {
-            return Optional.of(new Item[] {new Item(556), new Item(558)});
+            return Optional.of(new Item[] { new Item(556), new Item(558) });
         }
 
         @Override
@@ -89,8 +89,7 @@ public enum CombatSpells {
             if (!castOn.weaken(CombatWeaken.ATTACK_LOW) && cast.getType() == NodeType.PLAYER) {
                 Player player = (Player) cast;
                 String s = castOn.getType().name().toLowerCase();
-                player.getEncoder().sendMessage("The spell has no effect " +
-                        "because the " + s + " has already been weakened.");
+                player.getEncoder().sendMessage("The spell has no effect " + "because the " + s + " has already been weakened.");
             }
         }
 
@@ -111,8 +110,7 @@ public enum CombatSpells {
 
         @Override
         public Optional<Item[]> itemsRequired(Player player) {
-            return Optional.of(new Item[] {new Item(555, 3), new Item(557, 2),
-                    new Item(559)});
+            return Optional.of(new Item[] { new Item(555, 3), new Item(557, 2), new Item(559) });
         }
 
         @Override
@@ -163,8 +161,7 @@ public enum CombatSpells {
 
         @Override
         public Optional<Item[]> itemsRequired(Player player) {
-            return Optional.of(new Item[] {new Item(555), new Item(556),
-                    new Item(558)});
+            return Optional.of(new Item[] { new Item(555), new Item(556), new Item(558) });
         }
 
         @Override
@@ -215,8 +212,7 @@ public enum CombatSpells {
 
         @Override
         public Optional<Item[]> itemsRequired(Player player) {
-            return Optional.of(new Item[] {new Item(556, 1), new Item(558, 1),
-                    new Item(557, 2)});
+            return Optional.of(new Item[] { new Item(556, 1), new Item(558, 1), new Item(557, 2) });
         }
 
         @Override
@@ -245,8 +241,7 @@ public enum CombatSpells {
             if (!castOn.weaken(CombatWeaken.STRENGTH_LOW) && cast.getType() == NodeType.PLAYER) {
                 Player player = (Player) cast;
                 String s = castOn.getType().name().toLowerCase();
-                player.getEncoder().sendMessage("The spell has no effect " +
-                        "because the " + s + " has already been weakened.");
+                player.getEncoder().sendMessage("The spell has no effect " + "because the " + s + " has already been weakened.");
             }
         }
 
@@ -267,8 +262,7 @@ public enum CombatSpells {
 
         @Override
         public Optional<Item[]> itemsRequired(Player player) {
-            return Optional.of(new Item[] {new Item(555, 3), new Item(557, 2),
-                    new Item(559, 1)});
+            return Optional.of(new Item[] { new Item(555, 3), new Item(557, 2), new Item(559, 1) });
         }
 
         @Override
@@ -319,8 +313,7 @@ public enum CombatSpells {
 
         @Override
         public Optional<Item[]> itemsRequired(Player player) {
-            return Optional.of(new Item[] {new Item(556, 1), new Item(558, 1),
-                    new Item(554, 3)});
+            return Optional.of(new Item[] { new Item(556, 1), new Item(558, 1), new Item(554, 3) });
         }
 
         @Override
@@ -371,7 +364,7 @@ public enum CombatSpells {
 
         @Override
         public Optional<Item[]> itemsRequired(Player player) {
-            return Optional.of(new Item[] {new Item(556, 2), new Item(562, 1)});
+            return Optional.of(new Item[] { new Item(556, 2), new Item(562, 1) });
         }
 
         @Override
@@ -400,8 +393,7 @@ public enum CombatSpells {
             if (!castOn.weaken(CombatWeaken.DEFENCE_LOW) && cast.getType() == NodeType.PLAYER) {
                 Player player = (Player) cast;
                 String s = castOn.getType().name().toLowerCase();
-                player.getEncoder().sendMessage("The spell has no effect " +
-                        "because the " + s + " has already been weakened.");
+                player.getEncoder().sendMessage("The spell has no effect " + "because the " + s + " has already been weakened.");
             }
         }
 
@@ -422,8 +414,7 @@ public enum CombatSpells {
 
         @Override
         public Optional<Item[]> itemsRequired(Player player) {
-            return Optional.of(new Item[] {new Item(555, 2), new Item(557, 3),
-                    new Item(559, 1)});
+            return Optional.of(new Item[] { new Item(555, 2), new Item(557, 3), new Item(559, 1) });
         }
 
         @Override
@@ -478,8 +469,7 @@ public enum CombatSpells {
 
         @Override
         public Optional<Item[]> itemsRequired(Player player) {
-            return Optional.of(new Item[] {new Item(555, 3), new Item(557, 3),
-                    new Item(561, 2)});
+            return Optional.of(new Item[] { new Item(555, 3), new Item(557, 3), new Item(561, 2) });
         }
 
         @Override
@@ -530,8 +520,7 @@ public enum CombatSpells {
 
         @Override
         public Optional<Item[]> itemsRequired(Player player) {
-            return Optional.of(new Item[] {new Item(556, 2), new Item(562, 1),
-                    new Item(555, 2)});
+            return Optional.of(new Item[] { new Item(556, 2), new Item(562, 1), new Item(555, 2) });
         }
 
         @Override
@@ -582,8 +571,7 @@ public enum CombatSpells {
 
         @Override
         public Optional<Item[]> itemsRequired(Player player) {
-            return Optional.of(new Item[] {new Item(556, 2), new Item(562, 1),
-                    new Item(557, 3)});
+            return Optional.of(new Item[] { new Item(556, 2), new Item(562, 1), new Item(557, 3) });
         }
 
         @Override
@@ -634,8 +622,7 @@ public enum CombatSpells {
 
         @Override
         public Optional<Item[]> itemsRequired(Player player) {
-            return Optional.of(new Item[] {new Item(556, 3), new Item(562, 1),
-                    new Item(554, 4)});
+            return Optional.of(new Item[] { new Item(556, 3), new Item(562, 1), new Item(554, 4) });
         }
 
         @Override
@@ -686,8 +673,7 @@ public enum CombatSpells {
 
         @Override
         public Optional<Item[]> itemsRequired(Player player) {
-            return Optional.of(new Item[] {new Item(556, 2), new Item(562, 1),
-                    new Item(557, 2)});
+            return Optional.of(new Item[] { new Item(556, 2), new Item(562, 1), new Item(557, 2) });
         }
 
         @Override
@@ -738,7 +724,7 @@ public enum CombatSpells {
 
         @Override
         public Optional<Item[]> itemsRequired(Player player) {
-            return Optional.of(new Item[] {new Item(556, 3), new Item(560, 1)});
+            return Optional.of(new Item[] { new Item(556, 3), new Item(560, 1) });
         }
 
         @Override
@@ -789,8 +775,7 @@ public enum CombatSpells {
 
         @Override
         public Optional<Item[]> itemsRequired(Player player) {
-            return Optional.of(new Item[] {new Item(555, 3), new Item(556, 3),
-                    new Item(560, 1)});
+            return Optional.of(new Item[] { new Item(555, 3), new Item(556, 3), new Item(560, 1) });
         }
 
         @Override
@@ -836,12 +821,12 @@ public enum CombatSpells {
 
         @Override
         public Optional<Item[]> equipmentRequired(Player player) {
-            return Optional.of(new Item[] {new Item(1409)});
+            return Optional.of(new Item[] { new Item(1409) });
         }
 
         @Override
         public Optional<Item[]> itemsRequired(Player player) {
-            return Optional.of(new Item[] {new Item(560, 1), new Item(554, 5)});
+            return Optional.of(new Item[] { new Item(560, 1), new Item(554, 5) });
         }
 
         @Override
@@ -896,8 +881,7 @@ public enum CombatSpells {
 
         @Override
         public Optional<Item[]> itemsRequired(Player player) {
-            return Optional.of(new Item[] {new Item(555, 3), new Item(557, 4),
-                    new Item(561, 3)});
+            return Optional.of(new Item[] { new Item(555, 3), new Item(557, 4), new Item(561, 3) });
         }
 
         @Override
@@ -943,12 +927,12 @@ public enum CombatSpells {
 
         @Override
         public Optional<Item[]> equipmentRequired(Player player) {
-            return Optional.of(new Item[] {new Item(4170)});
+            return Optional.of(new Item[] { new Item(4170) });
         }
 
         @Override
         public Optional<Item[]> itemsRequired(Player player) {
-            return Optional.of(new Item[] {new Item(558, 4), new Item(560, 1)});
+            return Optional.of(new Item[] { new Item(558, 4), new Item(560, 1) });
         }
 
         @Override
@@ -999,8 +983,7 @@ public enum CombatSpells {
 
         @Override
         public Optional<Item[]> itemsRequired(Player player) {
-            return Optional.of(new Item[] {new Item(556, 3), new Item(560, 1),
-                    new Item(557, 4)});
+            return Optional.of(new Item[] { new Item(556, 3), new Item(560, 1), new Item(557, 4) });
         }
 
         @Override
@@ -1051,8 +1034,7 @@ public enum CombatSpells {
 
         @Override
         public Optional<Item[]> itemsRequired(Player player) {
-            return Optional.of(new Item[] {new Item(556, 4), new Item(560, 1),
-                    new Item(554, 5)});
+            return Optional.of(new Item[] { new Item(556, 4), new Item(560, 1), new Item(554, 5) });
         }
 
         @Override
@@ -1098,13 +1080,12 @@ public enum CombatSpells {
 
         @Override
         public Optional<Item[]> equipmentRequired(Player player) {
-            return Optional.of(new Item[] {new Item(2415)});
+            return Optional.of(new Item[] { new Item(2415) });
         }
 
         @Override
         public Optional<Item[]> itemsRequired(Player player) {
-            return Optional.of(new Item[] {new Item(556, 4), new Item(565, 2),
-                    new Item(554, 2)});
+            return Optional.of(new Item[] { new Item(556, 4), new Item(565, 2), new Item(554, 2) });
         }
 
         @Override
@@ -1150,13 +1131,12 @@ public enum CombatSpells {
 
         @Override
         public Optional<Item[]> equipmentRequired(Player player) {
-            return Optional.of(new Item[] {new Item(2416)});
+            return Optional.of(new Item[] { new Item(2416) });
         }
 
         @Override
         public Optional<Item[]> itemsRequired(Player player) {
-            return Optional.of(new Item[] {new Item(556, 4), new Item(565, 2),
-                    new Item(554, 2)});
+            return Optional.of(new Item[] { new Item(556, 4), new Item(565, 2), new Item(554, 2) });
         }
 
         @Override
@@ -1202,13 +1182,12 @@ public enum CombatSpells {
 
         @Override
         public Optional<Item[]> equipmentRequired(Player player) {
-            return Optional.of(new Item[] {new Item(2417)});
+            return Optional.of(new Item[] { new Item(2417) });
         }
 
         @Override
         public Optional<Item[]> itemsRequired(Player player) {
-            return Optional.of(new Item[] {new Item(556, 4), new Item(565, 2),
-                    new Item(554, 2)});
+            return Optional.of(new Item[] { new Item(556, 4), new Item(565, 2), new Item(554, 2) });
         }
 
         @Override
@@ -1259,7 +1238,7 @@ public enum CombatSpells {
 
         @Override
         public Optional<Item[]> itemsRequired(Player player) {
-            return Optional.of(new Item[] {new Item(556, 5), new Item(565, 1)});
+            return Optional.of(new Item[] { new Item(556, 5), new Item(565, 1) });
         }
 
         @Override
@@ -1310,8 +1289,7 @@ public enum CombatSpells {
 
         @Override
         public Optional<Item[]> itemsRequired(Player player) {
-            return Optional.of(new Item[] {new Item(556, 5), new Item(565, 1),
-                    new Item(555, 7)});
+            return Optional.of(new Item[] { new Item(556, 5), new Item(565, 1), new Item(555, 7) });
         }
 
         @Override
@@ -1340,8 +1318,7 @@ public enum CombatSpells {
             if (!castOn.weaken(CombatWeaken.DEFENCE_HIGH) && cast.getType() == NodeType.PLAYER) {
                 Player player = (Player) cast;
                 String s = castOn.getType().name().toLowerCase();
-                player.getEncoder().sendMessage("The spell has no effect " +
-                        "because the " + s + " has already been weakened.");
+                player.getEncoder().sendMessage("The spell has no effect " + "because the " + s + " has already been weakened.");
             }
         }
 
@@ -1362,8 +1339,7 @@ public enum CombatSpells {
 
         @Override
         public Optional<Item[]> itemsRequired(Player player) {
-            return Optional.of(new Item[] {new Item(557, 5), new Item(555, 5),
-                    new Item(566, 1)});
+            return Optional.of(new Item[] { new Item(557, 5), new Item(555, 5), new Item(566, 1) });
         }
 
         @Override
@@ -1414,8 +1390,7 @@ public enum CombatSpells {
 
         @Override
         public Optional<Item[]> itemsRequired(Player player) {
-            return Optional.of(new Item[] {new Item(556, 5), new Item(565, 1),
-                    new Item(557, 7)});
+            return Optional.of(new Item[] { new Item(556, 5), new Item(565, 1), new Item(557, 7) });
         }
 
         @Override
@@ -1444,8 +1419,7 @@ public enum CombatSpells {
             if (!castOn.weaken(CombatWeaken.STRENGTH_HIGH) && cast.getType() == NodeType.PLAYER) {
                 Player player = (Player) cast;
                 String s = castOn.getType().name().toLowerCase();
-                player.getEncoder().sendMessage("The spell has no effect " +
-                        "because the " + s + " has already been weakened.");
+                player.getEncoder().sendMessage("The spell has no effect " + "because the " + s + " has already been weakened.");
             }
         }
 
@@ -1466,8 +1440,7 @@ public enum CombatSpells {
 
         @Override
         public Optional<Item[]> itemsRequired(Player player) {
-            return Optional.of(new Item[] {new Item(557, 8), new Item(555, 8),
-                    new Item(566, 1)});
+            return Optional.of(new Item[] { new Item(557, 8), new Item(555, 8), new Item(566, 1) });
         }
 
         @Override
@@ -1518,8 +1491,7 @@ public enum CombatSpells {
 
         @Override
         public Optional<Item[]> itemsRequired(Player player) {
-            return Optional.of(new Item[] {new Item(556, 5), new Item(565, 1),
-                    new Item(554, 7)});
+            return Optional.of(new Item[] { new Item(556, 5), new Item(565, 1), new Item(554, 7) });
         }
 
         @Override
@@ -1574,8 +1546,7 @@ public enum CombatSpells {
 
         @Override
         public Optional<Item[]> itemsRequired(Player player) {
-            return Optional.of(new Item[] {new Item(555, 5), new Item(557, 5),
-                    new Item(561, 4)});
+            return Optional.of(new Item[] { new Item(555, 5), new Item(557, 5), new Item(561, 4) });
         }
 
         @Override
@@ -1604,8 +1575,7 @@ public enum CombatSpells {
             if (!castOn.weaken(CombatWeaken.ATTACK_HIGH) && cast.getType() == NodeType.PLAYER) {
                 Player player = (Player) cast;
                 String s = castOn.getType().name().toLowerCase();
-                player.getEncoder().sendMessage("The spell has no effect " +
-                        "because the " + s + " has already been weakened.");
+                player.getEncoder().sendMessage("The spell has no effect " + "because the " + s + " has already been weakened.");
             }
         }
 
@@ -1626,8 +1596,7 @@ public enum CombatSpells {
 
         @Override
         public Optional<Item[]> itemsRequired(Player player) {
-            return Optional.of(new Item[] {new Item(557, 12), new Item(555, 12),
-                    new Item(556, 1)});
+            return Optional.of(new Item[] { new Item(557, 12), new Item(555, 12), new Item(556, 1) });
         }
 
         @Override
@@ -1674,8 +1643,7 @@ public enum CombatSpells {
 
         @Override
         public Optional<Item[]> itemsRequired(Player player) {
-            return Optional.of(new Item[] {new Item(563, 1), new Item(562, 1),
-                    new Item(560, 1)});
+            return Optional.of(new Item[] { new Item(563, 1), new Item(562, 1), new Item(560, 1) });
         }
 
         @Override
@@ -1733,8 +1701,7 @@ public enum CombatSpells {
 
         @Override
         public Optional<Item[]> itemsRequired(Player player) {
-            return Optional.of(new Item[] {new Item(556, 1), new Item(554, 1),
-                    new Item(562, 2), new Item(560, 2)});
+            return Optional.of(new Item[] { new Item(556, 1), new Item(554, 1), new Item(562, 2), new Item(560, 2) });
         }
 
         @Override
@@ -1792,8 +1759,7 @@ public enum CombatSpells {
 
         @Override
         public Optional<Item[]> itemsRequired(Player player) {
-            return Optional.of(new Item[] {new Item(556, 1), new Item(566, 1),
-                    new Item(562, 2), new Item(560, 2)});
+            return Optional.of(new Item[] { new Item(556, 1), new Item(566, 1), new Item(562, 2), new Item(560, 2) });
         }
 
         @Override
@@ -1851,8 +1817,7 @@ public enum CombatSpells {
 
         @Override
         public Optional<Item[]> itemsRequired(Player player) {
-            return Optional.of(new Item[] {new Item(565, 1), new Item(562, 2),
-                    new Item(560, 2)});
+            return Optional.of(new Item[] { new Item(565, 1), new Item(562, 2), new Item(560, 2) });
         }
 
         @Override
@@ -1910,8 +1875,7 @@ public enum CombatSpells {
 
         @Override
         public Optional<Item[]> itemsRequired(Player player) {
-            return Optional.of(new Item[] {new Item(555, 2), new Item(562, 2),
-                    new Item(560, 2)});
+            return Optional.of(new Item[] { new Item(555, 2), new Item(562, 2), new Item(560, 2) });
         }
 
         @Override
@@ -1969,8 +1933,7 @@ public enum CombatSpells {
 
         @Override
         public Optional<Item[]> itemsRequired(Player player) {
-            return Optional.of(new Item[] {new Item(556, 2), new Item(554, 2),
-                    new Item(562, 4), new Item(560, 2)});
+            return Optional.of(new Item[] { new Item(556, 2), new Item(554, 2), new Item(562, 4), new Item(560, 2) });
         }
 
         @Override
@@ -2028,8 +1991,7 @@ public enum CombatSpells {
 
         @Override
         public Optional<Item[]> itemsRequired(Player player) {
-            return Optional.of(new Item[] {new Item(556, 1), new Item(566, 2),
-                    new Item(562, 4), new Item(560, 2)});
+            return Optional.of(new Item[] { new Item(556, 1), new Item(566, 2), new Item(562, 4), new Item(560, 2) });
         }
 
         @Override
@@ -2087,8 +2049,7 @@ public enum CombatSpells {
 
         @Override
         public Optional<Item[]> itemsRequired(Player player) {
-            return Optional.of(new Item[] {new Item(565, 2), new Item(562, 4),
-                    new Item(560, 2)});
+            return Optional.of(new Item[] { new Item(565, 2), new Item(562, 4), new Item(560, 2) });
         }
 
         @Override
@@ -2146,8 +2107,7 @@ public enum CombatSpells {
 
         @Override
         public Optional<Item[]> itemsRequired(Player player) {
-            return Optional.of(new Item[] {new Item(555, 4), new Item(562, 4),
-                    new Item(560, 2)});
+            return Optional.of(new Item[] { new Item(555, 4), new Item(562, 4), new Item(560, 2) });
         }
 
         @Override
@@ -2205,8 +2165,7 @@ public enum CombatSpells {
 
         @Override
         public Optional<Item[]> itemsRequired(Player player) {
-            return Optional.of(new Item[] {new Item(556, 2), new Item(554, 2),
-                    new Item(565, 2), new Item(560, 2)});
+            return Optional.of(new Item[] { new Item(556, 2), new Item(554, 2), new Item(565, 2), new Item(560, 2) });
         }
 
         @Override
@@ -2264,8 +2223,7 @@ public enum CombatSpells {
 
         @Override
         public Optional<Item[]> itemsRequired(Player player) {
-            return Optional.of(new Item[] {new Item(556, 2), new Item(566, 2),
-                    new Item(565, 2), new Item(560, 2)});
+            return Optional.of(new Item[] { new Item(556, 2), new Item(566, 2), new Item(565, 2), new Item(560, 2) });
         }
 
         @Override
@@ -2323,7 +2281,7 @@ public enum CombatSpells {
 
         @Override
         public Optional<Item[]> itemsRequired(Player player) {
-            return Optional.of(new Item[] {new Item(565, 4), new Item(560, 2)});
+            return Optional.of(new Item[] { new Item(565, 4), new Item(560, 2) });
         }
 
         @Override
@@ -2381,8 +2339,7 @@ public enum CombatSpells {
 
         @Override
         public Optional<Item[]> itemsRequired(Player player) {
-            return Optional.of(new Item[] {new Item(555, 3), new Item(565, 2),
-                    new Item(560, 2)});
+            return Optional.of(new Item[] { new Item(555, 3), new Item(565, 2), new Item(560, 2) });
         }
 
         @Override
@@ -2440,8 +2397,7 @@ public enum CombatSpells {
 
         @Override
         public Optional<Item[]> itemsRequired(Player player) {
-            return Optional.of(new Item[] {new Item(556, 4), new Item(554, 4),
-                    new Item(565, 2), new Item(560, 4)});
+            return Optional.of(new Item[] { new Item(556, 4), new Item(554, 4), new Item(565, 2), new Item(560, 4) });
         }
 
         @Override
@@ -2499,8 +2455,7 @@ public enum CombatSpells {
 
         @Override
         public Optional<Item[]> itemsRequired(Player player) {
-            return Optional.of(new Item[] {new Item(556, 4), new Item(566, 3),
-                    new Item(565, 2), new Item(560, 4)});
+            return Optional.of(new Item[] { new Item(556, 4), new Item(566, 3), new Item(565, 2), new Item(560, 4) });
         }
 
         @Override
@@ -2558,8 +2513,7 @@ public enum CombatSpells {
 
         @Override
         public Optional<Item[]> itemsRequired(Player player) {
-            return Optional.of(new Item[] {new Item(560, 4), new Item(566, 1),
-                    new Item(565, 4)});
+            return Optional.of(new Item[] { new Item(560, 4), new Item(566, 1), new Item(565, 4) });
         }
 
         @Override
@@ -2617,8 +2571,7 @@ public enum CombatSpells {
 
         @Override
         public Optional<Item[]> itemsRequired(Player player) {
-            return Optional.of(new Item[] {new Item(555, 6), new Item(565, 2),
-                    new Item(560, 4)});
+            return Optional.of(new Item[] { new Item(555, 6), new Item(565, 2), new Item(560, 4) });
         }
 
         @Override
@@ -2641,7 +2594,7 @@ public enum CombatSpells {
      * Creates a new {@link CombatSpells}.
      *
      * @param spell
-     *         the spell attached to this element.
+     *            the spell attached to this element.
      */
     private CombatSpells(CombatSpell spell) {
         this.spell = spell;
@@ -2660,7 +2613,7 @@ public enum CombatSpells {
      * Gets the spell with a {@link CombatSpell#spellId()} of {@code id}.
      *
      * @param id
-     *         the identification of the combat spell.
+     *            the identification of the combat spell.
      * @return the combat spell with that identification.
      */
     public static Optional<CombatSpells> getSpell(int id) {

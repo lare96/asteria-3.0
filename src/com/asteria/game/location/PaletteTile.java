@@ -55,9 +55,9 @@ public final class PaletteTile {
      * Creates a tile.
      *
      * @param x
-     *         The x coordinate.
+     *            The x coordinate.
      * @param y
-     *         The y coordinate.
+     *            The y coordinate.
      */
     public PaletteTile(int x, int y) {
         this(x, y, 0);
@@ -67,11 +67,11 @@ public final class PaletteTile {
      * Creates a tile.
      *
      * @param x
-     *         The x coordinate.
+     *            The x coordinate.
      * @param y
-     *         The y coordinate.
+     *            The y coordinate.
      * @param z
-     *         The z coordinate.
+     *            The z coordinate.
      */
     public PaletteTile(int x, int y, int z) {
         this(x, y, z, Palette.DIRECTION_NORMAL);
@@ -81,13 +81,13 @@ public final class PaletteTile {
      * Creates a tile.
      *
      * @param x
-     *         The x coordinate.
+     *            The x coordinate.
      * @param y
-     *         The y coordinate.
+     *            The y coordinate.
      * @param z
-     *         The z coordinate.
+     *            The z coordinate.
      * @param rot
-     *         The rotation.
+     *            The rotation.
      */
     public PaletteTile(int x, int y, int z, int rot) {
         this.x = x;

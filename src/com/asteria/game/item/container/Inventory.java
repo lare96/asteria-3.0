@@ -19,7 +19,7 @@ public final class Inventory extends ItemContainer {
      * Create a new {@link Inventory}.
      *
      * @param player
-     *         the player who's inventory is being managed.
+     *            the player who's inventory is being managed.
      */
     public Inventory(Player player) {
         super(28, ItemContainerPolicy.NORMAL);

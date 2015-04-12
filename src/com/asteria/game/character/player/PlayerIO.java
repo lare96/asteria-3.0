@@ -127,9 +127,9 @@ public final class PlayerIO {
      * Creates a new {@link PlayerIO}.
      *
      * @param key
-     *         the selection key registered to the selector.
+     *            the selection key registered to the selector.
      * @param response
-     *         the current login response for this session.
+     *            the current login response for this session.
      */
     public PlayerIO(SelectionKey key, LoginResponse response) {
         this.key = key;
@@ -150,7 +150,7 @@ public final class PlayerIO {
      * and closing the socket channel.
      *
      * @param forced
-     *         if the session must be disconnected because of an IO issue.
+     *            if the session must be disconnected because of an IO issue.
      */
     public void disconnect(boolean forced) {
         try {
@@ -189,8 +189,7 @@ public final class PlayerIO {
             key.cancel();
             channel.close();
             ConnectionHandler.remove(host);
-            logger.info(state == IOState.LOGGED_IN ? player + " has logged " +
-                    "out." : this + " has logged out.");
+            logger.info(state == IOState.LOGGED_IN ? player + " has logged " + "out." : this + " has logged out.");
             state = IOState.LOGGED_OUT;
         } catch (Exception e) {
             e.printStackTrace();
@@ -201,7 +200,7 @@ public final class PlayerIO {
      * Sends a packet of data to the client through {@code buffer}.
      *
      * @param buffer
-     *         the packet of data to send.
+     *            the packet of data to send.
      */
     public void send(ByteBuffer buffer) {
         if (!channel.isOpen() || packetDisconnect || combatLogout)
@@ -219,7 +218,7 @@ public final class PlayerIO {
      * Sends a packet of data to the client through {@code buffer}.
      *
      * @param buffer
-     *         the packet of data to send.
+     *            the packet of data to send.
      */
     public void send(DataBuffer buffer) {
         send(buffer.buffer());
@@ -319,7 +318,7 @@ public final class PlayerIO {
      * Sets the value for {@link PlayerIO#state}.
      *
      * @param state
-     *         the new value to set.
+     *            the new value to set.
      */
     public void setState(IOState state) {
         this.state = state;
@@ -338,7 +337,7 @@ public final class PlayerIO {
      * Sets the value for {@link PlayerIO#response}.
      *
      * @param response
-     *         the new value to set.
+     *            the new value to set.
      */
     public void setResponse(LoginResponse response) {
         this.response = response;
@@ -357,7 +356,7 @@ public final class PlayerIO {
      * Sets the value for {@link PlayerIO#packetOpcode}.
      *
      * @param packetOpcode
-     *         the new value to set.
+     *            the new value to set.
      */
     public void setPacketOpcode(int packetOpcode) {
         this.packetOpcode = packetOpcode;
@@ -376,7 +375,7 @@ public final class PlayerIO {
      * Sets the value for {@link PlayerIO#packetSize}.
      *
      * @param packetSize
-     *         the new value to set.
+     *            the new value to set.
      */
     public void setPacketSize(int packetSize) {
         this.packetSize = packetSize;
@@ -395,7 +394,7 @@ public final class PlayerIO {
      * Sets the value for {@link PlayerIO#encryptor}.
      *
      * @param encryptor
-     *         the new value to set.
+     *            the new value to set.
      */
     public void setEncryptor(ISAACCipher encryptor) {
         this.encryptor = encryptor;
@@ -414,7 +413,7 @@ public final class PlayerIO {
      * Sets the value for {@link PlayerIO#decryptor}.
      *
      * @param decryptor
-     *         the new value to set.
+     *            the new value to set.
      */
     public void setDecryptor(ISAACCipher decryptor) {
         this.decryptor = decryptor;
@@ -423,8 +422,8 @@ public final class PlayerIO {
     /**
      * Determines if the player disconnected while in combat.
      *
-     * @return {@code true} if the player disconnected while in combat, {@code
-     * false} otherwise.
+     * @return {@code true} if the player disconnected while in combat,
+     *         {@code false} otherwise.
      */
     public boolean isCombatLogout() {
         return combatLogout;

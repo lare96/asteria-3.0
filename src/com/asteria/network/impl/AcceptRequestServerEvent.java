@@ -12,8 +12,7 @@ import com.asteria.network.ServerSelectionKey;
 
 /**
  * The server selection event that handles all incoming connections. This
- * asynchronous event accepts the connection, and registers it with the
- * server's
+ * asynchronous event accepts the connection, and registers it with the server's
  * selector.
  *
  * @author lare96 <http://github.com/lare96>

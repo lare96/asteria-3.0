@@ -46,11 +46,11 @@ public final class NpcDropTable {
      * Creates a new {@link NpcDropTable}.
      *
      * @param npcs
-     *         the NPC identifiers that these drop tables are for.
+     *            the NPC identifiers that these drop tables are for.
      * @param dynamic
-     *         the dynamic drop table.
+     *            the dynamic drop table.
      * @param rare
-     *         the rare drop table.
+     *            the rare drop table.
      */
     public NpcDropTable(int[] npcs, NpcDrop[] dynamic, NpcDrop[] rare) {
         this.npcs = npcs;
@@ -65,7 +65,7 @@ public final class NpcDropTable {
      * will return a different array of items.
      *
      * @param player
-     *         the player that these calculations are being performed for.
+     *            the player that these calculations are being performed for.
      * @return the array of items that were calculated.
      */
     public Item[] toItems(Player player) {

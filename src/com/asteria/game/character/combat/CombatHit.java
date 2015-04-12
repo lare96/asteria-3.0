@@ -24,9 +24,9 @@ public final class CombatHit {
      * Creates a new {@link CombatHit}.
      *
      * @param hit
-     *         the hit that will be dealt to the victim.
+     *            the hit that will be dealt to the victim.
      * @param accurate
-     *         the flag that determines whether thi hit is accurate.
+     *            the flag that determines whether thi hit is accurate.
      */
     public CombatHit(Hit hit, boolean accurate) {
         this.hit = hit;
@@ -46,7 +46,7 @@ public final class CombatHit {
      * Sets the value for {@link CombatHit#hit}.
      *
      * @param hit
-     *         the new value to set.
+     *            the new value to set.
      */
     public void setHit(Hit hit) {
         this.hit = hit;
@@ -65,7 +65,7 @@ public final class CombatHit {
      * Sets the value for {@link CombatHit#accurate}.
      *
      * @param accurate
-     *         the new value to set.
+     *            the new value to set.
      */
     public void setAccurate(boolean accurate) {
         this.accurate = accurate;

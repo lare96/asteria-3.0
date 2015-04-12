@@ -21,9 +21,9 @@ public final class Graphic {
      * Creates a new {@link Graphic}.
      *
      * @param id
-     *         the identification for this graphic.
+     *            the identification for this graphic.
      * @param height
-     *         the height of this graphic.
+     *            the height of this graphic.
      */
     public Graphic(int id, int height) {
         this.id = id;
@@ -34,7 +34,7 @@ public final class Graphic {
      * Creates a new {@link Graphic} with a {@code height} of {@code 0}.
      *
      * @param id
-     *         the identification for this graphic.
+     *            the identification for this graphic.
      */
     public Graphic(int id) {
         this(id, 0);

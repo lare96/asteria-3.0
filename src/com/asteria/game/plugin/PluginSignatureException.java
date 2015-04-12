@@ -17,7 +17,7 @@ public final class PluginSignatureException extends RuntimeException {
      * Creates a new {@link PluginSignatureException}.
      *
      * @param clazz
-     *         the class that the plugin signature is missing from.
+     *            the class that the plugin signature is missing from.
      */
     public PluginSignatureException(Class<?> clazz) {
         super("Plugin signature invalid or missing in " + clazz.getSimpleName() + ".class");

@@ -13,8 +13,7 @@ import com.asteria.game.location.Location;
 import com.asteria.utility.RandomGen;
 
 /**
- * The {@link CombatSpell} extension with support for effects and the ability
- * to
+ * The {@link CombatSpell} extension with support for effects and the ability to
  * multicast characters within a certain radius.
  *
  * @author lare96 <http://github.com/lare96>
@@ -48,9 +47,8 @@ public abstract class CombatAncientSpell extends CombatSpell {
 
             while (it.hasNext()) {
                 CharacterNode character = it.next();
-                if (character == null || !character.getPosition().withinDistance(castOn.getPosition(), radius()) ||
-                        character.equals(cast) || character.equals(castOn) ||
-                        character.getCurrentHealth() <= 0 || character.isDead()) {
+                if (character == null || !character.getPosition().withinDistance(castOn.getPosition(), radius()) || character.equals(cast) || character
+                    .equals(castOn) || character.getCurrentHealth() <= 0 || character.isDead()) {
                     continue;
                 }
                 cast.getCurrentlyCasting().endGraphic().ifPresent(character::graphic);
@@ -71,11 +69,11 @@ public abstract class CombatAncientSpell extends CombatSpell {
      * Executed when the spell casted by {@code cast} hits {@code castOn}.
      *
      * @param cast
-     *         the character who casted the spell.
+     *            the character who casted the spell.
      * @param castOn
-     *         the character who the spell was casted on.
+     *            the character who the spell was casted on.
      * @param damage
-     *         the damage that was inflicted by the spell.
+     *            the damage that was inflicted by the spell.
      */
     public abstract void effect(CharacterNode cast, CharacterNode castOn, int damage);
 

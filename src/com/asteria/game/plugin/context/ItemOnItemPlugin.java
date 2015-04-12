@@ -24,9 +24,9 @@ public final class ItemOnItemPlugin implements PluginContext {
      * Creates a new {@link ItemOnItemPlugin}.
      *
      * @param itemUsed
-     *         the item that was used on the other item.
+     *            the item that was used on the other item.
      * @param itemOn
-     *         the item that the other item was used on.
+     *            the item that the other item was used on.
      */
     public ItemOnItemPlugin(Item itemUsed, Item itemOn) {
         this.itemUsed = itemUsed;

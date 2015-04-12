@@ -67,19 +67,18 @@ public final class DecodePacketServerEvent extends ServerSelectionEvent {
                 PacketDecoder packet = PacketDecoder.PACKETS[session.getPacketOpcode()];
                 if (session.getPacketCount().getAndIncrement() >= Settings.PACKET_LIMIT) {
                     if (Settings.DEBUG)
-                        logger.warning(session.getPlayer() + " decoded too " +
-                                "many packets in one sequence!");
+                        logger.warning(session.getPlayer() + " decoded too " + "many packets in one sequence!");
                     session.disconnect(false);
                     break;
                 }
 
                 try {
                     if (packet != null) {
-                        packet.decode(session.getPlayer(), session.getPacketOpcode(), session.getPacketSize(), DataBuffer.create(session.getInData()));
+                        packet.decode(session.getPlayer(), session.getPacketOpcode(), session.getPacketSize(), DataBuffer.create(session
+                            .getInData()));
                     } else {
                         if (Settings.DEBUG)
-                            logger.info(session.getPlayer() + " unhandled " +
-                                    "packet " + session.getPacketOpcode());
+                            logger.info(session.getPlayer() + " unhandled " + "packet " + session.getPacketOpcode());
                     }
                 } catch (Exception ex) {
                     ex.printStackTrace();

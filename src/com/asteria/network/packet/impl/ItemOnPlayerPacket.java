@@ -11,8 +11,7 @@ import com.asteria.network.ValueType;
 import com.asteria.network.packet.PacketDecoder;
 
 /**
- * The packet sent from the client when a player uses an item on another
- * player.
+ * The packet sent from the client when a player uses an item on another player.
  *
  * @author lare96 <http://github.com/lare96>
  */

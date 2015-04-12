@@ -4,8 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The decoder chain that holds a series of events to decode the login
- * protocol.
+ * The decoder chain that holds a series of events to decode the login protocol.
  *
  * @author lare96 <http://github.com/lare96>
  */
@@ -30,7 +29,7 @@ public final class LoginProtocolDecoderChain {
      * Creates a new {@link LoginProtocolDecoderChain}.
      *
      * @param size
-     *         the size of the chain that will hold the events.
+     *            the size of the chain that will hold the events.
      */
     public LoginProtocolDecoderChain(int size) {
         this.size = size;
@@ -40,7 +39,7 @@ public final class LoginProtocolDecoderChain {
      * Appends the {@code event} to the end of this protocol decoder chain.
      *
      * @param event
-     *         the event that will be appended to this chain.
+     *            the event that will be appended to this chain.
      * @return an instance of this protocol decoder chain.
      */
     public LoginProtocolDecoderChain append(LoginProtocolDecoder event) {
@@ -76,7 +75,7 @@ public final class LoginProtocolDecoderChain {
      * Determines if this login protocol decoder has more events in its chain.
      *
      * @return {@code true} if this decoder has more events, {@code false}
-     * otherwise.
+     *         otherwise.
      */
     public boolean hasNext() {
         return cursor < size;

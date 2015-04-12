@@ -34,9 +34,9 @@ public final class Requirement {
      * Creates a new {@link Requirement}.
      *
      * @param level
-     *         the level of this equipment requirement.
+     *            the level of this equipment requirement.
      * @param skill
-     *         the skill identifier for this equipment requirement.
+     *            the skill identifier for this equipment requirement.
      */
     public Requirement(int level, SkillData skill) {
         this.level = level;
@@ -59,11 +59,11 @@ public final class Requirement {
      * equipment requirements.
      *
      * @param player
-     *         the player that is equipping the item.
+     *            the player that is equipping the item.
      * @param item
-     *         the item being equipped.
+     *            the item being equipped.
      * @return {@code true} if the player can equip the item, {@code false}
-     * otherwise.
+     *         otherwise.
      */
     public static boolean canEquip(Player player, Item item) {
         if (item == null)
@@ -74,8 +74,7 @@ public final class Requirement {
         for (Requirement r : req) {
             if (player.getSkills()[r.skill.getId()].getRealLevel() < r.level) {
                 String append = TextUtils.appendIndefiniteArticle(SkillData.values()[r.skill.getId()].toString());
-                player.getEncoder().sendMessage("You need " + append + " " +
-                        "level of " + r.level + " to equip this item.");
+                player.getEncoder().sendMessage("You need " + append + " " + "level of " + r.level + " to equip this item.");
                 return false;
             }
         }

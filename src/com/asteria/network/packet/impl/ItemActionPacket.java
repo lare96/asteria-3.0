@@ -28,9 +28,9 @@ public final class ItemActionPacket extends PacketDecoder {
             return;
 
         switch (opcode) {
-            case 122:
-                firstClick(player, buf);
-                break;
+        case 122:
+            firstClick(player, buf);
+            break;
         }
     }
 
@@ -38,9 +38,9 @@ public final class ItemActionPacket extends PacketDecoder {
      * Handles the first slot of an item action.
      *
      * @param player
-     *         the player to handle this for.
+     *            the player to handle this for.
      * @param buf
-     *         the buffer for reading the sent data.
+     *            the buffer for reading the sent data.
      */
     private void firstClick(Player player, DataBuffer buf) {
         int container = buf.getShort(true, ValueType.A, ByteOrder.LITTLE);

@@ -33,13 +33,13 @@ public final class ObjectNode extends Node {
      * Creates a new {@link ObjectNode}.
      *
      * @param id
-     *         the identification of the object.
+     *            the identification of the object.
      * @param position
-     *         the position of this object in the world.
+     *            the position of this object in the world.
      * @param direction
-     *         the direction this object is facing.
+     *            the direction this object is facing.
      * @param type
-     *         the type of object that this is.
+     *            the type of object that this is.
      */
     public ObjectNode(int id, Position position, ObjectDirection direction, ObjectType type) {
         super(position, NodeType.OBJECT);
@@ -52,11 +52,11 @@ public final class ObjectNode extends Node {
      * Creates a new {@link ObjectNode} with the default {@code objectType}.
      *
      * @param id
-     *         the identification of the object.
+     *            the identification of the object.
      * @param position
-     *         the position of this object in the world.
+     *            the position of this object in the world.
      * @param direction
-     *         the direction this object is facing.
+     *            the direction this object is facing.
      */
     public ObjectNode(int id, Position position, ObjectDirection direction) {
         this(id, position, direction, ObjectType.DEFAULT);

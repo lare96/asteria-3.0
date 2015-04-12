@@ -26,11 +26,11 @@ public final class NpcDialogue implements DialogueChain {
      * Creates a new {@link NpcDialogue}.
      *
      * @param npc
-     *         the identifier for the NPC sending this dialogue.
+     *            the identifier for the NPC sending this dialogue.
      * @param expression
-     *         the expression that this NPC will display.
+     *            the expression that this NPC will display.
      * @param text
-     *         the text that will be displayed on the dialogue.
+     *            the text that will be displayed on the dialogue.
      */
     public NpcDialogue(int npc, Expression expression, String... text) {
         this.npc = npc;
@@ -42,9 +42,9 @@ public final class NpcDialogue implements DialogueChain {
      * Creates a new {@link NpcDialogue} with the default expression.
      *
      * @param npc
-     *         the identifier for the NPC sending this dialogue.
+     *            the identifier for the NPC sending this dialogue.
      * @param text
-     *         the text that will be displayed on the dialogue.
+     *            the text that will be displayed on the dialogue.
      */
     public NpcDialogue(int npc, String... text) {
         this(npc, Expression.CALM, text);

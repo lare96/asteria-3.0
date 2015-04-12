@@ -53,11 +53,11 @@ public final class ForcedMovement {
      * Creates a new {@link ForcedMovement}.
      *
      * @param amountX
-     *         the amount to move either east or west.
+     *            the amount to move either east or west.
      * @param amountY
-     *         the amount to move either north or south.
+     *            the amount to move either north or south.
      * @param direction
-     *         the direction to turn when moving.
+     *            the direction to turn when moving.
      */
     public ForcedMovement(int amountX, int amountY, int direction) {
         Preconditions.checkArgument(direction >= 0 && direction <= 3);

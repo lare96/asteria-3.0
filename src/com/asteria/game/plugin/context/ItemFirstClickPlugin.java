@@ -24,9 +24,9 @@ public final class ItemFirstClickPlugin implements PluginContext {
      * Create a new {@link ItemFirstClickPlugin}.
      *
      * @param slot
-     *         the inventory slot that the player clicked.
+     *            the inventory slot that the player clicked.
      * @param item
-     *         the item on the inventory slot that the player clicked.
+     *            the item on the inventory slot that the player clicked.
      */
     public ItemFirstClickPlugin(int slot, Item item) {
         this.slot = slot;

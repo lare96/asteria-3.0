@@ -53,17 +53,17 @@ public final class ViewingOrb {
      * Creates a new {@link ViewingOrb}.
      *
      * @param player
-     *         the player that is viewing the orb.
+     *            the player that is viewing the orb.
      * @param centre
-     *         the centre position corresponding to the viewing orb.
+     *            the centre position corresponding to the viewing orb.
      * @param northWest
-     *         the north-west position corresponding to the viewing orb.
+     *            the north-west position corresponding to the viewing orb.
      * @param northEast
-     *         the north-east position corresponding to the viewing orb.
+     *            the north-east position corresponding to the viewing orb.
      * @param southWest
-     *         the south-west position corresponding to the viewing orb.
+     *            the south-west position corresponding to the viewing orb.
      * @param southEast
-     *         the south-east position corresponding to the viewing orb.
+     *            the south-east position corresponding to the viewing orb.
      */
     public ViewingOrb(Player player, Position centre, Position northWest, Position northEast, Position southWest, Position southEast) {
         this.player = player;
@@ -124,16 +124,15 @@ public final class ViewingOrb {
     }
 
     /**
-     * Moves the player to {@code position} and updates the navigation
-     * interface
+     * Moves the player to {@code position} and updates the navigation interface
      * with the position that the player is being moved to.
      *
      * @param positionName
-     *         the name of the position being moved to.
+     *            the name of the position being moved to.
      * @param positionLineId
-     *         the interface string id of the position being moved to.
+     *            the interface string id of the position being moved to.
      * @param position
-     *         the position being moved to.
+     *            the position being moved to.
      */
     public void move(String positionName, int positionLineId, Position position) {
         if (position.equals(player.getPosition()))

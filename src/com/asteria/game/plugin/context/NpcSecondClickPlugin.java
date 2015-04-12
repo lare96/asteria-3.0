@@ -19,7 +19,7 @@ public final class NpcSecondClickPlugin implements PluginContext {
      * Creates a new {@link NpcSecondClickPlugin}.
      *
      * @param npc
-     *         the npc that was clicked by the player.
+     *            the npc that was clicked by the player.
      */
     public NpcSecondClickPlugin(Npc npc) {
         this.npc = npc;

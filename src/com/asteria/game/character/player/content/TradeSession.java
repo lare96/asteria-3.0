@@ -40,7 +40,7 @@ public final class TradeSession {
      * Creates a new {@link TradeSession}.
      *
      * @param player
-     *         the player that controls this trade session.
+     *            the player that controls this trade session.
      */
     public TradeSession(Player player) {
         this.player = player;
@@ -51,9 +51,9 @@ public final class TradeSession {
      * offer screen.
      *
      * @param item
-     *         the item to attempt to add to the trade.
+     *            the item to attempt to add to the trade.
      * @param inventorySlot
-     *         the inventory slot that the item is located on.
+     *            the inventory slot that the item is located on.
      */
     public void add(Item item, int inventorySlot) {
         if (!inTradeSession())
@@ -73,8 +73,7 @@ public final class TradeSession {
             player.getInventory().remove(item, inventorySlot);
             String trade = name(player);
             int remaining = player.getInventory().remaining();
-            other.getEncoder().sendString("Trading with: " + trade + " who " +
-                    "has @gre@" + remaining + " free slots", 3417);
+            other.getEncoder().sendString("Trading with: " + trade + " who " + "has @gre@" + remaining + " free slots", 3417);
             player.getEncoder().sendItemsOnInterface(3322, player.getInventory().container());
             int length = container.size();
             player.getEncoder().sendItemsOnInterface(3415, container.container(), length);
@@ -90,7 +89,7 @@ public final class TradeSession {
      * Attempts to remove {@code item} from the trade offer screen.
      *
      * @param item
-     *         the item to attempt to remove from the trade.
+     *            the item to attempt to remove from the trade.
      */
     public void remove(Item item) {
         if (!inTradeSession())
@@ -103,8 +102,7 @@ public final class TradeSession {
             player.getInventory().add(item);
             String trade = name(player);
             int remaining = player.getInventory().remaining();
-            other.getEncoder().sendString("Trading with: " + trade + " who " +
-                    "has @gre@" + remaining + " free slots", 3417);
+            other.getEncoder().sendString("Trading with: " + trade + " who " + "has @gre@" + remaining + " free slots", 3417);
             player.getEncoder().sendItemsOnInterface(3322, player.getInventory().container());
             int length = container.size();
             player.getEncoder().sendItemsOnInterface(3415, container.container(), length);
@@ -120,7 +118,7 @@ public final class TradeSession {
      * Attempts to initiate this trade session with {@code requester}.
      *
      * @param requester
-     *         the person requesting a trade session.
+     *            the person requesting a trade session.
      */
     public void request(Player requester) {
         if (requester.getTradeSession().inTradeSession()) {
@@ -153,36 +151,35 @@ public final class TradeSession {
      * Executes the action that corresponds with {@code stage}.
      *
      * @param stage
-     *         the stage to execute the action for.
+     *            the stage to execute the action for.
      * @throws IllegalArgumentException
-     *         if the trade stage is invalid.
+     *             if the trade stage is invalid.
      */
     public void execute(TradeStage stage) {
         if (!inTradeSession())
             return;
         switch (stage) {
-            case OFFER:
-                String trade = name(player);
-                int remaining = player.getInventory().remaining();
-                player.getEncoder().sendItemsOnInterface(3322, player.getInventory().container());
-                player.getEncoder().sendString("Trading with: " + trade + " " +
-                        "who has @gre@" + remaining + " free slots", 3417);
-                player.getEncoder().sendString("", 3431);
-                player.getEncoder().sendString("Are you sure you want to make" + " this trade?", 3535);
-                player.getEncoder().sendInventoryInterface(3323, 3321);
-                break;
-            case FIRST_ACCEPT:
-                player.getEncoder().sendItemsOnInterface(3214, player.getInventory().container());
-                player.getEncoder().sendString(getItemNames(container.container()), 3557);
-                player.getEncoder().sendString(getItemNames(other.getTradeSession().getContainer().container()), 3558);
-                player.getEncoder().sendInventoryInterface(3443, 3213);
-                break;
-            case FINAL_ACCEPT:
-                other.getInventory().addAll(container);
-                reset();
-                break;
-            default:
-                throw new IllegalArgumentException("Invalid trade stage!");
+        case OFFER:
+            String trade = name(player);
+            int remaining = player.getInventory().remaining();
+            player.getEncoder().sendItemsOnInterface(3322, player.getInventory().container());
+            player.getEncoder().sendString("Trading with: " + trade + " " + "who has @gre@" + remaining + " free slots", 3417);
+            player.getEncoder().sendString("", 3431);
+            player.getEncoder().sendString("Are you sure you want to make" + " this trade?", 3535);
+            player.getEncoder().sendInventoryInterface(3323, 3321);
+            break;
+        case FIRST_ACCEPT:
+            player.getEncoder().sendItemsOnInterface(3214, player.getInventory().container());
+            player.getEncoder().sendString(getItemNames(container.container()), 3557);
+            player.getEncoder().sendString(getItemNames(other.getTradeSession().getContainer().container()), 3558);
+            player.getEncoder().sendInventoryInterface(3443, 3213);
+            break;
+        case FINAL_ACCEPT:
+            other.getInventory().addAll(container);
+            reset();
+            break;
+        default:
+            throw new IllegalArgumentException("Invalid trade stage!");
         }
     }
 
@@ -190,7 +187,7 @@ public final class TradeSession {
      * Resets this trade session for both the controller and their partner.
      *
      * @param declined
-     *         determines if the trade is being reset because they declined.
+     *            determines if the trade is being reset because they declined.
      */
     public void reset(boolean declined) {
         if (!inTradeSession())
@@ -209,7 +206,7 @@ public final class TradeSession {
      * Determines if this controller is in an active trade session.
      *
      * @return {@code true} if the controller is in a trade, {@code false}
-     * otherwise.
+     *         otherwise.
      */
     public boolean inTradeSession() {
         return stage == TradeStage.OFFER || stage == TradeStage.FIRST_ACCEPT || stage == TradeStage.FINAL_ACCEPT;
@@ -232,11 +229,12 @@ public final class TradeSession {
      * Determines and returns the trade display name for {@code player}.
      *
      * @param player
-     *         the player to determine this display name for.
+     *            the player to determine this display name for.
      * @return the trade display name.
      */
     private String name(Player player) {
-        return player.getFormatUsername().concat(player.getRights().equal(Rights.MODERATOR) ? "@cr1@" : player.getRights().greater(Rights.MODERATOR) ? "@cr2@" : "");
+        return player.getFormatUsername().concat(
+            player.getRights().equal(Rights.MODERATOR) ? "@cr1@" : player.getRights().greater(Rights.MODERATOR) ? "@cr2@" : "");
     }
 
     /**
@@ -244,7 +242,7 @@ public final class TradeSession {
      * on the confirm trade screen.
      *
      * @param items
-     *         the array of items to display.
+     *            the array of items to display.
      * @return the confirm text for the array of items.
      */
     private String getItemNames(Item[] items) {
@@ -255,9 +253,9 @@ public final class TradeSession {
             if (item == null) {
                 continue;
             }
-            tradeAmount = item.getAmount() >= 1000 && item.getAmount() < 1000000 ? "@cya@" + (item.getAmount() / 1000) + "K @whi@" +
-                    "(" + item.getAmount() + ")" : item.getAmount() >= 1000000 ? "@gre@" + (item.getAmount() / 1000000) + " " +
-                    "million @whi@(" + item.getAmount() + ")" : "" + item.getAmount();
+            tradeAmount = item.getAmount() >= 1000 && item.getAmount() < 1000000
+                ? "@cya@" + (item.getAmount() / 1000) + "K @whi@" + "(" + item.getAmount() + ")" : item.getAmount() >= 1000000
+                    ? "@gre@" + (item.getAmount() / 1000000) + " " + "million @whi@(" + item.getAmount() + ")" : "" + item.getAmount();
             tradeItems = count == 0 ? item.getDefinition().getName() : tradeItems + "\\n" + item.getDefinition().getName();
             if (item.getDefinition().isStackable())
                 tradeItems = tradeItems + " x " + tradeAmount;
@@ -297,7 +295,7 @@ public final class TradeSession {
      * Sets the value for {@link TradeSession#other}.
      *
      * @param other
-     *         the new value to set.
+     *            the new value to set.
      */
     public void setOther(Player other) {
         this.other = other;
@@ -316,7 +314,7 @@ public final class TradeSession {
      * Sets the value for {@link TradeSession#stage}.
      *
      * @param stage
-     *         the new value to set.
+     *            the new value to set.
      */
     public void setStage(TradeStage stage) {
         this.stage = stage;

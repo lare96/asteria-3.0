@@ -28,9 +28,9 @@ public abstract class ProducingSkillAction extends SkillAction {
      * Creates a new {@link ProducingSkillAction}.
      *
      * @param player
-     *         the player this skill action is for.
+     *            the player this skill action is for.
      * @param position
-     *         the position the player should face.
+     *            the position the player should face.
      */
     public ProducingSkillAction(Player player, Optional<Position> position) {
         super(player, position);
@@ -45,8 +45,7 @@ public abstract class ProducingSkillAction extends SkillAction {
             player.getInventory().add(produceItem());
             onProduce(t, true);
         } else {
-            player.getEncoder().sendMessage("You do not have any " +
-                    removeItem.getDefinition().getName() + " left.");
+            player.getEncoder().sendMessage("You do not have any " + removeItem.getDefinition().getName() + " left.");
             t.cancel();
             onProduce(t, false);
             return;
@@ -57,9 +56,9 @@ public abstract class ProducingSkillAction extends SkillAction {
      * The method executed upon production of an item.
      *
      * @param t
-     *         the task executing this method.
+     *            the task executing this method.
      * @param success
-     *         determines if the production was successful or not.
+     *            determines if the production was successful or not.
      */
     public void onProduce(Task t, boolean success) {
 

@@ -21,9 +21,9 @@ public final class Item {
      * Creates a new {@link Item}.
      *
      * @param id
-     *         the identification of this item.
+     *            the identification of this item.
      * @param amount
-     *         the quantity of this item.
+     *            the quantity of this item.
      */
     public Item(int id, int amount) {
         if (amount < 0)
@@ -36,7 +36,7 @@ public final class Item {
      * Creates a new {@link Item} with an quantity of {@code 1}.
      *
      * @param id
-     *         the identification of this item.
+     *            the identification of this item.
      */
     public Item(int id) {
         this(id, 1);
@@ -78,7 +78,7 @@ public final class Item {
      * {@link Item#amount} are above {@code 0}.
      *
      * @param item
-     *         the item to determine if valid.
+     *            the item to determine if valid.
      * @return {@code true} if the item is valid, {@code false} otherwise.
      */
     public static boolean valid(Item item) {
@@ -114,7 +114,7 @@ public final class Item {
      * Increments the amount by {@code amount}.
      *
      * @param amount
-     *         the amount to increment by.
+     *            the amount to increment by.
      */
     public final void incrementAmountBy(int amount) {
         this.amount += amount;
@@ -124,7 +124,7 @@ public final class Item {
      * Decrements the amount by {@code amount}
      *
      * @param amount
-     *         the amount to decrement by.
+     *            the amount to decrement by.
      */
     public final void decrementAmountBy(int amount) {
         if ((this.amount - amount) < 1) {
@@ -156,7 +156,7 @@ public final class Item {
      * Sets the identification of this item.
      *
      * @param id
-     *         the new identification of this item.
+     *            the new identification of this item.
      */
     public final void setId(int id) {
         this.id = id;
@@ -175,7 +175,7 @@ public final class Item {
      * Sets the quantity of this item.
      *
      * @param amount
-     *         the new quantity of this item.
+     *            the new quantity of this item.
      */
     public final void setAmount(int amount) {
         if (amount < 0)

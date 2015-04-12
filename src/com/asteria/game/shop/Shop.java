@@ -67,15 +67,15 @@ public final class Shop {
      * Creates a new {@link Shop}.
      *
      * @param name
-     *         the name of this current shop.
+     *            the name of this current shop.
      * @param items
-     *         the items within this shop.
+     *            the items within this shop.
      * @param restock
-     *         the flag that determines if this shop will restock its items.
+     *            the flag that determines if this shop will restock its items.
      * @param canSell
-     *         the flag that determines if items can be sold to this shop.
+     *            the flag that determines if items can be sold to this shop.
      * @param currency
-     *         the currency that items within this shop will be bought with.
+     *            the currency that items within this shop will be bought with.
      */
     public Shop(String name, Item[] items, boolean restock, boolean canSell, Currency currency) {
         this.name = name;
@@ -116,7 +116,7 @@ public final class Shop {
      * Opens this shop by displaying the interface for {@code player}.
      *
      * @param player
-     *         the player to open the shop for.
+     *            the player to open the shop for.
      */
     public void openShop(Player player) {
         player.getEncoder().sendItemsOnInterface(3823, player.getInventory().container());
@@ -132,9 +132,9 @@ public final class Shop {
      * {@code player}.
      *
      * @param player
-     *         the player this shop will be updated for.
+     *            the player this shop will be updated for.
      * @param checkStock
-     *         if the stock should be checked.
+     *            if the stock should be checked.
      */
     public void updateShop(Player player, boolean checkStock) {
         player.getEncoder().sendItemsOnInterface(3823, player.getInventory().container());
@@ -152,39 +152,36 @@ public final class Shop {
      * Sends the determined selling value of {@code item} to {@code player}.
      *
      * @param player
-     *         the player to send the value to.
+     *            the player to send the value to.
      * @param item
-     *         the item to send the value of.
+     *            the item to send the value of.
      */
     public void sendSellingPrice(Player player, Item item) {
         String itemName = item.getDefinition().getName();
 
-        if(!canSell) {
+        if (!canSell) {
             player.getEncoder().sendMessage("You cannot sell any items to this store.");
             return;
         }
         if (Arrays.stream(Settings.BANNED_SHOP_ITEMS).anyMatch(i -> i == item.getId())) {
-            player.getEncoder().sendMessage("You can't sell " + itemName + " " +
-                    "here.");
+            player.getEncoder().sendMessage("You can't sell " + itemName + " " + "here.");
             return;
         }
         if (!container.contains(item.getId()) && !name.equalsIgnoreCase("General Store")) {
-            player.getEncoder().sendMessage("You can't sell " + itemName + " " +
-                    "to this store.");
+            player.getEncoder().sendMessage("You can't sell " + itemName + " " + "to this store.");
             return;
         }
         String formatPrice = TextUtils.formatPrice((int) Math.floor(determinePrice(item) / 2));
-        player.getEncoder().sendMessage(itemName + ": shop will buy for " +
-                formatPrice + " " + currency + ".");
+        player.getEncoder().sendMessage(itemName + ": shop will buy for " + formatPrice + " " + currency + ".");
     }
 
     /**
      * Sends the determined purchase value of {@code item} to {@code player}.
      *
      * @param player
-     *         the player to send the value to.
+     *            the player to send the value to.
      * @param item
-     *         the item to send the value of.
+     *            the item to send the value of.
      */
     public void sendPurchasePrice(Player player, Item item) {
         Item shopItem = container.searchItem(item.getId()).orElse(null);
@@ -194,19 +191,21 @@ public final class Shop {
             player.getEncoder().sendMessage("There is none of this item left in stock!");
             return;
         }
-        player.getEncoder().sendMessage(item.getDefinition().getName() + ": " +
-                "shop will sell for " + TextUtils.formatPrice(determinePrice(item)) + " " + currency + ".");
+        player
+            .getEncoder()
+            .sendMessage(
+                item.getDefinition().getName() + ": " + "shop will sell for " + TextUtils.formatPrice(determinePrice(item)) + " " + currency + ".");
     }
 
     /**
      * The method that allows {@code player} to purchase {@code item}.
      *
      * @param player
-     *         the player who will purchase this item.
+     *            the player who will purchase this item.
      * @param item
-     *         the item that will be purchased.
+     *            the item that will be purchased.
      * @return {@code true} if the player purchased the item, {@code false}
-     * otherwise.
+     *         otherwise.
      */
     public boolean purchase(Player player, Item item) {
         Item shopItem = container.searchItem(item.getId()).orElse(null);
@@ -228,12 +227,12 @@ public final class Shop {
         }
         int value = currency == Currency.COINS ? item.getDefinition().getGeneralPrice() : item.getDefinition().getSpecialPrice();
         if (!(currency.getCurrency().currencyAmount(player) >= (value * item.getAmount()))) {
-            player.getEncoder().sendMessage("You do not have enough " +
-                    currency + " to buy this item.");
+            player.getEncoder().sendMessage("You do not have enough " + currency + " to buy this item.");
             return false;
         }
-        if (player.getInventory().remaining() >= item.getAmount() && !item.getDefinition().isStackable() || player.getInventory().remaining() >= 1 && item.getDefinition().isStackable() ||
-                player.getInventory().contains(item.getId()) && item.getDefinition().isStackable()) {
+        if (player.getInventory().remaining() >= item.getAmount() && !item.getDefinition().isStackable() || player.getInventory()
+            .remaining() >= 1 && item.getDefinition().isStackable() || player.getInventory().contains(item.getId()) && item.getDefinition()
+            .isStackable()) {
 
             if (itemCache.containsKey(item.getId())) {
                 container.searchItem(item.getId()).ifPresent(i -> i.decrementAmountBy(item.getAmount()));
@@ -254,11 +253,11 @@ public final class Shop {
      * The method that allows {@code player} to sell {@code item}.
      *
      * @param player
-     *         the player who will sell this item.
+     *            the player who will sell this item.
      * @param item
-     *         the item that will be sold.
+     *            the item that will be sold.
      * @return {@code true} if the player sold the item, {@code false}
-     * otherwise.
+     *         otherwise.
      */
     public boolean sell(Player player, Item item, int fromSlot) {
         if (!Item.valid(item))
@@ -307,7 +306,7 @@ public final class Shop {
      * Determines if the items in the container need to be restocked.
      *
      * @return {@code true} if the items need to be restocked, {@code false}
-     * otherwise.
+     *         otherwise.
      */
     protected boolean needsRestock() {
         return container.stream().filter(Objects::nonNull).anyMatch(i -> i.getAmount() <= 0 && itemCache.containsKey(i.getId()));
@@ -317,17 +316,18 @@ public final class Shop {
      * Determines if the items in the container no longer need to be restocked.
      *
      * @return {@code true} if the items don't to be restocked, {@code false}
-     * otherwise.
+     *         otherwise.
      */
     protected boolean restockCompleted() {
-        return container.stream().filter(Objects::nonNull).allMatch(i -> itemCache.containsKey(i.getId()) && i.getAmount() >= itemCache.get(i.getId()));
+        return container.stream().filter(Objects::nonNull).allMatch(
+            i -> itemCache.containsKey(i.getId()) && i.getAmount() >= itemCache.get(i.getId()));
     }
 
     /**
      * Determines the price of {@code item} based on the currency.
      *
      * @param item
-     *         the item to determine the price of.
+     *            the item to determine the price of.
      * @return the price of the item based on the currency.
      */
     private int determinePrice(Item item) {

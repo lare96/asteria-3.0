@@ -45,16 +45,14 @@ import com.google.gson.JsonParser;
 public final class PlayerSerialization {
 
     /**
-     * The player serialization cache that will enabled the caching of
-     * character
+     * The player serialization cache that will enabled the caching of character
      * files for later use.
      */
     private static PlayerSerializationCache cache = new PlayerSerializationCache(false);
 
     /**
      * The linked hash collection of tokens that will be serialized and
-     * deserialized. A linked hash set is used here to ensure that there is
-     * only
+     * deserialized. A linked hash set is used here to ensure that there is only
      * one of each token, and to preserve order.
      */
     private final Set<TokenSerializer> tokens = new LinkedHashSet<>();
@@ -73,12 +71,11 @@ public final class PlayerSerialization {
      * Creates a new {@link PlayerSerialization}.
      *
      * @param player
-     *         the player this serializer is dedicated to.
+     *            the player this serializer is dedicated to.
      */
     public PlayerSerialization(Player player) {
         this.player = player;
-        this.cf = Paths.get("./data/players/" + player.getUsername() + "" +
-                ".json").toFile();
+        this.cf = Paths.get("./data/players/" + player.getUsername() + "" + ".json").toFile();
         createTokens();
     }
 
@@ -90,22 +87,23 @@ public final class PlayerSerialization {
      * The token serialization format is as follows:
      * <p>
      * <p>
+     * 
      * <pre>
-     * tokens.add(new TokenSerializer(NAME_OF_TOKEN, SERIALIZATION,
-     * DESERIALIZATION));
+     * tokens.add(new TokenSerializer(NAME_OF_TOKEN, SERIALIZATION, DESERIALIZATION));
      * </pre>
      * <p>
      * For those who are still confused, here is an example. Lets say we want
      * "deathCount" to be saved to and loaded from the character file:
      * <p>
      * <p>
+     * 
      * <pre>
      * private int deathCount;
-     *
+     * 
      * public void setDeathCount(int deathCount) {
      *     this.deathCount = deathCount;
      * }
-     *
+     * 
      * public int getDeathCount() {
      *     return deathCount;
      * }
@@ -114,9 +112,9 @@ public final class PlayerSerialization {
      * We would be able to do it like this:
      * <p>
      * <p>
+     * 
      * <pre>
-     * tokens.add(new TokenSerializer(&quot;death-count&quot;,
-     * player.getDeathCount(), n -&gt; player.setDeathCount(n.getAsInt())));
+     * tokens.add(new TokenSerializer(&quot;death-count&quot;, player.getDeathCount(), n -&gt; player.setDeathCount(n.getAsInt())));
      * </pre>
      */
     private void createTokens() {
@@ -175,7 +173,8 @@ public final class PlayerSerialization {
                 }
             }
             try (FileWriter out = new FileWriter(cf)) {
-                Gson gson = new GsonBuilder().setPrettyPrinting().addSerializationExclusionStrategy(new PlayerSerializationFilter()).create();
+                Gson gson = new GsonBuilder().setPrettyPrinting().addSerializationExclusionStrategy(new PlayerSerializationFilter())
+                    .create();
                 JsonObject obj = new JsonObject();
                 tokens.stream().forEach(t -> obj.add(t.getName(), gson.toJsonTree(t.getToJson())));
                 out.write(gson.toJson(obj));
@@ -190,10 +189,10 @@ public final class PlayerSerialization {
      * Deserializes the dedicated player from a {@code JSON} file.
      *
      * @param password
-     *         the password that will be used to validate if the player has
-     *         the right credentials.
+     *            the password that will be used to validate if the player has
+     *            the right credentials.
      * @return the login response determined by what happened before, during,
-     * and after deserialization.
+     *         and after deserialization.
      */
     public LoginResponse deserialize(String password) {
         try {
@@ -203,7 +202,8 @@ public final class PlayerSerialization {
             }
             Optional<JsonObject> cached = cache.get(player.getUsernameHash());
             if (cached.isPresent()) {
-                tokens.stream().filter(t -> cached.get().has(t.getName())).forEach(t -> t.getFromJson().accept(cached.get().get(t.getName())));
+                tokens.stream().filter(t -> cached.get().has(t.getName())).forEach(
+                    t -> t.getFromJson().accept(cached.get().get(t.getName())));
             } else {
                 cf.setReadable(true);
                 try (FileReader in = new FileReader(cf)) {
@@ -223,8 +223,7 @@ public final class PlayerSerialization {
     }
 
     /**
-     * Gets the cache that will enabled the caching of character files for
-     * later
+     * Gets the cache that will enabled the caching of character files for later
      * use.
      *
      * @return the cache for caching character files.
@@ -260,11 +259,11 @@ public final class PlayerSerialization {
          * Creates a new {@link TokenSerializer}.
          *
          * @param name
-         *         the name of this serializable token.
+         *            the name of this serializable token.
          * @param toJson
-         *         the {@code Object} being serialized by this token.
+         *            the {@code Object} being serialized by this token.
          * @param fromJson
-         *         the deserialization consumer for this token.
+         *            the deserialization consumer for this token.
          */
         public TokenSerializer(String name, Object toJson, Consumer<JsonElement> fromJson) {
             this.name = name;

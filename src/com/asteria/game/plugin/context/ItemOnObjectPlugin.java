@@ -40,15 +40,15 @@ public final class ItemOnObjectPlugin implements PluginContext {
      * Create a new {@link ItemOnObjectPlugin}.
      *
      * @param id
-     *         the identifier for the object that was clicked.
+     *            the identifier for the object that was clicked.
      * @param position
-     *         the position of the object that was clicked.
+     *            the position of the object that was clicked.
      * @param size
-     *         the size of the object that was clicked.
+     *            the size of the object that was clicked.
      * @param item
-     *         the item that was used with the object.
+     *            the item that was used with the object.
      * @param slot
-     *         the slot of the item that was used with the object.
+     *            the slot of the item that was used with the object.
      */
     public ItemOnObjectPlugin(int id, Position position, int size, Item item, int slot) {
         this.id = id;

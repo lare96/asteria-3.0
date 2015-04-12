@@ -275,15 +275,15 @@ public enum CombatPrayer {
      * Creates a new {@link CombatPrayer}.
      *
      * @param id
-     *         the identification for this prayer.
+     *            the identification for this prayer.
      * @param drainRate
-     *         the amount of ticks it takes for prayer to be drained.
+     *            the amount of ticks it takes for prayer to be drained.
      * @param headIcon
-     *         the head icon present when this prayer is activated.
+     *            the head icon present when this prayer is activated.
      * @param level
-     *         the level required to use this prayer.
+     *            the level required to use this prayer.
      * @param config
-     *         the config to make the prayer button light up when activated.
+     *            the config to make the prayer button light up when activated.
      */
     private CombatPrayer(int id, int drainRate, int headIcon, int level, int config) {
         this.id = id;
@@ -298,7 +298,7 @@ public enum CombatPrayer {
      * {@link CombatPrayer#activate} method.
      *
      * @param player
-     *         the player that activated this prayer.
+     *            the player that activated this prayer.
      */
     protected abstract void onActivation(Player player);
 
@@ -307,7 +307,7 @@ public enum CombatPrayer {
      * {@link CombatPrayer#deactivate} method.
      *
      * @param player
-     *         the player that deactivated this prayer.
+     *            the player that deactivated this prayer.
      */
     protected void onDeactivation(Player player) {
         player.getPrayerActive()[id] = false;
@@ -318,17 +318,17 @@ public enum CombatPrayer {
      * Attempts to activate this prayer for {@code player}.
      *
      * @param player
-     *         the player to activate this prayer for.
+     *            the player to activate this prayer for.
      * @return {@code true} if the activation was successful, {@code false}
-     * otherwise.
+     *         otherwise.
      */
     public final boolean activate(Player player) {
         if (CombatPrayer.isActivated(player, this)) {
             return false;
         } else if (player.getSkills()[Skills.PRAYER].getRealLevel() < level) {
-            player.getEncoder().sendChatboxString("You need a @blu@Prayer " +
-                    "level of " + level + " @bla@to use @blu@" + TextUtils.capitalize(name().toLowerCase().replaceAll("_", " ")) +
-                    "@bla@.");
+            player.getEncoder().sendChatboxString(
+                "You need a @blu@Prayer " + "level of " + level + " @bla@to use @blu@" + TextUtils.capitalize(name().toLowerCase()
+                    .replaceAll("_", " ")) + "@bla@.");
             player.getEncoder().sendByteState(config, 0);
             return false;
         } else if (player.getSkills()[Skills.PRAYER].getLevel() < 1) {
@@ -349,7 +349,7 @@ public enum CombatPrayer {
      * deactivate this prayer.
      *
      * @param player
-     *         the player this will be done for.
+     *            the player this will be done for.
      */
     public final void activateOrDeactivate(Player player) {
         if (!activate(player))
@@ -360,9 +360,9 @@ public enum CombatPrayer {
      * Attempts to deactivate this prayer for {@code player}.
      *
      * @param player
-     *         the player to deactivate this prayer for.
+     *            the player to deactivate this prayer for.
      * @return {@code true} if the deactivation was successful, {@code false}
-     * otherwise.
+     *         otherwise.
      */
     public final boolean deactivate(Player player) {
         if (!CombatPrayer.isActivated(player, this))
@@ -375,7 +375,7 @@ public enum CombatPrayer {
      * Deactivates all activated prayers for {@code player}.
      *
      * @param player
-     *         the player to deactivate all prayers for.
+     *            the player to deactivate all prayers for.
      */
     public static void deactivateAll(Player player) {
         Arrays.stream(CombatPrayer.values()).filter(c -> CombatPrayer.isActivated(player, c)).forEach(c -> c.deactivate(player));
@@ -385,7 +385,7 @@ public enum CombatPrayer {
      * Resets all of the prayer configurations back to their default states.
      *
      * @param player
-     *         the player to reset the configurations for.
+     *            the player to reset the configurations for.
      */
     public static void resetPrayerGlows(Player player) {
         Arrays.stream(CombatPrayer.values()).forEach(c -> player.getEncoder().sendByteState(c.getConfig(), 0));
@@ -395,11 +395,11 @@ public enum CombatPrayer {
      * Determines if the {@code prayer} is activated for the {@code player}.
      *
      * @param player
-     *         the player's prayers to check.
+     *            the player's prayers to check.
      * @param prayer
-     *         the prayer to check is active.
+     *            the prayer to check is active.
      * @return {@code true} if the prayer is activated for the player,
-     * {@code false} otherwise.
+     *         {@code false} otherwise.
      */
     public static boolean isActivated(Player player, CombatPrayer prayer) {
         return player.getPrayerActive()[prayer.getId()];
@@ -409,21 +409,21 @@ public enum CombatPrayer {
      * Gets the corresponding combat prayer to {@code type}.
      *
      * @param type
-     *         the combat type to get the prayer for.
+     *            the combat type to get the prayer for.
      * @return the corresponding combat prayer.
      * @throws IllegalArgumentException
-     *         if the combat type is invalid.
+     *             if the combat type is invalid.
      */
     public static CombatPrayer getProtectingPrayer(CombatType type) {
         switch (type) {
-            case MELEE:
-                return CombatPrayer.PROTECT_FROM_MELEE;
-            case MAGIC:
-                return CombatPrayer.PROTECT_FROM_MAGIC;
-            case RANGED:
-                return CombatPrayer.PROTECT_FROM_MISSILES;
-            default:
-                throw new IllegalArgumentException("Invalid combat type: " + type);
+        case MELEE:
+            return CombatPrayer.PROTECT_FROM_MELEE;
+        case MAGIC:
+            return CombatPrayer.PROTECT_FROM_MAGIC;
+        case RANGED:
+            return CombatPrayer.PROTECT_FROM_MISSILES;
+        default:
+            throw new IllegalArgumentException("Invalid combat type: " + type);
         }
     }
 

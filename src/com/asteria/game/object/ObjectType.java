@@ -41,7 +41,7 @@ public enum ObjectType {
      * Creates a new {@link ObjectType}.
      *
      * @param id
-     *         the identification of this type
+     *            the identification of this type
      */
     private ObjectType(int id) {
         this.id = id;

@@ -22,7 +22,7 @@ public final class RandomGen extends Random {
      * Creates a new {@link RandomGen} with {@code seed}.
      *
      * @param seed
-     *         the seed to create this random number generator with.
+     *            the seed to create this random number generator with.
      */
     public RandomGen(long seed) {
         super(seed);
@@ -44,12 +44,12 @@ public final class RandomGen extends Random {
      * This method is thread-safe. </br>
      *
      * @param min
-     *         The minimum inclusive number.
+     *            The minimum inclusive number.
      * @param max
-     *         The maximum exclusive number.
+     *            The maximum exclusive number.
      * @return The pseudo-random {@code int}.
      * @throws IllegalArgumentException
-     *         If the specified range is less {@code 0}
+     *             If the specified range is less {@code 0}
      */
     public int exclusive(int min, int max) {
         if (max <= min) {
@@ -59,8 +59,7 @@ public final class RandomGen extends Random {
     }
 
     /**
-     * Returns a pseudo-random {@code int} value between inclusive {@code 0}
-     * and
+     * Returns a pseudo-random {@code int} value between inclusive {@code 0} and
      * exclusive {@code range}.
      * <p>
      * <p>
@@ -68,10 +67,10 @@ public final class RandomGen extends Random {
      * This method is thread-safe. </br>
      *
      * @param range
-     *         the exclusive range.
+     *            the exclusive range.
      * @return the pseudo-random {@code int}.
      * @throws IllegalArgumentException
-     *         if the specified range is less {@code 0}
+     *             if the specified range is less {@code 0}
      */
     public int exclusive(int range) {
         return exclusive(0, range);
@@ -82,12 +81,12 @@ public final class RandomGen extends Random {
      * and inclusive {@code max}.
      *
      * @param min
-     *         the minimum inclusive number.
+     *            the minimum inclusive number.
      * @param max
-     *         the maximum inclusive number.
+     *            the maximum inclusive number.
      * @return the pseudo-random {@code int}.
      * @throws IllegalArgumentException
-     *         if {@code max - min + 1} is less than {@code 0}.
+     *             if {@code max - min + 1} is less than {@code 0}.
      * @see {@link #exclusive(int)}.
      */
     public int inclusive(int min, int max) {
@@ -98,15 +97,14 @@ public final class RandomGen extends Random {
     }
 
     /**
-     * Returns a pseudo-random {@code int} value between inclusive {@code 0}
-     * and
+     * Returns a pseudo-random {@code int} value between inclusive {@code 0} and
      * inclusive {@code range}.
      *
      * @param range
-     *         the maximum inclusive number.
+     *            the maximum inclusive number.
      * @return the pseudo-random {@code int}.
      * @throws IllegalArgumentException
-     *         if {@code max - min + 1} is less than {@code 0}.
+     *             if {@code max - min + 1} is less than {@code 0}.
      * @see {@link #exclusive(int)}.
      */
     public int inclusive(int range) {
@@ -119,12 +117,12 @@ public final class RandomGen extends Random {
      * {@code excludes} array.
      *
      * @param min
-     *         the minimum inclusive number.
+     *            the minimum inclusive number.
      * @param max
-     *         the maximum inclusive number.
+     *            the maximum inclusive number.
      * @return the pseudo-random {@code int}.
      * @throws IllegalArgumentException
-     *         if {@code max - min + 1} is less than {@code 0}.
+     *             if {@code max - min + 1} is less than {@code 0}.
      * @see {@link #inclusive(int, int)}.
      */
     public int inclusiveExcludes(int min, int max, int... exclude) {
@@ -143,10 +141,10 @@ public final class RandomGen extends Random {
      * exclusive {@code range}.
      *
      * @param range
-     *         The exclusive range.
+     *            The exclusive range.
      * @return The pseudo-random {@code float}.
      * @throws IllegalArgumentException
-     *         If the specified range is less than {@code 0}.
+     *             If the specified range is less than {@code 0}.
      */
     public float floatRandom(float range) {
         if (range < 0F)
@@ -158,7 +156,7 @@ public final class RandomGen extends Random {
      * Pseudo-randomly retrieves a element from {@code array}.
      *
      * @param array
-     *         the array to retrieve an element from.
+     *            the array to retrieve an element from.
      * @return the element retrieved from the array.
      */
     public <T> T random(T[] array) {
@@ -169,7 +167,7 @@ public final class RandomGen extends Random {
      * Pseudo-randomly retrieves an {@code int} from this {@code array}.
      *
      * @param array
-     *         the array to retrieve an {@code int} from.
+     *            the array to retrieve an {@code int} from.
      * @return the {@code int} retrieved from the array.
      */
     public int random(int[] array) {
@@ -180,7 +178,7 @@ public final class RandomGen extends Random {
      * Pseudo-randomly retrieves an {@code long} from this {@code array}.
      *
      * @param array
-     *         the array to retrieve an {@code long} from.
+     *            the array to retrieve an {@code long} from.
      * @return the {@code long} retrieved from the array.
      */
     public long random(long[] array) {
@@ -191,7 +189,7 @@ public final class RandomGen extends Random {
      * Pseudo-randomly retrieves an {@code double} from this {@code array}.
      *
      * @param array
-     *         the array to retrieve an {@code double} from.
+     *            the array to retrieve an {@code double} from.
      * @return the {@code double} retrieved from the array.
      */
     public double random(double[] array) {
@@ -202,7 +200,7 @@ public final class RandomGen extends Random {
      * Pseudo-randomly retrieves an {@code short} from this {@code array}.
      *
      * @param array
-     *         the array to retrieve an {@code short} from.
+     *            the array to retrieve an {@code short} from.
      * @return the {@code short} retrieved from the array.
      */
     public short random(short[] array) {
@@ -213,7 +211,7 @@ public final class RandomGen extends Random {
      * Pseudo-randomly retrieves an {@code byte} from this {@code array}.
      *
      * @param array
-     *         the array to retrieve an {@code byte} from.
+     *            the array to retrieve an {@code byte} from.
      * @return the {@code byte} retrieved from the array.
      */
     public byte random(byte[] array) {
@@ -224,7 +222,7 @@ public final class RandomGen extends Random {
      * Pseudo-randomly retrieves an {@code float} from this {@code array}.
      *
      * @param array
-     *         the array to retrieve an {@code float} from.
+     *            the array to retrieve an {@code float} from.
      * @return the {@code float} retrieved from the array.
      */
     public float random(float[] array) {
@@ -235,7 +233,7 @@ public final class RandomGen extends Random {
      * Pseudo-randomly retrieves an {@code boolean} from this {@code array}.
      *
      * @param array
-     *         the array to retrieve an {@code boolean} from.
+     *            the array to retrieve an {@code boolean} from.
      * @return the {@code boolean} retrieved from the array.
      */
     public boolean random(boolean[] array) {
@@ -246,7 +244,7 @@ public final class RandomGen extends Random {
      * Pseudo-randomly retrieves an {@code char} from this {@code array}.
      *
      * @param array
-     *         the array to retrieve an {@code char} from.
+     *            the array to retrieve an {@code char} from.
      * @return the {@code char} retrieved from the array.
      */
     public char random(char[] array) {
@@ -257,7 +255,7 @@ public final class RandomGen extends Random {
      * Pseudo-randomly retrieves a element from {@code list}.
      *
      * @param list
-     *         the list to retrieve an element from.
+     *            the list to retrieve an element from.
      * @return the element retrieved from the list.
      */
     public <T> T random(List<T> list) {
@@ -268,9 +266,9 @@ public final class RandomGen extends Random {
      * Rounds and returns the {@code counter} to the {@code place}.
      *
      * @param counter
-     *         the number that will be rounded.
+     *            the number that will be rounded.
      * @param place
-     *         the decimal place to round to.
+     *            the decimal place to round to.
      * @return the rounded number.
      */
     public double round(double counter, double place) {
@@ -278,15 +276,14 @@ public final class RandomGen extends Random {
     }
 
     /**
-     * Generates a pseudo-random {@code double} to be rounded and rolled
-     * against
+     * Generates a pseudo-random {@code double} to be rounded and rolled against
      * the {@code bet}.
      *
      * @param bet
-     *         the bet that the number will be rolled against.
+     *            the bet that the number will be rolled against.
      * @param round
-     *         the {@code double} that will be used to round the bet and
-     *         pseudo-randomly generated number.
+     *            the {@code double} that will be used to round the bet and
+     *            pseudo-randomly generated number.
      * @return {@code true} if the roll was successful, {@code false} otherwise.
      */
     public boolean roll(double bet, double round) {
@@ -300,7 +297,7 @@ public final class RandomGen extends Random {
      * and rolled against the {@code bet}.
      *
      * @param bet
-     *         the bet that the number will be rolled against.
+     *            the bet that the number will be rolled against.
      * @return {@code true} if the roll was successful, {@code false} otherwise.
      */
     public boolean roll(double bet) {

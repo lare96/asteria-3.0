@@ -26,11 +26,11 @@ public final class ItemNodeStatic extends ItemNode {
      * Creates a new {@link ItemNodeStatic}.
      *
      * @param item
-     *         the item concealed within this node.
+     *            the item concealed within this node.
      * @param position
-     *         the position this node is on.
+     *            the position this node is on.
      * @param policy
-     *         the current item policy of this node.
+     *            the current item policy of this node.
      */
     public ItemNodeStatic(Item item, Position position, ItemPolicy policy) {
         super(item, position, null);
@@ -42,9 +42,9 @@ public final class ItemNodeStatic extends ItemNode {
      * Creates a new {@link ItemNodeStatic} with the default policy.
      *
      * @param item
-     *         the item concealed within this node.
+     *            the item concealed within this node.
      * @param position
-     *         the position this node is on.
+     *            the position this node is on.
      */
     public ItemNodeStatic(Item item, Position position) {
         this(item, position, ItemPolicy.TIMEOUT);
@@ -87,30 +87,30 @@ public final class ItemNodeStatic extends ItemNode {
     @Override
     public void onSequence() {
         switch (policy) {
-            case TIMEOUT:
-                super.setRegistered(false);
-                break;
-            case RESPAWN:
-                if (needsRespawn) {
-                    dispose();
-                    needsRespawn = false;
-                    super.setState(ItemState.SEEN_BY_EVERYONE);
-                }
-                break;
+        case TIMEOUT:
+            super.setRegistered(false);
+            break;
+        case RESPAWN:
+            if (needsRespawn) {
+                dispose();
+                needsRespawn = false;
+                super.setState(ItemState.SEEN_BY_EVERYONE);
+            }
+            break;
         }
     }
 
     @Override
     public void onPickup(Player player) {
         switch (policy) {
-            case TIMEOUT:
-                ItemNodeManager.unregister(this);
-                break;
-            case RESPAWN:
-                dispose();
-                needsRespawn = true;
-                super.setState(ItemState.HIDDEN);
-                break;
+        case TIMEOUT:
+            ItemNodeManager.unregister(this);
+            break;
+        case RESPAWN:
+            dispose();
+            needsRespawn = true;
+            super.setState(ItemState.HIDDEN);
+            break;
         }
         player.getInventory().add(super.getItem());
     }

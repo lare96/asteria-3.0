@@ -18,7 +18,7 @@ public final class ButtonClickPlugin implements PluginContext {
      * Creates a new {@link ButtonClickPlugin}.
      *
      * @param id
-     *         the identifier for the button that was clicked.
+     *            the identifier for the button that was clicked.
      */
     public ButtonClickPlugin(int id) {
         this.id = id;

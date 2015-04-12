@@ -31,7 +31,7 @@ public enum LoginResponse {
      * Creates a new {@link LoginResponse}.
      *
      * @param code
-     *         the response code that the protocol recognizes.
+     *            the response code that the protocol recognizes.
      */
     private LoginResponse(int code) {
         this.code = code;

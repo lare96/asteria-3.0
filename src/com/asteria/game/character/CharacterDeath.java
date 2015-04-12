@@ -10,7 +10,7 @@ import com.asteria.task.Task;
  * The parent class that handles the death process for all characters.
  *
  * @param <T>
- *         the type of character the death process is being executed for.
+ *            the type of character the death process is being executed for.
  * @author lare96 <http://github.com/lare96>
  */
 public abstract class CharacterDeath<T extends CharacterNode> extends Task {
@@ -30,7 +30,7 @@ public abstract class CharacterDeath<T extends CharacterNode> extends Task {
      * Creates a new {@link CharacterDeath}.
      *
      * @param character
-     *         the character who has died and needs the death process.
+     *            the character who has died and needs the death process.
      */
     public CharacterDeath(T character) {
         super(1, true);
@@ -42,7 +42,7 @@ public abstract class CharacterDeath<T extends CharacterNode> extends Task {
      * rest of the death process.
      *
      * @param character
-     *         the character who has died.
+     *            the character who has died.
      */
     public abstract void preDeath(T character);
 
@@ -51,7 +51,7 @@ public abstract class CharacterDeath<T extends CharacterNode> extends Task {
      * character.
      *
      * @param character
-     *         the character who has died.
+     *            the character who has died.
      */
     public abstract void death(T character);
 
@@ -59,7 +59,7 @@ public abstract class CharacterDeath<T extends CharacterNode> extends Task {
      * The last part of the death process where the character is reset.
      *
      * @param character
-     *         the character who has died.
+     *            the character who has died.
      */
     public abstract void postDeath(T character);
 

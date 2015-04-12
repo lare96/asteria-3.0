@@ -3,8 +3,7 @@ package com.asteria.utility;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * The container class that contains functions to simplify the modification of
- * a
+ * The container class that contains functions to simplify the modification of a
  * number.
  * <p>
  * <p>
@@ -30,7 +29,7 @@ public final class MutableNumber extends Number implements Comparable<MutableNum
      * Creates a new {@link MutableNumber} with {@code value}.
      *
      * @param value
-     *         the value present within this counter.
+     *            the value present within this counter.
      */
     public MutableNumber(int value) {
         this.value = value;
@@ -102,9 +101,9 @@ public final class MutableNumber extends Number implements Comparable<MutableNum
      * {@code amount} to a maximum of {@code maximum}.
      *
      * @param amount
-     *         the amount to increment it by.
+     *            the amount to increment it by.
      * @param maximum
-     *         the maximum amount it will be incremented to.
+     *            the maximum amount it will be incremented to.
      * @return the value before it is incremented.
      */
     public int getAndIncrement(int amount, int maximum) {
@@ -120,7 +119,7 @@ public final class MutableNumber extends Number implements Comparable<MutableNum
      * {@code amount}.
      *
      * @param amount
-     *         the amount to increment it by.
+     *            the amount to increment it by.
      * @return the value before it is incremented.
      */
     public int getAndIncrement(int amount) {
@@ -128,8 +127,7 @@ public final class MutableNumber extends Number implements Comparable<MutableNum
     }
 
     /**
-     * Returns the value within this counter and then increments it by an
-     * amount
+     * Returns the value within this counter and then increments it by an amount
      * of {@code 1}.
      *
      * @return the value before it is incremented.
@@ -143,9 +141,9 @@ public final class MutableNumber extends Number implements Comparable<MutableNum
      * of {@code maximum} and then returns it.
      *
      * @param amount
-     *         the amount to increment it by.
+     *            the amount to increment it by.
      * @param maximum
-     *         the maximum amount it will be incremented to.
+     *            the maximum amount it will be incremented to.
      * @return the value after it is incremented.
      */
     public int incrementAndGet(int amount, int maximum) {
@@ -160,7 +158,7 @@ public final class MutableNumber extends Number implements Comparable<MutableNum
      * returns it.
      *
      * @param amount
-     *         the amount to increment it by.
+     *            the amount to increment it by.
      * @return the value after it is incremented.
      */
     public int incrementAndGet(int amount) {
@@ -182,9 +180,9 @@ public final class MutableNumber extends Number implements Comparable<MutableNum
      * {@code amount} to a minimum of {@code minimum}.
      *
      * @param amount
-     *         the amount to decrement it by.
+     *            the amount to decrement it by.
      * @param minimum
-     *         the minimum amount it will be decremented to.
+     *            the minimum amount it will be decremented to.
      * @return the value before it is decremented.
      */
     public int getAndDecrement(int amount, int minimum) {
@@ -200,7 +198,7 @@ public final class MutableNumber extends Number implements Comparable<MutableNum
      * {@code amount}.
      *
      * @param amount
-     *         the amount to decrement it by.
+     *            the amount to decrement it by.
      * @return the value before it is decremented.
      */
     public int getAndDecrement(int amount) {
@@ -208,8 +206,7 @@ public final class MutableNumber extends Number implements Comparable<MutableNum
     }
 
     /**
-     * Returns the value within this counter and then decrements it by an
-     * amount
+     * Returns the value within this counter and then decrements it by an amount
      * of {@code 1}.
      *
      * @return the value before it is decremented.
@@ -223,9 +220,9 @@ public final class MutableNumber extends Number implements Comparable<MutableNum
      * of {@code minimum} and then returns it.
      *
      * @param amount
-     *         the amount to decrement it by.
+     *            the amount to decrement it by.
      * @param minimum
-     *         the minimum amount it will be decremented to.
+     *            the minimum amount it will be decremented to.
      * @return the value after it is decremented.
      */
     public int decrementAndGet(int amount, int minimum) {
@@ -240,7 +237,7 @@ public final class MutableNumber extends Number implements Comparable<MutableNum
      * returns it.
      *
      * @param amount
-     *         the amount to decrement it by.
+     *            the amount to decrement it by.
      * @return the value after it is decremented.
      */
     public int decrementAndGet(int amount) {
@@ -271,7 +268,7 @@ public final class MutableNumber extends Number implements Comparable<MutableNum
      * Sets the value within this container to {@code value}.
      *
      * @param value
-     *         the new value to set.
+     *            the new value to set.
      */
     public void set(int value) {
         this.value = value;

@@ -34,7 +34,7 @@ public final class PostHandshakeLoginDecoder extends LoginProtocolDecoder {
      * Creates a new {@link PostHandshakeLoginDecoder}.
      *
      * @param session
-     *         the session that is decoding this protocol.
+     *            the session that is decoding this protocol.
      */
     public PostHandshakeLoginDecoder(PlayerIO session) {
         super(session, IOState.LOGGING_IN);
@@ -84,18 +84,17 @@ public final class PostHandshakeLoginDecoder extends LoginProtocolDecoder {
         if (Settings.DECODE_RSA) {
             byte[] encryptionBytes = new byte[loginEncryptPacketSize];
             in.buffer().get(encryptionBytes);
-            ByteBuffer rsaBuffer = ByteBuffer.wrap(new BigInteger(encryptionBytes).modPow(Settings.RSA_EXPONENT, Settings.RSA_MODULUS).toByteArray());
+            ByteBuffer rsaBuffer = ByteBuffer.wrap(new BigInteger(encryptionBytes).modPow(Settings.RSA_EXPONENT, Settings.RSA_MODULUS)
+                .toByteArray());
             int rsaOpcode = rsaBuffer.get();
             if (rsaOpcode != 10) {
-                logger.warning(session + " unable to decode RSA block " +
-                        "properly!");
+                logger.warning(session + " unable to decode RSA block " + "properly!");
                 session.disconnect(false);
                 return;
             }
             long clientHalf = rsaBuffer.getLong();
             long serverHalf = rsaBuffer.getLong();
-            int[] isaacSeed = {(int) (clientHalf >> 32), (int) clientHalf,
-                    (int) (serverHalf >> 32), (int) serverHalf};
+            int[] isaacSeed = { (int) (clientHalf >> 32), (int) clientHalf, (int) (serverHalf >> 32), (int) serverHalf };
             session.setDecryptor(new ISAACCipher(isaacSeed));
             for (int i = 0; i < isaacSeed.length; i++)
                 isaacSeed[i] += 50;
@@ -108,8 +107,7 @@ public final class PostHandshakeLoginDecoder extends LoginProtocolDecoder {
             in.buffer().get();
             long clientHalf = in.buffer().getLong();
             long serverHalf = in.buffer().getLong();
-            int[] isaacSeed = {(int) (clientHalf >> 32), (int) clientHalf,
-                    (int) (serverHalf >> 32), (int) serverHalf};
+            int[] isaacSeed = { (int) (clientHalf >> 32), (int) clientHalf, (int) (serverHalf >> 32), (int) serverHalf };
             session.setDecryptor(new ISAACCipher(isaacSeed));
             for (int i = 0; i < isaacSeed.length; i++)
                 isaacSeed[i] += 50;
@@ -121,7 +119,8 @@ public final class PostHandshakeLoginDecoder extends LoginProtocolDecoder {
         username = username.toLowerCase().replaceAll("_", " ").trim();
         password = password.toLowerCase();
         boolean invalidCredentials = !username.matches("^[a-zA-Z0-9_ ]{1," + "12}$") || password.isEmpty() || password.length() > 20;
-        session.setResponse(invalidCredentials ? LoginResponse.INVALID_CREDENTIALS : World.getPlayers().spaceLeft() == 0 ? LoginResponse.WORLD_FULL : session.getResponse());
+        session.setResponse(invalidCredentials ? LoginResponse.INVALID_CREDENTIALS : World.getPlayers().spaceLeft() == 0
+            ? LoginResponse.WORLD_FULL : session.getResponse());
         Player player = session.getPlayer();
         if (session.getResponse() == LoginResponse.NORMAL) {
             player.setUsername(username);

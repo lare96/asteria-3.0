@@ -36,7 +36,7 @@ public enum PoisonType {
      * Creates a new {@link PoisonType}.
      *
      * @param damage
-     *         the starting damage for this poison type.
+     *            the starting damage for this poison type.
      */
     private PoisonType(int damage) {
         this.damage = damage;
@@ -47,9 +47,9 @@ public enum PoisonType {
      * {@code random} will be used to determine this.
      *
      * @param random
-     *         the random number generator that will be used.
+     *            the random number generator that will be used.
      * @return {@code true} if the effect will be applied, {@code false}
-     * otherwise.
+     *         otherwise.
      */
     public abstract boolean apply(RandomGen random);
 

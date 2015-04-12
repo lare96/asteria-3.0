@@ -18,7 +18,7 @@ public final class CommandPlugin implements PluginContext {
      * Creates a new {@link CommandPlugin}.
      *
      * @param text
-     *         the command text broken up between spaces.
+     *            the command text broken up between spaces.
      */
     public CommandPlugin(String[] text) {
         this.text = text;

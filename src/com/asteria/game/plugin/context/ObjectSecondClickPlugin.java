@@ -29,11 +29,11 @@ public final class ObjectSecondClickPlugin implements PluginContext {
      * Creates a new {@link ObjectSecondClickPlugin}.
      *
      * @param id
-     *         the identifier for the object that was clicked.
+     *            the identifier for the object that was clicked.
      * @param position
-     *         the position of the object that was clicked.
+     *            the position of the object that was clicked.
      * @param size
-     *         the size of the object that was clicked.
+     *            the size of the object that was clicked.
      */
     public ObjectSecondClickPlugin(int id, Position position, int size) {
         this.id = id;

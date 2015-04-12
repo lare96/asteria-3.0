@@ -126,7 +126,7 @@ public final class Skills {
      * The default constructor.
      *
      * @throws UnsupportedOperationException
-     *         if this class is instantiated.
+     *             if this class is instantiated.
      */
     private Skills() {
         throw new UnsupportedOperationException("This class cannot be " + "instantiated!");
@@ -136,11 +136,11 @@ public final class Skills {
      * Attempts to add {@code amount} of experience for {@code player}.
      *
      * @param player
-     *         the player to add the experience for.
+     *            the player to add the experience for.
      * @param amount
-     *         the amount of experience that will be added.
+     *            the amount of experience that will be added.
      * @param skill
-     *         the skill to add the experience for.
+     *            the skill to add the experience for.
      */
     public static void experience(Player player, double amount, int skill) {
         if (amount <= 0)
@@ -160,12 +160,10 @@ public final class Skills {
                 }
                 SkillData data = SkillData.values()[skill];
                 String append = TextUtils.appendIndefiniteArticle(data.toString());
-                player.getEncoder().sendString("@dre@Congratulations, you've " +
-                        "just advanced " + append + " level!", data.getFirstLine());
-                player.getEncoder().sendString("Your " + data + " level is " +
-                        "now " + newLevel + ".", data.getSecondLine());
-                player.getEncoder().sendMessage("Congratulations, you've just" +
-                        " advanced " + append + " level!");
+                player.getEncoder()
+                    .sendString("@dre@Congratulations, you've " + "just advanced " + append + " level!", data.getFirstLine());
+                player.getEncoder().sendString("Your " + data + " level is " + "now " + newLevel + ".", data.getSecondLine());
+                player.getEncoder().sendMessage("Congratulations, you've just" + " advanced " + append + " level!");
                 player.getEncoder().sendChatInterface(data.getChatbox());
                 player.graphic(new Graphic(199));
                 player.getFlags().set(Flag.APPEARANCE);
@@ -179,9 +177,9 @@ public final class Skills {
      * {@code player}.
      *
      * @param player
-     *         the player to refresh the skill for.
+     *            the player to refresh the skill for.
      * @param skill
-     *         the skill that will be refreshed.
+     *            the skill that will be refreshed.
      */
     public static void refresh(Player player, int skill) {
         Skill s = player.getSkills()[skill];
@@ -200,7 +198,7 @@ public final class Skills {
      * Sends skills to the client which will refresh them for {@code player}.
      *
      * @param player
-     *         the player to refresh the skill for.
+     *            the player to refresh the skill for.
      */
     public static void refreshAll(Player player) {
         for (int i = 0; i < player.getSkills().length; i++)
@@ -211,7 +209,7 @@ public final class Skills {
      * Creates an array of skills for {@code player}.
      *
      * @param player
-     *         the player to create it for.
+     *            the player to create it for.
      */
     public static void create(Player player) {
         for (int i = 0; i < player.getSkills().length; i++) {
@@ -228,9 +226,9 @@ public final class Skills {
      * Restores {@code skill} back to its original level for {@code player}.
      *
      * @param player
-     *         the player to restore the skill for.
+     *            the player to restore the skill for.
      * @param skill
-     *         the skill to restore.
+     *            the skill to restore.
      */
     public static void restore(Player player, int skill) {
         player.getSkills()[skill].setLevel(player.getSkills()[skill].getRealLevel(), true);
@@ -241,7 +239,7 @@ public final class Skills {
      * Restores skills back their its original levels for {@code player}.
      *
      * @param player
-     *         the player to restore the skills for.
+     *            the player to restore the skills for.
      */
     public static void restoreAll(Player player) {
         for (int i = 0; i < player.getSkills().length; i++)

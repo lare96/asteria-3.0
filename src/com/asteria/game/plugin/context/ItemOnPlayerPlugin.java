@@ -25,9 +25,9 @@ public final class ItemOnPlayerPlugin implements PluginContext {
      * Creates a new {@link ItemOnPlayerPlugin}.
      *
      * @param player
-     *         the player that the item is being used on.
+     *            the player that the item is being used on.
      * @param item
-     *         the item that is being used on the player.
+     *            the item that is being used on the player.
      */
     public ItemOnPlayerPlugin(Player player, Item item) {
         this.player = player;

@@ -21,13 +21,12 @@ import com.google.common.collect.Multimap;
  * submitted, and executed from this class.
  * <p>
  * <p>
- * The data structures that hold the plugin listeners are not thread safe
- * which means that plugin listeners should only be executed on the main game
- * thread.
+ * The data structures that hold the plugin listeners are not thread safe which
+ * means that plugin listeners should only be executed on the main game thread.
  *
  * @author lare96 <http://github.com/lare96>
  */
-@SuppressWarnings({"rawtypes", "unchecked"})
+@SuppressWarnings({ "rawtypes", "unchecked" })
 public final class PluginHandler {
 
     /**
@@ -62,12 +61,12 @@ public final class PluginHandler {
      * type.
      *
      * @param player
-     *         the player that these plugin listeners will be executed for.
+     *            the player that these plugin listeners will be executed for.
      * @param type
-     *         the context type to grab the plugins listeners for.
+     *            the context type to grab the plugins listeners for.
      * @param context
-     *         the plugin context that will supply data to the plugin
-     *         listeners.
+     *            the plugin context that will supply data to the plugin
+     *            listeners.
      */
     public static void execute(Player player, Class<? extends PluginContext> type, PluginContext context) {
         Collection<PluginListener> collection = PLUGINS.get(type);
@@ -77,12 +76,12 @@ public final class PluginHandler {
     }
 
     /**
-     * Submits a new plugin listener into the multimap of plugins. This
-     * function will throw a {@link PluginSignatureException} if there is no
-     * plugin signature for {@code clazz}.
+     * Submits a new plugin listener into the multimap of plugins. This function
+     * will throw a {@link PluginSignatureException} if there is no plugin
+     * signature for {@code clazz}.
      *
      * @param clazz
-     *         the class of the plugin listener that will be submitted.
+     *            the class of the plugin listener that will be submitted.
      */
     public static void submit(Class<?> clazz) {
         try {

@@ -20,7 +20,7 @@ public enum AnimationPriority {
      * Creates a new {@link AnimationPriority}.
      *
      * @param value
-     *         the value of this priority.
+     *            the value of this priority.
      */
     private AnimationPriority(int value) {
         this.value = value;

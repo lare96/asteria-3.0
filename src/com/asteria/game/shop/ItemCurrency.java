@@ -20,7 +20,7 @@ public final class ItemCurrency implements GeneralCurrency {
      * Creates a new {@link ItemCurrency}.
      *
      * @param id
-     *         the item identification for this currency.
+     *            the item identification for this currency.
      */
     public ItemCurrency(int id) {
         this.id = id;

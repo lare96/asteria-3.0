@@ -118,15 +118,15 @@ public enum FightType {
      * Creates a new {@link FightType}.
      *
      * @param animation
-     *         the animation executed when this type is active.
+     *            the animation executed when this type is active.
      * @param parent
-     *         the parent config identification.
+     *            the parent config identification.
      * @param child
-     *         the child config identification.
+     *            the child config identification.
      * @param bonus
-     *         the type of bonus this type will apply.
+     *            the type of bonus this type will apply.
      * @param style
-     *         the style active when this type is active.
+     *            the style active when this type is active.
      */
     private FightType(int animation, int parent, int child, int bonus, FightStyle style) {
         this.animation = animation;
@@ -143,18 +143,18 @@ public enum FightType {
      */
     public final int getCorrespondingBonus() {
         switch (bonus) {
-            case Combat.ATTACK_CRUSH:
-                return Combat.DEFENCE_CRUSH;
-            case Combat.ATTACK_MAGIC:
-                return Combat.DEFENCE_MAGIC;
-            case Combat.ATTACK_RANGED:
-                return Combat.DEFENCE_RANGED;
-            case Combat.ATTACK_SLASH:
-                return Combat.DEFENCE_SLASH;
-            case Combat.ATTACK_STAB:
-                return Combat.DEFENCE_STAB;
-            default:
-                return Combat.DEFENCE_CRUSH;
+        case Combat.ATTACK_CRUSH:
+            return Combat.DEFENCE_CRUSH;
+        case Combat.ATTACK_MAGIC:
+            return Combat.DEFENCE_MAGIC;
+        case Combat.ATTACK_RANGED:
+            return Combat.DEFENCE_RANGED;
+        case Combat.ATTACK_SLASH:
+            return Combat.DEFENCE_SLASH;
+        case Combat.ATTACK_STAB:
+            return Combat.DEFENCE_STAB;
+        default:
+            return Combat.DEFENCE_CRUSH;
         }
     }
 

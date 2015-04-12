@@ -39,7 +39,7 @@ public final class NpcMovementCoordinator {
      * Creates a new {@link NpcMovementCoordinator}.
      *
      * @param npc
-     *         the NPC that this coordinator is dedicated to.
+     *            the NPC that this coordinator is dedicated to.
      */
     public NpcMovementCoordinator(Npc npc) {
         this.npc = npc;
@@ -53,14 +53,14 @@ public final class NpcMovementCoordinator {
             return;
         if (random.inclusive(13) == 5 && npc.getMovementQueue().isMovementDone()) {
             switch (state) {
-                case HOME:
-                    npc.getMovementQueue().walk(npc.getPosition().copy().random(radius));
-                    state = CoordinateState.AWAY;
-                    break;
-                case AWAY:
-                    npc.getMovementQueue().walk(npc.getOriginalPosition());
-                    state = CoordinateState.HOME;
-                    break;
+            case HOME:
+                npc.getMovementQueue().walk(npc.getPosition().copy().random(radius));
+                state = CoordinateState.AWAY;
+                break;
+            case AWAY:
+                npc.getMovementQueue().walk(npc.getOriginalPosition());
+                state = CoordinateState.HOME;
+                break;
             }
         }
     }
@@ -69,7 +69,7 @@ public final class NpcMovementCoordinator {
      * Determines if the NPC is flagged to walk randomly.
      *
      * @return {@code true} if the NPC will walk randomly, {@code false}
-     * otherwise.
+     *         otherwise.
      */
     public boolean isCoordinate() {
         return coordinate;
@@ -79,7 +79,7 @@ public final class NpcMovementCoordinator {
      * Sets the value for {@link NpcMovementCoordinator#coordinate}.
      *
      * @param coordinate
-     *         the new value to set.
+     *            the new value to set.
      */
     public void setCoordinate(boolean coordinate) {
         this.coordinate = coordinate;
@@ -98,7 +98,7 @@ public final class NpcMovementCoordinator {
      * Sets the value for {@link NpcMovementCoordinator#radius}.
      *
      * @param radius
-     *         the new value to set.
+     *            the new value to set.
      */
     public void setRadius(int radius) {
         this.radius = radius;

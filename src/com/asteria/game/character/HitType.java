@@ -20,7 +20,7 @@ public enum HitType {
      * Create a new {@link HitType}.
      *
      * @param id
-     *         the identification for this hit type.
+     *            the identification for this hit type.
      */
     private HitType(int id) {
         this.id = id;

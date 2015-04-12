@@ -23,14 +23,12 @@ public final class MovementQueue {
     /**
      * The direction delta {@code X} coordinates for movement.
      */
-    public static final byte[] DIRECTION_DELTA_X = new byte[] {-1, 0, 1, -1, 1,
-            -1, 0, 1};
+    public static final byte[] DIRECTION_DELTA_X = new byte[] { -1, 0, 1, -1, 1, -1, 0, 1 };
 
     /**
      * The direction delta {@code Y} coordinates for movement.
      */
-    public static final byte[] DIRECTION_DELTA_Y = new byte[] {1, 1, 1, 0, 0,
-            -1, -1, -1};
+    public static final byte[] DIRECTION_DELTA_Y = new byte[] { 1, 1, 1, 0, 0, -1, -1, -1 };
 
     /**
      * The character this movement queue is for.
@@ -66,7 +64,7 @@ public final class MovementQueue {
      * Creates a new {@link MovementQueue}.
      *
      * @param character
-     *         the character this movement queue is for.
+     *            the character this movement queue is for.
      */
     public MovementQueue(CharacterNode character) {
         this.character = character;
@@ -77,7 +75,7 @@ public final class MovementQueue {
      * waypoints, and updating the map region.
      *
      * @throws Exception
-     *         if any errors occur while sequencing movement.
+     *             if any errors occur while sequencing movement.
      */
     public void sequence() throws Exception {
         if (lockMovement || character.isFrozen()) {
@@ -157,9 +155,9 @@ public final class MovementQueue {
      * current position.
      *
      * @param addX
-     *         the amount of spaces to walk to the {@code X}.
+     *            the amount of spaces to walk to the {@code X}.
      * @param addY
-     *         the amount of spaces to walk to the {@code Y}.
+     *            the amount of spaces to walk to the {@code Y}.
      */
     public void walk(int addX, int addY) {
         walk(new Position(character.getPosition().getX() + addX, character.getPosition().getY() + addY));
@@ -170,7 +168,7 @@ public final class MovementQueue {
      * its current position.
      *
      * @param position
-     *         the position the character is moving too.
+     *            the position the character is moving too.
      */
     public void walk(Position position) {
         reset();
@@ -199,7 +197,7 @@ public final class MovementQueue {
      * Determines if this walking queue is finished or not.
      *
      * @return {@code true} if this walking queue is finished, {@code false}
-     * otherwise.
+     *         otherwise.
      */
     public boolean isMovementDone() {
         return waypoints.size() == 0;
@@ -209,7 +207,7 @@ public final class MovementQueue {
      * Adds a new position to the walking queue.
      *
      * @param position
-     *         the position to add.
+     *            the position to add.
      */
     public void addToPath(Position position) {
         if (waypoints.size() == 0) {
@@ -238,9 +236,9 @@ public final class MovementQueue {
      * Adds a step to the walking queue.
      *
      * @param x
-     *         the {@code X} coordinate of the step.
+     *            the {@code X} coordinate of the step.
      * @param y
-     *         the {@code Y} coordinate of the step.
+     *            the {@code Y} coordinate of the step.
      */
     private void addStep(int x, int y) {
         if (waypoints.size() >= 100) {
@@ -259,9 +257,9 @@ public final class MovementQueue {
      * Calculates the direction between the two coordinates.
      *
      * @param dx
-     *         the first coordinate.
+     *            the first coordinate.
      * @param dy
-     *         the second coordinate.
+     *            the second coordinate.
      * @return the direction.
      */
     private int direction(int dx, int dy) {
@@ -296,7 +294,7 @@ public final class MovementQueue {
      * Prompts the controller of this movement queue to follow {@code leader}.
      *
      * @param leader
-     *         the character being followed.
+     *            the character being followed.
      */
     public void follow(CharacterNode leader) {
         if (character.getFollowCharacter() != null && character.getFollowCharacter().equals(leader)) {
@@ -322,7 +320,7 @@ public final class MovementQueue {
      * Determines if the run button is toggled.
      *
      * @return {@code true} if the run button is toggled, {@code false}
-     * otherwise.
+     *         otherwise.
      */
     public boolean isRunning() {
         return running;
@@ -332,7 +330,7 @@ public final class MovementQueue {
      * Sets the value for {@link MovementQueue#running}.
      *
      * @param runToggled
-     *         the new value to set.
+     *            the new value to set.
      */
     public void setRunning(boolean runToggled) {
         this.running = runToggled;
@@ -342,7 +340,7 @@ public final class MovementQueue {
      * Determines if the current path is a run path.
      *
      * @return {@code true} if the current path is a run path, {@code false}
-     * otherwise.
+     *         otherwise.
      */
     public boolean isRunPath() {
         return runPath;
@@ -352,7 +350,7 @@ public final class MovementQueue {
      * Sets the value for {@link MovementQueue#runPath}.
      *
      * @param runPath
-     *         the new value to set.
+     *            the new value to set.
      */
     public void setRunPath(boolean runPath) {
         this.runPath = runPath;
@@ -362,7 +360,7 @@ public final class MovementQueue {
      * Determines if the movement queue is locked.
      *
      * @return {@code true} if the movement queue is locked, {@code false}
-     * otherwise.
+     *         otherwise.
      */
     public boolean isLockMovement() {
         return lockMovement;
@@ -372,7 +370,7 @@ public final class MovementQueue {
      * Sets the value for {@link MovementQueue#lockMovement}.
      *
      * @param lockMovement
-     *         the new value to set.
+     *            the new value to set.
      */
     public void setLockMovement(boolean lockMovement) {
         this.lockMovement = lockMovement;
@@ -394,11 +392,11 @@ public final class MovementQueue {
          * Creates a new {@link Point}.
          *
          * @param x
-         *         the {@code X} coordinate.
+         *            the {@code X} coordinate.
          * @param y
-         *         the {@code Y} coordinate.
+         *            the {@code Y} coordinate.
          * @param direction
-         *         the direction to this point.
+         *            the direction to this point.
          */
         public Point(int x, int y, int direction) {
             super(x, y);
@@ -442,9 +440,9 @@ public final class MovementQueue {
          * Creates a new {@link CharacterFollowTask}.
          *
          * @param character
-         *         the character this process is being executed for.
+         *            the character this process is being executed for.
          * @param leader
-         *         the character being followed in this process.
+         *            the character being followed in this process.
          */
         public CharacterFollowTask(CharacterNode character, CharacterNode leader) {
             super(1, true);
@@ -454,7 +452,8 @@ public final class MovementQueue {
 
         @Override
         public void execute() {
-            if (!character.isFollowing() || !character.getPosition().withinDistance(leader.getPosition(), 20) || character.isDead() || leader.isDead()) {
+            if (!character.isFollowing() || !character.getPosition().withinDistance(leader.getPosition(), 20) || character.isDead() || leader
+                .isDead()) {
                 character.faceCharacter(null);
                 character.setFollowing(false);
                 character.setFollowCharacter(null);
@@ -468,7 +467,7 @@ public final class MovementQueue {
             }
             if (character.getPosition().equals(leader.getPosition().copy())) {
                 character.getMovementQueue().reset();
-                int[] dir = {1, -1};
+                int[] dir = { 1, -1 };
 
                 if (random.nextBoolean()) {
                     character.getMovementQueue().walk(random.random(dir), 0);

@@ -15,9 +15,9 @@ public interface GeneralCurrency {
      * The method executed when the currency is taken from {@code player}.
      *
      * @param player
-     *         the player the currency is taken from.
+     *            the player the currency is taken from.
      * @param amount
-     *         the amount of currency that is taken.
+     *            the amount of currency that is taken.
      */
     public void takeCurrency(Player player, int amount);
 
@@ -25,18 +25,18 @@ public interface GeneralCurrency {
      * The method executed when the currency is given to {@code player}.
      *
      * @param player
-     *         the player the currency is given to.
+     *            the player the currency is given to.
      * @param amount
-     *         the amount of currency that is given.
+     *            the amount of currency that is given.
      */
     public void recieveCurrency(Player player, int amount);
 
     /**
-     * The method that retrieves the amount of currency {@code player}
-     * currently has.
+     * The method that retrieves the amount of currency {@code player} currently
+     * has.
      *
      * @param player
-     *         the player who's currency amount will be determined.
+     *            the player who's currency amount will be determined.
      * @return the amount of the currency the player has.
      */
     public int currencyAmount(Player player);
@@ -46,9 +46,9 @@ public interface GeneralCurrency {
      * inventory is full.
      *
      * @param player
-     *         the player to determine this for.
+     *            the player to determine this for.
      * @return {@code true} if the currency can be recieved, {@code false}
-     * otherwise.
+     *         otherwise.
      */
     public boolean canRecieveCurrency(Player player);
 }

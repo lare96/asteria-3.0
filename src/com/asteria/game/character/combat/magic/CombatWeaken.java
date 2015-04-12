@@ -23,7 +23,7 @@ public enum CombatWeaken {
      * Creates a new {@link CombatWeaken}.
      *
      * @param rate
-     *         the rate at which this element weakens.
+     *            the rate at which this element weakens.
      */
     private CombatWeaken(double rate) {
         this.rate = rate;

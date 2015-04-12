@@ -54,15 +54,15 @@ public enum SkillData {
      * Creates a new {@link SkillData}.
      *
      * @param id
-     *         the identification for this skill in the skills array.
+     *            the identification for this skill in the skills array.
      * @param firstLine
-     *         the first line that level up text will be printed on.
+     *            the first line that level up text will be printed on.
      * @param secondLine
-     *         the second line that level up text will be printed on.
+     *            the second line that level up text will be printed on.
      * @param chatbox
-     *         the chatbox interface displayed on level up.
+     *            the chatbox interface displayed on level up.
      * @param index
-     *         the index in the skill event array.
+     *            the index in the skill event array.
      */
     private SkillData(int id, int firstLine, int secondLine, int chatbox) {
         this.id = id;
