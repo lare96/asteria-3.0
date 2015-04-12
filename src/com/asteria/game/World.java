@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-import com.asteria.Server;
 import com.asteria.game.character.CharacterList;
 import com.asteria.game.character.CharacterNode;
 import com.asteria.game.character.npc.Npc;
@@ -35,15 +34,31 @@ public final class World {
     private static CharacterList<Npc> npcs = new CharacterList<>(5000);
 
     /**
+     * The flag that determines if processing should be parallelized.
+     */
+    private static final boolean PARALLEL_PROCESSING = (Runtime.getRuntime().availableProcessors() > 1);
+
+    /**
+     * The default constructor, will throw an
+     * {@link UnsupportedOperationException} if instantiated.
+     *
+     * @throws UnsupportedOperationException
+     *             if this class is instantiated.
+     */
+    private World() {
+        throw new UnsupportedOperationException("This class cannot be instantiated!");
+    }
+
+    /**
      * The method that executes the update sequence for all in game characters
      * every {@code 600}ms. The update sequence may either run sequentially or
      * concurrently depending on the type of engine selected by the server.
      *
      * @throws Exception
-     *         if any errors occur during the update sequence.
+     *             if any errors occur during the update sequence.
      */
     public static void sequence() throws Exception {
-        Runnable updateService = Server.getBuilder().isParallelEngine() ? new ConcurrentUpdateService() : new SequentialUpdateService();
+        Runnable updateService = PARALLEL_PROCESSING ? new ConcurrentUpdateService() : new SequentialUpdateService();
         updateService.run();
     }
 
@@ -52,9 +67,9 @@ public final class World {
      * {@code username}.
      *
      * @param username
-     *         the name hash to check the collection of players for.
+     *            the name hash to check the collection of players for.
      * @return the player within an optional if found, or an empty optional if
-     * not found.
+     *         not found.
      */
     public static Optional<Player> getPlayer(long username) {
         return players.search(player -> player.getUsernameHash() == username);
@@ -65,9 +80,9 @@ public final class World {
      * {@code username}.
      *
      * @param username
-     *         the name to check the collection of players for.
+     *            the name to check the collection of players for.
      * @return the player within an optional if found, or an empty optional if
-     * not found.
+     *         not found.
      */
     public static Optional<Player> getPlayer(String username) {
         if (username == null)
@@ -105,11 +120,10 @@ public final class World {
      * Sends {@code message} to all online players.
      *
      * @param message
-     *         the message to send to all online players.
+     *            the message to send to all online players.
      */
     public static void message(String message) {
-        players.forEach(p -> p.getEncoder().sendMessage("@red@[ANNOUNCEMENT]:" +
-                " " + message));
+        players.forEach(p -> p.getEncoder().sendMessage("@red@[ANNOUNCEMENT]: " + message));
     }
 
     /**
