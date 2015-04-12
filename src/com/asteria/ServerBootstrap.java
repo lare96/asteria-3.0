@@ -58,9 +58,9 @@ public final class ServerBootstrap {
     private final int port;
 
     /**
-     * The default constructor with a {@code protected} access modifier, to
-     * restrict the instantiation of this class to the {@code com.asteria}
-     * package.
+     * Creates a new {@link ServerBootstrap} with a {@code protected} access
+     * modifier, to restrict the instantiation of this class to the
+     * {@code com.asteria} package.
      * 
      * @param port
      *            the port that this server builder will bind the network on.
