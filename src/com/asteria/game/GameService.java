@@ -14,9 +14,10 @@ import com.asteria.utility.LoggerUtils;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 
 /**
- * The most important class of this server that sequentially executes, or
- * sequences all game related code.
- *
+ * The main game sequencer that executes game logic every {@code 600}ms. This
+ * also gives access to a single threaded {@link ScheduledExecutorService} which
+ * allows for the execution of low priority asynchronous services.
+ * 
  * @author lare96 <http://github.com/lare96>
  */
 public final class GameService implements Runnable {
@@ -27,9 +28,9 @@ public final class GameService implements Runnable {
     private static Logger logger = LoggerUtils.getLogger(GameService.class);
 
     /**
-     * The executor that will execute various {@code Thread.MIN_PRIORITY}
-     * services. This executor implementation will allocate a maximum of 1
-     * thread that will timeout after 45 {@code SECONDS} of inactivity.
+     * The executor that will execute various low priority services. This
+     * executor implementation will allocate a maximum of {@code 1} thread that
+     * will timeout after {@code 45}s of inactivity.
      */
     private static ScheduledExecutorService logicService = GameService.createLogicService();
 
@@ -40,18 +41,18 @@ public final class GameService implements Runnable {
             ServerHandler.sequence();
             World.sequence();
         } catch (Throwable t) {
-            logger.log(Level.SEVERE, "An error has occured during the main " + "game sequence!", t);
+            logger.log(Level.SEVERE, "An error has occured during the main game sequence!", t);
             World.getPlayers().forEach(player -> player.save());
         }
     }
 
     /**
-     * Creates and configures the {@link GameService#logicService} that will
-     * execute {@code Thread.MIN_PRIORITY} services. The returned executor is
+     * Creates and configures a new {@link ScheduledExecutorService} aimed at
+     * executing low priority services. The returned executor is
      * <b>unconfigurable</b> meaning it's configuration can no longer be
      * modified.
      *
-     * @return the newly created and configured logic service.
+     * @return the newly created and configured executor service.
      */
     private static ScheduledExecutorService createLogicService() {
         ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(1);
@@ -63,11 +64,10 @@ public final class GameService implements Runnable {
     }
 
     /**
-     * Gets the executor that will execute various {@code Thread.MIN_PRIORITY}
+     * Gets the executor that will execute various asynchronous low priority
      * services.
      *
-     * @return the executor that will execute various
-     * {@code Thread.MIN_PRIORITY} services.
+     * @return the logic service executor.
      */
     public static ScheduledExecutorService getLogicService() {
         return logicService;
