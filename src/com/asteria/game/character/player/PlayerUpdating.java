@@ -4,6 +4,7 @@ import java.util.Iterator;
 
 import com.asteria.game.World;
 import com.asteria.game.character.Flag;
+import com.asteria.game.character.Graphic;
 import com.asteria.game.character.player.skill.Skills;
 import com.asteria.game.item.container.Equipment;
 import com.asteria.game.location.Position;
@@ -528,8 +529,10 @@ public final class PlayerUpdating {
      *         the buffer to append it to.
      */
     private static void appendGraphic(Player player, DataBuffer out) {
-        out.putShort(player.getGraphic().getId(), ByteOrder.LITTLE);
-        out.putInt(player.getGraphic().getHeight());
+    	Graphic graphic = player.getGraphic();
+        out.putShort(graphic.getId(), ByteOrder.LITTLE);
+        out.putShort(graphic.getHeight());
+        out.putShort(graphic.getDelay());
     }
 
     /**

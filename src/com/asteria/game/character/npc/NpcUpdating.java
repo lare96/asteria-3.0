@@ -4,6 +4,7 @@ import java.util.Iterator;
 
 import com.asteria.game.World;
 import com.asteria.game.character.Flag;
+import com.asteria.game.character.Graphic;
 import com.asteria.game.character.player.Player;
 import com.asteria.game.location.Position;
 import com.asteria.network.ByteOrder;
@@ -204,8 +205,10 @@ public final class NpcUpdating {
      *         the buffer to append it to.
      */
     private static void appendGraphic(DataBuffer out, Npc npc) {
-        out.putShort(npc.getGraphic().getId());
-        out.putInt(npc.getGraphic().getHeight());
+    	Graphic graphic = npc.getGraphic();
+        out.putShort(graphic.getId());
+        out.putShort(graphic.getHeight());
+        out.putShort(graphic.getDelay());
     }
 
     /**
