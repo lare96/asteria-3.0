@@ -5,13 +5,13 @@ import java.util.Map;
 import java.util.Optional;
 
 import com.asteria.game.NodeType;
+import com.asteria.game.World;
 import com.asteria.game.character.CharacterNode;
 import com.asteria.game.character.Hit;
 import com.asteria.game.character.HitType;
 import com.asteria.game.character.PoisonType;
 import com.asteria.game.character.player.Player;
 import com.asteria.game.item.Item;
-import com.asteria.game.task.TaskHandler;
 import com.asteria.utility.RandomGen;
 
 /**
@@ -86,7 +86,7 @@ public final class CombatPoisonEffect extends CombatEffect {
     @Override
     public void onLogin() {
         if (character.isPoisoned()) {
-            TaskHandler.submit(this);
+            World.submit(this);
         }
     }
 

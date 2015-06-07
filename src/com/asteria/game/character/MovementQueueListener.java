@@ -3,8 +3,8 @@ package com.asteria.game.character;
 import java.util.Objects;
 import java.util.Optional;
 
-import com.asteria.game.task.EventListener;
-import com.asteria.game.task.TaskHandler;
+import com.asteria.game.World;
+import com.asteria.task.EventListener;
 
 /**
  * The container class that holds the movement queue listener. The listener
@@ -53,7 +53,7 @@ public final class MovementQueueListener {
         listener.ifPresent(t -> t.cancel());
         listener = Optional.of(new MovementQueueListenerTask(character, task));
         character.setFollowing(false);
-        TaskHandler.submit(listener.get());
+        World.submit(listener.get());
     }
 
     /**

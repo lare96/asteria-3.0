@@ -6,10 +6,10 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.function.Consumer;
 
+import com.asteria.game.World;
 import com.asteria.game.character.player.Player;
 import com.asteria.game.location.Position;
-import com.asteria.game.task.Task;
-import com.asteria.game.task.TaskHandler;
+import com.asteria.task.Task;
 
 /**
  * The node manager that manages all registered object nodes.
@@ -61,7 +61,7 @@ public final class ObjectNodeManager {
      */
     public static boolean register(ObjectNode object, int ticks, Consumer<ObjectNode> action) {
         if (register(object)) {
-            TaskHandler.submit(new Task(ticks, false) {
+            World.submit(new Task(ticks, false) {
                 @Override
                 public void execute() {
                     action.accept(object);

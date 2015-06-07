@@ -1,6 +1,7 @@
 package com.asteria.game.character.npc;
 
 import com.asteria.game.NodeType;
+import com.asteria.game.World;
 import com.asteria.game.character.CharacterNode;
 import com.asteria.game.character.Hit;
 import com.asteria.game.character.PoisonType;
@@ -10,7 +11,6 @@ import com.asteria.game.character.combat.CombatType;
 import com.asteria.game.character.combat.effect.CombatPoisonEffect;
 import com.asteria.game.character.combat.magic.CombatWeaken;
 import com.asteria.game.location.Position;
-import com.asteria.game.task.TaskHandler;
 
 /**
  * The character implementation that represents a node that is operated by the
@@ -87,7 +87,7 @@ public final class Npc extends CharacterNode {
         setPosition(new Position(1, 1));
         if (getDefinition().isAggressive())
             NpcAggression.AGGRESSIVE.remove(this);
-        TaskHandler.cancel(this);
+        World.getTaskQueue().cancel(this);
     }
 
     @Override

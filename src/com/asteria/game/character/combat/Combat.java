@@ -8,6 +8,7 @@ import plugin.combat.DefaultMeleeCombatStrategy;
 import plugin.combat.DefaultRangedCombatStrategy;
 
 import com.asteria.game.NodeType;
+import com.asteria.game.World;
 import com.asteria.game.character.CharacterNode;
 import com.asteria.game.character.Hit;
 import com.asteria.game.character.MovementQueue;
@@ -24,7 +25,6 @@ import com.asteria.game.character.player.skill.Skills;
 import com.asteria.game.item.Item;
 import com.asteria.game.item.container.Equipment;
 import com.asteria.game.location.Position;
-import com.asteria.game.task.TaskHandler;
 import com.asteria.utility.RandomGen;
 import com.asteria.utility.Settings;
 
@@ -389,7 +389,7 @@ public final class Combat {
      */
     public static boolean effect(CombatEffect effect) {
         if (effect.apply()) {
-            TaskHandler.submit(effect);
+            World.submit(effect);
             return true;
         }
         return false;

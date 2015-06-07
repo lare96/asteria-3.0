@@ -10,13 +10,13 @@ import static com.asteria.game.character.player.skill.Skills.STRENGTH;
 
 import java.util.Optional;
 
+import com.asteria.game.World;
 import com.asteria.game.character.Animation;
 import com.asteria.game.character.player.Player;
 import com.asteria.game.character.player.skill.Skill;
 import com.asteria.game.character.player.skill.Skills;
 import com.asteria.game.item.Item;
-import com.asteria.game.task.Task;
-import com.asteria.game.task.TaskHandler;
+import com.asteria.task.Task;
 
 /**
  * The enumerated type managing consumable potion types.
@@ -201,7 +201,7 @@ public enum PotionConsumable {
             if (player.getPoisonImmunity().get() <= 0) {
                 player.getEncoder().sendMessage("You have been granted " + "immunity against poison.");
                 player.getPoisonImmunity().incrementAndGet(500);
-                TaskHandler.submit(new Task(50, false) {
+                World.submit(new Task(50, false) {
                     @Override
                     public void execute() {
                         player.getPoisonImmunity().decrementAndGet(50);
@@ -271,7 +271,7 @@ public enum PotionConsumable {
             count <= 0 ? "You have been granted " + "immunity against dragon fire."
                 : "Your immunity against " + "dragon fire has been restored.");
         if (count <= 0) {
-            TaskHandler.submit(new Task(30, false) {
+            World.submit(new Task(30, false) {
                 @Override
                 public void execute() {
                     player.getFireImmunity().decrementAndGet(30);

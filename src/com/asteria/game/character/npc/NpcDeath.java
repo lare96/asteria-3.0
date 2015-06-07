@@ -13,8 +13,8 @@ import com.asteria.game.item.Item;
 import com.asteria.game.item.ItemNode;
 import com.asteria.game.item.ItemNodeManager;
 import com.asteria.game.item.ItemNodeStatic;
-import com.asteria.game.task.Task;
-import com.asteria.game.task.TaskHandler;
+import com.asteria.task.Task;
+import com.asteria.task.TaskQueue;
 
 /**
  * The character death implementation that handles NPC death.
@@ -58,7 +58,7 @@ public final class NpcDeath extends CharacterDeath<Npc> {
     @Override
     public void postDeath(Npc character) {
         if (character.isRespawn()) {
-            TaskHandler.submit(new Task(character.getRespawnTime(), false) {
+            World.submit(new Task(character.getRespawnTime(), false) {
                 @Override
                 public void execute() {
                     Npc npc = new Npc(character.getId(), character.getOriginalPosition());

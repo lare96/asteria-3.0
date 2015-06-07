@@ -2,11 +2,11 @@ package com.asteria.game.character.combat.prayer;
 
 import java.util.Arrays;
 
+import com.asteria.game.World;
 import com.asteria.game.character.Flag;
 import com.asteria.game.character.combat.CombatType;
 import com.asteria.game.character.player.Player;
 import com.asteria.game.character.player.skill.Skills;
-import com.asteria.game.task.TaskHandler;
 import com.asteria.utility.TextUtils;
 
 /**
@@ -338,7 +338,7 @@ public enum CombatPrayer {
         }
         if (player.getPrayerDrain() == null || !player.getPrayerDrain().isRunning()) {
             player.setPrayerDrain(new CombatPrayerTask(player));
-            TaskHandler.submit(player.getPrayerDrain());
+            World.submit(player.getPrayerDrain());
         }
         onActivation(player);
         return true;

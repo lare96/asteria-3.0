@@ -15,7 +15,7 @@ import com.asteria.game.item.Item;
 import com.asteria.game.item.ItemNode;
 import com.asteria.game.item.ItemNodeManager;
 import com.asteria.game.location.Location;
-import com.asteria.game.task.Task;
+import com.asteria.task.Task;
 import com.asteria.utility.RandomGen;
 
 /**

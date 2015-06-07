@@ -6,7 +6,7 @@ import com.asteria.game.character.player.Player;
 import com.asteria.game.character.player.skill.Skills;
 import com.asteria.game.item.Item;
 import com.asteria.game.location.Position;
-import com.asteria.game.task.Task;
+import com.asteria.task.Task;
 
 /**
  * The skill action that represents an action where one item in an inventory is

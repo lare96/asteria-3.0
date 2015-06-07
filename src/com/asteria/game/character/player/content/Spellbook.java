@@ -1,11 +1,11 @@
 package com.asteria.game.character.player.content;
 
+import com.asteria.game.World;
 import com.asteria.game.character.Animation;
 import com.asteria.game.character.Graphic;
 import com.asteria.game.character.player.Player;
 import com.asteria.game.location.Position;
-import com.asteria.game.task.Task;
-import com.asteria.game.task.TaskHandler;
+import com.asteria.task.Task;
 
 /**
  * The enumerated type whose elements represent a spellbook type.
@@ -17,7 +17,7 @@ public enum Spellbook {
         @Override
         public void execute(Player player, Position position) {
             player.animation(new Animation(714));
-            TaskHandler.submit(new Task(1, false) {
+            World.submit(new Task(1, false) {
                 @Override
                 public void execute() {
                     if (player.getTeleportStage() == 1) {
@@ -39,7 +39,7 @@ public enum Spellbook {
         @Override
         public void execute(Player player, Position position) {
             player.animation(new Animation(1979));
-            TaskHandler.submit(new Task(1, false) {
+            World.submit(new Task(1, false) {
                 @Override
                 public void execute() {
                     if (player.getTeleportStage() == 1) {

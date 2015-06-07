@@ -2,13 +2,13 @@ package com.asteria.game.character.player.skill.action;
 
 import java.util.Optional;
 
+import com.asteria.game.World;
 import com.asteria.game.character.Animation;
 import com.asteria.game.character.player.Player;
 import com.asteria.game.character.player.skill.SkillData;
 import com.asteria.game.location.Position;
 import com.asteria.game.plugin.PluginContext;
-import com.asteria.game.task.Task;
-import com.asteria.game.task.TaskHandler;
+import com.asteria.task.Task;
 
 /**
  * The skill action that is the parent class of all other skill actions. This
@@ -54,7 +54,7 @@ public abstract class SkillAction implements PluginContext {
     public final void start() {
         if (!player.isSkillAction()) {
             player.setSkillAction(true);
-            TaskHandler.submit(new SkillActionTask(this));
+            World.submit(new SkillActionTask(this));
         }
     }
 

@@ -8,11 +8,11 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
+import com.asteria.game.World;
 import com.asteria.game.character.player.Player;
 import com.asteria.game.item.Item;
 import com.asteria.game.item.container.ItemContainer;
 import com.asteria.game.item.container.ItemContainerPolicy;
-import com.asteria.game.task.TaskHandler;
 import com.asteria.utility.Settings;
 import com.asteria.utility.TextUtils;
 
@@ -142,9 +142,9 @@ public final class Shop {
         players.stream().filter(Objects::nonNull).forEach(p -> p.getEncoder().sendItemsOnInterface(3900, container.container(), size));
 
         if (checkStock && restock) {
-            if (TaskHandler.running(this) || !needsRestock())
+            if (World.getTaskQueue().running(this) || !needsRestock())
                 return;
-            TaskHandler.submit(new ShopRestockTask(this));
+            World.submit(new ShopRestockTask(this));
         }
     }
 

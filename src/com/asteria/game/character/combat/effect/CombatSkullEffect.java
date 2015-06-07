@@ -2,9 +2,9 @@ package com.asteria.game.character.combat.effect;
 
 import plugin.minigames.fightcaves.FightCavesHandler;
 
+import com.asteria.game.World;
 import com.asteria.game.character.Flag;
 import com.asteria.game.character.player.Player;
-import com.asteria.game.task.TaskHandler;
 
 /**
  * The combat effect applied when a player needs to be skulled.
@@ -59,7 +59,7 @@ public final class CombatSkullEffect extends CombatEffect {
     public void onLogin() {
         if (player.getSkullTimer().get() > 0) {
             player.setSkullIcon(Player.WHITE_SKULL);
-            TaskHandler.submit(this);
+            World.submit(this);
             return;
         }
         if (FightCavesHandler.isChampion(player))

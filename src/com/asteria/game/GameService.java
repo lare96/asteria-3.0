@@ -9,7 +9,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.asteria.game.task.TaskHandler;
 import com.asteria.network.ServerReactor;
 import com.asteria.utility.LoggerUtils;
 import com.google.common.base.Preconditions;
@@ -45,7 +44,7 @@ public final class GameService implements Runnable {
     @Override
     public void run() {
         try {
-            TaskHandler.sequence();
+            World.getTaskQueue().sequence();
             reactor.sequence();
             World.sequence();
         } catch (Throwable t) {

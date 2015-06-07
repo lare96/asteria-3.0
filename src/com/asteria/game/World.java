@@ -19,6 +19,8 @@ import com.asteria.game.character.player.Player;
 import com.asteria.game.character.player.PlayerUpdating;
 import com.asteria.game.item.ItemNodeManager;
 import com.asteria.game.object.ObjectNodeManager;
+import com.asteria.task.Task;
+import com.asteria.task.TaskQueue;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 
 /**
@@ -50,6 +52,11 @@ public final class World {
     private static GameService service = new GameService();
 
     /**
+     * The manager for the queue of game tasks.
+     */
+    private static TaskQueue taskQueue = new TaskQueue();
+
+    /**
      * The default constructor, will throw an
      * {@link UnsupportedOperationException} if instantiated.
      *
@@ -62,7 +69,7 @@ public final class World {
 
     /**
      * The method that executes the update sequence for all in game characters
-     * every {@code 600}ms. The update sequence may either run sequentially or
+     * every cycle. The update sequence may either run sequentially or
      * concurrently depending on the type of engine selected by the server.
      *
      * @throws Exception
@@ -71,6 +78,16 @@ public final class World {
     public static void sequence() throws Exception {
         Runnable updateService = PARALLEL_PROCESSING ? new ConcurrentUpdateService() : new SequentialUpdateService();
         updateService.run();
+    }
+
+    /**
+     * Submits {@code t} to the backing {@link com.asteria.task.TaskQueue}.
+     * 
+     * @param t
+     *            the task to submit to the queue.
+     */
+    public static void submit(Task t) {
+        taskQueue.submit(t);
     }
 
     /**
@@ -162,6 +179,25 @@ public final class World {
      */
     public static GameService getService() {
         return service;
+    }
+
+    /**
+     * Gets the manager for the queue of game tasks.
+     * 
+     * @return the queue of tasks.
+     */
+    public static TaskQueue getTaskQueue() {
+        return taskQueue;
+    }
+
+    /**
+     * Sets the value for {@link World.java#taskQueue}.
+     * 
+     * @param taskQueue
+     *            the new value to set.
+     */
+    public static void setTaskQueue(TaskQueue taskQueue) {
+        World.taskQueue = taskQueue;
     }
 
     /**
@@ -282,9 +318,9 @@ public final class World {
 
     /**
      * The sequential update service that will execute the update sequence
-     * sequentially. This service should only be used if the hosting computer has
-     * one core. If the hosting computer has more than one core, better performance
-     * is guaranteed with {@link ConcurrentUpdateService}.
+     * sequentially. This service should only be used if the hosting computer
+     * has one core. If the hosting computer has more than one core, better
+     * performance is guaranteed with {@link ConcurrentUpdateService}.
      *
      * @author lare96 <http://github.com/lare96>
      */

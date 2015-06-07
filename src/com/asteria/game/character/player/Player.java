@@ -52,10 +52,10 @@ import com.asteria.game.item.container.Inventory;
 import com.asteria.game.location.Location;
 import com.asteria.game.location.Position;
 import com.asteria.game.shop.Shop;
-import com.asteria.game.task.Task;
-import com.asteria.game.task.TaskHandler;
 import com.asteria.network.ConnectionHandler;
 import com.asteria.network.packet.PacketEncoder;
+import com.asteria.task.Task;
+import com.asteria.task.TaskQueue;
 import com.asteria.utility.LoggerUtils;
 import com.asteria.utility.MutableNumber;
 import com.asteria.utility.Settings;
@@ -603,7 +603,7 @@ public final class Player extends CharacterNode {
      *            complete.
      */
     public void movement(ForcedMovement movement, int ticks) {
-        TaskHandler.submit(new Task(ticks, false) {
+        World.submit(new Task(ticks, false) {
             @Override
             public void execute() {
                 setNeedsPlacement(true);

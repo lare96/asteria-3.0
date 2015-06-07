@@ -15,11 +15,10 @@ import com.asteria.game.character.player.login.impl.PostHandshakeLoginDecoder;
 import com.asteria.game.character.player.minigame.MinigameHandler;
 import com.asteria.game.location.Position;
 import com.asteria.game.shop.Shop;
-import com.asteria.game.task.Task;
-import com.asteria.game.task.TaskHandler;
 import com.asteria.network.ConnectionHandler;
 import com.asteria.network.DataBuffer;
 import com.asteria.network.ISAACCipher;
+import com.asteria.task.Task;
 import com.asteria.utility.LoggerUtils;
 import com.asteria.utility.MutableNumber;
 import com.asteria.utility.Stopwatch;
@@ -159,7 +158,7 @@ public final class PlayerIO {
                 key.attach(null);
                 key.cancel();
                 channel.close();
-                TaskHandler.submit(new Task(150, false) {
+                World.submit(new Task(150, false) {
                     @Override
                     public void execute() {
                         if (!player.getCombatBuilder().inCombat()) {
@@ -174,8 +173,8 @@ public final class PlayerIO {
             if (state == IOState.LOGGED_IN) {
                 if (player.getOpenShop() != null)
                     Shop.SHOPS.get(player.getOpenShop()).getPlayers().remove(player);
-                TaskHandler.cancel(player.getCombatBuilder());
-                TaskHandler.cancel(player);
+                World.getTaskQueue().cancel(player.getCombatBuilder());
+                World.getTaskQueue().cancel(player);
                 player.setSkillAction(false);
                 World.getPlayers().remove(player);
                 MinigameHandler.execute(player, m -> m.onLogout(player));

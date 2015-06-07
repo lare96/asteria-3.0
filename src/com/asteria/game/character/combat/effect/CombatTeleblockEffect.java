@@ -1,7 +1,7 @@
 package com.asteria.game.character.combat.effect;
 
+import com.asteria.game.World;
 import com.asteria.game.character.player.Player;
-import com.asteria.game.task.TaskHandler;
 
 /**
  * The combat effect applied when a player needs to be teleblocked.
@@ -53,7 +53,7 @@ public final class CombatTeleblockEffect extends CombatEffect {
     @Override
     public void onLogin() {
         if (player.getTeleblockTimer().get() > 0) {
-            TaskHandler.submit(this);
+            World.submit(this);
         }
     }
 }

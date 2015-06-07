@@ -7,10 +7,10 @@ import com.asteria.game.character.Flag;
 import com.asteria.game.character.player.skill.Skills;
 import com.asteria.game.item.container.Equipment;
 import com.asteria.game.location.Position;
-import com.asteria.game.task.TaskHandler;
 import com.asteria.network.ByteOrder;
 import com.asteria.network.DataBuffer;
 import com.asteria.network.ValueType;
+import com.asteria.task.TaskQueue;
 import com.asteria.utility.BitMask;
 
 /**
@@ -491,7 +491,7 @@ public final class PlayerUpdating {
             if (player.getSkills()[Skills.HITPOINTS].getLevel() <= 0) {
                 player.getSkills()[Skills.HITPOINTS].setLevel(0, true);
                 player.setDead(true);
-                TaskHandler.submit(new PlayerDeath(player));
+                World.submit(new PlayerDeath(player));
             }
         }
         out.put(player.getSkills()[Skills.HITPOINTS].getLevel(), ValueType.C);
@@ -514,7 +514,7 @@ public final class PlayerUpdating {
             if (player.getSkills()[Skills.HITPOINTS].getLevel() <= 0) {
                 player.getSkills()[Skills.HITPOINTS].setLevel(0, true);
                 player.setDead(true);
-                TaskHandler.submit(new PlayerDeath(player));
+                World.submit(new PlayerDeath(player));
             }
         }
 

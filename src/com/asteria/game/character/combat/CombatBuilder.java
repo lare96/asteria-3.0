@@ -3,11 +3,11 @@ package com.asteria.game.character.combat;
 import java.util.concurrent.TimeUnit;
 
 import com.asteria.game.NodeType;
+import com.asteria.game.World;
 import com.asteria.game.character.CharacterNode;
 import com.asteria.game.character.npc.Npc;
 import com.asteria.game.character.player.Player;
-import com.asteria.game.task.EventListener;
-import com.asteria.game.task.TaskHandler;
+import com.asteria.task.EventListener;
 
 /**
  * Controls and gives access to the main parts of the combat process such as
@@ -94,8 +94,8 @@ public final class CombatBuilder {
             }
             return;
         }
-        TaskHandler.cancel(this);
-        TaskHandler.submit(new CombatDistanceListener(this, target));
+        World.getTaskQueue().cancel(this);
+        World.submit(new CombatDistanceListener(this, target));
     }
 
     /**
@@ -353,7 +353,7 @@ public final class CombatBuilder {
 
             if (builder.combatTask == null || !builder.combatTask.isRunning()) {
                 builder.combatTask = new CombatSession(builder);
-                TaskHandler.submit(builder.combatTask);
+                World.submit(builder.combatTask);
             }
         }
     }

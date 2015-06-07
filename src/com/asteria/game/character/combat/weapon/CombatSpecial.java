@@ -5,6 +5,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import com.asteria.game.NodeType;
+import com.asteria.game.World;
 import com.asteria.game.character.Animation;
 import com.asteria.game.character.AnimationPriority;
 import com.asteria.game.character.CharacterNode;
@@ -20,8 +21,7 @@ import com.asteria.game.character.player.content.WeaponInterface;
 import com.asteria.game.character.player.skill.Skills;
 import com.asteria.game.item.container.Equipment;
 import com.asteria.game.location.Location;
-import com.asteria.game.task.Task;
-import com.asteria.game.task.TaskHandler;
+import com.asteria.task.Task;
 
 /**
  * The enumerated type whose elements represent the combat special attacks.
@@ -68,7 +68,7 @@ public enum CombatSpecial {
             player.highGraphic(new Graphic(250));
             new Projectile(player, target, 249, 44, 3, 43, 31, 0).sendProjectile();
 
-            TaskHandler.submit(new Task(1, false) {
+            World.submit(new Task(1, false) {
                 @Override
                 public void execute() {
                     player.animation(new Animation(426, AnimationPriority.HIGH));

@@ -5,11 +5,11 @@ import java.util.LinkedList;
 import java.util.Optional;
 
 import com.asteria.game.NodeType;
+import com.asteria.game.World;
 import com.asteria.game.character.combat.Combat;
 import com.asteria.game.character.player.Player;
 import com.asteria.game.location.Position;
-import com.asteria.game.task.Task;
-import com.asteria.game.task.TaskHandler;
+import com.asteria.task.Task;
 import com.asteria.utility.RandomGen;
 
 /**
@@ -312,7 +312,7 @@ public final class MovementQueue {
             character.setFollowing(true);
             character.setFollowCharacter(leader);
             followTask = Optional.of(new CharacterFollowTask(character, leader));
-            TaskHandler.submit(followTask.get());
+            World.submit(followTask.get());
         }
     }
 

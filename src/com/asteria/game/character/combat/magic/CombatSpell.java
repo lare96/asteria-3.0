@@ -3,6 +3,7 @@ package com.asteria.game.character.combat.magic;
 import java.util.Optional;
 
 import com.asteria.game.NodeType;
+import com.asteria.game.World;
 import com.asteria.game.character.Animation;
 import com.asteria.game.character.AnimationPriority;
 import com.asteria.game.character.CharacterNode;
@@ -10,8 +11,7 @@ import com.asteria.game.character.Graphic;
 import com.asteria.game.character.Projectile;
 import com.asteria.game.character.Spell;
 import com.asteria.game.character.npc.Npc;
-import com.asteria.game.task.Task;
-import com.asteria.game.task.TaskHandler;
+import com.asteria.task.Task;
 
 /**
  * The {@link Spell} extension with support for combat related functions such as
@@ -35,7 +35,7 @@ public abstract class CombatSpell extends Spell {
         startGraphic().ifPresent(cast::graphic);
 
         projectile(cast, castOn).ifPresent(g -> {
-            TaskHandler.submit(new Task(2, false) {
+            World.submit(new Task(2, false) {
                 @Override
                 public void execute() {
                     g.sendProjectile();

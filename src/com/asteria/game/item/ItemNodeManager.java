@@ -5,10 +5,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
+import com.asteria.game.World;
 import com.asteria.game.character.player.Player;
 import com.asteria.game.location.Position;
-import com.asteria.game.task.Task;
-import com.asteria.game.task.TaskHandler;
+import com.asteria.task.Task;
 
 /**
  * The node manager that manages all registered item nodes.
@@ -52,7 +52,7 @@ public final class ItemNodeManager extends Task {
 
     @Override
     public void onCancel() {
-        TaskHandler.submit(new ItemNodeManager());
+        World.submit(new ItemNodeManager());
     }
 
     @Override

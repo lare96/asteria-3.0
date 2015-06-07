@@ -7,7 +7,7 @@ import com.asteria.game.character.player.skill.action.DestructionSkillAction
 import com.asteria.game.character.player.skill.action.SkillAction
 import com.asteria.game.item.Item
 import com.asteria.game.plugin.PluginSignature
-import com.asteria.game.task.Task
+import com.asteria.task.Task
 
 @PluginSignature(SkillAction.class)
 final class PrayerBoneBury extends DestructionSkillAction {

@@ -1,4 +1,4 @@
-package com.asteria.game.task;
+package com.asteria.task;
 
 import java.util.Objects;
 

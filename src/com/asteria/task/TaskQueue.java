@@ -1,4 +1,4 @@
-package com.asteria.game.task;
+package com.asteria.task;
 
 import java.util.ArrayDeque;
 import java.util.Iterator;
@@ -18,17 +18,17 @@ import com.google.common.base.Preconditions;
  *
  * @author lare96 <http://github.com/lare96>
  */
-public final class TaskHandler {
+public final class TaskQueue {
 
     /**
      * The list that holds all of the pending tasks that are awaiting execution.
      */
-    private static final List<Task> PENDING_LIST = new LinkedList<>();
+    private final List<Task> pendingTasks = new LinkedList<>();
 
     /**
      * The queue that holds all of the tasks that are ready to be executed.
      */
-    private static final Queue<Task> RUNNING_QUEUE = new ArrayDeque<>(50);
+    private final Queue<Task> runTasks = new ArrayDeque<>(50);
 
     /**
      * Queues pending tasks that are ready to be executed and executes tasks
@@ -37,20 +37,20 @@ public final class TaskHandler {
      * @throws Exception
      *             if any errors occur while processing the tasks.
      */
-    public static void sequence() throws Exception {
-        Iterator<Task> it = PENDING_LIST.iterator();
-        while (it.hasNext()) {
-            Task t = it.next();
+    public void sequence() throws Exception {
+        Iterator<Task> $it = pendingTasks.iterator();
+        while ($it.hasNext()) {
+            Task t = $it.next();
             t.onSequence();
             if (t.needsExecute()) {
-                RUNNING_QUEUE.add(t);
+                runTasks.add(t);
             } else if (!t.isRunning()) {
-                it.remove();
+                $it.remove();
             }
         }
 
         Task t;
-        while ((t = RUNNING_QUEUE.poll()) != null) {
+        while ((t = runTasks.poll()) != null) {
             try {
                 t.execute();
             } catch (Throwable ex) {
@@ -67,13 +67,13 @@ public final class TaskHandler {
      * @param task
      *            the task to submit to this task handler.
      */
-    public static void submit(Task task) {
+    public void submit(Task task) {
         Preconditions.checkArgument(task.isRunning());
         task.onSubmit();
         if (task.isInstant())
             task.execute();
         if (task.isRunning())
-            PENDING_LIST.add(task);
+            pendingTasks.add(task);
     }
 
     /**
@@ -82,8 +82,8 @@ public final class TaskHandler {
      * @param key
      *            the key to cancel all tasks with.
      */
-    public static void cancel(Object key) {
-        PENDING_LIST.stream().filter(t -> t.getKey().equals(key)).forEach(t -> t.cancel());
+    public void cancel(Object key) {
+        pendingTasks.stream().filter(t -> t.getKey().equals(key)).forEach(t -> t.cancel());
     }
 
     /**
@@ -95,7 +95,7 @@ public final class TaskHandler {
      * @return {@code true} if there is a running task with that key attachment,
      *         {@code false} otherwise.
      */
-    public static boolean running(Object key) {
-        return PENDING_LIST.stream().anyMatch(t -> t.getKey().equals(key) && t.isRunning());
+    public boolean running(Object key) {
+        return pendingTasks.stream().anyMatch(t -> t.getKey().equals(key) && t.isRunning());
     }
 }
