@@ -13,8 +13,8 @@ import com.asteria.game.item.Item;
 import com.asteria.game.item.ItemNode;
 import com.asteria.game.item.ItemNodeManager;
 import com.asteria.game.item.ItemNodeStatic;
-import com.asteria.task.Task;
-import com.asteria.task.TaskHandler;
+import com.asteria.game.task.Task;
+import com.asteria.game.task.TaskHandler;
 
 /**
  * The character death implementation that handles NPC death.

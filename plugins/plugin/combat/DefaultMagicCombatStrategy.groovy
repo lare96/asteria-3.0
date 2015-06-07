@@ -1,13 +1,13 @@
 package plugin.combat
 
-import com.asteria.game.NodeType
-import com.asteria.game.character.CharacterNode
+import com.asteria.game.NodeType;
 import com.asteria.game.character.combat.Combat
 import com.asteria.game.character.combat.CombatSessionData
 import com.asteria.game.character.combat.CombatStrategy
 import com.asteria.game.character.combat.CombatType
-import com.asteria.game.character.npc.Npc
 import com.asteria.game.character.player.Player
+import com.asteria.game.model.character.CharacterNode;
+import com.asteria.game.model.character.npc.Npc;
 import com.asteria.game.plugin.PluginSignature
 
 @PluginSignature(CombatStrategy.class)

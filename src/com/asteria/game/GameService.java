@@ -9,8 +9,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.asteria.game.task.TaskHandler;
 import com.asteria.network.ServerReactor;
-import com.asteria.task.TaskHandler;
 import com.asteria.utility.LoggerUtils;
 import com.google.common.base.Preconditions;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;

@@ -1,4 +1,4 @@
-package com.asteria.game.service;
+package com.asteria.game;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -6,7 +6,6 @@ import java.util.concurrent.Phaser;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.ThreadPoolExecutor.CallerRunsPolicy;
 
-import com.asteria.game.World;
 import com.asteria.game.character.npc.NpcUpdating;
 import com.asteria.game.character.player.PlayerUpdating;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;

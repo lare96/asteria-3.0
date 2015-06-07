@@ -1,7 +1,7 @@
 package plugin.skills.fishing
 
 import com.asteria.game.character.player.Player
-import com.asteria.game.location.Location
+import com.asteria.game.location.Location;
 
 enum Catchable {
     SHRIMP(317, 1, 0.85, 10),

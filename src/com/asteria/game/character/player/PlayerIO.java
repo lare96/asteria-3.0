@@ -5,6 +5,8 @@ import java.nio.channels.SelectionKey;
 import java.nio.channels.SocketChannel;
 import java.util.logging.Logger;
 
+import plugin.minigames.fightcaves.FightCavesHandler;
+
 import com.asteria.game.World;
 import com.asteria.game.character.player.login.LoginProtocolDecoderChain;
 import com.asteria.game.character.player.login.LoginResponse;
@@ -13,16 +15,14 @@ import com.asteria.game.character.player.login.impl.PostHandshakeLoginDecoder;
 import com.asteria.game.character.player.minigame.MinigameHandler;
 import com.asteria.game.location.Position;
 import com.asteria.game.shop.Shop;
+import com.asteria.game.task.Task;
+import com.asteria.game.task.TaskHandler;
 import com.asteria.network.ConnectionHandler;
 import com.asteria.network.DataBuffer;
 import com.asteria.network.ISAACCipher;
-import com.asteria.task.Task;
-import com.asteria.task.TaskHandler;
 import com.asteria.utility.LoggerUtils;
 import com.asteria.utility.MutableNumber;
 import com.asteria.utility.Stopwatch;
-
-import plugin.minigames.fightcaves.FightCavesHandler;
 
 /**
  * The session handler dedicated to a player that will handle input and output

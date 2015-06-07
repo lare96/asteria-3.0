@@ -3,8 +3,8 @@ package com.asteria.game.character;
 import java.util.Objects;
 import java.util.Optional;
 
-import com.asteria.task.EventListener;
-import com.asteria.task.TaskHandler;
+import com.asteria.game.task.EventListener;
+import com.asteria.game.task.TaskHandler;
 
 /**
  * The container class that holds the movement queue listener. The listener

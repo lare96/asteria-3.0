@@ -11,7 +11,7 @@ import com.asteria.game.character.HitType;
 import com.asteria.game.character.PoisonType;
 import com.asteria.game.character.player.Player;
 import com.asteria.game.item.Item;
-import com.asteria.task.TaskHandler;
+import com.asteria.game.task.TaskHandler;
 import com.asteria.utility.RandomGen;
 
 /**

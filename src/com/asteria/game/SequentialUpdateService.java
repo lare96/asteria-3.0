@@ -1,6 +1,5 @@
-package com.asteria.game.service;
+package com.asteria.game;
 
-import com.asteria.game.World;
 import com.asteria.game.character.npc.NpcUpdating;
 import com.asteria.game.character.player.PlayerUpdating;
 

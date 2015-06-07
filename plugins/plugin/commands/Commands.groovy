@@ -2,18 +2,18 @@ package plugin.commands
 
 import com.asteria.game.GameService
 import com.asteria.game.World
-import com.asteria.game.character.Animation
-import com.asteria.game.character.Flag
-import com.asteria.game.character.Graphic
-import com.asteria.game.character.npc.Npc
 import com.asteria.game.character.player.Player
 import com.asteria.game.character.player.Rights
 import com.asteria.game.character.player.serialize.PlayerSerialization
 import com.asteria.game.character.player.skill.SkillData
 import com.asteria.game.character.player.skill.Skills
-import com.asteria.game.item.Item
-import com.asteria.game.item.ItemDefinition
-import com.asteria.game.location.Position
+import com.asteria.game.location.Position;
+import com.asteria.game.model.character.Animation;
+import com.asteria.game.model.character.Flag;
+import com.asteria.game.model.character.Graphic;
+import com.asteria.game.model.character.npc.Npc;
+import com.asteria.game.model.item.Item;
+import com.asteria.game.model.item.ItemDefinition;
 import com.asteria.game.object.ObjectDirection
 import com.asteria.game.object.ObjectNode
 import com.asteria.game.object.ObjectNodeManager

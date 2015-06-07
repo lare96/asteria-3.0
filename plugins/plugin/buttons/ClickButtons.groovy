@@ -16,8 +16,8 @@ import com.asteria.game.location.Position
 import com.asteria.game.plugin.PluginListener
 import com.asteria.game.plugin.PluginSignature
 import com.asteria.game.plugin.context.ButtonClickPlugin
-import com.asteria.task.Task
-import com.asteria.task.TaskHandler
+import com.asteria.game.task.Task
+import com.asteria.game.task.TaskHandler
 import com.asteria.utility.LoggerUtils
 import com.asteria.utility.Settings
 import plugin.skills.cooking.Cooking

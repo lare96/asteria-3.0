@@ -4,8 +4,8 @@ import com.asteria.game.character.Animation;
 import com.asteria.game.character.Graphic;
 import com.asteria.game.character.player.Player;
 import com.asteria.game.location.Position;
-import com.asteria.task.Task;
-import com.asteria.task.TaskHandler;
+import com.asteria.game.task.Task;
+import com.asteria.game.task.TaskHandler;
 
 /**
  * The enumerated type whose elements represent a spellbook type.

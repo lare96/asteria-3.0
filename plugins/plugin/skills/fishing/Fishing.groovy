@@ -1,13 +1,13 @@
 package plugin.skills.fishing
 
-import com.asteria.game.character.Animation
 import com.asteria.game.character.player.Player
 import com.asteria.game.character.player.skill.SkillData
 import com.asteria.game.character.player.skill.Skills
 import com.asteria.game.character.player.skill.action.HarvestingSkillAction
 import com.asteria.game.character.player.skill.action.SkillAction
-import com.asteria.game.item.Item
-import com.asteria.game.location.Position
+import com.asteria.game.location.Position;
+import com.asteria.game.model.character.Animation;
+import com.asteria.game.model.item.Item;
 import com.asteria.game.plugin.PluginSignature
 import com.asteria.task.Task
 import com.asteria.utility.RandomGen

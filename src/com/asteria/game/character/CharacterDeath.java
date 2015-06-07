@@ -4,7 +4,7 @@ import com.asteria.game.NodeType;
 import com.asteria.game.World;
 import com.asteria.game.character.npc.Npc;
 import com.asteria.game.character.player.Player;
-import com.asteria.task.Task;
+import com.asteria.game.task.Task;
 
 /**
  * The parent class that handles the death process for all characters.

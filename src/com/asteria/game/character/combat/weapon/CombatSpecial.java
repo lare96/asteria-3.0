@@ -20,8 +20,8 @@ import com.asteria.game.character.player.content.WeaponInterface;
 import com.asteria.game.character.player.skill.Skills;
 import com.asteria.game.item.container.Equipment;
 import com.asteria.game.location.Location;
-import com.asteria.task.Task;
-import com.asteria.task.TaskHandler;
+import com.asteria.game.task.Task;
+import com.asteria.game.task.TaskHandler;
 
 /**
  * The enumerated type whose elements represent the combat special attacks.

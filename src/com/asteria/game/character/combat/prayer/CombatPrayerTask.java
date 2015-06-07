@@ -3,7 +3,7 @@ package com.asteria.game.character.combat.prayer;
 import com.asteria.game.character.combat.Combat;
 import com.asteria.game.character.player.Player;
 import com.asteria.game.character.player.skill.Skills;
-import com.asteria.task.Task;
+import com.asteria.game.task.Task;
 
 /**
  * The {@link Task} extension that handles the draining of prayer.

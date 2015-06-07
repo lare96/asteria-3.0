@@ -8,8 +8,8 @@ import java.util.function.Consumer;
 
 import com.asteria.game.character.player.Player;
 import com.asteria.game.location.Position;
-import com.asteria.task.Task;
-import com.asteria.task.TaskHandler;
+import com.asteria.game.task.Task;
+import com.asteria.game.task.TaskHandler;
 
 /**
  * The node manager that manages all registered object nodes.

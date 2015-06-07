@@ -7,6 +7,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
+import plugin.minigames.fightcaves.FightCavesHandler;
+
 import com.asteria.game.character.Animation;
 import com.asteria.game.character.AnimationPriority;
 import com.asteria.game.character.CharacterDeath;
@@ -24,8 +26,6 @@ import com.asteria.game.item.container.Equipment;
 import com.asteria.game.location.Position;
 import com.asteria.utility.RandomGen;
 import com.asteria.utility.Settings;
-
-import plugin.minigames.fightcaves.FightCavesHandler;
 
 /**
  * The character death implementation that handles player death.

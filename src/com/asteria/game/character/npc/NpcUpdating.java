@@ -6,10 +6,10 @@ import com.asteria.game.World;
 import com.asteria.game.character.Flag;
 import com.asteria.game.character.player.Player;
 import com.asteria.game.location.Position;
+import com.asteria.game.task.TaskHandler;
 import com.asteria.network.ByteOrder;
 import com.asteria.network.DataBuffer;
 import com.asteria.network.ValueType;
-import com.asteria.task.TaskHandler;
 import com.asteria.utility.BitMask;
 
 /**

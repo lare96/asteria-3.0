@@ -6,7 +6,7 @@ import com.asteria.game.character.Flag;
 import com.asteria.game.character.combat.CombatType;
 import com.asteria.game.character.player.Player;
 import com.asteria.game.character.player.skill.Skills;
-import com.asteria.task.TaskHandler;
+import com.asteria.game.task.TaskHandler;
 import com.asteria.utility.TextUtils;
 
 /**

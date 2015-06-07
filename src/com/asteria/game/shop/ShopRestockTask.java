@@ -3,7 +3,7 @@ package com.asteria.game.shop;
 import java.util.Objects;
 
 import com.asteria.game.item.Item;
-import com.asteria.task.Task;
+import com.asteria.game.task.Task;
 
 /**
  * The task that will restock items in shop containers when needed.

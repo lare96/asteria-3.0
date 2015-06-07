@@ -1,14 +1,15 @@
 package plugin.objects
 
-import com.asteria.game.character.Animation
 import com.asteria.game.character.player.Player
 import com.asteria.game.character.player.content.Spellbook
 import com.asteria.game.character.player.content.ViewingOrb
 import com.asteria.game.character.player.skill.Skills
-import com.asteria.game.location.Position
+import com.asteria.game.location.Position;
+import com.asteria.game.model.character.Animation;
 import com.asteria.game.plugin.PluginListener
 import com.asteria.game.plugin.PluginSignature
 import com.asteria.game.plugin.context.ObjectFirstClickPlugin
+
 import plugin.minigames.fightcaves.FightCavesHandler
 
 @PluginSignature(ObjectFirstClickPlugin.class)

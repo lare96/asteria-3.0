@@ -1,4 +1,4 @@
-package com.asteria.task;
+package com.asteria.game.task;
 
 import java.util.ArrayDeque;
 import java.util.Iterator;

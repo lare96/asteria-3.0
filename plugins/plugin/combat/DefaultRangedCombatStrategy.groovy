@@ -1,6 +1,6 @@
 package plugin.combat
 
-import com.asteria.game.NodeType
+import com.asteria.game.NodeType;
 import com.asteria.game.character.*
 import com.asteria.game.character.combat.Combat
 import com.asteria.game.character.combat.CombatSessionData
@@ -8,11 +8,16 @@ import com.asteria.game.character.combat.CombatStrategy
 import com.asteria.game.character.combat.CombatType
 import com.asteria.game.character.combat.ranged.CombatRangedAmmo
 import com.asteria.game.character.combat.weapon.FightStyle
-import com.asteria.game.character.npc.Npc
 import com.asteria.game.character.player.Player
 import com.asteria.game.character.player.content.WeaponInterface
-import com.asteria.game.item.Item
-import com.asteria.game.item.container.Equipment
+import com.asteria.game.model.character.Animation;
+import com.asteria.game.model.character.CharacterNode;
+import com.asteria.game.model.character.Flag;
+import com.asteria.game.model.character.Graphic;
+import com.asteria.game.model.character.Projectile;
+import com.asteria.game.model.character.npc.Npc;
+import com.asteria.game.model.item.Item;
+import com.asteria.game.model.item.container.Equipment;
 import com.asteria.game.plugin.PluginSignature
 
 @PluginSignature(CombatStrategy.class)

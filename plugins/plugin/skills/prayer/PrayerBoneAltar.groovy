@@ -1,12 +1,12 @@
 package plugin.skills.prayer
 
-import com.asteria.game.character.Animation
 import com.asteria.game.character.player.Player
 import com.asteria.game.character.player.skill.SkillData
 import com.asteria.game.character.player.skill.action.DestructionSkillAction
 import com.asteria.game.character.player.skill.action.SkillAction
-import com.asteria.game.item.Item
-import com.asteria.game.location.Position
+import com.asteria.game.location.Position;
+import com.asteria.game.model.character.Animation;
+import com.asteria.game.model.item.Item;
 import com.asteria.game.plugin.PluginSignature
 import com.asteria.task.Task
 

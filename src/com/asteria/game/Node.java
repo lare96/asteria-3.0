@@ -6,6 +6,7 @@ import com.asteria.game.character.npc.Npc;
 import com.asteria.game.character.player.Player;
 import com.asteria.game.item.ItemNode;
 import com.asteria.game.location.Position;
+import com.asteria.game.object.ObjectNode;
 
 /**
  * The parent class that represents anything that can be interacted with. This

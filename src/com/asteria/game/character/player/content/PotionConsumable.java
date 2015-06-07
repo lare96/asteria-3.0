@@ -1,6 +1,12 @@
 package com.asteria.game.character.player.content;
 
-import static com.asteria.game.character.player.skill.Skills.*;
+import static com.asteria.game.character.player.skill.Skills.ATTACK;
+import static com.asteria.game.character.player.skill.Skills.DEFENCE;
+import static com.asteria.game.character.player.skill.Skills.HITPOINTS;
+import static com.asteria.game.character.player.skill.Skills.MAGIC;
+import static com.asteria.game.character.player.skill.Skills.PRAYER;
+import static com.asteria.game.character.player.skill.Skills.RANGED;
+import static com.asteria.game.character.player.skill.Skills.STRENGTH;
 
 import java.util.Optional;
 
@@ -9,8 +15,8 @@ import com.asteria.game.character.player.Player;
 import com.asteria.game.character.player.skill.Skill;
 import com.asteria.game.character.player.skill.Skills;
 import com.asteria.game.item.Item;
-import com.asteria.task.Task;
-import com.asteria.task.TaskHandler;
+import com.asteria.game.task.Task;
+import com.asteria.game.task.TaskHandler;
 
 /**
  * The enumerated type managing consumable potion types.

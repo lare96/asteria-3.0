@@ -1,10 +1,10 @@
 package com.asteria.game.character.combat.effect;
 
+import plugin.minigames.fightcaves.FightCavesHandler;
+
 import com.asteria.game.character.Flag;
 import com.asteria.game.character.player.Player;
-import com.asteria.task.TaskHandler;
-
-import plugin.minigames.fightcaves.FightCavesHandler;
+import com.asteria.game.task.TaskHandler;
 
 /**
  * The combat effect applied when a player needs to be skulled.

@@ -1,7 +1,7 @@
 package plugin.items
 
 import com.asteria.game.character.player.Player
-import com.asteria.game.item.Item
+import com.asteria.game.model.item.Item;
 import com.asteria.game.plugin.PluginListener
 import com.asteria.game.plugin.PluginSignature
 import com.asteria.game.plugin.context.ItemFirstClickPlugin

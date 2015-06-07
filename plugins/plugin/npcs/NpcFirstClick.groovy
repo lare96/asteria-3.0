@@ -2,12 +2,13 @@ package plugin.npcs
 
 import com.asteria.game.character.player.Player
 import com.asteria.game.character.player.dialogue.*
-import com.asteria.game.item.Item
-import com.asteria.game.location.Position
+import com.asteria.game.location.Position;
+import com.asteria.game.model.item.Item;
 import com.asteria.game.plugin.PluginListener
 import com.asteria.game.plugin.PluginSignature
 import com.asteria.game.plugin.context.NpcFirstClickPlugin
 import com.asteria.game.shop.Shop
+
 import plugin.minigames.fightcaves.FightCavesHandler
 import plugin.skills.fishing.Fishing
 import plugin.skills.fishing.Tool

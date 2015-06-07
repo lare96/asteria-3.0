@@ -3,6 +3,10 @@ package com.asteria.game.character.combat;
 import java.util.HashMap;
 import java.util.Map;
 
+import plugin.combat.DefaultMagicCombatStrategy;
+import plugin.combat.DefaultMeleeCombatStrategy;
+import plugin.combat.DefaultRangedCombatStrategy;
+
 import com.asteria.game.NodeType;
 import com.asteria.game.character.CharacterNode;
 import com.asteria.game.character.Hit;
@@ -20,13 +24,9 @@ import com.asteria.game.character.player.skill.Skills;
 import com.asteria.game.item.Item;
 import com.asteria.game.item.container.Equipment;
 import com.asteria.game.location.Position;
-import com.asteria.task.TaskHandler;
+import com.asteria.game.task.TaskHandler;
 import com.asteria.utility.RandomGen;
 import com.asteria.utility.Settings;
-
-import plugin.combat.DefaultMagicCombatStrategy;
-import plugin.combat.DefaultMeleeCombatStrategy;
-import plugin.combat.DefaultRangedCombatStrategy;
 
 /**
  * A collection of utility methods and constants related to combat.

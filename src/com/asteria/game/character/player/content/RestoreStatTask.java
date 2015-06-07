@@ -6,8 +6,8 @@ import com.asteria.game.character.combat.weapon.CombatSpecial;
 import com.asteria.game.character.player.Player;
 import com.asteria.game.character.player.Rights;
 import com.asteria.game.character.player.skill.Skills;
-import com.asteria.task.Task;
-import com.asteria.task.TaskHandler;
+import com.asteria.game.task.Task;
+import com.asteria.game.task.TaskHandler;
 
 /**
  * The class that handles the restoration of weakened skills.

@@ -1,5 +1,8 @@
 package com.asteria.network.packet.impl;
 
+import plugin.skills.prayer.Bone;
+import plugin.skills.prayer.PrayerBoneAltar;
+
 import com.asteria.game.character.player.Player;
 import com.asteria.game.item.Item;
 import com.asteria.game.location.Position;
@@ -9,9 +12,6 @@ import com.asteria.network.ByteOrder;
 import com.asteria.network.DataBuffer;
 import com.asteria.network.ValueType;
 import com.asteria.network.packet.PacketDecoder;
-
-import plugin.skills.prayer.Bone;
-import plugin.skills.prayer.PrayerBoneAltar;
 
 /**
  * The packet sent from the client when a player uses an item on an object.

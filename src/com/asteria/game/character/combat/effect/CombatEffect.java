@@ -1,7 +1,7 @@
 package com.asteria.game.character.combat.effect;
 
 import com.asteria.game.character.CharacterNode;
-import com.asteria.task.Task;
+import com.asteria.game.task.Task;
 
 /**
  * An effect that usually takes places as a result of combat.

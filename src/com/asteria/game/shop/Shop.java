@@ -12,7 +12,7 @@ import com.asteria.game.character.player.Player;
 import com.asteria.game.item.Item;
 import com.asteria.game.item.container.ItemContainer;
 import com.asteria.game.item.container.ItemContainerPolicy;
-import com.asteria.task.TaskHandler;
+import com.asteria.game.task.TaskHandler;
 import com.asteria.utility.Settings;
 import com.asteria.utility.TextUtils;
 

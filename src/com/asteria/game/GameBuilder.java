@@ -12,8 +12,8 @@ import com.asteria.game.character.player.content.RestoreStatTask;
 import com.asteria.game.character.player.minigame.MinigameHandler;
 import com.asteria.game.character.player.serialize.PlayerSerialization;
 import com.asteria.game.item.ItemNodeManager;
+import com.asteria.game.task.TaskHandler;
 import com.asteria.network.ServerReactor;
-import com.asteria.task.TaskHandler;
 import com.asteria.utility.Settings;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 

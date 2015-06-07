@@ -10,7 +10,7 @@ import com.asteria.game.character.combat.CombatType;
 import com.asteria.game.character.combat.effect.CombatPoisonEffect;
 import com.asteria.game.character.combat.magic.CombatWeaken;
 import com.asteria.game.location.Position;
-import com.asteria.task.TaskHandler;
+import com.asteria.game.task.TaskHandler;
 
 /**
  * The character implementation that represents a node that is operated by the

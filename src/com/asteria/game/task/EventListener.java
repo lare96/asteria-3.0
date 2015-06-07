@@ -1,4 +1,4 @@
-package com.asteria.task;
+package com.asteria.game.task;
 
 /**
  * An event listener is a {@link Task} implementation that executes an

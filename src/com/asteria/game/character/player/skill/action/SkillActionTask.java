@@ -2,7 +2,7 @@ package com.asteria.game.character.player.skill.action;
 
 import com.asteria.game.character.player.IOState;
 import com.asteria.game.character.player.Player;
-import com.asteria.task.Task;
+import com.asteria.game.task.Task;
 
 /**
  * The skill action task whose job is to process and execute the various

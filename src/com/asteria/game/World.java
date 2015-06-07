@@ -12,8 +12,6 @@ import com.asteria.game.character.npc.Npc;
 import com.asteria.game.character.player.Player;
 import com.asteria.game.item.ItemNodeManager;
 import com.asteria.game.object.ObjectNodeManager;
-import com.asteria.game.service.ConcurrentUpdateService;
-import com.asteria.game.service.SequentialUpdateService;
 
 /**
  * The static utility class that contains functions to manage and process game

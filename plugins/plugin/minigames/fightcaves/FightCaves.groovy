@@ -1,11 +1,11 @@
 package plugin.minigames.fightcaves
 
-import com.asteria.game.NodeType
-import com.asteria.game.character.CharacterNode
+import com.asteria.game.NodeType;
 import com.asteria.game.character.player.Player
 import com.asteria.game.character.player.minigame.Minigame
 import com.asteria.game.character.player.minigame.SequencedMinigame
-import com.asteria.game.location.Position
+import com.asteria.game.location.Position;
+import com.asteria.game.model.character.CharacterNode;
 import com.asteria.game.plugin.PluginSignature
 
 import java.util.concurrent.TimeUnit

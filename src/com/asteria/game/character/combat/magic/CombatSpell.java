@@ -10,8 +10,8 @@ import com.asteria.game.character.Graphic;
 import com.asteria.game.character.Projectile;
 import com.asteria.game.character.Spell;
 import com.asteria.game.character.npc.Npc;
-import com.asteria.task.Task;
-import com.asteria.task.TaskHandler;
+import com.asteria.game.task.Task;
+import com.asteria.game.task.TaskHandler;
 
 /**
  * The {@link Spell} extension with support for combat related functions such as

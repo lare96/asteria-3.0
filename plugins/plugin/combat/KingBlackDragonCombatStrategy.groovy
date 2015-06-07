@@ -1,17 +1,17 @@
 package plugin.combat
 
-import com.asteria.game.NodeType
+import com.asteria.game.NodeType;
 import com.asteria.game.World
-import com.asteria.game.character.Animation
-import com.asteria.game.character.CharacterNode
-import com.asteria.game.character.Hit
 import com.asteria.game.character.combat.*
 import com.asteria.game.character.combat.magic.CombatSpells
 import com.asteria.game.character.combat.prayer.CombatPrayer
-import com.asteria.game.character.npc.Npc
 import com.asteria.game.character.player.Player
-import com.asteria.game.location.Location
-import com.asteria.game.location.SquareLocation
+import com.asteria.game.location.Location;
+import com.asteria.game.location.SquareLocation;
+import com.asteria.game.model.character.Animation;
+import com.asteria.game.model.character.CharacterNode;
+import com.asteria.game.model.character.Hit;
+import com.asteria.game.model.character.npc.Npc;
 import com.asteria.game.plugin.PluginSignature
 import com.asteria.network.packet.PacketEncoder
 import com.asteria.task.Task

@@ -7,8 +7,8 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 
 import com.asteria.game.character.player.Player;
-import com.asteria.task.Task;
-import com.asteria.task.TaskHandler;
+import com.asteria.game.task.Task;
+import com.asteria.game.task.TaskHandler;
 
 /**
  * The class that contains methods to handle the functionality of minigames.

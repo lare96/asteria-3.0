@@ -6,8 +6,8 @@ import com.asteria.game.NodeType;
 import com.asteria.game.character.CharacterNode;
 import com.asteria.game.character.npc.Npc;
 import com.asteria.game.character.player.Player;
-import com.asteria.task.EventListener;
-import com.asteria.task.TaskHandler;
+import com.asteria.game.task.EventListener;
+import com.asteria.game.task.TaskHandler;
 
 /**
  * Controls and gives access to the main parts of the combat process such as
