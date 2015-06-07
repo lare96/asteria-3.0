@@ -14,6 +14,10 @@ import java.util.stream.Stream;
  * A collection that provides functionality for storing and managing characters.
  * This list does not support the storage of elements with a value of
  * {@code null}, and maintains an extremely strict ordering of the elements.
+ * This list for storing characters will be faster than typical implementations,
+ * mainly due to the fact that it caches the last slot that a character was
+ * removed from in order to reduce the amount of lookups needed to add a new
+ * one.
  *
  * @param <E>
  *            the type of character being managed with this collection.
