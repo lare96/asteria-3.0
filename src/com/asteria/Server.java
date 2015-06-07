@@ -37,9 +37,10 @@ public final class Server {
     public static void main(String[] args) {
         try {
             Preconditions.checkState(args.length == 0, "No runtime arguments needed!");
+            logger.info("Initializing the bootstrap...");
             ServerBootstrap bootstrap = new ServerBootstrap(Settings.PORT);
             bootstrap.bind();
-            logger.info(Settings.NAME + " is now online!");
+            logger.info("The bootstrap has been bound, " + Settings.NAME + " is now online!");
         } catch (Exception e) {
             logger.log(Level.SEVERE, "An error occurred while binding the bootstrap!", e);
 
