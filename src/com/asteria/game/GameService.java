@@ -15,7 +15,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 
 /**
- * The main game sequencer that executes game logic every {@code 600}ms. This
+ * The main game sequencer that executes game logic every {@code CYCLE_RATE}ms. This
  * also gives access to a single threaded {@link ScheduledExecutorService} which
  * allows for the execution of low priority asynchronous services.
  * 
