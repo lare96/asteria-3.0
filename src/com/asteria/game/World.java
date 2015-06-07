@@ -5,13 +5,21 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Phaser;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.ThreadPoolExecutor.CallerRunsPolicy;
 
 import com.asteria.game.character.CharacterList;
 import com.asteria.game.character.CharacterNode;
 import com.asteria.game.character.npc.Npc;
+import com.asteria.game.character.npc.NpcUpdating;
 import com.asteria.game.character.player.Player;
+import com.asteria.game.character.player.PlayerUpdating;
 import com.asteria.game.item.ItemNodeManager;
 import com.asteria.game.object.ObjectNodeManager;
+import com.google.common.util.concurrent.ThreadFactoryBuilder;
 
 /**
  * The static utility class that contains functions to manage and process game
@@ -156,4 +164,189 @@ public final class World {
         return service;
     }
 
+    /**
+     * The concurrent update service that will execute the update sequence in
+     * parallel using {@link Runtime#availableProcessors()} threads. If the
+     * hosting computer has more than one core, is it guaranteed that this
+     * update service will perform better than {@link SequentialUpdateService}.
+     *
+     * @author lare96 <http://github.com/lare96>
+     */
+    private static final class ConcurrentUpdateService implements Runnable {
+
+        /**
+         * The phaser keeps the entire update sequence in proper synchronization
+         * with the main game thread.
+         */
+        private final Phaser synchronizer = new Phaser(1);
+
+        /**
+         * The executor that allows us to utilize multiple threads to update in
+         * parallel.
+         */
+        private final ExecutorService updateService = ConcurrentUpdateService.create();
+
+        @Override
+        public void run() {
+
+            // Sequence movement and perform sequential processing for players.
+            World.getPlayers().forEach(player -> {
+                try {
+                    player.sequence();
+                    player.getMovementQueue().sequence();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    World.getPlayers().remove(player);
+                }
+            });
+
+            // Sequence movement and perform sequential processing for npcs.
+            World.getNpcs().forEach(npc -> {
+                try {
+                    npc.sequence();
+                    npc.getMovementQueue().sequence();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    World.getNpcs().remove(npc);
+                }
+            });
+
+            // Update players for players, and npcs for players.
+            synchronizer.bulkRegister(World.getPlayers().size());
+            World.getPlayers().forEach(player -> updateService.execute(() -> {
+                synchronized (player) {
+                    try {
+                        PlayerUpdating.update(player);
+                        NpcUpdating.update(player);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        World.getPlayers().remove(player);
+                    } finally {
+                        synchronizer.arriveAndDeregister();
+                    }
+                }
+            }));
+            synchronizer.arriveAndAwaitAdvance();
+
+            // Prepare players for the next update sequence.
+            synchronizer.bulkRegister(World.getPlayers().size());
+            World.getPlayers().forEach(player -> updateService.execute(() -> {
+                synchronized (player) {
+                    try {
+                        player.reset();
+                        player.setCachedUpdateBlock(null);
+                        player.getSession().getPacketCount().set(0);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        World.getPlayers().remove(player);
+                    } finally {
+                        synchronizer.arriveAndDeregister();
+                    }
+                }
+            }));
+            synchronizer.arriveAndAwaitAdvance();
+
+            // Prepare npcs for the next update sequence.
+            synchronizer.bulkRegister(World.getNpcs().size());
+            World.getNpcs().forEach(npc -> updateService.execute(() -> {
+                synchronized (npc) {
+                    try {
+                        npc.reset();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        World.getNpcs().remove(npc);
+                    } finally {
+                        synchronizer.arriveAndDeregister();
+                    }
+                }
+            }));
+            synchronizer.arriveAndAwaitAdvance();
+        }
+
+        /**
+         * Creates and configures the update service that will execute updating
+         * in parallel for characters. The returned executor is
+         * <b>unconfigurable</b> meaning it's configuration can no longer be
+         * modified.
+         *
+         * @return the newly created and configured update service.
+         */
+        private static ExecutorService create() {
+            int nThreads = Runtime.getRuntime().availableProcessors();
+            ScheduledThreadPoolExecutor executor = (ScheduledThreadPoolExecutor) Executors.newScheduledThreadPool(nThreads);
+            executor.setRejectedExecutionHandler(new CallerRunsPolicy());
+            executor.setThreadFactory(new ThreadFactoryBuilder().setNameFormat("UpdateServiceThread").build());
+            return Executors.unconfigurableScheduledExecutorService(executor);
+        }
+    }
+
+    /**
+     * The sequential update service that will execute the update sequence
+     * sequentially. This service should only be used if the hosting computer has
+     * one core. If the hosting computer has more than one core, better performance
+     * is guaranteed with {@link ConcurrentUpdateService}.
+     *
+     * @author lare96 <http://github.com/lare96>
+     */
+    private static final class SequentialUpdateService implements Runnable {
+
+        @Override
+        public void run() {
+
+            // Update movement for players.
+            World.getPlayers().forEach(player -> {
+                try {
+                    player.sequence();
+                    player.getMovementQueue().sequence();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    World.getPlayers().remove(player);
+                }
+            });
+
+            // Update movement for npcs.
+            World.getNpcs().forEach(npc -> {
+                try {
+                    npc.sequence();
+                    npc.getMovementQueue().sequence();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    World.getNpcs().remove(npc);
+                }
+            });
+
+            // Update players for players, and npcs for players.
+            World.getPlayers().forEach(player -> {
+                try {
+                    PlayerUpdating.update(player);
+                    NpcUpdating.update(player);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    World.getPlayers().remove(player);
+                }
+            });
+
+            // Prepare players for the next update sequence.
+            World.getPlayers().forEach(player -> {
+                try {
+                    player.reset();
+                    player.setCachedUpdateBlock(null);
+                    player.getSession().getPacketCount().set(0);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    World.getPlayers().remove(player);
+                }
+            });
+
+            // Prepare npcs for the next update sequence.
+            World.getNpcs().forEach(npc -> {
+                try {
+                    npc.reset();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    World.getNpcs().remove(npc);
+                }
+            });
+        }
+    }
 }
