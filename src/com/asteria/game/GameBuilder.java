@@ -33,16 +33,6 @@ public final class GameBuilder {
         "GameThread").build());
 
     /**
-     * The selector that will select network events.
-     */
-    private Selector selector;
-
-    /**
-     * The socket channel that the server will listen on.
-     */
-    private ServerSocketChannel channel;
-
-    /**
      * Creates the game by submitting the game service it to an executor that
      * will run it every {@code CYCLE_RATE}ms, as well as executing any network
      * and worldly logic that needs to be initialized.
@@ -53,8 +43,8 @@ public final class GameBuilder {
      *             if any errors occur whilst creating the game.
      */
     public void create(int port) throws Exception {
-        selector = Selector.open();
-        channel = ServerSocketChannel.open();
+        Selector selector = Selector.open();
+        ServerSocketChannel channel = ServerSocketChannel.open();
         channel.configureBlocking(false);
         channel.socket().bind(new InetSocketAddress(port));
         channel.register(selector, SelectionKey.OP_ACCEPT);
