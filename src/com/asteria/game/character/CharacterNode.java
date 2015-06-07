@@ -15,7 +15,6 @@ import com.asteria.game.character.npc.Npc;
 import com.asteria.game.character.player.Player;
 import com.asteria.game.location.Position;
 import com.asteria.task.Task;
-import com.asteria.task.TaskQueue;
 import com.asteria.utility.Stopwatch;
 import com.google.common.base.Preconditions;
 
