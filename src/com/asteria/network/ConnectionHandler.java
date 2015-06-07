@@ -11,7 +11,7 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import com.asteria.game.GameService;
+import com.asteria.game.World;
 import com.asteria.game.character.player.login.LoginResponse;
 import com.asteria.utility.Stopwatch;
 
@@ -111,7 +111,7 @@ public final class ConnectionHandler {
     public static void addIPBan(String host) {
         if (ConnectionHandler.isLocal(host))
             return;
-        GameService.getLogicService().execute(() -> {
+        World.getService().submit(() -> {
             if (BANNED.contains(host))
                 return;
             try (FileWriter out = new FileWriter(Paths.get("./data/", "banned_ips.txt").toFile(), true)) {

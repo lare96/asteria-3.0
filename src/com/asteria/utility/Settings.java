@@ -2,6 +2,7 @@ package com.asteria.utility;
 
 import java.math.BigInteger;
 
+import com.asteria.game.GameService;
 import com.asteria.game.item.Item;
 import com.asteria.game.location.Position;
 
@@ -22,6 +23,11 @@ public final class Settings {
      * The port that this server will bind to.
      */
     public static final int PORT = 43594;
+
+    /**
+     * The cycle rate of the {@link GameService}.
+     */
+    public static final int CYCLE_RATE = 600;
 
     /**
      * Determines if debugging messages should be printed or not.

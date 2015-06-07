@@ -1,6 +1,8 @@
 package com.asteria.network;
 
 import java.nio.channels.SelectionKey;
+import java.nio.channels.Selector;
+import java.nio.channels.ServerSocketChannel;
 import java.util.Optional;
 
 import com.asteria.network.impl.AcceptRequestServerEvent;
@@ -21,13 +23,27 @@ public final class ServerSelectionKey {
     private final SelectionKey key;
 
     /**
+     * The internal selector that determined this network event, wrapped by this
+     * container.
+     */
+    private final Selector selector;
+
+    /**
+     * The internal channel that the server is listening on, wrapped by this
+     * container.
+     */
+    private final ServerSocketChannel channel;
+
+    /**
      * Creates a new {@link ServerSelectionKey}.
      *
      * @param key
      *            the internal selection key wrapped by this container.
      */
-    public ServerSelectionKey(SelectionKey key) {
+    public ServerSelectionKey(SelectionKey key, Selector selector, ServerSocketChannel channel) {
         this.key = key;
+        this.selector = selector;
+        this.channel = channel;
     }
 
     /**
@@ -54,5 +70,25 @@ public final class ServerSelectionKey {
      */
     public SelectionKey getKey() {
         return key;
+    }
+
+    /**
+     * Gets the internal selector that determined this network event, wrapped by
+     * this container.
+     *
+     * @return the internal selector.
+     */
+    public Selector getSelector() {
+        return selector;
+    }
+
+    /**
+     * Gets the internal channel that the server is listening on, wrapped by
+     * this container.
+     *
+     * @return the internal channel.
+     */
+    public ServerSocketChannel getChannel() {
+        return channel;
     }
 }

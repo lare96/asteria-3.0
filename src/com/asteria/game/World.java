@@ -24,6 +24,11 @@ import com.asteria.game.service.SequentialUpdateService;
 public final class World {
 
     /**
+     * The flag that determines if processing should be parallelized.
+     */
+    private static final boolean PARALLEL_PROCESSING = (Runtime.getRuntime().availableProcessors() > 1);
+
+    /**
      * The collection of active players.
      */
     private static CharacterList<Player> players = new CharacterList<>(2000);
@@ -34,9 +39,9 @@ public final class World {
     private static CharacterList<Npc> npcs = new CharacterList<>(5000);
 
     /**
-     * The flag that determines if processing should be parallelized.
+     * The game service that processes this world.
      */
-    private static final boolean PARALLEL_PROCESSING = (Runtime.getRuntime().availableProcessors() > 1);
+    private static GameService service = new GameService();
 
     /**
      * The default constructor, will throw an
@@ -143,4 +148,14 @@ public final class World {
     public static CharacterList<Npc> getNpcs() {
         return npcs;
     }
+
+    /**
+     * Returns the game service that processes this world.
+     * 
+     * @return the game service.
+     */
+    public static GameService getService() {
+        return service;
+    }
+
 }

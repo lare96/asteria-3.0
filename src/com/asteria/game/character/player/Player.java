@@ -8,7 +8,9 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.logging.Logger;
 
-import com.asteria.game.GameService;
+import plugin.minigames.fightcaves.FightCavesHandler;
+import plugin.skills.cooking.CookingData;
+
 import com.asteria.game.NodeType;
 import com.asteria.game.World;
 import com.asteria.game.character.CharacterNode;
@@ -59,9 +61,6 @@ import com.asteria.utility.MutableNumber;
 import com.asteria.utility.Settings;
 import com.asteria.utility.Stopwatch;
 import com.asteria.utility.TextUtils;
-
-import plugin.minigames.fightcaves.FightCavesHandler;
-import plugin.skills.cooking.CookingData;
 
 /**
  * The character implementation that represents a node that is operated by an
@@ -717,7 +716,7 @@ public final class Player extends CharacterNode {
     public void save() {
         if (session.getState() != IOState.LOGGED_IN)
             return;
-        GameService.getLogicService().execute(() -> new PlayerSerialization(this).serialize());
+        World.getService().submit(() -> new PlayerSerialization(this).serialize());
     }
 
     /**

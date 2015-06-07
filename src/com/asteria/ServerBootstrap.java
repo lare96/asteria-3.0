@@ -2,18 +2,11 @@ package com.asteria;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import com.asteria.game.GameService;
-import com.asteria.game.character.player.content.RestoreStatTask;
-import com.asteria.game.character.player.minigame.MinigameHandler;
-import com.asteria.game.character.player.serialize.PlayerSerialization;
-import com.asteria.game.item.ItemNodeManager;
+import com.asteria.game.GameBuilder;
 import com.asteria.game.plugin.PluginHandler;
 import com.asteria.network.ConnectionHandler;
-import com.asteria.network.ServerHandler;
-import com.asteria.task.TaskHandler;
 import com.asteria.utility.json.ItemDefinitionLoader;
 import com.asteria.utility.json.ItemNodeLoader;
 import com.asteria.utility.json.NpcDefinitionLoader;
@@ -47,10 +40,9 @@ public final class ServerBootstrap {
         "ServiceLoaderThread").build());
 
     /**
-     * The scheduled executor service that will run the {@link GameService}.
+     * The builder that will create and run game {@link java.lang.Object}s.
      */
-    private final ScheduledExecutorService sequencer = Executors.newSingleThreadScheduledExecutor(new ThreadFactoryBuilder().setNameFormat(
-        "GameThread").build());
+    private final GameBuilder builder = new GameBuilder();
 
     /**
      * The port that this server builder will bind the network on.
@@ -82,15 +74,10 @@ public final class ServerBootstrap {
     public void bind() throws Exception {
         Preconditions.checkState(!serviceLoader.isShutdown(), "The bootstrap has been bound already!");
         executeServiceLoad();
-        ServerHandler.start(port);
         serviceLoader.shutdown();
         if (!serviceLoader.awaitTermination(15, TimeUnit.MINUTES))
             throw new IllegalStateException("The background service load took too long!");
-        sequencer.scheduleAtFixedRate(new GameService(), 0, 600, TimeUnit.MILLISECONDS);
-        TaskHandler.submit(new ItemNodeManager());
-        TaskHandler.submit(new RestoreStatTask());
-        TaskHandler.submit(new MinigameHandler());
-        PlayerSerialization.getCache().init();
+        builder.create(port);
     }
 
     /**

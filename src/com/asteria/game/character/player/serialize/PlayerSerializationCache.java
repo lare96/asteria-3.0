@@ -5,7 +5,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.asteria.game.GameService;
+import com.asteria.game.World;
 import com.asteria.utility.LoggerUtils;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
@@ -30,7 +30,7 @@ public final class PlayerSerializationCache implements Runnable {
     /**
      * The logger that will print important information.
      */
-    private static Logger logger = LoggerUtils.getLogger(PlayerSerializationCache.class);
+    private final Logger logger = LoggerUtils.getLogger(PlayerSerializationCache.class);
 
     /**
      * The collection of character files that have been cached by the
@@ -77,7 +77,7 @@ public final class PlayerSerializationCache implements Runnable {
      */
     public void init() {
         if (automatic)
-            GameService.getLogicService().scheduleAtFixedRate(this, 15, 15, TimeUnit.MINUTES);
+            World.getService().submit(this, 15, TimeUnit.MINUTES);
     }
 
     /**

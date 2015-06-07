@@ -6,7 +6,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import com.asteria.game.character.player.PlayerIO;
 import com.asteria.network.ConnectionHandler;
-import com.asteria.network.ServerHandler;
 import com.asteria.network.ServerSelectionEvent;
 import com.asteria.network.ServerSelectionKey;
 
@@ -34,12 +33,12 @@ public final class AcceptRequestServerEvent extends ServerSelectionEvent {
     @Override
     public void executeEvent(ServerSelectionKey key) throws Exception {
         SocketChannel socket;
-        while ((socket = ServerHandler.getServer().accept()) != null) {
+        while ((socket = key.getChannel().accept()) != null) {
             if (counter.getAndIncrement() > 5)
                 break;
             String host = socket.socket().getInetAddress().getHostAddress();
             socket.configureBlocking(false);
-            SelectionKey newKey = socket.register(ServerHandler.getSelector(), SelectionKey.OP_READ);
+            SelectionKey newKey = socket.register(key.getSelector(), SelectionKey.OP_READ);
             newKey.attach(new PlayerIO(newKey, ConnectionHandler.evaluate(host)));
         }
     }
