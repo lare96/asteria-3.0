@@ -191,7 +191,7 @@ public final class CombatSession extends Task {
         }
         Player player = (Player) builder.getVictim();
 
-        if (CombatPrayer.isActivated(player, CombatPrayer.getProtectingPrayer(data.getType()))) {
+        if (CombatPrayer.isActivated(player, Combat.getProtectingPrayer(data.getType()))) {
             switch (builder.getCharacter().getType()) {
             case PLAYER:
                 for (CombatHit h : data.getHits()) {

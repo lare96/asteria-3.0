@@ -1,18 +1,18 @@
 package plugin.combat
 
-import com.asteria.game.NodeType;
+import com.asteria.game.NodeType
+import com.asteria.game.character.Animation
+import com.asteria.game.character.AnimationPriority
+import com.asteria.game.character.CharacterNode
 import com.asteria.game.character.combat.CombatSessionData
 import com.asteria.game.character.combat.CombatStrategy
 import com.asteria.game.character.combat.CombatType
 import com.asteria.game.character.combat.weapon.FightType
+import com.asteria.game.character.npc.Npc
 import com.asteria.game.character.player.Player
 import com.asteria.game.character.player.content.WeaponInterface
-import com.asteria.game.model.character.Animation;
-import com.asteria.game.model.character.AnimationPriority;
-import com.asteria.game.model.character.CharacterNode;
-import com.asteria.game.model.character.npc.Npc;
-import com.asteria.game.model.item.Item;
-import com.asteria.game.model.item.container.Equipment;
+import com.asteria.game.item.Item
+import com.asteria.game.item.container.Equipment
 import com.asteria.game.plugin.PluginSignature
 
 @PluginSignature(CombatStrategy.class)

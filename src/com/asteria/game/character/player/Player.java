@@ -55,7 +55,6 @@ import com.asteria.game.shop.Shop;
 import com.asteria.network.ConnectionHandler;
 import com.asteria.network.packet.PacketEncoder;
 import com.asteria.task.Task;
-import com.asteria.task.TaskQueue;
 import com.asteria.utility.LoggerUtils;
 import com.asteria.utility.MutableNumber;
 import com.asteria.utility.Settings;
@@ -461,7 +460,7 @@ public final class Player extends CharacterNode {
         encoder.sendByteState(108, 0);
         encoder.sendByteState(301, 0);
         encoder.sendString(runEnergy + "%", 149);
-        CombatPrayer.resetPrayerGlows(this);
+        CombatPrayer.PRAYERS.values().forEach(c -> encoder.sendByteState(c.getConfig(), 0));
         logger.info(this + " has logged in.");
         session.setState(IOState.LOGGED_IN);
         session.getTimeout().reset();

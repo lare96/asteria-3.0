@@ -241,7 +241,7 @@ public enum CombatSpells {
             if (!castOn.weaken(CombatWeaken.STRENGTH_LOW) && cast.getType() == NodeType.PLAYER) {
                 Player player = (Player) cast;
                 String s = castOn.getType().name().toLowerCase();
-                player.getEncoder().sendMessage("The spell has no effect " + "because the " + s + " has already been weakened.");
+                player.getEncoder().sendMessage("The spell has no effect because the " + s + " has already been weakened.");
             }
         }
 

@@ -1,6 +1,7 @@
 package com.asteria.game;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -116,6 +117,36 @@ public final class World {
         if (username == null)
             return Optional.empty();
         return players.search(player -> player.getUsername().equals(username));
+    }
+
+    /**
+     * Retrieves and returns the local {@link Player}s for {@code character}.
+     * The specific players returned is completely dependent on the character
+     * given in the argument.
+     * 
+     * @param character
+     *            the character that it will be returned for.
+     * @return the local players.
+     */
+    public static Iterator<Player> getLocalPlayers(CharacterNode character) {
+        if(character.getType() == NodeType.PLAYER)
+            return ((Player) character).getLocalPlayers().iterator();
+        return players.iterator();
+    }
+
+    /**
+     * Retrieves and returns the local {@link Npc}s for {@code character}. The
+     * specific npcs returned is completely dependent on the character given in
+     * the argument.
+     * 
+     * @param character
+     *            the character that it will be returned for.
+     * @return the local npcs.
+     */
+    public static Iterator<Npc> getLocalNpcs(CharacterNode character) {
+        if (character.getType() == NodeType.PLAYER)
+            return ((Player) character).getLocalNpcs().iterator();
+        return npcs.iterator();
     }
 
     /**

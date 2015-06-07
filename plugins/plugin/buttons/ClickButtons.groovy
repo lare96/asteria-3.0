@@ -1,5 +1,11 @@
 package plugin.buttons
 
+import java.util.concurrent.TimeUnit
+import java.util.function.Function
+import java.util.logging.Logger
+
+import plugin.skills.cooking.Cooking
+
 import com.asteria.game.World
 import com.asteria.game.character.combat.magic.CombatSpells
 import com.asteria.game.character.combat.prayer.CombatPrayer
@@ -16,15 +22,9 @@ import com.asteria.game.location.Position
 import com.asteria.game.plugin.PluginListener
 import com.asteria.game.plugin.PluginSignature
 import com.asteria.game.plugin.context.ButtonClickPlugin
-import com.asteria.game.task.Task
-import com.asteria.game.task.TaskHandler
+import com.asteria.task.Task
 import com.asteria.utility.LoggerUtils
 import com.asteria.utility.Settings
-import plugin.skills.cooking.Cooking
-
-import java.util.concurrent.TimeUnit
-import java.util.function.Function
-import java.util.logging.Logger
 
 @PluginSignature(ButtonClickPlugin.class)
 final class ClickButtons implements PluginListener<ButtonClickPlugin> {
@@ -821,18 +821,18 @@ final class ClickButtons implements PluginListener<ButtonClickPlugin> {
                     player.encoder.sendByteState(301, 1)
                     player.specialActivated = true
 
-                    TaskHandler.submit(new Task(1, false) {
-                        @Override
-                        void execute() {
-                            if (!player.specialActivated) {
-                                this.cancel()
-                                return
-                            }
+                    World.submit(new Task(1, false) {
+                                @Override
+                                void execute() {
+                                    if (!player.specialActivated) {
+                                        this.cancel()
+                                        return
+                                    }
 
-                            player.combatSpecial.onActivation(player, player.combatBuilder.currentVictim)
-                            this.cancel()
-                        }
-                    }.attach(player))
+                                    player.combatSpecial.onActivation(player, player.combatBuilder.currentVictim)
+                                    this.cancel()
+                                }
+                            }.attach(player))
                 }
                 break
             default:

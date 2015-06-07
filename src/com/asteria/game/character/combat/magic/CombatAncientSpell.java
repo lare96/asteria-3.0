@@ -29,22 +29,11 @@ public abstract class CombatAncientSpell extends CombatSpell {
     public final void executeOnHit(CharacterNode cast, CharacterNode castOn, boolean accurate, int damage) {
         if (accurate) {
             effect(cast, castOn, damage);
-
             if (radius() == 0 || !Location.inMultiCombat(castOn)) {
                 return;
             }
-
-            Iterator<? extends CharacterNode> it = null;
-            if (cast.getType() == NodeType.PLAYER && castOn.getType() == NodeType.PLAYER) {
-                it = ((Player) cast).getLocalPlayers().iterator();
-            } else if (cast.getType() == NodeType.PLAYER && castOn.getType() == NodeType.NPC) {
-                it = ((Player) cast).getLocalNpcs().iterator();
-            } else if (cast.getType() == NodeType.NPC && castOn.getType() == NodeType.NPC) {
-                it = World.getNpcs().iterator();
-            } else if (cast.getType() == NodeType.NPC && castOn.getType() == NodeType.PLAYER) {
-                it = World.getPlayers().iterator();
-            }
-
+            Iterator<? extends CharacterNode> it = castOn.getType() == NodeType.PLAYER ? World.getLocalPlayers(cast) : World
+                .getLocalNpcs(cast);
             while (it.hasNext()) {
                 CharacterNode character = it.next();
                 if (character == null || !character.getPosition().withinDistance(castOn.getPosition(), radius()) || character.equals(cast) || character

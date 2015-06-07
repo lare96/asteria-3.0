@@ -153,6 +153,28 @@ public final class Combat {
     }
 
     /**
+     * Gets the corresponding combat prayer to {@code type}.
+     *
+     * @param type
+     *            the combat type to get the prayer for.
+     * @return the corresponding combat prayer.
+     * @throws IllegalArgumentException
+     *             if the combat type is invalid.
+     */
+    public static CombatPrayer getProtectingPrayer(CombatType type) {
+        switch (type) {
+        case MELEE:
+            return CombatPrayer.PROTECT_FROM_MELEE;
+        case MAGIC:
+            return CombatPrayer.PROTECT_FROM_MAGIC;
+        case RANGED:
+            return CombatPrayer.PROTECT_FROM_MISSILES;
+        default:
+            throw new IllegalArgumentException("Invalid combat type: " + type);
+        }
+    }
+
+    /**
      * Determines the combat strategy for {@code npc}.
      *
      * @param npc
@@ -293,7 +315,7 @@ public final class Combat {
         Item item = player.getEquipment().get(Equipment.WEAPON_SLOT);
         if (item == null)
             return false;
-        return item.getDefinition().getName().toLowerCase().contains("crystal" + " bow");
+        return item.getDefinition().getName().toLowerCase().contains("crystal bow");
     }
 
     /**
@@ -353,7 +375,7 @@ public final class Combat {
         case SHORTBOW:
             return 7;
         default:
-            throw new IllegalArgumentException("Invalid weapon interface " + "type!");
+            throw new IllegalArgumentException("Invalid weapon interface type!");
         }
     }
 

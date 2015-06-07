@@ -118,7 +118,7 @@ public class CombatSessionData {
      *
      * @return {@code true} if the hit is accurate, {@code false} otherwise.
      */
-    private boolean calculateAccuracy() {
+    private final boolean calculateAccuracy() {
         return checkAccuracy ? Combat.isAccurate(attacker, victim, type) : true;
     }
 
