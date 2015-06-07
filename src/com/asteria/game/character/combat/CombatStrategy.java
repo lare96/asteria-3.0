@@ -24,9 +24,8 @@ public interface CombatStrategy extends PluginContext {
     public boolean canAttack(CharacterNode character, CharacterNode victim);
 
     /**
-     * Executed when {@code character} has passed the initial
-     * {@link CombatStrategy#canAttack(CharacterNode, CharacterNode)} has and is
-     * about to attack {@code victim}.
+     * Executed when {@code character} has passed the initial {@code canAttack}
+     * check and is about to attack {@code victim}.
      *
      * @param character
      *            the character that is attacking.
