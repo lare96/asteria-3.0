@@ -8,6 +8,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import com.asteria.ServerBootstrap;
 import com.asteria.game.character.player.content.RestoreStatTask;
 import com.asteria.game.character.player.minigame.MinigameHandler;
 import com.asteria.game.character.player.serialize.PlayerSerialization;
@@ -17,15 +18,15 @@ import com.asteria.utility.Settings;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 
 /**
- * Initializes game {@link java.lang.Object}s and prepares them to be created by
- * the {@link com.asteria.ServerBootstrap}.
+ * Initializes game {@link Object}s and prepares them to be created by the
+ * {@link ServerBootstrap}.
  * 
  * @author lare96 <http://github.org/lare96>
  */
 public final class GameBuilder {
 
     /**
-     * The executor that will run the {@link com.asteria.game.GameService} every
+     * The executor that will run the {@link GameService} every
      * {@code CYCLE_RATE}ms.
      */
     private final ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor(new ThreadFactoryBuilder().setNameFormat(

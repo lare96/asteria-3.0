@@ -36,7 +36,7 @@ public final class ServerReactor {
     private final ServerSocketChannel channel;
 
     /**
-     * Creates a new {@link com.asteria.network.ServerReactor}.
+     * Creates a new {@link ServerReactor}.
      *
      * @param selector
      *            the selector that will select network events.

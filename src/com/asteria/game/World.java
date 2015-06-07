@@ -81,7 +81,7 @@ public final class World {
     }
 
     /**
-     * Submits {@code t} to the backing {@link com.asteria.task.TaskQueue}.
+     * Submits {@code t} to the backing {@link TaskQueue}.
      * 
      * @param t
      *            the task to submit to the queue.
