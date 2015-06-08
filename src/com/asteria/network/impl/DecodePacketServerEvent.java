@@ -29,7 +29,7 @@ public final class DecodePacketServerEvent extends ServerSelectionEvent {
     /**
      * The logger that will print important information.
      */
-    private static Logger logger = LoggerUtils.getLogger(DecodePacketServerEvent.class);
+    private final Logger logger = LoggerUtils.getLogger(DecodePacketServerEvent.class);
 
     @Override
     public void executeEvent(ServerSelectionKey key) throws Exception {

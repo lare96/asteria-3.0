@@ -1,5 +1,7 @@
 package com.asteria.game.character.player.skill;
 
+import java.util.stream.IntStream;
+
 import com.asteria.game.character.Flag;
 import com.asteria.game.character.Graphic;
 import com.asteria.game.character.player.Player;
@@ -242,7 +244,6 @@ public final class Skills {
      *            the player to restore the skills for.
      */
     public static void restoreAll(Player player) {
-        for (int i = 0; i < player.getSkills().length; i++)
-            restore(player, i);
+        IntStream.range(0, player.getSkills().length).forEach(it -> restore(player, it));
     }
 }

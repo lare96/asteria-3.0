@@ -3,7 +3,7 @@ package plugin.skills.fishing
 
 import com.asteria.game.character.player.Player
 import com.asteria.game.character.player.skill.Skills
-import com.asteria.game.model.item.Item;
+import com.asteria.game.item.Item
 import com.asteria.utility.RandomGen
 
 enum Tool {

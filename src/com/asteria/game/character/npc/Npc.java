@@ -85,8 +85,6 @@ public final class Npc extends CharacterNode {
     @Override
     public void dispose() {
         setPosition(new Position(1, 1));
-        if (getDefinition().isAggressive())
-            NpcAggression.AGGRESSIVE.remove(this);
         World.getTaskQueue().cancel(this);
     }
 

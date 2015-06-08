@@ -10,7 +10,5 @@ final class ObjectSecondClick implements PluginListener<ObjectSecondClickPlugin>
 
     @Override
     void run(Player player, ObjectSecondClickPlugin context) {
-        switch (context.id) {
-        }
     }
 }

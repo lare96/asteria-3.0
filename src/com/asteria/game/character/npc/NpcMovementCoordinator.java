@@ -3,8 +3,8 @@ package com.asteria.game.character.npc;
 import com.asteria.utility.RandomGen;
 
 /**
- * The movement coordinator that makes all NPCs pseudo-randomly move within a
- * radius of their original positions.
+ * The movement coordinator that makes all {@link Npc}s pseudo-randomly move
+ * within a radius of their original positions.
  *
  * @author lare96 <http://github.com/lare96>
  */
@@ -33,7 +33,7 @@ public final class NpcMovementCoordinator {
     /**
      * The current coordinate state of this NPC.
      */
-    private CoordinateState state = CoordinateState.HOME;
+    private State state = State.HOME;
 
     /**
      * Creates a new {@link NpcMovementCoordinator}.
@@ -55,11 +55,11 @@ public final class NpcMovementCoordinator {
             switch (state) {
             case HOME:
                 npc.getMovementQueue().walk(npc.getPosition().copy().random(radius));
-                state = CoordinateState.AWAY;
+                state = State.AWAY;
                 break;
             case AWAY:
                 npc.getMovementQueue().walk(npc.getOriginalPosition());
-                state = CoordinateState.HOME;
+                state = State.HOME;
                 break;
             }
         }
@@ -110,7 +110,7 @@ public final class NpcMovementCoordinator {
      *
      * @author lare96 <http://github.com/lare96>
      */
-    private enum CoordinateState {
+    private enum State {
         HOME,
         AWAY
     }

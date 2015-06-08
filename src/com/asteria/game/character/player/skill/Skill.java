@@ -18,7 +18,8 @@ public final class Skill {
     private double experience = 0;
 
     /**
-     * The real level of this skill that can be trained.
+     * The cached real level of this skill that can be trained, to reduce the
+     * amount of expensive level calculations.
      */
     private int realLevel = 1;
 

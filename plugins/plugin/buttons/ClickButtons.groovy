@@ -86,58 +86,58 @@ final class ClickButtons implements PluginListener<ButtonClickPlugin> {
                 player.teleport new Position(3094, 3243)
                 break
             case 21233:
-                CombatPrayer.THICK_SKIN.activateOrDeactivate player
+                CombatPrayer.THICK_SKIN.activate(player, true)
                 break
             case 21234:
-                CombatPrayer.BURST_OF_STRENGTH.activateOrDeactivate player
+                CombatPrayer.BURST_OF_STRENGTH.activate(player, true)
                 break
             case 21235:
-                CombatPrayer.CLARITY_OF_THOUGHT.activateOrDeactivate player
+                CombatPrayer.CLARITY_OF_THOUGHT.activate(player, true)
                 break
             case 21236:
-                CombatPrayer.ROCK_SKIN.activateOrDeactivate player
+                CombatPrayer.ROCK_SKIN.activate(player, true)
                 break
             case 21237:
-                CombatPrayer.SUPERHUMAN_STRENGTH.activateOrDeactivate player
+                CombatPrayer.SUPERHUMAN_STRENGTH.activate(player, true)
                 break
             case 21238:
-                CombatPrayer.IMPROVED_REFLEXES.activateOrDeactivate player
+                CombatPrayer.IMPROVED_REFLEXES.activate(player, true)
                 break
             case 21239:
-                CombatPrayer.RAPID_RESTORE.activateOrDeactivate player
+                CombatPrayer.RAPID_RESTORE.activate(player, true)
                 break
             case 21240:
-                CombatPrayer.RAPID_HEAL.activateOrDeactivate player
+                CombatPrayer.RAPID_HEAL.activate(player, true)
                 break
             case 21241:
-                CombatPrayer.PROTECT_ITEM.activateOrDeactivate player
+                CombatPrayer.PROTECT_ITEM.activate(player, true)
                 break
             case 21242:
-                CombatPrayer.STEEL_SKIN.activateOrDeactivate player
+                CombatPrayer.STEEL_SKIN.activate(player, true)
                 break
             case 21243:
-                CombatPrayer.ULTIMATE_STRENGTH.activateOrDeactivate player
+                CombatPrayer.ULTIMATE_STRENGTH.activate(player, true)
                 break
             case 21244:
-                CombatPrayer.INCREDIBLE_REFLEXES.activateOrDeactivate player
+                CombatPrayer.INCREDIBLE_REFLEXES.activate(player, true)
                 break
             case 21245:
-                CombatPrayer.PROTECT_FROM_MAGIC.activateOrDeactivate player
+                CombatPrayer.PROTECT_FROM_MAGIC.activate(player, true)
                 break
             case 21246:
-                CombatPrayer.PROTECT_FROM_MISSILES.activateOrDeactivate player
+                CombatPrayer.PROTECT_FROM_MISSILES.activate(player, true)
                 break
             case 21247:
-                CombatPrayer.PROTECT_FROM_MELEE.activateOrDeactivate player
+                CombatPrayer.PROTECT_FROM_MELEE.activate(player, true)
                 break
             case 2171:
-                CombatPrayer.RETRIBUTION.activateOrDeactivate player
+                CombatPrayer.RETRIBUTION.activate(player, true)
                 break
             case 2172:
-                CombatPrayer.REDEMPTION.activateOrDeactivate player
+                CombatPrayer.REDEMPTION.activate(player, true)
                 break
             case 2173:
-                CombatPrayer.SMITE.activateOrDeactivate player
+                CombatPrayer.SMITE.activate(player, true)
                 break
             case 48177:
                 if (player.acceptAid) {

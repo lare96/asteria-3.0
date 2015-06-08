@@ -171,7 +171,7 @@ public enum CombatPrayer {
         player.getPrayerActive()[id] = true;
         player.getEncoder().sendByteState(config, 1);
         if (headIcon != -1) {
-            player.setHeadIcon(CombatPrayer.SMITE.getHeadIcon());
+            player.setHeadIcon(headIcon);
             player.getFlags().set(Flag.APPEARANCE);
         }
         onActivation(player);

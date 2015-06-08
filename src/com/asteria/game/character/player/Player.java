@@ -31,7 +31,6 @@ import com.asteria.game.character.combat.weapon.CombatSpecial;
 import com.asteria.game.character.combat.weapon.FightType;
 import com.asteria.game.character.npc.Npc;
 import com.asteria.game.character.npc.NpcAggression;
-import com.asteria.game.character.player.content.ForcedMovement;
 import com.asteria.game.character.player.content.PrivateMessage;
 import com.asteria.game.character.player.content.Spellbook;
 import com.asteria.game.character.player.content.TeleportSpell;
@@ -253,11 +252,6 @@ public final class Player extends CharacterNode {
      * The weapon animation for appearance updating.
      */
     private WeaponAnimation weaponAnimation;
-
-    /**
-     * The forced movement container for the update mask.
-     */
-    private ForcedMovement forcedMovement;
 
     /**
      * The task that handles combat prayer draining.
@@ -524,10 +518,12 @@ public final class Player extends CharacterNode {
     public void onSuccessfulHit(CharacterNode victim, CombatType type) {
         if (type == CombatType.MELEE || weapon == WeaponInterface.DART || weapon == WeaponInterface.KNIFE || weapon == WeaponInterface.THROWNAXE || weapon == WeaponInterface.JAVELIN) {
             Combat
-                .effect(new CombatPoisonEffect(this, CombatPoisonEffect.getPoisonType(equipment.get(Equipment.WEAPON_SLOT)).orElse(null)));
+.effect(new CombatPoisonEffect(victim, CombatPoisonEffect.getPoisonType(equipment.get(Equipment.WEAPON_SLOT))
+                .orElse(null)));
         } else if (type == CombatType.RANGED) {
             Combat
-                .effect(new CombatPoisonEffect(this, CombatPoisonEffect.getPoisonType(equipment.get(Equipment.ARROWS_SLOT)).orElse(null)));
+.effect(new CombatPoisonEffect(victim, CombatPoisonEffect.getPoisonType(equipment.get(Equipment.ARROWS_SLOT))
+                .orElse(null)));
         }
     }
 
@@ -593,41 +589,19 @@ public final class Player extends CharacterNode {
     }
 
     /**
-     * Applies the forced movement update mask to this player.
-     *
-     * @param movement
-     *            the forced movement to apply.
-     * @param ticks
-     *            the amount of ticks it will take for this movement to
-     *            complete.
-     */
-    public void movement(ForcedMovement movement, int ticks) {
-        World.submit(new Task(ticks, false) {
-            @Override
-            public void execute() {
-                setNeedsPlacement(true);
-                getPosition().move(movement.getAmountX(), movement.getAmountY());
-                this.cancel();
-            }
-        }.attach(this));
-        forcedMovement = movement.copy();
-        super.getFlags().set(Flag.FORCED_MOVEMENT);
-    }
-
-    /**
      * Attempts to teleport this player somewhere based on {@code spell}.
      *
      * @param spell
      *            the spell the player is using to teleport.
      */
     public void teleport(TeleportSpell spell) {
-        if (viewingOrb != null)
+        if (viewingOrb != null || disabled)
             return;
         PacketEncoder encoder = getEncoder();
         if (teleportStage > 0)
             return;
         if (wildernessLevel >= 20) {
-            encoder.sendMessage("You must be below level 20 wilderness to " + "teleport!");
+            encoder.sendMessage("You must be below level 20 wilderness to teleport!");
             return;
         }
         if (teleblockTimer.get() > 0) {
@@ -1799,25 +1773,6 @@ public final class Player extends CharacterNode {
      */
     public void setUpdateRegion(boolean updateRegion) {
         this.updateRegion = updateRegion;
-    }
-
-    /**
-     * Gets the forced movement container for the update mask.
-     *
-     * @return the forced movement container.
-     */
-    public ForcedMovement getForcedMovement() {
-        return forcedMovement;
-    }
-
-    /**
-     * Sets the value for {@link Player#forcedMovement}.
-     *
-     * @param forcedMovement
-     *            the new value to set.
-     */
-    public void setForcedMovement(ForcedMovement forcedMovement) {
-        this.forcedMovement = forcedMovement;
     }
 
     /**

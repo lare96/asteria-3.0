@@ -1,18 +1,18 @@
 package plugin.skills.cooking
 
+import static com.asteria.game.character.player.skill.Skills.COOKING
+
+import com.asteria.game.character.Animation
 import com.asteria.game.character.player.Player
 import com.asteria.game.character.player.skill.SkillData
 import com.asteria.game.character.player.skill.action.ProducingSkillAction
 import com.asteria.game.character.player.skill.action.SkillAction
-import com.asteria.game.location.Position;
-import com.asteria.game.model.character.Animation;
-import com.asteria.game.model.item.Item;
-import com.asteria.game.model.item.ItemDefinition;
+import com.asteria.game.item.Item
+import com.asteria.game.item.ItemDefinition
+import com.asteria.game.location.Position
 import com.asteria.game.plugin.PluginSignature
 import com.asteria.task.Task
 import com.asteria.utility.RandomGen
-
-import static com.asteria.game.character.player.skill.Skills.COOKING
 
 @PluginSignature(SkillAction.class)
 final class Cooking extends ProducingSkillAction {

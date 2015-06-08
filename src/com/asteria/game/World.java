@@ -20,6 +20,7 @@ import com.asteria.game.character.player.Player;
 import com.asteria.game.character.player.PlayerUpdating;
 import com.asteria.game.item.ItemNodeManager;
 import com.asteria.game.object.ObjectNodeManager;
+import com.asteria.game.plugin.PluginHandler;
 import com.asteria.task.Task;
 import com.asteria.task.TaskQueue;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
@@ -56,6 +57,11 @@ public final class World {
      * The manager for the queue of game tasks.
      */
     private static TaskQueue taskQueue = new TaskQueue();
+
+    /**
+     * The manager for the map of game plugins.
+     */
+    private static PluginHandler plugins = new PluginHandler();
 
     /**
      * The default constructor, will throw an
@@ -129,7 +135,7 @@ public final class World {
      * @return the local players.
      */
     public static Iterator<Player> getLocalPlayers(CharacterNode character) {
-        if(character.getType() == NodeType.PLAYER)
+        if (character.getType() == NodeType.PLAYER)
             return ((Player) character).getLocalPlayers().iterator();
         return players.iterator();
     }
@@ -229,6 +235,15 @@ public final class World {
      */
     public static void setTaskQueue(TaskQueue taskQueue) {
         World.taskQueue = taskQueue;
+    }
+
+    /**
+     * Gets the manager for the map of game plugins.
+     * 
+     * @return the manager for plugins.
+     */
+    public static PluginHandler getPlugins() {
+        return plugins;
     }
 
     /**

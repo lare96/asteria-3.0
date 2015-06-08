@@ -25,6 +25,9 @@ import com.asteria.task.Task;
  * @author lare96 <http://github.com/lare96>
  */
 public enum PotionConsumable {
+    // TODO: Normal restore potions, stamina potions, combat potion, super
+    // combat potion, extended antifire, zamorak brew, saradomin brew,
+    // antidote+, antidote++, agility potion, fishing potion
     RANGE_POTIONS(2444, 169, 171, 173) {
         @Override
         public void onEffect(Player player) {

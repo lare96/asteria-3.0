@@ -98,7 +98,7 @@ public final class BitMask {
 
     /**
      * The flag that determines if this bit mask is empty, or in other words if
-     * this bit mask does not have any active or inactivate flags.
+     * this bit mask does not have any active or inactive flags.
      *
      * @return {@code true} if this bit mask is empty, {@code false} otherwise.
      */

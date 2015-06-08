@@ -22,7 +22,7 @@ public final class HandshakeLoginDecoder extends LoginProtocolDecoder {
     /**
      * The logger that will print important information.
      */
-    private static Logger logger = LoggerUtils.getLogger(PlayerIO.class);
+    private final Logger logger = LoggerUtils.getLogger(PlayerIO.class);
 
     /**
      * Creates a new {@link HandshakeLoginDecoder}.

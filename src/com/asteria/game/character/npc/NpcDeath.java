@@ -14,10 +14,10 @@ import com.asteria.game.item.ItemNode;
 import com.asteria.game.item.ItemNodeManager;
 import com.asteria.game.item.ItemNodeStatic;
 import com.asteria.task.Task;
-import com.asteria.task.TaskQueue;
 
 /**
- * The character death implementation that handles NPC death.
+ * The {@link CharacterDeath} implementation that is dedicated to managing the
+ * death process for all {@link Npc}s.
  *
  * @author lare96 <http://github.com/lare96>
  */

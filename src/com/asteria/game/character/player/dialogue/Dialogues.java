@@ -16,7 +16,7 @@ public final class Dialogues {
     /**
      * The maximum length of a single line of dialogue.
      */
-    private static final int MAXIMUM_LENGTH = ("A string representing maximum " + "dialogue text length!!").length();
+    private static final int MAXIMUM_LENGTH = ("A string representing maximum dialogue text length!!").length();
 
     /**
      * The default constructor.

@@ -1,7 +1,7 @@
 package plugin.skills.cooking
 
 import com.asteria.game.character.player.Player
-import com.asteria.game.model.item.ItemDefinition;
+import com.asteria.game.item.ItemDefinition
 
 enum CookingData {
     SHRIMP(317, 1, 315, 34, 323, 30),

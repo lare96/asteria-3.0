@@ -9,8 +9,8 @@ import com.asteria.game.location.Location;
 import com.asteria.game.location.Position;
 
 /**
- * The static utility class that handles the behavior of aggressive NPCs within
- * a certain radius of players.
+ * Manages the behavior of aggressive {@link Npc}s including the way the
+ * interact towards various {@link Player}s.
  *
  * @author lare96 <http://github.com/lare96>
  */
@@ -18,27 +18,29 @@ public final class NpcAggression {
 
     /**
      * The absolute distance that players must be within to be targeted by
-     * aggressive NPCs.
+     * aggressive {@link Npc}s.
      */
     private static final int TARGET_DISTANCE = 6;
 
     /**
-     * The time that has to be spent in a region before NPCs stop acting
-     * aggressive.
+     * The time that has to be spent in a region before {@link Npc}s stop acting
+     * aggressive towards a specific {@link Player}.
      */
     private static final int TOLERANCE_SECONDS = 600;
 
     /**
-     * The hash collection the holds the npc identifiers of aggressive NPCs.
+     * The hash collection the holds the npc identifiers of aggressive
+     * {@link Npc}s.
      */
     public static final Set<Integer> AGGRESSIVE = new HashSet<>();
 
     /**
-     * The sequencer that will prompt all aggressive NPCs to attack
-     * {@code player}.
+     * Prompts all aggressive {@link Npc}s to attack the unsuspecting
+     * {@code player}, if they do not attack the player they will go back to
+     * their default movement coordinate state.
      *
      * @param player
-     *            the player that will be targeted by aggressive NPCs.
+     *            the player that will be targeted.
      */
     public static void sequence(Player player) {
         for (Npc npc : player.getLocalNpcs()) {
@@ -62,6 +64,8 @@ public final class NpcAggression {
      */
     private static boolean validate(Npc npc, Player player) {
         Position position = npc.getOriginalPosition();
+        if (Location.inWilderness(npc))
+            return true;
         if (!AGGRESSIVE.contains(npc.getId()))
             return false;
         if (!Location.inMultiCombat(player) && player.getCombatBuilder().isAttacking() || player.getCombatBuilder().isBeingAttacked())

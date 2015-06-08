@@ -101,19 +101,9 @@ public final class ViewingOrb {
      * the player back to the starting position.
      */
     public void close() {
-        player.getEncoder().sendSidebarInterface(1, 3917);
-        player.getEncoder().sendSidebarInterface(2, 638);
-        player.getEncoder().sendSidebarInterface(3, 3213);
-        player.getEncoder().sendSidebarInterface(4, 1644);
-        player.getEncoder().sendSidebarInterface(5, 5608);
-        player.getEncoder().sendSidebarInterface(6, player.getSpellbook().getId());
-        player.getEncoder().sendSidebarInterface(8, 5065);
-        player.getEncoder().sendSidebarInterface(9, 5715);
-        player.getEncoder().sendSidebarInterface(10, 2449);
-        player.getEncoder().sendSidebarInterface(11, 904);
-        player.getEncoder().sendSidebarInterface(12, 147);
-        player.getEncoder().sendSidebarInterface(13, 962);
-        player.getEncoder().sendSidebarInterface(0, 2423);
+        int[] interfaces = { 3917, 638, 3213, 1644, 5608, player.getSpellbook().getId(), 5065, 5715, 2449, 904, 147, 962, 2423 };
+        for (int idx = 0; idx < interfaces.length; idx++)
+            player.getEncoder().sendSidebarInterface(idx, interfaces[idx]);
         player.getMovementQueue().setLockMovement(false);
         player.setVisible(true);
         player.setDisabled(false);

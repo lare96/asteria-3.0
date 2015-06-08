@@ -10,7 +10,5 @@ final class ItemOnPlayer implements PluginListener<ItemOnPlayerPlugin> {
 
     @Override
     void run(Player player, ItemOnPlayerPlugin context) {
-        switch (context.item.id) {
-        }
     }
 }

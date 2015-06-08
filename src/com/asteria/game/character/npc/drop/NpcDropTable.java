@@ -1,10 +1,13 @@
 package com.asteria.game.character.npc.drop;
 
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
 
 import com.asteria.game.character.player.Player;
 import com.asteria.game.item.Item;
+import com.asteria.utility.CollectionUtils;
 import com.asteria.utility.RandomGen;
 
 /**
@@ -14,6 +17,11 @@ import com.asteria.utility.RandomGen;
  * @author lare96 <http://github.com/lare96>
  */
 public final class NpcDropTable {
+
+    /**
+     * The maximum amount of drops that can be rolled from the dynamic table.
+     */
+    private static final int DROP_THRESHOLD = 3;
 
     /**
      * The hash collection of drop tables for all NPCs.
@@ -71,9 +79,15 @@ public final class NpcDropTable {
     public Item[] toItems(Player player) {
         int slot = 0;
         Item[] items = new Item[(dynamic.length + 1)];
-        for (NpcDrop drop : dynamic)
+        LinkedList<NpcDrop> copyList = CollectionUtils.newLinkedList(dynamic);
+        Collections.shuffle(copyList);
+        for (int amount = 0; amount < DROP_THRESHOLD; amount++) {
+            if (copyList.size() == 0)
+                break;
+            NpcDrop drop = copyList.remove();
             if (drop.getChance().successful(random))
                 items[slot++] = drop.toItem(random);
+        }
         if (rare.length == 0)
             return items;
         NpcDrop drop = random.random(rare);

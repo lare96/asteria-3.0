@@ -28,8 +28,9 @@ import com.asteria.utility.RandomGen;
 import com.asteria.utility.Settings;
 
 /**
- * The character death implementation that handles player death.
- *
+ * The {@link CharacterDeath} implementation that is dedicated to managing the
+ * death process for all {@link Player}s.
+ * 
  * @author lare96 <http://github.com/lare96>
  */
 public final class PlayerDeath extends CharacterDeath<Player> {
@@ -96,7 +97,7 @@ public final class PlayerDeath extends CharacterDeath<Player> {
         WeaponInterface.execute(character, character.getEquipment().get(Equipment.WEAPON_SLOT));
         character.getEncoder().sendMessage(
             character.getRights().less(Rights.ADMINISTRATOR) ? "Oh dear, you're dead!"
-                : "You are " + "unaffected by death because of your rank.");
+                : "You are unaffected by death because of your rank.");
         character.getEncoder().sendWalkable(65535);
         CombatPrayer.deactivateAll(character);
         Skills.restoreAll(character);

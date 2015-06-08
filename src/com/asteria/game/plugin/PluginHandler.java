@@ -33,24 +33,24 @@ public final class PluginHandler {
      * The map of {@link PluginContext}s mapped to their collection of
      * {@link PluginListener}s.
      */
-    public static final Multimap<Class<? extends PluginContext>, PluginListener> PLUGINS = ArrayListMultimap.create();
+    private final Multimap<Class<? extends PluginContext>, PluginListener> plugins = ArrayListMultimap.create();
 
     /**
      * The logger that will print important information.
      */
-    private static Logger logger = LoggerUtils.getLogger(PluginHandler.class);
+    private final Logger logger = LoggerUtils.getLogger(PluginHandler.class);
 
     /**
      * Initializes the bootstrap, effectively loading all plugin listeners in
      * the {@code ./plugins/} directory.
      */
-    public static void init() {
+    public void init() {
         try {
             Class<?> c = Class.forName("plugin.Bootstrap");
             Constructor<?> bootstrap = c.getConstructor(Logger.class);
             bootstrap.newInstance(logger);
         } catch (Exception e) {
-            logger.log(Level.SEVERE, "An error has occured while initializing" + " the Bootstrap!", e);
+            logger.log(Level.SEVERE, "An error has occured while initializing the Bootstrap!", e);
         }
     }
 
@@ -68,10 +68,10 @@ public final class PluginHandler {
      *            the plugin context that will supply data to the plugin
      *            listeners.
      */
-    public static void execute(Player player, Class<? extends PluginContext> type, PluginContext context) {
-        Collection<PluginListener> collection = PLUGINS.get(type);
+    public void execute(Player player, Class<? extends PluginContext> type, PluginContext context) {
+        Collection<PluginListener> collection = plugins.get(type);
         if (collection == null)
-            throw new NullPointerException("No plugin listeners exist for " + "this plugin signature!");
+            throw new NullPointerException("No plugin listeners exist for this plugin signature!");
         collection.forEach(c -> c.run(player, context));
     }
 
@@ -83,7 +83,7 @@ public final class PluginHandler {
      * @param clazz
      *            the class of the plugin listener that will be submitted.
      */
-    public static void submit(Class<?> clazz) {
+    public void submit(Class<?> clazz) {
         try {
             PluginSignature type = clazz.getAnnotation(PluginSignature.class);
             if (type == null) {
@@ -99,9 +99,17 @@ public final class PluginHandler {
                     Combat.STRATEGIES.put(npc, combat);
                 return;
             }
-            PLUGINS.put(type.value(), (PluginListener<?>) clazz.newInstance());
+            plugins.put(type.value(), (PluginListener<?>) clazz.newInstance());
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Clears the backing map of all its plugin entries. When this method
+     * returns there will be no active plugin listeners.
+     */
+    public void clear() {
+        plugins.clear();
     }
 }
