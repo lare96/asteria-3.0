@@ -64,15 +64,16 @@ public final class NpcAggression {
      */
     private static boolean validate(Npc npc, Player player) {
         Position position = npc.getOriginalPosition();
-        if (Location.inWilderness(npc))
-            return true;
-        if (!AGGRESSIVE.contains(npc.getId()))
+        boolean wilderness = Location.inWilderness(npc) && Location.inWilderness(player);
+        boolean tolerance = wilderness || npc.getDefinition().getCombatLevel() > 126 ? false : player.getTolerance().elapsed(
+            TOLERANCE_SECONDS, TimeUnit.SECONDS);
+        if (!AGGRESSIVE.contains(npc.getId()) && !wilderness || !npc.getDefinition().isAttackable())
             return false;
         if (!Location.inMultiCombat(player) && player.getCombatBuilder().isAttacking() || player.getCombatBuilder().isBeingAttacked())
             return false;
-        if (player.determineCombatLevel() > (npc.getDefinition().getCombatLevel() * 2) && !Location.inWilderness(player))
+        if (player.determineCombatLevel() > (npc.getDefinition().getCombatLevel() * 2) && !wilderness)
             return false;
         return position.withinDistance(player.getPosition(), TARGET_DISTANCE) && !npc.getCombatBuilder().isAttacking() && !npc
-            .getCombatBuilder().isBeingAttacked() && !player.getTolerance().elapsed(TOLERANCE_SECONDS, TimeUnit.SECONDS);
+            .getCombatBuilder().isBeingAttacked() && !tolerance;
     }
 }
