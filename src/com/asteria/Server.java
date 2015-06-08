@@ -40,9 +40,9 @@ public final class Server {
             logger.info("Initializing the bootstrap...");
             ServerBootstrap bootstrap = new ServerBootstrap(Settings.PORT);
             bootstrap.bind();
-            logger.info("The bootstrap has been bound, " + Settings.NAME + " is now online!");
+            logger.info("The Bootstrap has been bound, " + Settings.NAME + " is now online!");
         } catch (Exception e) {
-            logger.log(Level.SEVERE, "An error occurred while binding the bootstrap!", e);
+            logger.log(Level.SEVERE, "An error occurred while binding the Bootstrap!", e);
 
             // No point in continuing server startup when the
             // bootstrap either failed to bind or was bound
