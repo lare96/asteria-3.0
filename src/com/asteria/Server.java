@@ -37,7 +37,7 @@ public final class Server {
     public static void main(String[] args) {
         try {
             Preconditions.checkState(args.length == 0, "No runtime arguments needed!");
-            logger.info("Initializing the bootstrap...");
+            logger.info("Initializing the Bootstrap...");
             ServerBootstrap bootstrap = new ServerBootstrap(Settings.PORT);
             bootstrap.bind();
             logger.info("The Bootstrap has been bound, " + Settings.NAME + " is now online!");
