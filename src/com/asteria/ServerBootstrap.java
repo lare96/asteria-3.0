@@ -5,7 +5,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 import com.asteria.game.GameBuilder;
-import com.asteria.game.plugin.PluginHandler;
+import com.asteria.game.World;
 import com.asteria.network.ConnectionHandler;
 import com.asteria.utility.json.ItemDefinitionLoader;
 import com.asteria.utility.json.ItemNodeLoader;
@@ -102,6 +102,6 @@ public final class ServerBootstrap {
         serviceLoader.execute(() -> new WeaponInterfaceLoader().load());
         serviceLoader.execute(() -> new WeaponRequirementLoader().load());
         serviceLoader.execute(() -> new ObjectNodeRemoveLoader().load());
-        serviceLoader.execute(PluginHandler::init);
+        serviceLoader.execute(World.getPlugins()::init);
     }
 }

@@ -9,7 +9,6 @@ import com.asteria.game.character.player.Player;
 import com.asteria.game.character.player.minigame.MinigameHandler;
 import com.asteria.game.location.Location;
 import com.asteria.game.location.Position;
-import com.asteria.game.plugin.PluginHandler;
 import com.asteria.game.plugin.context.NpcFirstClickPlugin;
 import com.asteria.game.plugin.context.NpcSecondClickPlugin;
 import com.asteria.network.ByteOrder;
@@ -103,7 +102,7 @@ public final class NpcActionPacket extends PacketDecoder {
                 player.facePosition(npc.getPosition());
                 npc.facePosition(player.getPosition());
                 MinigameHandler.execute(player, m -> m.onFirstClickNpc(player, npc));
-                PluginHandler.execute(player, NpcFirstClickPlugin.class, new NpcFirstClickPlugin(npc));
+                World.getPlugins().execute(player, NpcFirstClickPlugin.class, new NpcFirstClickPlugin(npc));
             }
         });
     }
@@ -127,7 +126,7 @@ public final class NpcActionPacket extends PacketDecoder {
                 player.facePosition(npc.getPosition());
                 npc.facePosition(player.getPosition());
                 MinigameHandler.execute(player, m -> m.onSecondClickNpc(player, npc));
-                PluginHandler.execute(player, NpcSecondClickPlugin.class, new NpcSecondClickPlugin(npc));
+                World.getPlugins().execute(player, NpcSecondClickPlugin.class, new NpcSecondClickPlugin(npc));
             }
         });
     }

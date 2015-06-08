@@ -3,7 +3,6 @@ package com.asteria.network.packet.impl;
 import com.asteria.game.World;
 import com.asteria.game.character.player.Player;
 import com.asteria.game.item.Item;
-import com.asteria.game.plugin.PluginHandler;
 import com.asteria.game.plugin.context.ItemOnPlayerPlugin;
 import com.asteria.network.ByteOrder;
 import com.asteria.network.DataBuffer;
@@ -36,7 +35,7 @@ public final class ItemOnPlayerPacket extends PacketDecoder {
 
         player.getMovementListener().append(() -> {
             if (player.getPosition().withinDistance(usedOn.getPosition(), 1)) {
-                PluginHandler.execute(player, ItemOnPlayerPlugin.class, new ItemOnPlayerPlugin(player, item));
+                World.getPlugins().execute(player, ItemOnPlayerPlugin.class, new ItemOnPlayerPlugin(player, item));
             }
         });
     }

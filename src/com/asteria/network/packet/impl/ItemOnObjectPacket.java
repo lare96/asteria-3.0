@@ -3,10 +3,10 @@ package com.asteria.network.packet.impl;
 import plugin.skills.prayer.Bone;
 import plugin.skills.prayer.PrayerBoneAltar;
 
+import com.asteria.game.World;
 import com.asteria.game.character.player.Player;
 import com.asteria.game.item.Item;
 import com.asteria.game.location.Position;
-import com.asteria.game.plugin.PluginHandler;
 import com.asteria.game.plugin.context.ItemOnObjectPlugin;
 import com.asteria.network.ByteOrder;
 import com.asteria.network.DataBuffer;
@@ -50,7 +50,7 @@ public final class ItemOnObjectPacket extends PacketDecoder {
                         altarAction.start();
                         return;
                     }
-                    PluginHandler.execute(player, ItemOnObjectPlugin.class, new ItemOnObjectPlugin(objectId, position, objectSize, item,
+                    World.getPlugins().execute(player, ItemOnObjectPlugin.class, new ItemOnObjectPlugin(objectId, position, objectSize, item,
                         slot));
                 }
             });

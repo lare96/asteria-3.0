@@ -1,7 +1,7 @@
 package com.asteria.network.packet.impl;
 
+import com.asteria.game.World;
 import com.asteria.game.character.player.Player;
-import com.asteria.game.plugin.PluginHandler;
 import com.asteria.game.plugin.context.CommandPlugin;
 import com.asteria.network.DataBuffer;
 import com.asteria.network.packet.PacketDecoder;
@@ -20,6 +20,6 @@ public final class CommandPacket extends PacketDecoder {
             return;
 
         String[] text = buf.getString().toLowerCase().split(" ");
-        PluginHandler.execute(player, CommandPlugin.class, new CommandPlugin(text));
+        World.getPlugins().execute(player, CommandPlugin.class, new CommandPlugin(text));
     }
 }

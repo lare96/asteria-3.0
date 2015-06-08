@@ -3,12 +3,12 @@ package com.asteria.network.packet.impl;
 import plugin.skills.prayer.Bone;
 import plugin.skills.prayer.PrayerBoneBury;
 
+import com.asteria.game.World;
 import com.asteria.game.character.player.Player;
 import com.asteria.game.character.player.content.FoodConsumable;
 import com.asteria.game.character.player.content.PotionConsumable;
 import com.asteria.game.item.Item;
 import com.asteria.game.item.ItemDefinition;
-import com.asteria.game.plugin.PluginHandler;
 import com.asteria.game.plugin.context.ItemFirstClickPlugin;
 import com.asteria.network.ByteOrder;
 import com.asteria.network.DataBuffer;
@@ -71,7 +71,7 @@ public final class ItemActionPacket extends PacketDecoder {
                 buryAction.start();
                 return;
             }
-            PluginHandler.execute(player, ItemFirstClickPlugin.class, new ItemFirstClickPlugin(slot, item));
+            World.getPlugins().execute(player, ItemFirstClickPlugin.class, new ItemFirstClickPlugin(slot, item));
         }
     }
 }

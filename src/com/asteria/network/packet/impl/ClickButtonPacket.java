@@ -1,7 +1,7 @@
 package com.asteria.network.packet.impl;
 
+import com.asteria.game.World;
 import com.asteria.game.character.player.Player;
-import com.asteria.game.plugin.PluginHandler;
 import com.asteria.game.plugin.context.ButtonClickPlugin;
 import com.asteria.network.DataBuffer;
 import com.asteria.network.packet.PacketDecoder;
@@ -25,6 +25,6 @@ public final class ClickButtonPacket extends PacketDecoder {
     @Override
     public void decode(Player player, int opcode, int size, DataBuffer buf) {
         int button = PROPER_READ ? buf.getShort() : BufferUtils.hexToInt(buf.getBytes(2));
-        PluginHandler.execute(player, ButtonClickPlugin.class, new ButtonClickPlugin(button));
+        World.getPlugins().execute(player, ButtonClickPlugin.class, new ButtonClickPlugin(button));
     }
 }

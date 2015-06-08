@@ -1,9 +1,9 @@
 package com.asteria.network.packet.impl;
 
+import com.asteria.game.World;
 import com.asteria.game.character.player.Player;
 import com.asteria.game.character.player.minigame.MinigameHandler;
 import com.asteria.game.location.Position;
-import com.asteria.game.plugin.PluginHandler;
 import com.asteria.game.plugin.context.ObjectFirstClickPlugin;
 import com.asteria.game.plugin.context.ObjectSecondClickPlugin;
 import com.asteria.network.ByteOrder;
@@ -61,7 +61,7 @@ public final class ObjectActionPacket extends PacketDecoder {
         player.getMovementListener().append(() -> {
             if (player.getPosition().withinDistance(position, size)) {
                 MinigameHandler.execute(player, m -> m.onFirstClickObject(player, objectId, position.copy()));
-                PluginHandler.execute(player, ObjectFirstClickPlugin.class, new ObjectFirstClickPlugin(objectId, position, size));
+                World.getPlugins().execute(player, ObjectFirstClickPlugin.class, new ObjectFirstClickPlugin(objectId, position, size));
             }
         });
     }
@@ -88,7 +88,7 @@ public final class ObjectActionPacket extends PacketDecoder {
         player.getMovementListener().append(() -> {
             if (player.getPosition().withinDistance(position, size)) {
                 MinigameHandler.execute(player, m -> m.onSecondClickObject(player, objectId, position.copy()));
-                PluginHandler.execute(player, ObjectSecondClickPlugin.class, new ObjectSecondClickPlugin(objectId, position, size));
+                World.getPlugins().execute(player, ObjectSecondClickPlugin.class, new ObjectSecondClickPlugin(objectId, position, size));
             }
         });
     }
