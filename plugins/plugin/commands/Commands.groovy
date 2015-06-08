@@ -34,6 +34,9 @@ final class Commands implements PluginListener<CommandPlugin> {
         // class.
         if (player.rights.greater(Rights.ADMINISTRATOR)) {
             switch (cmd[0]) {
+                case "disconnect":
+                    player.encoder.sendLogout()
+                    break
                 case "pnpc":
                     int id = Integer.parseInt cmd[1]
                     player.playerNpc = id
