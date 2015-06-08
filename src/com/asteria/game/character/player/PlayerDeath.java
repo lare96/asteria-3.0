@@ -119,35 +119,42 @@ public final class PlayerDeath extends CharacterDeath<Player> {
             id -> character.getEquipment().unequipItem(new Item(id), false) || character.getInventory().remove(new Item(id))).forEach(
             id -> keep.add(new Item(id)));
         List<Item> items = new LinkedList<>();
-        Collections.addAll(items, character.getEquipment().containerCopy());
-        Collections.addAll(items, character.getInventory().containerCopy());
-        character.getEquipment().clear();
-        character.getInventory().clear();
-        character.getEquipment().refresh();
-        character.getInventory().refresh();
-        int amount = character.getSkullTimer().get() > 0 ? 0 : 3;
-        if (CombatPrayer.isActivated(character, CombatPrayer.PROTECT_ITEM))
-            amount++;
-        if (amount > 0) {
-            items.sort(Collections.reverseOrder((one, two) -> Integer.compare(one.getDefinition().getGeneralPrice(), two.getDefinition()
-                .getGeneralPrice())));
-            for (Iterator<Item> it = items.iterator(); it.hasNext();) {
-                Item next = it.next();
-                if (amount == 0) {
-                    break;
+        character.getEquipment().forEach(items::add);
+        character.getInventory().forEach(items::add);
+        if (items.size() > 0) {
+            character.getEquipment().clear();
+            character.getInventory().clear();
+            character.getEquipment().refresh();
+            character.getInventory().refresh();
+            int amount = character.getSkullTimer().get() > 0 ? 0 : 3;
+            if (CombatPrayer.isActivated(character, CombatPrayer.PROTECT_ITEM))
+                amount++;
+            if (amount > 0) {
+                items.sort(Collections.reverseOrder((one, two) -> Integer.compare(one.getDefinition().getGeneralPrice(), two
+                    .getDefinition().getGeneralPrice())));
+                for (Iterator<Item> it = items.iterator(); it.hasNext();) {
+                    Item next = it.next();
+                    if (amount == 0) {
+                        break;
+                    }
+                    character.getInventory().add(new Item(next.getId()));
+                    if (next.getDefinition().isStackable() && next.getAmount() > 1) {
+                        next.decrementAmountBy(1);
+                    } else {
+                        it.remove();
+                    }
+                    amount--;
                 }
-                character.getInventory().add(new Item(next.getId()));
-                if (next.getDefinition().isStackable() && next.getAmount() > 1) {
-                    next.decrementAmountBy(1);
-                } else {
-                    it.remove();
-                }
-                amount--;
             }
+            ItemNodeManager.register(!killer.isPresent() ? new ItemNodeStatic(new Item(526), character.getPosition()) : new ItemNode(
+                new Item(526), character.getPosition(), killer.get()));
+            items.stream().forEach(
+                item -> ItemNodeManager.register(!killer.isPresent() ? new ItemNodeStatic(item, character.getPosition()) : new ItemNode(
+                    item, character.getPosition(), killer.get())));
+            character.getInventory().addAll(keep);
+        } else {
+            ItemNodeManager.register(!killer.isPresent() ? new ItemNodeStatic(new Item(526), character.getPosition()) : new ItemNode(
+                new Item(526), character.getPosition(), killer.get()));
         }
-        items.stream().forEach(
-            item -> ItemNodeManager.register(!killer.isPresent() ? new ItemNodeStatic(item, character.getPosition()) : new ItemNode(item,
-                character.getPosition(), killer.get())));
-        character.getInventory().addAll(keep);
     }
 }
