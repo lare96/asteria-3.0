@@ -62,6 +62,10 @@ public final class CombatSession extends Task {
         }
         if (builder.getCharacter().getType() == NodeType.PLAYER) {
             builder.determineStrategy();
+
+            Player player = (Player) builder.getCharacter();
+            if (player.isSpecialActivated() && player.getCombatSpecial() == CombatSpecial.GRANITE_MAUL)
+                builder.clearAttackTimer();
         }
         builder.decrementAttackTimer();
 

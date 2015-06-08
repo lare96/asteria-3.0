@@ -126,6 +126,13 @@ public final class CombatBuilder {
     }
 
     /**
+     * Sets the attack timer to a value of {@code 0}.
+     */
+    public void clearAttackTimer() {
+        attackTimer = 0;
+    }
+
+    /**
      * Starts the cooldown sequence for this controller.
      *
      * @param resetAttack
