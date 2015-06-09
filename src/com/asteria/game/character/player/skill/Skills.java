@@ -1,5 +1,6 @@
 package com.asteria.game.character.player.skill;
 
+import java.util.Arrays;
 import java.util.stream.IntStream;
 
 import com.asteria.game.character.Flag;
@@ -194,6 +195,19 @@ public final class Skills {
             player.getSkills()[skill] = s;
         }
         player.getEncoder().sendSkill(skill, s.getLevel(), (int) s.getExperience());
+    }
+
+    /**
+     * Sends {@code skills} to the client which will refresh it for
+     * {@code player}.
+     *
+     * @param player
+     *            the player to refresh the skills for.
+     * @param skills
+     *            the skills that will be refreshed.
+     */
+    public static void refresh(Player player, int... skills) {
+        Arrays.stream(skills).forEach(it -> refresh(player, it));
     }
 
     /**

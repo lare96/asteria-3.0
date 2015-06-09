@@ -1,7 +1,9 @@
 package com.asteria.game.character.player.content;
 
+import static com.asteria.game.character.player.skill.Skills.AGILITY;
 import static com.asteria.game.character.player.skill.Skills.ATTACK;
 import static com.asteria.game.character.player.skill.Skills.DEFENCE;
+import static com.asteria.game.character.player.skill.Skills.FISHING;
 import static com.asteria.game.character.player.skill.Skills.HITPOINTS;
 import static com.asteria.game.character.player.skill.Skills.MAGIC;
 import static com.asteria.game.character.player.skill.Skills.PRAYER;
@@ -25,9 +27,44 @@ import com.asteria.task.Task;
  * @author lare96 <http://github.com/lare96>
  */
 public enum PotionConsumable {
-    // TODO: Normal restore potions, stamina potions, combat potion, super
-    // combat potion, extended antifire, zamorak brew, saradomin brew,
-    // antidote+, antidote++, agility potion, fishing potion
+
+    ZAMORAK_BREW(2450, 189, 191, 193) {
+        @Override
+        public void onEffect(Player player) {
+            PotionConsumable.onZamorakEffect(player);
+        }
+    },
+    SARADOMIN_BREW(6685, 6687, 6689, 6691) {
+        @Override
+        public void onEffect(Player player) {
+            PotionConsumable.onSaradominEffect(player);
+        }
+    },
+    ANTIDOTE_PLUS(5943, 5945, 5947, 5949) {
+        @Override
+        public void onEffect(Player player) {
+            PotionConsumable.onAntiPoisonEffect(player, true, 1000);
+        }
+    },
+    ANTIDOTE_PLUS_PLUS(5952, 5954, 5956, 5958) {
+        @Override
+        public void onEffect(Player player) {
+            PotionConsumable.onAntiPoisonEffect(player, true, 1200);
+        }
+    },
+    AGILITY_POTION(3032, 3034, 3036, 3038) {
+        @Override
+        public void onEffect(Player player) {
+            PotionConsumable.onAgilityEffect(player);
+
+        }
+    },
+    FISHING_POTION(2438, 151, 153, 155) {
+        @Override
+        public void onEffect(Player player) {
+            PotionConsumable.onFishingEffect(player);
+        }
+    },
     RANGE_POTIONS(2444, 169, 171, 173) {
         @Override
         public void onEffect(Player player) {
@@ -109,13 +146,13 @@ public enum PotionConsumable {
     ANTIPOISON_POTIONS(2446, 175, 177, 179) {
         @Override
         public void onEffect(Player player) {
-            PotionConsumable.onAntiPoisonEffect(player, false);
+            PotionConsumable.onAntiPoisonEffect(player, false, 0);
         }
     },
     SUPER_ANTIPOISON_POTIONS(2448, 181, 183, 185) {
         @Override
         public void onEffect(Player player) {
-            PotionConsumable.onAntiPoisonEffect(player, true);
+            PotionConsumable.onAntiPoisonEffect(player, true, 500);
         }
     };
 
@@ -165,6 +202,72 @@ public enum PotionConsumable {
     }
 
     /**
+     * The method that executes the fishing potion action.
+     *
+     * @param player
+     *            the player to do this action for.
+     */
+    private static void onFishingEffect(Player player) {
+        Skill fishing = player.getSkills()[FISHING];
+        fishing.increasePotionLevel(3);
+        Skills.refresh(player, FISHING);
+    }
+
+    /**
+     * The method that executes the agility potion action.
+     *
+     * @param player
+     *            the player to do this action for.
+     */
+    private static void onAgilityEffect(Player player) {
+        Skill agility = player.getSkills()[AGILITY];
+        agility.increasePotionLevel(3);
+        Skills.refresh(player, AGILITY);
+    }
+
+    /**
+     * The method that executes the Saradomin brew action.
+     *
+     * @param player
+     *            the player to do this action for.
+     */
+    private static void onSaradominEffect(Player player) {
+        Skill attack = player.getSkills()[ATTACK];
+        Skill strength = player.getSkills()[STRENGTH];
+        Skill defence = player.getSkills()[DEFENCE];
+        Skill hp = player.getSkills()[HITPOINTS];
+        Skill ranged = player.getSkills()[RANGED];
+        Skill magic = player.getSkills()[MAGIC];
+        defence.increasePotionLevel((int) Math.floor(2 + (0.20 * defence.getRealLevel())));
+        hp.increasePotionLevel((int) Math.floor(2 + (0.15 * hp.getRealLevel())));
+        attack.decreasePotionLevel((int) Math.floor(0.10 * attack.getRealLevel()));
+        strength.decreasePotionLevel((int) Math.floor(0.10 * strength.getRealLevel()));
+        magic.decreasePotionLevel((int) Math.floor(0.10 * magic.getRealLevel()));
+        ranged.decreasePotionLevel((int) Math.floor(0.10 * ranged.getRealLevel()));
+        Skills.refresh(player, ATTACK, STRENGTH, DEFENCE, HITPOINTS, RANGED, MAGIC);
+    }
+
+    /**
+     * The method that executes the Zamorak brew action.
+     *
+     * @param player
+     *            the player to do this action for.
+     */
+    private static void onZamorakEffect(Player player) {
+        Skill attack = player.getSkills()[ATTACK];
+        Skill strength = player.getSkills()[STRENGTH];
+        Skill defence = player.getSkills()[DEFENCE];
+        Skill hp = player.getSkills()[HITPOINTS];
+        Skill prayer = player.getSkills()[PRAYER];
+        attack.increasePotionLevel((int) Math.floor(2 + (0.20 * attack.getRealLevel())));
+        strength.increasePotionLevel((int) Math.floor(2 + (0.12 * strength.getRealLevel())));
+        defence.decreasePotionLevel((int) Math.floor(2 + (0.10 * defence.getRealLevel())));
+        hp.decreasePotionLevel((int) Math.floor(2 + (0.10 * hp.getRealLevel())));
+        prayer.increaseLevel((int) Math.floor(0.10 * prayer.getRealLevel()), prayer.getRealLevel());
+        Skills.refresh(player, ATTACK, STRENGTH, DEFENCE, HITPOINTS, PRAYER);
+    }
+
+    /**
      * The method that executes the prayer potion action.
      *
      * @param player
@@ -177,7 +280,7 @@ public enum PotionConsumable {
         Skill skill = player.getSkills()[PRAYER];
         int realLevel = skill.getRealLevel();
 
-        skill.increaseLevel((int) (realLevel * .33), realLevel);
+        skill.increaseLevel((int) Math.floor(7 + (realLevel / 4)), realLevel);
 
         if (restorePotion) {
             skill.increaseLevel(1, realLevel);
@@ -194,22 +297,24 @@ public enum PotionConsumable {
      * @param superPotion
      *            {@code true} if this potion is a super potion, {@code false}
      *            otherwise.
+     * @param length
+     *            the length that the effect lingers for.
      */
-    private static void onAntiPoisonEffect(Player player, boolean superPotion) {
+    private static void onAntiPoisonEffect(Player player, boolean superPotion, int length) {
         if (player.isPoisoned()) {
             player.setPoisonDamage(0);
-            player.getEncoder().sendMessage("You have been cured of your " + "poison!");
+            player.getEncoder().sendMessage("You have been cured of your poison!");
         }
         if (superPotion) {
             if (player.getPoisonImmunity().get() <= 0) {
-                player.getEncoder().sendMessage("You have been granted " + "immunity against poison.");
-                player.getPoisonImmunity().incrementAndGet(500);
+                player.getEncoder().sendMessage("You have been granted immunity against poison.");
+                player.getPoisonImmunity().incrementAndGet(length);
                 World.submit(new Task(50, false) {
                     @Override
                     public void execute() {
                         player.getPoisonImmunity().decrementAndGet(50);
                         if (player.getPoisonImmunity().get() <= 50) {
-                            player.getEncoder().sendMessage("Your resistance " + "to poison is about to wear off!");
+                            player.getEncoder().sendMessage("Your resistance to poison is about to wear off!");
                         } else if (player.getPoisonImmunity().get() <= 0) {
                             this.cancel();
                         }
@@ -217,13 +322,13 @@ public enum PotionConsumable {
 
                     @Override
                     public void onCancel() {
-                        player.getEncoder().sendMessage("Your resistance to " + "poison has worn off!");
+                        player.getEncoder().sendMessage("Your resistance to poison has worn off!");
                         player.getPoisonImmunity().set(0);
                     }
                 }.attach(player));
             } else if (player.getPoisonImmunity().get() > 0) {
-                player.getEncoder().sendMessage("Your immunity against poison" + " has been restored!");
-                player.getPoisonImmunity().set(500);
+                player.getEncoder().sendMessage("Your immunity against poison has been restored!");
+                player.getPoisonImmunity().set(length);
             }
         }
     }
@@ -257,7 +362,7 @@ public enum PotionConsumable {
             Skill skill = player.getSkills()[index];
             int realLevel = skill.getRealLevel();
 
-            skill.increaseLevel((int) (realLevel * .33), realLevel);
+            skill.increaseLevel((int) Math.floor(8 + (realLevel / 4)), realLevel);
             Skills.refresh(player, index);
         }
     }

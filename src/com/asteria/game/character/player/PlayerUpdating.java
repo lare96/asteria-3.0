@@ -466,6 +466,7 @@ public final class PlayerUpdating {
     private static void appendPrimaryHit(Player player, DataBuffer out) throws Exception {
         out.put(player.getPrimaryHit().getDamage());
         out.put(player.getPrimaryHit().getType().getId(), ValueType.A);
+
         if (!player.isDead()) {
             if (player.getSkills()[Skills.HITPOINTS].getLevel() <= 0) {
                 player.getSkills()[Skills.HITPOINTS].setLevel(0, true);
@@ -473,6 +474,7 @@ public final class PlayerUpdating {
                 World.submit(new PlayerDeath(player));
             }
         }
+
         out.put(player.getSkills()[Skills.HITPOINTS].getLevel(), ValueType.C);
         out.put(player.getSkills()[Skills.HITPOINTS].getRealLevel());
     }
@@ -488,7 +490,7 @@ public final class PlayerUpdating {
     private static void appendSecondaryHit(Player player, DataBuffer out) throws Exception {
         out.put(player.getSecondaryHit().getDamage());
         out.put(player.getSecondaryHit().getType().getId(), ValueType.S);
-
+       
         if (!player.isDead()) {
             if (player.getSkills()[Skills.HITPOINTS].getLevel() <= 0) {
                 player.getSkills()[Skills.HITPOINTS].setLevel(0, true);
@@ -496,7 +498,7 @@ public final class PlayerUpdating {
                 World.submit(new PlayerDeath(player));
             }
         }
-
+        
         out.put(player.getSkills()[Skills.HITPOINTS].getLevel());
         out.put(player.getSkills()[Skills.HITPOINTS].getRealLevel(), ValueType.C);
     }

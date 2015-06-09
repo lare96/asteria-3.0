@@ -71,6 +71,17 @@ public final class Skill {
     }
 
     /**
+     * Increments this level by {@code amount} to a maximum of
+     * {@code realLevel + amount}.
+     *
+     * @param amount
+     *            the amount to increase this level by.
+     */
+    public void increasePotionLevel(int amount) {
+        increaseLevel(amount, realLevel + amount);
+    }
+
+    /**
      * Increments this level by {@code amount} to {@code maximum}.
      *
      * @param amount
@@ -94,6 +105,17 @@ public final class Skill {
      */
     public void decreaseLevel(int amount) {
         decreaseLevel(amount, 0);
+    }
+
+    /**
+     * Decrements this level by {@code amount} to a minimum of
+     * {@code realLevel - amount}.
+     *
+     * @param amount
+     *            the amount to decrease this level by.
+     */
+    public void decreasePotionLevel(int amount) {
+        decreaseLevel(amount, realLevel - amount);
     }
 
     /**
