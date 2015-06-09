@@ -56,7 +56,6 @@ public enum PotionConsumable {
         @Override
         public void onEffect(Player player) {
             PotionConsumable.onAgilityEffect(player);
-
         }
     },
     FISHING_POTION(2438, 151, 153, 155) {
@@ -309,15 +308,16 @@ public enum PotionConsumable {
             if (player.getPoisonImmunity().get() <= 0) {
                 player.getEncoder().sendMessage("You have been granted immunity against poison.");
                 player.getPoisonImmunity().incrementAndGet(length);
+                System.out.println(player.getPoisonImmunity().get());
                 World.submit(new Task(50, false) {
                     @Override
                     public void execute() {
-                        player.getPoisonImmunity().decrementAndGet(50);
-                        if (player.getPoisonImmunity().get() <= 50) {
-                            player.getEncoder().sendMessage("Your resistance to poison is about to wear off!");
-                        } else if (player.getPoisonImmunity().get() <= 0) {
+                        if (player.getPoisonImmunity().get() <= 0)
                             this.cancel();
-                        }
+                        if (player.getPoisonImmunity().decrementAndGet(50) <= 50)
+                            player.getEncoder().sendMessage("Your resistance to poison is about to wear off!");
+                        if (player.getPoisonImmunity().get() <= 0)
+                            this.cancel();
                     }
 
                     @Override
