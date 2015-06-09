@@ -545,6 +545,8 @@ public abstract class CharacterNode extends Node {
      *            the time to freeze this character for.
      */
     public final void freeze(long time) {
+        if (isFrozen())
+            return;
         freezeDelay = time;
         freezeTimer.reset();
         movementQueue.reset();
