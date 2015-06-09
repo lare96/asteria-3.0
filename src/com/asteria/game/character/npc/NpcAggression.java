@@ -45,6 +45,7 @@ public final class NpcAggression {
     public static void sequence(Player player) {
         for (Npc npc : player.getLocalNpcs()) {
             if (validate(npc, player)) {
+                npc.getMovementQueue().reset();
                 npc.getCombatBuilder().attack(player);
             } else {
                 npc.getMovementCoordinator().setCoordinate(npc.isOriginalRandomWalk());
@@ -69,11 +70,16 @@ public final class NpcAggression {
             TOLERANCE_SECONDS, TimeUnit.SECONDS);
         if (!AGGRESSIVE.contains(npc.getId()) && !wilderness || !npc.getDefinition().isAttackable())
             return false;
+        if (!position.withinDistance(npc.getPosition(), TARGET_DISTANCE) || !position.withinDistance(player.getPosition(), TARGET_DISTANCE) && npc
+            .getDefinition().isRetreats()) {
+            npc.getMovementQueue().walk(position);
+            npc.getCombatBuilder().reset();
+            return false;
+        }
         if (!Location.inMultiCombat(player) && player.getCombatBuilder().isAttacking() || player.getCombatBuilder().isBeingAttacked())
             return false;
         if (player.determineCombatLevel() > (npc.getDefinition().getCombatLevel() * 2) && !wilderness)
             return false;
-        return position.withinDistance(player.getPosition(), TARGET_DISTANCE) && !npc.getCombatBuilder().isAttacking() && !npc
-            .getCombatBuilder().isBeingAttacked() && !tolerance;
+        return !npc.getCombatBuilder().isAttacking() && !npc.getCombatBuilder().isBeingAttacked() && !tolerance;
     }
 }
