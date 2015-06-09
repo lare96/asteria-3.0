@@ -106,6 +106,12 @@ public enum FoodConsumable {
             return 600;
         }
     },
+    KARAMBWAN(18, 3144) {
+        @Override
+        public long getDelay() {
+            return 600;
+        }
+    },
     KEBAB(-1, 1971) {
         @Override
         public void onEffect(Player player) {
