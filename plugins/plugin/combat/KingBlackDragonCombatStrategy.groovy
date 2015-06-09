@@ -4,16 +4,16 @@ import com.asteria.game.NodeType
 import com.asteria.game.World
 import com.asteria.game.character.Animation
 import com.asteria.game.character.CharacterNode
+import com.asteria.game.character.Graphic
 import com.asteria.game.character.Hit
 import com.asteria.game.character.combat.*
 import com.asteria.game.character.combat.magic.CombatSpells
 import com.asteria.game.character.combat.prayer.CombatPrayer
-import com.asteria.game.character.npc.Npc
 import com.asteria.game.character.player.Player
 import com.asteria.game.location.Location
+import com.asteria.game.location.Position
 import com.asteria.game.location.SquareLocation
 import com.asteria.game.plugin.PluginSignature
-import com.asteria.network.packet.PacketEncoder
 import com.asteria.task.Task
 import com.asteria.utility.RandomGen
 
@@ -90,8 +90,9 @@ final class KingBlackDragonCombatStrategy implements CombatStrategy {
 
     private CombatSessionData ranged(CharacterNode character, CharacterNode victim) {
         character.animation new Animation(81)
-        def p = victim.position.copy()
+        Position p = victim.position.copy()
         Location location = new SquareLocation(p.x, p.y, p.z, 5)
+        Player player = victim as Player
         World.submit(new Task(2, false) {
                     @Override
                     void execute() {
@@ -99,24 +100,24 @@ final class KingBlackDragonCombatStrategy implements CombatStrategy {
                         if (!character.registered || !victim.registered || victim.dead) {
                             return
                         }
-                        10.times {
-                            PacketEncoder.sendAllGraphic(446, location.random(), 0)
+                        player.graphic new Graphic(446)
+                        5.times {
+                            player.encoder.sendLocalGraphic(446, new Position(p.x + it, p.y), 0)
+                            player.encoder.sendLocalGraphic(446, new Position(p.x - it, p.y), 0)
                         }
-                        for (CharacterNode c : World.getCharacters()) {
+                        5.times {
+                            player.encoder.sendLocalGraphic(446, new Position(p.x, p.y + it), 0)
+                            player.encoder.sendLocalGraphic(446, new Position(p.x, p.y - it), 0)
+                        }
+                        for (Player c : World.getPlayers()) {
                             if (location.inLocation(c.position) && c != victim && c != character) {
-                                if (c.type == NodeType.NPC) {
-                                    if (!(c as Npc).getDefinition().attackable)
-                                        continue
-                                }
                                 int amount = Combat.calculateRandomHit(character, c, CombatType.RANGED).damage
                                 if (amount > 40)
                                     amount = 40
                                 int half = (amount / 2) as int
                                 int quarter = (amount / 4) as int
-                                if (c.type == NodeType.PLAYER) {
-                                    if (CombatPrayer.isActivated((c as Player), CombatPrayer.PROTECT_FROM_MISSILES))
-                                        amount = 0
-                                }
+                                if (CombatPrayer.isActivated(c, CombatPrayer.PROTECT_FROM_MISSILES))
+                                    amount = 0
                                 c.damage(new Hit(half), new Hit(quarter))
                                 c.combatBuilder.damageCache.add(c, half + quarter)
                             }
