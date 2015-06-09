@@ -110,6 +110,8 @@ final class KingBlackDragonCombatStrategy implements CombatStrategy {
                             player.encoder.sendLocalGraphic(446, new Position(p.x, p.y - it), 0)
                         }
                         for (Player c : World.getPlayers()) {
+                            if(c == null)
+                                continue
                             if (location.inLocation(c.position) && c != victim && c != character) {
                                 int amount = Combat.calculateRandomHit(character, c, CombatType.RANGED).damage
                                 if (amount > 40)
