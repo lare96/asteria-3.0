@@ -503,9 +503,6 @@ public final class Player extends CharacterNode {
             }
         }
         if (castSpell != null || autocastSpell != null) {
-            if (autocast) {
-                castSpell = autocastSpell;
-            }
             return Combat.newDefaultMagicStrategy();
         }
         if (weapon == WeaponInterface.SHORTBOW || weapon == WeaponInterface.LONGBOW || weapon == WeaponInterface.CROSSBOW || weapon == WeaponInterface.DART || weapon == WeaponInterface.JAVELIN || weapon == WeaponInterface.THROWNAXE || weapon == WeaponInterface.KNIFE) {

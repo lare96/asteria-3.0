@@ -75,9 +75,6 @@ public final class NpcActionPacket extends PacketDecoder {
         CombatSpell spell = CombatSpells.getSpell(spellId).orElse(null).getSpell();
         if (npc == null || spell == null || !checkAttack(player, npc))
             return;
-        player.setAutocastSpell(null);
-        player.setAutocast(false);
-        player.getEncoder().sendByteState(108, 0);
         player.setCastSpell(spell);
         player.getTolerance().reset();
         player.getCombatBuilder().attack(npc);

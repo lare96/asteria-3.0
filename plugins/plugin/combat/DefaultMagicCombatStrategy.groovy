@@ -6,6 +6,7 @@ import com.asteria.game.character.combat.Combat
 import com.asteria.game.character.combat.CombatSessionData
 import com.asteria.game.character.combat.CombatStrategy
 import com.asteria.game.character.combat.CombatType
+import com.asteria.game.character.combat.magic.CombatSpell
 import com.asteria.game.character.npc.Npc
 import com.asteria.game.character.player.Player
 import com.asteria.game.plugin.PluginSignature
@@ -18,14 +19,14 @@ final class DefaultMagicCombatStrategy implements CombatStrategy {
         if (character.type == NodeType.NPC)
             return true
         Player player = character as Player
-        return player.castSpell.canCast(player)
+        return get(player).canCast(player)
     }
 
     @Override
     CombatSessionData attack(CharacterNode character, CharacterNode victim) {
         if (character.type == NodeType.PLAYER) {
             Player player = character as Player
-            player.prepareSpell(player.castSpell, victim)
+            player.prepareSpell(get(player), victim)
         } else if (character.type == NodeType.NPC) {
             Npc npc = character as Npc
             npc.prepareSpell(Combat.prepareSpellCast(npc).spell, victim)
@@ -50,5 +51,12 @@ final class DefaultMagicCombatStrategy implements CombatStrategy {
     @Override
     int[] getNpcs() {
         [13, 172, 174] as int[]
+    }
+
+    private CombatSpell get(Player player) {
+        if(player.autocast && player.castSpell != null  && player.autocastSpell != null || !player.autocast && player.autocastSpell==null) {
+            return player.castSpell
+        }
+        return player.autocastSpell
     }
 }

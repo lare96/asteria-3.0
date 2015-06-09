@@ -54,9 +54,6 @@ public final class AttackPlayerPacket extends PacketDecoder {
 
         if (index < 0 || index > World.getPlayers().capacity() || spellId < 0 || !checkAttack(player, victim))
             return;
-        player.setAutocastSpell(null);
-        player.setAutocast(false);
-        player.getEncoder().sendByteState(108, 0);
         player.setCastSpell(spell);
         player.getCombatBuilder().attack(victim);
     }

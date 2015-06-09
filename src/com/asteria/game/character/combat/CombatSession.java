@@ -97,7 +97,7 @@ public final class CombatSession extends Task {
                 if (data.getType() == CombatType.MAGIC && builder.getCharacter().getType() == NodeType.PLAYER) {
                     Player player = (Player) builder.getCharacter();
 
-                    if (!player.isAutocast()) {
+                    if (player.getCastSpell() != null && player.getAutocastSpell() != null || player.getAutocastSpell() == null) {
                         if (!player.isSpecialActivated())
                             player.getCombatBuilder().cooldown(false);
                         player.setCastSpell(null);
@@ -154,7 +154,7 @@ public final class CombatSession extends Task {
                     return false;
                 }
             } else if (Location.inWilderness(builder.getCharacter()) && !Location.inWilderness(builder.getVictim())) {
-                player.getEncoder().sendMessage("They are not in the " + "wilderness!");
+                player.getEncoder().sendMessage("They are not in the wilderness!");
                 builder.reset();
                 return false;
             }
