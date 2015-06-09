@@ -107,7 +107,7 @@ public final class PrivateMessagingPacket extends PacketDecoder {
     private void sendMessage(Player player, int size, DataBuffer buf) {
         long to = buf.getLong();
         int newSize = size - 8;
-        byte[] message = buf.getBytes(size);
+        byte[] message = buf.getBytes(newSize);
         if (to < 0 || newSize < 0 || message == null)
             return;
         if (!player.getFriends().contains(to)) {
