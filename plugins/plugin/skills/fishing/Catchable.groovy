@@ -1,9 +1,12 @@
 package plugin.skills.fishing
 
 import com.asteria.game.character.player.Player
-import com.asteria.game.location.Location;
+import com.asteria.game.location.Location
 
 enum Catchable {
+
+    // TODO: Some way of catching Manta ray?
+
     SHRIMP(317, 1, 0.85, 10),
     SARDINE(327, 5, 0.8, 20),
     HERRING(345, 10, 0.85, 30),

@@ -3,6 +3,8 @@ package plugin.skills.cooking
 import com.asteria.game.character.player.Player
 import com.asteria.game.item.ItemDefinition
 
+
+
 enum CookingData {
     SHRIMP(317, 1, 315, 34, 323, 30),
     SARDINE(327, 5, 325, 38, 369, 40),
@@ -20,6 +22,7 @@ enum CookingData {
     BASS(363, 46, 365, 80, 367, 130),
     SWORDFISH(371, 50, 373, 86, 375, 140),
     LAVA_EEL(2148, 53, 2149, 89, 3383, 140),
+    MANTA_RAY(389, 91, 391, 100, 393, 216.3),
     SHARK(383, 76, 385, 94, 387, 210)
 
     final int rawId
