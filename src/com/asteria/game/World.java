@@ -260,13 +260,13 @@ public final class World {
          * The phaser keeps the entire update sequence in proper synchronization
          * with the main game thread.
          */
-        private final Phaser synchronizer = new Phaser(1);
+        private static Phaser synchronizer = new Phaser(1);
 
         /**
          * The executor that allows us to utilize multiple threads to update in
          * parallel.
          */
-        private final ExecutorService updateService = ConcurrentUpdateService.create();
+        private static ExecutorService updateService = ConcurrentUpdateService.create();
 
         @Override
         public void run() {
