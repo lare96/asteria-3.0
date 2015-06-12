@@ -78,7 +78,7 @@ public final class NpcDropTable {
      */
     public Item[] toItems(Player player) {
         int slot = 0;
-        Item[] items = new Item[(dynamic.length + 1)];
+        Item[] items = new Item[DROP_THRESHOLD + 1];
         LinkedList<NpcDrop> copyList = CollectionUtils.newLinkedList(dynamic);
         Collections.shuffle(copyList);
         for (int amount = 0; amount < DROP_THRESHOLD; amount++) {
