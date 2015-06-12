@@ -102,7 +102,7 @@ public final class CombatBuilder {
      * Instantly executes the combat task regardless of its state. Should really
      * only be used for instant special attacks.
      */
-    protected void instant() {
+    public void instant() {
         combatTask.execute();
     }
 
