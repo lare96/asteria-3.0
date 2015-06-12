@@ -99,6 +99,14 @@ public final class CombatBuilder {
     }
 
     /**
+     * Instantly executes the combat task regardless of its state. Should really
+     * only be used for instant special attacks.
+     */
+    protected void instant() {
+        combatTask.execute();
+    }
+
+    /**
      * Resets this builder by canceling the {@link CombatBuilder#combatTask} if
      * it's running and discarding various values associated with the combat
      * process.

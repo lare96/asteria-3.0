@@ -9,6 +9,7 @@ import plugin.skills.cooking.Cooking
 import com.asteria.game.World
 import com.asteria.game.character.combat.magic.CombatSpells
 import com.asteria.game.character.combat.prayer.CombatPrayer
+import com.asteria.game.character.combat.weapon.CombatSpecial
 import com.asteria.game.character.combat.weapon.FightType
 import com.asteria.game.character.player.Player
 import com.asteria.game.character.player.content.Spellbook
@@ -817,10 +818,12 @@ final class ClickButtons implements PluginListener<ButtonClickPlugin> {
                         player.encoder.sendMessage "You do not have enough special energy left!"
                         break
                     }
-
                     player.encoder.sendByteState(301, 1)
                     player.specialActivated = true
-
+                    if(player.combatSpecial == CombatSpecial.GRANITE_MAUL && player.getCombatBuilder().isAttacking() && !player.getCombatBuilder().isCooldown()) {
+                        player.getCombatBuilder().instant()
+                        break
+                    }
                     World.submit(new Task(1, false) {
                                 @Override
                                 void execute() {
