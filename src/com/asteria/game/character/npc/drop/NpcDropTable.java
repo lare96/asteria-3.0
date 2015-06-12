@@ -2,6 +2,7 @@ package com.asteria.game.character.npc.drop;
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
 
@@ -78,8 +79,16 @@ public final class NpcDropTable {
      */
     public Item[] toItems(Player player) {
         int slot = 0;
-        Item[] items = new Item[DROP_THRESHOLD + 1];
+        Item[] items = new Item[dynamic.length + 1];
         LinkedList<NpcDrop> copyList = CollectionUtils.newLinkedList(dynamic);
+        Iterator<NpcDrop> $it = copyList.iterator();
+        while($it.hasNext()) {
+            NpcDrop drop = $it.next();
+            if(drop.getChance() == NpcDropChance.ALWAYS) {
+                items[slot++] = drop.toItem(random);
+                $it.remove();
+            }
+        }
         Collections.shuffle(copyList);
         for (int amount = 0; amount < DROP_THRESHOLD; amount++) {
             if (copyList.size() == 0)
