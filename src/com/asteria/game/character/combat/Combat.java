@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.function.Consumer;
 
 import plugin.combat.DefaultMagicCombatStrategy;
 import plugin.combat.DefaultMeleeCombatStrategy;
@@ -27,6 +28,7 @@ import com.asteria.game.character.player.skill.Skills;
 import com.asteria.game.item.Item;
 import com.asteria.game.item.container.Equipment;
 import com.asteria.game.location.Position;
+import com.asteria.utility.CollectionUtils;
 import com.asteria.utility.RandomGen;
 import com.asteria.utility.Settings;
 
@@ -173,7 +175,7 @@ public final class Combat {
         if (Combat.isFullVeracs(builder.getCharacter())) {
             if (Settings.DEBUG && builder.getCharacter().getType() == NodeType.PLAYER)
                 ((Player) builder.getCharacter()).getEncoder().sendMessage(
-                    "[DEBUG]: Chance of opponents prayer cancelling hit " + "[0%:" + Combat.PRAYER_ACCURACY_REDUCTION + "%]");
+                    "[DEBUG]: Chance of opponents prayer cancelling hit " + "[0/" + Combat.PRAYER_ACCURACY_REDUCTION + "]");
             return;
         }
         Player player = (Player) builder.getVictim();
@@ -248,56 +250,161 @@ public final class Combat {
 
     /**
      * Deals the damage contained within {@code data} to all {@code characters}
-     * within {@code radius} of {@code position}.
+     * within {@code radius} of {@code position}. This method also executes
+     * {@code action} for every character. Please note that this only accounts
+     * for local characters.
      * 
-     * @param characters
+     * @param attacker
+     *            the attacker in this combat session.
+     * @param victims
      *            the characters that will be attempted to be hit.
      * @param position
      *            the position that the radius will be calculated from.
      * @param radius
      *            the radius of the damage.
-     * @param data
-     *            the data containing the damage.
+     * @param hits
+     *            the amount of hits to calculate.
+     * @param type
+     *            the combat type the attacker is using.
+     * @param checkAccuracy
+     *            determines if accuracy should be calculated for hits.
+     * @param action
+     *            the action to execute for each victim.
      */
-    public static void damageCharactersWithin(Iterable<? extends CharacterNode> characters, Position position, int radius, CombatSessionData data) {
-        for (CharacterNode c : characters) {
+    public static <E extends CharacterNode> void damageCharactersWithin(CharacterNode attacker, Iterable<E> victims, Position position, int radius, int hits, CombatType type, boolean checkAccuracy, Consumer<E> action) {
+        for (E c : victims) {
             if (c == null)
                 continue;
-            if (!c.getPosition().withinDistance(position, radius) || c.equals(data.getAttacker()) || c.equals(data.getAttacker()
-                .getCombatBuilder().getVictim()))
+            if (!c.getPosition().withinDistance(position, radius) || c.equals(attacker) || c
+                .equals(attacker.getCombatBuilder().getVictim()) || c.getCurrentHealth() <= 0 || c.isDead())
                 continue;
-            c.getCombatBuilder().getDamageCache().add(data.getAttacker(), data.attack());
+            CombatSessionData data = new CombatSessionData(attacker, c, hits, type, checkAccuracy);
+            c.getCombatBuilder().getDamageCache().add(attacker, data.attack());
+            if (action != null)
+                action.accept(c);
         }
     }
 
     /**
-     * Deals the damage contained within {@code data} to all {@link Player}s
-     * within {@code radius} of {@code position}.
+     * Deals the damage contained within {@code data} to all {@code characters}
+     * within {@code radius} of {@code position}. This method also executes
+     * {@code action} for every character. Please note that this only accounts
+     * for local characters.
      * 
+     * @param attacker
+     *            the attacker in this combat session.
+     * @param victims
+     *            the characters that will be attempted to be hit.
      * @param position
      *            the position that the radius will be calculated from.
      * @param radius
      *            the radius of the damage.
-     * @param data
-     *            the data containing the damage.
+     * @param hits
+     *            the amount of hits to calculate.
+     * @param type
+     *            the combat type the attacker is using.
+     * @param checkAccuracy
+     *            determines if accuracy should be calculated for hits.
      */
-    public static void damagePlayersWithin(Position position, int radius, CombatSessionData data) {
-        damageCharactersWithin(World.getPlayers(), position, radius, data);
+    public static void damageCharactersWithin(CharacterNode attacker, Iterable<? extends CharacterNode> victims, Position position, int radius, int hits, CombatType type, boolean checkAccuracy) {
+        damageCharactersWithin(attacker, victims, position, radius, hits, type, checkAccuracy, null);
+    }
+
+    /**
+     * Deals the damage contained within {@code data} to all {@link Player}s
+     * within {@code radius} of {@code position}. Please note that this only
+     * accounts for local characters.
+     * 
+     * @param attacker
+     *            the attacker in this combat session.
+     * @param position
+     *            the position that the radius will be calculated from.
+     * @param radius
+     *            the radius of the damage.
+     * @param hits
+     *            the amount of hits to calculate.
+     * @param type
+     *            the combat type the attacker is using.
+     * @param checkAccuracy
+     *            determines if accuracy should be calculated for hits.
+     * @param action
+     *            the action to execute for each victim.
+     */
+    public static void damagePlayersWithin(CharacterNode attacker, Position position, int radius, int hits, CombatType type, boolean checkAccuracy, Consumer<Player> action) {
+        damageCharactersWithin(attacker, CollectionUtils.newIterable(World.getLocalPlayers(attacker)), position, radius, hits, type,
+            checkAccuracy, action);
+    }
+
+    /**
+     * Deals the damage contained within {@code data} to all {@link Player}s
+     * within {@code radius} of {@code position}. This method also executes
+     * {@code action} for every character. Please note that this only accounts
+     * for local characters.
+     * 
+     * @param attacker
+     *            the attacker in this combat session.
+     * @param position
+     *            the position that the radius will be calculated from.
+     * @param radius
+     *            the radius of the damage.
+     * @param hits
+     *            the amount of hits to calculate.
+     * @param type
+     *            the combat type the attacker is using.
+     * @param checkAccuracy
+     *            determines if accuracy should be calculated for hits.
+     */
+    public static void damagePlayersWithin(CharacterNode attacker, Position position, int radius, int hits, CombatType type, boolean checkAccuracy) {
+        damagePlayersWithin(attacker, position, radius, hits, type, checkAccuracy, null);
     }
 
     /**
      * Deals the damage contained within {@code data} to all {@link Npc}s within
-     * {@code radius} of {@code position}.
+     * {@code radius} of {@code position}. This method also executes
+     * {@code action} for every character. Please note that this only accounts
+     * for local characters.
      * 
+     * @param attacker
+     *            the attacker in this combat session.
      * @param position
      *            the position that the radius will be calculated from.
      * @param radius
      *            the radius of the damage.
-     * @param data
-     *            the data containing the damage.
+     * @param hits
+     *            the amount of hits to calculate.
+     * @param type
+     *            the combat type the attacker is using.
+     * @param checkAccuracy
+     *            determines if accuracy should be calculated for hits.
+     * @param action
+     *            the action to execute for each victim.
      */
-    public static void damageNpcsWithin(Position position, int radius, CombatSessionData data) {
-        damageCharactersWithin(World.getNpcs(), position, radius, data);
+    public static void damageNpcsWithin(CharacterNode attacker, Position position, int radius, int hits, CombatType type, boolean checkAccuracy, Consumer<Npc> action) {
+        damageCharactersWithin(attacker, CollectionUtils.newIterable(World.getLocalNpcs(attacker)), position, radius, hits, type,
+            checkAccuracy, action);
+    }
+
+    /**
+     * Deals the damage contained within {@code data} to all {@link Npc}s within
+     * {@code radius} of {@code position}. This method also executes
+     * {@code action} for every character. Please note that this only accounts
+     * for local characters.
+     * 
+     * @param attacker
+     *            the attacker in this combat session.
+     * @param position
+     *            the position that the radius will be calculated from.
+     * @param radius
+     *            the radius of the damage.
+     * @param hits
+     *            the amount of hits to calculate.
+     * @param type
+     *            the combat type the attacker is using.
+     * @param checkAccuracy
+     *            determines if accuracy should be calculated for hits.
+     */
+    public static void damageNpcsWithin(CharacterNode attacker, Position position, int radius, int hits, CombatType type, boolean checkAccuracy) {
+        damageNpcsWithin(attacker, position, radius, hits, type, checkAccuracy, null);
     }
 
     /**

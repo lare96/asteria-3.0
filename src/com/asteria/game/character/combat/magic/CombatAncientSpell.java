@@ -1,16 +1,16 @@
 package com.asteria.game.character.combat.magic;
 
-import java.util.Iterator;
 import java.util.Optional;
+import java.util.function.Consumer;
 
 import com.asteria.game.NodeType;
-import com.asteria.game.World;
 import com.asteria.game.character.CharacterNode;
-import com.asteria.game.character.Hit;
+import com.asteria.game.character.combat.Combat;
+import com.asteria.game.character.combat.CombatType;
+import com.asteria.game.character.npc.Npc;
 import com.asteria.game.character.player.Player;
 import com.asteria.game.item.Item;
 import com.asteria.game.location.Location;
-import com.asteria.utility.RandomGen;
 
 /**
  * The {@link CombatSpell} extension with support for effects and the ability to
@@ -20,31 +20,28 @@ import com.asteria.utility.RandomGen;
  */
 public abstract class CombatAncientSpell extends CombatSpell {
 
-    /**
-     * The random generator instance that will generate random numbers.
-     */
-    private RandomGen random = new RandomGen();
-
     @Override
     public final void executeOnHit(CharacterNode cast, CharacterNode castOn, boolean accurate, int damage) {
         if (accurate) {
             effect(cast, castOn, damage);
-            if (radius() == 0 || !Location.inMultiCombat(castOn)) {
+            if (radius() == 0 || !Location.inMultiCombat(castOn))
                 return;
-            }
-            Iterator<? extends CharacterNode> it = castOn.getType() == NodeType.PLAYER ? World.getLocalPlayers(cast) : World
-                .getLocalNpcs(cast);
-            while (it.hasNext()) {
-                CharacterNode character = it.next();
-                if (character == null || !character.getPosition().withinDistance(castOn.getPosition(), radius()) || character.equals(cast) || character
-                    .equals(castOn) || character.getCurrentHealth() <= 0 || character.isDead()) {
-                    continue;
-                }
-                cast.getCurrentlyCasting().endGraphic().ifPresent(character::graphic);
-                int counter = random.inclusive(0, maximumHit());
-                character.damage(new Hit(counter));
-                character.getCombatBuilder().getDamageCache().add(cast, counter);
-                effect(cast, character, counter);
+            if (castOn.getType() == NodeType.PLAYER) {
+                Combat.damagePlayersWithin(cast, castOn.getPosition(), radius(), 1, CombatType.MAGIC, false, new Consumer<Player>() {
+                    @Override
+                    public void accept(Player t) {
+                        cast.getCurrentlyCasting().endGraphic().ifPresent(t::graphic);
+                        effect(cast, castOn, damage);
+                    }
+                });
+            } else {
+                Combat.damageNpcsWithin(cast, castOn.getPosition(), radius(), 1, CombatType.MAGIC, false, new Consumer<Npc>() {
+                    @Override
+                    public void accept(Npc t) {
+                        cast.getCurrentlyCasting().endGraphic().ifPresent(t::graphic);
+                        effect(cast, castOn, damage);
+                    }
+                });
             }
         }
     }
