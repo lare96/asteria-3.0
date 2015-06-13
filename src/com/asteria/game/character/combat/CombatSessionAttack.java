@@ -65,7 +65,8 @@ public final class CombatSessionAttack extends Task {
         CharacterNode attacker = builder.getCharacter();
         CharacterNode victim = builder.getVictim();
 
-        if (attacker.isDead() || !attacker.isRegistered() || victim.isDead() || !victim.isRegistered()) {
+        if (attacker == null || victim == null || attacker.isDead() || !attacker.isRegistered() || victim.isDead() || !victim
+            .isRegistered()) {
             this.cancel();
             return;
         }
@@ -74,7 +75,6 @@ public final class CombatSessionAttack extends Task {
         if (data.getHits().length != 0 && data.getType() != CombatType.MAGIC || data.isAccurate()) {
             victim.getCombatBuilder().getDamageCache().add(attacker, (counter = data.attack()));
         }
-        handleExperience();
 
         if (!data.isAccurate()) {
             if (data.getType() == CombatType.MAGIC) {
@@ -189,37 +189,6 @@ public final class CombatSessionAttack extends Task {
                     Skills.refresh(victim, Skills.PRAYER);
                 }
             }
-        }
-    }
-
-    /**
-     * Handles the distribution of experience for the amount of damage dealt in
-     * this combat session attack.
-     */
-    private void handleExperience() {
-        if (data.getExperience().length == 0 && data.getType() != CombatType.MAGIC) {
-            return;
-        }
-        if (builder.getCharacter().getType() == NodeType.PLAYER) {
-            Player player = (Player) builder.getCharacter();
-            double exp = 0;
-            double hitpointsExp = 0;
-
-            if (data.getType() == CombatType.MAGIC) {
-                exp = (counter * 4d) + builder.getCharacter().getCurrentlyCasting().baseExperience();
-                hitpointsExp = (exp / 3d);
-
-                Skills.experience(player, exp, Skills.MAGIC);
-                Skills.experience(player, hitpointsExp, Skills.HITPOINTS);
-                return;
-            }
-            exp = ((counter * 4d) / data.getExperience().length);
-            hitpointsExp = (exp / 3d);
-
-            for (int amount : data.getExperience()) {
-                Skills.experience(player, exp, amount);
-            }
-            Skills.experience(player, hitpointsExp, Skills.HITPOINTS);
         }
     }
 }

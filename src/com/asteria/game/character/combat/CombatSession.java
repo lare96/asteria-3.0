@@ -1,13 +1,9 @@
 package com.asteria.game.character.combat;
 
-import java.util.Arrays;
-import java.util.Objects;
 import java.util.Optional;
 
 import com.asteria.game.NodeType;
 import com.asteria.game.World;
-import com.asteria.game.character.Hit;
-import com.asteria.game.character.combat.prayer.CombatPrayer;
 import com.asteria.game.character.combat.weapon.CombatSpecial;
 import com.asteria.game.character.npc.Npc;
 import com.asteria.game.character.player.Player;
@@ -15,8 +11,6 @@ import com.asteria.game.character.player.minigame.Minigame;
 import com.asteria.game.character.player.minigame.MinigameHandler;
 import com.asteria.game.location.Location;
 import com.asteria.task.Task;
-import com.asteria.utility.RandomGen;
-import com.asteria.utility.Settings;
 
 /**
  * The combat session controls the mechanics of when and how the controller of
@@ -25,11 +19,6 @@ import com.asteria.utility.Settings;
  * @author lare96 <http://github.com/lare96>
  */
 public final class CombatSession extends Task {
-
-    /**
-     * The random generator instance that will generate random numbers.
-     */
-    private final RandomGen random = new RandomGen();
 
     /**
      * The builder assigned to this combat session.
@@ -88,9 +77,6 @@ public final class CombatSession extends Task {
             }
 
             if (data.getType() != null) {
-                if (data.getHits().length > 0) {
-                    applyPrayerEffects(data);
-                }
                 builder.getVictim().getCombatBuilder().setLastAttacker(builder.getCharacter());
                 builder.getVictim().getLastCombat().reset();
 
@@ -169,59 +155,5 @@ public final class CombatSession extends Task {
             }
         }
         return true;
-    }
-
-    /**
-     * Applies combat prayer accuracy and damage reductions before executing the
-     * {@link CombatSessionAttack}.
-     *
-     * @param data
-     *            the data for this combat session.
-     * @throws IllegalStateException
-     *             if the character node type is invalid.
-     */
-    private void applyPrayerEffects(CombatSessionData data) {
-        if (!data.isCheckAccuracy()) {
-            return;
-        }
-        if (builder.getVictim().getType() != NodeType.PLAYER) {
-            return;
-        }
-        if (Combat.isFullVeracs(builder.getCharacter())) {
-            if (Settings.DEBUG && builder.getCharacter().getType() == NodeType.PLAYER)
-                ((Player) builder.getCharacter()).getEncoder().sendMessage(
-                    "[DEBUG]: Chance of opponents prayer cancelling hit " + "[0%:" + Combat.PRAYER_ACCURACY_REDUCTION + "%]");
-            return;
-        }
-        Player player = (Player) builder.getVictim();
-
-        if (CombatPrayer.isActivated(player, Combat.getProtectingPrayer(data.getType()))) {
-            switch (builder.getCharacter().getType()) {
-            case PLAYER:
-                for (CombatHit h : data.getHits()) {
-                    int hit = h.getHit().getDamage();
-                    double mod = Math.abs(1 - Combat.PRAYER_DAMAGE_REDUCTION);
-                    h.setHit(new Hit((int) (hit * mod), h.getHit().getType()));
-                    if (Settings.DEBUG)
-                        player.getEncoder().sendMessage(
-                            "[DEBUG]: Damage " + "reduced by opponents prayer [" + (hit - h.getHit().getDamage()) + "]");
-                    mod = Math.round(random.nextDouble() * 100.0) / 100.0;
-                    if (Settings.DEBUG)
-                        player
-                            .getEncoder()
-                            .sendMessage(
-                                "[DEBUG]: Chance " + "of opponents prayer cancelling hit [" + mod + "/" + Combat.PRAYER_ACCURACY_REDUCTION + "]");
-                    if (mod <= Combat.PRAYER_ACCURACY_REDUCTION) {
-                        h.setAccurate(false);
-                    }
-                }
-                break;
-            case NPC:
-                Arrays.stream(data.getHits()).filter(Objects::nonNull).forEach(h -> h.setAccurate(false));
-                break;
-            default:
-                throw new IllegalStateException("Invalid character node " + "type!");
-            }
-        }
     }
 }

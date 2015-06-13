@@ -109,6 +109,7 @@ public class CombatSessionData {
             if (array[i].isAccurate())
                 accurate = true;
         }
+        Combat.applyPrayerEffects(attacker.getCombatBuilder(), this);
         return array;
     }
 
@@ -141,6 +142,7 @@ public class CombatSessionData {
         if (hits.length > 0) {
             victim.damage(container);
         }
+        Combat.handleExperience(attacker.getCombatBuilder(), this, counter);
         return counter;
     }
 

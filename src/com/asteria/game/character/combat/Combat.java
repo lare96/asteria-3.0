@@ -1,7 +1,9 @@
 package com.asteria.game.character.combat;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import plugin.combat.DefaultMagicCombatStrategy;
 import plugin.combat.DefaultMeleeCombatStrategy;
@@ -149,7 +151,153 @@ public final class Combat {
      *             if this class is instantiated.
      */
     private Combat() {
-        throw new UnsupportedOperationException("This class cannot be " + "instantiated!");
+        throw new UnsupportedOperationException("This class cannot be instantiated!");
+    }
+
+    /**
+     * Applies combat prayer accuracy and damage reductions before executing the
+     * {@link CombatSessionAttack}.
+     *
+     * @param builder
+     *            the combat builder for this combat session.
+     * @param data
+     *            the data for this combat session.
+     */
+    protected static void applyPrayerEffects(CombatBuilder builder, CombatSessionData data) {
+        if (!data.isCheckAccuracy()) {
+            return;
+        }
+        if (builder.getVictim().getType() != NodeType.PLAYER) {
+            return;
+        }
+        if (Combat.isFullVeracs(builder.getCharacter())) {
+            if (Settings.DEBUG && builder.getCharacter().getType() == NodeType.PLAYER)
+                ((Player) builder.getCharacter()).getEncoder().sendMessage(
+                    "[DEBUG]: Chance of opponents prayer cancelling hit " + "[0%:" + Combat.PRAYER_ACCURACY_REDUCTION + "%]");
+            return;
+        }
+        Player player = (Player) builder.getVictim();
+
+        if (CombatPrayer.isActivated(player, Combat.getProtectingPrayer(data.getType()))) {
+            switch (builder.getCharacter().getType()) {
+            case PLAYER:
+                for (CombatHit h : data.getHits()) {
+                    int hit = h.getHit().getDamage();
+                    double mod = Math.abs(1 - Combat.PRAYER_DAMAGE_REDUCTION);
+                    h.setHit(new Hit((int) (hit * mod), h.getHit().getType()));
+                    if (Settings.DEBUG)
+                        player.getEncoder().sendMessage(
+                            "[DEBUG]: Damage " + "reduced by opponents prayer [" + (hit - h.getHit().getDamage()) + "]");
+                    mod = Math.round(random.nextDouble() * 100.0) / 100.0;
+                    if (Settings.DEBUG)
+                        player
+                            .getEncoder()
+                            .sendMessage(
+                                "[DEBUG]: Chance " + "of opponents prayer cancelling hit [" + mod + "/" + Combat.PRAYER_ACCURACY_REDUCTION + "]");
+                    if (mod <= Combat.PRAYER_ACCURACY_REDUCTION) {
+                        h.setAccurate(false);
+                    }
+                }
+                break;
+            case NPC:
+                Arrays.stream(data.getHits()).filter(Objects::nonNull).forEach(h -> h.setAccurate(false));
+                break;
+            default:
+                throw new IllegalStateException("Invalid character node " + "type!");
+            }
+        }
+    }
+
+    /**
+     * Handles the distribution of experience for the amount of damage dealt in
+     * this combat session attack.
+     * 
+     * @param builder
+     *            the combat builder for this combat session.
+     * @param data
+     *            the data for this combat session.
+     * @param counter
+     *            the total amount of damage dealt.
+     */
+    protected static void handleExperience(CombatBuilder builder, CombatSessionData data, int counter) {
+        if (builder.getCharacter().getType() == NodeType.PLAYER) {
+            if (data.getExperience().length == 0 && data.getType() != CombatType.MAGIC) {
+                return;
+            }
+            Player player = (Player) builder.getCharacter();
+            double exp = 0;
+            double hitpointsExp = 0;
+
+            if (data.getType() == CombatType.MAGIC) {
+                exp = (counter * 4d) + builder.getCharacter().getCurrentlyCasting().baseExperience();
+                hitpointsExp = (exp / 3d);
+
+                Skills.experience(player, exp, Skills.MAGIC);
+                Skills.experience(player, hitpointsExp, Skills.HITPOINTS);
+                return;
+            }
+            exp = ((counter * 4d) / data.getExperience().length);
+            hitpointsExp = (exp / 3d);
+
+            for (int amount : data.getExperience()) {
+                Skills.experience(player, exp, amount);
+            }
+            Skills.experience(player, hitpointsExp, Skills.HITPOINTS);
+        }
+    }
+
+    /**
+     * Deals the damage contained within {@code data} to all {@code characters}
+     * within {@code radius} of {@code position}.
+     * 
+     * @param characters
+     *            the characters that will be attempted to be hit.
+     * @param position
+     *            the position that the radius will be calculated from.
+     * @param radius
+     *            the radius of the damage.
+     * @param data
+     *            the data containing the damage.
+     */
+    public static void damageCharactersWithin(Iterable<? extends CharacterNode> characters, Position position, int radius, CombatSessionData data) {
+        for (CharacterNode c : characters) {
+            if (c == null)
+                continue;
+            if (!c.getPosition().withinDistance(position, radius) || c.equals(data.getAttacker()) || c.equals(data.getAttacker()
+                .getCombatBuilder().getVictim()))
+                continue;
+            c.getCombatBuilder().getDamageCache().add(data.getAttacker(), data.attack());
+        }
+    }
+
+    /**
+     * Deals the damage contained within {@code data} to all {@link Player}s
+     * within {@code radius} of {@code position}.
+     * 
+     * @param position
+     *            the position that the radius will be calculated from.
+     * @param radius
+     *            the radius of the damage.
+     * @param data
+     *            the data containing the damage.
+     */
+    public static void damagePlayersWithin(Position position, int radius, CombatSessionData data) {
+        damageCharactersWithin(World.getPlayers(), position, radius, data);
+    }
+
+    /**
+     * Deals the damage contained within {@code data} to all {@link Npc}s within
+     * {@code radius} of {@code position}.
+     * 
+     * @param position
+     *            the position that the radius will be calculated from.
+     * @param radius
+     *            the radius of the damage.
+     * @param data
+     *            the data containing the damage.
+     */
+    public static void damageNpcsWithin(Position position, int radius, CombatSessionData data) {
+        damageCharactersWithin(World.getNpcs(), position, radius, data);
     }
 
     /**
@@ -688,8 +836,6 @@ public final class Combat {
         if (character.getType() == NodeType.NPC) {
             Npc npc = (Npc) character;
             maxHit = npc.getDefinition().getMaxHit();
-            if (npc.getWeakenedBy() == CombatWeaken.STRENGTH_LOW || npc.getWeakenedBy() == CombatWeaken.STRENGTH_HIGH)
-                maxHit -= (int) ((npc.getWeakenedBy().getRate()) * (maxHit));
             return maxHit;
         }
 
