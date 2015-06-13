@@ -58,7 +58,7 @@ public final class NpcDeath extends CharacterDeath<Npc> {
     @Override
     public void postDeath(Npc character) {
         if (character.isRespawn()) {
-            World.submit(new Task(character.getRespawnTime(), false) {
+            World.submit(new Task(character.getDefinition().getRespawnTime(), false) {
                 @Override
                 public void execute() {
                     Npc npc = new Npc(character.getId(), character.getOriginalPosition());

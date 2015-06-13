@@ -269,7 +269,7 @@ public final class NpcDefinition {
      * @return the respawn time.
      */
     public int getRespawnTime() {
-        return respawnTime;
+        return ((respawnTime - 1) <= 0 ? 1 : (respawnTime - 1));
     }
 
     /**

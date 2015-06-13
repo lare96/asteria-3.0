@@ -165,15 +165,6 @@ public final class Npc extends CharacterNode {
     }
 
     /**
-     * Gets the respawn time for this NPC in ticks.
-     *
-     * @return the respawn time.
-     */
-    public int getRespawnTime() {
-        return ((getDefinition().getRespawnTime() - 1) <= 0 ? 1 : (getDefinition().getRespawnTime() - 1));
-    }
-
-    /**
      * Gets the movement coordinator for this NPC.
      *
      * @return the movement coordinator.
