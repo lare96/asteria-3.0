@@ -8,11 +8,8 @@ import com.asteria.game.character.Graphic
 import com.asteria.game.character.Hit
 import com.asteria.game.character.combat.*
 import com.asteria.game.character.combat.magic.CombatSpells
-import com.asteria.game.character.combat.prayer.CombatPrayer
 import com.asteria.game.character.player.Player
-import com.asteria.game.location.Location
 import com.asteria.game.location.Position
-import com.asteria.game.location.SquareLocation
 import com.asteria.game.plugin.PluginSignature
 import com.asteria.task.Task
 import com.asteria.utility.RandomGen
@@ -91,7 +88,6 @@ final class KingBlackDragonCombatStrategy implements CombatStrategy {
     private CombatSessionData ranged(CharacterNode character, CharacterNode victim) {
         character.animation new Animation(81)
         Position p = victim.position.copy()
-        Location location = new SquareLocation(p.x, p.y, p.z, 5)
         Player player = victim as Player
         World.submit(new Task(2, false) {
                     @Override
@@ -109,21 +105,7 @@ final class KingBlackDragonCombatStrategy implements CombatStrategy {
                             player.encoder.sendLocalGraphic(446, new Position(p.x, p.y + it), 0)
                             player.encoder.sendLocalGraphic(446, new Position(p.x, p.y - it), 0)
                         }
-                        for (Player c : World.getPlayers()) {
-                            if(c == null)
-                                continue
-                            if (location.inLocation(c.position) && c != victim && c != character) {
-                                int amount = Combat.calculateRandomHit(character, c, CombatType.RANGED).damage
-                                if (amount > 40)
-                                    amount = 40
-                                int half = (amount / 2) as int
-                                int quarter = (amount / 4) as int
-                                if (CombatPrayer.isActivated(c, CombatPrayer.PROTECT_FROM_MISSILES))
-                                    amount = 0
-                                c.damage(new Hit(half), new Hit(quarter))
-                                c.combatBuilder.damageCache.add(c, half + quarter)
-                            }
-                        }
+                        Combat.damagePlayersWithin(p, 5, new CombatSessionData(character, victim, 2, CombatType.RANGED, true))
                     }
                 })
         return new CombatSessionData(character, victim, 2, CombatType.RANGED, true)
