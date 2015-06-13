@@ -110,7 +110,10 @@ final class Commands implements PluginListener<CommandPlugin> {
                     player.move new Position(x, y, 0)
                     break
                 case "npc":
-                    World.npcs.add new Npc(Integer.parseInt(cmd[1]), player.position)
+                    Npc n = new Npc(Integer.parseInt(cmd[1]), player.position)
+                    if(cmd.length == 3 && cmd[2].equals("true"))
+                        n.respawn = true
+                    World.npcs.add n
                     break
                 case "dummy":
                     Npc npc = new Npc(Integer.parseInt(cmd[1]), player.position)
