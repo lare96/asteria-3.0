@@ -160,28 +160,26 @@ public final class Combat {
      * Applies combat prayer accuracy and damage reductions before executing the
      * {@link CombatSessionAttack}.
      *
-     * @param builder
-     *            the combat builder for this combat session.
      * @param data
      *            the data for this combat session.
      */
-    protected static void applyPrayerEffects(CombatBuilder builder, CombatSessionData data) {
+    protected static void applyPrayerEffects(CombatSessionData data) {
         if (!data.isCheckAccuracy()) {
             return;
         }
-        if (builder.getVictim().getType() != NodeType.PLAYER) {
+        if (data.getVictim().getType() != NodeType.PLAYER) {
             return;
         }
-        if (Combat.isFullVeracs(builder.getCharacter())) {
-            if (Settings.DEBUG && builder.getCharacter().getType() == NodeType.PLAYER)
-                ((Player) builder.getCharacter()).getEncoder().sendMessage(
+        if (Combat.isFullVeracs(data.getAttacker())) {
+            if (Settings.DEBUG && data.getAttacker().getType() == NodeType.PLAYER)
+                ((Player) data.getAttacker()).getEncoder().sendMessage(
                     "[DEBUG]: Chance of opponents prayer cancelling hit " + "[0/" + Combat.PRAYER_ACCURACY_REDUCTION + "]");
             return;
         }
-        Player player = (Player) builder.getVictim();
+        Player player = (Player) data.getVictim();
 
         if (CombatPrayer.isActivated(player, Combat.getProtectingPrayer(data.getType()))) {
-            switch (builder.getCharacter().getType()) {
+            switch (data.getAttacker().getType()) {
             case PLAYER:
                 for (CombatHit h : data.getHits()) {
                     int hit = h.getHit().getDamage();
