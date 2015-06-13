@@ -4,12 +4,14 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 import com.asteria.game.character.player.Player;
 import com.asteria.game.item.Item;
 import com.asteria.utility.CollectionUtils;
 import com.asteria.utility.RandomGen;
+import com.asteria.utility.json.NpcDropTableLoader;
 
 /**
  * The container class that contains the drop tables for a set of NPCs along
@@ -28,6 +30,11 @@ public final class NpcDropTable {
      * The hash collection of drop tables for all NPCs.
      */
     public static final Map<Integer, NpcDropTable> DROPS = new HashMap<>();
+
+    /**
+     * The list of listeners for all of the drop tables.
+     */
+    private static List<NpcDropListener> listeners = new LinkedList<>();
 
     /**
      * The random generator instance that will generate random numbers.
@@ -67,6 +74,14 @@ public final class NpcDropTable {
         this.rare = rare;
     }
 
+    public static void main(String[] args) {
+        try {
+            new NpcDropTableLoader().load();
+            DROPS.get(50).toItems(null);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     /**
      * Performs the necessary calculations on all of the tables in this
      * container to determine an array of items to drop. Please note that this
@@ -87,6 +102,7 @@ public final class NpcDropTable {
             if(drop.getChance() == NpcDropChance.ALWAYS) {
                 items[slot++] = drop.toItem(random);
                 $it.remove();
+                listeners.forEach(it -> it.onDynamicDrop(player, drop, true));
             }
         }
         Collections.shuffle(copyList);
@@ -94,14 +110,22 @@ public final class NpcDropTable {
             if (copyList.size() == 0)
                 break;
             NpcDrop drop = copyList.remove();
-            if (drop.getChance().successful(random))
+            if (drop.getChance().successful(random)) {
                 items[slot++] = drop.toItem(random);
+                listeners.forEach(it -> it.onDynamicDrop(player, drop, true));
+            } else {
+                listeners.forEach(it -> it.onDynamicDrop(player, drop, false));
+            }
         }
         if (rare.length == 0)
             return items;
         NpcDrop drop = random.random(rare);
-        if (drop.getChance().successful(random))
+        if (drop.getChance().successful(random)) {
             items[slot++] = drop.toItem(random);
+            listeners.forEach(it -> it.onRareDrop(player, drop, true));
+        } else {
+            listeners.forEach(it -> it.onRareDrop(player, drop, false));
+        }
         return items;
     }
 
