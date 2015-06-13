@@ -11,7 +11,6 @@ import com.asteria.game.character.player.Player;
 import com.asteria.game.item.Item;
 import com.asteria.utility.CollectionUtils;
 import com.asteria.utility.RandomGen;
-import com.asteria.utility.json.NpcDropTableLoader;
 
 /**
  * The container class that contains the drop tables for a set of NPCs along
@@ -74,14 +73,6 @@ public final class NpcDropTable {
         this.rare = rare;
     }
 
-    public static void main(String[] args) {
-        try {
-            new NpcDropTableLoader().load();
-            DROPS.get(50).toItems(null);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
     /**
      * Performs the necessary calculations on all of the tables in this
      * container to determine an array of items to drop. Please note that this
