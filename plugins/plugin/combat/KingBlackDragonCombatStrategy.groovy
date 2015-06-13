@@ -105,7 +105,7 @@ final class KingBlackDragonCombatStrategy implements CombatStrategy {
                             player.encoder.sendLocalGraphic(446, new Position(p.x, p.y + it), 0)
                             player.encoder.sendLocalGraphic(446, new Position(p.x, p.y - it), 0)
                         }
-                        Combat.damagePlayersWithin(p, 5, new CombatSessionData(character, victim, 2, CombatType.RANGED, true))
+                        Combat.damagePlayersWithin(character, p, 5, 2, CombatType.RANGED, true)
                     }
                 })
         return new CombatSessionData(character, victim, 2, CombatType.RANGED, true)
