@@ -25,7 +25,7 @@ public final class NpcDropTableLoader extends JsonLoader {
 
     @Override
     public void load(JsonObject reader, Gson builder) {
-        int[] array = builder.fromJson(reader.get("id"), int[].class);
+        int[] array = builder.fromJson(reader.get("ids"), int[].class);
         NpcDrop[] dynamic = Objects.requireNonNull(builder.fromJson(reader.get("dynamic"), NpcDrop[].class));
         NpcDrop[] rare = Objects.requireNonNull(builder.fromJson(reader.get("rare"), NpcDrop[].class));
         Arrays.stream(array).forEach(id -> NpcDropTable.DROPS.put(id, new NpcDropTable(array, dynamic, rare)));
