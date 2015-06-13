@@ -2,6 +2,7 @@ package com.asteria.utility;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
 
@@ -14,6 +15,22 @@ import com.google.common.collect.Maps;
  * @author lare96 <http://github.com/lare96>
  */
 public final class CollectionUtils {
+
+    /**
+     * Returns an {@link Iterable} constructed using the given {@code iterator}.
+     * 
+     * @param iterator
+     *            the iterator to construct with.
+     * @return the newly constructed iterable.
+     */
+    public static <E> Iterable<E> newIterable(Iterator<E> iterator) {
+        return new Iterable<E>() {
+            @Override
+            public Iterator<E> iterator() {
+                return iterator;
+            }
+        };
+    }
 
     /**
      * Returns an {@link ArrayList} with {@code elements} packed into the
