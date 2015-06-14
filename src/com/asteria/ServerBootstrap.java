@@ -20,7 +20,7 @@ import com.asteria.utility.json.ShopLoader;
 import com.asteria.utility.json.WeaponAnimationLoader;
 import com.asteria.utility.json.WeaponInterfaceLoader;
 import com.asteria.utility.json.WeaponPoisonLoader;
-import com.asteria.utility.json.WeaponRequirementLoader;
+import com.asteria.utility.json.EquipmentRequirementLoader;
 import com.google.common.base.Preconditions;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 
@@ -100,7 +100,7 @@ public final class ServerBootstrap {
         serviceLoader.execute(() -> new NpcDropTableLoader().load());
         serviceLoader.execute(() -> new WeaponAnimationLoader().load());
         serviceLoader.execute(() -> new WeaponInterfaceLoader().load());
-        serviceLoader.execute(() -> new WeaponRequirementLoader().load());
+        serviceLoader.execute(() -> new EquipmentRequirementLoader().load());
         serviceLoader.execute(() -> new ObjectNodeRemoveLoader().load());
         serviceLoader.execute(World.getPlugins()::init);
     }
