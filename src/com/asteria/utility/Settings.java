@@ -77,7 +77,7 @@ public final class Settings {
     /**
      * The items that are not allowed to be traded.
      */
-    public static final int[] ITEM_UNTRADEABLE = {};
+    public static final int[] ITEM_UNTRADEABLE = { 6570 };
 
     /**
      * The items that are obtained through caskets.
@@ -102,13 +102,7 @@ public final class Settings {
      */
     public static final String[] DEATH_MESSAGES = { "You have just killed -victim-!", "You have completely slaughtered -victim-!",
             "I bet -victim- will think twice before messing with you again!",
-            "Your killing style is impeccable, -victim- didn't stand a " + "chance!" };
-
-    /**
-     * The items that will be kept on death regardless of if a player is skulled
-     * or not.
-     */
-    public static final int[] KEEP_ON_DEATH = { 6570 };
+            "Your killing style is impeccable, -victim- didn't stand a chance!" };
 
     /**
      * The default constructor.

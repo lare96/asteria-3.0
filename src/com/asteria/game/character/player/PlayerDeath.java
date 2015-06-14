@@ -115,7 +115,7 @@ public final class PlayerDeath extends CharacterDeath<Player> {
      */
     private void calculateDropItems(Player character, Optional<Player> killer) {
         List<Item> keep = new LinkedList<>();
-        Arrays.stream(Settings.KEEP_ON_DEATH).filter(
+        Arrays.stream(Settings.ITEM_UNTRADEABLE).filter(
             id -> character.getEquipment().unequipItem(new Item(id), false) || character.getInventory().remove(new Item(id))).forEach(
             id -> keep.add(new Item(id)));
         List<Item> items = new LinkedList<>();
