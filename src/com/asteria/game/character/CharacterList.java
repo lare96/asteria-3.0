@@ -2,6 +2,7 @@ package com.asteria.game.character;
 
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Spliterator;
@@ -31,6 +32,13 @@ public final class CharacterList<E extends CharacterNode> implements Iterable<E>
     private E[] characters;
 
     /**
+     * The list containing all of the slots that {@link CharacterNode}s were
+     * recently removed from. This is used to reduce slot lookup times for
+     * characters being added to this character list.
+     */
+    private final LinkedList<Integer> removeSlots = new LinkedList<>();
+
+    /**
      * The finite capacity of this collection.
      */
     private final int capacity;
@@ -39,11 +47,6 @@ public final class CharacterList<E extends CharacterNode> implements Iterable<E>
      * The size of this collection.
      */
     private int size;
-
-    /**
-     * The last slot that a {@link CharacterNode} was removed from.
-     */
-    private int lastSlot = -1;
 
     /**
      * Creates a new {@link CharacterList}.
@@ -98,7 +101,7 @@ public final class CharacterList<E extends CharacterNode> implements Iterable<E>
             e.setRegistered(false);
             e.dispose();
             characters[e.getSlot()] = null;
-            lastSlot = e.getSlot();
+            removeSlots.add(e.getSlot());
             size--;
             return true;
         }
@@ -183,7 +186,7 @@ public final class CharacterList<E extends CharacterNode> implements Iterable<E>
      * @return the found slot, or -1 if no slot is available.
      */
     private int slotSearch() {
-        if (lastSlot < 1) {
+        if (removeSlots.size() == 0) {
             for (int slot = 1; slot < capacity; slot++) {
                 if (characters[slot] == null) {
                     return slot;
@@ -191,9 +194,7 @@ public final class CharacterList<E extends CharacterNode> implements Iterable<E>
             }
             return -1;
         }
-        int found = lastSlot;
-        lastSlot = -1;
-        return found;
+        return removeSlots.remove();
     }
 
     /**
