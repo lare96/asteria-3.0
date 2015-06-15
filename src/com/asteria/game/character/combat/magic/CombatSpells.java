@@ -1661,7 +1661,7 @@ public enum CombatSpells {
         public void effect(CharacterNode cast, CharacterNode castOn, int damage) {
             if (damage < 1)
                 return;
-            Combat.effect(new CombatPoisonEffect(castOn, PoisonType.MILD));
+            Combat.effect(new CombatPoisonEffect(castOn, PoisonType.DEFAULT_RANGED));
         }
 
         @Override
@@ -1893,7 +1893,7 @@ public enum CombatSpells {
         public void effect(CharacterNode cast, CharacterNode castOn, int damage) {
             if (damage < 1)
                 return;
-            Combat.effect(new CombatPoisonEffect(castOn, PoisonType.MILD));
+            Combat.effect(new CombatPoisonEffect(castOn, PoisonType.DEFAULT_RANGED));
         }
 
         @Override
@@ -2125,7 +2125,7 @@ public enum CombatSpells {
         public void effect(CharacterNode cast, CharacterNode castOn, int damage) {
             if (damage < 1)
                 return;
-            Combat.effect(new CombatPoisonEffect(castOn, PoisonType.EXTRA));
+            Combat.effect(new CombatPoisonEffect(castOn, PoisonType.DEFAULT_RANGED));
         }
 
         @Override
@@ -2357,7 +2357,7 @@ public enum CombatSpells {
         public void effect(CharacterNode cast, CharacterNode castOn, int damage) {
             if (damage < 1)
                 return;
-            Combat.effect(new CombatPoisonEffect(castOn, PoisonType.SUPER));
+            Combat.effect(new CombatPoisonEffect(castOn, PoisonType.SUPER_RANGED));
         }
 
         @Override

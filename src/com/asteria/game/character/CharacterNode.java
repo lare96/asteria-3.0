@@ -15,6 +15,7 @@ import com.asteria.game.character.npc.Npc;
 import com.asteria.game.character.player.Player;
 import com.asteria.game.location.Position;
 import com.asteria.task.Task;
+import com.asteria.utility.MutableNumber;
 import com.asteria.utility.Stopwatch;
 import com.google.common.base.Preconditions;
 
@@ -68,7 +69,7 @@ public abstract class CharacterNode extends Node {
     /**
      * The amount of poison damage this character has.
      */
-    private int poisonDamage;
+    private final MutableNumber poisonDamage = new MutableNumber();
 
     /**
      * The primary movement direction of this character.
@@ -568,7 +569,7 @@ public abstract class CharacterNode extends Node {
      *         otherwise.
      */
     public final boolean isPoisoned() {
-        return poisonDamage != 0;
+        return poisonDamage.get() > 0;
     }
 
     /**
@@ -605,27 +606,8 @@ public abstract class CharacterNode extends Node {
      *
      * @return the amount of poison damage.
      */
-    public final int getPoisonDamage() {
+    public final MutableNumber getPoisonDamage() {
         return poisonDamage;
-    }
-
-    /**
-     * Gets and decrements the amount of poison damage this character has.
-     *
-     * @return the amount of poison damage.
-     */
-    public final int getAndDecrementPoisonDamage() {
-        return poisonDamage--;
-    }
-
-    /**
-     * Sets the value for {@link CharacterNode#poisonDamage}.
-     *
-     * @param poisonDamage
-     *            the new value to set.
-     */
-    public final void setPoisonDamage(int poisonDamage) {
-        this.poisonDamage = poisonDamage;
     }
 
     /**

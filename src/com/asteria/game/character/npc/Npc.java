@@ -140,10 +140,8 @@ public final class Npc extends CharacterNode {
 
     @Override
     public void onSuccessfulHit(CharacterNode victim, CombatType type) {
-        if (getDefinition().isPoisonous()) {
-            Combat.effect(new CombatPoisonEffect(victim, type == CombatType.RANGED || type == CombatType.MAGIC ? PoisonType.MILD
-                : PoisonType.EXTRA));
-        }
+        if (getDefinition().isPoisonous())
+            Combat.effect(new CombatPoisonEffect(victim, CombatPoisonEffect.getPoisonType(id).orElse(PoisonType.DEFAULT_NPC)));
     }
 
     @Override

@@ -1,31 +1,56 @@
 package com.asteria.game.character;
 
-import com.asteria.utility.RandomGen;
-
 /**
  * The enumerated type whose elements represent the different levels of poison.
  *
  * @author lare96 <http://github.com/lare96>
  */
 public enum PoisonType {
-    MILD(5) {
-        @Override
-        public boolean apply(RandomGen random) {
-            return random.nextInt(9) == 0;
-        }
-    },
-    EXTRA(7) {
-        @Override
-        public boolean apply(RandomGen random) {
-            return random.nextInt(6) == 0;
-        }
-    },
-    SUPER(12) {
-        @Override
-        public boolean apply(RandomGen random) {
-            return random.nextInt(3) == 0;
-        }
-    };
+
+    /**
+     * The default poison type for ranged ammunition.
+     */
+    DEFAULT_RANGED(2),
+
+    /**
+     * The stronger poison type for ranged ammunition.
+     */
+    STRONG_RANGED(3),
+
+    /**
+     * The strongest poison type for ranged ammunition.
+     */
+    SUPER_RANGED(4),
+
+    /**
+     * The default poison type for melee weapons.
+     */
+    DEFAULT_MELEE(4),
+
+    /**
+     * The stronger poison type for melee weapons.
+     */
+    STRONG_MELEE(5),
+
+    /**
+     * The strongest poison type for melee weapons.
+     */
+    SUPER_MELEE(6),
+
+    /**
+     * The default poison type for poisonous NPCs.
+     */
+    DEFAULT_NPC(8),
+
+    /**
+     * The stronger poison type for poisonous NPCs.
+     */
+    STRONG_NPC(12),
+
+    /**
+     * The strongest poison type for poisonous NPCs.
+     */
+    SUPER_NPC(16);
 
     /**
      * The starting damage for this poison type.
@@ -41,17 +66,6 @@ public enum PoisonType {
     private PoisonType(int damage) {
         this.damage = damage;
     }
-
-    /**
-     * Determines if a poison effect with this poison type will be applied. The
-     * {@code random} will be used to determine this.
-     *
-     * @param random
-     *            the random number generator that will be used.
-     * @return {@code true} if the effect will be applied, {@code false}
-     *         otherwise.
-     */
-    public abstract boolean apply(RandomGen random);
 
     /**
      * Gets the starting damage for this poison type.
