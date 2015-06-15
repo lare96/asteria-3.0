@@ -193,7 +193,6 @@ public enum PotionConsumable {
             return false;
         player.animation(new Animation(829));
         player.getPotionTimer().reset();
-        player.getEatingTimer().reset();
         player.getInventory().remove(item, slot);
         player.getInventory().add(getReplacementItem(item));
         potion.get().onEffect(player);

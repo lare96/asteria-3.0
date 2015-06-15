@@ -204,7 +204,6 @@ public enum FoodConsumable {
             return false;
         player.animation(new Animation(829));
         player.getEatingTimer().reset();
-        player.getPotionTimer().reset();
         player.getInventory().remove(item, slot);
 
         Optional<Item> replacement = getReplacementItem(item);
