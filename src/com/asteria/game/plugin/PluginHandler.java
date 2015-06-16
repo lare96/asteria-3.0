@@ -91,14 +91,14 @@ public final class PluginHandler {
             for (Class<? extends PluginContext> c : type.value()) {
                 if (c == Minigame.class) {
                     MinigameHandler.MINIGAMES.add((Minigame) clazz.newInstance());
-                    return;
+                    continue;
                 } else if (c == SkillAction.class) {
-                    return; // We don't need to cache skills.
+                    continue; // We don't need to cache skills.
                 } else if (c == CombatStrategy.class) {
                     CombatStrategy combat = (CombatStrategy) clazz.newInstance();
                     for (int npc : combat.getNpcs())
                         Combat.STRATEGIES.put(npc, combat);
-                    return;
+                    continue;
                 }
                 plugins.put(c, (PluginListener<?>) clazz.newInstance());
             }
