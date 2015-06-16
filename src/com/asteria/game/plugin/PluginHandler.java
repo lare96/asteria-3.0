@@ -86,20 +86,22 @@ public final class PluginHandler {
     public void submit(Class<?> clazz) {
         try {
             PluginSignature type = clazz.getAnnotation(PluginSignature.class);
-            if (type == null) {
+            if (type == null)
                 throw new PluginSignatureException(clazz);
-            } else if (type.value() == Minigame.class) {
-                MinigameHandler.MINIGAMES.add((Minigame) clazz.newInstance());
-                return;
-            } else if (type.value() == SkillAction.class) {
-                return; // We don't need to cache skills.
-            } else if (type.value() == CombatStrategy.class) {
-                CombatStrategy combat = (CombatStrategy) clazz.newInstance();
-                for (int npc : combat.getNpcs())
-                    Combat.STRATEGIES.put(npc, combat);
-                return;
+            for (Class<? extends PluginContext> c : type.value()) {
+                if (c == Minigame.class) {
+                    MinigameHandler.MINIGAMES.add((Minigame) clazz.newInstance());
+                    return;
+                } else if (c == SkillAction.class) {
+                    return; // We don't need to cache skills.
+                } else if (c == CombatStrategy.class) {
+                    CombatStrategy combat = (CombatStrategy) clazz.newInstance();
+                    for (int npc : combat.getNpcs())
+                        Combat.STRATEGIES.put(npc, combat);
+                    return;
+                }
+                plugins.put(c, (PluginListener<?>) clazz.newInstance());
             }
-            plugins.put(type.value(), (PluginListener<?>) clazz.newInstance());
         } catch (Exception e) {
             e.printStackTrace();
         }

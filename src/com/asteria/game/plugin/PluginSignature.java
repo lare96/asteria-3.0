@@ -24,5 +24,5 @@ public @interface PluginSignature {
      *
      * @return the plugin signature.
      */
-    public Class<? extends PluginContext> value();
+    public Class<? extends PluginContext>[] value();
 }
