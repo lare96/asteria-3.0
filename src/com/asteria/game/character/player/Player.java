@@ -20,9 +20,8 @@ import com.asteria.game.character.combat.Combat;
 import com.asteria.game.character.combat.CombatStrategy;
 import com.asteria.game.character.combat.CombatType;
 import com.asteria.game.character.combat.effect.CombatEffect;
+import com.asteria.game.character.combat.effect.CombatEffectTask;
 import com.asteria.game.character.combat.effect.CombatPoisonEffect;
-import com.asteria.game.character.combat.effect.CombatSkullEffect;
-import com.asteria.game.character.combat.effect.CombatTeleblockEffect;
 import com.asteria.game.character.combat.magic.CombatSpell;
 import com.asteria.game.character.combat.magic.CombatWeaken;
 import com.asteria.game.character.combat.prayer.CombatPrayer;
@@ -437,12 +436,10 @@ public final class Player extends CharacterNode {
             encoder.sendInterface(3559);
             newPlayer = false;
         }
-        CombatEffect poisonEffect = new CombatPoisonEffect(this, null);
-        CombatEffect skullEffect = new CombatSkullEffect(this);
-        CombatEffect teleblockEffect = new CombatTeleblockEffect(this);
-        poisonEffect.onLogin();
-        skullEffect.onLogin();
-        teleblockEffect.onLogin();
+        CombatEffect.values().forEach($it -> {
+            if ($it.onLogin(this))
+                World.submit(new CombatEffectTask(this, $it));
+        });
         encoder.sendMessage(Settings.WELCOME_MESSAGE);
         MinigameHandler.execute(this, m -> m.onLogin(this));
         WeaponInterface.execute(this, equipment.get(Equipment.WEAPON_SLOT));
@@ -514,13 +511,9 @@ public final class Player extends CharacterNode {
     @Override
     public void onSuccessfulHit(CharacterNode victim, CombatType type) {
         if (type == CombatType.MELEE || weapon == WeaponInterface.DART || weapon == WeaponInterface.KNIFE || weapon == WeaponInterface.THROWNAXE || weapon == WeaponInterface.JAVELIN) {
-            Combat
-.effect(new CombatPoisonEffect(victim, CombatPoisonEffect.getPoisonType(equipment.get(Equipment.WEAPON_SLOT))
-                .orElse(null)));
+            victim.poison(CombatPoisonEffect.getPoisonType(equipment.get(Equipment.WEAPON_SLOT)).orElse(null));
         } else if (type == CombatType.RANGED) {
-            Combat
-.effect(new CombatPoisonEffect(victim, CombatPoisonEffect.getPoisonType(equipment.get(Equipment.ARROWS_SLOT))
-                .orElse(null)));
+            victim.poison(CombatPoisonEffect.getPoisonType(equipment.get(Equipment.ARROWS_SLOT)).orElse(null));
         }
     }
 

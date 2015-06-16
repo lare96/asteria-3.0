@@ -2,7 +2,8 @@ package com.asteria.game.character.combat.effect;
 
 import plugin.minigames.fightcaves.FightCavesHandler;
 
-import com.asteria.game.World;
+import com.asteria.game.NodeType;
+import com.asteria.game.character.CharacterNode;
 import com.asteria.game.character.Flag;
 import com.asteria.game.character.player.Player;
 
@@ -14,36 +15,21 @@ import com.asteria.game.character.player.Player;
 public final class CombatSkullEffect extends CombatEffect {
 
     /**
-     * The player this effect is being applied to.
-     */
-    private final Player player;
-
-    /**
      * Creates a new {@link CombatSkullEffect}.
-     *
-     * @param player
-     *            the player this effect is being applied to.
      */
-    public CombatSkullEffect(Player player) {
-        super(player, 50);
-        this.player = player;
+    public CombatSkullEffect() {
+        super(50);
     }
 
     @Override
-    public boolean apply() {
-        if (player.getSkullTimer().get() > 0) {
-            return false;
-        }
-        player.getSkullTimer().set(3000);
-        player.setSkullIcon(Player.WHITE_SKULL);
-        player.getFlags().set(Flag.APPEARANCE);
-        return true;
-    }
-
-    @Override
-    public boolean removeOn() {
-        if (player.getSkullTimer().get() <= 0) {
-            player.setSkullIcon(-1);
+    public boolean apply(CharacterNode c) {
+        if (c.getType() == NodeType.PLAYER) {
+            Player player = (Player) c;
+            if (player.getSkullTimer().get() > 0) {
+                return false;
+            }
+            player.getSkullTimer().set(3000);
+            player.setSkullIcon(Player.WHITE_SKULL);
             player.getFlags().set(Flag.APPEARANCE);
             return true;
         }
@@ -51,18 +37,39 @@ public final class CombatSkullEffect extends CombatEffect {
     }
 
     @Override
-    public void sequence() {
-        player.getSkullTimer().decrementAndGet(50, 0);
+    public boolean removeOn(CharacterNode c) {
+        if (c.getType() == NodeType.PLAYER) {
+            Player player = (Player) c;
+            if (player.getSkullTimer().get() <= 0) {
+                player.setSkullIcon(-1);
+                player.getFlags().set(Flag.APPEARANCE);
+                return true;
+            }
+            return false;
+        }
+        return true;
     }
 
     @Override
-    public void onLogin() {
-        if (player.getSkullTimer().get() > 0) {
-            player.setSkullIcon(Player.WHITE_SKULL);
-            World.submit(this);
-            return;
+    public void process(CharacterNode c) {
+        if (c.getType() == NodeType.PLAYER) {
+            Player player = (Player) c;
+            player.getSkullTimer().decrementAndGet(50, 0);
         }
-        if (FightCavesHandler.isChampion(player))
-            player.setSkullIcon(Player.RED_SKULL);
+    }
+
+    @Override
+    public boolean onLogin(CharacterNode c) {
+        if (c.getType() == NodeType.PLAYER) {
+            Player player = (Player) c;
+
+            if (player.getSkullTimer().get() > 0) {
+                player.setSkullIcon(Player.WHITE_SKULL);
+                return true;
+            }
+            if (FightCavesHandler.isChampion(player))
+                player.setSkullIcon(Player.RED_SKULL);
+        }
+        return false;
     }
 }

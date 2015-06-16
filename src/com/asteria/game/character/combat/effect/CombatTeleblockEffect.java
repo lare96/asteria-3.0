@@ -1,6 +1,7 @@
 package com.asteria.game.character.combat.effect;
 
-import com.asteria.game.World;
+import com.asteria.game.NodeType;
+import com.asteria.game.character.CharacterNode;
 import com.asteria.game.character.player.Player;
 
 /**
@@ -11,49 +12,54 @@ import com.asteria.game.character.player.Player;
 public final class CombatTeleblockEffect extends CombatEffect {
 
     /**
-     * The player this effect is being applied to.
-     */
-    private final Player player;
-
-    /**
      * Creates a new {@link CombatTeleblockEffect}.
-     *
-     * @param player
-     *            the player this effect is being applied to.
      */
-    public CombatTeleblockEffect(Player player) {
-        super(player, 1);
-        this.player = player;
+    public CombatTeleblockEffect() {
+        super(50);
     }
 
     @Override
-    public boolean apply() {
-        if (player.getTeleblockTimer().get() > 0) {
-            return false;
-        }
-        player.getTeleblockTimer().set(3000);
-        player.getEncoder().sendMessage("You have just been teleblocked!");
-        return true;
-    }
-
-    @Override
-    public boolean removeOn() {
-        if (player.getTeleblockTimer().get() <= 0) {
-            player.getEncoder().sendMessage("You feel the effects of the " + "teleblock spell go away.");
+    public boolean apply(CharacterNode c) {
+        if (c.getType() == NodeType.PLAYER) {
+            Player player = (Player) c;
+            if (player.getTeleblockTimer().get() > 0) {
+                return false;
+            }
+            player.getTeleblockTimer().set(3000);
+            player.getEncoder().sendMessage("You have just been teleblocked!");
             return true;
         }
         return false;
     }
 
     @Override
-    public void sequence() {
-        player.getTeleblockTimer().decrementAndGet();
+    public boolean removeOn(CharacterNode c) {
+        if (c.getType() == NodeType.PLAYER) {
+            Player player = (Player) c;
+            if (player.getTeleblockTimer().get() <= 0) {
+                player.getEncoder().sendMessage("You feel the effects of the teleblock spell go away.");
+                return true;
+            }
+            return false;
+        }
+        return true;
     }
 
     @Override
-    public void onLogin() {
-        if (player.getTeleblockTimer().get() > 0) {
-            World.submit(this);
+    public void process(CharacterNode c) {
+        if (c.getType() == NodeType.PLAYER) {
+            Player player = (Player) c;
+            player.getTeleblockTimer().decrementAndGet(50, 0);
         }
+    }
+
+    @Override
+    public boolean onLogin(CharacterNode c) {
+        if (c.getType() == NodeType.PLAYER) {
+            Player player = (Player) c;
+            if (player.getTeleblockTimer().get() > 0)
+                return true;
+        }
+        return false;
     }
 }

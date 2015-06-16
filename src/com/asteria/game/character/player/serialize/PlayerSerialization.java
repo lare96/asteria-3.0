@@ -150,7 +150,7 @@ public final class PlayerSerialization {
         MutableNumber skulled = p.getSkullTimer();
         tokens.add(new TokenSerializer("skull-timer", skulled.get(), n -> skulled.set(n.getAsInt())));
         tokens.add(new TokenSerializer("accept-aid", p.isAcceptAid(), n -> p.setAcceptAid(n.getAsBoolean())));
-        tokens.add(new TokenSerializer("poison-damage", p.getPoisonDamage(), n -> p.setPoisonDamage(n.getAsInt())));
+        tokens.add(new TokenSerializer("poison-damage", p.getPoisonDamage().get(), n -> p.getPoisonDamage().set(n.getAsInt())));
         MutableNumber teleblocked = p.getTeleblockTimer();
         tokens.add(new TokenSerializer("teleblock-timer", teleblocked.get(), n -> teleblocked.set(n.getAsInt())));
         MutableNumber percentage = p.getSpecialPercentage();

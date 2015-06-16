@@ -16,6 +16,7 @@ import com.asteria.game.character.CharacterNode;
 import com.asteria.game.character.Hit;
 import com.asteria.game.character.MovementQueue;
 import com.asteria.game.character.combat.effect.CombatEffect;
+import com.asteria.game.character.combat.effect.CombatEffectType;
 import com.asteria.game.character.combat.magic.CombatSpells;
 import com.asteria.game.character.combat.magic.CombatWeaken;
 import com.asteria.game.character.combat.prayer.CombatPrayer;
@@ -662,12 +663,8 @@ public final class Combat {
      * @return {@code true} if it was successfully applied, {@code false}
      *         otherwise.
      */
-    public static boolean effect(CombatEffect effect) {
-        if (effect.apply()) {
-            World.submit(effect);
-            return true;
-        }
-        return false;
+    public static boolean effect(CharacterNode character, CombatEffectType effect) {
+        return CombatEffect.EFFECTS.get(effect).start(character);
     }
 
     /**

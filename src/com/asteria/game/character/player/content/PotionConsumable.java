@@ -300,7 +300,7 @@ public enum PotionConsumable {
      */
     private static void onAntiPoisonEffect(Player player, boolean superPotion, int length) {
         if (player.isPoisoned()) {
-            player.setPoisonDamage(0);
+            player.getPoisonDamage().set(0);
             player.getEncoder().sendMessage("You have been cured of your poison!");
         }
         if (superPotion) {

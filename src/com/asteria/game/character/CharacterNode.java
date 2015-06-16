@@ -6,9 +6,11 @@ import java.util.concurrent.TimeUnit;
 import com.asteria.game.Node;
 import com.asteria.game.NodeType;
 import com.asteria.game.World;
+import com.asteria.game.character.combat.Combat;
 import com.asteria.game.character.combat.CombatBuilder;
 import com.asteria.game.character.combat.CombatStrategy;
 import com.asteria.game.character.combat.CombatType;
+import com.asteria.game.character.combat.effect.CombatEffectType;
 import com.asteria.game.character.combat.magic.CombatSpell;
 import com.asteria.game.character.combat.magic.CombatWeaken;
 import com.asteria.game.character.npc.Npc;
@@ -70,6 +72,11 @@ public abstract class CharacterNode extends Node {
      * The amount of poison damage this character has.
      */
     private final MutableNumber poisonDamage = new MutableNumber();
+
+    /**
+     * The type of poison that was previously applied.
+     */
+    private PoisonType poisonType;
 
     /**
      * The primary movement direction of this character.
@@ -306,6 +313,17 @@ public abstract class CharacterNode extends Node {
      *            the amount to restore this health level by.
      */
     public abstract void healCharacter(int amount);
+
+    /**
+     * Applies poison with an intensity of {@code type} to the character.
+     * 
+     * @param type
+     *            the poison type to apply.
+     */
+    public void poison(PoisonType type) {
+        poisonType = type;
+        Combat.effect(this, CombatEffectType.POISON);
+    }
 
     /**
      * Calculates and returns the size of this character.
@@ -973,5 +991,24 @@ public abstract class CharacterNode extends Node {
      */
     public final Hit getSecondaryHit() {
         return secondaryHit;
+    }
+
+    /**
+     * Gets the type of poison that was previously applied.
+     * 
+     * @return the type of poison.
+     */
+    public PoisonType getPoisonType() {
+        return poisonType;
+    }
+
+    /**
+     * Sets the value for {@link CharacterNode#poisonType}.
+     * 
+     * @param poisonType
+     *            the new value to set.
+     */
+    public void setPoisonType(PoisonType poisonType) {
+        this.poisonType = poisonType;
     }
 }

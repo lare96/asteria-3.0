@@ -10,8 +10,7 @@ import com.asteria.game.character.Graphic;
 import com.asteria.game.character.PoisonType;
 import com.asteria.game.character.Projectile;
 import com.asteria.game.character.combat.Combat;
-import com.asteria.game.character.combat.effect.CombatPoisonEffect;
-import com.asteria.game.character.combat.effect.CombatTeleblockEffect;
+import com.asteria.game.character.combat.effect.CombatEffectType;
 import com.asteria.game.character.player.Player;
 import com.asteria.game.item.Item;
 
@@ -1623,7 +1622,7 @@ public enum CombatSpells {
         @Override
         public void effect(CharacterNode cast, CharacterNode castOn) {
             if (castOn.getType() == NodeType.PLAYER)
-                Combat.effect(new CombatTeleblockEffect((Player) castOn));
+                Combat.effect(castOn, CombatEffectType.TELEBLOCK);
         }
 
         @Override
@@ -1661,7 +1660,7 @@ public enum CombatSpells {
         public void effect(CharacterNode cast, CharacterNode castOn, int damage) {
             if (damage < 1)
                 return;
-            Combat.effect(new CombatPoisonEffect(castOn, PoisonType.DEFAULT_RANGED));
+            castOn.poison(PoisonType.DEFAULT_RANGED);
         }
 
         @Override
@@ -1893,7 +1892,7 @@ public enum CombatSpells {
         public void effect(CharacterNode cast, CharacterNode castOn, int damage) {
             if (damage < 1)
                 return;
-            Combat.effect(new CombatPoisonEffect(castOn, PoisonType.DEFAULT_RANGED));
+            castOn.poison(PoisonType.DEFAULT_RANGED);
         }
 
         @Override
@@ -2125,7 +2124,7 @@ public enum CombatSpells {
         public void effect(CharacterNode cast, CharacterNode castOn, int damage) {
             if (damage < 1)
                 return;
-            Combat.effect(new CombatPoisonEffect(castOn, PoisonType.DEFAULT_RANGED));
+            castOn.poison(PoisonType.DEFAULT_RANGED);
         }
 
         @Override
@@ -2357,7 +2356,7 @@ public enum CombatSpells {
         public void effect(CharacterNode cast, CharacterNode castOn, int damage) {
             if (damage < 1)
                 return;
-            Combat.effect(new CombatPoisonEffect(castOn, PoisonType.SUPER_RANGED));
+            castOn.poison(PoisonType.SUPER_RANGED);
         }
 
         @Override

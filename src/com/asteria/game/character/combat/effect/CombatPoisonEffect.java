@@ -5,7 +5,6 @@ import java.util.Map;
 import java.util.Optional;
 
 import com.asteria.game.NodeType;
-import com.asteria.game.World;
 import com.asteria.game.character.CharacterNode;
 import com.asteria.game.character.Hit;
 import com.asteria.game.character.HitType;
@@ -27,68 +26,49 @@ public final class CombatPoisonEffect extends CombatEffect {
     public static final Map<Integer, PoisonType> TYPES = new HashMap<>();
 
     /**
-     * The character this effect is being applied to.
-     */
-    private final CharacterNode character;
-
-    /**
-     * The poison type this effect will use.
-     */
-    private final PoisonType type;
-
-    /**
      * The amount of times this player has been hit.
      */
     private int amount;
 
     /**
      * Creates a new {@link CombatPoisonEffect}.
-     *
-     * @param character
-     *            the character this effect is being applied to.
-     * @param type
-     *            the poison type this effect will use.
      */
-    public CombatPoisonEffect(CharacterNode character, PoisonType type) {
-        super(character, 30);
-        this.character = character;
-        this.type = type;
+    public CombatPoisonEffect() {
+        super(30);
     }
 
     @Override
-    public boolean apply() {
-        if (character.isPoisoned() || type == null)
+    public boolean apply(CharacterNode t) {
+        if (t.isPoisoned() || t.getPoisonType() == null)
             return false;
-        if (character.getType() == NodeType.PLAYER) {
-            Player player = (Player) character;
+        if (t.getType() == NodeType.PLAYER) {
+            Player player = (Player) t;
             if (player.getPoisonImmunity().get() > 0)
                 return false;
             player.getEncoder().sendMessage("You have been poisoned!");
         }
-        character.getPoisonDamage().set(type.getDamage());
+        t.getPoisonDamage().set(t.getPoisonType().getDamage());
         return true;
     }
 
     @Override
-    public boolean removeOn() {
-        return !character.isPoisoned();
+    public boolean removeOn(CharacterNode t) {
+        return !t.isPoisoned();
     }
 
     @Override
-    public void sequence() {
+    public void process(CharacterNode t) {
         amount--;
-        character.damage(new Hit(character.getPoisonDamage().get(), HitType.POISON));
+        t.damage(new Hit(t.getPoisonDamage().get(), HitType.POISON));
         if (amount == 0) {
             amount = 4;
-            character.getPoisonDamage().decrementAndGet();
+            t.getPoisonDamage().decrementAndGet();
         }
     }
 
     @Override
-    public void onLogin() {
-        if (character.isPoisoned()) {
-            World.submit(this);
-        }
+    public boolean onLogin(CharacterNode t) {
+        return t.isPoisoned();
     }
 
     /**

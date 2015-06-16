@@ -4,7 +4,7 @@ import java.util.Optional;
 
 import com.asteria.game.World;
 import com.asteria.game.character.combat.Combat;
-import com.asteria.game.character.combat.effect.CombatSkullEffect;
+import com.asteria.game.character.combat.effect.CombatEffectType;
 import com.asteria.game.character.combat.magic.CombatSpell;
 import com.asteria.game.character.combat.magic.CombatSpells;
 import com.asteria.game.character.player.Player;
@@ -108,7 +108,7 @@ public final class AttackPlayerPacket extends PacketDecoder {
             }
             if (!attacker.getCombatBuilder().isBeingAttacked() || attacker.getCombatBuilder().isBeingAttacked() && attacker
                 .getCombatBuilder().getLastAttacker() != victim && Location.inMultiCombat(attacker)) {
-                Combat.effect(new CombatSkullEffect(attacker));
+                Combat.effect(attacker, CombatEffectType.SKULL);
             }
         } else {
             if (!optional.get().canHit(attacker, victim))

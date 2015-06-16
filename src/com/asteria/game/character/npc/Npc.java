@@ -141,7 +141,7 @@ public final class Npc extends CharacterNode {
     @Override
     public void onSuccessfulHit(CharacterNode victim, CombatType type) {
         if (getDefinition().isPoisonous())
-            Combat.effect(new CombatPoisonEffect(victim, CombatPoisonEffect.getPoisonType(id).orElse(PoisonType.DEFAULT_NPC)));
+            victim.poison(CombatPoisonEffect.getPoisonType(id).orElse(PoisonType.DEFAULT_NPC));
     }
 
     @Override

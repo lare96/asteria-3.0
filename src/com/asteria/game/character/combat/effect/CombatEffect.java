@@ -1,66 +1,121 @@
 package com.asteria.game.character.combat.effect;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
+import com.asteria.game.World;
 import com.asteria.game.character.CharacterNode;
-import com.asteria.task.Task;
 
 /**
- * An effect that usually takes places as a result of combat.
- *
- * @author lare96 <http://github.com/lare96>
+ * Some sort of temporary effect applied to a {@link CharacterNode} during
+ * combat. Combat effects include but are not limited to; being poisoned,
+ * skulled, and teleblocked.
+ * 
+ * @author lare96 <http://github.org/lare96>
+ * @param <T>
+ *            the type of character that this effect is designated for.
  */
-public abstract class CombatEffect extends Task {
+public abstract class CombatEffect {
 
     /**
-     * The character this effect is being applied to.
+     * The map of all of the combat effect types mapped to their respective
+     * listeners.
      */
-    private final CharacterNode character;
+    public static final Map<CombatEffectType, CombatEffect> EFFECTS = new HashMap<>();
+
+    /**
+     * The delay for this individual combat effect.
+     */
+    private final int delay;
 
     /**
      * Creates a new {@link CombatEffect}.
      *
-     * @param character
-     *            the character this effect is being applied to
      * @param delay
-     *            the delay for how often this effect will be sequenced.
+     *            the delay for this combat effect.
      */
-    public CombatEffect(CharacterNode character, int delay) {
-        super(delay, false);
-        super.attach(character);
-        this.character = character;
+    public CombatEffect(int delay) {
+        this.delay = delay;
     }
 
     /**
-     * Applies this effect to {@code character}.
+     * The static initialization block that is used to populate the list with
+     * our combat effect listeners.
+     */
+    static {
+        CombatEffectType.TYPES.forEach($it -> EFFECTS.put($it, $it.getEffect()));
+    }
+
+    /**
+     * Starts this combat effect by scheduling a task utilizing the abstract
+     * methods in this class.
+     * 
+     * @param c
+     *            the character this combat effect is for.
+     */
+    public final boolean start(CharacterNode c) {
+        if (apply(c)) {
+            World.submit(new CombatEffectTask(c, this));
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Applies this effect to {@code c}.
      *
+     * @param c
+     *            the character this combat effect is for.
      * @return {@code true} if the effect could be applied, {@code false}
      *         otherwise.
      */
-    public abstract boolean apply();
+    public abstract boolean apply(CharacterNode c);
 
     /**
-     * Removes this effect from {@code character} if needed.
+     * Removes this effect from {@code c} if needed.
      *
+     * @param c
+     *            the character this combat effect is for.
      * @return {@code true} if this effect should be stopped, {@code false}
      *         otherwise.
      */
-    public abstract boolean removeOn();
+    public abstract boolean removeOn(CharacterNode c);
 
     /**
-     * Provides processing for this effect on {@code character}.
+     * Provides processing for this effect on {@code c}.
+     * 
+     * @param c
+     *            the character this combat effect is for.
      */
-    public abstract void sequence();
+    public abstract void process(CharacterNode c);
 
     /**
-     * Executed on login to re-apply the effect to {@code character}.
+     * Executed on login, primarily used to re-apply the effect to {@code c}.
+     * 
+     * @param c
+     *            the character this combat effect is for.
+     * @return {@code true} if the effect should be re-applied, {@code false}
+     *         otherwise.
      */
-    public abstract void onLogin();
+    public abstract boolean onLogin(CharacterNode c);
 
-    @Override
-    public final void execute() {
-        if (removeOn() || !character.isRegistered()) {
-            this.cancel();
-            return;
-        }
-        sequence();
+    /**
+     * Gets the delay for this individual combat effect.
+     *
+     * @return the delay for this effect.
+     */
+    protected final int getDelay() {
+        return delay;
+    }
+
+    /**
+     * Returns an unmodifiable view of the combat effect listeners.
+     * 
+     * @return the combat effect listeners.
+     */
+    public static Collection<CombatEffect> values() {
+        return Collections.unmodifiableCollection(EFFECTS.values());
     }
 }

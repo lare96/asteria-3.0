@@ -67,7 +67,7 @@ public abstract class CharacterDeath<T extends CharacterNode> extends Task {
     public final void execute() {
         if (counter == 0) {
             character.setDead(true);
-            character.setPoisonDamage(0);
+            character.getPoisonDamage().set(0);
             character.getMovementQueue().reset();
             character.unfreeze();
         } else if (counter == 1) {
