@@ -51,7 +51,7 @@ public enum CombatEffectType {
      * 
      * @return the combat effect for this type.
      */
-    public CombatEffect getEffect() {
+    public final CombatEffect getEffect() {
         return effect;
     }
 }
