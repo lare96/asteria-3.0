@@ -35,6 +35,15 @@ public abstract class Spell {
             return false;
         }
 
+        if (equipment.isPresent()) {
+            if (!player.getEquipment().containsAll(equipment.get())) {
+                player.getEncoder().sendMessage("You do not have the required equipment to cast this spell.");
+                resetPlayerSpell(player);
+                player.getCombatBuilder().reset();
+                return false;
+            }
+        }
+
         if (inventory.isPresent()) {
             Item[] items = MagicStaff.suppressRunes(player, inventory.get());
 
@@ -45,15 +54,6 @@ public abstract class Spell {
                 return false;
             }
             player.getInventory().removeAll(Arrays.asList(items));
-        }
-
-        if (equipment.isPresent()) {
-            if (!player.getEquipment().containsAll(equipment.get())) {
-                player.getEncoder().sendMessage("You do not have the required equipment to cast this spell.");
-                resetPlayerSpell(player);
-                player.getCombatBuilder().reset();
-                return false;
-            }
         }
         return true;
     }
