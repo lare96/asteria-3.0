@@ -1,6 +1,5 @@
 package plugin.commands
 
-import com.asteria.game.GameService
 import com.asteria.game.World
 import com.asteria.game.character.Animation
 import com.asteria.game.character.Flag
@@ -50,7 +49,7 @@ final class Commands implements PluginListener<CommandPlugin> {
                     break
                 case "save":
                     World.players.each {
-                        GameService.getLogicService().execute({
+                        World.getService().submit({
                             ->
                             new PlayerSerialization(it).serialize()
                         })
