@@ -1,386 +1,386 @@
 [  
   {  
-    "id":5632,
-    "type":"STRONG_RANGED"
+    "id": 5632,
+    "type": "STRONG_RANGED"
   },
   {  
-    "id":5633,
-    "type":"STRONG_RANGED"
+    "id": 5633,
+    "type": "STRONG_RANGED"
   },
   {  
-    "id":5634,
-    "type":"STRONG_RANGED"
+    "id": 5634,
+    "type": "STRONG_RANGED"
   },
   {  
-    "id":5635,
-    "type":"SUPER_RANGED"
+    "id": 5635,
+    "type": "SUPER_RANGED"
   },
   {  
-    "id":5636,
-    "type":"SUPER_RANGED"
+    "id": 5636,
+    "type": "SUPER_RANGED"
   },
   {  
-    "id":5637,
-    "type":"SUPER_RANGED"
+    "id": 5637,
+    "type": "SUPER_RANGED"
   },
   {  
-    "id":5638,
-    "type":"SUPER_RANGED"
+    "id": 5638,
+    "type": "SUPER_RANGED"
   },
   {  
-    "id":5639,
-    "type":"SUPER_RANGED"
+    "id": 5639,
+    "type": "SUPER_RANGED"
   },
   {  
-    "id":5640,
-    "type":"SUPER_RANGED"
+    "id": 5640,
+    "type": "SUPER_RANGED"
   },
   {  
-    "id":5641,
-    "type":"SUPER_RANGED"
+    "id": 5641,
+    "type": "SUPER_RANGED"
   },
   {  
-    "id":5642,
-    "type":"STRONG_RANGED"
+    "id": 5642,
+    "type": "STRONG_RANGED"
   },
   {  
-    "id":5643,
-    "type":"STRONG_RANGED"
+    "id": 5643,
+    "type": "STRONG_RANGED"
   },
   {  
-    "id":5644,
-    "type":"STRONG_RANGED"
+    "id": 5644,
+    "type": "STRONG_RANGED"
   },
   {  
-    "id":5645,
-    "type":"STRONG_RANGED"
+    "id": 5645,
+    "type": "STRONG_RANGED"
   },
   {  
-    "id":5646,
-    "type":"STRONG_RANGED"
+    "id": 5646,
+    "type": "STRONG_RANGED"
   },
   {  
-    "id":5647,
-    "type":"STRONG_RANGED"
+    "id": 5647,
+    "type": "STRONG_RANGED"
   },
   {  
-    "id":5648,
-    "type":"SUPER_MELEE"
+    "id": 5648,
+    "type": "SUPER_MELEE"
   },
   {  
-    "id":5649,
-    "type":"SUPER_RANGED"
+    "id": 5649,
+    "type": "SUPER_RANGED"
   },
   {  
-    "id":5650,
-    "type":"SUPER_RANGED"
+    "id": 5650,
+    "type": "SUPER_RANGED"
   },
   {  
-    "id":5651,
-    "type":"SUPER_RANGED"
+    "id": 5651,
+    "type": "SUPER_RANGED"
   },
   {  
-    "id":5652,
-    "type":"SUPER_RANGED"
+    "id": 5652,
+    "type": "SUPER_RANGED"
   },
   {  
-    "id":5653,
-    "type":"SUPER_RANGED"
+    "id": 5653,
+    "type": "SUPER_RANGED"
   },
   {  
-    "id":3094,
-    "type":"DEFAULT_RANGED"
+    "id": 3094,
+    "type": "DEFAULT_RANGED"
   },
   {  
-    "id":5654,
-    "type":"STRONG_RANGED"
+    "id": 5654,
+    "type": "STRONG_RANGED"
   },
   {  
-    "id":5655,
-    "type":"STRONG_RANGED"
+    "id": 5655,
+    "type": "STRONG_RANGED"
   },
   {  
-    "id":5656,
-    "type":"STRONG_RANGED"
+    "id": 5656,
+    "type": "STRONG_RANGED"
   },
   {  
-    "id":5657,
-    "type":"STRONG_RANGED"
+    "id": 5657,
+    "type": "STRONG_RANGED"
   },
   {  
-    "id":5658,
-    "type":"STRONG_RANGED"
+    "id": 5658,
+    "type": "STRONG_RANGED"
   },
   {  
-    "id":5659,
-    "type":"STRONG_RANGED"
+    "id": 5659,
+    "type": "STRONG_RANGED"
   },
   {  
-    "id":5660,
-    "type":"STRONG_RANGED"
+    "id": 5660,
+    "type": "STRONG_RANGED"
   },
   {  
-    "id":5661,
-    "type":"SUPER_RANGED"
+    "id": 5661,
+    "type": "SUPER_RANGED"
   },
   {  
-    "id":5662,
-    "type":"SUPER_RANGED"
+    "id": 5662,
+    "type": "SUPER_RANGED"
   },
   {  
-    "id":5663,
-    "type":"SUPER_RANGED"
+    "id": 5663,
+    "type": "SUPER_RANGED"
   },
   {  
-    "id":5664,
-    "type":"SUPER_RANGED"
+    "id": 5664,
+    "type": "SUPER_RANGED"
   },
   {  
-    "id":5665,
-    "type":"SUPER_RANGED"
+    "id": 5665,
+    "type": "SUPER_RANGED"
   },
   {  
-    "id":5666,
-    "type":"SUPER_RANGED"
+    "id": 5666,
+    "type": "SUPER_RANGED"
   },
   {  
-    "id":5667,
-    "type":"SUPER_RANGED"
+    "id": 5667,
+    "type": "SUPER_RANGED"
   },
   {  
-    "id":812,
-    "type":"DEFAULT_RANGED"
+    "id": 812,
+    "type": "DEFAULT_RANGED"
   },
   {  
-    "id":813,
-    "type":"DEFAULT_RANGED"
+    "id": 813,
+    "type": "DEFAULT_RANGED"
   },
   {  
-    "id":814,
-    "type":"DEFAULT_RANGED"
+    "id": 814,
+    "type": "DEFAULT_RANGED"
   },
   {  
-    "id":815,
-    "type":"DEFAULT_RANGED"
+    "id": 815,
+    "type": "DEFAULT_RANGED"
   },
   {  
-    "id":816,
-    "type":"DEFAULT_RANGED"
+    "id": 816,
+    "type": "DEFAULT_RANGED"
   },
   {  
-    "id":5680,
-    "type":"STRONG_MELEE"
+    "id": 5680,
+    "type": "STRONG_MELEE"
   },
   {  
-    "id":817,
-    "type":"DEFAULT_RANGED"
+    "id": 817,
+    "type": "DEFAULT_RANGED"
   },
   {  
-    "id":818,
-    "type":"DEFAULT_RANGED"
+    "id": 818,
+    "type": "DEFAULT_RANGED"
   },
   {  
-    "id":831,
-    "type":"DEFAULT_RANGED"
+    "id": 831,
+    "type": "DEFAULT_RANGED"
   },
   {  
-    "id":832,
-    "type":"DEFAULT_RANGED"
+    "id": 832,
+    "type": "DEFAULT_RANGED"
   },
   {  
-    "id":833,
-    "type":"DEFAULT_RANGED"
+    "id": 833,
+    "type": "DEFAULT_RANGED"
   },
   {  
-    "id":834,
-    "type":"DEFAULT_RANGED"
+    "id": 834,
+    "type": "DEFAULT_RANGED"
   },
   {  
-    "id":5698,
-    "type":"SUPER_MELEE"
+    "id": 5698,
+    "type": "SUPER_MELEE"
   },
   {  
-    "id":835,
-    "type":"DEFAULT_RANGED"
+    "id": 835,
+    "type": "DEFAULT_RANGED"
   },
   {  
-    "id":1219,
-    "type":"DEFAULT_MELEE"
+    "id": 1219,
+    "type": "DEFAULT_MELEE"
   },
   {  
-    "id":836,
-    "type":"DEFAULT_RANGED"
+    "id": 836,
+    "type": "DEFAULT_RANGED"
   },
   {  
-    "id":1221,
-    "type":"DEFAULT_MELEE"
+    "id": 1221,
+    "type": "DEFAULT_MELEE"
   },
   {  
-    "id":1223,
-    "type":"DEFAULT_MELEE"
+    "id": 1223,
+    "type": "DEFAULT_MELEE"
   },
   {  
-    "id":1225,
-    "type":"DEFAULT_MELEE"
+    "id": 1225,
+    "type": "DEFAULT_MELEE"
   },
   {  
-    "id":1227,
-    "type":"DEFAULT_MELEE"
+    "id": 1227,
+    "type": "DEFAULT_MELEE"
   },
   {  
-    "id":1229,
-    "type":"DEFAULT_MELEE"
+    "id": 1229,
+    "type": "DEFAULT_MELEE"
   },
   {  
-    "id":1231,
-    "type":"DEFAULT_MELEE"
+    "id": 1231,
+    "type": "DEFAULT_MELEE"
   },
   {  
-    "id":1233,
-    "type":"DEFAULT_MELEE"
+    "id": 1233,
+    "type": "DEFAULT_MELEE"
   },
   {  
-    "id":5730,
-    "type":"SUPER_MELEE"
+    "id": 5730,
+    "type": "SUPER_MELEE"
   },
   {  
-    "id":1251,
-    "type":"DEFAULT_MELEE"
+    "id": 1251,
+    "type": "DEFAULT_MELEE"
   },
   {  
-    "id":1253,
-    "type":"DEFAULT_MELEE"
+    "id": 1253,
+    "type": "DEFAULT_MELEE"
   },
   {  
-    "id":870,
-    "type":"DEFAULT_RANGED"
+    "id": 870,
+    "type": "DEFAULT_RANGED"
   },
   {  
-    "id":871,
-    "type":"DEFAULT_RANGED"
+    "id": 871,
+    "type": "DEFAULT_RANGED"
   },
   {  
-    "id":872,
-    "type":"DEFAULT_RANGED"
+    "id": 872,
+    "type": "DEFAULT_RANGED"
   },
   {  
-    "id":873,
-    "type":"DEFAULT_RANGED"
+    "id": 873,
+    "type": "DEFAULT_RANGED"
   },
   {  
-    "id":1257,
-    "type":"DEFAULT_MELEE"
+    "id": 1257,
+    "type": "DEFAULT_MELEE"
   },
   {  
-    "id":874,
-    "type":"DEFAULT_RANGED"
+    "id": 874,
+    "type": "DEFAULT_RANGED"
   },
   {  
-    "id":875,
-    "type":"DEFAULT_RANGED"
+    "id": 875,
+    "type": "DEFAULT_RANGED"
   },
   {  
-    "id":1259,
-    "type":"DEFAULT_MELEE"
+    "id": 1259,
+    "type": "DEFAULT_MELEE"
   },
   {  
-    "id":876,
-    "type":"DEFAULT_RANGED"
+    "id": 876,
+    "type": "DEFAULT_RANGED"
   },
   {  
-    "id":1261,
-    "type":"DEFAULT_MELEE"
+    "id": 1261,
+    "type": "DEFAULT_MELEE"
   },
   {  
-    "id":1263,
-    "type":"DEFAULT_MELEE"
+    "id": 1263,
+    "type": "DEFAULT_MELEE"
   },
   {  
-    "id":5616,
-    "type":"STRONG_RANGED"
+    "id": 5616,
+    "type": "STRONG_RANGED"
   },
   {  
-    "id":5617,
-    "type":"STRONG_RANGED"
+    "id": 5617,
+    "type": "STRONG_RANGED"
   },
   {  
-    "id":5618,
-    "type":"STRONG_RANGED"
+    "id": 5618,
+    "type": "STRONG_RANGED"
   },
   {  
-    "id":883,
-    "type":"DEFAULT_RANGED"
+    "id": 883,
+    "type": "DEFAULT_RANGED"
   },
   {  
-    "id":5619,
-    "type":"STRONG_RANGED"
+    "id": 5619,
+    "type": "STRONG_RANGED"
   },
   {  
-    "id":5620,
-    "type":"STRONG_RANGED"
+    "id": 5620,
+    "type": "STRONG_RANGED"
   },
   {  
-    "id":885,
-    "type":"DEFAULT_RANGED"
+    "id": 885,
+    "type": "DEFAULT_RANGED"
   },
   {  
-    "id":5621,
-    "type":"STRONG_RANGED"
+    "id": 5621,
+    "type": "STRONG_RANGED"
   },
   {  
-    "id":5622,
-    "type":"SUPER_RANGED"
+    "id": 5622,
+    "type": "SUPER_RANGED"
   },
   {  
-    "id":887,
-    "type":"DEFAULT_RANGED"
+    "id": 887,
+    "type": "DEFAULT_RANGED"
   },
   {  
-    "id":5623,
-    "type":"SUPER_RANGED"
+    "id": 5623,
+    "type": "SUPER_RANGED"
   },
   {  
-    "id":5624,
-    "type":"SUPER_RANGED"
+    "id": 5624,
+    "type": "SUPER_RANGED"
   },
   {  
-    "id":889,
-    "type":"DEFAULT_RANGED"
+    "id": 889,
+    "type": "DEFAULT_RANGED"
   },
   {  
-    "id":5625,
-    "type":"SUPER_RANGED"
+    "id": 5625,
+    "type": "SUPER_RANGED"
   },
   {  
-    "id":5626,
-    "type":"SUPER_RANGED"
+    "id": 5626,
+    "type": "SUPER_RANGED"
   },
   {  
-    "id":891,
-    "type":"DEFAULT_RANGED"
+    "id": 891,
+    "type": "DEFAULT_RANGED"
   },
   {  
-    "id":5627,
-    "type":"SUPER_RANGED"
+    "id": 5627,
+    "type": "SUPER_RANGED"
   },
   {  
-    "id":5628,
-    "type":"STRONG_RANGED"
+    "id": 5628,
+    "type": "STRONG_RANGED"
   },
   {  
-    "id":893,
-    "type":"DEFAULT_RANGED"
+    "id": 893,
+    "type": "DEFAULT_RANGED"
   },
   {  
-    "id":5629,
-    "type":"STRONG_RANGED"
+    "id": 5629,
+    "type": "STRONG_RANGED"
   },
   {  
-    "id":5630,
-    "type":"STRONG_RANGED"
+    "id": 5630,
+    "type": "STRONG_RANGED"
   },
   {  
-    "id":5631,
-    "type":"STRONG_RANGED"
+    "id": 5631,
+    "type": "STRONG_RANGED"
   }
 ]
