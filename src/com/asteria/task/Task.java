@@ -155,8 +155,8 @@ public abstract class Task {
     /**
      * Attaches {@code key} to this task that can later be retrieved with
      * {@link Task#getKey()}. This is a very useful feature because similar or
-     * related tasks can be bound with the same key, and then be retrieved or
-     * cancelled later on. All player related tasks should be bound with the
+     * related tasks can be bound with the same key, and can then be retrieved
+     * or cancelled later on. All player related tasks should be bound with the
      * player's instance so all tasks are automatically stopped on logout.
      * <p>
      * <p>
