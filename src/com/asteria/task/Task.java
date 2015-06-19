@@ -21,8 +21,6 @@ import com.google.common.base.Preconditions;
  */
 public abstract class Task {
 
-    // TODO: Task pausing.
-
     /**
      * The default attachment key for all tasks.
      */
