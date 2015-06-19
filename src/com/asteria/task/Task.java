@@ -21,6 +21,8 @@ import com.google.common.base.Preconditions;
  */
 public abstract class Task {
 
+    // TODO: Task pausing.
+
     /**
      * The default attachment key for all tasks.
      */
@@ -30,6 +32,11 @@ public abstract class Task {
      * The delay for this task.
      */
     private int delay;
+
+    /**
+     * The pause delay for this task.
+     */
+    private int pauseDelay;
 
     /**
      * The counter used for determining when this task executes.
@@ -111,6 +118,11 @@ public abstract class Task {
      *         otherwise.
      */
     public final boolean needsExecute() {
+        if (pauseDelay > 0) {
+            pauseDelay--;
+            if (pauseDelay != 0)
+                return false;
+        }
         if (++counter >= delay && running) {
             counter = 0;
             return true;
@@ -127,6 +139,19 @@ public abstract class Task {
             running = false;
             onCancel();
         }
+    }
+
+    /**
+     * Pauses this task, or in other words temporarily cancels it for
+     * {@code duration}.
+     * 
+     * @param duration
+     *            the duration to pause this task for.
+     */
+    public final void pause(int duration) {
+        if (pauseDelay > 0)
+            throw new IllegalStateException("This task is already paused!");
+        this.pauseDelay = duration;
     }
 
     /**
