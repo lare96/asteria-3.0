@@ -1,6 +1,7 @@
 package com.asteria.game.character.combat.prayer;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Map;
 
 import com.asteria.game.World;
@@ -46,7 +47,8 @@ public enum CombatPrayer {
     public static final ImmutableMap<Integer, CombatPrayer> PRAYERS = CollectionUtils
         .build(new ImmutableMapBuilder<Integer, CombatPrayer>() {
             @Override
-            public Map<Integer, CombatPrayer> build(Map<Integer, CombatPrayer> map) {
+            public Map<Integer, CombatPrayer> build() {
+                Map<Integer, CombatPrayer> map = new HashMap<>();
                 Arrays.stream(values()).forEach(it -> map.put(it.id, it));
                 return map;
             }

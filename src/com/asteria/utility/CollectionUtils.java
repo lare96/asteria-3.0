@@ -7,7 +7,8 @@ import java.util.LinkedList;
 import java.util.Map;
 
 import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Maps;
+import com.google.common.collect.ImmutableMultimap;
+import com.google.common.collect.Multimap;
 
 /**
  * The static-utility class that contains collection utility functions.
@@ -76,6 +77,17 @@ public final class CollectionUtils {
     }
 
     /**
+     * Builds an {@link ImmutableMultimap} using the {@code builder}.
+     * 
+     * @param builder
+     *            the builder to build the map with.
+     * @return the immutable multimap.
+     */
+    public static <K, V> ImmutableMultimap<K, V> build(ImmutableMultimapBuilder<K, V> builder) {
+        return builder.create();
+    }
+
+    /**
      * The functional interface that serves the purpose of building
      * {@link ImmutableMap}s from regular {@link Map}s.
      * 
@@ -89,14 +101,12 @@ public final class CollectionUtils {
     public static interface ImmutableMapBuilder<K, V> {
 
         /**
-         * Provides an empty map for the user to build and return, to be later
-         * transformed into an {@link ImmutableMap}.
+         * Provides logic space for the user to build and return a map, to be
+         * later transformed into an {@link ImmutableMap}.
          * 
-         * @param map
-         *            an empty map that can be manipulated.
-         * @return
+         * @return the map to be transformed.
          */
-        public Map<K, V> build(Map<K, V> map);
+        public Map<K, V> build();
 
         /**
          * Transforms the map from {@code build} into an {@link ImmutableMap}.
@@ -104,7 +114,38 @@ public final class CollectionUtils {
          * @return the built map.
          */
         default ImmutableMap<K, V> create() {
-            return ImmutableMap.copyOf(build(Maps.newHashMap()));
+            return ImmutableMap.copyOf(build());
+        }
+    }
+
+    /**
+     * The functional interface that serves the purpose of building
+     * {@link ImmutableMultimap}s from regular {@link Multimap}s.
+     * 
+     * @author lare96 <http://github.org/lare96>
+     * @param <K>
+     *            the key for the immutable multimap builder.
+     * @param <V>
+     *            the value for the immutable multimap builder.
+     */
+    @FunctionalInterface
+    public static interface ImmutableMultimapBuilder<K, V> {
+
+        /**
+         * Provides logic space for the user to build and return a multimap, to
+         * be later transformed into an {@link ImmutableMultimap}.
+         * 
+         * @return the map to be transformed.
+         */
+        public Multimap<K, V> build();
+
+        /**
+         * Transforms the map from {@code build} into an {@link ImmutableMap}.
+         * 
+         * @return the built map.
+         */
+        default ImmutableMultimap<K, V> create() {
+            return ImmutableMultimap.copyOf(build());
         }
     }
 }

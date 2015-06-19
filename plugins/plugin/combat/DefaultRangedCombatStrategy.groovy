@@ -7,6 +7,7 @@ import com.asteria.game.character.combat.CombatSessionData
 import com.asteria.game.character.combat.CombatStrategy
 import com.asteria.game.character.combat.CombatType
 import com.asteria.game.character.combat.ranged.CombatRangedAmmo
+import com.asteria.game.character.combat.ranged.CombatRangedBow
 import com.asteria.game.character.combat.weapon.FightStyle
 import com.asteria.game.character.npc.Npc
 import com.asteria.game.character.player.Player
@@ -43,8 +44,11 @@ final class DefaultRangedCombatStrategy implements CombatStrategy {
         Player player = character as Player
         player.rangedAmmo = null
         player.fireAmmo = 0
-        startAnimation player
         CombatRangedAmmo ammo = CombatRangedAmmo.getPlayerAmmo(player).get()
+        if(!CombatRangedBow.canUse(player, ammo)) {
+            player.combatBuilder.reset()
+            return new CombatSessionData(character, victim, null, true)
+        }
         player.rangedAmmo = ammo
         if (!Combat.isCrystalBow(player)) {
             decrementAmmo player
@@ -54,6 +58,7 @@ final class DefaultRangedCombatStrategy implements CombatStrategy {
             new Projectile(character, victim, ammo.projectile, ammo.delay, ammo.speed, ammo.startHeight, ammo
                     .endHeight, 0).sendProjectile()
         }
+        startAnimation player
         return new CombatSessionData(character, victim, 1, CombatType.RANGED, true)
     }
 
