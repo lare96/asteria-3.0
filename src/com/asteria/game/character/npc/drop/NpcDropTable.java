@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import com.asteria.game.character.player.Player;
 import com.asteria.game.item.Item;
@@ -91,9 +92,10 @@ public final class NpcDropTable {
         while($it.hasNext()) {
             NpcDrop drop = $it.next();
             if(drop.getChance() == NpcDropChance.ALWAYS) {
-                items[slot++] = drop.toItem(random);
+                Item newItem = drop.toItem(random);
+                items[slot++] = newItem;
                 $it.remove();
-                listeners.forEach(it -> it.onDynamicDrop(player, drop, true));
+                listeners.forEach(it -> it.onDynamicDrop(player, drop, Optional.of(newItem), true));
             }
         }
         Collections.shuffle(copyList);
@@ -102,20 +104,22 @@ public final class NpcDropTable {
                 break;
             NpcDrop drop = copyList.remove();
             if (drop.getChance().successful(random)) {
-                items[slot++] = drop.toItem(random);
-                listeners.forEach(it -> it.onDynamicDrop(player, drop, true));
+                Item newItem = drop.toItem(random);
+                items[slot++] = newItem;
+                listeners.forEach(it -> it.onDynamicDrop(player, drop, Optional.of(newItem), true));
             } else {
-                listeners.forEach(it -> it.onDynamicDrop(player, drop, false));
+                listeners.forEach(it -> it.onDynamicDrop(player, drop, Optional.empty(), false));
             }
         }
         if (rare.length == 0)
             return items;
         NpcDrop drop = random.random(rare);
         if (drop.getChance().successful(random)) {
-            items[slot++] = drop.toItem(random);
-            listeners.forEach(it -> it.onRareDrop(player, drop, true));
+            Item newItem = drop.toItem(random);
+            items[slot++] = newItem;
+            listeners.forEach(it -> it.onRareDrop(player, drop, Optional.of(newItem), true));
         } else {
-            listeners.forEach(it -> it.onRareDrop(player, drop, false));
+            listeners.forEach(it -> it.onRareDrop(player, drop, Optional.empty(), false));
         }
         return items;
     }
