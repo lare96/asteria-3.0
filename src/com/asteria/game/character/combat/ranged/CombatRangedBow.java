@@ -16,6 +16,7 @@ import com.asteria.utility.CollectionUtils;
 import com.asteria.utility.CollectionUtils.ImmutableMultimapBuilder;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.HashMultimap;
+import com.google.common.collect.ImmutableCollection;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.LinkedListMultimap;
 import com.google.common.collect.Multimap;
@@ -96,7 +97,10 @@ public enum CombatRangedBow {
         Item $it = player.getEquipment().get(Equipment.WEAPON_SLOT);
         if ($it == null)
             return true;
-        if (!WEAPONS.get($it.getId()).contains(ammo)) {
+        ImmutableCollection<CombatRangedAmmo> values = WEAPONS.get($it.getId());
+        if (values.isEmpty())
+            return true;
+        if (!values.contains(ammo)) {
             boolean needsPlural = !ammo.toString().endsWith("s");
             player.getEncoder().sendMessage("You cannot use " + ammo + "" + (needsPlural ? "s" : "") + " with this ranged weapon.");
             return false;
