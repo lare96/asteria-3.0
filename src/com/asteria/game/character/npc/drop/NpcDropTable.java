@@ -111,7 +111,7 @@ public final class NpcDropTable {
                 listeners.forEach(it -> it.onDynamicDrop(player, drop, Optional.empty(), false));
             }
         }
-        if (rare.length == 0 || NpcDropChance.UNCOMMON.successful(random))
+        if (rare.length == 0 || !NpcDropChance.COMMON.successful(random))
             return items;
         NpcDrop drop = random.random(rare);
         if (drop.getChance().successful(random)) {
