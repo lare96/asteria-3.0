@@ -356,6 +356,8 @@ public abstract class CharacterNode extends Node {
      *            animation.
      */
     public final void animation(Animation animation) {
+        if (animation == null)
+            animation = new Animation(65535, AnimationPriority.HIGH);
         if (this.animation == null || this.animation.getPriority().getValue() <= animation.getPriority().getValue()) {
             this.animation = animation.copy();
             flags.set(Flag.ANIMATION);
