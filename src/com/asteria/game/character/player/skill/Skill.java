@@ -8,6 +8,11 @@ package com.asteria.game.character.player.skill;
 public final class Skill {
 
     /**
+     * The maximum amount of experience that can be obtained in a single skill.
+     */
+    private static final int MAXIMUM_EXPERIENCE = 2_000_000;
+
+    /**
      * The level of this skill that can be trained.
      */
     private int level = 1;
@@ -133,6 +138,17 @@ public final class Skill {
     }
 
     /**
+     * Increments this experience by {@code experience}, to a maximum of
+     * {@code MAXIMUM_EXPERIENCE}.
+     *
+     * @param experience
+     *            the amount to increment by.
+     */
+    public void increaseExperience(double experience) {
+        setExperience(this.experience + experience);
+    }
+
+    /**
      * Gets the experience for this skill.
      *
      * @return the experience.
@@ -150,8 +166,8 @@ public final class Skill {
     public void setExperience(double experience) {
         this.experience = experience;
 
-        if (this.experience > 2000000000) {
-            this.experience = 2000000000;
+        if (this.experience > MAXIMUM_EXPERIENCE) {
+            this.experience = MAXIMUM_EXPERIENCE;
         }
     }
 

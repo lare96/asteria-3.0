@@ -149,9 +149,8 @@ public final class Skills {
         if (amount <= 0)
             return;
         int oldLevel = player.getSkills()[skill].getRealLevel();
-        double experience = player.getSkills()[skill].getExperience();
         amount *= Skills.EXPERIENCE_MULTIPLIER;
-        player.getSkills()[skill].setExperience(experience + amount);
+        player.getSkills()[skill].increaseExperience(amount);
         if (oldLevel < 99) {
             int newLevel = player.getSkills()[skill].getLevelForExperience();
             if (oldLevel < newLevel) {
