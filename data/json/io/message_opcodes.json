@@ -1,0 +1,160 @@
+[
+  {
+    "opcodes": [
+      202
+    ],
+    "class": "com.asteria.net.message.impl.IdleStateMessage"
+  },
+  {
+    "opcodes": [
+      249,
+      73
+    ],
+    "class": "com.asteria.net.message.impl.AttackPlayerMessage"
+  },
+  {
+    "opcodes": [
+      101
+    ],
+    "class": "com.asteria.net.message.impl.CharacterSelectionMessage"
+  },
+  {
+    "opcodes": [
+      4
+    ],
+    "class": "com.asteria.net.message.impl.ChatMessage"
+  },
+  {
+    "opcodes": [
+      185
+    ],
+    "class": "com.asteria.net.message.impl.ClickButtonMessage"
+  },
+  {
+    "opcodes": [
+      122
+    ],
+    "class": "com.asteria.net.message.impl.ItemActionMessage"
+  },
+  {
+    "opcodes": [
+      103
+    ],
+    "class": "com.asteria.net.message.impl.CommandMessage"
+  },
+  {
+    "opcodes": [
+      0,
+      95,
+      241,
+      86
+    ],
+    "class": "com.asteria.net.message.impl.DefaultMessage"
+  },
+  {
+    "opcodes": [
+      40
+    ],
+    "class": "com.asteria.net.message.impl.AdvanceDialogueMessage"
+  },
+  {
+    "opcodes": [
+      87
+    ],
+    "class": "com.asteria.net.message.impl.DropItemMessage"
+  },
+  {
+    "opcodes": [
+      39
+    ],
+    "class": "com.asteria.net.message.impl.FollowPlayerMessage"
+  },
+  {
+    "opcodes": [
+      130
+    ],
+    "class": "com.asteria.net.message.impl.InterfaceClickMessage"
+  },
+  {
+    "opcodes": [
+      145,
+      41,
+      117,
+      43,
+      129,
+      214
+    ],
+    "class": "com.asteria.net.message.impl.ItemInterfaceMessage"
+  },
+  {
+    "opcodes": [
+      53
+    ],
+    "class": "com.asteria.net.message.impl.ItemOnItemMessage"
+  },
+  {
+    "opcodes": [
+      192
+    ],
+    "class": "com.asteria.net.message.impl.ItemOnObjectMessage"
+  },
+  {
+    "opcodes": [
+      14
+    ],
+    "class": "com.asteria.net.message.impl.ItemOnPlayerMessage"
+  },
+  {
+    "opcodes": [
+      248,
+      164,
+      98
+    ],
+    "class": "com.asteria.net.message.impl.MovementQueueMessage"
+  },
+  {
+    "opcodes": [
+      72,
+      131,
+      155,
+      17
+    ],
+    "class": "com.asteria.net.message.impl.NpcActionMessage"
+  },
+  {
+    "opcodes": [
+      132,
+      252,
+      70
+    ],
+    "class": "com.asteria.net.message.impl.ObjectActionMessage"
+  },
+  {
+    "opcodes": [
+      236
+    ],
+    "class": "com.asteria.net.message.impl.PickupItemMessage"
+  },
+  {
+    "opcodes": [
+      188,
+      215,
+      133,
+      74,
+      126
+    ],
+    "class": "com.asteria.net.message.impl.PrivateMessagingMessage"
+  },
+  {
+    "opcodes": [
+      139
+    ],
+    "class": "com.asteria.net.message.impl.RequestMessage"
+  },
+  {
+    "opcodes": [
+      121
+    ],
+    "class": "com.asteria.net.message.impl.UpdateRegionMessage"
+  }
+]
