@@ -89,12 +89,12 @@ public enum Spellbook {
      */
     public static void convert(Player player, Spellbook book) {
         if (player.getSpellbook() == book) {
-            player.getEncoder().sendMessage("You have already converted to " + book + " magics!");
+            player.getMessages().sendMessage("You have already converted to " + book + " magics!");
             return;
         }
-        player.getEncoder().sendSidebarInterface(6, book.id);
+        player.getMessages().sendSidebarInterface(6, book.id);
         player.setSpellbook(book);
-        player.getEncoder().sendMessage("You convert to " + book + " magics!");
+        player.getMessages().sendMessage("You convert to " + book + " magics!");
     }
 
     /**

@@ -66,14 +66,14 @@ public final class ObjectNode extends Node {
     public void create() {
         World.getPlayers().forEach(p -> {
             if (super.getPosition().withinDistance(p.getPosition(), 60)) {
-                p.getEncoder().sendObject(this);
+                p.getMessages().sendObject(this);
             }
         });
     }
 
     @Override
     public void dispose() {
-        World.getPlayers().forEach(p -> p.getEncoder().sendRemoveObject(super.getPosition()));
+        World.getPlayers().forEach(p -> p.getMessages().sendRemoveObject(super.getPosition()));
     }
 
     @Override

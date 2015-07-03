@@ -102,7 +102,7 @@ public enum CombatRangedBow {
             return true;
         if (!values.contains(ammo)) {
             boolean needsPlural = !ammo.toString().endsWith("s");
-            player.getEncoder().sendMessage("You cannot use " + ammo + "" + (needsPlural ? "s" : "") + " with this ranged weapon.");
+            player.getMessages().sendMessage("You cannot use " + ammo + "" + (needsPlural ? "s" : "") + " with this ranged weapon.");
             return false;
         }
         return true;

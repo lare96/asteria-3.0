@@ -33,8 +33,8 @@ final class PrayerBoneBury extends DestructionSkillAction {
     void onDestruct(Task t, boolean success) {
         if (success) {
             player.animation new Animation(827)
-            player.encoder.sendSound(380, 0, 0)
-            player.encoder.sendMessage "You bury the ${bone}."
+            player.messages.sendSound(380, 0, 0)
+            player.messages.sendMessage "You bury the ${bone}."
             player.buryTimer.reset()
         }
         t.cancel()

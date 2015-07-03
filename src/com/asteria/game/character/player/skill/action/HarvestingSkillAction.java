@@ -64,20 +64,20 @@ public abstract class HarvestingSkillAction extends SkillAction {
 
             if (removeItems.isPresent()) {
                 if (!player.getInventory().containsAll(removeItems.get())) {
-                    player.getEncoder().sendMessage("You do not have the " + "required items to perform this!");
+                    player.getMessages().sendMessage("You do not have the " + "required items to perform this!");
                     t.cancel();
                     return;
                 }
             }
             for (Item item : harvestItems) {
                 if (player.getInventory().add(item)) {
-                    player.getEncoder().sendMessage("You get some " + item.getDefinition().getName() + ".");
+                    player.getMessages().sendMessage("You get some " + item.getDefinition().getName() + ".");
                     Skills.experience(player, experience(), skill().getId());
                     removeItems.ifPresent(player.getInventory()::removeAll);
                     onHarvest(t, item, true);
                 } else {
                     onHarvest(t, item, false);
-                    player.getEncoder().sendMessage("You do not have any " + "space left in your inventory!");
+                    player.getMessages().sendMessage("You do not have any " + "space left in your inventory!");
                     t.cancel();
                     return;
                 }

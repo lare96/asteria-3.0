@@ -88,7 +88,7 @@ public enum CombatSpells {
             if (!castOn.weaken(CombatWeaken.ATTACK_LOW) && cast.getType() == NodeType.PLAYER) {
                 Player player = (Player) cast;
                 String s = castOn.getType().name().toLowerCase();
-                player.getEncoder().sendMessage("The spell has no effect " + "because the " + s + " has already been weakened.");
+                player.getMessages().sendMessage("The spell has no effect " + "because the " + s + " has already been weakened.");
             }
         }
 
@@ -240,7 +240,7 @@ public enum CombatSpells {
             if (!castOn.weaken(CombatWeaken.STRENGTH_LOW) && cast.getType() == NodeType.PLAYER) {
                 Player player = (Player) cast;
                 String s = castOn.getType().name().toLowerCase();
-                player.getEncoder().sendMessage("The spell has no effect because the " + s + " has already been weakened.");
+                player.getMessages().sendMessage("The spell has no effect because the " + s + " has already been weakened.");
             }
         }
 
@@ -392,7 +392,7 @@ public enum CombatSpells {
             if (!castOn.weaken(CombatWeaken.DEFENCE_LOW) && cast.getType() == NodeType.PLAYER) {
                 Player player = (Player) cast;
                 String s = castOn.getType().name().toLowerCase();
-                player.getEncoder().sendMessage("The spell has no effect " + "because the " + s + " has already been weakened.");
+                player.getMessages().sendMessage("The spell has no effect " + "because the " + s + " has already been weakened.");
             }
         }
 
@@ -441,12 +441,12 @@ public enum CombatSpells {
         public void effect(CharacterNode cast, CharacterNode castOn) {
             if (castOn.getMovementQueue().isLockMovement()) {
                 if (cast.getType() == NodeType.PLAYER)
-                    ((Player) cast).getEncoder().sendMessage("The spell has " + "no effect because they are already frozen.");
+                    ((Player) cast).getMessages().sendMessage("The spell has " + "no effect because they are already frozen.");
                 return;
             }
             if (castOn.getType() == NodeType.PLAYER) {
                 Player player = (Player) castOn;
-                player.getEncoder().sendMessage("You have been frozen by " + "magic!");
+                player.getMessages().sendMessage("You have been frozen by " + "magic!");
             }
             castOn.freeze(5);
         }
@@ -853,12 +853,12 @@ public enum CombatSpells {
         public void effect(CharacterNode cast, CharacterNode castOn) {
             if (castOn.getMovementQueue().isLockMovement()) {
                 if (cast.getType() == NodeType.PLAYER)
-                    ((Player) cast).getEncoder().sendMessage("The spell has " + "no effect because they are already frozen.");
+                    ((Player) cast).getMessages().sendMessage("The spell has " + "no effect because they are already frozen.");
                 return;
             }
             if (castOn.getType() == NodeType.PLAYER) {
                 Player player = (Player) castOn;
-                player.getEncoder().sendMessage("You have been frozen by " + "magic!");
+                player.getMessages().sendMessage("You have been frozen by " + "magic!");
             }
             castOn.freeze(10);
         }
@@ -1317,7 +1317,7 @@ public enum CombatSpells {
             if (!castOn.weaken(CombatWeaken.DEFENCE_HIGH) && cast.getType() == NodeType.PLAYER) {
                 Player player = (Player) cast;
                 String s = castOn.getType().name().toLowerCase();
-                player.getEncoder().sendMessage("The spell has no effect " + "because the " + s + " has already been weakened.");
+                player.getMessages().sendMessage("The spell has no effect " + "because the " + s + " has already been weakened.");
             }
         }
 
@@ -1418,7 +1418,7 @@ public enum CombatSpells {
             if (!castOn.weaken(CombatWeaken.STRENGTH_HIGH) && cast.getType() == NodeType.PLAYER) {
                 Player player = (Player) cast;
                 String s = castOn.getType().name().toLowerCase();
-                player.getEncoder().sendMessage("The spell has no effect " + "because the " + s + " has already been weakened.");
+                player.getMessages().sendMessage("The spell has no effect " + "because the " + s + " has already been weakened.");
             }
         }
 
@@ -1518,12 +1518,12 @@ public enum CombatSpells {
         public void effect(CharacterNode cast, CharacterNode castOn) {
             if (castOn.getMovementQueue().isLockMovement()) {
                 if (cast.getType() == NodeType.PLAYER)
-                    ((Player) cast).getEncoder().sendMessage("The spell has " + "no effect because they are already frozen.");
+                    ((Player) cast).getMessages().sendMessage("The spell has " + "no effect because they are already frozen.");
                 return;
             }
             if (castOn.getType() == NodeType.PLAYER) {
                 Player player = (Player) castOn;
-                player.getEncoder().sendMessage("You have been frozen by " + "magic!");
+                player.getMessages().sendMessage("You have been frozen by " + "magic!");
             }
             castOn.freeze(15);
         }
@@ -1574,7 +1574,7 @@ public enum CombatSpells {
             if (!castOn.weaken(CombatWeaken.ATTACK_HIGH) && cast.getType() == NodeType.PLAYER) {
                 Player player = (Player) cast;
                 String s = castOn.getType().name().toLowerCase();
-                player.getEncoder().sendMessage("The spell has no effect " + "because the " + s + " has already been weakened.");
+                player.getMessages().sendMessage("The spell has no effect " + "because the " + s + " has already been weakened.");
             }
         }
 

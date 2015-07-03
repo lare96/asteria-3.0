@@ -3,17 +3,27 @@ package com.asteria;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.asteria.net.NetworkConstants;
 import com.asteria.utility.LoggerUtils;
-import com.asteria.utility.Settings;
 import com.google.common.base.Preconditions;
 
 /**
- * The main class that will create and bind the {@link ServerBootstrap},
+ * The main class that will create and bind the {@link Bootstrap},
  * effectively putting the server online.
  *
  * @author lare96 <http://github.com/lare96>
  */
 public final class Server {
+
+    /**
+     * The name of this server.
+     */
+    public static final String NAME = "Asteria 3.0";
+
+    /**
+     * The flag that determines if debugging messages should be printed or not.
+     */
+    public static final boolean DEBUG = true;
 
     /**
      * The logger that will print important information.
@@ -38,9 +48,9 @@ public final class Server {
         try {
             Preconditions.checkState(args.length == 0, "No runtime arguments needed!");
             logger.info("Initializing the Bootstrap...");
-            ServerBootstrap bootstrap = new ServerBootstrap(Settings.PORT);
+            Bootstrap bootstrap = new Bootstrap(NetworkConstants.PORT);
             bootstrap.bind();
-            logger.info("The Bootstrap has been bound, " + Settings.NAME + " is now online!");
+            logger.info("The Bootstrap has been bound, " + NAME + " is now online!");
         } catch (Exception e) {
             logger.log(Level.SEVERE, "An error occurred while binding the Bootstrap!", e);
 

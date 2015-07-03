@@ -41,19 +41,19 @@ public final class CombatPrayerTask extends Task {
 
     @Override
     public void execute() {
-        for (int i = 0; i < player.getPrayerActive().length; i++) {
-            if (player.getPrayerActive()[i]) {
+        for (CombatPrayer prayer : CombatPrayer.PRAYERS.values()) {
+            if (player.getPrayerActive().has(prayer.getMask())) {
                 cancel = false;
-                if (++countdown[i] >= ((player.getBonus()[Combat.BONUS_PRAYER] / 2) + CombatPrayer.values()[i].getDrainRate())) {
+                if (++countdown[prayer.getId()] >= ((player.getBonus()[Combat.BONUS_PRAYER] / 2) + prayer.getDrainRate())) {
                     player.getSkills()[Skills.PRAYER].decreaseLevel(1);
                     Skills.refresh(player, Skills.PRAYER);
-                    countdown[i] = 0;
+                    countdown[prayer.getId()] = 0;
                 }
             }
         }
 
         if (player.getSkills()[Skills.PRAYER].getLevel() < 1) {
-            player.getEncoder().sendMessage("You've run out of prayer points!");
+            player.getMessages().sendMessage("You've run out of prayer points!");
             CombatPrayer.deactivateAll(player);
             cancel = true;
         }

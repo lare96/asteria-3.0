@@ -45,7 +45,7 @@ public final class CombatPoisonEffect extends CombatEffect {
             Player player = (Player) t;
             if (player.getPoisonImmunity().get() > 0)
                 return false;
-            player.getEncoder().sendMessage("You have been poisoned!");
+            player.getMessages().sendMessage("You have been poisoned!");
         }
         t.getPoisonDamage().set(t.getPoisonType().getDamage());
         return true;

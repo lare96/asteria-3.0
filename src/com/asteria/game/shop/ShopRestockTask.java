@@ -49,7 +49,7 @@ public final class ShopRestockTask extends Task {
             item.incrementAmount();
             int size = container.getContainer().size();
             container.getPlayers().stream().filter(Objects::nonNull).forEach(
-                p -> p.getEncoder().sendItemsOnInterface(3900, container.getContainer().container(), size));
+                p -> p.getMessages().sendItemsOnInterface(3900, container.getContainer().container(), size));
         }
     }
 }

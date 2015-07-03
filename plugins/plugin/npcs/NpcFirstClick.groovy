@@ -19,7 +19,7 @@ import com.asteria.game.shop.Shop
 final class NpcFirstClick implements PluginListener<NpcFirstClickPlugin> {
 
     @Override
-    void run(Player player, NpcFirstClickPlugin context) {
+    void execute(Player player, NpcFirstClickPlugin context) {
         int id = context.npc.id
         Position position = context.npc.position.copy()
         switch (id) {
@@ -40,7 +40,7 @@ final class NpcFirstClick implements PluginListener<NpcFirstClickPlugin> {
                                                     "You receive 1000 gold coins.")
                                             player.dialogueChain.advance()
                                         } else if (t == OptionType.SECOND_OPTION) {
-                                            player.encoder.sendCloseWindows()
+                                            player.messages.sendCloseWindows()
                                         }
                                     }
                                 })
@@ -60,7 +60,7 @@ final class NpcFirstClick implements PluginListener<NpcFirstClickPlugin> {
                                         if (t == OptionType.FIRST_OPTION) {
                                             player.move FightCavesHandler.DEATH_POSITION
                                         } else if (t == OptionType.SECOND_OPTION) {
-                                            player.encoder.sendCloseWindows()
+                                            player.messages.sendCloseWindows()
                                         }
                                     }
                                 })

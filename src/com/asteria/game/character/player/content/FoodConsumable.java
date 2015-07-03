@@ -121,16 +121,16 @@ public enum FoodConsumable {
             if (random.floatRandom(100F) >= 61.24F) {
                 int healAmount = Math.round((10 * 100F) / realLevel);
                 skill.increaseLevel(healAmount, realLevel);
-                player.getEncoder().sendMessage("It restores some life points" + ".");
+                player.getMessages().sendMessage("It restores some life points" + ".");
                 return;
             }
             if (random.floatRandom(100F) >= 21.12F) {
                 skill.increaseLevel(random.inclusive(10, 20), realLevel);
-                player.getEncoder().sendMessage("That was a good kebab. You " + "feel a lot better.");
+                player.getMessages().sendMessage("That was a good kebab. You " + "feel a lot better.");
                 return;
             }
             if (random.floatRandom(100F) >= 8.71F) {
-                player.getEncoder().sendMessage("The kebab didn't seem to do " + "a lot.");
+                player.getMessages().sendMessage("The kebab didn't seem to do " + "a lot.");
                 return;
             }
             if (random.floatRandom(100F) >= 3.65F) {
@@ -138,21 +138,21 @@ public enum FoodConsumable {
                 player.getSkills()[Skills.ATTACK].increaseLevel(random.exclusive(3));
                 player.getSkills()[Skills.STRENGTH].increaseLevel(random.exclusive(3));
                 player.getSkills()[Skills.DEFENCE].increaseLevel(random.exclusive(3));
-                player.getEncoder().sendMessage("Wow, that was an amazing " + "kebab! You feel really invigorated.");
+                player.getMessages().sendMessage("Wow, that was an amazing " + "kebab! You feel really invigorated.");
                 return;
             }
             if (random.floatRandom(100F) >= 3.28F) {
                 player.getSkills()[Skills.ATTACK].decreaseLevel(random.exclusive(3));
                 player.getSkills()[Skills.STRENGTH].decreaseLevel(random.exclusive(3));
                 player.getSkills()[Skills.DEFENCE].decreaseLevel(random.exclusive(3));
-                player.getEncoder().sendMessage("That tasted a bit dodgy. You" + " feel a bit ill.");
+                player.getMessages().sendMessage("That tasted a bit dodgy. You" + " feel a bit ill.");
                 return;
             }
             if (random.floatRandom(100F) >= 2.00F) {
                 int id = random.inclusiveExcludes(0, player.getSkills().length, Skills.HITPOINTS);
                 Skill randomSkill = player.getSkills()[id];
                 randomSkill.decreaseLevel(random.exclusive(3));
-                player.getEncoder().sendMessage("Eating the kebab has damaged" + " your " + SkillData.values()[id] + " stat.");
+                player.getMessages().sendMessage("Eating the kebab has damaged" + " your " + SkillData.values()[id] + " stat.");
                 return;
             }
         }
@@ -211,7 +211,7 @@ public enum FoodConsumable {
             player.getInventory().set(slot, replacement.get());
             player.getInventory().refresh();
         }
-        player.getEncoder().sendMessage(food.get().getMessage());
+        player.getMessages().sendMessage(food.get().getMessage());
         food.get().onEffect(player);
         Skills.refresh(player, Skills.HITPOINTS);
         return true;
@@ -232,7 +232,7 @@ public enum FoodConsumable {
             return;
         }
         skill.increaseLevel(getHealAmount(), realLevel);
-        player.getEncoder().sendMessage("It healed some health.");
+        player.getMessages().sendMessage("It healed some health.");
     }
 
     /**

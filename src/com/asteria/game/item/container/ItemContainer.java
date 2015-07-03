@@ -456,7 +456,7 @@ public class ItemContainer implements Iterable<Item> {
      *            the interface to refresh the contents of this container on.
      */
     public void refresh(Player player, int widget) {
-        player.getEncoder().sendItemsOnInterface(widget, container());
+        player.getMessages().sendItemsOnInterface(widget, container());
     }
 
     /**

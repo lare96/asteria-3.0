@@ -8,6 +8,7 @@ import com.asteria.game.World;
 import com.asteria.game.character.Flag;
 import com.asteria.game.character.player.Player;
 import com.asteria.game.character.player.skill.Skills;
+import com.asteria.utility.BitMask;
 import com.asteria.utility.CollectionUtils;
 import com.asteria.utility.CollectionUtils.ImmutableMapBuilder;
 import com.asteria.utility.TextUtils;
@@ -41,7 +42,7 @@ public enum CombatPrayer {
     SMITE(17, 7, 4, 52, 100, 12, 13, 14, 15, 16);
 
     /**
-     * The immutable map that will contain mappings of all the elements to their
+     * The cached array that will contain mappings of all the elements to their
      * identifiers.
      */
     public static final ImmutableMap<Integer, CombatPrayer> PRAYERS = CollectionUtils
@@ -58,6 +59,11 @@ public enum CombatPrayer {
      * The identification for this prayer.
      */
     private final int id;
+
+    /**
+     * The mask identification for this prayer.
+     */
+    private final int mask;
 
     /**
      * The amount of ticks it takes for prayer to be drained.
@@ -103,6 +109,7 @@ public enum CombatPrayer {
      */
     private CombatPrayer(int id, int drainRate, int headIcon, int level, int config, int... deactivate) {
         this.id = id;
+        this.mask = BitMask.calcMask(id);
         this.drainRate = drainRate;
         this.headIcon = headIcon;
         this.level = level;
@@ -161,8 +168,8 @@ public enum CombatPrayer {
             sb.append("You need to recharge your prayer at an altar!");
         }
         if (sb.length() > 0) {
-            player.getEncoder().sendByteState(config, 0);
-            player.getEncoder().sendMessage(sb.toString());
+            player.getMessages().sendByteState(config, 0);
+            player.getMessages().sendMessage(sb.toString());
             return;
         }
         if (player.getPrayerDrain() == null || !player.getPrayerDrain().isRunning()) {
@@ -170,8 +177,8 @@ public enum CombatPrayer {
             World.submit(player.getPrayerDrain());
         }
         Arrays.stream(deactivate).forEach(it -> PRAYERS.get(it).deactivate(player));
-        player.getPrayerActive()[id] = true;
-        player.getEncoder().sendByteState(config, 1);
+        player.getPrayerActive().set(mask);
+        player.getMessages().sendByteState(config, 1);
         if (headIcon != -1) {
             player.setHeadIcon(headIcon);
             player.getFlags().set(Flag.APPEARANCE);
@@ -200,8 +207,8 @@ public enum CombatPrayer {
     public final void deactivate(Player player) {
         if (!CombatPrayer.isActivated(player, this))
             return;
-        player.getPrayerActive()[id] = false;
-        player.getEncoder().sendByteState(config, 0);
+        player.getPrayerActive().unset(mask);
+        player.getMessages().sendByteState(config, 0);
         if (headIcon != -1) {
             player.setHeadIcon(-1);
             player.getFlags().set(Flag.APPEARANCE);
@@ -231,7 +238,7 @@ public enum CombatPrayer {
      *         {@code false} otherwise.
      */
     public static boolean isActivated(Player player, CombatPrayer prayer) {
-        return player.getPrayerActive()[prayer.getId()];
+        return player.getPrayerActive().has(prayer.mask);
     }
 
     /**
@@ -296,5 +303,14 @@ public enum CombatPrayer {
      */
     public int[] getDeactivate() {
         return deactivate;
+    }
+
+    /**
+     * Gets the mask identification for this prayer.
+     * 
+     * @return the mask identification.
+     */
+    public int getMask() {
+        return mask;
     }
 }

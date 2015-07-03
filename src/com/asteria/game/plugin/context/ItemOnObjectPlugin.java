@@ -5,7 +5,7 @@ import com.asteria.game.location.Position;
 import com.asteria.game.plugin.PluginContext;
 
 /**
- * The plugin context for the item on object packet.
+ * The plugin context for the item on object message.
  *
  * @author lare96 <http://github.com/lare96>
  */

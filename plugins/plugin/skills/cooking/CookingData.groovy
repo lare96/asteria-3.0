@@ -47,9 +47,9 @@ enum CookingData {
     }
 
     void openInterface(Player player) {
-        player.encoder.sendChatInterface 1743
-        player.encoder.sendItemModelOnInterface(13716, 190, rawId)
-        player.encoder.sendString("\\n\\n\\n\\n\\n${ItemDefinition.DEFINITIONS[rawId].name}", 13717)
+        player.messages.sendChatInterface 1743
+        player.messages.sendItemModelOnInterface(13716, 190, rawId)
+        player.messages.sendString("\\n\\n\\n\\n\\n${ItemDefinition.DEFINITIONS[rawId].name}", 13717)
     }
 
     static CookingData getData(int id) {

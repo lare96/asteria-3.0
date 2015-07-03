@@ -46,7 +46,7 @@ public final class PluginHandler {
      */
     public void init() {
         try {
-            Class<?> c = Class.forName("plugin.Bootstrap");
+            Class<?> c = Class.forName("plugin.PluginBootstrap");
             Constructor<?> bootstrap = c.getConstructor(Logger.class);
             bootstrap.newInstance(logger);
         } catch (Exception e) {
@@ -72,7 +72,7 @@ public final class PluginHandler {
         Collection<PluginListener> collection = plugins.get(type);
         if (collection == null)
             throw new NullPointerException("No plugin listeners exist for this plugin signature!");
-        collection.forEach(c -> c.run(player, context));
+        collection.forEach(c -> c.execute(player, context));
     }
 
     /**

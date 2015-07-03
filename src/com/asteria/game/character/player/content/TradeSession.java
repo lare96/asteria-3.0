@@ -2,13 +2,13 @@ package com.asteria.game.character.player.content;
 
 import java.util.Arrays;
 
+import com.asteria.game.GameConstants;
 import com.asteria.game.character.player.IOState;
 import com.asteria.game.character.player.Player;
 import com.asteria.game.character.player.Rights;
 import com.asteria.game.item.Item;
 import com.asteria.game.item.container.ItemContainer;
 import com.asteria.game.item.container.ItemContainerPolicy;
-import com.asteria.utility.Settings;
 
 /**
  * The container class that represents a trade session between players.
@@ -61,8 +61,8 @@ public final class TradeSession {
             return;
         if (!Item.valid(item) || !player.getInventory().contains(item.getId()))
             return;
-        if (Arrays.stream(Settings.ITEM_UNTRADEABLE).anyMatch(i -> i == item.getId())) {
-            player.getEncoder().sendMessage("You cannot trade this item!");
+        if (Arrays.stream(GameConstants.ITEM_UNTRADEABLE).anyMatch(i -> i == item.getId())) {
+            player.getMessages().sendMessage("You cannot trade this item!");
             return;
         }
         if (item.getAmount() > player.getInventory().amount(item.getId()) && !item.getDefinition().isStackable()) {
@@ -74,15 +74,15 @@ public final class TradeSession {
             player.getInventory().remove(item, inventorySlot);
             String trade = name(player);
             int remaining = player.getInventory().remaining();
-            other.getEncoder().sendString("Trading with: " + trade + " who " + "has @gre@" + remaining + " free slots", 3417);
-            player.getEncoder().sendItemsOnInterface(3322, player.getInventory().container());
+            other.getMessages().sendString("Trading with: " + trade + " who " + "has @gre@" + remaining + " free slots", 3417);
+            player.getMessages().sendItemsOnInterface(3322, player.getInventory().container());
             int length = container.size();
-            player.getEncoder().sendItemsOnInterface(3415, container.container(), length);
-            other.getEncoder().sendItemsOnInterface(3416, container.container(), length);
+            player.getMessages().sendItemsOnInterface(3415, container.container(), length);
+            other.getMessages().sendItemsOnInterface(3416, container.container(), length);
             stage = TradeStage.OFFER;
             other.getTradeSession().setStage(TradeStage.OFFER);
-            player.getEncoder().sendString("", 3431);
-            other.getEncoder().sendString("", 3431);
+            player.getMessages().sendString("", 3431);
+            other.getMessages().sendString("", 3431);
         }
     }
 
@@ -103,15 +103,15 @@ public final class TradeSession {
             player.getInventory().add(item);
             String trade = name(player);
             int remaining = player.getInventory().remaining();
-            other.getEncoder().sendString("Trading with: " + trade + " who " + "has @gre@" + remaining + " free slots", 3417);
-            player.getEncoder().sendItemsOnInterface(3322, player.getInventory().container());
+            other.getMessages().sendString("Trading with: " + trade + " who " + "has @gre@" + remaining + " free slots", 3417);
+            player.getMessages().sendItemsOnInterface(3322, player.getInventory().container());
             int length = container.size();
-            player.getEncoder().sendItemsOnInterface(3415, container.container(), length);
-            other.getEncoder().sendItemsOnInterface(3416, container.container(), length);
+            player.getMessages().sendItemsOnInterface(3415, container.container(), length);
+            other.getMessages().sendItemsOnInterface(3416, container.container(), length);
             stage = TradeStage.OFFER;
             other.getTradeSession().stage = TradeStage.OFFER;
-            player.getEncoder().sendString("", 3431);
-            other.getEncoder().sendString("", 3431);
+            player.getMessages().sendString("", 3431);
+            other.getMessages().sendString("", 3431);
         }
     }
 
@@ -124,15 +124,15 @@ public final class TradeSession {
      */
     public void request(Player other) {
         if (other.getTradeSession().inTradeSession()) {
-            other.getEncoder().sendMessage("You are already in a trade session!");
+            other.getMessages().sendMessage("You are already in a trade session!");
             return;
         }
         if (inTradeSession()) {
-            other.getEncoder().sendMessage("They are already in a trade session!");
+            other.getMessages().sendMessage("They are already in a trade session!");
             return;
         }
         if (player.equals(other)) {
-            other.getEncoder().sendMessage("You cannot initiate a trade session with yourself!");
+            other.getMessages().sendMessage("You cannot initiate a trade session with yourself!");
             return;
         }
         if (player.equals(other.getTradeSession().getOther())) {
@@ -147,8 +147,8 @@ public final class TradeSession {
             return;
         }
         this.other = other;
-        player.getEncoder().sendMessage("Sending trade request...");
-        other.getEncoder().sendMessage(player.getFormatUsername() + ":tradereq:");
+        player.getMessages().sendMessage("Sending trade request...");
+        other.getMessages().sendMessage(player.getFormatUsername() + ":tradereq:");
         player.facePosition(other.getPosition());
     }
 
@@ -167,19 +167,19 @@ public final class TradeSession {
         case OFFER:
             String trade = name(player);
             int remaining = player.getInventory().remaining();
-            player.getEncoder().sendItemsOnInterface(3322, player.getInventory().container());
-            player.getEncoder().sendString("Trading with: " + trade + " " + "who has @gre@" + remaining + " free slots", 3417);
-            player.getEncoder().sendString("", 3431);
-            player.getEncoder().sendString("Are you sure you want to make" + " this trade?", 3535);
-            player.getEncoder().sendInventoryInterface(3323, 3321);
-            player.getEncoder().sendItemsOnInterface(3415, null, 0);
-            other.getEncoder().sendItemsOnInterface(3416, null, 0);
+            player.getMessages().sendItemsOnInterface(3322, player.getInventory().container());
+            player.getMessages().sendString("Trading with: " + trade + " " + "who has @gre@" + remaining + " free slots", 3417);
+            player.getMessages().sendString("", 3431);
+            player.getMessages().sendString("Are you sure you want to make" + " this trade?", 3535);
+            player.getMessages().sendInventoryInterface(3323, 3321);
+            player.getMessages().sendItemsOnInterface(3415, null, 0);
+            other.getMessages().sendItemsOnInterface(3416, null, 0);
             break;
         case FIRST_ACCEPT:
-            player.getEncoder().sendItemsOnInterface(3214, player.getInventory().container());
-            player.getEncoder().sendString(getItemNames(container.container()), 3557);
-            player.getEncoder().sendString(getItemNames(other.getTradeSession().getContainer().container()), 3558);
-            player.getEncoder().sendInventoryInterface(3443, 3213);
+            player.getMessages().sendItemsOnInterface(3214, player.getInventory().container());
+            player.getMessages().sendString(getItemNames(container.container()), 3557);
+            player.getMessages().sendString(getItemNames(other.getTradeSession().getContainer().container()), 3558);
+            player.getMessages().sendInventoryInterface(3443, 3213);
             break;
         case FINAL_ACCEPT:
             if (other.getSession().getState() == IOState.LOGGED_IN && player.getSession().getState() == IOState.LOGGED_IN) {
@@ -206,8 +206,8 @@ public final class TradeSession {
         player.getInventory().addAll(container);
         other.getInventory().addAll(other.getTradeSession().getContainer());
         if (declined) {
-            other.getEncoder().sendMessage("The other player has declined the trade!");
-            player.getEncoder().sendMessage("You have declined the trade.");
+            other.getMessages().sendMessage("The other player has declined the trade!");
+            player.getMessages().sendMessage("You have declined the trade.");
         }
         other.getTradeSession().reset();
         reset();
@@ -229,7 +229,7 @@ public final class TradeSession {
     private void reset() {
         if (!inTradeSession())
             return;
-        player.getEncoder().sendCloseWindows();
+        player.getMessages().sendCloseWindows();
         container.clear();
         stage = null;
         other = null;

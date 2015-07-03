@@ -16,7 +16,7 @@ public enum Rights {
 
     /**
      * The value of this rank as seen by the protocol. The only ranks the
-     * protocol sees are:
+     * protocol sees by default are:
      * <p>
      * <p>
      * <table BORDER CELLPADDING=3 CELLSPACING=1>

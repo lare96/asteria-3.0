@@ -4,7 +4,7 @@ import com.asteria.game.character.npc.Npc;
 import com.asteria.game.plugin.PluginContext;
 
 /**
- * The plugin context for the npc second click packet.
+ * The plugin context for the npc second click message.
  *
  * @author lare96 <http://github.com/lare96>
  */

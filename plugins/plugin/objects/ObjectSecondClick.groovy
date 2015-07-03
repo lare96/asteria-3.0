@@ -9,6 +9,6 @@ import com.asteria.game.plugin.context.ObjectSecondClickPlugin
 final class ObjectSecondClick implements PluginListener<ObjectSecondClickPlugin> {
 
     @Override
-    void run(Player player, ObjectSecondClickPlugin context) {
+    void execute(Player player, ObjectSecondClickPlugin context) {
     }
 }

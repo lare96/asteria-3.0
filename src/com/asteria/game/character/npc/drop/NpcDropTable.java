@@ -89,26 +89,28 @@ public final class NpcDropTable {
         Item[] items = new Item[dynamic.length + 1];
         LinkedList<NpcDrop> copyList = CollectionUtils.newLinkedList(dynamic);
         Iterator<NpcDrop> $it = copyList.iterator();
-        while($it.hasNext()) {
+        while ($it.hasNext()) {
             NpcDrop drop = $it.next();
-            if(drop.getChance() == NpcDropChance.ALWAYS) {
+            if (drop.getChance() == NpcDropChance.ALWAYS) {
                 Item newItem = drop.toItem(random);
                 items[slot++] = newItem;
                 $it.remove();
                 listeners.forEach(it -> it.onDynamicDrop(player, drop, Optional.of(newItem), true));
             }
         }
-        Collections.shuffle(copyList);
-        for (int amount = 0; amount < DROP_THRESHOLD; amount++) {
-            if (copyList.size() == 0)
-                break;
-            NpcDrop drop = copyList.remove();
-            if (drop.getChance().successful(random)) {
-                Item newItem = drop.toItem(random);
-                items[slot++] = newItem;
-                listeners.forEach(it -> it.onDynamicDrop(player, drop, Optional.of(newItem), true));
-            } else {
-                listeners.forEach(it -> it.onDynamicDrop(player, drop, Optional.empty(), false));
+        if (random.nextBoolean()) {
+            Collections.shuffle(copyList);
+            for (int amount = 0; amount < DROP_THRESHOLD; amount++) {
+                if (copyList.size() == 0)
+                    break;
+                NpcDrop drop = copyList.remove();
+                if (drop.getChance().successful(random)) {
+                    Item newItem = drop.toItem(random);
+                    items[slot++] = newItem;
+                    listeners.forEach(it -> it.onDynamicDrop(player, drop, Optional.of(newItem), true));
+                } else {
+                    listeners.forEach(it -> it.onDynamicDrop(player, drop, Optional.empty(), false));
+                }
             }
         }
         if (rare.length == 0 || !NpcDropChance.COMMON.successful(random))

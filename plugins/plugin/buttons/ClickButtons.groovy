@@ -6,6 +6,7 @@ import java.util.logging.Logger
 
 import plugin.skills.cooking.Cooking
 
+import com.asteria.Server
 import com.asteria.game.World
 import com.asteria.game.character.combat.magic.CombatSpells
 import com.asteria.game.character.combat.prayer.CombatPrayer
@@ -25,7 +26,6 @@ import com.asteria.game.plugin.PluginSignature
 import com.asteria.game.plugin.context.ButtonClickPlugin
 import com.asteria.task.Task
 import com.asteria.utility.LoggerUtils
-import com.asteria.utility.Settings
 
 @PluginSignature(ButtonClickPlugin.class)
 final class ClickButtons implements PluginListener<ButtonClickPlugin> {
@@ -33,7 +33,7 @@ final class ClickButtons implements PluginListener<ButtonClickPlugin> {
     private static Logger logger = LoggerUtils.getLogger(ClickButtons.class)
 
     @Override
-    void run(Player player, ButtonClickPlugin context) {
+    void execute(Player player, ButtonClickPlugin context) {
         int button = context.getId()
         switch (button) {
             case 59135:
@@ -142,26 +142,26 @@ final class ClickButtons implements PluginListener<ButtonClickPlugin> {
                 break
             case 48177:
                 if (player.acceptAid) {
-                    player.encoder.sendMessage "Accept aid has been turned off."
+                    player.messages.sendMessage "Accept aid has been turned off."
                     player.acceptAid = false
                 }
                 break
             case 48176:
                 if (!player.acceptAid) {
-                    player.encoder.sendMessage "Accept aid has been turned on."
+                    player.messages.sendMessage "Accept aid has been turned on."
                     player.acceptAid = true
                 }
                 break
             case 150:
                 if (!player.autoRetaliate) {
                     player.autoRetaliate = true
-                    player.encoder.sendMessage "Auto retaliate has been turned on!"
+                    player.messages.sendMessage "Auto retaliate has been turned on!"
                 }
                 break
             case 151:
                 if (player.autoRetaliate) {
                     player.autoRetaliate = false
-                    player.encoder.sendMessage "Auto retaliate has been turned off!"
+                    player.messages.sendMessage "Auto retaliate has been turned off!"
                 }
                 break
             case 56109:
@@ -260,20 +260,20 @@ final class ClickButtons implements PluginListener<ButtonClickPlugin> {
                 }))
                     break
                 if (!player.lastCombat.elapsed(10, TimeUnit.SECONDS)) {
-                    player.encoder.sendMessage "You must wait 10 seconds after combat before logging out."
+                    player.messages.sendMessage "You must wait 10 seconds after combat before logging out."
                     break
                 }
-                World.players.remove(player)
+                World.players.remove player
                 break
             case 153:
                 if (player.runEnergy.get() == 0)
                     break
                 player.movementQueue.running = true
-                player.encoder.sendByteState(173, 1)
+                player.messages.sendByteState(173, 1)
                 break
             case 152:
                 player.movementQueue.running = false
-                player.encoder.sendByteState(173, 0)
+                player.messages.sendByteState(173, 0)
                 break
             case 21011:
                 player.withdrawAsNote = false
@@ -295,12 +295,12 @@ final class ClickButtons implements PluginListener<ButtonClickPlugin> {
                         break
                     if (partner.inventory.remaining() < player.tradeSession.container.size()) {
                         String username = partner.getFormatUsername()
-                        player.encoder.sendMessage "${username} does not have enough free slots for this many items."
+                        player.messages.sendMessage "${username} does not have enough free slots for this many items."
                         break
                     }
                     player.tradeSession.stage = TradeStage.FIRST_ACCEPT
-                    player.encoder.sendString("Waiting for other player...", 3431)
-                    partner.encoder.sendString("Other player has accepted", 3431)
+                    player.messages.sendString("Waiting for other player...", 3431)
+                    partner.messages.sendString("Other player has accepted", 3431)
                     if (player.tradeSession.getStage() == TradeStage.FIRST_ACCEPT && partner.tradeSession.getStage() == TradeStage.FIRST_ACCEPT) {
                         partner.tradeSession.execute TradeStage.FIRST_ACCEPT
                         player.tradeSession.execute TradeStage.FIRST_ACCEPT
@@ -313,8 +313,8 @@ final class ClickButtons implements PluginListener<ButtonClickPlugin> {
                     if (!partner.tradeSession.inTradeSession())
                         break
                     player.tradeSession.stage = TradeStage.FINAL_ACCEPT
-                    partner.encoder.sendString("Other player has accepted.", 3535)
-                    player.encoder.sendString("Waiting for other player...", 3535)
+                    partner.messages.sendString("Other player has accepted.", 3535)
+                    player.messages.sendString("Waiting for other player...", 3535)
 
                     if (player.tradeSession.getStage() == TradeStage.FINAL_ACCEPT && partner.tradeSession.getStage() == TradeStage.FINAL_ACCEPT) {
                         player.tradeSession.execute TradeStage.FINAL_ACCEPT
@@ -573,7 +573,7 @@ final class ClickButtons implements PluginListener<ButtonClickPlugin> {
                 break
             case 24017:
             case 7212:
-                player.encoder.sendSidebarInterface(0, player.weapon.getId())
+                player.messages.sendSidebarInterface(0, player.weapon.getId())
                 break
             case 1093:
             case 1094:
@@ -582,22 +582,22 @@ final class ClickButtons implements PluginListener<ButtonClickPlugin> {
                     player.castSpell = null
                     player.autocastSpell = null
                     player.autocast = false
-                    player.encoder.sendByteState(108, 0)
+                    player.messages.sendByteState(108, 0)
                 } else if (!player.autocast) {
                     if (player.getEquipment().getId(Equipment.WEAPON_SLOT) == 4675) {
                         if (player.getSpellbook() != Spellbook.ANCIENT) {
-                            player.encoder.sendMessage "You can only autocast ancient magics with this staff."
+                            player.messages.sendMessage "You can only autocast ancient magics with this staff."
                             break
                         }
 
-                        player.encoder.sendSidebarInterface(0, 1689)
+                        player.messages.sendSidebarInterface(0, 1689)
                     } else {
                         if (player.getSpellbook() != Spellbook.NORMAL) {
-                            player.encoder.sendMessage "You can only autocast standard magics with this staff."
+                            player.messages.sendMessage "You can only autocast standard magics with this staff."
                             break
                         }
 
-                        player.encoder.sendSidebarInterface(0, 1829)
+                        player.messages.sendSidebarInterface(0, 1829)
                     }
                 }
                 break
@@ -605,194 +605,194 @@ final class ClickButtons implements PluginListener<ButtonClickPlugin> {
             case 51133:
                 player.autocastSpell = CombatSpells.SMOKE_RUSH.getSpell()
                 player.autocast = true
-                player.encoder.sendSidebarInterface(0, player.weapon.getId())
-                player.encoder.sendByteState(108, 3)
+                player.messages.sendSidebarInterface(0, player.weapon.getId())
+                player.messages.sendByteState(108, 3)
                 break
             case 51185:
                 player.autocastSpell = CombatSpells.SHADOW_RUSH.getSpell()
                 player.autocast = true
-                player.encoder.sendSidebarInterface(0, player.weapon.getId())
-                player.encoder.sendByteState(108, 3)
+                player.messages.sendSidebarInterface(0, player.weapon.getId())
+                player.messages.sendByteState(108, 3)
                 break
             case 51091:
                 player.autocastSpell = CombatSpells.BLOOD_RUSH.getSpell()
                 player.autocast = true
-                player.encoder.sendSidebarInterface(0, player.weapon.getId())
-                player.encoder.sendByteState(108, 3)
+                player.messages.sendSidebarInterface(0, player.weapon.getId())
+                player.messages.sendByteState(108, 3)
                 break
             case 24018:
                 player.autocastSpell = CombatSpells.ICE_RUSH.getSpell()
                 player.autocast = true
-                player.encoder.sendSidebarInterface(0, player.weapon.getId())
-                player.encoder.sendByteState(108, 3)
+                player.messages.sendSidebarInterface(0, player.weapon.getId())
+                player.messages.sendByteState(108, 3)
                 break
             case 51159:
                 player.autocastSpell = CombatSpells.SMOKE_BURST.getSpell()
                 player.autocast = true
-                player.encoder.sendSidebarInterface(0, player.weapon.getId())
-                player.encoder.sendByteState(108, 3)
+                player.messages.sendSidebarInterface(0, player.weapon.getId())
+                player.messages.sendByteState(108, 3)
                 break
             case 51211:
                 player.autocastSpell = CombatSpells.SHADOW_BURST.getSpell()
                 player.autocast = true
-                player.encoder.sendSidebarInterface(0, player.weapon.getId())
-                player.encoder.sendByteState(108, 3)
+                player.messages.sendSidebarInterface(0, player.weapon.getId())
+                player.messages.sendByteState(108, 3)
                 break
             case 51111:
                 player.autocastSpell = CombatSpells.BLOOD_BURST.getSpell()
                 player.autocast = true
-                player.encoder.sendSidebarInterface(0, player.weapon.getId())
-                player.encoder.sendByteState(108, 3)
+                player.messages.sendSidebarInterface(0, player.weapon.getId())
+                player.messages.sendByteState(108, 3)
                 break
             case 51069:
                 player.autocastSpell = CombatSpells.ICE_BURST.getSpell()
                 player.autocast = true
-                player.encoder.sendSidebarInterface(0, player.weapon.getId())
-                player.encoder.sendByteState(108, 3)
+                player.messages.sendSidebarInterface(0, player.weapon.getId())
+                player.messages.sendByteState(108, 3)
                 break
             case 51146:
                 player.autocastSpell = CombatSpells.SMOKE_BLITZ.getSpell()
                 player.autocast = true
-                player.encoder.sendSidebarInterface(0, player.weapon.getId())
-                player.encoder.sendByteState(108, 3)
+                player.messages.sendSidebarInterface(0, player.weapon.getId())
+                player.messages.sendByteState(108, 3)
                 break
             case 51198:
                 player.autocastSpell = CombatSpells.SHADOW_BLITZ.getSpell()
                 player.autocast = true
-                player.encoder.sendSidebarInterface(0, player.weapon.getId())
-                player.encoder.sendByteState(108, 3)
+                player.messages.sendSidebarInterface(0, player.weapon.getId())
+                player.messages.sendByteState(108, 3)
                 break
             case 51102:
                 player.autocastSpell = CombatSpells.BLOOD_BLITZ.getSpell()
                 player.autocast = true
-                player.encoder.sendSidebarInterface(0, player.weapon.getId())
-                player.encoder.sendByteState(108, 3)
+                player.messages.sendSidebarInterface(0, player.weapon.getId())
+                player.messages.sendByteState(108, 3)
                 break
             case 51058:
                 player.autocastSpell = CombatSpells.ICE_BLITZ.getSpell()
                 player.autocast = true
-                player.encoder.sendSidebarInterface(0, player.weapon.getId())
-                player.encoder.sendByteState(108, 3)
+                player.messages.sendSidebarInterface(0, player.weapon.getId())
+                player.messages.sendByteState(108, 3)
                 break
             case 51172:
                 player.autocastSpell = CombatSpells.SMOKE_BARRAGE.getSpell()
                 player.autocast = true
-                player.encoder.sendSidebarInterface(0, player.weapon.getId())
-                player.encoder.sendByteState(108, 3)
+                player.messages.sendSidebarInterface(0, player.weapon.getId())
+                player.messages.sendByteState(108, 3)
                 break
             case 51224:
                 player.autocastSpell = CombatSpells.SHADOW_BARRAGE.getSpell()
                 player.autocast = true
-                player.encoder.sendSidebarInterface(0, player.weapon.getId())
-                player.encoder.sendByteState(108, 3)
+                player.messages.sendSidebarInterface(0, player.weapon.getId())
+                player.messages.sendByteState(108, 3)
                 break
             case 51122:
                 player.autocastSpell = CombatSpells.BLOOD_BARRAGE.getSpell()
                 player.autocast = true
-                player.encoder.sendSidebarInterface(0, player.weapon.getId())
-                player.encoder.sendByteState(108, 3)
+                player.messages.sendSidebarInterface(0, player.weapon.getId())
+                player.messages.sendByteState(108, 3)
                 break
             case 51080:
                 player.autocastSpell = CombatSpells.ICE_BARRAGE.getSpell()
                 player.autocast = true
-                player.encoder.sendSidebarInterface(0, player.weapon.getId())
-                player.encoder.sendByteState(108, 3)
+                player.messages.sendSidebarInterface(0, player.weapon.getId())
+                player.messages.sendByteState(108, 3)
                 break
             case 7038:
                 player.autocastSpell = CombatSpells.WIND_STRIKE.getSpell()
                 player.autocast = true
-                player.encoder.sendSidebarInterface(0, player.weapon.getId())
-                player.encoder.sendByteState(108, 3)
+                player.messages.sendSidebarInterface(0, player.weapon.getId())
+                player.messages.sendByteState(108, 3)
                 break
             case 7039:
                 player.autocastSpell = CombatSpells.WATER_STRIKE.getSpell()
                 player.autocast = true
-                player.encoder.sendSidebarInterface(0, player.weapon.getId())
-                player.encoder.sendByteState(108, 3)
+                player.messages.sendSidebarInterface(0, player.weapon.getId())
+                player.messages.sendByteState(108, 3)
                 break
             case 7040:
                 player.autocastSpell = CombatSpells.EARTH_STRIKE.getSpell()
                 player.autocast = true
-                player.encoder.sendSidebarInterface(0, player.weapon.getId())
-                player.encoder.sendByteState(108, 3)
+                player.messages.sendSidebarInterface(0, player.weapon.getId())
+                player.messages.sendByteState(108, 3)
                 break
             case 7041:
                 player.autocastSpell = CombatSpells.FIRE_STRIKE.getSpell()
                 player.autocast = true
-                player.encoder.sendSidebarInterface(0, player.weapon.getId())
-                player.encoder.sendByteState(108, 3)
+                player.messages.sendSidebarInterface(0, player.weapon.getId())
+                player.messages.sendByteState(108, 3)
                 break
             case 7042:
                 player.autocastSpell = CombatSpells.WIND_BOLT.getSpell()
                 player.autocast = true
-                player.encoder.sendSidebarInterface(0, player.weapon.getId())
-                player.encoder.sendByteState(108, 3)
+                player.messages.sendSidebarInterface(0, player.weapon.getId())
+                player.messages.sendByteState(108, 3)
                 break
             case 7043:
                 player.autocastSpell = CombatSpells.WATER_BOLT.getSpell()
                 player.autocast = true
-                player.encoder.sendSidebarInterface(0, player.weapon.getId())
-                player.encoder.sendByteState(108, 3)
+                player.messages.sendSidebarInterface(0, player.weapon.getId())
+                player.messages.sendByteState(108, 3)
                 break
             case 7044:
                 player.autocastSpell = CombatSpells.EARTH_BOLT.getSpell()
                 player.autocast = true
-                player.encoder.sendSidebarInterface(0, player.weapon.getId())
-                player.encoder.sendByteState(108, 3)
+                player.messages.sendSidebarInterface(0, player.weapon.getId())
+                player.messages.sendByteState(108, 3)
                 break
             case 7045:
                 player.autocastSpell = CombatSpells.FIRE_BOLT.getSpell()
                 player.autocast = true
-                player.encoder.sendSidebarInterface(0, player.weapon.getId())
-                player.encoder.sendByteState(108, 3)
+                player.messages.sendSidebarInterface(0, player.weapon.getId())
+                player.messages.sendByteState(108, 3)
                 break
             case 7046:
                 player.autocastSpell = CombatSpells.WIND_BLAST.getSpell()
                 player.autocast = true
-                player.encoder.sendSidebarInterface(0, player.weapon.getId())
-                player.encoder.sendByteState(108, 3)
+                player.messages.sendSidebarInterface(0, player.weapon.getId())
+                player.messages.sendByteState(108, 3)
                 break
             case 7047:
                 player.autocastSpell = CombatSpells.WATER_BLAST.getSpell()
                 player.autocast = true
-                player.encoder.sendSidebarInterface(0, player.weapon.getId())
-                player.encoder.sendByteState(108, 3)
+                player.messages.sendSidebarInterface(0, player.weapon.getId())
+                player.messages.sendByteState(108, 3)
                 break
             case 7048:
                 player.autocastSpell = CombatSpells.EARTH_BLAST.getSpell()
                 player.autocast = true
-                player.encoder.sendSidebarInterface(0, player.weapon.getId())
-                player.encoder.sendByteState(108, 3)
+                player.messages.sendSidebarInterface(0, player.weapon.getId())
+                player.messages.sendByteState(108, 3)
                 break
             case 7049:
                 player.autocastSpell = CombatSpells.FIRE_BLAST.getSpell()
                 player.autocast = true
-                player.encoder.sendSidebarInterface(0, player.weapon.getId())
-                player.encoder.sendByteState(108, 3)
+                player.messages.sendSidebarInterface(0, player.weapon.getId())
+                player.messages.sendByteState(108, 3)
                 break
             case 7050:
                 player.autocastSpell = CombatSpells.WIND_WAVE.getSpell()
                 player.autocast = true
-                player.encoder.sendSidebarInterface(0, player.weapon.getId())
-                player.encoder.sendByteState(108, 3)
+                player.messages.sendSidebarInterface(0, player.weapon.getId())
+                player.messages.sendByteState(108, 3)
                 break
             case 7051:
                 player.autocastSpell = CombatSpells.WATER_WAVE.getSpell()
                 player.autocast = true
-                player.encoder.sendSidebarInterface(0, player.weapon.getId())
-                player.encoder.sendByteState(108, 3)
+                player.messages.sendSidebarInterface(0, player.weapon.getId())
+                player.messages.sendByteState(108, 3)
                 break
             case 7052:
                 player.autocastSpell = CombatSpells.EARTH_WAVE.getSpell()
                 player.autocast = true
-                player.encoder.sendSidebarInterface(0, player.weapon.getId())
-                player.encoder.sendByteState(108, 3)
+                player.messages.sendSidebarInterface(0, player.weapon.getId())
+                player.messages.sendByteState(108, 3)
                 break
             case 7053:
                 player.autocastSpell = CombatSpells.FIRE_WAVE.getSpell()
                 player.autocast = true
-                player.encoder.sendSidebarInterface(0, player.weapon.getId())
-                player.encoder.sendByteState(108, 3)
+                player.messages.sendSidebarInterface(0, player.weapon.getId())
+                player.messages.sendByteState(108, 3)
                 break
             case 29138:
             case 29038:
@@ -811,14 +811,14 @@ final class ClickButtons implements PluginListener<ButtonClickPlugin> {
                 }
 
                 if (player.specialActivated) {
-                    player.encoder.sendByteState(301, 0)
+                    player.messages.sendByteState(301, 0)
                     player.specialActivated = false
                 } else {
                     if (player.specialPercentage.value < player.combatSpecial.amount) {
-                        player.encoder.sendMessage "You do not have enough special energy left!"
+                        player.messages.sendMessage "You do not have enough special energy left!"
                         break
                     }
-                    player.encoder.sendByteState(301, 1)
+                    player.messages.sendByteState(301, 1)
                     player.specialActivated = true
                     if(player.combatSpecial == CombatSpecial.GRANITE_MAUL && player.getCombatBuilder().isAttacking() && !player.getCombatBuilder().isCooldown()) {
                         player.getCombatBuilder().instant()
@@ -839,7 +839,7 @@ final class ClickButtons implements PluginListener<ButtonClickPlugin> {
                 }
                 break
             default:
-                if (Settings.DEBUG)
+                if (Server.DEBUG)
                     logger.info "Unhandled button: ${button}"
                 break
         }

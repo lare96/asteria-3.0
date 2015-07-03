@@ -92,15 +92,14 @@ public abstract class Task {
     }
 
     /**
-     * The method executed when this task is cancelled using
-     * {@link Task#cancel()}.
+     * The method executed when this task is cancelled using {@code cancel()}.
      */
     public void onCancel() {
 
     }
 
     /**
-     * The method executed when {@link Task#execute()} throws an error.
+     * The method executed when {@code execute()} throws an error.
      *
      * @param t
      *            the error thrown by execution of the task.
@@ -129,8 +128,8 @@ public abstract class Task {
     }
 
     /**
-     * Cancels this task and executes the {@link Task#onCancel()} method only if
-     * this task is running.
+     * Cancels this task and executes the {@code onCancel()} method only if this
+     * task is running.
      */
     public final void cancel() {
         if (running) {
@@ -154,14 +153,14 @@ public abstract class Task {
 
     /**
      * Attaches {@code key} to this task that can later be retrieved with
-     * {@link Task#getKey()}. This is a very useful feature because similar or
+     * {@code getKey()}. This is a very useful feature because similar or
      * related tasks can be bound with the same key, and can then be retrieved
      * or cancelled later on. All player related tasks should be bound with the
      * player's instance so all tasks are automatically stopped on logout.
      * <p>
      * <p>
      * Keys with a value of {@code null} are <b>not</b> permitted, the default
-     * value for all keys is {@link Task#DEFAULT_KEY}.
+     * value for all keys is {@code DEFAULT_KEY}.
      *
      * @param key
      *            the key to bind to this task, cannot be {@code null}.

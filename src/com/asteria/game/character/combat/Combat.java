@@ -1,5 +1,8 @@
 package com.asteria.game.character.combat;
 
+import static com.asteria.game.character.combat.CombatConstants.PRAYER_ACCURACY_REDUCTION;
+import static com.asteria.game.character.combat.CombatConstants.PRAYER_DAMAGE_REDUCTION;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -10,6 +13,7 @@ import plugin.combat.DefaultMagicCombatStrategy;
 import plugin.combat.DefaultMeleeCombatStrategy;
 import plugin.combat.DefaultRangedCombatStrategy;
 
+import com.asteria.Server;
 import com.asteria.game.NodeType;
 import com.asteria.game.World;
 import com.asteria.game.character.CharacterNode;
@@ -31,7 +35,6 @@ import com.asteria.game.item.container.Equipment;
 import com.asteria.game.location.Position;
 import com.asteria.utility.CollectionUtils;
 import com.asteria.utility.RandomGen;
-import com.asteria.utility.Settings;
 
 /**
  * A collection of utility methods and constants related to combat.
@@ -39,37 +42,6 @@ import com.asteria.utility.Settings;
  * @author lare96 <http://github.com/lare96>
  */
 public final class Combat {
-
-    /**
-     * The amount of time it takes in seconds for cached damage to timeout.
-     */
-    public static final long DAMAGE_CACHE_TIMEOUT = 60;
-
-    /**
-     * The percentage at which damage is reduced by combat protection prayers.
-     */
-    public static final double PRAYER_DAMAGE_REDUCTION = .20;
-
-    /**
-     * The percentage at which accuracy is reduced by combat protection prayers.
-     */
-    public static final double PRAYER_ACCURACY_REDUCTION = .255;
-
-    /**
-     * The percentage at which hitpoints will be healed by from the prayer level
-     * when using redemption.
-     */
-    public static final double REDEMPTION_PRAYER_HEAL = .25;
-
-    /**
-     * The maximum amount of damage that retribution can inflict.
-     */
-    public static final int MAXIMUM_RETRIBUTION_DAMAGE = 15;
-
-    /**
-     * The radius in which the retribution effect will take place.
-     */
-    public static final int RETRIBUTION_RADIUS = 5;
 
     /**
      * The attack stab bonus identifier.
@@ -172,9 +144,9 @@ public final class Combat {
             return;
         }
         if (Combat.isFullVeracs(data.getAttacker())) {
-            if (Settings.DEBUG && data.getAttacker().getType() == NodeType.PLAYER)
-                ((Player) data.getAttacker()).getEncoder().sendMessage(
-                    "[DEBUG]: Chance of opponents prayer cancelling hit " + "[0/" + Combat.PRAYER_ACCURACY_REDUCTION + "]");
+            if (Server.DEBUG && data.getAttacker().getType() == NodeType.PLAYER)
+                ((Player) data.getAttacker()).getMessages().sendMessage(
+                    "[DEBUG]: Chance of opponents prayer cancelling hit " + "[0/" + PRAYER_ACCURACY_REDUCTION + "]");
             return;
         }
         Player player = (Player) data.getVictim();
@@ -184,18 +156,18 @@ public final class Combat {
             case PLAYER:
                 for (CombatHit h : data.getHits()) {
                     int hit = h.getHit().getDamage();
-                    double mod = Math.abs(1 - Combat.PRAYER_DAMAGE_REDUCTION);
+                    double mod = Math.abs(1 - PRAYER_DAMAGE_REDUCTION);
                     h.setHit(new Hit((int) (hit * mod), h.getHit().getType()));
-                    if (Settings.DEBUG)
-                        player.getEncoder().sendMessage(
+                    if (Server.DEBUG)
+                        player.getMessages().sendMessage(
                             "[DEBUG]: Damage " + "reduced by opponents prayer [" + (hit - h.getHit().getDamage()) + "]");
                     mod = Math.round(random.nextDouble() * 100.0) / 100.0;
-                    if (Settings.DEBUG)
+                    if (Server.DEBUG)
                         player
-                            .getEncoder()
+                            .getMessages()
                             .sendMessage(
-                                "[DEBUG]: Chance " + "of opponents prayer cancelling hit [" + mod + "/" + Combat.PRAYER_ACCURACY_REDUCTION + "]");
-                    if (mod <= Combat.PRAYER_ACCURACY_REDUCTION) {
+                            "[DEBUG]: Chance " + "of opponents prayer cancelling hit [" + mod + "/" + PRAYER_ACCURACY_REDUCTION + "]");
+                    if (mod <= PRAYER_ACCURACY_REDUCTION) {
                         h.setAccurate(false);
                     }
                 }
@@ -709,8 +681,8 @@ public final class Combat {
         case RANGED:
             return new Hit(random.inclusive(1, Combat.calculateMaxRangedHit(character, victim)));
         case MAGIC:
-            if (Settings.DEBUG && character.getType() == NodeType.PLAYER)
-                ((Player) character).getEncoder().sendMessage(
+            if (Server.DEBUG && character.getType() == NodeType.PLAYER)
+                ((Player) character).getMessages().sendMessage(
                     "[DEBUG]: " + "Maximum hit this turn is [" + character.getCurrentlyCasting().maximumHit() + "].");
             return new Hit(random.inclusive(0, character.getCurrentlyCasting().maximumHit()));
         default:
@@ -829,9 +801,9 @@ public final class Combat {
         double hitSucceed = A < D ? (A - 1.0) / (2.0 * D) : 1.0 - (D + 1.0) / (2.0 * A);
         hitSucceed = hitSucceed >= 1.0 ? 0.99 : hitSucceed <= 0.0 ? 0.01 : hitSucceed;
 
-        if (attacker.getType() == NodeType.PLAYER && Settings.DEBUG) {
+        if (attacker.getType() == NodeType.PLAYER && Server.DEBUG) {
             ((Player) attacker)
-                .getEncoder()
+                .getMessages()
                 .sendMessage(
                     "[DEBUG]: Your roll " + "[" + (Math.round(attackCalc * 1000.0) / 1000.0) + "] : " + "Victim's roll [" + (Math
                         .round(defenceCalc * 1000.0) / 1000.0) + "] : Chance to hit [" + (100 * Math.round(hitSucceed * 1000.0) / 1000.0) + "%]");
@@ -917,8 +889,8 @@ public final class Combat {
         if (Combat.isFullDharoks(player)) {
             maxHit += (player.getSkills()[Skills.HITPOINTS].getRealLevel() - player.getSkills()[Skills.HITPOINTS].getLevel()) * 0.35;
         }
-        if (Settings.DEBUG)
-            player.getEncoder().sendMessage("[DEBUG]: Maximum hit this turn " + "is [" + maxHit + "].");
+        if (Server.DEBUG)
+            player.getMessages().sendMessage("[DEBUG]: Maximum hit this turn " + "is [" + maxHit + "].");
         return maxHit;
 
     }
@@ -971,8 +943,8 @@ public final class Combat {
 
         maxHit = (int) (baseDamage * specialMultiplier);
 
-        if (Settings.DEBUG)
-            player.getEncoder().sendMessage("[DEBUG]: Maximum hit this turn " + "is [" + maxHit + "].");
+        if (Server.DEBUG)
+            player.getMessages().sendMessage("[DEBUG]: Maximum hit this turn " + "is [" + maxHit + "].");
         return maxHit;
     }
 

@@ -30,11 +30,12 @@ public final class Bank extends ItemContainer {
      * Opens and refreshes the bank for {@code player}.
      */
     public void open() {
+        shift();
         player.setWithdrawAsNote(false);
-        player.getEncoder().sendByteState(115, 0);
-        player.getEncoder().sendInventoryInterface(5292, 5063);
+        player.getMessages().sendByteState(115, 0);
+        player.getMessages().sendInventoryInterface(5292, 5063);
         refresh();
-        player.getEncoder().sendItemsOnInterface(5064, player.getInventory().container());
+        player.getMessages().sendItemsOnInterface(5064, player.getInventory().container());
     }
 
     /**
@@ -66,7 +67,7 @@ public final class Bank extends ItemContainer {
         if (deposit(item.copy())) {
             player.getInventory().remove(item, inventorySlot);
             refresh();
-            player.getEncoder().sendItemsOnInterface(5064, player.getInventory().container());
+            player.getMessages().sendItemsOnInterface(5064, player.getInventory().container());
             return true;
         }
         return false;
@@ -84,7 +85,7 @@ public final class Bank extends ItemContainer {
         int slot = freeSlot();
         boolean contains = contains(item.getId());
         if (slot == -1 && !contains) {
-            player.getEncoder().sendMessage("You don't have enough space to " + "deposit this item!");
+            player.getMessages().sendMessage("You don't have enough space to " + "deposit this item!");
             return false;
         }
         int itemId = item.getDefinition().isNoted() ? item.getId() - 1 : item.getId();
@@ -128,21 +129,21 @@ public final class Bank extends ItemContainer {
 
         if (!item.getDefinition().isStackable() && !item.getDefinition().isNoted() && !player.isWithdrawAsNote()) {
             if (player.getInventory().remaining() < item.getAmount()) {
-                player.getEncoder().sendMessage("You do not have enough space" + " in your inventory!");
+                player.getMessages().sendMessage("You do not have enough space" + " in your inventory!");
                 return false;
             }
         } else {
             if (player.getInventory().remaining() < 1 && !player.getInventory().contains(
                 !player.isWithdrawAsNote() ? item.getId() : item.getId() + 1)) {
-                player.getEncoder().sendMessage("You do not have enough space" + " in your inventory!");
+                player.getMessages().sendMessage("You do not have enough space" + " in your inventory!");
                 return false;
             }
         }
 
         if (player.isWithdrawAsNote() && !withdrawItemNoted) {
-            player.getEncoder().sendMessage("This item can't be withdrawn as " + "a note.");
+            player.getMessages().sendMessage("This item can't be withdrawn as " + "a note.");
             player.setWithdrawAsNote(false);
-            player.getEncoder().sendByteState(115, 0);
+            player.getMessages().sendByteState(115, 0);
 
             if (!item.getDefinition().isStackable()) {
                 item.setAmount(player.getInventory().remaining());
@@ -154,9 +155,8 @@ public final class Bank extends ItemContainer {
         }
         if (addItem)
             player.getInventory().add(item);
-        shift();
         refresh();
-        player.getEncoder().sendItemsOnInterface(5064, player.getInventory().container());
+        player.getMessages().sendItemsOnInterface(5064, player.getInventory().container());
         return true;
     }
 

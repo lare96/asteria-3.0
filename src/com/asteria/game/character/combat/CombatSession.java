@@ -69,7 +69,7 @@ public final class CombatSession extends Task {
 
             if (builder.getCharacter().getType() == NodeType.PLAYER) {
                 Player player = (Player) builder.getCharacter();
-                player.getEncoder().sendCloseWindows();
+                player.getMessages().sendCloseWindows();
                 if (player.isSpecialActivated() && player.getCastSpell() == null) {
                     data = player.getCombatSpecial().container(player, builder.getVictim());
                     CombatSpecial.drain(player, player.getCombatSpecial().getAmount());
@@ -120,14 +120,14 @@ public final class CombatSession extends Task {
         if (!Location.inMultiCombat(builder.getCharacter()) && builder.isBeingAttacked() && !builder.getVictim().equals(
             builder.getLastAttacker())) {
             if (builder.getCharacter().getType() == NodeType.PLAYER)
-                ((Player) builder.getCharacter()).getEncoder().sendMessage("You are already under attack!");
+                ((Player) builder.getCharacter()).getMessages().sendMessage("You are already under attack!");
             builder.reset();
             return false;
         }
         if (!Location.inMultiCombat(builder.getCharacter()) && builder.getVictim().getCombatBuilder().isBeingAttacked() && !builder
             .getVictim().getCombatBuilder().getLastAttacker().equals(builder.getCharacter())) {
             if (builder.getCharacter().getType() == NodeType.PLAYER)
-                ((Player) builder.getCharacter()).getEncoder().sendMessage("They are already under attack!");
+                ((Player) builder.getCharacter()).getMessages().sendMessage("They are already under attack!");
             builder.reset();
             return false;
         }
@@ -140,7 +140,7 @@ public final class CombatSession extends Task {
                     return false;
                 }
             } else if (Location.inWilderness(builder.getCharacter()) && !Location.inWilderness(builder.getVictim())) {
-                player.getEncoder().sendMessage("They are not in the wilderness!");
+                player.getMessages().sendMessage("They are not in the wilderness!");
                 builder.reset();
                 return false;
             }

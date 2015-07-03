@@ -145,13 +145,13 @@ public final class ObjectNodeManager {
      */
     public static void updateRegion(Player player) {
         OBJECTS.forEach(obj -> {
-            player.getEncoder().sendRemoveObject(obj.getPosition());
+            player.getMessages().sendRemoveObject(obj.getPosition());
             if (obj.getPosition().withinDistance(player.getPosition(), 60)) {
-                player.getEncoder().sendObject(obj);
+                player.getMessages().sendObject(obj);
             }
         });
         REMOVE_OBJECTS.forEach(obj -> {
-            player.getEncoder().sendRemoveObject(obj);
+            player.getMessages().sendRemoveObject(obj);
         });
     }
 }

@@ -11,7 +11,7 @@ import com.asteria.game.plugin.context.ItemOnObjectPlugin
 final class ItemOnObject implements PluginListener<ItemOnObjectPlugin> {
 
     @Override
-    void run(Player player, ItemOnObjectPlugin context) {
+    void execute(Player player, ItemOnObjectPlugin context) {
         switch (context.id) {
             case 114:
                 CookingData c = CookingData.getData(context.item.id)

@@ -6,6 +6,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.asteria.game.World;
+import com.asteria.service.Service;
+import com.asteria.service.ServiceQueue;
 import com.asteria.utility.LoggerUtils;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
@@ -25,7 +27,7 @@ import com.google.gson.JsonObject;
  *
  * @author lare96 <http://github.com/lare96>
  */
-public final class PlayerSerializationCache implements Runnable {
+public final class PlayerSerializationCache extends Service {
 
     /**
      * The logger that will print important information.
@@ -55,17 +57,18 @@ public final class PlayerSerializationCache implements Runnable {
      *            entries upon reads and writes.
      */
     public PlayerSerializationCache(boolean automatic) {
+        super(15, TimeUnit.MINUTES);
         this.automatic = automatic;
     }
 
     @Override
-    public void run() {
+    public void execute(ServiceQueue context) {
         try {
             cache.cleanUp();
         } catch (Throwable t) {
 
             // Clean up fail, discard all entries.
-            logger.log(Level.SEVERE, "The player cache failed to clean up!", t);
+            logger.log(Level.SEVERE, "The player serialization cache failed to clean up!", t);
             cache.invalidateAll();
         }
     }
@@ -77,7 +80,7 @@ public final class PlayerSerializationCache implements Runnable {
      */
     public void init() {
         if (automatic)
-            World.getService().submit(this, 15, TimeUnit.MINUTES);
+            World.getService().submit(this);
     }
 
     /**

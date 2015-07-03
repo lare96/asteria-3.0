@@ -1,5 +1,7 @@
 package com.asteria.utility;
 
+import com.google.common.base.Preconditions;
+
 /**
  * The faster and more memory efficient alternative to associating
  * {@code Object}s to boolean values.
@@ -7,7 +9,7 @@ package com.asteria.utility;
  * <p>
  * Please note that a maximum of only {@code 32} masks can be used.
  * Alternatively, a backing {@code long} can be used to ensure that a maximum of
- * {@code 64} masks can be used.
+ * {@code 64} masks can be used (although {@code 32} should really be enough).
  *
  * @author lare96 <http://github.com/lare96>
  */
@@ -44,6 +46,17 @@ public final class BitMask {
      */
     public BitMask copy() {
         return new BitMask(flags);
+    }
+
+    /**
+     * Calculates the mask for the bit {@code position}.
+     * 
+     * @param position
+     *            the position to calculate the mask for.
+     */
+    public static int calcMask(int position) {
+        Preconditions.checkArgument(position >= 0 && position <= 32, "position < 0, or position > 32");
+        return (int) Math.pow(2, position);
     }
 
     /**

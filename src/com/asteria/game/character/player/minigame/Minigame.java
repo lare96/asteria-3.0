@@ -66,10 +66,10 @@ public abstract class Minigame implements PluginContext {
     }
 
     /**
-     * The method executed when the first click npc packet is sent.
+     * The method executed when the first click npc message is sent.
      *
      * @param player
-     *            the player the packet was sent for.
+     *            the player the message was sent for.
      * @param npc
      *            the npc that was clicked by the player.
      */
@@ -78,10 +78,10 @@ public abstract class Minigame implements PluginContext {
     }
 
     /**
-     * The method executed when the second click npc packet is sent.
+     * The method executed when the second click npc message is sent.
      *
      * @param player
-     *            the player the packet was sent for.
+     *            the player the message was sent for.
      * @param npc
      *            the npc that was clicked by the player.
      */
@@ -90,10 +90,10 @@ public abstract class Minigame implements PluginContext {
     }
 
     /**
-     * The method executed when the first click object packet is sent.
+     * The method executed when the first click object message is sent.
      *
      * @param player
-     *            the player the packet was sent for.
+     *            the player the message was sent for.
      * @param id
      *            the identification of the object that was clicked.
      * @param position
@@ -104,10 +104,10 @@ public abstract class Minigame implements PluginContext {
     }
 
     /**
-     * The method executed when the second click object packet is sent.
+     * The method executed when the second click object message is sent.
      *
      * @param player
-     *            the player the packet was sent for.
+     *            the player the message was sent for.
      * @param id
      *            the identification of the object that was clicked.
      * @param position
@@ -118,10 +118,10 @@ public abstract class Minigame implements PluginContext {
     }
 
     /**
-     * The method executed when the third click object packet is sent.
+     * The method executed when the third click object message is sent.
      *
      * @param player
-     *            the player the packet was sent for.
+     *            the player the message was sent for.
      * @param id
      *            the identification of the object that was clicked.
      * @param position
@@ -197,7 +197,7 @@ public abstract class Minigame implements PluginContext {
      * @return {@code true} if the players can trade, {@code false} otherwise.
      */
     public boolean canTrade(Player player, Player other) {
-        player.getEncoder().sendMessage("You cannot trade in here!");
+        player.getMessages().sendMessage("You cannot trade in here!");
         return false;
     }
 
@@ -222,7 +222,7 @@ public abstract class Minigame implements PluginContext {
      * @return {@code true} if the player can logout, {@code false} otherwise.
      */
     public boolean canLogout(Player player) {
-        player.getEncoder().sendMessage("You cannot logout in here!");
+        player.getMessages().sendMessage("You cannot logout in here!");
         return false;
     }
 
@@ -236,7 +236,7 @@ public abstract class Minigame implements PluginContext {
      * @return {@code true} if the player can teleport, {@code false} otherwise.
      */
     public boolean canTeleport(Player player, Position position) {
-        player.getEncoder().sendMessage("You cannot teleport in here!");
+        player.getMessages().sendMessage("You cannot teleport in here!");
         return false;
     }
 

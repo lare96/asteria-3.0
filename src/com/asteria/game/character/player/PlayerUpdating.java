@@ -7,9 +7,9 @@ import com.asteria.game.character.Flag;
 import com.asteria.game.character.player.skill.Skills;
 import com.asteria.game.item.container.Equipment;
 import com.asteria.game.location.Position;
-import com.asteria.network.ByteOrder;
-import com.asteria.network.DataBuffer;
-import com.asteria.network.ValueType;
+import com.asteria.net.ByteOrder;
+import com.asteria.net.ValueType;
+import com.asteria.net.message.MessageBuilder;
 import com.asteria.utility.BitMask;
 
 /**
@@ -39,9 +39,9 @@ public final class PlayerUpdating {
      *             if any errors occur while updating the player.
      */
     public static void update(Player player) throws Exception {
-        DataBuffer out = DataBuffer.create(16384);
-        DataBuffer block = DataBuffer.create(8192);
-        out.newVarShortPacket(81, player.getSession().getEncryptor());
+        MessageBuilder out = MessageBuilder.create(16384);
+        MessageBuilder block = MessageBuilder.create(8192);
+        out.newVarShortMessage(81);
         out.startBitAccess();
         PlayerUpdating.updateLocalPlayerMovement(player, out);
         if (player.getFlags().needsUpdate())
@@ -75,15 +75,15 @@ public final class PlayerUpdating {
                 }
             }
         }
-        if (block.buffer().position() > 0) {
+        if (block.buffer().writerIndex() > 0) {
             out.putBits(11, 2047);
             out.endBitAccess();
             out.putBytes(block.buffer());
         } else {
             out.endBitAccess();
         }
-        out.endVarShortPacket();
-        player.getSession().send(out);
+        out.endVarShortMessage();
+        player.getSession().queue(out);
     }
 
     /**
@@ -94,7 +94,7 @@ public final class PlayerUpdating {
      * @param out
      *            the buffer to append it to.
      */
-    private static void appendChat(Player player, DataBuffer out) {
+    private static void appendChat(Player player, MessageBuilder out) {
         out.putShort(((player.getChatColor() & 0xff) << 8) + (player.getChatEffects() & 0xff), ByteOrder.LITTLE);
         out.put(player.getRights().getProtocolValue());
         out.put(player.getChatText().length, ValueType.C);
@@ -109,9 +109,9 @@ public final class PlayerUpdating {
      * @param out
      *            the buffer to append it to.
      */
-    private static void appendAppearance(Player player, DataBuffer out) {
+    private static void appendAppearance(Player player, MessageBuilder out) {
         Appearance appearance = player.getAppearance();
-        DataBuffer block = DataBuffer.create(128);
+        MessageBuilder block = MessageBuilder.create(128);
         block.put(appearance.getGender());
         block.put(player.getHeadIcon());
         block.put(player.getSkullIcon());
@@ -211,7 +211,7 @@ public final class PlayerUpdating {
         block.put(player.determineCombatLevel());
         block.putShort(0);
 
-        out.put(block.buffer().position(), com.asteria.network.ValueType.C);
+        out.put(block.buffer().writerIndex(), ValueType.C);
         out.putBytes(block.buffer());
     }
 
@@ -225,7 +225,7 @@ public final class PlayerUpdating {
      * @param other
      *            the player who's list will be modified.
      */
-    private static void addPlayer(DataBuffer out, Player player, Player other) {
+    private static void addPlayer(MessageBuilder out, Player player, Player other) {
         out.putBits(11, other.getSlot());
         out.putBit(true);
         out.putBit(true);
@@ -246,7 +246,7 @@ public final class PlayerUpdating {
      * @param out
      *            the buffer to write to data to.
      */
-    private static void updateLocalPlayerMovement(Player player, DataBuffer out) {
+    private static void updateLocalPlayerMovement(Player player, MessageBuilder out) {
         boolean updateRequired = player.getFlags().needsUpdate();
         if (player.isNeedsPlacement()) {
             out.putBit(true);
@@ -283,7 +283,7 @@ public final class PlayerUpdating {
      * @param out
      *            the buffer to write the data to.
      */
-    private static void updateOtherPlayerMovement(Player player, DataBuffer out) {
+    private static void updateOtherPlayerMovement(Player player, MessageBuilder out) {
         boolean updateRequired = player.getFlags().needsUpdate();
         int pDir = player.getPrimaryDirection();
         int sDir = player.getSecondaryDirection();
@@ -320,14 +320,14 @@ public final class PlayerUpdating {
      * @throws Exception
      *             if any errors occur while updating the state.
      */
-    private static void updateState(Player player, Player thisPlayer, DataBuffer block, boolean forceAppearance, boolean noChat) throws Exception {
+    private static void updateState(Player player, Player thisPlayer, MessageBuilder block, boolean forceAppearance, boolean noChat) throws Exception {
         if (!player.getFlags().needsUpdate() && !forceAppearance)
             return;
         if (player.getCachedUpdateBlock() != null && !player.equals(thisPlayer) && !forceAppearance && !noChat) {
             block.putBytes(player.getCachedUpdateBlock());
             return;
         }
-        DataBuffer cachedBuffer = DataBuffer.create(300);
+        MessageBuilder cachedBuffer = MessageBuilder.create(300);
         BitMask mask = new BitMask();
 
         if (player.getFlags().get(Flag.FORCED_MOVEMENT)) {
@@ -362,7 +362,7 @@ public final class PlayerUpdating {
         }
         if (mask.get() >= 0x100) {
             mask.set(0x40);
-            cachedBuffer.putShort(mask.get(), com.asteria.network.ByteOrder.LITTLE);
+            cachedBuffer.putShort(mask.get(), com.asteria.net.ByteOrder.LITTLE);
         } else {
             cachedBuffer.put(mask.get());
         }
@@ -411,7 +411,7 @@ public final class PlayerUpdating {
      * @param out
      *            the buffer to append it to.
      */
-    private static void appendForcedChat(Player player, DataBuffer out) {
+    private static void appendForcedChat(Player player, MessageBuilder out) {
         out.putString(player.getForcedText());
     }
 
@@ -424,7 +424,7 @@ public final class PlayerUpdating {
      * @param out
      *            the buffer to append it to.
      */
-    private static void appendFaceCharacter(Player player, DataBuffer out) {
+    private static void appendFaceCharacter(Player player, MessageBuilder out) {
         out.putShort(player.getFaceIndex(), ByteOrder.LITTLE);
     }
 
@@ -437,7 +437,7 @@ public final class PlayerUpdating {
      * @param out
      *            the buffer to append it to.
      */
-    private static void appendFaceCoordinates(Player player, DataBuffer out) {
+    private static void appendFaceCoordinates(Player player, MessageBuilder out) {
         out.putShort(player.getFacePosition().getX(), ValueType.A, ByteOrder.LITTLE);
         out.putShort(player.getFacePosition().getY(), ByteOrder.LITTLE);
     }
@@ -450,7 +450,7 @@ public final class PlayerUpdating {
      * @param out
      *            the buffer to append it to.
      */
-    private static void appendAnimation(Player player, DataBuffer out) {
+    private static void appendAnimation(Player player, MessageBuilder out) {
         out.putShort(player.getAnimation().getId(), ByteOrder.LITTLE);
         out.put(player.getAnimation().getDelay(), ValueType.C);
     }
@@ -463,7 +463,7 @@ public final class PlayerUpdating {
      * @param out
      *            the buffer to append it to.
      */
-    private static void appendPrimaryHit(Player player, DataBuffer out) throws Exception {
+    private static void appendPrimaryHit(Player player, MessageBuilder out) throws Exception {
         out.put(player.getPrimaryHit().getDamage());
         out.put(player.getPrimaryHit().getType().getId(), ValueType.A);
 
@@ -487,10 +487,10 @@ public final class PlayerUpdating {
      * @param out
      *            the buffer to append it to.
      */
-    private static void appendSecondaryHit(Player player, DataBuffer out) throws Exception {
+    private static void appendSecondaryHit(Player player, MessageBuilder out) throws Exception {
         out.put(player.getSecondaryHit().getDamage());
         out.put(player.getSecondaryHit().getType().getId(), ValueType.S);
-       
+
         if (!player.isDead()) {
             if (player.getSkills()[Skills.HITPOINTS].getLevel() <= 0) {
                 player.getSkills()[Skills.HITPOINTS].setLevel(0, true);
@@ -498,7 +498,7 @@ public final class PlayerUpdating {
                 World.submit(new PlayerDeath(player));
             }
         }
-        
+
         out.put(player.getSkills()[Skills.HITPOINTS].getLevel());
         out.put(player.getSkills()[Skills.HITPOINTS].getRealLevel(), ValueType.C);
     }
@@ -511,25 +511,25 @@ public final class PlayerUpdating {
      * @param out
      *            the buffer to append it to.
      */
-    private static void appendGraphic(Player player, DataBuffer out) {
+    private static void appendGraphic(Player player, MessageBuilder out) {
         out.putShort(player.getGraphic().getId(), ByteOrder.LITTLE);
         out.putInt(player.getGraphic().getHeight());
     }
 
     /**
-     * Appends the stand version of the movement section of the update packet
+     * Appends the stand version of the movement section of the update message
      * (sector 2,0). Appending this (instead of just a zero bit) automatically
      * assumes that there is a required attribute update afterwards.
      *
      * @param out
      *            the buffer to write the data to.
      */
-    private static void appendStand(DataBuffer out) {
+    private static void appendStand(MessageBuilder out) {
         out.putBits(2, 0);
     }
 
     /**
-     * Appends the walk version of the movement section of the update packet
+     * Appends the walk version of the movement section of the update message
      * (sector 2,1).
      *
      * @param out
@@ -539,14 +539,14 @@ public final class PlayerUpdating {
      * @param attributesUpdate
      *            whether or not a player attributes update is required.
      */
-    private static void appendWalk(DataBuffer out, int direction, boolean attributesUpdate) {
+    private static void appendWalk(MessageBuilder out, int direction, boolean attributesUpdate) {
         out.putBits(2, 1);
         out.putBits(3, direction);
         out.putBit(attributesUpdate);
     }
 
     /**
-     * Appends the walk version of the movement section of the update packet
+     * Appends the walk version of the movement section of the update message
      * (sector 2,2).
      *
      * @param out
@@ -558,7 +558,7 @@ public final class PlayerUpdating {
      * @param attributesUpdate
      *            whether or not a player attributes update is required.
      */
-    private static void appendRun(DataBuffer out, int direction, int direction2, boolean attributesUpdate) {
+    private static void appendRun(MessageBuilder out, int direction, int direction2, boolean attributesUpdate) {
         out.putBits(2, 2);
         out.putBits(3, direction);
         out.putBits(3, direction2);
@@ -567,7 +567,7 @@ public final class PlayerUpdating {
 
     /**
      * Appends the player placement version of the movement section of the
-     * update packet (sector 2,3). Note that by others this was previously
+     * update message (sector 2,3). Note that by others this was previously
      * called the "teleport update".
      *
      * @param out
@@ -583,7 +583,7 @@ public final class PlayerUpdating {
      * @param attributesUpdate
      *            whether or not a plater attributes update is required.
      */
-    private static void appendPlacement(DataBuffer out, int localX, int localY, int z, boolean discardMovementQueue, boolean attributesUpdate) {
+    private static void appendPlacement(MessageBuilder out, int localX, int localY, int z, boolean discardMovementQueue, boolean attributesUpdate) {
         out.putBits(2, 3);
         out.putBits(2, z);
         out.putBit(discardMovementQueue);

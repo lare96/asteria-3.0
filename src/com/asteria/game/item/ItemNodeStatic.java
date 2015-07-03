@@ -79,7 +79,7 @@ public final class ItemNodeStatic extends ItemNode {
     public void create() {
         World.getPlayers().forEach(p -> {
             if (p.getPosition().withinDistance(getPosition(), 60)) {
-                p.getEncoder().sendGroundItem(this);
+                p.getMessages().sendGroundItem(this);
             }
         });
     }

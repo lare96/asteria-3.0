@@ -39,7 +39,7 @@ public final class Inventory extends ItemContainer {
             return false;
         if (!contains(item.getId()) && !item.getDefinition().isStackable()) {
             if (freeSlot() == -1) {
-                player.getEncoder().sendMessage("You don't have enough space " + "in your inventory!");
+                player.getMessages().sendMessage("You don't have enough space in your inventory!");
                 return false;
             }
         }

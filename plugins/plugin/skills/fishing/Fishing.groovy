@@ -44,7 +44,7 @@ final class Fishing extends HarvestingSkillAction {
     boolean init() {
         if (!checkFishing())
             return false
-        player.encoder.sendMessage "You begin to fish..."
+        player.messages.sendMessage "You begin to fish..."
         player.animation new Animation(tool.animation)
         return true
     }
@@ -93,21 +93,21 @@ final class Fishing extends HarvestingSkillAction {
 
     private boolean checkFishing() {
         if (!player.inventory.contains(tool.id)) {
-            player.encoder.sendMessage "You need a ${tool} to fish here!"
+            player.messages.sendMessage "You need a ${tool} to fish here!"
             return false
         }
         if (tool.needed > 0) {
             if (!player.inventory.contains(tool.needed)) {
-                player.encoder.sendMessage "You do not have enough bait."
+                player.messages.sendMessage "You do not have enough bait."
                 return false
             }
         }
         if (player.inventory.remaining() < 1) {
-            player.encoder.sendMessage "You do not have any space left in your inventory."
+            player.messages.sendMessage "You do not have any space left in your inventory."
             return false
         }
         if (!player.skills[FISHING].reqLevel(tool.level)) {
-            player.encoder.sendMessage "You must have a Fishing level of ${tool.level} to use this tool."
+            player.messages.sendMessage "You must have a Fishing level of ${tool.level} to use this tool."
             return false
         }
         return true

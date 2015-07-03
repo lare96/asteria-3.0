@@ -8,12 +8,12 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
+import com.asteria.game.GameConstants;
 import com.asteria.game.World;
 import com.asteria.game.character.player.Player;
 import com.asteria.game.item.Item;
 import com.asteria.game.item.container.ItemContainer;
 import com.asteria.game.item.container.ItemContainerPolicy;
-import com.asteria.utility.Settings;
 import com.asteria.utility.TextUtils;
 
 /**
@@ -119,11 +119,11 @@ public final class Shop {
      *            the player to open the shop for.
      */
     public void openShop(Player player) {
-        player.getEncoder().sendItemsOnInterface(3823, player.getInventory().container());
-        player.getEncoder().sendItemsOnInterface(3900, container.container(), container.size());
+        player.getMessages().sendItemsOnInterface(3823, player.getInventory().container());
+        player.getMessages().sendItemsOnInterface(3900, container.container(), container.size());
         player.setOpenShop(name);
-        player.getEncoder().sendInventoryInterface(3824, 3822);
-        player.getEncoder().sendString(name, 3901);
+        player.getMessages().sendInventoryInterface(3824, 3822);
+        player.getMessages().sendString(name, 3901);
         players.add(player);
     }
 
@@ -137,9 +137,9 @@ public final class Shop {
      *            if the stock should be checked.
      */
     public void updateShop(Player player, boolean checkStock) {
-        player.getEncoder().sendItemsOnInterface(3823, player.getInventory().container());
+        player.getMessages().sendItemsOnInterface(3823, player.getInventory().container());
         int size = container.size();
-        players.stream().filter(Objects::nonNull).forEach(p -> p.getEncoder().sendItemsOnInterface(3900, container.container(), size));
+        players.stream().filter(Objects::nonNull).forEach(p -> p.getMessages().sendItemsOnInterface(3900, container.container(), size));
 
         if (checkStock && restock) {
             if (World.getTaskQueue().running(this) || !needsRestock())
@@ -160,19 +160,19 @@ public final class Shop {
         String itemName = item.getDefinition().getName();
 
         if (!canSell) {
-            player.getEncoder().sendMessage("You cannot sell any items to this store.");
+            player.getMessages().sendMessage("You cannot sell any items to this store.");
             return;
         }
-        if (Arrays.stream(Settings.BANNED_SHOP_ITEMS).anyMatch(i -> i == item.getId())) {
-            player.getEncoder().sendMessage("You can't sell " + itemName + " " + "here.");
+        if (Arrays.stream(GameConstants.BANNED_SHOP_ITEMS).anyMatch(i -> i == item.getId())) {
+            player.getMessages().sendMessage("You can't sell " + itemName + " " + "here.");
             return;
         }
         if (!container.contains(item.getId()) && !name.equalsIgnoreCase("General Store")) {
-            player.getEncoder().sendMessage("You can't sell " + itemName + " " + "to this store.");
+            player.getMessages().sendMessage("You can't sell " + itemName + " " + "to this store.");
             return;
         }
         String formatPrice = TextUtils.formatPrice((int) Math.floor(determinePrice(item) / 2));
-        player.getEncoder().sendMessage(itemName + ": shop will buy for " + formatPrice + " " + currency + ".");
+        player.getMessages().sendMessage(itemName + ": shop will buy for " + formatPrice + " " + currency + ".");
     }
 
     /**
@@ -188,11 +188,11 @@ public final class Shop {
         if (shopItem == null)
             return;
         if (shopItem.getAmount() <= 0) {
-            player.getEncoder().sendMessage("There is none of this item left in stock!");
+            player.getMessages().sendMessage("There is none of this item left in stock!");
             return;
         }
         player
-            .getEncoder()
+            .getMessages()
             .sendMessage(
                 item.getDefinition().getName() + ": " + "shop will sell for " + TextUtils.formatPrice(determinePrice(item)) + " " + currency + ".");
     }
@@ -212,7 +212,7 @@ public final class Shop {
         if (shopItem == null)
             return false;
         if (shopItem.getAmount() <= 0) {
-            player.getEncoder().sendMessage("There is none of this item left in stock!");
+            player.getMessages().sendMessage("There is none of this item left in stock!");
             return false;
         }
         if (item.getAmount() > shopItem.getAmount())
@@ -221,13 +221,13 @@ public final class Shop {
             item.setAmount(player.getInventory().remaining());
 
             if (item.getAmount() == 0) {
-                player.getEncoder().sendMessage("You do not have enough space in your inventory to buy this item!");
+                player.getMessages().sendMessage("You do not have enough space in your inventory to buy this item!");
                 return false;
             }
         }
         int value = currency == Currency.COINS ? item.getDefinition().getGeneralPrice() : item.getDefinition().getSpecialPrice();
         if (!(currency.getCurrency().currencyAmount(player) >= (value * item.getAmount()))) {
-            player.getEncoder().sendMessage("You do not have enough " + currency + " to buy this item.");
+            player.getMessages().sendMessage("You do not have enough " + currency + " to buy this item.");
             return false;
         }
         if (player.getInventory().remaining() >= item.getAmount() && !item.getDefinition().isStackable() || player.getInventory()
@@ -242,7 +242,7 @@ public final class Shop {
             currency.getCurrency().takeCurrency(player, item.getAmount() * value);
             player.getInventory().add(item);
         } else {
-            player.getEncoder().sendMessage("You don't have enough space in " + "your inventory.");
+            player.getMessages().sendMessage("You don't have enough space in " + "your inventory.");
             return false;
         }
         updateShop(player, true);
@@ -263,25 +263,25 @@ public final class Shop {
         if (!Item.valid(item))
             return false;
         if (!canSell) {
-            player.getEncoder().sendMessage("You cannot sell items here.");
+            player.getMessages().sendMessage("You cannot sell items here.");
             return false;
         }
-        if (Arrays.stream(Settings.BANNED_SHOP_ITEMS).anyMatch(i -> i == item.getId())) {
-            player.getEncoder().sendMessage("You can't sell " + item.getDefinition().getName() + " here.");
+        if (Arrays.stream(GameConstants.BANNED_SHOP_ITEMS).anyMatch(i -> i == item.getId())) {
+            player.getMessages().sendMessage("You can't sell " + item.getDefinition().getName() + " here.");
             return false;
         }
         if (!player.getInventory().contains(item.getId()))
             return false;
         if (!container.contains(item.getId()) && !name.equalsIgnoreCase("General Store")) {
-            player.getEncoder().sendMessage("You can't sell " + item.getDefinition().getName() + " to this store.");
+            player.getMessages().sendMessage("You can't sell " + item.getDefinition().getName() + " to this store.");
             return false;
         }
         if (!container.spaceFor(item)) {
-            player.getEncoder().sendMessage("There is no room in this store " + "for the item you are trying to sell!");
+            player.getMessages().sendMessage("There is no room in this store " + "for the item you are trying to sell!");
             return false;
         }
         if (player.getInventory().remaining() == 0 && !currency.getCurrency().canRecieveCurrency(player)) {
-            player.getEncoder().sendMessage("You do not have enough space in " + "your inventory to sell this item!");
+            player.getMessages().sendMessage("You do not have enough space in " + "your inventory to sell this item!");
             return false;
         }
         int amount = player.getInventory().amount(item.getId());

@@ -162,11 +162,11 @@ public final class Skills {
                 }
                 SkillData data = SkillData.values()[skill];
                 String append = TextUtils.appendIndefiniteArticle(data.toString());
-                player.getEncoder()
+                player.getMessages()
                     .sendString("@dre@Congratulations, you've " + "just advanced " + append + " level!", data.getFirstLine());
-                player.getEncoder().sendString("Your " + data + " level is " + "now " + newLevel + ".", data.getSecondLine());
-                player.getEncoder().sendMessage("Congratulations, you've just" + " advanced " + append + " level!");
-                player.getEncoder().sendChatInterface(data.getChatbox());
+                player.getMessages().sendString("Your " + data + " level is " + "now " + newLevel + ".", data.getSecondLine());
+                player.getMessages().sendMessage("Congratulations, you've just" + " advanced " + append + " level!");
+                player.getMessages().sendChatInterface(data.getChatbox());
                 player.graphic(new Graphic(199));
                 player.getFlags().set(Flag.APPEARANCE);
             }
@@ -193,7 +193,7 @@ public final class Skills {
             }
             player.getSkills()[skill] = s;
         }
-        player.getEncoder().sendSkill(skill, s.getLevel(), (int) s.getExperience());
+        player.getMessages().sendSkill(skill, s.getLevel(), (int) s.getExperience());
     }
 
     /**

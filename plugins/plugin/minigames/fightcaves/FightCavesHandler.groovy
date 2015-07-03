@@ -35,10 +35,10 @@ final class FightCavesHandler {
                 player.viewingOrb.close()
                 player.viewingOrb = null
             }
-            player.encoder.sendContextMenu(3, "Attack")
-            player.encoder.sendWalkable(-1)
+            player.messages.sendContextMenu(3, "Attack")
+            player.messages.sendWalkable(-1)
             player.move new Position(2392 + random.exclusive(12), 5139 + random.exclusive(25))
-            player.encoder.sendMessage "The fight pits have begun, good luck!"
+            player.messages.sendMessage "The fight pits have begun, good luck!"
             players.add player
         }
     }
@@ -54,8 +54,8 @@ final class FightCavesHandler {
             players.each {
                 if (!it.registered)
                     return
-                it.encoder.sendContextMenu(3, "null")
-                it.encoder.sendWalkable(-1)
+                it.messages.sendContextMenu(3, "null")
+                it.messages.sendWalkable(-1)
                 it.combatBuilder.reset()
                 it.specialPercentage.value = 100
                 it.specialActivated = false
@@ -63,7 +63,7 @@ final class FightCavesHandler {
                 CombatPrayer.deactivateAll it
                 Skills.restoreAll it
                 it.move FightCavesHandler.DEATH_POSITION
-                it.encoder.sendMessage "The round took too long, no one has won!"
+                it.messages.sendMessage "The round took too long, no one has won!"
             }
         } else {
             def player = World.getPlayer currentChampion
@@ -76,10 +76,10 @@ final class FightCavesHandler {
                     return
                 currentChampion = it.getFormatUsername()
                 it.inventory.add new Item(6529, 100)
-                it.encoder.sendMessage "Congratulations, you have won the fight pits minigame!"
+                it.messages.sendMessage "Congratulations, you have won the fight pits minigame!"
                 World.message "${currentChampion} has won the fight pits minigame!"
-                it.encoder.sendContextMenu(3, "null")
-                it.encoder.sendWalkable(-1)
+                it.messages.sendContextMenu(3, "null")
+                it.messages.sendWalkable(-1)
                 it.combatBuilder.reset()
                 it.specialPercentage.value = 100
                 it.specialActivated = false
@@ -101,10 +101,10 @@ final class FightCavesHandler {
         int needed = PLAYERS_NEEDED - awaiting.size()
         minutes = minutes < 0 ? 1 : minutes
         String champion = currentChampion ?: "Xil"
-        player.encoder.sendString("Current champion: JalYt-Ket-${champion}", 2805)
-        player.encoder.sendString(players.size() >= 1 ? "Game currently in progress!" : awaiting.size() < PLAYERS_NEEDED ? "Waiting for ${needed} more players!" : "Minutes Left: ${minutes}", 2806)
+        player.messages.sendString("Current champion: JalYt-Ket-${champion}", 2805)
+        player.messages.sendString(players.size() >= 1 ? "Game currently in progress!" : awaiting.size() < PLAYERS_NEEDED ? "Waiting for ${needed} more players!" : "Minutes Left: ${minutes}", 2806)
         if (champion != null)
-            player.encoder.sendByteState(560, champion.equalsIgnoreCase(player.username) ? 0 : 1)
+            player.messages.sendByteState(560, champion.equalsIgnoreCase(player.username) ? 0 : 1)
     }
 
     static boolean remove(Player player) {

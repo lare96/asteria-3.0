@@ -10,13 +10,13 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.function.Consumer;
 
+import com.asteria.game.GameConstants;
 import com.asteria.game.character.MovementQueue;
 import com.asteria.game.character.combat.weapon.FightType;
 import com.asteria.game.character.player.Appearance;
 import com.asteria.game.character.player.Player;
 import com.asteria.game.character.player.Rights;
 import com.asteria.game.character.player.content.Spellbook;
-import com.asteria.game.character.player.login.LoginResponse;
 import com.asteria.game.character.player.skill.Skill;
 import com.asteria.game.character.player.skill.Skills;
 import com.asteria.game.item.Item;
@@ -24,6 +24,7 @@ import com.asteria.game.item.container.Bank;
 import com.asteria.game.item.container.Equipment;
 import com.asteria.game.item.container.Inventory;
 import com.asteria.game.location.Position;
+import com.asteria.net.login.LoginResponse;
 import com.asteria.utility.ArrayUtils;
 import com.asteria.utility.MutableNumber;
 import com.google.gson.Gson;
@@ -48,7 +49,7 @@ public final class PlayerSerialization {
      * The player serialization cache that will enabled the caching of character
      * files for later use.
      */
-    private static PlayerSerializationCache cache = new PlayerSerializationCache(false);
+    private static PlayerSerializationCache cache = new PlayerSerializationCache(GameConstants.CLEAN_CACHE);
 
     /**
      * The linked hash collection of tokens that will be serialized and

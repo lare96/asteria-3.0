@@ -10,7 +10,7 @@ public final class Skill {
     /**
      * The maximum amount of experience that can be obtained in a single skill.
      */
-    private static final int MAXIMUM_EXPERIENCE = 2_000_000;
+    private static final double MAXIMUM_EXPERIENCE = 200_000_000;
 
     /**
      * The level of this skill that can be trained.
@@ -82,8 +82,19 @@ public final class Skill {
      * @param amount
      *            the amount to increase this level by.
      */
-    public void increasePotionLevel(int amount) {
+    public void increaseLevelReal(int amount) {
         increaseLevel(amount, realLevel + amount);
+    }
+
+    /**
+     * Decrements this level by {@code amount} to a minimum of
+     * {@code realLevel - amount}.
+     *
+     * @param amount
+     *            the amount to decrease this level by.
+     */
+    public void decreaseLevelReal(int amount) {
+        decreaseLevel(amount, realLevel - amount);
     }
 
     /**
@@ -110,17 +121,6 @@ public final class Skill {
      */
     public void decreaseLevel(int amount) {
         decreaseLevel(amount, 0);
-    }
-
-    /**
-     * Decrements this level by {@code amount} to a minimum of
-     * {@code realLevel - amount}.
-     *
-     * @param amount
-     *            the amount to decrease this level by.
-     */
-    public void decreasePotionLevel(int amount) {
-        decreaseLevel(amount, realLevel - amount);
     }
 
     /**

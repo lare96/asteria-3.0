@@ -9,6 +9,6 @@ import com.asteria.game.plugin.context.ItemOnPlayerPlugin
 final class ItemOnPlayer implements PluginListener<ItemOnPlayerPlugin> {
 
     @Override
-    void run(Player player, ItemOnPlayerPlugin context) {
+    void execute(Player player, ItemOnPlayerPlugin context) {
     }
 }

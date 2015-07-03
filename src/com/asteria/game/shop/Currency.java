@@ -29,7 +29,7 @@ public enum Currency {
 
     @Override
     public final String toString() {
-        return name().toLowerCase().replace('_', ' ');
+        return name().toLowerCase().replaceAll("_", " ");
     }
 
     /**

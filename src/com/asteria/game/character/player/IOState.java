@@ -21,6 +21,11 @@ public enum IOState {
      * The client is now a player, and is logged in.
      */
     LOGGED_IN,
+    
+    /**
+     * A request has been sent to disconnect the client.
+     */
+    LOGGING_OUT,
 
     /**
      * The client has disconnected from the server.

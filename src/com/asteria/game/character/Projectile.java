@@ -126,7 +126,7 @@ public final class Projectile {
     public void sendProjectile() {
         World.getPlayers().forEach(player -> {
             if (start.isViewableFrom(player.getPosition())) {
-                player.getEncoder().sendProjectile(start, offset, 0, speed, projectileId, startHeight, endHeight, lockon, delay);
+                player.getMessages().sendProjectile(start, offset, 0, speed, projectileId, startHeight, endHeight, lockon, delay);
 
             }
         });

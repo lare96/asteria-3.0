@@ -79,18 +79,18 @@ public final class ViewingOrb {
      * Opens the viewing orb navigation interface in the sidebar.
      */
     public void open() {
-        IntStream.rangeClosed(0, 13).filter(v -> v != 7 && v != 10).forEach(v -> player.getEncoder().sendSidebarInterface(v, -1));
-        player.getEncoder().sendSidebarInterface(10, 3209);
-        player.getEncoder().sendForceTab(10);
-        player.getEncoder().sendString("@yel@Centre", 15239);
-        player.getEncoder().sendString("@yel@North-West", 15240);
-        player.getEncoder().sendString("@yel@North-East", 15241);
-        player.getEncoder().sendString("@yel@South-East", 15242);
-        player.getEncoder().sendString("@yel@South-West", 15243);
+        IntStream.rangeClosed(0, 13).filter(v -> v != 7 && v != 10).forEach(v -> player.getMessages().sendSidebarInterface(v, -1));
+        player.getMessages().sendSidebarInterface(10, 3209);
+        player.getMessages().sendForceTab(10);
+        player.getMessages().sendString("@yel@Centre", 15239);
+        player.getMessages().sendString("@yel@North-West", 15240);
+        player.getMessages().sendString("@yel@North-East", 15241);
+        player.getMessages().sendString("@yel@South-East", 15242);
+        player.getMessages().sendString("@yel@South-West", 15243);
         player.getMovementQueue().setLockMovement(true);
         player.setVisible(false);
         player.setDisabled(true);
-        player.getEncoder().sendMinimapState(2);
+        player.getMessages().sendMinimapState(2);
         player.setPlayerNpc(2982);
         player.getFlags().set(Flag.APPEARANCE);
         move("Centre", 15239, centre);
@@ -103,13 +103,13 @@ public final class ViewingOrb {
     public void close() {
         int[] interfaces = { 3917, 638, 3213, 1644, 5608, player.getSpellbook().getId(), 5065, 5715, 2449, 904, 147, 962, 2423 };
         for (int idx = 0; idx < interfaces.length; idx++)
-            player.getEncoder().sendSidebarInterface(idx, interfaces[idx]);
+            player.getMessages().sendSidebarInterface(idx, interfaces[idx]);
         player.getMovementQueue().setLockMovement(false);
         player.setVisible(true);
         player.setDisabled(false);
         player.setPlayerNpc(-1);
         player.getFlags().set(Flag.APPEARANCE);
-        player.getEncoder().sendMinimapState(0);
+        player.getMessages().sendMinimapState(0);
         player.move(start);
     }
 
@@ -127,12 +127,12 @@ public final class ViewingOrb {
     public void move(String positionName, int positionLineId, Position position) {
         if (position.equals(player.getPosition()))
             return;
-        player.getEncoder().sendString("@yel@Centre", 15239);
-        player.getEncoder().sendString("@yel@North-West", 15240);
-        player.getEncoder().sendString("@yel@North-East", 15241);
-        player.getEncoder().sendString("@yel@South-East", 15242);
-        player.getEncoder().sendString("@yel@South-West", 15243);
-        player.getEncoder().sendString("@whi@" + positionName, positionLineId);
+        player.getMessages().sendString("@yel@Centre", 15239);
+        player.getMessages().sendString("@yel@North-West", 15240);
+        player.getMessages().sendString("@yel@North-East", 15241);
+        player.getMessages().sendString("@yel@South-East", 15242);
+        player.getMessages().sendString("@yel@South-West", 15243);
+        player.getMessages().sendString("@whi@" + positionName, positionLineId);
         player.move(position);
     }
 

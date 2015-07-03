@@ -1,28 +1,34 @@
 package com.asteria.game.character;
 
+import java.util.ArrayDeque;
 import java.util.Arrays;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Queue;
 import java.util.Spliterator;
 import java.util.Spliterators;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
+
+import com.asteria.game.NodeType;
+import com.asteria.game.character.player.IOState;
+import com.asteria.game.character.player.Player;
 
 /**
  * A collection that provides functionality for storing and managing characters.
  * This list does not support the storage of elements with a value of
  * {@code null}, and maintains an extremely strict ordering of the elements.
- * This list for storing characters will be faster than typical implementations,
- * mainly due to the fact that it caches the last slot that a character was
- * removed from in order to reduce the amount of lookups needed to add a new
- * one.
+ * This list for storing characters will be much faster than typical
+ * implementations, mainly due to the fact that it uses a {@link Queue} to cache
+ * available slots in order to prevent expensive lookups needed to add a new
+ * character.
  *
+ * @author lare96 <http://github.com/lare96>
  * @param <E>
  *            the type of character being managed with this collection.
- * @author lare96 <http://github.com/lare96>
  */
 public final class CharacterList<E extends CharacterNode> implements Iterable<E> {
 
@@ -32,11 +38,10 @@ public final class CharacterList<E extends CharacterNode> implements Iterable<E>
     private E[] characters;
 
     /**
-     * The list containing all of the slots that {@link CharacterNode}s were
-     * recently removed from. This is used to reduce slot lookup times for
-     * characters being added to this character list.
+     * The queue containing all of the cached slots that can be assigned to
+     * {@link CharacterNode}s to prevent expensive lookups.
      */
-    private final LinkedList<Integer> removeSlots = new LinkedList<>();
+    private final Queue<Integer> slotQueue = new ArrayDeque<>();
 
     /**
      * The finite capacity of this collection.
@@ -59,6 +64,7 @@ public final class CharacterList<E extends CharacterNode> implements Iterable<E>
         this.capacity = ++capacity;
         this.characters = (E[]) new CharacterNode[capacity];
         this.size = 0;
+        IntStream.rangeClosed(1, capacity).forEach(slotQueue::add);
     }
 
     /**
@@ -73,9 +79,7 @@ public final class CharacterList<E extends CharacterNode> implements Iterable<E>
         Objects.requireNonNull(e);
 
         if (!e.isRegistered()) {
-            int slot = slotSearch();
-            if (slot < 0)
-                return false;
+            int slot = slotQueue.remove();
             e.setRegistered(true);
             e.setSlot(slot);
             characters[slot] = e;
@@ -97,11 +101,22 @@ public final class CharacterList<E extends CharacterNode> implements Iterable<E>
     public boolean remove(E e) {
         Objects.requireNonNull(e);
 
+        // A player cannot be removed from the character list unless it's from a
+        // logout request. On-demand removes for players completely mess up the
+        // login process, so we request a logout instead.
+        if (e.getType() == NodeType.PLAYER) {
+            Player player = (Player) e;
+            if (player.getSession().getState() != IOState.LOGGING_OUT) {
+                player.dispose();
+                return false;
+            }
+        }
+
         if (e.isRegistered() && characters[e.getSlot()] != null) {
             e.setRegistered(false);
             e.dispose();
             characters[e.getSlot()] = null;
-            removeSlots.add(e.getSlot());
+            slotQueue.add(e.getSlot());
             size--;
             return true;
         }
@@ -176,25 +191,6 @@ public final class CharacterList<E extends CharacterNode> implements Iterable<E>
      */
     public E get(int slot) {
         return characters[slot];
-    }
-
-    /**
-     * Searches through the backing array for the next available slot. This
-     * method will perform in constant time if a {@link CharacterNode} was
-     * removed from this collection after the last search.
-     *
-     * @return the found slot, or -1 if no slot is available.
-     */
-    private int slotSearch() {
-        if (removeSlots.size() == 0) {
-            for (int slot = 1; slot < capacity; slot++) {
-                if (characters[slot] == null) {
-                    return slot;
-                }
-            }
-            return -1;
-        }
-        return removeSlots.remove();
     }
 
     /**

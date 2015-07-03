@@ -13,7 +13,7 @@ import plugin.skills.fishing.Tool
 final class NpcSecondClick implements PluginListener<NpcSecondClickPlugin> {
 
     @Override
-    void run(Player player, NpcSecondClickPlugin context) {
+    void execute(Player player, NpcSecondClickPlugin context) {
         Position position = context.npc.position.copy()
         switch (context.npc.id) {
             case 309:

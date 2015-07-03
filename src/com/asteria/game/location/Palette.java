@@ -25,7 +25,7 @@ package com.asteria.game.location;
 
 /**
  * Manages a palette of map regions for use in the constructed map region
- * packet.
+ * message.
  *
  * @author Graham Edgecombe
  */

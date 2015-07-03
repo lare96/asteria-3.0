@@ -163,14 +163,14 @@ public final class ItemNodeManager extends Task {
         for (ItemNode item : ITEMS) {
             if (item.getState() == ItemState.HIDDEN || !item.isRegistered())
                 continue;
-            player.getEncoder().sendRemoveGroundItem(item);
+            player.getMessages().sendRemoveGroundItem(item);
             if (item.getPosition().withinDistance(player.getPosition(), 60)) {
                 if (item.getPlayer() == null && item.getState() == ItemState.SEEN_BY_EVERYONE) {
-                    player.getEncoder().sendGroundItem(item);
+                    player.getMessages().sendGroundItem(item);
                     continue;
                 }
                 if (item.getPlayer().equals(player) && item.getState() == ItemState.SEEN_BY_OWNER) {
-                    player.getEncoder().sendGroundItem(item);
+                    player.getMessages().sendGroundItem(item);
                     continue;
                 }
             }

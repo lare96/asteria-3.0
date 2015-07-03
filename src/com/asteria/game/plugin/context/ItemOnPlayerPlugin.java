@@ -5,7 +5,7 @@ import com.asteria.game.item.Item;
 import com.asteria.game.plugin.PluginContext;
 
 /**
- * The plugin context for the item on player packet.
+ * The plugin context for the item on player message.
  *
  * @author lare96 <http://github.com/lare96>
  */

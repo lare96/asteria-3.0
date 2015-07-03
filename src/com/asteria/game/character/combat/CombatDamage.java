@@ -12,7 +12,7 @@ import com.asteria.game.character.player.Player;
 import com.asteria.utility.Stopwatch;
 
 /**
- * A cache of players who have inflicted damage on a controller in a combat
+ * A cache of players who have inflicted damage on another player in a combat
  * session.
  *
  * @author lare96 <http://github.com/lare96>
@@ -22,11 +22,11 @@ public final class CombatDamage {
     /**
      * The map of players who have inflicted damage.
      */
-    private Map<Player, DamageCounter> attackers = new HashMap<>();
+    private final Map<Player, DamageCounter> attackers = new HashMap<>();
 
     /**
      * Registers damage in the backing collection for {@code character}. This
-     * method has no effect if the character isn't a {@link NodeType#PLAYER} or
+     * method has no effect if the character isn't a {@code PLAYER} or if
      * {@code amount} is below {@code 0}.
      *
      * @param character
@@ -37,13 +37,9 @@ public final class CombatDamage {
     public void add(CharacterNode character, int amount) {
         if (character.getType() == NodeType.PLAYER && amount > 0) {
             Player player = (Player) character;
-            DamageCounter counter = attackers.get(player);
-
-            if (counter == null) {
-                attackers.put(player, new DamageCounter(amount));
-            } else {
+            DamageCounter counter = attackers.putIfAbsent(player, new DamageCounter(amount));
+            if (counter != null)
                 counter.incrementAmount(amount);
-            }
         }
     }
 
@@ -61,12 +57,9 @@ public final class CombatDamage {
             DamageCounter counter = entry.getValue();
             Player player = entry.getKey();
 
-            if (counter.isTimeout()) {
+            if (player.isDead() || !player.isRegistered() || counter.isTimeout() || !player.getPosition().withinDistance(
+                player.getPosition(), 25))
                 continue;
-            }
-            if (player.isDead() || !player.getPosition().withinDistance(player.getPosition(), 25) || !player.isRegistered()) {
-                continue;
-            }
             if (counter.getAmount() > amount) {
                 amount = counter.getAmount();
                 killer = player;
@@ -98,7 +91,7 @@ public final class CombatDamage {
         /**
          * The stopwatch that will determine when a timeout occurs.
          */
-        private final Stopwatch stopwatch;
+        private final Stopwatch stopwatch = new Stopwatch().reset();
 
         /**
          * Creates a new {@link DamageCounter}.
@@ -108,7 +101,6 @@ public final class CombatDamage {
          */
         public DamageCounter(int amount) {
             this.amount = amount;
-            this.stopwatch = new Stopwatch().reset();
         }
 
         /**
@@ -141,7 +133,7 @@ public final class CombatDamage {
          *         otherwise.
          */
         public boolean isTimeout() {
-            return stopwatch.elapsed(Combat.DAMAGE_CACHE_TIMEOUT, TimeUnit.SECONDS);
+            return stopwatch.elapsed(CombatConstants.DAMAGE_CACHE_TIMEOUT, TimeUnit.SECONDS);
         }
     }
 }

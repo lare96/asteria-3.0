@@ -94,25 +94,25 @@ final class DefaultRangedCombatStrategy implements CombatStrategy {
                 .get(Equipment.WEAPON_SLOT) : player.equipment.get(Equipment.ARROWS_SLOT)
 
         if (!Item.valid(item)) {
-            player.encoder.sendMessage "You do not have enough ammo to use this ranged weapon."
+            player.messages.sendMessage "You do not have enough ammo to use this ranged weapon."
             player.combatBuilder.reset()
             return false
         }
         if (player.weapon == WeaponInterface.SHORTBOW || player.weapon == WeaponInterface.LONGBOW) {
             if (!Combat.isArrows(player)) {
-                player.encoder.sendMessage "You need to use arrows with your bow."
+                player.messages.sendMessage "You need to use arrows with your bow."
                 player.combatBuilder.reset()
                 return false
             }
         } else if (player.weapon == WeaponInterface.CROSSBOW) {
             if (player.equipment.get(Equipment.WEAPON_SLOT).getDefinition().name.startsWith("Karils") && !item
             .getDefinition().name.endsWith("rack")) {
-                player.encoder.sendMessage "You need to use bolt racks with this crossbow."
+                player.messages.sendMessage "You need to use bolt racks with this crossbow."
                 player.combatBuilder.reset()
                 return false
             } else if (!player.equipment.get(Equipment.WEAPON_SLOT).getDefinition().name.startsWith("Karils") && !Combat
             .isBolts(player)) {
-                player.encoder.sendMessage "You need to use bolts with your crossbow."
+                player.messages.sendMessage "You need to use bolts with your crossbow."
                 player.combatBuilder.reset()
                 return false
             }
@@ -128,7 +128,7 @@ final class DefaultRangedCombatStrategy implements CombatStrategy {
         player.equipment.get(slot).decrementAmount()
 
         if (player.equipment.get(slot).amount == 0) {
-            player.encoder.sendMessage "That was your last piece of ammo!"
+            player.messages.sendMessage "That was your last piece of ammo!"
             player.equipment.set(slot, null)
 
             if (slot == Equipment.WEAPON_SLOT) {

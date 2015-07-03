@@ -75,9 +75,9 @@ final class KingBlackDragonCombatStrategy implements CombatStrategy {
                                 Arrays.fill(hits, null)
                                 this.hits[0] = new CombatHit(new Hit(random.inclusive(35, 80)), true)
                                 this.accurate = true
-                                player.encoder.sendMessage "You do not have any protection against the dragonfire, the attack burns you!"
+                                player.messages.sendMessage "You do not have any protection against the dragonfire, the attack burns you!"
                             } else {
-                                player.encoder.sendMessage "You are protected against the dragonfire."
+                                player.messages.sendMessage "You are protected against the dragonfire."
                             }
                         }
                         return this
@@ -98,12 +98,12 @@ final class KingBlackDragonCombatStrategy implements CombatStrategy {
                         }
                         player.graphic new Graphic(446)
                         5.times {
-                            player.encoder.sendLocalGraphic(446, new Position(p.x + it, p.y), 0)
-                            player.encoder.sendLocalGraphic(446, new Position(p.x - it, p.y), 0)
+                            player.messages.sendLocalGraphic(446, new Position(p.x + it, p.y), 0)
+                            player.messages.sendLocalGraphic(446, new Position(p.x - it, p.y), 0)
                         }
                         5.times {
-                            player.encoder.sendLocalGraphic(446, new Position(p.x, p.y + it), 0)
-                            player.encoder.sendLocalGraphic(446, new Position(p.x, p.y - it), 0)
+                            player.messages.sendLocalGraphic(446, new Position(p.x, p.y + it), 0)
+                            player.messages.sendLocalGraphic(446, new Position(p.x, p.y - it), 0)
                         }
                         Combat.damagePlayersWithin(character, p, 5, 2, CombatType.RANGED, true)
                     }

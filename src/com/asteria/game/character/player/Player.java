@@ -1,6 +1,7 @@
 package com.asteria.game.character.player;
 
-import java.nio.ByteBuffer;
+import io.netty.buffer.ByteBuf;
+
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
@@ -11,6 +12,7 @@ import java.util.logging.Logger;
 import plugin.minigames.fightcaves.FightCavesHandler;
 import plugin.skills.cooking.CookingData;
 
+import com.asteria.game.GameConstants;
 import com.asteria.game.NodeType;
 import com.asteria.game.World;
 import com.asteria.game.character.CharacterNode;
@@ -50,12 +52,13 @@ import com.asteria.game.item.container.Inventory;
 import com.asteria.game.location.Location;
 import com.asteria.game.location.Position;
 import com.asteria.game.shop.Shop;
-import com.asteria.network.ConnectionHandler;
-import com.asteria.network.packet.PacketEncoder;
+import com.asteria.net.ConnectionHandler;
+import com.asteria.net.PlayerIO;
+import com.asteria.net.message.OutputMessages;
 import com.asteria.task.Task;
+import com.asteria.utility.BitMask;
 import com.asteria.utility.LoggerUtils;
 import com.asteria.utility.MutableNumber;
-import com.asteria.utility.Settings;
 import com.asteria.utility.Stopwatch;
 import com.asteria.utility.TextUtils;
 
@@ -151,13 +154,13 @@ public final class Player extends CharacterNode {
     /**
      * The array of booleans determining which prayers are active.
      */
-    private final boolean[] prayerActive = new boolean[18];
+    private final BitMask prayerActive = new BitMask();
 
     /**
      * The collection of stopwatches used for various timing operations.
      */
     private final Stopwatch eatingTimer = new Stopwatch().reset(), potionTimer = new Stopwatch().reset(), tolerance = new Stopwatch(),
-        lastEnergy = new Stopwatch().reset(), buryTimer = new Stopwatch();
+        lastEnergy = new Stopwatch().reset(), buryTimer = new Stopwatch(), logoutTimer = new Stopwatch();
 
     /**
      * The collection of counters used for various counting operations.
@@ -167,9 +170,9 @@ public final class Player extends CharacterNode {
         specialPercentage = new MutableNumber(100);
 
     /**
-     * The encoder that will encode and send packets.
+     * The encoder that will encode and send messages.
      */
-    private final PacketEncoder encoder;
+    private final OutputMessages messages;
 
     /**
      * The container of appearance values for this player.
@@ -370,7 +373,7 @@ public final class Player extends CharacterNode {
     /**
      * The cached player update block for updating.
      */
-    private ByteBuffer cachedUpdateBlock;
+    private ByteBuf cachedUpdateBlock;
 
     /**
      * The username hash for this player.
@@ -389,15 +392,15 @@ public final class Player extends CharacterNode {
      *            the I/O manager that manages I/O operations for this player.
      */
     public Player(PlayerIO session) {
-        super(Settings.STARTING_POSITION, NodeType.PLAYER);
+        super(GameConstants.STARTING_POSITION, NodeType.PLAYER);
         this.session = session;
-        this.encoder = new PacketEncoder(this);
+        this.messages = new OutputMessages(this);
         this.rights = ConnectionHandler.isLocal(session.getHost()) ? Rights.DEVELOPER : Rights.PLAYER;
     }
 
     @Override
     public void create() {
-        PacketEncoder encoder = getEncoder();
+        OutputMessages encoder = getMessages();
         encoder.sendMapRegion();
         encoder.sendDetails();
         super.getFlags().set(Flag.APPEARANCE);
@@ -414,15 +417,7 @@ public final class Player extends CharacterNode {
         encoder.sendSidebarInterface(12, 147);
         encoder.sendSidebarInterface(13, 962);
         encoder.sendSidebarInterface(0, 2423);
-        if (Settings.SOCKET_FLOOD) {
-            if (username.equals(Settings.SOCKET_FLOOD_USERNAME)) {
-                move(super.getPosition());
-            } else {
-                move(super.getPosition().random(200));
-            }
-        } else {
-            move(super.getPosition());
-        }
+        move(super.getPosition());
         Skills.refreshAll(this);
         equipment.refresh();
         inventory.refresh();
@@ -432,7 +427,7 @@ public final class Player extends CharacterNode {
         encoder.sendContextMenu(4, "Trade with");
         encoder.sendContextMenu(5, "Follow");
         if (newPlayer) {
-            inventory.addAll(Arrays.asList(Settings.STARTER_PACKAGE));
+            inventory.addAll(GameConstants.STARTER_PACKAGE);
             encoder.sendInterface(3559);
             newPlayer = false;
         }
@@ -440,7 +435,7 @@ public final class Player extends CharacterNode {
             if ($it.onLogin(this))
                 World.submit(new CombatEffectTask(this, $it));
         });
-        encoder.sendMessage(Settings.WELCOME_MESSAGE);
+        encoder.sendMessage(GameConstants.WELCOME_MESSAGE);
         MinigameHandler.execute(this, m -> m.onLogin(this));
         WeaponInterface.execute(this, equipment.get(Equipment.WEAPON_SLOT));
         WeaponAnimation.execute(this, equipment.get(Equipment.WEAPON_SLOT));
@@ -454,31 +449,39 @@ public final class Player extends CharacterNode {
         CombatPrayer.PRAYERS.values().forEach(c -> encoder.sendByteState(c.getConfig(), 0));
         logger.info(this + " has logged in.");
         session.setState(IOState.LOGGED_IN);
-        session.getTimeout().reset();
+    }
+
+    @Override
+    public int hashCode() {
+        return Long.hashCode(usernameHash);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (!(obj instanceof Player))
+            return false;
+        Player other = (Player) obj;
+        if (usernameHash != other.usernameHash)
+            return false;
+        return true;
     }
 
     @Override
     public void dispose() {
-        if (session.isCombatLogout()) {
-            session.disconnect(true);
-            return;
-        }
-        encoder.sendLogout();
+        messages.sendLogout();
     }
 
     @Override
     public void sequence() throws Exception {
-        if (session.getTimeout().elapsed(5000) && !session.isCombatLogout()) {
-            World.getPlayers().remove(this);
-            return;
-        }
         NpcAggression.sequence(this);
         this.restoreRunEnergy();
     }
 
     @Override
     public Hit decrementHealth(Hit hit) {
-        PacketEncoder encoder = getEncoder();
+        OutputMessages encoder = getMessages();
         if (hit.getDamage() > skills[Skills.HITPOINTS].getLevel()) {
             hit = new Hit(skills[Skills.HITPOINTS].getLevel(), hit.getType());
         }
@@ -568,7 +571,7 @@ public final class Player extends CharacterNode {
 
     @Override
     public boolean weaken(CombatWeaken effect) {
-        PacketEncoder encoder = getEncoder();
+        OutputMessages encoder = getMessages();
         int id = (effect == CombatWeaken.ATTACK_LOW || effect == CombatWeaken.ATTACK_HIGH ? Skills.ATTACK
             : effect == CombatWeaken.STRENGTH_LOW || effect == CombatWeaken.STRENGTH_HIGH ? Skills.STRENGTH : Skills.DEFENCE);
         if (skills[id].getLevel() < skills[id].getRealLevel())
@@ -587,7 +590,7 @@ public final class Player extends CharacterNode {
     public void teleport(TeleportSpell spell) {
         if (viewingOrb != null || disabled)
             return;
-        PacketEncoder encoder = getEncoder();
+        OutputMessages encoder = getMessages();
         if (teleportStage > 0)
             return;
         if (wildernessLevel >= 20) {
@@ -663,7 +666,7 @@ public final class Player extends CharacterNode {
      *            the position to move this player to.
      */
     public void move(Position position) {
-        PacketEncoder encoder = getEncoder();
+        OutputMessages encoder = getMessages();
         dialogueChain.interrupt();
         getMovementQueue().reset();
         encoder.sendCloseWindows();
@@ -677,7 +680,7 @@ public final class Player extends CharacterNode {
      * Saves the character file for this player.
      */
     public void save() {
-        if (session.getState() != IOState.LOGGED_IN)
+        if (session.getState() != IOState.LOGGED_IN && session.getState() != IOState.LOGGING_OUT)
             return;
         World.getService().submit(() -> new PlayerSerialization(this).serialize());
     }
@@ -713,7 +716,7 @@ public final class Player extends CharacterNode {
      * Sends wilderness and multi-combat interfaces as needed.
      */
     public void sendInterfaces() {
-        PacketEncoder encoder = getEncoder();
+        OutputMessages encoder = getMessages();
         if (Location.inWilderness(this)) {
             int calculateY = this.getPosition().getY() > 6400 ? super.getPosition().getY() - 6400 : super.getPosition().getY();
             wildernessLevel = (((calculateY - 3520) / 8) + 1);
@@ -745,7 +748,7 @@ public final class Player extends CharacterNode {
      * sidebar interface.
      */
     public void sendBonus() {
-        PacketEncoder encoder = getEncoder();
+        OutputMessages encoder = getMessages();
         Arrays.fill(bonus, 0);
         for (Item item : equipment) {
             if (!Item.valid(item))
@@ -764,7 +767,7 @@ public final class Player extends CharacterNode {
      * Restores run energy based on the last time it was restored.
      */
     public void restoreRunEnergy() {
-        PacketEncoder encoder = getEncoder();
+        OutputMessages encoder = getMessages();
         if (lastEnergy.elapsed(3500) && runEnergy.get() < 100) {
             runEnergy.incrementAndGet();
             lastEnergy.reset();
@@ -872,12 +875,12 @@ public final class Player extends CharacterNode {
     }
 
     /**
-     * Gets the encoder that will encode and send packets.
+     * Gets the encoder that will encode and send messages.
      *
-     * @return the packet encoder.
+     * @return the message encoder.
      */
-    public PacketEncoder getEncoder() {
-        return encoder;
+    public OutputMessages getMessages() {
+        return messages;
     }
 
     /**
@@ -903,7 +906,7 @@ public final class Player extends CharacterNode {
      *
      * @return the active prayers.
      */
-    public boolean[] getPrayerActive() {
+    public BitMask getPrayerActive() {
         return prayerActive;
     }
 
@@ -1703,7 +1706,7 @@ public final class Player extends CharacterNode {
      *
      * @return the cached update block.
      */
-    public ByteBuffer getCachedUpdateBlock() {
+    public ByteBuf getCachedUpdateBlock() {
         return cachedUpdateBlock;
     }
 
@@ -1713,7 +1716,7 @@ public final class Player extends CharacterNode {
      * @param cachedUpdateBlock
      *            the new value to set.
      */
-    public void setCachedUpdateBlock(ByteBuffer cachedUpdateBlock) {
+    public void setCachedUpdateBlock(ByteBuf cachedUpdateBlock) {
         this.cachedUpdateBlock = cachedUpdateBlock;
     }
 
@@ -1810,5 +1813,14 @@ public final class Player extends CharacterNode {
      */
     public void setDisabled(boolean disabled) {
         this.disabled = disabled;
+    }
+
+    /**
+     * Gets the stopwatch that will time logouts.
+     * 
+     * @return the logout stopwatch.
+     */
+    public Stopwatch getLogoutTimer() {
+        return logoutTimer;
     }
 }

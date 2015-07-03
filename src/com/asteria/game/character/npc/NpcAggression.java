@@ -1,9 +1,12 @@
 package com.asteria.game.character.npc;
 
+import static com.asteria.game.GameConstants.TARGET_DISTANCE;
+
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
+import com.asteria.game.GameConstants;
 import com.asteria.game.character.player.Player;
 import com.asteria.game.location.Location;
 import com.asteria.game.location.Position;
@@ -15,18 +18,6 @@ import com.asteria.game.location.Position;
  * @author lare96 <http://github.com/lare96>
  */
 public final class NpcAggression {
-
-    /**
-     * The absolute distance that players must be within to be targeted by
-     * aggressive {@link Npc}s.
-     */
-    private static final int TARGET_DISTANCE = 6;
-
-    /**
-     * The time that has to be spent in a region before {@link Npc}s stop acting
-     * aggressive towards a specific {@link Player}.
-     */
-    private static final int TOLERANCE_SECONDS = 600;
 
     /**
      * The hash collection the holds the npc identifiers of aggressive
@@ -67,7 +58,7 @@ public final class NpcAggression {
         Position position = npc.getOriginalPosition();
         boolean wilderness = Location.inWilderness(npc) && Location.inWilderness(player);
         boolean tolerance = wilderness || npc.getDefinition().getCombatLevel() > 126 ? false : player.getTolerance().elapsed(
-            TOLERANCE_SECONDS, TimeUnit.SECONDS);
+            GameConstants.TOLERANCE_SECONDS, TimeUnit.SECONDS);
         if (!AGGRESSIVE.contains(npc.getId()) && !wilderness || !npc.getDefinition().isAttackable())
             return false;
         if (!position.withinDistance(npc.getPosition(), TARGET_DISTANCE) || !position.withinDistance(player.getPosition(), TARGET_DISTANCE) && npc

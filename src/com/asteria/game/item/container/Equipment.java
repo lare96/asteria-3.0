@@ -141,8 +141,8 @@ public final class Equipment extends ItemContainer {
                 if (!equipItem.getDefinition().isStackable()) {
                     player.getInventory().set(inventorySlot, equipItem);
                 } else {
-                    player.getInventory().add(equipItem);
                     player.getInventory().set(inventorySlot, null);
+                    player.getInventory().add(equipItem, inventorySlot);
                 }
                 player.getInventory().refresh();
             } else {
@@ -156,8 +156,8 @@ public final class Equipment extends ItemContainer {
             player.setCastSpell(null);
             player.setAutocastSpell(null);
             player.setAutocast(false);
-            player.getEncoder().sendByteState(108, 0);
-            player.getEncoder().sendByteState(301, 0);
+            player.getMessages().sendByteState(108, 0);
+            player.getMessages().sendByteState(301, 0);
             player.setSpecialActivated(false);
         }
         refresh();
@@ -181,7 +181,7 @@ public final class Equipment extends ItemContainer {
         if (!MinigameHandler.execute(player, true, m -> m.canUnequip(player, item, item.getDefinition().getEquipmentSlot())))
             return false;
         if (!player.getInventory().spaceFor(item)) {
-            player.getEncoder().sendMessage("You do not have enough space in " + "your inventory!");
+            player.getMessages().sendMessage("You do not have enough space in " + "your inventory!");
             return false;
         }
         super.remove(item, equipmentSlot);
@@ -192,9 +192,9 @@ public final class Equipment extends ItemContainer {
             player.setCastSpell(null);
             player.setAutocastSpell(null);
             player.setAutocast(false);
-            player.getEncoder().sendByteState(108, 0);
+            player.getMessages().sendByteState(108, 0);
             player.setWeaponAnimation(null);
-            player.getEncoder().sendByteState(301, 0);
+            player.getMessages().sendByteState(301, 0);
             player.setSpecialActivated(false);
         }
         refresh();

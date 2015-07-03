@@ -30,14 +30,14 @@ public abstract class Spell {
         Optional<Item[]> equipment = equipmentRequired(player);
 
         if (player.getSkills()[Skills.MAGIC].getLevel() < level) {
-            player.getEncoder().sendMessage("You need a Magic level of " + level + " to cast this spell.");
+            player.getMessages().sendMessage("You need a Magic level of " + level + " to cast this spell.");
             player.getCombatBuilder().reset();
             return false;
         }
 
         if (equipment.isPresent()) {
             if (!player.getEquipment().containsAll(equipment.get())) {
-                player.getEncoder().sendMessage("You do not have the required equipment to cast this spell.");
+                player.getMessages().sendMessage("You do not have the required equipment to cast this spell.");
                 resetPlayerSpell(player);
                 player.getCombatBuilder().reset();
                 return false;
@@ -48,7 +48,7 @@ public abstract class Spell {
             Item[] items = MagicStaff.suppressRunes(player, inventory.get());
 
             if (!player.getInventory().containsAll(items)) {
-                player.getEncoder().sendMessage("You do not have the required items to cast this spell.");
+                player.getMessages().sendMessage("You do not have the required items to cast this spell.");
                 resetPlayerSpell(player);
                 player.getCombatBuilder().reset();
                 return false;
@@ -68,7 +68,7 @@ public abstract class Spell {
         if (player.getCombatBuilder().isAttacking() || player.getCombatBuilder().isBeingAttacked() && player.isAutocast()) {
             player.setAutocastSpell(null);
             player.setAutocast(false);
-            player.getEncoder().sendByteState(108, 0);
+            player.getMessages().sendByteState(108, 0);
             player.setCastSpell(null);
         }
     }

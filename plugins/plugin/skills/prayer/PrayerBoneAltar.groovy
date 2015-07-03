@@ -34,8 +34,8 @@ final class PrayerBoneAltar extends DestructionSkillAction {
     void onDestruct(Task t, boolean success) {
         if (success) {
             player.animation new Animation(894)
-            player.encoder.sendLocalGraphic(624, position.get(), 0)
-            player.encoder.sendMessage "You offer the ${bone} to the gods... they seem pleased."
+            player.messages.sendLocalGraphic(624, position.get(), 0)
+            player.messages.sendMessage "You offer the ${bone} to the gods... they seem pleased."
         }
     }
 

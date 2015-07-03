@@ -26,7 +26,7 @@ public final class CombatTeleblockEffect extends CombatEffect {
                 return false;
             }
             player.getTeleblockTimer().set(3000);
-            player.getEncoder().sendMessage("You have just been teleblocked!");
+            player.getMessages().sendMessage("You have just been teleblocked!");
             return true;
         }
         return false;
@@ -37,7 +37,7 @@ public final class CombatTeleblockEffect extends CombatEffect {
         if (c.getType() == NodeType.PLAYER) {
             Player player = (Player) c;
             if (player.getTeleblockTimer().get() <= 0) {
-                player.getEncoder().sendMessage("You feel the effects of the teleblock spell go away.");
+                player.getMessages().sendMessage("You feel the effects of the teleblock spell go away.");
                 return true;
             }
             return false;

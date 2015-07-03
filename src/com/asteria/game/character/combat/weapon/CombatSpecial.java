@@ -100,11 +100,11 @@ public enum CombatSpecial {
             player.graphic(new Graphic(246));
             player.animation(new Animation(1056));
             player.forceChat("Raarrrrrgggggghhhhhhh!");
-            player.getSkills()[Skills.STRENGTH].increaseLevel(newStrength);
-            player.getSkills()[Skills.ATTACK].decreaseLevel(newAttack);
-            player.getSkills()[Skills.DEFENCE].decreaseLevel(newDefence);
-            player.getSkills()[Skills.RANGED].decreaseLevel(newRanged);
-            player.getSkills()[Skills.MAGIC].decreaseLevel(newMagic);
+            player.getSkills()[Skills.STRENGTH].increaseLevelReal(newStrength);
+            player.getSkills()[Skills.ATTACK].decreaseLevelReal(newAttack);
+            player.getSkills()[Skills.DEFENCE].decreaseLevelReal(newDefence);
+            player.getSkills()[Skills.RANGED].decreaseLevelReal(newRanged);
+            player.getSkills()[Skills.MAGIC].decreaseLevelReal(newMagic);
             Skills.refresh(player, Skills.STRENGTH);
             Skills.refresh(player, Skills.ATTACK);
             Skills.refresh(player, Skills.DEFENCE);
@@ -285,7 +285,7 @@ public enum CombatSpecial {
     public static void drain(Player player, int amount) {
         player.getSpecialPercentage().decrementAndGet(amount, 0);
         CombatSpecial.updateSpecialAmount(player);
-        player.getEncoder().sendByteState(301, 0);
+        player.getMessages().sendByteState(301, 0);
         player.setSpecialActivated(false);
     }
 
@@ -319,7 +319,7 @@ public enum CombatSpecial {
         int specialAmount = player.getSpecialPercentage().get() / 10;
 
         for (int i = 0; i < 10; i++) {
-            player.getEncoder().sendUpdateSpecial(--specialBar, specialAmount >= specialCheck ? 500 : 0);
+            player.getMessages().sendUpdateSpecial(--specialBar, specialAmount >= specialCheck ? 500 : 0);
             specialCheck--;
         }
     }
@@ -339,12 +339,12 @@ public enum CombatSpecial {
         Optional<CombatSpecial> special = Arrays.stream(CombatSpecial.values()).filter(
             c -> Arrays.stream(c.getIds()).anyMatch(id -> player.getEquipment().getId(Equipment.WEAPON_SLOT) == id)).findFirst();
         if (special.isPresent()) {
-            player.getEncoder().sendInterfaceLayer(player.getWeapon().getSpecialBar(), false);
+            player.getMessages().sendInterfaceLayer(player.getWeapon().getSpecialBar(), false);
             player.setCombatSpecial(special.get());
             return;
         }
 
-        player.getEncoder().sendInterfaceLayer(player.getWeapon().getSpecialBar(), true);
+        player.getMessages().sendInterfaceLayer(player.getWeapon().getSpecialBar(), true);
         player.setCombatSpecial(null);
     }
 

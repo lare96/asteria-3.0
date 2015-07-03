@@ -3,7 +3,7 @@ package com.asteria.game.plugin.context;
 import com.asteria.game.plugin.PluginContext;
 
 /**
- * The plugin context for the player command packet.
+ * The plugin context for the player command message.
  *
  * @author lare96 <http://github.com/lare96>
  */

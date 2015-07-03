@@ -42,7 +42,7 @@ final class Cooking extends ProducingSkillAction {
     void onProduce(Task t, boolean success) {
         if (success) {
             player.animation(!cookStove ? new Animation(897) : new Animation(896))
-            player.encoder.sendMessage(
+            player.messages.sendMessage(
                     (burned ? "Oops! You accidently burn the " : "You cook the ").concat("${ItemDefinition.DEFINITIONS[data.rawId].name}."))
             counter--
             if (counter == 0)
@@ -62,7 +62,7 @@ final class Cooking extends ProducingSkillAction {
     boolean init() {
         if (!checkCooking())
             return false
-        player.encoder.sendCloseWindows()
+        player.messages.sendCloseWindows()
         return true
     }
 
@@ -117,11 +117,11 @@ final class Cooking extends ProducingSkillAction {
         if (counter == 0)
             return false
         if (!player.inventory.contains(data.rawId)) {
-            player.encoder.sendMessage "You don't have any ${data} to cook."
+            player.messages.sendMessage "You don't have any ${data} to cook."
             return false
         }
         if (!player.skills[COOKING].reqLevel(data.level)) {
-            player.encoder.sendMessage "You need a cooking level of ${data.level} to cook ${data}."
+            player.messages.sendMessage "You need a cooking level of ${data.level} to cook ${data}."
             return false
         }
         return true

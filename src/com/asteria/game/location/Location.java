@@ -2,6 +2,7 @@ package com.asteria.game.location;
 
 import java.util.Arrays;
 
+import com.asteria.game.GameConstants;
 import com.asteria.game.Node;
 
 /**
@@ -10,16 +11,6 @@ import com.asteria.game.Node;
  * @author lare96 <http://github.com/lare96>
  */
 public abstract class Location {
-
-    /**
-     * An array of locations representing the wilderness areas.
-     */
-    public static final Location[] WILDERNESS = { new SquareLocation(2941, 3518, 3392, 3966, 0) };
-
-    /**
-     * An array of locations representing multi-combat areas.
-     */
-    public static final Location[] MULTIPLE_COMBAT = {};
 
     /**
      * Determines if the specified position is in this location.
@@ -81,7 +72,7 @@ public abstract class Location {
      *         {@code false} otherwise.
      */
     public static boolean inMultiCombat(Node node) {
-        return Location.inAnyLocation(node.getPosition(), Location.MULTIPLE_COMBAT);
+        return GameConstants.MULTIPLE_COMBAT.stream().anyMatch($it -> $it.inLocation(node.getPosition()));
     }
 
     /**
@@ -93,6 +84,6 @@ public abstract class Location {
      *         {@code false} otherwise.
      */
     public static boolean inWilderness(Node node) {
-        return Location.inAnyLocation(node.getPosition(), Location.WILDERNESS);
+        return GameConstants.WILDERNESS.stream().anyMatch($it -> $it.inLocation(node.getPosition()));
     }
 }

@@ -19,13 +19,13 @@ import com.asteria.game.object.ObjectNodeManager
 import com.asteria.game.plugin.PluginListener
 import com.asteria.game.plugin.PluginSignature
 import com.asteria.game.plugin.context.CommandPlugin
-import com.asteria.network.ConnectionHandler
+import com.asteria.net.ConnectionHandler
 
 @PluginSignature(CommandPlugin.class)
 final class Commands implements PluginListener<CommandPlugin> {
 
     @Override
-    void run(Player player, CommandPlugin context) {
+    void execute(Player player, CommandPlugin context) {
         String[] cmd = context.text
 
         // All commands are currently for 'developers' only, which is the
@@ -33,9 +33,6 @@ final class Commands implements PluginListener<CommandPlugin> {
         // class.
         if (player.rights.greater(Rights.ADMINISTRATOR)) {
             switch (cmd[0]) {
-                case "disconnect":
-                    player.encoder.sendLogout()
-                    break
                 case "pnpc":
                     int id = Integer.parseInt cmd[1]
                     player.playerNpc = id
@@ -54,7 +51,7 @@ final class Commands implements PluginListener<CommandPlugin> {
                             new PlayerSerialization(it).serialize()
                         })
                     }
-                    player.encoder.sendMessage "Character files have been saved for everyone online!"
+                    player.messages.sendMessage "Character files have been saved for everyone online!"
                     break
                 case "setlevel":
                     String skill = cmd[1]
@@ -71,20 +68,20 @@ final class Commands implements PluginListener<CommandPlugin> {
                     if (p == null)
                         return
                     player.move p.position
-                    player.encoder.sendMessage "You teleport to ${p.getFormatUsername()}'s position."
+                    player.messages.sendMessage "You teleport to ${p.getFormatUsername()}'s position."
                     break
                 case "teletome":
                     Player p = World.getPlayer(cmd[1].replaceAll("_", " ")).orElse(null)
                     if (p == null)
                         return
                     p.move player.position
-                    p.encoder.sendMessage "You have been teleported to ${player.getFormatUsername()}'s position."
+                    p.messages.sendMessage "You have been teleported to ${player.getFormatUsername()}'s position."
                     break
                 case "ipban":
                     Player ipban = World.getPlayer(cmd[1].replaceAll("_", " ")).orElse(null)
 
                     if (ipban != null && ipban.rights.less(Rights.ADMINISTRATOR) && ipban != player) {
-                        player.encoder.sendMessage "Successfully IP banned ${ipban.getFormatUsername()}"
+                        player.messages.sendMessage "Successfully IP banned ${ipban.getFormatUsername()}"
                         ConnectionHandler.addIPBan ipban.session.host
                         World.players.remove ipban
                     }
@@ -93,7 +90,7 @@ final class Commands implements PluginListener<CommandPlugin> {
                     Player ban = World.getPlayer(cmd[1].replaceAll("_", " ")).orElse(null)
 
                     if (ban != null && ban.rights.less(Rights.MODERATOR) && ban != player) {
-                        player.encoder.sendMessage "Successfully banned ${ban.getFormatUsername()}"
+                        player.messages.sendMessage "Successfully banned ${ban.getFormatUsername()}"
                         ban.banned = true
                         World.players.remove ban
                     }
@@ -122,12 +119,12 @@ final class Commands implements PluginListener<CommandPlugin> {
                     break
                 case "music":
                     int id = Integer.parseInt cmd[1]
-                    player.encoder.sendMusic id
+                    player.messages.sendMusic id
                     break
                 case "item":
                     String item = cmd[1].replaceAll("_", " ")
                     int amount = Integer.parseInt cmd[2]
-                    player.encoder.sendMessage "Searching..."
+                    player.messages.sendMessage "Searching..."
                     int occurances = 0
                     int bankCount = 0
                     boolean addedToBank = false
@@ -147,23 +144,23 @@ final class Commands implements PluginListener<CommandPlugin> {
                     }
 
                     if (occurances == 0) {
-                        player.encoder.sendMessage "Item [${item}] not found!"
+                        player.messages.sendMessage "Item [${item}] not found!"
                     } else {
-                        player.encoder.sendMessage "Item [${item}] found on ${occurances} occurances."
+                        player.messages.sendMessage "Item [${item}] found on ${occurances} occurances."
                     }
 
                     if (addedToBank) {
-                        player.encoder.sendMessage bankCount + " items were banked due to lack of inventory space!"
+                        player.messages.sendMessage bankCount + " items were banked due to lack of inventory space!"
                     }
                     break
                 case "interface":
-                    player.encoder.sendInterface Integer.parseInt(cmd[1])
+                    player.messages.sendInterface Integer.parseInt(cmd[1])
                     break
                 case "sound":
-                    player.encoder.sendSound(Integer.parseInt(cmd[1]), 0, Integer.parseInt(cmd[2]))
+                    player.messages.sendSound(Integer.parseInt(cmd[1]), 0, Integer.parseInt(cmd[2]))
                     break
                 case "mypos":
-                    player.encoder.sendMessage "You are at: ${player.position}"
+                    player.messages.sendMessage "You are at: ${player.position}"
                     break
                 case "pickup":
                     player.inventory.add new Item(Integer.parseInt(cmd[1]), Integer.parseInt(cmd[2]))
@@ -184,7 +181,7 @@ final class Commands implements PluginListener<CommandPlugin> {
                     break
                 case "players":
                     int players = World.players.size()
-                    player.encoder.sendMessage
+                    player.messages.sendMessage
                     players == 1 ? "There is currently 1 player online!" : "There are currently ${players} players online!"
                     break
                 case "gfx":
@@ -194,7 +191,7 @@ final class Commands implements PluginListener<CommandPlugin> {
                     ObjectNodeManager.register new ObjectNode(Integer.parseInt(cmd[1]), player.position, ObjectDirection.SOUTH)
                     break
                 default:
-                    player.encoder.sendMessage "Command [::" + cmd[0] + "] does not exist!"
+                    player.messages.sendMessage "Command [::" + cmd[0] + "] does not exist!"
                     break
             }
         }

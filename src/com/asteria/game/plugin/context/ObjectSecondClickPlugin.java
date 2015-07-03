@@ -4,7 +4,7 @@ import com.asteria.game.location.Position;
 import com.asteria.game.plugin.PluginContext;
 
 /**
- * The plugin context for the second object click packet.
+ * The plugin context for the second object click message.
  *
  * @author lare96 <http://github.com/lare96>
  */

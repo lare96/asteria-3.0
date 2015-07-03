@@ -72,7 +72,7 @@ public final class DialogueChainBuilder {
     public void advance() {
         DialogueChain entry = chain.poll();
         if (entry == null) {
-            player.getEncoder().sendCloseWindows();
+            player.getMessages().sendCloseWindows();
         } else {
             entry.accept(this);
         }

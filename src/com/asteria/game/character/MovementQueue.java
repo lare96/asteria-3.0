@@ -127,10 +127,10 @@ public final class MovementQueue {
                 Player player = (Player) character;
                 if (player.getRunEnergy().getAndDecrement() > 0) {
                     player.sendInterfaces();
-                    player.getEncoder().sendString(player.getRunEnergy() + "%", 149);
+                    player.getMessages().sendString(player.getRunEnergy() + "%", 149);
                 } else {
                     running = false;
-                    player.getEncoder().sendByteState(173, 0);
+                    player.getMessages().sendByteState(173, 0);
                 }
             }
 
@@ -145,7 +145,7 @@ public final class MovementQueue {
             int deltaY = character.getPosition().getY() - character.getCurrentRegion().getRegionY() * 8;
 
             if (deltaX < 16 || deltaX >= 88 || deltaY < 16 || deltaY > 88) {
-                ((Player) character).getEncoder().sendMapRegion();
+                ((Player) character).getMessages().sendMapRegion();
             }
         }
     }

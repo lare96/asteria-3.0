@@ -16,7 +16,7 @@ import com.asteria.game.plugin.context.ObjectFirstClickPlugin
 final class ObjectFirstClick implements PluginListener<ObjectFirstClickPlugin> {
 
     @Override
-    void run(Player player, ObjectFirstClickPlugin context) {
+    void execute(Player player, ObjectFirstClickPlugin context) {
         switch (context.id) {
             case 9391:
                 player.viewingOrb = new ViewingOrb(player, new Position(2398, 5150),
@@ -29,25 +29,25 @@ final class ObjectFirstClick implements PluginListener<ObjectFirstClickPlugin> {
                     player.move new Position(2399, 5169)
                     player.combatBuilder.reset()
                     FightCavesHandler.awaiting.add player
-                    player.encoder.sendMessage "You forfeit the fight pits minigame!"
-                    player.encoder.sendWalkable 2804
+                    player.messages.sendMessage "You forfeit the fight pits minigame!"
+                    player.messages.sendWalkable 2804
                     FightCavesHandler.display player
-                    player.encoder.sendContextMenu(1, "null")
+                    player.messages.sendContextMenu(1, "null")
                     FightCavesHandler.end false
                 }
                 break
             case 9369:
                 if (FightCavesHandler.awaiting.contains(player)) {
                     FightCavesHandler.awaiting.remove player
-                    player.encoder.sendMessage "You exit the fight pits minigame waiting room!"
+                    player.messages.sendMessage "You exit the fight pits minigame waiting room!"
                     player.move new Position(2399, 5177)
-                    player.encoder.sendWalkable(-1)
+                    player.messages.sendWalkable(-1)
                 } else if (!FightCavesHandler.awaiting.contains(player)) {
                     int minutes = FightCavesHandler.GAME_CYCLE_MINUTES - FightCavesHandler.gameCounter
                     FightCavesHandler.awaiting.add player
-                    player.encoder.sendMessage "You enter the fight pits minigame waiting room!"
+                    player.messages.sendMessage "You enter the fight pits minigame waiting room!"
                     player.move new Position(2399, 5175)
-                    player.encoder.sendWalkable 2804
+                    player.messages.sendWalkable 2804
                     FightCavesHandler.display player
                     FightCavesHandler.awaiting.each { FightCavesHandler.display it }
                 }
@@ -61,10 +61,10 @@ final class ObjectFirstClick implements PluginListener<ObjectFirstClickPlugin> {
                 if (player.skills[Skills.PRAYER].level < level) {
                     player.animation new Animation(645)
                     player.skills[Skills.PRAYER].setLevel(level, true)
-                    player.encoder.sendMessage "You recharge your prayer points."
+                    player.messages.sendMessage "You recharge your prayer points."
                     Skills.refresh(player, Skills.PRAYER)
                 } else {
-                    player.encoder.sendMessage "You already have full prayer points."
+                    player.messages.sendMessage "You already have full prayer points."
                 }
                 break
             case 6552:

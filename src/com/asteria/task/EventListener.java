@@ -39,8 +39,8 @@ public abstract class EventListener extends Task {
     }
 
     /**
-     * The listener will execute {@link EventListener#run()} when invocation of
-     * this method returns {@code false}.
+     * The listener will execute {@code run()} when invocation of this method
+     * returns {@code false}.
      *
      * @return {@code true} if the code can be executed, {@code false} if the
      *         listener should keep listening.
@@ -48,8 +48,8 @@ public abstract class EventListener extends Task {
     public abstract boolean canExecute();
 
     /**
-     * The code that will be executed when {@link EventListener#canExecute()}
-     * returns {@code false}.
+     * The code that will be executed when {@code canExecute()} returns
+     * {@code true}.
      */
     public abstract void run();
 

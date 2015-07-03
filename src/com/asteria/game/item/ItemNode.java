@@ -92,7 +92,7 @@ public class ItemNode extends Node {
 
     @Override
     public void create() {
-        player.getEncoder().sendGroundItem(this);
+        player.getMessages().sendGroundItem(this);
     }
 
     @Override
@@ -101,12 +101,12 @@ public class ItemNode extends Node {
         case SEEN_BY_EVERYONE:
             World.getPlayers().forEach(p -> {
                 if (super.getPosition().withinDistance(p.getPosition(), 60)) {
-                    p.getEncoder().sendRemoveGroundItem(this);
+                    p.getMessages().sendRemoveGroundItem(this);
                 }
             });
             break;
         case SEEN_BY_OWNER:
-            World.getPlayer(player.getUsernameHash()).ifPresent(p -> p.getEncoder().sendRemoveGroundItem(this));
+            World.getPlayer(player.getUsernameHash()).ifPresent(p -> p.getMessages().sendRemoveGroundItem(this));
             break;
         default:
             throw new IllegalStateException("Invalid item node state!");
@@ -124,7 +124,7 @@ public class ItemNode extends Node {
         case SEEN_BY_OWNER:
             World.getPlayers().forEach(p -> {
                 if (super.getPosition().withinDistance(p.getPosition(), 60) && !p.equals(player)) {
-                    p.getEncoder().sendGroundItem(new ItemNode(item, super.getPosition(), null));
+                    p.getMessages().sendGroundItem(new ItemNode(item, super.getPosition(), null));
                 }
             });
             player = null;

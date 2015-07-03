@@ -9,6 +9,7 @@ import java.util.Optional;
 
 import plugin.minigames.fightcaves.FightCavesHandler;
 
+import com.asteria.game.GameConstants;
 import com.asteria.game.character.Animation;
 import com.asteria.game.character.AnimationPriority;
 import com.asteria.game.character.CharacterDeath;
@@ -25,7 +26,6 @@ import com.asteria.game.item.ItemNodeStatic;
 import com.asteria.game.item.container.Equipment;
 import com.asteria.game.location.Position;
 import com.asteria.utility.RandomGen;
-import com.asteria.utility.Settings;
 
 /**
  * The {@link CharacterDeath} implementation that is dedicated to managing the
@@ -61,8 +61,8 @@ public final class PlayerDeath extends CharacterDeath<Player> {
     public void death(Player character) {
         Optional<Player> killer = character.getCombatBuilder().getDamageCache().calculateKiller();
         Optional<Minigame> optional = MinigameHandler.search(character);
-        killer.ifPresent(k -> k.getEncoder().sendMessage(
-            random.random(Settings.DEATH_MESSAGES).replaceAll("-victim-", character.getFormatUsername()).replaceAll("-killer-",
+        killer.ifPresent(k -> k.getMessages().sendMessage(
+            random.random(GameConstants.DEATH_MESSAGES).replaceAll("-victim-", character.getFormatUsername()).replaceAll("-killer-",
                 k.getFormatUsername())));
         if (optional.isPresent()) {
             optional.get().onDeath(character);
@@ -83,22 +83,22 @@ public final class PlayerDeath extends CharacterDeath<Player> {
 
     @Override
     public void postDeath(Player character) {
-        character.getEncoder().sendCloseWindows();
+        character.getMessages().sendCloseWindows();
         character.getCombatBuilder().reset();
         character.getCombatBuilder().getDamageCache().clear();
         character.getTolerance().reset();
         character.getSpecialPercentage().set(100);
-        character.getEncoder().sendByteState(301, 0);
+        character.getMessages().sendByteState(301, 0);
         character.setSpecialActivated(false);
         character.getSkullTimer().set(0);
         character.setSkullIcon(FightCavesHandler.isChampion(character) ? Player.RED_SKULL : -1);
         character.getTeleblockTimer().set(0);
         character.animation(new Animation(65535));
         WeaponInterface.execute(character, character.getEquipment().get(Equipment.WEAPON_SLOT));
-        character.getEncoder().sendMessage(
+        character.getMessages().sendMessage(
             character.getRights().less(Rights.ADMINISTRATOR) ? "Oh dear, you're dead!"
                 : "You are unaffected by death because of your rank.");
-        character.getEncoder().sendWalkable(65535);
+        character.getMessages().sendWalkable(65535);
         CombatPrayer.deactivateAll(character);
         Skills.restoreAll(character);
         character.getFlags().set(Flag.APPEARANCE);
@@ -115,7 +115,7 @@ public final class PlayerDeath extends CharacterDeath<Player> {
      */
     private void calculateDropItems(Player character, Optional<Player> killer) {
         List<Item> keep = new LinkedList<>();
-        Arrays.stream(Settings.ITEM_UNTRADEABLE).filter(
+        Arrays.stream(GameConstants.ITEM_UNTRADEABLE).filter(
             id -> character.getEquipment().unequipItem(new Item(id), false) || character.getInventory().remove(new Item(id))).forEach(
             id -> keep.add(new Item(id)));
         List<Item> items = new LinkedList<>();

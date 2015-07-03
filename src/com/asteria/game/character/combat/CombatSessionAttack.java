@@ -153,11 +153,11 @@ public final class CombatSessionAttack extends Task {
 
             if (CombatPrayer.isActivated(victim, CombatPrayer.REDEMPTION) && victim.getSkills()[Skills.HITPOINTS].getLevel() <= (victim
                 .getSkills()[Skills.HITPOINTS].getRealLevel() / 10)) {
-                int heal = (int) (victim.getSkills()[Skills.HITPOINTS].getRealLevel() * Combat.REDEMPTION_PRAYER_HEAL);
+                int heal = (int) (victim.getSkills()[Skills.HITPOINTS].getRealLevel() * CombatConstants.REDEMPTION_PRAYER_HEAL);
                 victim.getSkills()[Skills.HITPOINTS].increaseLevel(random.inclusive(1, heal));
                 victim.graphic(new Graphic(436));
                 victim.getSkills()[Skills.PRAYER].setLevel(0, true);
-                victim.getEncoder().sendMessage("You've run out of prayer " + "points!");
+                victim.getMessages().sendMessage("You've run out of prayer " + "points!");
                 CombatPrayer.deactivateAll(victim);
                 Skills.refresh(victim, Skills.PRAYER);
                 Skills.refresh(victim, Skills.HITPOINTS);
@@ -168,8 +168,8 @@ public final class CombatSessionAttack extends Task {
                     victim.graphic(new Graphic(437));
 
                     if (Location.inWilderness(victim) || MinigameHandler.contains(victim) && !Location.inMultiCombat(victim)) {
-                        if (builder.getCharacter().getPosition().withinDistance(victim.getPosition(), Combat.RETRIBUTION_RADIUS)) {
-                            builder.getCharacter().damage(new Hit(random.inclusive(Combat.MAXIMUM_RETRIBUTION_DAMAGE)));
+                        if (builder.getCharacter().getPosition().withinDistance(victim.getPosition(), CombatConstants.RETRIBUTION_RADIUS)) {
+                            builder.getCharacter().damage(new Hit(random.inclusive(CombatConstants.MAXIMUM_RETRIBUTION_DAMAGE)));
                         }
                     } else if (Location.inWilderness(victim) || MinigameHandler.contains(victim) && Location.inMultiCombat(victim)) {
                         for (Player player : victim.getLocalPlayers()) {
@@ -178,8 +178,8 @@ public final class CombatSessionAttack extends Task {
                             }
 
                             if (!player.equals(victim) && player.getPosition().withinDistance(victim.getPosition(),
-                                Combat.RETRIBUTION_RADIUS)) {
-                                player.damage(new Hit(random.inclusive(Combat.MAXIMUM_RETRIBUTION_DAMAGE)));
+                                CombatConstants.RETRIBUTION_RADIUS)) {
+                                player.damage(new Hit(random.inclusive(CombatConstants.MAXIMUM_RETRIBUTION_DAMAGE)));
                             }
                         }
                     }

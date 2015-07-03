@@ -6,9 +6,9 @@ import com.asteria.game.World;
 import com.asteria.game.character.Flag;
 import com.asteria.game.character.player.Player;
 import com.asteria.game.location.Position;
-import com.asteria.network.ByteOrder;
-import com.asteria.network.DataBuffer;
-import com.asteria.network.ValueType;
+import com.asteria.net.ByteOrder;
+import com.asteria.net.ValueType;
+import com.asteria.net.message.MessageBuilder;
 import com.asteria.utility.BitMask;
 
 /**
@@ -38,9 +38,9 @@ public final class NpcUpdating {
      *             if any errors occur while updating NPCs for the player.
      */
     public static void update(Player player) throws Exception {
-        DataBuffer out = DataBuffer.create(2048);
-        DataBuffer block = DataBuffer.create(1024);
-        out.newVarShortPacket(65, player.getSession().getEncryptor());
+        MessageBuilder out = MessageBuilder.create(2048);
+        MessageBuilder block = MessageBuilder.create(1024);
+        out.newVarShortMessage(65);
         out.startBitAccess();
         out.putBits(8, player.getLocalNpcs().size());
         for (Iterator<Npc> i = player.getLocalNpcs().iterator(); i.hasNext();) {
@@ -73,15 +73,15 @@ public final class NpcUpdating {
                 }
             }
         }
-        if (block.buffer().position() > 0) {
+        if (block.buffer().writerIndex() > 0) {
             out.putBits(14, 16383);
             out.endBitAccess();
             out.putBytes(block.buffer());
         } else {
             out.endBitAccess();
         }
-        out.endVarShortPacket();
-        player.getSession().send(out);
+        out.endVarShortMessage();
+        player.getSession().queue(out);
     }
 
     /**
@@ -94,7 +94,7 @@ public final class NpcUpdating {
      * @param npc
      *            the NPC who will be added to the player's list.
      */
-    private static void addNpc(DataBuffer out, Player player, Npc npc) {
+    private static void addNpc(MessageBuilder out, Player player, Npc npc) {
         out.putBits(14, npc.getSlot());
         Position delta = Position.delta(player.getPosition(), npc.getPosition());
         out.putBits(5, delta.getY());
@@ -112,7 +112,7 @@ public final class NpcUpdating {
      * @param npc
      *            the NPC's movement that will be updated.
      */
-    private static void updateNpcMovement(DataBuffer out, Npc npc) {
+    private static void updateNpcMovement(MessageBuilder out, Npc npc) {
         if (npc.getPrimaryDirection() == -1) {
             if (npc.getFlags().needsUpdate()) {
                 out.putBit(true);
@@ -142,7 +142,7 @@ public final class NpcUpdating {
      * @throws Exception
      *             if any errors occur while updating the state.
      */
-    private static void updateState(DataBuffer block, Npc npc) throws Exception {
+    private static void updateState(MessageBuilder block, Npc npc) throws Exception {
         BitMask mask = new BitMask();
         if (npc.getFlags().get(Flag.ANIMATION)) {
             mask.set(0x10);
@@ -167,7 +167,7 @@ public final class NpcUpdating {
         }
         if (mask.get() >= 0x100) {
             mask.set(0x40);
-            block.putShort(mask.get(), com.asteria.network.ByteOrder.LITTLE);
+            block.putShort(mask.get(), com.asteria.net.ByteOrder.LITTLE);
         } else {
             block.put(mask.get());
         }
@@ -202,7 +202,7 @@ public final class NpcUpdating {
      * @param out
      *            the buffer to append it to.
      */
-    private static void appendGraphic(DataBuffer out, Npc npc) {
+    private static void appendGraphic(MessageBuilder out, Npc npc) {
         out.putShort(npc.getGraphic().getId());
         out.putInt(npc.getGraphic().getHeight());
     }
@@ -215,7 +215,7 @@ public final class NpcUpdating {
      * @param out
      *            the buffer to append it to.
      */
-    private static void appendSecondaryHit(DataBuffer out, Npc npc) throws Exception {
+    private static void appendSecondaryHit(MessageBuilder out, Npc npc) throws Exception {
         if (!npc.isDead()) {
             if (npc.getCurrentHealth() <= 0) {
                 npc.setCurrentHealth(0);
@@ -236,7 +236,7 @@ public final class NpcUpdating {
      * @param out
      *            the buffer to append it to.
      */
-    private static void appendFaceCharacter(DataBuffer out, Npc npc) {
+    private static void appendFaceCharacter(MessageBuilder out, Npc npc) {
         out.putShort(npc.getFaceIndex());
     }
 
@@ -248,7 +248,7 @@ public final class NpcUpdating {
      * @param out
      *            the buffer to append it to.
      */
-    private static void appendForcedChat(DataBuffer out, Npc npc) {
+    private static void appendForcedChat(MessageBuilder out, Npc npc) {
         out.putString(npc.getForcedText());
     }
 
@@ -260,7 +260,7 @@ public final class NpcUpdating {
      * @param out
      *            the buffer to append it to.
      */
-    private static void appendPrimaryHit(DataBuffer out, Npc npc) {
+    private static void appendPrimaryHit(MessageBuilder out, Npc npc) {
         if (!npc.isDead()) {
             if (npc.getCurrentHealth() <= 0) {
                 npc.setCurrentHealth(0);
@@ -282,7 +282,7 @@ public final class NpcUpdating {
      * @param out
      *            the buffer to append it to.
      */
-    private static void appendFaceCoordinates(DataBuffer out, Npc npc) {
+    private static void appendFaceCoordinates(MessageBuilder out, Npc npc) {
         out.putShort(npc.getFacePosition().getX(), ByteOrder.LITTLE);
         out.putShort(npc.getFacePosition().getY(), ByteOrder.LITTLE);
     }
@@ -295,7 +295,7 @@ public final class NpcUpdating {
      * @param out
      *            the buffer to append it to.
      */
-    private static void appendAnimation(DataBuffer out, Npc npc) {
+    private static void appendAnimation(MessageBuilder out, Npc npc) {
         out.putShort(npc.getAnimation().getId(), ByteOrder.LITTLE);
         out.put(npc.getAnimation().getDelay());
     }

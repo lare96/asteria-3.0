@@ -3,7 +3,7 @@ package com.asteria.game.plugin.context;
 import com.asteria.game.plugin.PluginContext;
 
 /**
- * The plugin context for the clicking buttons packet.
+ * The plugin context for the clicking buttons message.
  *
  * @author lare96 <http://github.com/lare96>
  */

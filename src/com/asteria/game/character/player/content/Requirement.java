@@ -74,7 +74,7 @@ public final class Requirement {
         for (Requirement r : req) {
             if (player.getSkills()[r.skill.getId()].getRealLevel() < r.level) {
                 String append = TextUtils.appendIndefiniteArticle(SkillData.values()[r.skill.getId()].toString());
-                player.getEncoder().sendMessage("You need " + append + " " + "level of " + r.level + " to equip this item.");
+                player.getMessages().sendMessage("You need " + append + " " + "level of " + r.level + " to equip this item.");
                 return false;
             }
         }

@@ -1,27 +1,20 @@
 package com.asteria.game;
 
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.ScheduledThreadPoolExecutor;
-import java.util.concurrent.ThreadPoolExecutor.CallerRunsPolicy;
-import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.asteria.network.ServerReactor;
+import com.asteria.service.Service;
+import com.asteria.service.ServiceQueue;
 import com.asteria.utility.LoggerUtils;
-import com.google.common.base.Preconditions;
-import com.google.common.util.concurrent.ThreadFactoryBuilder;
 
 /**
- * The main game sequencer that executes game logic every {@code CYCLE_RATE}ms.
- * This also gives access to a single threaded {@link ScheduledExecutorService}
- * which allows for the execution of low priority asynchronous services.
- * 
+ * The {@link Service} implementation that synchronizes game logic periodically
+ * at strict intervals. This service is responsible for virtually running the
+ * entire game.
+ *
  * @author lare96 <http://github.com/lare96>
  */
-public final class GameService implements Runnable {
+public final class GameService extends Service {
 
     /**
      * The logger that will print important information.
@@ -29,23 +22,21 @@ public final class GameService implements Runnable {
     private final Logger logger = LoggerUtils.getLogger(GameService.class);
 
     /**
-     * The executor that will execute various low priority services. This
-     * executor implementation will allocate a maximum of {@code 1} thread that
-     * will timeout after {@code 45}s of inactivity.
+     * The service queue that will be used to run all asynchronous tasks.
      */
-    private final ScheduledExecutorService logicService = GameService.createLogicService();
+    private final ServiceQueue serviceQueue = new ServiceQueue(GameConstants.THREAD_TIMEOUT);
 
     /**
-     * The sequence based reactor that will handle the various network events
-     * assigned to clients as they are received.
+     * Creates a new {@link GameService} with a execution rate of
+     * {@code CYCLE_RATE}.
      */
-    private ServerReactor reactor;
+    public GameService() {
+        super(GameConstants.CYCLE_RATE);
+    }
 
     @Override
-    public void run() {
+    public void execute(ServiceQueue context) {
         try {
-            World.getTaskQueue().sequence();
-            reactor.sequence();
             World.sequence();
         } catch (Throwable t) {
             logger.log(Level.SEVERE, "An error has occured during the main game sequence!", t);
@@ -54,80 +45,33 @@ public final class GameService implements Runnable {
     }
 
     /**
-     * Submits {@code t} to the underlying logic service to be executed
+     * Submits {@code service} to the backing service queue, to be executed
      * asynchronously. Please note that the task may not be executed for some
      * time after this method returns, depending on how many tasks are currently
-     * in the queue of the logic service.
-     * 
-     * @param t
-     *            the task to submit to the executor.
-     */
-    public void submit(Runnable t) {
-        logicService.execute(t);
-    }
-
-    /**
-     * Submits {@code t} to the underlying logic service to be repeatedly
-     * executed asynchronously with an initial delay of {@code initialDelay} and
-     * subsequent delays of {@code delay} in the time unit {@code unit}. Please
-     * note that the task may not be executed exactly on the requested
-     * intervals, depending on how many tasks are currently in the queue of the
-     * logic service.
-     * 
-     * @param t
-     *            the task to submit to the executor.
-     * @return the result of the execution of this task, primarily used to
-     *         cancel execution.
-     */
-    public ScheduledFuture<?> submit(Runnable t, long initialDelay, long delay, TimeUnit unit) {
-        return logicService.scheduleAtFixedRate(t, initialDelay, delay, unit);
-    }
-
-    /**
-     * Submits {@code t} to the underlying logic service to be repeatedly
-     * executed asynchronously with initial and subsequent delays of
-     * {@code delay} in the time unit {@code unit}. Please note that the task
-     * may not be executed for some time after this method returns, depending on
-     * how many tasks are currently in the queue of the logic service.
-     * 
-     * @param t
-     *            the task to submit to the executor.
-     * @return the result of the execution of this task, primarily used to
-     *         cancel execution.
-     */
-    public ScheduledFuture<?> submit(Runnable t, long delay, TimeUnit unit) {
-        return submit(t, delay, delay, unit);
-    }
-
-    /**
-     * Sets the server reactor that will be used to handle network events to
-     * {@code reactor}. This method can only be used if there is currently no
-     * reactor set.
-     * 
-     * @param reactor
-     *            the reactor that will be used.
-     * @throws IllegalStateException
-     *             if a reactor instance is already set.
-     */
-    public void setServerReactor(ServerReactor reactor) {
-        Preconditions.checkState(this.reactor == null, "There is already a reactor set!");
-        this.reactor = reactor;
-    }
-
-    /**
-     * Creates and configures a new {@link ScheduledExecutorService} aimed at
-     * executing low priority services. The returned executor is
-     * <b>unconfigurable</b> meaning it's configuration can no longer be
-     * modified.
+     * in the queue of the service queue.
      *
-     * @return the newly created and configured executor service.
+     * @param service
+     *            the service to submit to the service queue.
      */
-    private static ScheduledExecutorService createLogicService() {
-        ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(1);
-        executor.setRejectedExecutionHandler(new CallerRunsPolicy());
-        executor.setThreadFactory(new ThreadFactoryBuilder().setNameFormat("LogicServiceThread").build());
-        executor.setKeepAliveTime(45, TimeUnit.SECONDS);
-        executor.allowCoreThreadTimeOut(true);
-        return Executors.unconfigurableScheduledExecutorService(executor);
+    public void submit(Service service) {
+        serviceQueue.submit(service);
+    }
+
+    /**
+     * Submits {@code service} to the backing service queue, to be executed
+     * asynchronously as a {@code DIRECT} service. Please note that the task may
+     * not be executed for some time after this method returns, depending on how
+     * many tasks are currently in the queue of the service queue.
+     *
+     * @param service
+     *            the service to submit to the service queue.
+     */
+    public void submit(Runnable service) {
+        submit(new Service() {
+            @Override
+            public void execute(ServiceQueue context) {
+                service.run();
+            }
+        });
     }
 }
