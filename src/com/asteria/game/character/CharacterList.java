@@ -1,8 +1,8 @@
 package com.asteria.game.character;
 
-import java.util.ArrayDeque;
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Queue;
@@ -41,7 +41,7 @@ public final class CharacterList<E extends CharacterNode> implements Iterable<E>
      * The queue containing all of the cached slots that can be assigned to
      * {@link CharacterNode}s to prevent expensive lookups.
      */
-    private final Queue<Integer> slotQueue = new ArrayDeque<>();
+    private final Queue<Integer> slotQueue = new LinkedList<>();
 
     /**
      * The finite capacity of this collection.
