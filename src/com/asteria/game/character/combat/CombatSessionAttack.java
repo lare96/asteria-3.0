@@ -91,7 +91,7 @@ public final class CombatSessionAttack extends Task {
                 attacker.getCurrentlyCasting().endGraphic().ifPresent(victim::graphic);
                 attacker.getCurrentlyCasting().executeOnHit(attacker, victim, true, counter);
                 attacker.setCurrentlyCasting(null);
-            } else if (data.getType() == CombatType.RANGED && attacker.getType() == NodeType.PLAYER && random.nextBoolean()) {
+            } else if (data.getType() == CombatType.RANGED && attacker.getType() == NodeType.PLAYER && random.get().nextBoolean()) {
                 Player player = (Player) attacker;
                 if (player.getFireAmmo() > 0) {
                     ItemNodeManager.register(new ItemNode(new Item(player.getFireAmmo()), victim.getPosition(), player), true);
@@ -117,7 +117,7 @@ public final class CombatSessionAttack extends Task {
      * Handles all armor effects that take place upon a successful attack.
      */
     private void handleArmorEffects() {
-        if (random.nextInt(4) == 0) {
+        if (random.get().nextInt(4) == 0) {
             if (Combat.isFullGuthans(builder.getCharacter())) {
                 builder.getVictim().graphic(new Graphic(398));
                 builder.getCharacter().healCharacter(counter);

@@ -2,6 +2,8 @@ package plugin.skills.cooking
 
 import static com.asteria.game.character.player.skill.Skills.COOKING
 
+import java.util.concurrent.ThreadLocalRandom
+
 import com.asteria.game.character.Animation
 import com.asteria.game.character.player.Player
 import com.asteria.game.character.player.skill.SkillData
@@ -12,7 +14,6 @@ import com.asteria.game.item.ItemDefinition
 import com.asteria.game.location.Position
 import com.asteria.game.plugin.PluginSignature
 import com.asteria.task.Task
-import com.asteria.utility.RandomGen
 
 @PluginSignature(SkillAction.class)
 final class Cooking extends ProducingSkillAction {
@@ -22,7 +23,7 @@ final class Cooking extends ProducingSkillAction {
     private final boolean cookStove
     private int counter
     private boolean burned
-    private final RandomGen random = new RandomGen()
+    private final ThreadLocalRandom random = ThreadLocalRandom.current()
 
     Cooking(Player player, Position position, CookingData data, boolean cookStove, int counter) {
         super(player, Optional.of(position))

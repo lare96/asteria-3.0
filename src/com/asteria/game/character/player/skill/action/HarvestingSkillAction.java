@@ -58,7 +58,7 @@ public abstract class HarvestingSkillAction extends SkillAction {
         Player player = getPlayer();
         int factor = (player.getSkills()[skill().getId()].getLevel() / SUCCESS_FACTOR);
         double boost = (factor * 0.01);
-        if (random.roll((successFactor() + boost))) {
+        if (random.success((successFactor() + boost))) {
             Optional<Item[]> removeItems = removeItems();
             Item[] harvestItems = harvestItems();
 

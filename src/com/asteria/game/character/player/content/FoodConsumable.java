@@ -135,23 +135,23 @@ public enum FoodConsumable {
             }
             if (random.floatRandom(100F) >= 3.65F) {
                 skill.increaseLevel(30, realLevel);
-                player.getSkills()[Skills.ATTACK].increaseLevel(random.exclusive(3));
-                player.getSkills()[Skills.STRENGTH].increaseLevel(random.exclusive(3));
-                player.getSkills()[Skills.DEFENCE].increaseLevel(random.exclusive(3));
+                player.getSkills()[Skills.ATTACK].increaseLevel(random.inclusive(3));
+                player.getSkills()[Skills.STRENGTH].increaseLevel(random.inclusive(3));
+                player.getSkills()[Skills.DEFENCE].increaseLevel(random.inclusive(3));
                 player.getMessages().sendMessage("Wow, that was an amazing " + "kebab! You feel really invigorated.");
                 return;
             }
             if (random.floatRandom(100F) >= 3.28F) {
-                player.getSkills()[Skills.ATTACK].decreaseLevel(random.exclusive(3));
-                player.getSkills()[Skills.STRENGTH].decreaseLevel(random.exclusive(3));
-                player.getSkills()[Skills.DEFENCE].decreaseLevel(random.exclusive(3));
+                player.getSkills()[Skills.ATTACK].decreaseLevel(random.inclusive(3));
+                player.getSkills()[Skills.STRENGTH].decreaseLevel(random.inclusive(3));
+                player.getSkills()[Skills.DEFENCE].decreaseLevel(random.inclusive(3));
                 player.getMessages().sendMessage("That tasted a bit dodgy. You" + " feel a bit ill.");
                 return;
             }
             if (random.floatRandom(100F) >= 2.00F) {
                 int id = random.inclusiveExcludes(0, player.getSkills().length, Skills.HITPOINTS);
                 Skill randomSkill = player.getSkills()[id];
-                randomSkill.decreaseLevel(random.exclusive(3));
+                randomSkill.decreaseLevel(random.inclusive(3));
                 player.getMessages().sendMessage("Eating the kebab has damaged" + " your " + SkillData.values()[id] + " stat.");
                 return;
             }

@@ -432,7 +432,7 @@ public final class MovementQueue {
         private final CharacterNode leader;
 
         /**
-         * The random generator to generate pseudo-random numbers.
+         * The thread local random instance.
          */
         private final RandomGen random = new RandomGen();
 
@@ -468,8 +468,7 @@ public final class MovementQueue {
             if (character.getPosition().equals(leader.getPosition().copy())) {
                 character.getMovementQueue().reset();
                 int[] dir = { 1, -1 };
-
-                if (random.nextBoolean()) {
+                if (random.get().nextBoolean()) {
                     character.getMovementQueue().walk(random.random(dir), 0);
                 } else {
                     character.getMovementQueue().walk(0, random.random(dir));

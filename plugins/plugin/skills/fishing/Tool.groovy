@@ -99,7 +99,7 @@ enum Tool {
         Collections.shuffle(success, random)
         Catchable c = null
         success.each {
-            if (random.roll(it.chance)) {
+            if (random.success(it.chance)) {
                 c = it
                 return
             }

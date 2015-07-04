@@ -1,13 +1,13 @@
 package plugin.minigames.fightcaves
 
 import com.asteria.game.World
+import com.asteria.game.character.Animation
+import com.asteria.game.character.Flag
 import com.asteria.game.character.combat.prayer.CombatPrayer
 import com.asteria.game.character.player.Player
 import com.asteria.game.character.player.skill.Skills
-import com.asteria.game.location.Position;
-import com.asteria.game.character.Animation;
-import com.asteria.game.character.Flag;
-import com.asteria.game.item.Item;
+import com.asteria.game.item.Item
+import com.asteria.game.location.Position
 import com.asteria.utility.RandomGen
 import com.asteria.utility.Stopwatch
 
@@ -21,14 +21,13 @@ final class FightCavesHandler {
     static Set<Player> players = new HashSet<>()
     static int gameCounter = 0
     static Stopwatch timeoutCounter = new Stopwatch()
-
+    private static RandomGen random = new RandomGen()
     private FightCavesHandler() {
         throw new UnsupportedOperationException("This class cannot be instantiated!")
     }
 
     static def start() {
         timeoutCounter.reset()
-        RandomGen random = new RandomGen()
         Player player = null
         while ((player = awaiting.poll()) != null) {
             if (player.viewingOrb != null) {
@@ -37,7 +36,7 @@ final class FightCavesHandler {
             }
             player.messages.sendContextMenu(3, "Attack")
             player.messages.sendWalkable(-1)
-            player.move new Position(2392 + random.exclusive(12), 5139 + random.exclusive(25))
+            player.move new Position(2392 + random.inclusive(11), 5139 + random.inclusive(24))
             player.messages.sendMessage "The fight pits have begun, good luck!"
             players.add player
         }

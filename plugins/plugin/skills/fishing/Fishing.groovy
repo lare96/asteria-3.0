@@ -2,6 +2,8 @@ package plugin.skills.fishing
 
 import static com.asteria.game.character.player.skill.Skills.FISHING
 
+import java.util.concurrent.ThreadLocalRandom
+
 import com.asteria.game.character.Animation
 import com.asteria.game.character.player.Player
 import com.asteria.game.character.player.skill.SkillData
@@ -12,13 +14,12 @@ import com.asteria.game.item.Item
 import com.asteria.game.location.Position
 import com.asteria.game.plugin.PluginSignature
 import com.asteria.task.Task
-import com.asteria.utility.RandomGen
 
 @PluginSignature(SkillAction.class)
 final class Fishing extends HarvestingSkillAction {
 
     private final Tool tool
-    private final RandomGen random = new RandomGen()
+    private final ThreadLocalRandom random = ThreadLocalRandom.current()
 
     Fishing(Player player, Tool tool, Position position) {
         super(player, Optional.of(position))

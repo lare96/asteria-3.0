@@ -161,7 +161,7 @@ public final class Combat {
                     if (Server.DEBUG)
                         player.getMessages().sendMessage(
                             "[DEBUG]: Damage " + "reduced by opponents prayer [" + (hit - h.getHit().getDamage()) + "]");
-                    mod = Math.round(random.nextDouble() * 100.0) / 100.0;
+                    mod = Math.round(random.get().nextDouble() * 100.0) / 100.0;
                     if (Server.DEBUG)
                         player
                             .getMessages()
@@ -706,7 +706,7 @@ public final class Combat {
 
         if (type == CombatType.MELEE) {
             if (Combat.isFullVeracs(attacker)) {
-                if (random.nextInt(8) == 3) {
+                if (random.get().nextInt(8) == 3) {
                     veracEffect = true;
                 }
             }
@@ -754,7 +754,7 @@ public final class Combat {
         attackCalc += styleBonus;
 
         if (equipmentBonus < -67) {
-            attackCalc = random.exclusive(8) == 0 ? attackCalc : 0;
+            attackCalc = random.get().nextInt(8) == 0 ? attackCalc : 0;
         }
         attackCalc *= specialBonus;
 
@@ -791,7 +791,7 @@ public final class Combat {
         defenceCalc += styleBonus;
 
         if (equipmentBonus < -67) {
-            defenceCalc = random.exclusive(8) == 0 ? defenceCalc : 0;
+            defenceCalc = random.get().nextInt(8) == 0 ? defenceCalc : 0;
         }
         if (veracEffect) {
             defenceCalc = 0;
@@ -808,7 +808,7 @@ public final class Combat {
                     "[DEBUG]: Your roll " + "[" + (Math.round(attackCalc * 1000.0) / 1000.0) + "] : " + "Victim's roll [" + (Math
                         .round(defenceCalc * 1000.0) / 1000.0) + "] : Chance to hit [" + (100 * Math.round(hitSucceed * 1000.0) / 1000.0) + "%]");
         }
-        return hitSucceed >= random.nextDouble();
+        return hitSucceed >= random.get().nextDouble();
     }
 
     /**
