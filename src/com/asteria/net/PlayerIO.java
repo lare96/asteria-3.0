@@ -5,8 +5,8 @@ import io.netty.buffer.Unpooled;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
+import io.netty.channel.socket.SocketChannel;
 
-import java.net.InetSocketAddress;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
@@ -66,15 +66,13 @@ public final class PlayerIO {
     /**
      * Creates a new {@link PlayerIO}.
      *
-     * @param key
-     *            the selection key registered to the selector.
-     * @param response
-     *            the current login response for this session.
+     * @param channel
+     *            the socket channel that data will be written to.
      */
-    public PlayerIO(Channel channel, LoginResponse response) {
-        this.response = response;
+    public PlayerIO(SocketChannel channel) {
+        this.host = channel.remoteAddress().getAddress().getHostAddress();
+        this.response = ConnectionHandler.evaluate(host);
         this.channel = channel;
-        this.host = ((InetSocketAddress) channel.remoteAddress()).getAddress().getHostAddress();
         this.player = new Player(this);
     }
 

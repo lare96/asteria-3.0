@@ -28,8 +28,7 @@ public final class NetworkChannelInitializer extends ChannelInitializer<SocketCh
 
         // Initialize our session Object when the channel is initialized, attach
         // it to the channel.
-        String host = ch.remoteAddress().getAddress().getHostAddress();
-        ch.attr(NetworkConstants.SESSION_KEY).setIfAbsent(new PlayerIO(ch, ConnectionHandler.evaluate(host)));
+        ch.attr(NetworkConstants.SESSION_KEY).setIfAbsent(new PlayerIO(ch));
 
         // Initialize the pipeline channel handlers.
         ChannelDuplexHandler timeout = new IdleStateHandler(NetworkConstants.INPUT_TIMEOUT, 0, 0);
