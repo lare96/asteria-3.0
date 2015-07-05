@@ -1,7 +1,6 @@
 package com.asteria.game.character.player;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -26,6 +25,7 @@ import com.asteria.game.item.ItemNodeStatic;
 import com.asteria.game.item.container.Equipment;
 import com.asteria.game.location.Position;
 import com.asteria.utility.RandomGen;
+import com.google.common.collect.Ordering;
 
 /**
  * The {@link CharacterDeath} implementation that is dedicated to managing the
@@ -130,8 +130,12 @@ public final class PlayerDeath extends CharacterDeath<Player> {
             if (CombatPrayer.isActivated(character, CombatPrayer.PROTECT_ITEM))
                 amount++;
             if (amount > 0) {
-                items.sort(Collections.reverseOrder((one, two) -> Integer.compare(one.getDefinition().getGeneralPrice(), two
-                    .getDefinition().getGeneralPrice())));
+                items.sort(new Ordering<Item>() {
+                    @Override
+                    public int compare(Item left, Item right) {
+                        return Integer.compare(left.getDefinition().getGeneralPrice(), right.getDefinition().getGeneralPrice());
+                    }
+                }.reverse());
                 for (Iterator<Item> it = items.iterator(); it.hasNext();) {
                     Item next = it.next();
                     if (amount == 0) {
