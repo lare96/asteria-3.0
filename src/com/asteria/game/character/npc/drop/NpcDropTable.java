@@ -1,77 +1,46 @@
 package com.asteria.game.character.npc.drop;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 
+import com.asteria.game.GameConstants;
 import com.asteria.game.character.player.Player;
 import com.asteria.game.item.Item;
+import com.asteria.game.item.container.Equipment;
+import com.asteria.utility.Chance;
 import com.asteria.utility.CollectionUtils;
 import com.asteria.utility.RandomGen;
 
 /**
- * The container class that contains the drop tables for a set of NPCs along
- * with functions to manage these tables.
- *
- * @author lare96 <http://github.com/lare96>
+ * A container that holds the unique and common drop tables.
+ * 
+ * @author lare96 <http://github.org/lare96>
  */
 public final class NpcDropTable {
 
     /**
-     * The maximum amount of drops that can be rolled from the dynamic table.
+     * The unique drop table that consists of both dynamic and rare drops.
      */
-    private static final int DROP_THRESHOLD = 3;
+    private final NpcDrop[] unique;
 
     /**
-     * The hash collection of drop tables for all NPCs.
+     * The common drop table that is shared with other tables.
      */
-    public static final Map<Integer, NpcDropTable> DROPS = new HashMap<>();
-
-    /**
-     * The list of listeners for all of the drop tables.
-     */
-    private static List<NpcDropListener> listeners = new LinkedList<>();
-
-    /**
-     * The random generator instance that will generate random numbers.
-     */
-    private static RandomGen random = new RandomGen();
-
-    /**
-     * The NPC identifiers that these drop tables are for.
-     */
-    private final int[] npcs;
-
-    /**
-     * The dynamic drop table where all items will be accounted for and given
-     * the chance to be selected for a drop.
-     */
-    private final NpcDrop[] dynamic;
-
-    /**
-     * The rare drop table where only one item will be accounted for and given
-     * the chance to be selected for a drop.
-     */
-    private final NpcDrop[] rare;
+    private final NpcDropCache[] common;
 
     /**
      * Creates a new {@link NpcDropTable}.
      *
-     * @param npcs
-     *            the NPC identifiers that these drop tables are for.
-     * @param dynamic
-     *            the dynamic drop table.
-     * @param rare
-     *            the rare drop table.
+     * @param unique
+     *            the unique drop table.
+     * @param common
+     *            the common drop table.
      */
-    public NpcDropTable(int[] npcs, NpcDrop[] dynamic, NpcDrop[] rare) {
-        this.npcs = npcs;
-        this.dynamic = dynamic;
-        this.rare = rare;
+    public NpcDropTable(NpcDrop[] unique, NpcDropCache[] common) {
+        this.unique = unique;
+        this.common = common;
     }
 
     /**
@@ -84,72 +53,67 @@ public final class NpcDropTable {
      *            the player that these calculations are being performed for.
      * @return the array of items that were calculated.
      */
-    public Item[] toItems(Player player) {
-        int slot = 0;
-        Item[] items = new Item[dynamic.length + 1];
-        LinkedList<NpcDrop> copyList = CollectionUtils.newLinkedList(dynamic);
-        Iterator<NpcDrop> $it = copyList.iterator();
+    public List<Item> toItems(Player player) {
+
+        // Instantiate the random generator, the list of items to drop, the list
+        // for the rare items, the common table, and a list that contains a
+        // shuffled copy of the unique table.
+        RandomGen random = new RandomGen();
+        List<Item> items = new LinkedList<>();
+        List<NpcDrop> rareTable = new LinkedList<>();
+        NpcDropCache cache = random.random(common);
+        LinkedList<NpcDrop> copyItems = CollectionUtils.newLinkedList(unique);
+        Collections.shuffle(copyItems);
+
+        // Iterate through the unique table, drop ALWAYS items and add RARE+
+        // items to the rare table.
+        Iterator<NpcDrop> $it = copyItems.iterator();
         while ($it.hasNext()) {
-            NpcDrop drop = $it.next();
-            if (drop.getChance() == NpcDropChance.ALWAYS) {
-                Item newItem = drop.toItem(random);
-                items[slot++] = newItem;
+            NpcDrop next = $it.next();
+            if (next.getChance() == Chance.ALWAYS) {
+                items.add(next.toItem(random));
                 $it.remove();
-                listeners.forEach(it -> it.onDynamicDrop(player, drop, Optional.of(newItem), true));
+            } else if (next.getChance().getTier() >= Chance.RARE.getTier()) {
+                rareTable.add(next);
+                $it.remove();
             }
         }
-        if (random.nextBoolean()) {
-            Collections.shuffle(copyList);
-            for (int amount = 0; amount < DROP_THRESHOLD; amount++) {
-                if (copyList.size() == 0)
+
+        // 50% Chance to drop an item from the unique table, pick DROP_THRESHOLD
+        // amount of dynamic drops from the table and roll them.
+        if (random.get().nextBoolean()) {
+            for (int amount = 0; amount < GameConstants.DROP_THRESHOLD; amount++) {
+                if (copyItems.size() == 0)
                     break;
-                NpcDrop drop = copyList.remove();
-                if (drop.getChance().successful(random)) {
-                    Item newItem = drop.toItem(random);
-                    items[slot++] = newItem;
-                    listeners.forEach(it -> it.onDynamicDrop(player, drop, Optional.of(newItem), true));
-                } else {
-                    listeners.forEach(it -> it.onDynamicDrop(player, drop, Optional.empty(), false));
-                }
+                NpcDrop next = copyItems.remove();
+                if (next.getChance().successful(random))
+                    items.add(next.toItem(random));
             }
         }
-        if (rare.length == 0 || !NpcDropChance.COMMON.successful(random))
+
+        // n (n = specific table chance or 100% if wearing Ring of Wealth)
+        // Chance to drop an item from the common table, pick one drop from
+        // the table and roll it.
+        boolean row = player != null && player.getEquipment().getId(Equipment.RING_SLOT) == 2572;
+        int denominator = row ? 4 : 8;
+        if (random.get().nextInt(denominator) == 0) {
+            NpcDrop next = random.random(NpcDropManager.COMMON.get(cache));
+            if (next.getChance().successful(random)) {
+                items.add(next.toItem(random));
+                if (row)
+                    player.getMessages().sendMessage("Your Ring of Wealth illuminates...");
+            }
+        }
+
+        // 20% Chance to drop an item from the rare table, pick one drop from
+        // the table and roll it.
+        if (rareTable.size() == 0)
             return items;
-        NpcDrop drop = random.random(rare);
-        if (drop.getChance().successful(random)) {
-            Item newItem = drop.toItem(random);
-            items[slot++] = newItem;
-            listeners.forEach(it -> it.onRareDrop(player, drop, Optional.of(newItem), true));
-        } else {
-            listeners.forEach(it -> it.onRareDrop(player, drop, Optional.empty(), false));
+        if (random.get().nextInt(5) == 0) {
+            NpcDrop next = random.random(rareTable);
+            if (next.getChance().successful(random))
+                items.add(next.toItem(random));
         }
         return items;
-    }
-
-    /**
-     * Gets the NPC identifiers that these drop tables are for.
-     *
-     * @return the NPC identifiers for these tables.
-     */
-    public int[] getNpcs() {
-        return npcs;
-    }
-
-    /**
-     * Gets the dynamic drop table.
-     *
-     * @return the dynamic table.
-     */
-    public NpcDrop[] getDynamic() {
-        return dynamic;
-    }
-
-    /**
-     * Gets the rare drop table.
-     *
-     * @return the rare table.
-     */
-    public NpcDrop[] getRare() {
-        return rare;
     }
 }

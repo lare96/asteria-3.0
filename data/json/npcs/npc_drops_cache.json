@@ -1,0 +1,785 @@
+[
+  {
+    "table": "LOW_RUNES",
+    "items": [
+      {
+        "id": 554,
+        "minimum": 100,
+        "maximum": 200,
+        "chance": "ALWAYS"
+      },
+      {
+        "id": 555,
+        "minimum": 100,
+        "maximum": 200,
+        "chance": "ALWAYS"
+      },
+      {
+        "id": 556,
+        "minimum": 100,
+        "maximum": 200,
+        "chance": "ALWAYS"
+      },
+      {
+        "id": 557,
+        "minimum": 100,
+        "maximum": 200,
+        "chance": "ALWAYS"
+      },
+      {
+        "id": 558,
+        "minimum": 100,
+        "maximum": 200,
+        "chance": "ALWAYS"
+      },
+      {
+        "id": 559,
+        "minimum": 100,
+        "maximum": 200,
+        "chance": "ALWAYS"
+      }
+    ]
+  },
+  {
+    "table": "MED_RUNES",
+    "items": [
+      {
+        "id": 554,
+        "minimum": 500,
+        "maximum": 1000,
+        "chance": "ALWAYS"
+      },
+      {
+        "id": 555,
+        "minimum": 500,
+        "maximum": 1000,
+        "chance": "ALWAYS"
+      },
+      {
+        "id": 556,
+        "minimum": 500,
+        "maximum": 1000,
+        "chance": "ALWAYS"
+      },
+      {
+        "id": 557,
+        "minimum": 500,
+        "maximum": 1000,
+        "chance": "ALWAYS"
+      },
+      {
+        "id": 564,
+        "minimum": 500,
+        "maximum": 1000,
+        "chance": "ALWAYS"
+      },
+      {
+        "id": 560,
+        "minimum": 50,
+        "maximum": 100,
+        "chance": "COMMON"
+      },
+      {
+        "id": 561,
+        "minimum": 50,
+        "maximum": 100,
+        "chance": "COMMON"
+      },
+      {
+        "id": 562,
+        "minimum": 50,
+        "maximum": 100,
+        "chance": "COMMON"
+      },
+      {
+        "id": 563,
+        "minimum": 50,
+        "maximum": 100,
+        "chance": "COMMON"
+      },
+      {
+        "id": 565,
+        "minimum": 50,
+        "maximum": 100,
+        "chance": "COMMON"
+      },
+      {
+        "id": 566,
+        "minimum": 50,
+        "maximum": 100,
+        "chance": "COMMON"
+      }
+    ]
+  },
+  {
+    "table": "HIGH_RUNES",
+    "items": [
+      {
+        "id": 554,
+        "minimum": 1000,
+        "maximum": 2000,
+        "chance": "ALWAYS"
+      },
+      {
+        "id": 555,
+        "minimum": 1000,
+        "maximum": 2000,
+        "chance": "ALWAYS"
+      },
+      {
+        "id": 556,
+        "minimum": 1000,
+        "maximum": 2000,
+        "chance": "ALWAYS"
+      },
+      {
+        "id": 557,
+        "minimum": 1000,
+        "maximum": 2000,
+        "chance": "ALWAYS"
+      },
+      {
+        "id": 564,
+        "minimum": 1000,
+        "maximum": 2000,
+        "chance": "ALWAYS"
+      },
+      {
+        "id": 560,
+        "minimum": 500,
+        "maximum": 1000,
+        "chance": "COMMON"
+      },
+      {
+        "id": 561,
+        "minimum": 500,
+        "maximum": 1000,
+        "chance": "COMMON"
+      },
+      {
+        "id": 562,
+        "minimum": 500,
+        "maximum": 1000,
+        "chance": "COMMON"
+      },
+      {
+        "id": 563,
+        "minimum": 500,
+        "maximum": 1000,
+        "chance": "COMMON"
+      },
+      {
+        "id": 565,
+        "minimum": 500,
+        "maximum": 1000,
+        "chance": "COMMON"
+      },
+      {
+        "id": 566,
+        "minimum": 500,
+        "maximum": 1000,
+        "chance": "COMMON"
+      }
+    ]
+  },
+  {
+    "table": "LOW_HERBS",
+    "items": [
+      {
+        "id": 199,
+        "minimum": 1,
+        "maximum": 1,
+        "chance": "ALWAYS"
+      },
+      {
+        "id": 201,
+        "minimum": 1,
+        "maximum": 1,
+        "chance": "ALWAYS"
+      },
+      {
+        "id": 203,
+        "minimum": 1,
+        "maximum": 1,
+        "chance": "ALWAYS"
+      },
+      {
+        "id": 205,
+        "minimum": 1,
+        "maximum": 1,
+        "chance": "ALWAYS"
+      },
+      {
+        "id": 207,
+        "minimum": 1,
+        "maximum": 1,
+        "chance": "ALWAYS"
+      }
+    ]
+  },
+  {
+    "table": "MED_HERBS",
+    "items": [
+      {
+        "id": 207,
+        "minimum": 1,
+        "maximum": 1,
+        "chance": "ALWAYS"
+      },
+      {
+        "id": 3049,
+        "minimum": 1,
+        "maximum": 1,
+        "chance": "ALWAYS"
+      },
+      {
+        "id": 209,
+        "minimum": 1,
+        "maximum": 1,
+        "chance": "ALWAYS"
+      },
+      {
+        "id": 211,
+        "minimum": 1,
+        "maximum": 1,
+        "chance": "ALWAYS"
+      },
+      {
+        "id": 213,
+        "minimum": 1,
+        "maximum": 1,
+        "chance": "ALWAYS"
+      }
+    ]
+  },
+  {
+    "table": "HIGH_HERBS",
+    "items": [
+      {
+        "id": 208,
+        "minimum": 1,
+        "maximum": 5,
+        "chance": "ALWAYS"
+      },
+      {
+        "id": 3050,
+        "minimum": 1,
+        "maximum": 5,
+        "chance": "ALWAYS"
+      },
+      {
+        "id": 210,
+        "minimum": 1,
+        "maximum": 5,
+        "chance": "ALWAYS"
+      },
+      {
+        "id": 212,
+        "minimum": 1,
+        "maximum": 5,
+        "chance": "ALWAYS"
+      },
+      {
+        "id": 214,
+        "minimum": 1,
+        "maximum": 5,
+        "chance": "ALWAYS"
+      },
+      {
+        "id": 3052,
+        "minimum": 1,
+        "maximum": 2,
+        "chance": "ALWAYS"
+      },
+      {
+        "id": 216,
+        "minimum": 1,
+        "maximum": 2,
+        "chance": "ALWAYS"
+      },
+      {
+        "id": 2486,
+        "minimum": 1,
+        "maximum": 2,
+        "chance": "ALWAYS"
+      },
+      {
+        "id": 218,
+        "minimum": 1,
+        "maximum": 2,
+        "chance": "ALWAYS"
+      },
+      {
+        "id": 220,
+        "minimum": 1,
+        "maximum": 2,
+        "chance": "ALWAYS"
+      }
+    ]
+  },
+  {
+    "table": "LOW_GEMS",
+    "items": [
+      {
+        "id": 1624,
+        "minimum": 1,
+        "maximum": 5,
+        "chance": "ALWAYS"
+      },
+      {
+        "id": 1622,
+        "minimum": 1,
+        "maximum": 5,
+        "chance": "ALWAYS"
+      }
+    ]
+  },
+  {
+    "table": "MED_GEMS",
+    "items": [
+      {
+        "id": 1624,
+        "minimum": 1,
+        "maximum": 10,
+        "chance": "ALWAYS"
+      },
+      {
+        "id": 1622,
+        "minimum": 1,
+        "maximum": 10,
+        "chance": "ALWAYS"
+      },
+      {
+        "id": 1620,
+        "minimum": 1,
+        "maximum": 5,
+        "chance": "ALWAYS"
+      },
+      {
+        "id": 1618,
+        "minimum": 1,
+        "maximum": 5,
+        "chance": "ALWAYS"
+      }
+    ]
+  },
+  {
+    "table": "HIGH_GEMS",
+    "items": [
+      {
+        "id": 1624,
+        "minimum": 20,
+        "maximum": 50,
+        "chance": "ALWAYS"
+      },
+      {
+        "id": 1622,
+        "minimum": 20,
+        "maximum": 50,
+        "chance": "ALWAYS"
+      },
+      {
+        "id": 1620,
+        "minimum": 10,
+        "maximum": 20,
+        "chance": "ALWAYS"
+      },
+      {
+        "id": 1618,
+        "minimum": 10,
+        "maximum": 20,
+        "chance": "ALWAYS"
+      },
+      {
+        "id": 1632,
+        "minimum": 1,
+        "maximum": 5,
+        "chance": "ALWAYS"
+      },
+      {
+        "id": 6572,
+        "minimum": 1,
+        "maximum": 2,
+        "chance": "ALWAYS"
+      }
+    ]
+  },
+  {
+    "table": "LOW_EQUIPMENT",
+    "items": [
+      {
+        "id": 1073,
+        "minimum": 1,
+        "maximum": 1,
+        "chance": "UNCOMMON"
+      },
+      {
+        "id": 1123,
+        "minimum": 1,
+        "maximum": 1,
+        "chance": "UNCOMMON"
+      },
+      {
+        "id": 1161,
+        "minimum": 1,
+        "maximum": 1,
+        "chance": "UNCOMMON"
+      },
+      {
+        "id": 1199,
+        "minimum": 1,
+        "maximum": 1,
+        "chance": "UNCOMMON"
+      },
+      {
+        "id": 1317,
+        "minimum": 1,
+        "maximum": 1,
+        "chance": "UNCOMMON"
+      },
+      {
+        "id": 1331,
+        "minimum": 1,
+        "maximum": 1,
+        "chance": "UNCOMMON"
+      },
+      {
+        "id": 890,
+        "minimum": 100,
+        "maximum": 500,
+        "chance": "COMMON"
+      },
+      {
+        "id": 867,
+        "minimum": 100,
+        "maximum": 500,
+        "chance": "COMMON"
+      },
+      {
+        "id": 810,
+        "minimum": 100,
+        "maximum": 500,
+        "chance": "COMMON"
+      }
+    ]
+  },
+  {
+    "table": "MED_EQUIPMENT",
+    "items": [
+      {
+        "id": 1347,
+        "minimum": 1,
+        "maximum": 1,
+        "chance": "UNCOMMON"
+      },
+      {
+        "id": 1147,
+        "minimum": 1,
+        "maximum": 1,
+        "chance": "UNCOMMON"
+      },
+      {
+        "id": 1359,
+        "minimum": 1,
+        "maximum": 1,
+        "chance": "UNCOMMON"
+      },
+      {
+        "id": 1275,
+        "minimum": 1,
+        "maximum": 1,
+        "chance": "UNCOMMON"
+      },
+      {
+        "id": 1147,
+        "minimum": 1,
+        "maximum": 1,
+        "chance": "UNCOMMON"
+      },
+      {
+        "id": 1303,
+        "minimum": 1,
+        "maximum": 1,
+        "chance": "UNCOMMON"
+      },
+      {
+        "id": 892,
+        "minimum": 100,
+        "maximum": 500,
+        "chance": "COMMON"
+      }
+    ]
+  },
+  {
+    "table": "HIGH_EQUIPMENT",
+    "items": [
+      {
+        "id": 1127,
+        "minimum": 1,
+        "maximum": 1,
+        "chance": "UNCOMMON"
+      },
+      {
+        "id": 1079,
+        "minimum": 1,
+        "maximum": 1,
+        "chance": "UNCOMMON"
+      },
+      {
+        "id": 1163,
+        "minimum": 1,
+        "maximum": 1,
+        "chance": "UNCOMMON"
+      },
+      {
+        "id": 1201,
+        "minimum": 1,
+        "maximum": 1,
+        "chance": "UNCOMMON"
+      },
+      {
+        "id": 1319,
+        "minimum": 1,
+        "maximum": 1,
+        "chance": "UNCOMMON"
+      },
+      {
+        "id": 1333,
+        "minimum": 1,
+        "maximum": 1,
+        "chance": "UNCOMMON"
+      },
+      {
+        "id": 1373,
+        "minimum": 1,
+        "maximum": 1,
+        "chance": "UNCOMMON"
+      },
+      {
+        "id": 868,
+        "minimum": 500,
+        "maximum": 1000,
+        "chance": "COMMON"
+      },
+      {
+        "id": 811,
+        "minimum": 500,
+        "maximum": 1000,
+        "chance": "COMMON"
+      }
+    ]
+  },
+  {
+    "table": "LOW_RESOURCES",
+    "items": [
+      {
+        "id": 360,
+        "minimum": 50,
+        "maximum": 100,
+        "chance": "COMMON"
+      },
+      {
+        "id": 995,
+        "minimum": 5000,
+        "maximum": 10000,
+        "chance": "COMMON"
+      },
+      {
+        "id": 362,
+        "minimum": 50,
+        "maximum": 100,
+        "chance": "COMMON"
+      },
+      {
+        "id": 1520,
+        "minimum": 500,
+        "maximum": 1000,
+        "chance": "COMMON"
+      },
+      {
+        "id": 2354,
+        "minimum": 5,
+        "maximum": 10,
+        "chance": "COMMON"
+      },
+      {
+        "id": 454,
+        "minimum": 20,
+        "maximum": 50,
+        "chance": "COMMON"
+      },
+      {
+        "id": 441,
+        "minimum": 20,
+        "maximum": 50,
+        "chance": "COMMON"
+      },
+      {
+        "id": 7937,
+        "minimum": 200,
+        "maximum": 500,
+        "chance": "COMMON"
+      }
+    ]
+  },
+  {
+    "table": "MED_RESOURCES",
+    "items": [
+      {
+        "id": 378,
+        "minimum": 50,
+        "maximum": 100,
+        "chance": "COMMON"
+      },
+      {
+        "id": 995,
+        "minimum": 50000,
+        "maximum": 100000,
+        "chance": "COMMON"
+      },
+      {
+        "id": 380,
+        "minimum": 50,
+        "maximum": 100,
+        "chance": "COMMON"
+      },
+      {
+        "id": 372,
+        "minimum": 50,
+        "maximum": 100,
+        "chance": "COMMON"
+      },
+      {
+        "id": 374,
+        "minimum": 50,
+        "maximum": 100,
+        "chance": "COMMON"
+      },
+      {
+        "id": 1520,
+        "minimum": 500,
+        "maximum": 1000,
+        "chance": "COMMON"
+      },
+      {
+        "id": 1518,
+        "minimum": 100,
+        "maximum": 500,
+        "chance": "COMMON"
+      },
+      {
+        "id": 2360,
+        "minimum": 1,
+        "maximum": 5,
+        "chance": "COMMON"
+      },
+      {
+        "id": 454,
+        "minimum": 100,
+        "maximum": 200,
+        "chance": "COMMON"
+      },
+      {
+        "id": 448,
+        "minimum": 50,
+        "maximum": 100,
+        "chance": "COMMON"
+      },
+      {
+        "id": 7937,
+        "minimum": 500,
+        "maximum": 1000,
+        "chance": "COMMON"
+      }
+    ]
+  },
+  {
+    "table": "HIGH_RESOURCES",
+    "items": [
+      {
+        "id": 390,
+        "minimum": 50,
+        "maximum": 100,
+        "chance": "COMMON"
+      },
+      {
+        "id": 995,
+        "minimum": 100000,
+        "maximum": 500000,
+        "chance": "COMMON"
+      },
+      {
+        "id": 392,
+        "minimum": 50,
+        "maximum": 100,
+        "chance": "COMMON"
+      },
+      {
+        "id": 384,
+        "minimum": 50,
+        "maximum": 100,
+        "chance": "COMMON"
+      },
+      {
+        "id": 386,
+        "minimum": 50,
+        "maximum": 100,
+        "chance": "COMMON"
+      },
+      {
+        "id": 1516,
+        "minimum": 50,
+        "maximum": 150,
+        "chance": "COMMON"
+      },
+      {
+        "id": 1514,
+        "minimum": 50,
+        "maximum": 150,
+        "chance": "COMMON"
+      },
+      {
+        "id": 2362,
+        "minimum": 1,
+        "maximum": 2,
+        "chance": "COMMON"
+      },
+      {
+        "id": 2364,
+        "minimum": 1,
+        "maximum": 1,
+        "chance": "COMMON"
+      },
+      {
+        "id": 454,
+        "minimum": 500,
+        "maximum": 1000,
+        "chance": "COMMON"
+      },
+      {
+        "id": 450,
+        "minimum": 1,
+        "maximum": 5,
+        "chance": "COMMON"
+      },
+      {
+        "id": 452,
+        "minimum": 1,
+        "maximum": 2,
+        "chance": "COMMON"
+      },
+      {
+        "id": 7937,
+        "minimum": 1000,
+        "maximum": 2000,
+        "chance": "COMMON"
+      },
+      {
+        "id": 7937,
+        "minimum": 1000,
+        "maximum": 2000,
+        "chance": "COMMON"
+      }
+    ]
+  }
+]

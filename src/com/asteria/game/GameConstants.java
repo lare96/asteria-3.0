@@ -69,6 +69,11 @@ public final class GameConstants {
     public static final int TARGET_DISTANCE = 6;
 
     /**
+     * The maximum amount of drops that can be rolled from the unique table.
+     */
+    public static final int DROP_THRESHOLD = 2;
+
+    /**
      * The time in seconds that has to be spent in a region before {@link Npc}s
      * stop acting aggressive towards a specific {@link Player}.
      */

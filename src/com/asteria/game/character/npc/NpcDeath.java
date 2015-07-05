@@ -6,13 +6,8 @@ import com.asteria.game.World;
 import com.asteria.game.character.Animation;
 import com.asteria.game.character.AnimationPriority;
 import com.asteria.game.character.CharacterDeath;
-import com.asteria.game.character.npc.drop.NpcDropTable;
+import com.asteria.game.character.npc.drop.NpcDropManager;
 import com.asteria.game.character.player.Player;
-import com.asteria.game.character.player.minigame.MinigameHandler;
-import com.asteria.game.item.Item;
-import com.asteria.game.item.ItemNode;
-import com.asteria.game.item.ItemNodeManager;
-import com.asteria.game.item.ItemNodeStatic;
 import com.asteria.task.Task;
 
 /**
@@ -41,17 +36,7 @@ public final class NpcDeath extends CharacterDeath<Npc> {
     @Override
     public void death(Npc character) {
         Optional<Player> killer = character.getCombatBuilder().getDamageCache().calculateKiller();
-        Optional<NpcDropTable> drops = Optional.ofNullable(NpcDropTable.DROPS.get(character.getId()));
-        drops.ifPresent(t -> {
-            Item[] dropItems = t.toItems(killer.orElse(null));
-            for (Item drop : dropItems) {
-                if (drop == null)
-                    continue;
-                ItemNodeManager.register(!killer.isPresent() ? new ItemNodeStatic(drop, character.getPosition()) : new ItemNode(drop,
-                    character.getPosition(), killer.get()));
-            }
-            killer.ifPresent(k -> MinigameHandler.search(k).ifPresent(m -> m.onKill(k, character)));
-        });
+        NpcDropManager.dropItems(killer, character);
         World.getNpcs().remove(character);
     }
 

@@ -14,13 +14,14 @@ import com.asteria.utility.BackgroundLoader;
 import com.asteria.utility.json.EquipmentRequirementLoader;
 import com.asteria.utility.json.ItemDefinitionLoader;
 import com.asteria.utility.json.ItemNodeLoader;
+import com.asteria.utility.json.MessageOpcodeLoader;
+import com.asteria.utility.json.MessageSizeLoader;
 import com.asteria.utility.json.NpcDefinitionLoader;
+import com.asteria.utility.json.NpcDropCacheLoader;
 import com.asteria.utility.json.NpcDropTableLoader;
 import com.asteria.utility.json.NpcNodeLoader;
 import com.asteria.utility.json.ObjectNodeLoader;
 import com.asteria.utility.json.ObjectNodeRemoveLoader;
-import com.asteria.utility.json.MessageOpcodeLoader;
-import com.asteria.utility.json.MessageSizeLoader;
 import com.asteria.utility.json.ShopLoader;
 import com.asteria.utility.json.WeaponAnimationLoader;
 import com.asteria.utility.json.WeaponInterfaceLoader;
@@ -89,6 +90,7 @@ public final class GameBuilder {
         tasks.add(() -> new WeaponInterfaceLoader().load());
         tasks.add(() -> new EquipmentRequirementLoader().load());
         tasks.add(() -> new ObjectNodeRemoveLoader().load());
+        tasks.add(() -> new NpcDropCacheLoader().load());
         tasks.add(World.getPlugins()::init);
         return tasks;
     }

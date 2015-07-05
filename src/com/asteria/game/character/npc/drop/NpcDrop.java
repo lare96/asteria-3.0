@@ -1,17 +1,18 @@
 package com.asteria.game.character.npc.drop;
 
 import com.asteria.game.item.Item;
+import com.asteria.utility.Chance;
 import com.asteria.utility.RandomGen;
 
 /**
- * The container class that represents one NPC drop within a table.
+ * The container class that represents one {@code NpcDrop} within a table.
  *
  * @author lare96 <http://github.com/lare96>
  */
 public final class NpcDrop {
 
     /**
-     * The identification of this NPC drop.
+     * The identification of this {@code NpcDrop}.
      */
     private final int id;
 
@@ -28,13 +29,13 @@ public final class NpcDrop {
     /**
      * The chance of this item being dropped.
      */
-    private final NpcDropChance chance;
+    private final Chance chance;
 
     /**
      * Creates a new {@link NpcDrop}.
      *
      * @param id
-     *            the identification of this NPC drop.
+     *            the identification of this {@code NpcDrop}.
      * @param minimum
      *            the minimum amount that will be dropped.
      * @param maximum
@@ -42,7 +43,7 @@ public final class NpcDrop {
      * @param chance
      *            the chance of this item being dropped.
      */
-    public NpcDrop(int id, int minimum, int maximum, NpcDropChance chance) {
+    public NpcDrop(int id, int minimum, int maximum, Chance chance) {
         this.id = id;
         this.minimum = minimum;
         this.maximum = maximum;
@@ -50,18 +51,18 @@ public final class NpcDrop {
     }
 
     /**
-     * Converts this NPC drop into an {@link Item} object.
+     * Converts this {@code NpcDrop} into an {@link Item} Object.
      *
      * @param random
      *            the random number generator to use.
-     * @return the converted NPC drop.
+     * @return the converted drop.
      */
     public Item toItem(RandomGen random) {
         return new Item(id, random.inclusive(minimum, maximum));
     }
 
     /**
-     * Gets the identification of this NPC drop.
+     * Gets the identification of this {@code NpcDrop}.
      *
      * @return the identification.
      */
@@ -92,7 +93,7 @@ public final class NpcDrop {
      *
      * @return the drop chance.
      */
-    public NpcDropChance getChance() {
+    public Chance getChance() {
         return chance;
     }
 }

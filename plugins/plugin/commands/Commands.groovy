@@ -5,6 +5,8 @@ import com.asteria.game.character.Animation
 import com.asteria.game.character.Flag
 import com.asteria.game.character.Graphic
 import com.asteria.game.character.npc.Npc
+import com.asteria.game.character.npc.drop.NpcDropManager
+import com.asteria.game.character.npc.drop.NpcDropTable
 import com.asteria.game.character.player.Player
 import com.asteria.game.character.player.Rights
 import com.asteria.game.character.player.serialize.PlayerSerialization
@@ -12,6 +14,7 @@ import com.asteria.game.character.player.skill.SkillData
 import com.asteria.game.character.player.skill.Skills
 import com.asteria.game.item.Item
 import com.asteria.game.item.ItemDefinition
+import com.asteria.game.item.container.Bank
 import com.asteria.game.location.Position
 import com.asteria.game.object.ObjectDirection
 import com.asteria.game.object.ObjectNode
@@ -33,6 +36,16 @@ final class Commands implements PluginListener<CommandPlugin> {
         // class.
         if (player.rights.greater(Rights.ADMINISTRATOR)) {
             switch (cmd[0]) {
+                case "simulate":
+                    int id = Integer.parseInt cmd[1]
+                    int amount = Integer.parseInt cmd[2]
+                    NpcDropTable table = NpcDropManager.TABLES.get id
+                    Bank bank = new Bank(player)
+                    amount.times {
+                        table.toItems(player).each { bank.deposit it }
+                    }
+                    bank.open();
+                    break
                 case "pnpc":
                     int id = Integer.parseInt cmd[1]
                     player.playerNpc = id

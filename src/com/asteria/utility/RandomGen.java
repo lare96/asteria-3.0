@@ -118,6 +118,17 @@ public final class RandomGen {
     }
 
     /**
+     * Pseudo-randomly retrieves an index from {@code array}.
+     *
+     * @param array
+     *            the array to retrieve an index from.
+     * @return the element retrieved from the array.
+     */
+    public int randomIndex(Object[] array) {
+        return (int) (random.nextDouble() * array.length);
+    }
+
+    /**
      * Pseudo-randomly retrieves a element from {@code array}.
      *
      * @param array

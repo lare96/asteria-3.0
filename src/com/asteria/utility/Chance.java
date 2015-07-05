@@ -1,28 +1,31 @@
-package com.asteria.game.character.npc.drop;
+package com.asteria.utility;
 
 import java.util.LinkedList;
 import java.util.List;
 
-import com.asteria.utility.RandomGen;
-
 /**
- * The enumerated type whose elements represent the NPC drop rates.
+ * The enumerated type whose elements represent the chance rates.
  *
  * @author lare96 <http://github.com/lare96>
  */
-public enum NpcDropChance {
-    ALWAYS(1, 1) {
+public enum Chance {
+    ALWAYS(0, 1, 1) {
         @Override
         public boolean successful(RandomGen random) {
             return true;
         }
     },
-    COMMON(2, 50),
-    UNCOMMON(51, 100),
-    VERY_UNCOMMON(77, 330),
-    RARE(101, 512),
-    VERY_RARE(513, 1000),
-    EXTREMELY_RARE(616, 1229);
+    COMMON(1, 2, 50),
+    UNCOMMON(2, 51, 100),
+    VERY_UNCOMMON(3, 77, 330),
+    RARE(4, 101, 512),
+    VERY_RARE(5, 513, 1000),
+    EXTREMELY_RARE(6, 616, 1229);
+
+    /**
+     * The tier level of "rareness".
+     */
+    private final int tier;
 
     /**
      * The numerator of this NPC drop rate.
@@ -35,14 +38,17 @@ public enum NpcDropChance {
     private final int denominator;
 
     /**
-     * Creates a new {@link NpcDropChance}.
+     * Creates a new {@link Chance}.
      *
+     * @param tier
+     *            the tier level of "rareness".
      * @param numerator
      *            the numerator of this NPC drop rate.
      * @param denominator
      *            the denominator of this NPC drop rate.
      */
-    private NpcDropChance(int numerator, int denominator) {
+    private Chance(int tier, int numerator, int denominator) {
+        this.tier = tier;
         this.numerator = numerator;
         this.denominator = denominator;
     }
@@ -103,6 +109,16 @@ public enum NpcDropChance {
         average /= size;
         System.out.println("[" + this + "] Took an average amount of " + average + " tries!");
     }
+
+    /**
+     * Gets the tier level of "rareness".
+     * 
+     * @return the tier level.
+     */
+    public final int getTier() {
+        return tier;
+    }
+
     /**
      * Gets the numerator of this NPC drop rate.
      *

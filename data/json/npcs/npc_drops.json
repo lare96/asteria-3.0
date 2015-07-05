@@ -1,37 +1,9 @@
 [
   {
     "ids": [
-      1,
-      2,
-      3
-    ],
-    "dynamic": [
-      {
-        "id": 526,
-        "minimum": 1,
-        "maximum": 1,
-        "chance": "ALWAYS"
-      },
-      {
-        "id": 995,
-        "minimum": 50,
-        "maximum": 500,
-        "chance": "COMMON"
-      },
-      {
-        "id": 1205,
-        "minimum": 1,
-        "maximum": 1,
-        "chance": "UNCOMMON"
-      }
-    ],
-    "rare": []
-  },
-  {
-    "ids": [
       1615
     ],
-    "dynamic": [
+    "unique": [
       {
         "id": 592,
         "minimum": 1,
@@ -42,16 +14,18 @@
         "id": 995,
         "minimum": 1000,
         "maximum": 100000,
-        "chance": "RARE"
-      }
-    ],
-    "rare": [
+        "chance": "UNCOMMON"
+      },
       {
         "id": 4151,
         "minimum": 1,
         "maximum": 1,
-        "chance": "VERY_RARE"
+        "chance": "RARE"
       }
+    ],
+    "common": [
+      "HIGH_HERBS",
+      "MED_RUNES"
     ]
   }
 ]
