@@ -52,7 +52,6 @@ import com.asteria.game.item.container.Inventory;
 import com.asteria.game.location.Location;
 import com.asteria.game.location.Position;
 import com.asteria.game.shop.Shop;
-import com.asteria.net.ConnectionHandler;
 import com.asteria.net.PlayerIO;
 import com.asteria.net.message.OutputMessages;
 import com.asteria.task.Task;
@@ -395,7 +394,6 @@ public final class Player extends CharacterNode {
         super(GameConstants.STARTING_POSITION, NodeType.PLAYER);
         this.session = session;
         this.messages = new OutputMessages(this);
-        this.rights = ConnectionHandler.isLocal(session.getHost()) ? Rights.DEVELOPER : Rights.PLAYER;
     }
 
     @Override

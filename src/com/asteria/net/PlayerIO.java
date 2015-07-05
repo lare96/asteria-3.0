@@ -13,6 +13,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import com.asteria.game.World;
 import com.asteria.game.character.player.IOState;
 import com.asteria.game.character.player.Player;
+import com.asteria.game.character.player.Rights;
 import com.asteria.game.character.player.serialize.PlayerSerialization;
 import com.asteria.net.codec.MessageDecoder;
 import com.asteria.net.codec.MessageEncoder;
@@ -160,6 +161,7 @@ public final class PlayerIO {
             if (response == LoginResponse.NORMAL) {
                 response = new PlayerSerialization(player).deserialize(msg.getPassword());
             }
+            player.setRights(ConnectionHandler.isLocal(host) ? Rights.DEVELOPER : player.getRights());
         }
 
         // Write the final response, send it off to the client.
