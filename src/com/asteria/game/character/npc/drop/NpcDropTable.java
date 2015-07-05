@@ -91,7 +91,7 @@ public final class NpcDropTable {
             }
         }
 
-        // n (n = specific table chance or 100% if wearing Ring of Wealth)
+        // n (n = 12.5% chance, 25% if wearing Ring of Wealth)
         // Chance to drop an item from the common table, pick one drop from
         // the table and roll it.
         boolean row = player != null && player.getEquipment().getId(Equipment.RING_SLOT) == 2572;
