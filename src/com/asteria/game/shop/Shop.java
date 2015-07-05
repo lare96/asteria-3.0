@@ -64,6 +64,11 @@ public final class Shop {
     private final Map<Integer, Integer> itemCache;
 
     /**
+     * The shop restock task that will restock the shops.
+     */
+    private ShopRestockTask restockTask;
+
+    /**
      * Creates a new {@link Shop}.
      *
      * @param name
@@ -142,9 +147,12 @@ public final class Shop {
         players.stream().filter(Objects::nonNull).forEach(p -> p.getMessages().sendItemsOnInterface(3900, container.container(), size));
 
         if (checkStock && restock) {
-            if (World.getTaskQueue().running(this) || !needsRestock())
+            if (restockTask != null && restockTask.isRunning())
                 return;
-            World.submit(new ShopRestockTask(this));
+            if (!needsRestock())
+                return;
+            restockTask = new ShopRestockTask(this);
+            World.submit(restockTask);
         }
     }
 

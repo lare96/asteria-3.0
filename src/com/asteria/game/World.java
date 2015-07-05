@@ -370,7 +370,6 @@ public final class World {
             session.setState(IOState.LOGGING_OUT);
             if (player.getOpenShop() != null)
                 Shop.SHOPS.get(player.getOpenShop()).getPlayers().remove(player);
-            World.getTaskQueue().cancel(player.getCombatBuilder());
             World.getTaskQueue().cancel(player);
             player.setSkillAction(false);
             World.getPlayers().remove(player);

@@ -33,6 +33,8 @@ public final class CombatSession extends Task {
      */
     public CombatSession(CombatBuilder builder) {
         super(1, false);
+        super.attach(builder.getCharacter().getType() == NodeType.PLAYER ? ((Player) builder.getCharacter()) : ((Npc) builder
+            .getCharacter()));
         this.builder = builder;
     }
 

@@ -85,17 +85,4 @@ public final class TaskQueue {
     public void cancel(Object key) {
         pendingTasks.stream().filter(t -> t.getKey().equals(key)).forEach(t -> t.cancel());
     }
-
-    /**
-     * Determines if any task with {@code key} as their key attachment is
-     * currently running.
-     *
-     * @param key
-     *            the key to determine this for.
-     * @return {@code true} if there is a running task with that key attachment,
-     *         {@code false} otherwise.
-     */
-    public boolean running(Object key) {
-        return pendingTasks.stream().anyMatch(t -> t.getKey().equals(key) && t.isRunning());
-    }
 }

@@ -38,6 +38,11 @@ public final class CombatBuilder {
     private CombatSession combatTask;
 
     /**
+     * The task that handles the pre-combat process.
+     */
+    private CombatDistanceListener distanceTask;
+
+    /**
      * The cache of damage dealt to this controller during combat.
      */
     private final CombatDamage damageCache = new CombatDamage();
@@ -94,8 +99,11 @@ public final class CombatBuilder {
             }
             return;
         }
-        World.getTaskQueue().cancel(this);
-        World.submit(new CombatDistanceListener(this, target));
+
+        if (distanceTask != null && distanceTask.isRunning())
+            distanceTask.cancel();
+        distanceTask = new CombatDistanceListener(this, target);
+        World.submit(distanceTask);
     }
 
     /**
@@ -107,11 +115,12 @@ public final class CombatBuilder {
     }
 
     /**
-     * Resets this builder by canceling the {@link CombatBuilder#combatTask} if
-     * it's running and discarding various values associated with the combat
-     * process.
+     * Resets this builder by discarding various values associated with the
+     * combat process.
      */
     public void reset() {
+        if (distanceTask != null)
+            distanceTask.cancel();
         if (combatTask != null)
             combatTask.cancel();
         currentVictim = null;
@@ -307,7 +316,7 @@ public final class CombatBuilder {
      * An {@link EventListener} implementation that is used to listen for the
      * controller to become in proper range of the victim.
      *
-     * @author lare96
+     * @author lare96 <http://github.com/lare96>
      */
     private static final class CombatDistanceListener extends EventListener {
 
@@ -330,7 +339,8 @@ public final class CombatBuilder {
          *            the victim that will be listened for.
          */
         public CombatDistanceListener(CombatBuilder builder, CharacterNode victim) {
-            super.attach(builder);
+            super.attach(builder.getCharacter().getType() == NodeType.PLAYER ? ((Player) builder.getCharacter()) : ((Npc) builder
+                .getCharacter()));
             this.builder = builder;
             this.victim = victim;
         }
