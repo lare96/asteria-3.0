@@ -73,24 +73,29 @@ public final class ItemNodeManager extends Task {
     public static boolean register(ItemNode item, boolean stack) {
         if (item.isRegistered())
             return false;
+        if (stack) {
+            Iterator<ItemNode> it = ITEMS.iterator();
+            while (it.hasNext()) {
+                ItemNode next = it.next();
+                if (next.getPlayer() == null || next.getPosition() == null || next.getItem() == null)
+                    continue;
+                if (next.getItem().getId() == item.getItem().getId() && next.getPosition().equals(item.getPosition()) && next.getPlayer()
+                    .equals(item.getPlayer())) {
+                    next.getItem().incrementAmountBy(item.getItem().getAmount());
+                    if (next.getItem().getAmount() <= 5) {
+                        next.dispose();
+                        next.create();
+                    }
+                    return true;
+                }
+            }
+            ITEMS.add(item);
+            item.create();
+            item.setRegistered(true);
+            return true;
+        }
         if (item.getItem().getDefinition().isStackable()) {
             if (ITEMS.add(item)) {
-                if (stack) {
-                    int counter = 0;
-                    for (Iterator<ItemNode> it = ITEMS.iterator(); it.hasNext();) {
-                        ItemNode next = it.next();
-                        if (next.getPlayer() == null || next.getPosition() == null || next.getItem() == null)
-                            continue;
-                        if (next.getItem().getId() == item.getItem().getId() && next.getPosition().equals(item.getPosition()) && next
-                            .getPlayer().equals(item.getPlayer())) {
-                            counter += next.getItem().getAmount();
-                            next.dispose();
-                            next.setRegistered(false);
-                            it.remove();
-                        }
-                    }
-                    item.getItem().incrementAmountBy(counter);
-                }
                 item.create();
                 item.setRegistered(true);
                 return true;

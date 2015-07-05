@@ -91,7 +91,7 @@ public final class CombatSessionAttack extends Task {
                 attacker.getCurrentlyCasting().endGraphic().ifPresent(victim::graphic);
                 attacker.getCurrentlyCasting().executeOnHit(attacker, victim, true, counter);
                 attacker.setCurrentlyCasting(null);
-            } else if (data.getType() == CombatType.RANGED && attacker.getType() == NodeType.PLAYER && random.get().nextBoolean()) {
+            } else if (data.getType() == CombatType.RANGED && attacker.getType() == NodeType.PLAYER && random.inclusive(2) == 0) {
                 Player player = (Player) attacker;
                 if (player.getFireAmmo() > 0) {
                     ItemNodeManager.register(new ItemNode(new Item(player.getFireAmmo()), victim.getPosition(), player), true);
