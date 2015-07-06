@@ -33,7 +33,6 @@ import com.asteria.game.character.player.skill.Skills;
 import com.asteria.game.item.Item;
 import com.asteria.game.item.container.Equipment;
 import com.asteria.game.location.Position;
-import com.asteria.utility.CollectionUtils;
 import com.asteria.utility.RandomGen;
 
 /**
@@ -302,7 +301,7 @@ public final class Combat {
      *            the action to execute for each victim.
      */
     public static void damagePlayersWithin(CharacterNode attacker, Position position, int radius, int hits, CombatType type, boolean checkAccuracy, Consumer<Player> action) {
-        damageCharactersWithin(attacker, CollectionUtils.newIterable(World.getLocalPlayers(attacker)), position, radius, hits, type,
+        damageCharactersWithin(attacker, () -> World.getLocalPlayers(attacker), position, radius, hits, type,
             checkAccuracy, action);
     }
 
@@ -351,7 +350,7 @@ public final class Combat {
      *            the action to execute for each victim.
      */
     public static void damageNpcsWithin(CharacterNode attacker, Position position, int radius, int hits, CombatType type, boolean checkAccuracy, Consumer<Npc> action) {
-        damageCharactersWithin(attacker, CollectionUtils.newIterable(World.getLocalNpcs(attacker)), position, radius, hits, type,
+        damageCharactersWithin(attacker, () -> World.getLocalNpcs(attacker), position, radius, hits, type,
             checkAccuracy, action);
     }
 

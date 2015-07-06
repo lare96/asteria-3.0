@@ -36,7 +36,7 @@ final class Commands implements PluginListener<CommandPlugin> {
         // class.
         if (player.rights.greater(Rights.ADMINISTRATOR)) {
             switch (cmd[0]) {
-                case "simulate":
+                case "s":
                     int id = Integer.parseInt cmd[1]
                     int amount = Integer.parseInt cmd[2]
                     NpcDropTable table = NpcDropManager.TABLES.get id

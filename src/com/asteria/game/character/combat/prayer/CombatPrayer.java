@@ -1,16 +1,13 @@
 package com.asteria.game.character.combat.prayer;
 
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.stream.Collectors;
 
 import com.asteria.game.World;
 import com.asteria.game.character.Flag;
 import com.asteria.game.character.player.Player;
 import com.asteria.game.character.player.skill.Skills;
 import com.asteria.utility.BitMask;
-import com.asteria.utility.CollectionUtils;
-import com.asteria.utility.CollectionUtils.ImmutableMapBuilder;
 import com.asteria.utility.TextUtils;
 import com.google.common.collect.ImmutableMap;
 
@@ -45,15 +42,8 @@ public enum CombatPrayer {
      * The cached array that will contain mappings of all the elements to their
      * identifiers.
      */
-    public static final ImmutableMap<Integer, CombatPrayer> PRAYERS = CollectionUtils
-        .build(new ImmutableMapBuilder<Integer, CombatPrayer>() {
-            @Override
-            public Map<Integer, CombatPrayer> build() {
-                Map<Integer, CombatPrayer> map = new HashMap<>();
-                Arrays.stream(values()).forEach(it -> map.put(it.id, it));
-                return map;
-            }
-        });
+    public static final ImmutableMap<Integer, CombatPrayer> PRAYERS = ImmutableMap.<Integer, CombatPrayer> builder().putAll(
+        Arrays.stream(values()).collect(Collectors.toMap($it -> $it.id, $it -> $it))).build();
 
     /**
      * The identification for this prayer.

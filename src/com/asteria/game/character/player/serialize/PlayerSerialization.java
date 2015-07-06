@@ -25,7 +25,6 @@ import com.asteria.game.item.container.Equipment;
 import com.asteria.game.item.container.Inventory;
 import com.asteria.game.location.Position;
 import com.asteria.net.login.LoginResponse;
-import com.asteria.utility.ArrayUtils;
 import com.asteria.utility.MutableNumber;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -157,7 +156,7 @@ public final class PlayerSerialization {
         MutableNumber percentage = p.getSpecialPercentage();
         tokens.add(new TokenSerializer("special-amount", percentage.get(), n -> percentage.set(n.getAsInt())));
         Skill[] skills = p.getSkills();
-        tokens.add(new TokenSerializer("skills", skills, n -> ArrayUtils.dump(b.fromJson(n, Skill[].class), skills)));
+        tokens.add(new TokenSerializer("skills", skills, n -> System.arraycopy(b.fromJson(n, Skill[].class), 0, skills, 0, skills.length)));
     }
 
     /**

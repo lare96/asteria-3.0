@@ -12,8 +12,6 @@ import java.util.Arrays;
 import com.asteria.game.character.player.Player;
 import com.asteria.game.item.Item;
 import com.asteria.game.item.container.Equipment;
-import com.asteria.utility.CollectionUtils;
-import com.asteria.utility.CollectionUtils.ImmutableMultimapBuilder;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.ImmutableCollection;
@@ -49,15 +47,7 @@ public enum CombatRangedBow {
      * when checking for arrows. This collection is immutable which means that
      * no elements can be added or removed from it.
      */
-    private static final ImmutableMultimap<Integer, CombatRangedAmmo> WEAPONS = CollectionUtils
-        .build(new ImmutableMultimapBuilder<Integer, CombatRangedAmmo>() {
-            @Override
-            public Multimap<Integer, CombatRangedAmmo> build() {
-                Multimap<Integer, CombatRangedAmmo> map = HashMultimap.create();
-                Arrays.stream(values()).forEach($it -> map.putAll($it.id, Arrays.asList($it.ammo)));
-                return map;
-            }
-        });
+    private static final ImmutableMultimap<Integer, CombatRangedAmmo> WEAPONS = ImmutableMultimap.copyOf(get());
 
     /**
      * The item identification for this ranged weapon.
@@ -80,6 +70,18 @@ public enum CombatRangedBow {
     private CombatRangedBow(int id, CombatRangedAmmo... ammo) {
         this.id = id;
         this.ammo = ammo;
+    }
+    
+    /**
+     * Retrieves the {@link Multimap} that holds the contents of this
+     * enumeration.
+     * 
+     * @return the multimap that holds the contents of this enumeration.
+     */
+    private static Multimap<Integer, CombatRangedAmmo> get() {
+        Multimap<Integer, CombatRangedAmmo> map = HashMultimap.create();
+        Arrays.stream(values()).forEach($it -> map.putAll($it.id, Arrays.asList($it.ammo)));
+        return map;
     }
 
     /**
