@@ -286,6 +286,48 @@ public class ItemContainer implements Iterable<Item> {
     }
 
     /**
+     * Attempts to replace the first occurrence of {@code oldId} with
+     * {@code newId}. If {@code oldId} isn't in this container {@code newId}
+     * will not be added.
+     * 
+     * @param oldId
+     *            the identifier to replace.
+     * @param newId
+     *            the identifier to replace with.
+     * @return {@code true} if the operation was successful, {@code false}
+     *         otherwise.
+     */
+    public boolean replace(int oldId, int newId) {
+        int idx = searchSlot(oldId);
+        if (idx == -1)
+            return false;
+        Item onSlot = get(idx);
+        if (remove(onSlot, idx)) {
+            boolean successful = add(new Item(newId, onSlot.getAmount()), idx);
+            return successful;
+        }
+        return false;
+    }
+
+    /**
+     * Attempts to replace all occurrences of {@code oldId} with {@code newId}.
+     * If {@code oldId} isn't in this container {@code newId} will not be added.
+     * 
+     * @param oldId
+     *            the identifier to replace.
+     * @param newId
+     *            the identifier to replace with.
+     * @return {@code true} if at least one replace operation was successful,
+     *         {@code false} otherwise.
+     */
+    public boolean replaceAll(int oldId, int newId) {
+        boolean successful = false;
+        while(replace(oldId, newId))
+            successful = true;
+        return successful;
+    }
+
+    /**
      * Determines if there is enough space in this container for {@code item}.
      *
      * @param item
