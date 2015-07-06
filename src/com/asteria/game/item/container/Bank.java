@@ -118,6 +118,12 @@ public final class Bank extends ItemContainer {
         boolean withdrawItemNoted = item.getDefinition().isNoteable();
         int withdrawAmount = amount(item.getId());
 
+        if (player.isWithdrawAsNote() && !withdrawItemNoted) {
+            player.getMessages().sendMessage("This item can't be withdrawn as " + "a note.");
+            player.setWithdrawAsNote(false);
+            player.getMessages().sendByteState(115, 0);
+        }
+
         if (free(bankSlot)) {
             return false;
         }
@@ -143,15 +149,6 @@ public final class Bank extends ItemContainer {
             }
         }
 
-        if (player.isWithdrawAsNote() && !withdrawItemNoted) {
-            player.getMessages().sendMessage("This item can't be withdrawn as " + "a note.");
-            player.setWithdrawAsNote(false);
-            player.getMessages().sendByteState(115, 0);
-
-            if (!item.getDefinition().isStackable()) {
-                item.setAmount(player.getInventory().remaining());
-            }
-        }
         super.remove(item, bankSlot);
         if (player.isWithdrawAsNote()) {
             item.setId(item.getId() + 1);
