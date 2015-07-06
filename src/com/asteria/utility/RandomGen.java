@@ -239,6 +239,167 @@ public final class RandomGen {
     }
 
     /**
+     * An implementation of the Fisher-Yates shuffle algorithm that will shuffle
+     * the elements of an {@code T} array.
+     * 
+     * @param array
+     *            the array that will be shuffled.
+     * @return the shuffled array.
+     */
+    public <T> T[] shuffle(T[] array) {
+        for (int i = array.length - 1; i > 0; i--) {
+            int index = random.nextInt(i + 1);
+            T a = array[index];
+            array[index] = array[i];
+            array[i] = a;
+        }
+        return array;
+    }
+
+    /**
+     * An implementation of the Fisher-Yates shuffle algorithm that will shuffle
+     * the elements of an {@code int} array.
+     * 
+     * @param array
+     *            the array that will be shuffled.
+     * @return the shuffled array.
+     */
+    public int[] shuffle(int[] array) {
+        for (int i = array.length - 1; i > 0; i--) {
+            int index = random.nextInt(i + 1);
+            int a = array[index];
+            array[index] = array[i];
+            array[i] = a;
+        }
+        return array;
+    }
+
+    /**
+     * An implementation of the Fisher-Yates shuffle algorithm that will shuffle
+     * the elements of an {@code long} array.
+     * 
+     * @param array
+     *            the array that will be shuffled.
+     * @return the shuffled array.
+     */
+    public long[] shuffle(long[] array) {
+        for (int i = array.length - 1; i > 0; i--) {
+            int index = random.nextInt(i + 1);
+            long a = array[index];
+            array[index] = array[i];
+            array[i] = a;
+        }
+        return array;
+    }
+
+    /**
+     * An implementation of the Fisher-Yates shuffle algorithm that will shuffle
+     * the elements of an {@code double} array.
+     * 
+     * @param array
+     *            the array that will be shuffled.
+     * @return the shuffled array.
+     */
+    public double[] shuffle(double[] array) {
+        for (int i = array.length - 1; i > 0; i--) {
+            int index = random.nextInt(i + 1);
+            double a = array[index];
+            array[index] = array[i];
+            array[i] = a;
+        }
+        return array;
+    }
+
+    /**
+     * An implementation of the Fisher-Yates shuffle algorithm that will shuffle
+     * the elements of an {@code short} array.
+     * 
+     * @param array
+     *            the array that will be shuffled.
+     * @return the shuffled array.
+     */
+    public short[] shuffle(short[] array) {
+        for (int i = array.length - 1; i > 0; i--) {
+            int index = random.nextInt(i + 1);
+            short a = array[index];
+            array[index] = array[i];
+            array[i] = a;
+        }
+        return array;
+    }
+
+    /**
+     * An implementation of the Fisher-Yates shuffle algorithm that will shuffle
+     * the elements of an {@code byte} array.
+     * 
+     * @param array
+     *            the array that will be shuffled.
+     * @return the shuffled array.
+     */
+    public byte[] shuffle(byte[] array) {
+        for (int i = array.length - 1; i > 0; i--) {
+            int index = random.nextInt(i + 1);
+            byte a = array[index];
+            array[index] = array[i];
+            array[i] = a;
+        }
+        return array;
+    }
+
+    /**
+     * An implementation of the Fisher-Yates shuffle algorithm that will shuffle
+     * the elements of an {@code float} array.
+     * 
+     * @param array
+     *            the array that will be shuffled.
+     * @return the shuffled array.
+     */
+    public float[] shuffle(float[] array) {
+        for (int i = array.length - 1; i > 0; i--) {
+            int index = random.nextInt(i + 1);
+            float a = array[index];
+            array[index] = array[i];
+            array[i] = a;
+        }
+        return array;
+    }
+
+    /**
+     * An implementation of the Fisher-Yates shuffle algorithm that will shuffle
+     * the elements of an {@code boolean} array.
+     * 
+     * @param array
+     *            the array that will be shuffled.
+     * @return the shuffled array.
+     */
+    public boolean[] shuffle(boolean[] array) {
+        for (int i = array.length - 1; i > 0; i--) {
+            int index = random.nextInt(i + 1);
+            boolean a = array[index];
+            array[index] = array[i];
+            array[i] = a;
+        }
+        return array;
+    }
+
+    /**
+     * An implementation of the Fisher-Yates shuffle algorithm that will shuffle
+     * the elements of an {@code char} array.
+     * 
+     * @param array
+     *            the array that will be shuffled.
+     */
+    public char[] shuffle(char[] array) {
+        for (int i = array.length - 1; i > 0; i--) {
+            int index = random.nextInt(i + 1);
+            char a = array[index];
+            array[index] = array[i];
+            array[i] = a;
+        }
+        return array;
+    }
+
+    /**
      * Determines if a pseudorandomly generated double rounded to two decimal
      * places is below or equal to {@code value}.
      * 
