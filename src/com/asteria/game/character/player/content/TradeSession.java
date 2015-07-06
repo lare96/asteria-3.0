@@ -1,8 +1,5 @@
 package com.asteria.game.character.player.content;
 
-import java.util.Arrays;
-
-import com.asteria.game.GameConstants;
 import com.asteria.game.character.player.IOState;
 import com.asteria.game.character.player.Player;
 import com.asteria.game.character.player.Rights;
@@ -61,7 +58,7 @@ public final class TradeSession {
             return;
         if (!Item.valid(item) || !player.getInventory().contains(item.getId()))
             return;
-        if (Arrays.stream(GameConstants.ITEM_UNTRADEABLE).anyMatch(i -> i == item.getId())) {
+        if (!item.getDefinition().isTradeable()) {
             player.getMessages().sendMessage("You cannot trade this item!");
             return;
         }

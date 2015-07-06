@@ -1,6 +1,5 @@
 package com.asteria.game.character.player;
 
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -75,10 +74,10 @@ public final class PlayerDeath extends CharacterDeath<Player> {
             character.move(optional.get().deathPosition(character));
             return;
         }
-        if (character.getRights().less(Rights.ADMINISTRATOR)) {
+        // if (character.getRights().less(Rights.ADMINISTRATOR)) {
             calculateDropItems(character, killer);
             character.move(new Position(3093, 3244));
-        }
+        // }
     }
 
     @Override
@@ -115,12 +114,22 @@ public final class PlayerDeath extends CharacterDeath<Player> {
      */
     private void calculateDropItems(Player character, Optional<Player> killer) {
         List<Item> keep = new LinkedList<>();
-        Arrays.stream(GameConstants.ITEM_UNTRADEABLE).filter(
-            id -> character.getEquipment().unequipItem(new Item(id), false) || character.getInventory().remove(new Item(id))).forEach(
-            id -> keep.add(new Item(id)));
         List<Item> items = new LinkedList<>();
-        character.getEquipment().forEach(items::add);
-        character.getInventory().forEach(items::add);
+
+        character.getEquipment().forEach($it -> {
+            if($it.getDefinition().isTradeable()) {
+                items.add($it);
+            } else {
+                keep.add($it);
+            }
+        });
+        character.getInventory().forEach($it -> {
+            if ($it.getDefinition().isTradeable()) {
+                items.add($it);
+            } else {
+                keep.add($it);
+            }
+        });
         if (items.size() > 0) {
             character.getEquipment().clear();
             character.getInventory().clear();

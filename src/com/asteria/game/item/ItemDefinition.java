@@ -90,6 +90,11 @@ public final class ItemDefinition {
     private final boolean platebody;
 
     /**
+     * The flag that determines if this item is tradeable.
+     */
+    private final boolean tradeable;
+
+    /**
      * Creates a new {@link ItemDefinition}.
      *
      * @param id
@@ -122,10 +127,12 @@ public final class ItemDefinition {
      *            the flag that determines if this item is a full helmet.
      * @param platebody
      *            the flag that determines if this item is a platebody.
+     * @param tradeable
+     *            the flag that determines if this item is tradeable.
      */
     public ItemDefinition(int id, String name, String description, int equipmentSlot, boolean noteable, boolean stackable,
         int specialPrice, int generalPrice, int lowAlchValue, int highAlchValue, double weight, int[] bonus, boolean twoHanded,
-        boolean fullHelm, boolean platebody) {
+        boolean fullHelm, boolean platebody, boolean tradeable) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -141,6 +148,7 @@ public final class ItemDefinition {
         this.twoHanded = twoHanded;
         this.fullHelm = fullHelm;
         this.platebody = platebody;
+        this.tradeable = tradeable;
         prayerBonus();
     }
 
@@ -298,5 +306,14 @@ public final class ItemDefinition {
      */
     public boolean isPlatebody() {
         return platebody;
+    }
+
+    /**
+     * Determines if this item is tradeable.
+     * 
+     * @return {@code true} if this item is tradeable, {@code false} otherwise.
+     */
+    public boolean isTradeable() {
+        return tradeable;
     }
 }

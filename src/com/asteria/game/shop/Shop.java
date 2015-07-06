@@ -171,7 +171,7 @@ public final class Shop {
             player.getMessages().sendMessage("You cannot sell any items to this store.");
             return;
         }
-        if (Arrays.stream(GameConstants.BANNED_SHOP_ITEMS).anyMatch(i -> i == item.getId())) {
+        if (Arrays.stream(GameConstants.INVALID_SHOP_ITEMS).anyMatch(i -> i == item.getId())) {
             player.getMessages().sendMessage("You can't sell " + itemName + " " + "here.");
             return;
         }
@@ -274,7 +274,7 @@ public final class Shop {
             player.getMessages().sendMessage("You cannot sell items here.");
             return false;
         }
-        if (Arrays.stream(GameConstants.BANNED_SHOP_ITEMS).anyMatch(i -> i == item.getId())) {
+        if (Arrays.stream(GameConstants.INVALID_SHOP_ITEMS).anyMatch(i -> i == item.getId())) {
             player.getMessages().sendMessage("You can't sell " + item.getDefinition().getName() + " here.");
             return false;
         }

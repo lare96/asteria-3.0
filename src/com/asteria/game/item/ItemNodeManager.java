@@ -95,18 +95,17 @@ public final class ItemNodeManager extends Task {
             return true;
         }
         if (item.getItem().getDefinition().isStackable()) {
-            if (ITEMS.add(item)) {
-                item.create();
-                item.setRegistered(true);
-                return true;
-            }
-            return false;
+            ITEMS.add(item);
+            item.create();
+            item.setRegistered(true);
+            return true;
         }
-        for (int amount = 0; amount < item.getItem().getAmount(); amount++) {
-            ItemNode node = new ItemNode(new Item(item.getItem().getId(), 1), item.getPosition(), item.getPlayer());
-            ITEMS.add(node);
-            node.create();
-            node.setRegistered(true);
+        int amount = item.getItem().getAmount();
+        item.getItem().setAmount(1);
+        for (int i = 0; i < amount; i++) {
+            ITEMS.add(item);
+            item.create();
+            item.setRegistered(true);
         }
         return true;
     }

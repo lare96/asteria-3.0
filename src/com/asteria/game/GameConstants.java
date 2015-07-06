@@ -22,12 +22,17 @@ public final class GameConstants {
      * be periodically forced to clean itself rather than doing it manually on
      * read and writes. Making this value {@code true} will keep memory usage
      * lower, at the cost of increased CPU usage (and vice-versa).
+     * <p>
+     * <p>
+     * This value should be {@code true} if you prioritize memory > CPU usage,
+     * and {@code false} if you prioritize CPU usage > memory.
      */
     public static final boolean CLEAN_CACHE = false;
 
     /**
-     * The default time that all utility threads will go idle on after not
-     * receiving any tasks.
+     * The default time in {@code SECONDS} that all utility threads will go idle
+     * on after not receiving any tasks. This is in place to ensure that threads
+     * that are not receiving work aren't taking up any resources.
      */
     public static final int THREAD_TIMEOUT = 45;
 
@@ -40,7 +45,7 @@ public final class GameConstants {
      * How long the player will stay logged in for after they have x-logged
      * during combat.
      */
-    public static final int INVALID_LOGOUT_SECONDS = 90;
+    public static final int LOGOUT_SECONDS = 90;
 
     /**
      * The flag that determines if processing should be parallelized, improving
@@ -69,7 +74,8 @@ public final class GameConstants {
     public static final int TARGET_DISTANCE = 6;
 
     /**
-     * The maximum amount of drops that can be rolled from the unique table.
+     * The maximum amount of drops that can be rolled from the dynamic drop
+     * table.
      */
     public static final int DROP_THRESHOLD = 2;
 
@@ -97,18 +103,7 @@ public final class GameConstants {
     /**
      * The items that are not allowed to be bought or sold in shops.
      */
-    public static final int[] BANNED_SHOP_ITEMS = { 995 };
-
-    /**
-     * The items that are not allowed to be traded.
-     */
-    public static final int[] ITEM_UNTRADEABLE = { 6570 };
-
-    /**
-     * The items that are obtained through caskets.
-     */
-    public static final Item[] CASKET_ITEMS = { new Item(1061), new Item(592), new Item(1059), new Item(995, 100000), new Item(4212),
-            new Item(995, 50000), new Item(401), new Item(995, 150000), new Item(407) };
+    public static final int[] INVALID_SHOP_ITEMS = { 995 };
 
     /**
      * The message that will be sent on every login.

@@ -36,7 +36,7 @@ public final class ShopLoader extends JsonLoader {
         Currency currency = Objects.requireNonNull(Currency.valueOf(reader.get("currency").getAsString()));
 
         Shop shop = new Shop(name, items, restock, sellItems, currency);
-        OptionalInt op = Arrays.stream(GameConstants.BANNED_SHOP_ITEMS).filter(shop.getContainer()::contains).findFirst();
+        OptionalInt op = Arrays.stream(GameConstants.INVALID_SHOP_ITEMS).filter(shop.getContainer()::contains).findFirst();
 
         if (op.isPresent())
             throw new IllegalStateException("Item not allowed in shops: " + ItemDefinition.DEFINITIONS[op.getAsInt()].getName());
