@@ -285,7 +285,6 @@ public final class CharacterList<E extends CharacterNode> implements Iterable<E>
             if (index >= list.capacity()) {
                 throw new ArrayIndexOutOfBoundsException("There are no " + "elements left to iterate over!");
             }
-
             lastIndex = index;
             index++;
             return list.characters[lastIndex];
@@ -297,7 +296,6 @@ public final class CharacterList<E extends CharacterNode> implements Iterable<E>
                 throw new IllegalStateException("This method can only be " + "called once after \"next\".");
             }
             list.remove(list.characters[lastIndex]);
-            index = lastIndex;
             lastIndex = -1;
         }
     }
