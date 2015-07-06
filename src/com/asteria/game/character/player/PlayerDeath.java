@@ -74,10 +74,10 @@ public final class PlayerDeath extends CharacterDeath<Player> {
             character.move(optional.get().deathPosition(character));
             return;
         }
-        // if (character.getRights().less(Rights.ADMINISTRATOR)) {
+        if (character.getRights().less(Rights.ADMINISTRATOR)) {
             calculateDropItems(character, killer);
             character.move(new Position(3093, 3244));
-        // }
+        }
     }
 
     @Override
