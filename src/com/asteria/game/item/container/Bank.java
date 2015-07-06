@@ -57,7 +57,10 @@ public final class Bank extends ItemContainer {
      * @return {@code true} if the item was deposited, {@code false} otherwise.
      */
     public boolean depositFromInventory(int inventorySlot, int amount) {
-        Item item = new Item(player.getInventory().get(inventorySlot).getId(), amount);
+        Item invItem = player.getInventory().get(inventorySlot);
+        if(invItem == null)
+            return false;
+        Item item = new Item(invItem.getId(), amount);
         int count = player.getInventory().amount(item.getId());
 
         if (item.getAmount() > count) {
