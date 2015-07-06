@@ -50,6 +50,11 @@ public final class NpcDrop {
         this.chance = chance;
     }
 
+    @Override
+    public String toString() {
+        return "NPC_DROP[id= " + id + ", min= " + minimum + ", max= " + maximum + ", chance= " + chance + "]";
+    }
+
     /**
      * Converts this {@code NpcDrop} into an {@link Item} Object.
      *

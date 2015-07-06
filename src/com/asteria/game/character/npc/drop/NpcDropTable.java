@@ -1,6 +1,7 @@
 package com.asteria.game.character.npc.drop;
 
-import java.util.Collections;
+import static com.asteria.utility.Chance.RARE;
+
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -9,8 +10,8 @@ import com.asteria.game.GameConstants;
 import com.asteria.game.character.player.Player;
 import com.asteria.game.item.Item;
 import com.asteria.game.item.container.Equipment;
+import com.asteria.utility.ArrayIterator;
 import com.asteria.utility.Chance;
-import com.asteria.utility.CollectionUtils;
 import com.asteria.utility.RandomGen;
 
 /**
@@ -60,59 +61,55 @@ public final class NpcDropTable {
         // shuffled copy of the unique table.
         RandomGen random = new RandomGen();
         List<Item> items = new LinkedList<>();
-        List<NpcDrop> rareTable = new LinkedList<>();
         NpcDropCache cache = random.random(common);
-        LinkedList<NpcDrop> copyItems = CollectionUtils.newLinkedList(unique);
-        Collections.shuffle(copyItems);
+        Iterator<NpcDrop> $it = new ArrayIterator<>(random.shuffle(unique.clone()));
 
-        // Iterate through the unique table, drop ALWAYS items and add RARE+
-        // items to the rare table.
-        Iterator<NpcDrop> $it = copyItems.iterator();
+        // Determines if the rare, common, and dynamic tables should be rolled.
+        // The breakdown of each of the formulas are touched upon later on.
+        boolean rollRare = random.get().nextInt(5) == 0; // 20% chance.
+        boolean rollCommon = player != null && player.getEquipment().getId(Equipment.RING_SLOT) == 2572 ? random.get().nextInt(4) == 0
+            : random.get().nextInt(8) == 0; // 12.5%-25% chance.
+        boolean rollDynamic = random.get().nextBoolean(); // 50% chance.
+
+        // Iterate through the unique table, drop ALWAYS items, roll a RARE+
+        // item if possible, and roll dynamic items if possible.
+        int amount = 0;
         while ($it.hasNext()) {
             NpcDrop next = $it.next();
-            if (next.getChance() == Chance.ALWAYS) {
-                items.add(next.toItem(random));
-                $it.remove();
-            } else if (next.getChance().getTier() >= Chance.RARE.getTier()) {
-                rareTable.add(next);
-                $it.remove();
-            }
-        }
+            Chance chance = next.getChance();
 
-        // 50% Chance to drop an item from the unique table, pick DROP_THRESHOLD
-        // amount of dynamic drops from the table and roll them.
-        if (random.get().nextBoolean()) {
-            for (int amount = 0; amount < GameConstants.DROP_THRESHOLD; amount++) {
-                if (copyItems.size() == 0)
-                    break;
-                NpcDrop next = copyItems.remove();
+            if (chance.getTier() == 0) {
+
+                // 100% Chance to drop an item from the always table, the lowest
+                // Chance tier.
+                items.add(next.toItem(random));
+            } else if (chance.getTier() >= RARE.getTier() && rollRare) {
+
+                // 20% Chance to roll an item from the rare table, pick one drop
+                // from the table and roll it.
+                if (chance.successful(random))
+                    items.add(next.toItem(random));
+                rollRare = false;
+            } else if (rollDynamic && chance.getTier() < RARE.getTier()) {
+
+                // 50% Chance to roll an item from the dynamic table, pick one
+                // drop from the table and roll it.
+                if (amount++ == GameConstants.DROP_THRESHOLD)
+                    rollDynamic = false;
                 if (next.getChance().successful(random))
                     items.add(next.toItem(random));
             }
-        }
 
-        // n (n = 12.5% chance, 25% if wearing Ring of Wealth)
-        // Chance to drop an item from the common table, pick one drop from
-        // the table and roll it.
-        boolean row = player != null && player.getEquipment().getId(Equipment.RING_SLOT) == 2572;
-        int denominator = row ? 4 : 8;
-        if (random.get().nextInt(denominator) == 0) {
-            NpcDrop next = random.random(NpcDropManager.COMMON.get(cache));
-            if (next.getChance().successful(random)) {
-                items.add(next.toItem(random));
-                if (row)
-                    player.getMessages().sendMessage("Your Ring of Wealth illuminates...");
+            if (!$it.hasNext() && rollCommon) {
+
+                // n (n = 12.5% chance, 25% if wearing Ring of Wealth)
+                // Chance to roll an item from the common table, pick one drop
+                // from the table and roll it.
+                next = random.random(NpcDropManager.COMMON.get(cache));
+                if (next.getChance().successful(random))
+                    items.add(next.toItem(random));
+                rollCommon = false;
             }
-        }
-
-        // 20% Chance to drop an item from the rare table, pick one drop from
-        // the table and roll it.
-        if (rareTable.size() == 0)
-            return items;
-        if (random.get().nextInt(5) == 0) {
-            NpcDrop next = random.random(rareTable);
-            if (next.getChance().successful(random))
-                items.add(next.toItem(random));
         }
         return items;
     }
