@@ -122,7 +122,7 @@ public final class World {
         Iterator<Player> $it = logouts.iterator();
         while ($it.hasNext()) {
             Player player = $it.next();
-            if (player == null || amount >= GameConstants.LOGIN_THRESHOLD)
+            if (player == null || amount >= GameConstants.LOGOUT_THRESHOLD)
                 break;
             if (handleLogout(player)) {
                 $it.remove();

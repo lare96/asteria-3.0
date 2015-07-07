@@ -28,12 +28,12 @@ public enum Chance {
     private final int tier;
 
     /**
-     * The numerator of this NPC drop rate.
+     * The numerator of this chance.
      */
     private final int numerator;
 
     /**
-     * The denominator of this NPC drop rate.
+     * The denominator of this chance.
      */
     private final int denominator;
 
@@ -43,9 +43,9 @@ public enum Chance {
      * @param tier
      *            the tier level of "rareness".
      * @param numerator
-     *            the numerator of this NPC drop rate.
+     *            the numerator of this chance.
      * @param denominator
-     *            the denominator of this NPC drop rate.
+     *            the denominator of this chance.
      */
     private Chance(int tier, int numerator, int denominator) {
         this.tier = tier;
@@ -54,7 +54,7 @@ public enum Chance {
     }
 
     /**
-     * Determines if an NPC drop will be successful or not.
+     * Determines if this chance will be successful or not.
      *
      * @param random
      *            the random number generator used to determine this.
@@ -120,7 +120,7 @@ public enum Chance {
     }
 
     /**
-     * Gets the numerator of this NPC drop rate.
+     * Gets the numerator of this chance.
      *
      * @return the numerator.
      */
@@ -129,7 +129,7 @@ public enum Chance {
     }
 
     /**
-     * Gets the denominator of this NPC drop rate.
+     * Gets the denominator of this chance.
      *
      * @return the denominator.
      */
