@@ -181,7 +181,7 @@ public final class Player extends CharacterNode {
     /**
      * The amount of authority this player has over others.
      */
-    private Rights rights;
+    private Rights rights = Rights.PLAYER;
 
     /**
      * The current username of this player.
