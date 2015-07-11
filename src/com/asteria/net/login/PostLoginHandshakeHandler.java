@@ -26,7 +26,8 @@ public final class PostLoginHandshakeHandler extends ByteToMessageDecoder {
 
         // Read the login type, validate it.
         if (in.readableBytes() < 2)
-            throw new InvalidLoginException(ctx.channel(), "Not enough bytes to read.");
+            return;
+
         int type = in.readByte();
         if (type != 16 && type != 18)
             throw new InvalidLoginException(ctx.channel(), "Invalid login type [" + type + "]");
@@ -37,7 +38,7 @@ public final class PostLoginHandshakeHandler extends ByteToMessageDecoder {
         if (loginEncryptPacketSize <= 0)
             throw new InvalidLoginException(ctx.channel(), "Invalid RSA packet size [" + loginEncryptPacketSize + "]");
         if (in.readableBytes() < blockLength)
-            throw new InvalidLoginException(ctx.channel(), "Not enough bytes to read for this block.");
+            return;
 
         // Read the client version, validate it.
         in.readByte();

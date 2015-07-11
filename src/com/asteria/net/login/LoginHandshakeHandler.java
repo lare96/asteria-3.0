@@ -26,7 +26,7 @@ public final class LoginHandshakeHandler extends ByteToMessageDecoder {
         // Read the initial request value, validate it.
         SecureRandom random = new SecureRandom();
         if (in.readableBytes() < 2)
-            throw new InvalidLoginException(ctx.channel(), "Not enough bytes to read.");
+            return;
 
         int request = in.readUnsignedByte();
         in.readByte();

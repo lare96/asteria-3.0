@@ -49,10 +49,9 @@ public final class MessageDecoder extends ByteToMessageDecoder {
 
         // Determine the opcode, size, if the message has a listener, and
         // retrieve the session attachment from the attribute map.
-        if (!in.isReadable()) {
-            ctx.channel().close();
+        if (!in.isReadable())
             return;
-        }
+
         PlayerIO session = ctx.channel().attr(NetworkConstants.SESSION_KEY).get();
         int opcode = -1;
         int size = -1;
@@ -81,10 +80,8 @@ public final class MessageDecoder extends ByteToMessageDecoder {
         // the exact size of the message.
         if (size == -1 || size == -2) {
             int bytes = size == -1 ? Byte.BYTES : Short.BYTES;
-            if (!in.isReadable(bytes)) {
-                ctx.channel().close();
+            if (!in.isReadable(bytes))
                 return;
-            }
             size = 0;
             for (int i = 0; i < bytes; i++) {
                 size |= in.readUnsignedByte() << 8 * (bytes - 1 - i);
@@ -94,10 +91,9 @@ public final class MessageDecoder extends ByteToMessageDecoder {
         // Finally, here we wrap the payload in our custom wrapper buffer
         // designed to decode data from the Runescape client. We then queue it
         // over to be received upstream by the channel handler.
-        if (!in.isReadable(size)) {
-            ctx.channel().close();
+        if (!in.isReadable(size))
             return;
-        }
+
         if (hasMessage) {
             ByteBuf buffer = in.readBytes(size);
             out.add(new InputMessage(opcode, size, MessageBuilder.create(buffer)));
