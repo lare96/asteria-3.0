@@ -75,22 +75,22 @@ public final class GameBuilder {
      */
     public Queue<Runnable> createBackgroundTasks() {
         Queue<Runnable> tasks = new ArrayDeque<>();
-        tasks.add(() -> new NpcDefinitionLoader().load());
-        tasks.add(() -> new ItemDefinitionLoader().load());
-        tasks.add(() -> new WeaponPoisonLoader().load());
-        tasks.add(() -> new MessageOpcodeLoader().load());
-        tasks.add(() -> new MessageSizeLoader().load());
+        tasks.add(() -> new NpcDefinitionLoader());
+        tasks.add(() -> new ItemDefinitionLoader());
+        tasks.add(() -> new WeaponPoisonLoader());
+        tasks.add(() -> new MessageOpcodeLoader());
+        tasks.add(() -> new MessageSizeLoader());
         tasks.add(ConnectionHandler::parseIPBans);
-        tasks.add(() -> new NpcNodeLoader().load());
-        tasks.add(() -> new ShopLoader().load());
-        tasks.add(() -> new ItemNodeLoader().load());
-        tasks.add(() -> new ObjectNodeLoader().load());
-        tasks.add(() -> new NpcDropTableLoader().load());
-        tasks.add(() -> new WeaponAnimationLoader().load());
-        tasks.add(() -> new WeaponInterfaceLoader().load());
-        tasks.add(() -> new EquipmentRequirementLoader().load());
-        tasks.add(() -> new ObjectNodeRemoveLoader().load());
-        tasks.add(() -> new NpcDropCacheLoader().load());
+        tasks.add(() -> new NpcNodeLoader());
+        tasks.add(() -> new ShopLoader());
+        tasks.add(() -> new ItemNodeLoader());
+        tasks.add(() -> new ObjectNodeLoader());
+        tasks.add(() -> new NpcDropTableLoader());
+        tasks.add(() -> new WeaponAnimationLoader());
+        tasks.add(() -> new WeaponInterfaceLoader());
+        tasks.add(() -> new EquipmentRequirementLoader());
+        tasks.add(() -> new ObjectNodeRemoveLoader());
+        tasks.add(() -> new NpcDropCacheLoader());
         tasks.add(World.getPlugins()::init);
         return tasks;
     }

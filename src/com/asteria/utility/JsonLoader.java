@@ -14,7 +14,7 @@ import com.google.gson.JsonParser;
  *
  * @author lare96 <http://github.com/lare96>
  */
-public abstract class JsonLoader {
+public abstract class JsonLoader implements Runnable {
 
     /**
      * The path to the {@code .json} file being parsed.
@@ -29,6 +29,11 @@ public abstract class JsonLoader {
      */
     public JsonLoader(String path) {
         this.path = path;
+    }
+
+    @Override
+    public void run() {
+        load();
     }
 
     /**
