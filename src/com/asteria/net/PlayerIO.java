@@ -124,7 +124,7 @@ public final class PlayerIO {
         // sequence.
         case LOGGED_IN:
             if (msg instanceof InputMessage) {
-                if (messageQueue.size() <= NetworkConstants.DECODE_LIMIT)
+                if (messageQueue.size() < NetworkConstants.DECODE_LIMIT)
                     messageQueue.add((InputMessage) msg);
             }
             break;
