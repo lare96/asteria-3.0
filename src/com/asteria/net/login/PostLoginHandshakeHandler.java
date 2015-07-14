@@ -30,13 +30,13 @@ public final class PostLoginHandshakeHandler extends ByteToMessageDecoder {
 
         int type = in.readByte();
         if (type != 16 && type != 18)
-            throw new InvalidLoginException(ctx.channel(), "Invalid login type [" + type + "]");
+            throw new Exception("Invalid login type [" + type + "]");
 
         // Decode the block length, validate RSA block size.
         int blockLength = in.readUnsignedByte();
         int loginEncryptPacketSize = blockLength - (36 + 1 + 1 + 2);
         if (loginEncryptPacketSize <= 0)
-            throw new InvalidLoginException(ctx.channel(), "Invalid RSA packet size [" + loginEncryptPacketSize + "]");
+            throw new Exception("Invalid RSA packet size [" + loginEncryptPacketSize + "]");
         if (in.readableBytes() < blockLength)
             return;
 
@@ -44,7 +44,7 @@ public final class PostLoginHandshakeHandler extends ByteToMessageDecoder {
         in.readByte();
         int version = in.readShort();
         if (version != 317)
-            throw new InvalidLoginException(ctx.channel(), "Invalid client version [" + version + "]");
+            throw new Exception("Invalid client version [" + version + "]");
 
         // Read and ignore the data for CRC keys.
         in.readByte();
@@ -66,7 +66,7 @@ public final class PostLoginHandshakeHandler extends ByteToMessageDecoder {
                 NetworkConstants.RSA_MODULUS).toByteArray());
             int rsaOpcode = rsaBuffer.readByte();
             if (rsaOpcode != 10)
-                throw new InvalidLoginException(ctx.channel(), "Invalid RSA opcode [" + rsaOpcode + "]");
+                throw new Exception("Invalid RSA opcode [" + rsaOpcode + "]");
             long clientHalf = rsaBuffer.readLong();
             long serverHalf = rsaBuffer.readLong();
             int[] isaacSeed = { (int) (clientHalf >> 32), (int) clientHalf, (int) (serverHalf >> 32), (int) serverHalf };
