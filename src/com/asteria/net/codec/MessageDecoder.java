@@ -58,6 +58,8 @@ public final class MessageDecoder extends ByteToMessageDecoder {
         boolean hasMessage = false;
         opcode = in.readUnsignedByte();
         opcode = (opcode - decryptor.getKey()) & 0xFF;
+        if (opcode < 0 || opcode > NetworkConstants.MESSAGE_SIZES.length)
+            return;
         size = NetworkConstants.MESSAGE_SIZES[opcode];
         hasMessage = NetworkConstants.MESSAGES[opcode] != null;
 
@@ -69,9 +71,8 @@ public final class MessageDecoder extends ByteToMessageDecoder {
                 // EMPTY_BUFFER because this message has no payload.
                 out.add(new InputMessage(opcode, size, MessageBuilder.create(Unpooled.EMPTY_BUFFER)));
             } else {
-                in.readBytes(new byte[size]);
                 if (Server.DEBUG)
-                    logger.info(session + " unhandled upstream message [opcode= " + opcode + ", size= " + size + "]");
+                    logger.info(session + " unhandled upstream message [opcode= " + opcode + "]");
             }
             return;
         }
@@ -98,7 +99,7 @@ public final class MessageDecoder extends ByteToMessageDecoder {
             ByteBuf buffer = in.readBytes(size);
             out.add(new InputMessage(opcode, size, MessageBuilder.create(buffer)));
         } else {
-            in.readBytes(new byte[size]);
+            in.readBytes(size);
             if (Server.DEBUG)
                 logger.info(session + " unhandled upstream message [opcode= " + opcode + ", size= " + size + "]");
         }
