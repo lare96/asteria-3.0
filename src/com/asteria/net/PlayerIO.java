@@ -174,7 +174,6 @@ public final class PlayerIO {
         // is sent to the client.
         ChannelFuture future = msg.getCtx().channel().writeAndFlush(resp);
         if (response != LoginResponse.NORMAL) {
-            msg.getCtx().pipeline().remove("post-login-handshake");
             future.addListener(ChannelFutureListener.CLOSE);
             return;
         }
