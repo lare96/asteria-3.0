@@ -6,6 +6,7 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.ByteToMessageDecoder;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Logger;
 
 import com.asteria.Server;
@@ -13,6 +14,7 @@ import com.asteria.net.ISAACCipher;
 import com.asteria.net.NetworkConstants;
 import com.asteria.net.PlayerIO;
 import com.asteria.net.message.InputMessage;
+import com.asteria.net.message.InputMessageListener;
 import com.asteria.net.message.MessageBuilder;
 import com.asteria.utility.LoggerUtils;
 
@@ -35,6 +37,21 @@ public final class MessageDecoder extends ByteToMessageDecoder {
     private final ISAACCipher decryptor;
 
     /**
+     * The state of the message being decoded.
+     */
+    private State state = State.OPCODE;
+
+    /**
+     * The opcode of the message being decoded.
+     */
+    private int opcode;
+
+    /**
+     * The size of the message being decoded.
+     */
+    private int size;
+
+    /**
      * Creates a new {@link MessageDecoder}.
      *
      * @param decryptor
@@ -46,62 +63,119 @@ public final class MessageDecoder extends ByteToMessageDecoder {
 
     @Override
     protected void decode(ChannelHandlerContext ctx, ByteBuf in, List<Object> out) throws Exception {
-
-        // Determine the opcode, size, if the message has a listener, and
-        // retrieve the session attachment from the attribute map.
-        if (!in.isReadable())
-            return;
-
-        PlayerIO session = ctx.channel().attr(NetworkConstants.SESSION_KEY).get();
-        int opcode = -1;
-        int size = -1;
-        boolean hasMessage = false;
-        opcode = in.readUnsignedByte();
-        opcode = (opcode - decryptor.getKey()) & 0xFF;
-        if (opcode < 0 || opcode > NetworkConstants.MESSAGE_SIZES.length)
-            return;
-        size = NetworkConstants.MESSAGE_SIZES[opcode];
-        hasMessage = NetworkConstants.MESSAGES[opcode] != null;
-
-        // The message has no payload to decode, so queue it over to be received
-        // upstream by the channel handler.
-        if (size == 0) {
-            if (hasMessage) {
-
-                // EMPTY_BUFFER because this message has no payload.
-                out.add(new InputMessage(opcode, size, MessageBuilder.create(Unpooled.EMPTY_BUFFER)));
-            } else {
-                if (Server.DEBUG)
-                    logger.info(session + " unhandled upstream message [opcode= " + opcode + "]");
-            }
-            return;
+        switch (state) {
+        case OPCODE:
+            opcode(ctx, in).ifPresent(out::add);
+            break;
+        case SIZE:
+            size(in);
+            break;
+        case PAYLOAD:
+            payload(ctx, in).ifPresent(out::add);
+            break;
         }
+    }
 
-        // The message is variable sized or variable short sized, so determine
-        // the exact size of the message.
-        if (size == -1 || size == -2) {
-            int bytes = size == -1 ? Byte.BYTES : Short.BYTES;
-            if (!in.isReadable(bytes))
-                return;
+    /**
+     * Decode the message opcode and determine the message type. If the message
+     * is variable sized set the next state to {@code SIZE}, otherwise set it to
+     * {@code PAYLOAD}.
+     * 
+     * @param ctx
+     *            the context for our channel, used to retrieve the session
+     *            instance.
+     * @param msg
+     *            the message to decode the opcode from.
+     * @return an optional containing a message with no payload, or an empty
+     *         optional.
+     */
+    private Optional<InputMessage> opcode(ChannelHandlerContext ctx, ByteBuf msg) {
+        if (msg.isReadable()) {
+            opcode = msg.readUnsignedByte();
+            opcode = (opcode - decryptor.getKey()) & 0xFF;
+            size = NetworkConstants.MESSAGE_SIZES[opcode];
+            if (size == 0)
+                return message(ctx, Unpooled.EMPTY_BUFFER);
+            state = size == NetworkConstants.VAR_SIZE || size == NetworkConstants.VAR_SIZE_SHORT ? State.SIZE : State.PAYLOAD;
+        }
+        return Optional.empty();
+    }
+
+    /**
+     * Decode the message size for variable sized messages, then set the state
+     * to {@code PAYLOAD}.
+     * 
+     * @param msg
+     *            the message to decode the size from.
+     */
+    private void size(ByteBuf msg) {
+        int bytes = size == NetworkConstants.VAR_SIZE ? Byte.BYTES : Short.BYTES;
+        if (msg.isReadable(bytes)) {
             size = 0;
-            for (int i = 0; i < bytes; i++) {
-                size |= in.readUnsignedByte() << 8 * (bytes - 1 - i);
-            }
+            for (int i = 0; i < bytes; i++)
+                size |= msg.readUnsignedByte() << 8 * (bytes - 1 - i);
+            state = State.PAYLOAD;
         }
+    }
 
-        // Finally, here we wrap the payload in our custom wrapper buffer
-        // designed to decode data from the Runescape client. We then queue it
-        // over to be received upstream by the channel handler.
-        if (!in.isReadable(size))
-            return;
+    /**
+     * Decode the payload for this message, then queue it over to be received
+     * upstream by the Netty channel handler.
+     * 
+     * @param ctx
+     *            the context for our channel, used to retrieve the session
+     *            instance.
+     * @param msg
+     *            the message to decode the payload from.
+     * @return an optional containing the successfully decoded
+     */
+    private Optional<InputMessage> payload(ChannelHandlerContext ctx, ByteBuf msg) {
+        if (msg.isReadable(size))
+            return message(ctx, msg.readBytes(size));
+        return Optional.empty();
+    }
 
-        if (hasMessage) {
-            ByteBuf buffer = in.readBytes(size);
-            out.add(new InputMessage(opcode, size, MessageBuilder.create(buffer)));
-        } else {
-            in.readBytes(size);
-            if (Server.DEBUG)
+    /**
+     * Determines if an {@link InputMessageListener} is available for the
+     * current opcode, if it is it returns a new {@code InputMessage} wrapped in
+     * an optional, if not it returns an empty optional. Before this method
+     * returns, the state is reset to {@code OPCODE} and the opcode and size
+     * values are reset to {@code -1}.
+     * 
+     * 
+     * @param ctx
+     *            the context for our channel, used to retrieve the session
+     *            instance.
+     * @param payload
+     *            the payload to pack in this message.
+     * @return an optional containing the message if available, an empty
+     *         optional otherwise.
+     */
+    private Optional<InputMessage> message(ChannelHandlerContext ctx, ByteBuf payload) {
+        try {
+            if (NetworkConstants.MESSAGES[opcode] != null)
+                return Optional.of(new InputMessage(opcode, size, MessageBuilder.create(payload)));
+            if (Server.DEBUG) {
+                PlayerIO session = ctx.channel().attr(NetworkConstants.SESSION_KEY).get();
                 logger.info(session + " unhandled upstream message [opcode= " + opcode + ", size= " + size + "]");
+            }
+        } finally {
+            state = State.OPCODE;
+            opcode = -1;
+            size = -1;
         }
+        return Optional.empty();
+    }
+
+    /**
+     * The enumerated type representing all of the possible states of this
+     * decoder.
+     * 
+     * @author lare96 <http://github.org/lare96>
+     */
+    private enum State {
+        OPCODE,
+        SIZE,
+        PAYLOAD
     }
 }

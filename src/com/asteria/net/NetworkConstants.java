@@ -28,6 +28,16 @@ public final class NetworkConstants {
     public static final int INPUT_TIMEOUT = 5;
 
     /**
+     * The size of a variable sized packet.
+     */
+    public static final int VAR_SIZE = -1;
+
+    /**
+     * The size of a variable sized short packet.
+     */
+    public static final int VAR_SIZE_SHORT = -2;
+
+    /**
      * The resource leak detection level when not running the server in debug
      * mode.
      */
