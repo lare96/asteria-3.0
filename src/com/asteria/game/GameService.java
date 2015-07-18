@@ -34,6 +34,15 @@ public final class GameService extends Service {
         super(GameConstants.CYCLE_RATE);
     }
 
+    /**
+     * {@inheritDoc}
+     * <p>
+     * <p>
+     * This method should <b>never</b> be invoked unless by the underlying
+     * {@linkplain ServiceQueue service queue context}. Illegal invocation of
+     * this method will lead to serious gameplay timing issues as well as other
+     * unexplainable and unpredictable issues related to gameplay.
+     */
     @Override
     public void execute(ServiceQueue context) {
         try {

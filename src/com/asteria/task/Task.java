@@ -73,7 +73,10 @@ public abstract class Task {
     }
 
     /**
-     * The code that will be executed by this task.
+     * The code that will be executed by this task. This should rarely; if ever,
+     * be invoked unless by a {@linkplain TaskQueue task queue}. Illegal
+     * invocation of this method will lead to unpredictable issues depending on
+     * the contents of the task.
      */
     public abstract void execute();
 
