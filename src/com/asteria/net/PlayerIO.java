@@ -113,10 +113,8 @@ public final class PlayerIO {
         // before queuing the session over to the main game thread to be logged
         // in on the next sequence.
         case LOGGING_IN:
-            if (msg instanceof LoginDetailsMessage) {
-                LoginDetailsMessage details = (LoginDetailsMessage) msg;
-                finalizeDetails(details);
-            }
+            if (msg instanceof LoginDetailsMessage)
+                finalizeDetails((LoginDetailsMessage) msg);
             break;
 
         // We are already logged in, handle incoming messages from the client by
@@ -124,12 +122,12 @@ public final class PlayerIO {
         // sequence.
         case LOGGED_IN:
             if (msg instanceof InputMessage) {
-                if (messageQueue.size() < NetworkConstants.DECODE_LIMIT)
+                if (messageQueue.size() <= NetworkConstants.DECODE_LIMIT)
                     messageQueue.add((InputMessage) msg);
             }
             break;
         default:
-            throw new IllegalStateException("Cannot recieve upstream messages when in state [" + state + "].");
+            throw new IllegalStateException("Cannot recieve upstream messages when " + state + ".");
         }
     }
 
