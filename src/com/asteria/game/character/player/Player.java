@@ -3,6 +3,7 @@ package com.asteria.game.character.player;
 import io.netty.buffer.ByteBuf;
 
 import java.util.Arrays;
+import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Optional;
@@ -55,7 +56,6 @@ import com.asteria.game.shop.Shop;
 import com.asteria.net.PlayerIO;
 import com.asteria.net.message.OutputMessages;
 import com.asteria.task.Task;
-import com.asteria.utility.BitMask;
 import com.asteria.utility.LoggerUtils;
 import com.asteria.utility.MutableNumber;
 import com.asteria.utility.Stopwatch;
@@ -153,7 +153,7 @@ public final class Player extends CharacterNode {
     /**
      * The array of booleans determining which prayers are active.
      */
-    private final BitMask prayerActive = new BitMask();
+    private final EnumSet<CombatPrayer> prayerActive = EnumSet.noneOf(CombatPrayer.class);
 
     /**
      * The collection of stopwatches used for various timing operations.
@@ -444,7 +444,7 @@ public final class Player extends CharacterNode {
         encoder.sendByteState(108, 0);
         encoder.sendByteState(301, 0);
         encoder.sendString(runEnergy + "%", 149);
-        CombatPrayer.PRAYERS.values().forEach(c -> encoder.sendByteState(c.getConfig(), 0));
+        CombatPrayer.VALUES.forEach(c -> encoder.sendByteState(c.getConfig(), 0));
         logger.info(this + " has logged in.");
         session.setState(IOState.LOGGED_IN);
     }
@@ -904,7 +904,7 @@ public final class Player extends CharacterNode {
      *
      * @return the active prayers.
      */
-    public BitMask getPrayerActive() {
+    public EnumSet<CombatPrayer> getPrayerActive() {
         return prayerActive;
     }
 

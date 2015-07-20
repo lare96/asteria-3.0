@@ -4,28 +4,15 @@ import com.asteria.game.character.combat.Combat;
 import com.asteria.game.character.player.Player;
 import com.asteria.game.character.player.skill.Skills;
 import com.asteria.task.Task;
+import com.google.common.collect.HashMultiset;
+import com.google.common.collect.Multiset;
 
-/**
- * The {@link Task} extension that handles the draining of prayer.
- *
- * @author lare96 <http://github.com/lare96>
- */
+
 public final class CombatPrayerTask extends Task {
 
-    /**
-     * The player attached to this task.
-     */
     private final Player player;
 
-    /**
-     * An array of counters to perform a countdown.
-     */
-    private final int[] countdown = new int[CombatPrayer.size()];
-
-    /**
-     * The flag that determines if this task should be cancelled.
-     */
-    private boolean cancel = true;
+    private final Multiset<CombatPrayer> counter = HashMultiset.create();
 
     /**
      * Creates a new {@link CombatPrayerTask}.
@@ -41,27 +28,39 @@ public final class CombatPrayerTask extends Task {
 
     @Override
     public void execute() {
-        for (CombatPrayer prayer : CombatPrayer.PRAYERS.values()) {
-            if (player.getPrayerActive().has(prayer.getMask())) {
-                cancel = false;
-                if (++countdown[prayer.getId()] >= ((player.getBonus()[Combat.BONUS_PRAYER] / 2) + prayer.getDrainRate())) {
-                    player.getSkills()[Skills.PRAYER].decreaseLevel(1);
-                    Skills.refresh(player, Skills.PRAYER);
-                    countdown[prayer.getId()] = 0;
-                }
-            }
-        }
-
-        if (player.getSkills()[Skills.PRAYER].getLevel() < 1) {
-            player.getMessages().sendMessage("You've run out of prayer points!");
-            CombatPrayer.deactivateAll(player);
-            cancel = true;
-        }
-
-        if (cancel) {
+        if (player.getPrayerActive().isEmpty()) {
             this.cancel();
             return;
         }
-        cancel = true;
+
+        for (CombatPrayer prayer : player.getPrayerActive()) {
+            if (counter.add(prayer, 1) >= drainFormula(prayer)) {
+                player.getSkills()[Skills.PRAYER].decreaseLevel(1);
+                Skills.refresh(player, Skills.PRAYER);
+                counter.setCount(prayer, 0);
+                if (checkPrayer())
+                    break;
+            }
+        }
+    }
+
+    private boolean checkPrayer() {
+        if (player.getSkills()[Skills.PRAYER].getLevel() < 1) {
+            player.getMessages().sendMessage("You've run out of prayer points!");
+            CombatPrayer.deactivateAll(player);
+            this.cancel();
+            return true;
+        }
+        return false;
+    }
+
+    private int drainFormula(CombatPrayer prayer) {
+        double rate = prayer.getDrainRate();
+        double addFactor = 1;
+        double divideFactor = 30;
+        double bonus = player.getBonus()[Combat.BONUS_PRAYER];
+        double tick = 600;
+        double second = 1000;
+        return (int) (((rate + (addFactor + bonus / divideFactor)) * second) / tick);
     }
 }

@@ -362,7 +362,7 @@ public final class PlayerUpdating {
         }
         if (mask.get() >= 0x100) {
             mask.set(0x40);
-            cachedBuffer.putShort(mask.get(), com.asteria.net.ByteOrder.LITTLE);
+            cachedBuffer.putShort(mask.get(), ByteOrder.LITTLE);
         } else {
             cachedBuffer.put(mask.get());
         }

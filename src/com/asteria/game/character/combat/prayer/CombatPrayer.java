@@ -1,15 +1,13 @@
 package com.asteria.game.character.combat.prayer;
 
 import java.util.Arrays;
-import java.util.stream.Collectors;
 
 import com.asteria.game.World;
 import com.asteria.game.character.Flag;
 import com.asteria.game.character.player.Player;
 import com.asteria.game.character.player.skill.Skills;
-import com.asteria.utility.BitMask;
 import com.asteria.utility.TextUtils;
-import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.ImmutableList;
 
 /**
  * The enumerated type whose elements represent the prayers that can be
@@ -19,41 +17,30 @@ import com.google.common.collect.ImmutableMap;
  * @author lare96 <http://github.com/lare96>
  */
 public enum CombatPrayer {
-    THICK_SKIN(0, 20, -1, 1, 83, 3, 9),
-    BURST_OF_STRENGTH(1, 20, -1, 4, 84, 4, 10),
-    CLARITY_OF_THOUGHT(2, 20, -1, 7, 85, 5, 11),
-    ROCK_SKIN(3, 10, -1, 10, 86, 9, 0),
-    SUPERHUMAN_STRENGTH(4, 10, -1, 13, 87, 1, 10),
-    IMPROVED_REFLEXES(5, 10, -1, 16, 88, 2, 11),
-    RAPID_RESTORE(6, 29, -1, 19, 89),
-    RAPID_HEAL(7, 29, -1, 22, 90),
-    PROTECT_ITEM(8, 29, -1, 25, 91),
-    STEEL_SKIN(9, 5, -1, 28, 92, 0, 3),
-    ULTIMATE_STRENGTH(10, 5, -1, 31, 93, 1, 4),
-    INCREDIBLE_REFLEXES(11, 5, -1, 34, 94, 2, 5),
-    PROTECT_FROM_MAGIC(12, 5, 2, 37, 95, 13, 14, 15, 16, 17),
-    PROTECT_FROM_MISSILES(13, 5, 1, 40, 96, 12, 14, 15, 16, 17),
-    PROTECT_FROM_MELEE(14, 5, 0, 43, 97, 12, 13, 15, 16, 17),
-    RETRIBUTION(15, 17, 3, 46, 98, 12, 13, 14, 16, 17),
-    REDEMPTION(16, 6, 5, 49, 99, 12, 13, 14, 15, 17),
-    SMITE(17, 7, 4, 52, 100, 12, 13, 14, 15, 16);
+    THICK_SKIN(20, -1, 1, 83, 3, 9),
+    BURST_OF_STRENGTH(20, -1, 4, 84, 4, 10),
+    CLARITY_OF_THOUGHT(20, -1, 7, 85, 5, 11),
+    ROCK_SKIN(10, -1, 10, 86, 9, 0),
+    SUPERHUMAN_STRENGTH(10, -1, 13, 87, 1, 10),
+    IMPROVED_REFLEXES(10, -1, 16, 88, 2, 11),
+    RAPID_RESTORE(29, -1, 19, 89),
+    RAPID_HEAL(29, -1, 22, 90),
+    PROTECT_ITEM(29, -1, 25, 91),
+    STEEL_SKIN(5, -1, 28, 92, 0, 3),
+    ULTIMATE_STRENGTH(5, -1, 31, 93, 1, 4),
+    INCREDIBLE_REFLEXES(5, -1, 34, 94, 2, 5),
+    PROTECT_FROM_MAGIC(5, 2, 37, 95, 13, 14, 15, 16, 17),
+    PROTECT_FROM_MISSILES(5, 1, 40, 96, 12, 14, 15, 16, 17),
+    PROTECT_FROM_MELEE(5, 0, 43, 97, 12, 13, 15, 16, 17),
+    RETRIBUTION(17, 3, 46, 98, 12, 13, 14, 16, 17),
+    REDEMPTION(6, 5, 49, 99, 12, 13, 14, 15, 17),
+    SMITE(7, 4, 52, 100, 12, 13, 14, 15, 16);
 
     /**
      * The cached array that will contain mappings of all the elements to their
      * identifiers.
      */
-    public static final ImmutableMap<Integer, CombatPrayer> PRAYERS = ImmutableMap.<Integer, CombatPrayer> builder().putAll(
-        Arrays.stream(values()).collect(Collectors.toMap($it -> $it.id, $it -> $it))).build();
-
-    /**
-     * The identification for this prayer.
-     */
-    private final int id;
-
-    /**
-     * The mask identification for this prayer.
-     */
-    private final int mask;
+    public static final ImmutableList<CombatPrayer> VALUES = ImmutableList.copyOf(values());
 
     /**
      * The amount of ticks it takes for prayer to be drained.
@@ -97,9 +84,7 @@ public enum CombatPrayer {
      * @param deactivate
      *            the combat prayers that will be automatically deactivated.
      */
-    private CombatPrayer(int id, int drainRate, int headIcon, int level, int config, int... deactivate) {
-        this.id = id;
-        this.mask = BitMask.calcMask(id);
+    private CombatPrayer(int drainRate, int headIcon, int level, int config, int... deactivate) {
         this.drainRate = drainRate;
         this.headIcon = headIcon;
         this.level = level;
@@ -118,9 +103,11 @@ public enum CombatPrayer {
      *
      * @param player
      *            the player that activated this prayer.
+     * @return {@code true} if this prayer can activated, {@code false}
+     *         otherwise.
      */
-    void onActivation(Player player) {
-
+    public boolean onActivation(Player player) {
+        return true;
     }
 
     /**
@@ -129,9 +116,11 @@ public enum CombatPrayer {
      *
      * @param player
      *            the player that deactivated this prayer.
+     * @return {@code true} if this prayer can deactivated, {@code false}
+     *         otherwise.
      */
-    void onDeactivation(Player player) {
-
+    public boolean onDeactivation(Player player) {
+        return true;
     }
 
     /**
@@ -162,18 +151,19 @@ public enum CombatPrayer {
             player.getMessages().sendMessage(sb.toString());
             return;
         }
+        if (!onActivation(player))
+            return;
         if (player.getPrayerDrain() == null || !player.getPrayerDrain().isRunning()) {
             player.setPrayerDrain(new CombatPrayerTask(player));
             World.submit(player.getPrayerDrain());
         }
-        Arrays.stream(deactivate).forEach(it -> PRAYERS.get(it).deactivate(player));
-        player.getPrayerActive().set(mask);
+        Arrays.stream(deactivate).forEach(it -> VALUES.get(it).deactivate(player));
+        player.getPrayerActive().add(this);
         player.getMessages().sendByteState(config, 1);
         if (headIcon != -1) {
             player.setHeadIcon(headIcon);
             player.getFlags().set(Flag.APPEARANCE);
         }
-        onActivation(player);
     }
 
     /**
@@ -197,13 +187,14 @@ public enum CombatPrayer {
     public final void deactivate(Player player) {
         if (!CombatPrayer.isActivated(player, this))
             return;
-        player.getPrayerActive().unset(mask);
+        if (!onDeactivation(player))
+            return;
+        player.getPrayerActive().remove(this);
         player.getMessages().sendByteState(config, 0);
         if (headIcon != -1) {
             player.setHeadIcon(-1);
             player.getFlags().set(Flag.APPEARANCE);
         }
-        onDeactivation(player);
     }
 
     /**
@@ -214,7 +205,7 @@ public enum CombatPrayer {
      *            the player to deactivate prayers for.
      */
     public static void deactivateAll(Player player) {
-        PRAYERS.values().forEach(it -> it.deactivate(player));
+        VALUES.forEach(it -> it.deactivate(player));
     }
 
     /**
@@ -228,25 +219,7 @@ public enum CombatPrayer {
      *         {@code false} otherwise.
      */
     public static boolean isActivated(Player player, CombatPrayer prayer) {
-        return player.getPrayerActive().has(prayer.mask);
-    }
-
-    /**
-     * Retrieves the size of this enumerated type.
-     *
-     * @return the size of the enum.
-     */
-    public static int size() {
-        return PRAYERS.size();
-    }
-
-    /**
-     * Gets the identification for this prayer.
-     *
-     * @return the identification.
-     */
-    public final int getId() {
-        return id;
+        return player.getPrayerActive().contains(prayer);
     }
 
     /**
@@ -293,14 +266,5 @@ public enum CombatPrayer {
      */
     public int[] getDeactivate() {
         return deactivate;
-    }
-
-    /**
-     * Gets the mask identification for this prayer.
-     * 
-     * @return the mask identification.
-     */
-    public int getMask() {
-        return mask;
     }
 }
