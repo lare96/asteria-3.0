@@ -1,5 +1,7 @@
 package plugin.skills.prayer
 
+import com.google.common.collect.ImmutableSet
+
 enum Bone {
     BONES(526, 4.5),
     BAT_BONES(530, 5.2),
@@ -9,6 +11,7 @@ enum Bone {
     BABYDRAGON_BONES(534, 30),
     DRAGON_BONES(536, 72)
 
+    static final ImmutableSet<Bone> VALUES = ImmutableSet.copyOf(values())
     final int id
     final double experience
 
@@ -23,11 +26,6 @@ enum Bone {
     }
 
     static Bone getBone(int id) {
-        Bone bone = null
-        values().each {
-            if (it.id == id)
-                bone = it
-        }
-        return bone
+        return VALUES.find {it.id == id}
     }
 }

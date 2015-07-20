@@ -2,6 +2,7 @@ package plugin.skills.cooking
 
 import com.asteria.game.character.player.Player
 import com.asteria.game.item.ItemDefinition
+import com.google.common.collect.ImmutableSet
 
 
 
@@ -25,6 +26,7 @@ enum CookingData {
     MANTA_RAY(389, 91, 391, 100, 393, 216.3),
     SHARK(383, 76, 385, 94, 387, 210)
 
+    static final ImmutableSet<CookingData> VALUES = ImmutableSet.copyOf(values())
     final int rawId
     final int level
     final int cookedId
@@ -53,12 +55,6 @@ enum CookingData {
     }
 
     static CookingData getData(int id) {
-        CookingData cook = null
-        values().each {
-            if (it.rawId == id) {
-                cook = it
-            }
-        }
-        return cook
+        return VALUES.find {it.rawId == id}
     }
 }

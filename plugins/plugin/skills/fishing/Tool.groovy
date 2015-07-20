@@ -2,6 +2,7 @@ package plugin.skills.fishing
 
 
 import com.asteria.game.character.player.Player
+import com.asteria.game.character.player.skill.Skill
 import com.asteria.game.character.player.skill.Skills
 import com.asteria.game.item.Item
 import com.asteria.utility.RandomGen
@@ -92,19 +93,10 @@ enum Tool {
 
     Catchable calculate(Player player) {
         List<Catchable> success = new ArrayList<>(catchables.length)
-        catchables.each {
-            if (it.level <= player.skills[Skills.FISHING].level && it.catchable(player))
-                success.add it
-        }
+        Skill skill = player.skills[Skills.FISHING]
+        catchables.findAll {skill.reqLevel(it.level) && it.catchable(player) }.each { success.add it }
         Collections.shuffle(success, random)
-        Catchable c = null
-        success.each {
-            if (random.success(it.chance)) {
-                c = it
-                return
-            }
-        }
-        return c ?: catchable()
+        return success.find { random.success(it.chance) } ?: catchable()
     }
 
     Item[] onCatch(Player player) {

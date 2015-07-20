@@ -2,6 +2,7 @@ package plugin.skills.fishing
 
 import com.asteria.game.character.player.Player
 import com.asteria.game.location.Location
+import com.google.common.collect.ImmutableSet
 
 enum Catchable {
 
@@ -42,6 +43,7 @@ enum Catchable {
     },
     SHARK(383, 76, 0.7, 110)
 
+    static final ImmutableSet<Catchable> VALUES = ImmutableSet.copyOf(values())
     final int id
     final int level
     final double chance
@@ -64,11 +66,6 @@ enum Catchable {
     }
 
     static Catchable getCatchable(int id) {
-        Catchable catchable = null
-        values().each {
-            if (it.id == id)
-                catchable = it
-        }
-        return catchable
+        return VALUES.find {it.id == id}
     }
 }
