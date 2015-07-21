@@ -162,6 +162,9 @@ public final class NpcUpdating {
         if (npc.getFlags().get(Flag.HIT)) {
             mask.set(0x40);
         }
+        if (npc.getFlags().get(Flag.TRANSFORM)) {
+            mask.set(2);
+        }
         if (npc.getFlags().get(Flag.FACE_COORDINATE)) {
             mask.set(4);
         }
@@ -189,6 +192,9 @@ public final class NpcUpdating {
         if (npc.getFlags().get(Flag.HIT)) {
             appendPrimaryHit(block, npc);
         }
+        if (npc.getFlags().get(Flag.TRANSFORM)) {
+            appendTransformation(block, npc);
+        }
         if (npc.getFlags().get(Flag.FACE_COORDINATE)) {
             appendFaceCoordinates(block, npc);
         }
@@ -205,6 +211,18 @@ public final class NpcUpdating {
     private static void appendGraphic(MessageBuilder out, Npc npc) {
         out.putShort(npc.getGraphic().getId());
         out.putInt(npc.getGraphic().getHeight());
+    }
+
+    /**
+     * Appends the state of a transformation to {@code out} for {@code npc}.
+     *
+     * @param npc
+     *            the npc to append the state for.
+     * @param out
+     *            the buffer to append it to.
+     */
+    private static void appendTransformation(MessageBuilder out, Npc npc) {
+        out.putShort(npc.getTransform(), ValueType.A, ByteOrder.LITTLE);
     }
 
     /**

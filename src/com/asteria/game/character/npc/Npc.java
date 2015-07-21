@@ -3,6 +3,7 @@ package com.asteria.game.character.npc;
 import com.asteria.game.NodeType;
 import com.asteria.game.World;
 import com.asteria.game.character.CharacterNode;
+import com.asteria.game.character.Flag;
 import com.asteria.game.character.Hit;
 import com.asteria.game.character.PoisonType;
 import com.asteria.game.character.combat.Combat;
@@ -60,6 +61,11 @@ public final class Npc extends CharacterNode {
      * The spell that this NPC is weakened by.
      */
     private CombatWeaken weakenedBy;
+    
+    /**
+     * The transformation identifier.
+     */
+    private int transform = -1;
 
     /**
      * Creates a new {@link Npc}.
@@ -160,6 +166,18 @@ public final class Npc extends CharacterNode {
             return true;
         }
         return false;
+    }
+
+    /**
+     * Activates the {@code TRANSFORM} update mask for this non-player
+     * character.
+     * 
+     * @param id
+     *            the new npc to transform this npc into.
+     */
+    public void transform(int id) {
+        transform = id;
+        getFlags().set(Flag.TRANSFORM);
     }
 
     /**
@@ -273,5 +291,14 @@ public final class Npc extends CharacterNode {
      */
     public NpcDefinition getDefinition() {
         return NpcDefinition.DEFINITIONS[id];
+    }
+
+    /**
+     * Gets the transformation identifier.
+     * 
+     * @return the transformation id.
+     */
+    public int getTransform() {
+        return transform;
     }
 }
