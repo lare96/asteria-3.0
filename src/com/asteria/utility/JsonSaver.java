@@ -72,6 +72,25 @@ public final class JsonSaver {
     }
 
     /**
+     * <strong>Invocation of this function is expensive and should be cached or
+     * avoided whenever possible.</strong> This function will call
+     * {@code split()} if the {@code currentWriter} has unsplit elements added
+     * to it.
+     * <p>
+     * <p>
+     * This function returns the contents of this class in pretty printed
+     * {@code JSON} format.
+     */
+    @Override
+    public String toString() {
+        if (singletonTable)
+            return gson.toJson(currentWriter);
+        if (currentWriter.entrySet().size() > 0)
+            split();
+        return gson.toJson(array);
+    }
+
+    /**
      * Adds the data within {@code currentWriter} to the internal
      * {@link JsonArray} then instantiates a new writer, effectively splitting
      * the data up into tables. If this instance is a {@code singletonTable},
@@ -108,24 +127,5 @@ public final class JsonSaver {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    /**
-     * <strong>Invocation of this function is expensive and should be cached or
-     * avoided whenever possible.</strong> This function will call
-     * {@code split()} if the {@code currentWriter} has unsplit elements added
-     * to it.
-     * <p>
-     * <p>
-     * This function returns the contents of this class in pretty printed
-     * {@code JSON} format.
-     */
-    @Override
-    public String toString() {
-        if (singletonTable)
-            return gson.toJson(currentWriter);
-        if (currentWriter.entrySet().size() > 0)
-            split();
-        return gson.toJson(array);
     }
 }
