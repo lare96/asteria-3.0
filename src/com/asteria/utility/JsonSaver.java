@@ -35,7 +35,7 @@ public final class JsonSaver {
      * A gson builder, allows us to turn {@code Object}s into {@code JSON}
      * format and vice-versa.
      */
-    private final Gson gson = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
+    private final Gson serializer = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
 
     /**
      * An array that will hold all of our sub-tables.
@@ -84,10 +84,10 @@ public final class JsonSaver {
     @Override
     public String toString() {
         if (singletonTable)
-            return gson.toJson(currentWriter);
+            return serializer.toJson(currentWriter);
         if (currentWriter.entrySet().size() > 0)
             split();
-        return gson.toJson(array);
+        return serializer.toJson(array);
     }
 
     /**
@@ -112,6 +112,15 @@ public final class JsonSaver {
      */
     public JsonObject current() {
         return currentWriter;
+    }
+
+    /**
+     * Gets the internal gson that allows for serialization.
+     * 
+     * @return the internal gson.
+     */
+    public Gson serializer() {
+        return serializer;
     }
 
     /**
