@@ -45,7 +45,7 @@ enum CookingData {
 
     @Override
     String toString() {
-        name.toLowerCase().replaceAll("_", " ")
+        name().toLowerCase().replaceAll("_", " ")
     }
 
     void openInterface(Player player) {

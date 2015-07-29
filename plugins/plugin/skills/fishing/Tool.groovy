@@ -95,7 +95,7 @@ enum Tool {
         List<Catchable> success = new ArrayList<>(catchables.length)
         Skill skill = player.skills[Skills.FISHING]
         catchables.findAll {skill.reqLevel(it.level) && it.catchable(player) }.each { success.add it }
-        Collections.shuffle(success, random)
+        Collections.shuffle(success, random.get())
         return success.find { random.success(it.chance) } ?: catchable()
     }
 
