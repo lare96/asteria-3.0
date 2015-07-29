@@ -127,7 +127,7 @@ public final class PlayerIO {
             }
             break;
         default:
-            throw new IllegalStateException("Cannot recieve upstream messages when " + state + ".");
+            throw new IllegalStateException("Cannot receive upstream messages when " + state + ".");
         }
     }
 
