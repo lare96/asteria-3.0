@@ -46,10 +46,7 @@ final class PluginBootstrap {
                         String name = file.name
                         if(!name.endsWith(".class") || name.contains("\$"))
                             return FileVisitResult.CONTINUE
-                        //String formatted = file.path.replace("\\", ".").substring(0, file.path.lastIndexOf(".")).replace("bin.", "").replace("..", "")
-
-                        //Unix Fix
-                        String formatted = file.path.replace("/", ".").substring(0, file.path.lastIndexOf(".")).replace("bin.", "").replace("..", "").replace("./bin/", "").replace("/", ".")
+                        String formatted = file.path.replace(File.separator, ".").substring(0, file.path.lastIndexOf(".")).replace("bin.", "").replace("..", "")
 
                         Class<?> c = Class.forName(formatted)
                         c.interfaces.each {

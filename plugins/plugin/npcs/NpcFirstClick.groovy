@@ -101,11 +101,6 @@ final class NpcFirstClick implements PluginListener<NpcFirstClickPlugin> {
                 Fishing fishing = new Fishing(player, Tool.NET, position)
                 fishing.start()
                 break
-            /*default: //For default npc dialogue
-                player.dialogueChain.append new NpcDialogue(id, "Missing Dialogue.")
-				player.dialogueChain.advance()
-                break*/
-
         }
     }
 }
