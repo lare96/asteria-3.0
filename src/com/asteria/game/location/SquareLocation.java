@@ -109,7 +109,7 @@ public final class SquareLocation extends Location {
     @Override
     public Position random() {
         RandomGen r = new RandomGen();
-        int x = r.get().nextInt((Math.max(swX, neX) - Math.min(swX, neX) + 1) + Math.min(swX, neX));
+        int x = r.get().nextInt(Math.max(swX, neX) - Math.min(swX, neX) + 1) + Math.min(swX, neX);
         int y = r.get().nextInt(Math.max(swY, neY) - Math.min(swY, neY) + 1) + Math.min(swY, neY);
         return new Position(x, y, z);
     }
