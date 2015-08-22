@@ -7,3 +7,23 @@ Asteria is an open source Runescape emulator for the #317 protocol that has been
 [Asteria 2.0 (May 2014)](http://www.rune-server.org/runescape-development/rs2-server/downloads/551082-asteria-2-0-a.html)
 
 [Asteria 3.0 (July 2015)](http://www.rune-server.org/runescape-development/rs2-server/downloads/599705-asteria-3-0-a.html)
+
+# Ideas for 4.0 (If developed)
+These are things that could be added to the 4.0 release if developed, entries marked with * will be added for certain.
+
+- Maven to manage dependencies *
+- JUnit for unit testing *
+- Log4j2 for usage as the logging framework *
+- Classes like Item, Position, etc. made immutable *
+- Usage of [Guava's service model](https://code.google.com/p/guava-libraries/wiki/ServiceExplained) in place of the Service/ServiceQueue model *
+- Usage of [Guava's stopwatch](http://docs.guava-libraries.googlecode.com/git-history/master/javadoc/com/google/common/base/Stopwatch.html) in place of Asteria's stopwatch (Guava does it better) *
+- ForkJoinPool instead of GameSyncTask and GameSyncExecutor? Or at the least a redesign of the two aforementioned classes
+- General design and performance optimizations, some of which were mentioned on the official 3.0 release thread on Rune-Server *
+- Better networking model and decoupling of message encoding/decoding *
+- Update content to OSRS revision (is it really worth the time though?)
+- Better task/action decoupling, support for OneInstanceTask's as well as OneTimeTask's, and support for actions and action policies such as triggering events with certain policies, etc.
+- Swapping of the Groovy plugin system for something more practical like Xtend, or even Scala
+- Improving the plugin model by adding functionality for determining which plugins listeners in the chain are executed (if multiple plugin listeners are mapped to a plugin context class). Apollo does this very nicely
+- Hyperion's region system with an algorithm that prioritizes player by distance and combat state
+- Apollo's file system and pathfinding implementation (thanks Major)
+- JAGGRAB
