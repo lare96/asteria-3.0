@@ -9,7 +9,7 @@ Asteria is an open source Runescape emulator for the #317 protocol that has been
 [Asteria 3.0 (July 2015)](http://www.rune-server.org/runescape-development/rs2-server/downloads/599705-asteria-3-0-a.html)
 
 # Ideas for 4.0 (If developed)
-These are things that could be added to the 4.0 release if developed, entries marked with * will be added for certain.
+These are things that could possibly be added to the 4.0 release if developed, entries marked with * will be added for certain. Alternatively, a 4.0 release will probably be scrapped entirely and a new project will be started from scratch containing everything below and more.
 
 - Maven to manage dependencies *
 - JUnit for unit testing *
@@ -31,3 +31,4 @@ These are things that could be added to the 4.0 release if developed, entries ma
 - Apollo's file system and pathfinding implementation (thanks Major)
 - JAGGRAB
 - YAML instead of JSON for data serialization. Much more readable and easier to write
+- Usage of [Guava's EventBus](https://code.google.com/p/guava-libraries/wiki/EventBusExplained) instead of event listeners for plugins *
