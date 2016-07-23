@@ -86,7 +86,7 @@ public final class ConnectionHandler {
         Optional<Connection> op = Optional.ofNullable(CONNECTIONS.get(host));
         Connection c = op.orElseThrow(() -> new IllegalStateException("Host was not registered with the connection map!"));
         if (c.decrement() < 1)
-            CONNECTIONS.remove(c);
+            CONNECTIONS.remove(host);
     }
 
     /**
